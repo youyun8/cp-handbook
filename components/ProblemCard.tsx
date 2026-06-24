@@ -2,14 +2,38 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { DifficultyBadge, ProblemTypeBadge, TierBadge } from '@/components/Badges';
+import {
+  CompletionBadge,
+  DifficultyBadge,
+  ProblemTypeBadge,
+  SourceBadge,
+  TierBadge,
+  type CompletionStatus
+} from '@/components/Badges';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { Problem } from '@/lib/types';
 import { sourceLabel, sourceUrl } from '@/lib/utils';
+import { useMounted } from '@/lib/useMounted';
+import { useProgressStore } from '@/store/useProgressStore';
 
 export function ProblemCard({ problem }: { problem: Problem }) {
   const [showHint, setShowHint] = useState(false);
+  const mounted = useMounted();
+  const reviewedProblemIds = useProgressStore((state) => state.reviewedProblemIds);
+  const submissions = useProgressStore((state) => state.submissions);
+
+  let completion: CompletionStatus = 'none';
+  if (mounted) {
+    const accepted = submissions.some(
+      (submission) => submission.problemId === problem.id && submission.status === 'AC'
+    );
+    if (accepted) {
+      completion = 'accepted';
+    } else if (reviewedProblemIds.includes(problem.id)) {
+      completion = 'reviewed';
+    }
+  }
 
   return (
     <Card className="h-full">
@@ -18,6 +42,8 @@ export function ProblemCard({ problem }: { problem: Problem }) {
           <DifficultyBadge rating={problem.rating} />
           <ProblemTypeBadge problemType={problem.problem_type} />
           <TierBadge tier={problem.tier} />
+          <SourceBadge source={problem.source} />
+          <CompletionBadge status={completion} />
         </div>
         <CardTitle className="text-base">{problem.title}</CardTitle>
       </CardHeader>

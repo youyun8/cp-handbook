@@ -6,10 +6,24 @@ import { DifficultyBadge, ProblemTypeBadge } from '@/components/Badges';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { Problem, SubmissionStatus, Topic } from '@/lib/types';
-import { problemTypeLabel, ratingBands, sourceLabel, sourceUrl, submissionStatusLabel } from '@/lib/utils';
+import { problemTypeLabel, ratingBands, sourceLabel, sourceUrl, submissionStatusLabel, cn } from '@/lib/utils';
 import { useProgressStore } from '@/store/useProgressStore';
 
 const statusOptions: SubmissionStatus[] = ['AC', 'WA', 'TLE', 'SKIP'];
+
+const statusIcon: Record<SubmissionStatus, string> = {
+  AC: '✅',
+  WA: '❌',
+  TLE: '⏱',
+  SKIP: '⏭'
+};
+
+const statusButtonClass: Record<SubmissionStatus, string> = {
+  AC: 'hover:border-emerald-400/60 hover:bg-emerald-500/15',
+  WA: 'hover:border-red-400/60 hover:bg-red-500/15',
+  TLE: 'hover:border-yellow-400/60 hover:bg-yellow-500/15',
+  SKIP: 'hover:border-slate-400/60 hover:bg-slate-500/15'
+};
 
 export function PracticeArena({ problems, topics }: { problems: Problem[]; topics: Topic[] }) {
   const [problemCount, setProblemCount] = useState(5);
@@ -315,7 +329,7 @@ function PracticeProblemRow({
   onLog: (status: SubmissionStatus) => void;
 }) {
   return (
-    <div className="rounded-2xl border border-border bg-background/45 p-4">
+    <div className="rounded-2xl border border-border bg-background/45 p-4 shadow-sm transition-shadow hover:shadow-md">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <Link href={`/problems/${problem.id}`} className="font-medium hover:text-primary">
@@ -335,11 +349,24 @@ function PracticeProblemRow({
         <span className="text-xs text-muted-foreground">題型：{problemTypeLabel(problem.problem_type)}</span>
       </div>
       <div className="mt-3 flex flex-wrap gap-2">
-        {statusOptions.map((status) => (
-          <Button key={status} type="button" variant="secondary" size="sm" onClick={() => onLog(status)}>
-            {submissionStatusLabel(status)}
-          </Button>
-        ))}
+        {statusOptions.map((status) => {
+          const label = submissionStatusLabel(status);
+          return (
+            <button
+              key={status}
+              type="button"
+              onClick={() => onLog(status)}
+              title={label}
+              aria-label={label}
+              className={cn(
+                'inline-flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-background/60 text-base transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
+                statusButtonClass[status]
+              )}
+            >
+              <span aria-hidden>{statusIcon[status]}</span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );

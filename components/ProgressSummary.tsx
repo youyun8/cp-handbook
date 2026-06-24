@@ -59,11 +59,14 @@ export function ProgressSummary({ problems, topics }: { problems: Problem[]; top
         <CardTitle>近期進度摘要</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {stats.map((stat) => (
-            <div key={stat.label} className="rounded-2xl border border-border bg-background/50 p-4">
-              <p className="text-sm text-muted-foreground">{stat.label}</p>
-              <p className="mt-2 text-2xl font-semibold">{stat.value}</p>
+            <div
+              key={stat.label}
+              className="rounded-2xl border border-border bg-background/50 p-4 transition-colors hover:border-primary/50"
+            >
+              <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{stat.label}</p>
+              <p className="mt-2 text-2xl font-bold tabular-nums">{stat.value}</p>
             </div>
           ))}
         </div>

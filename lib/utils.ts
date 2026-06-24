@@ -86,6 +86,32 @@ export function submissionStatusLabel(status: SubmissionStatus) {
   return labels[status];
 }
 
+export function topicIcon(topicId: string) {
+  const icons: Record<string, string> = {
+    'binary-search': '🔍',
+    'graph-traversal': '🕸️',
+    intervals: '📏',
+    'heap-priority-queue': '⛰️',
+    'dp-fundamentals': '📐',
+    'two-pointers': '↔️',
+    dsu: '🔗',
+    'binary-lifting-lca': '🌲',
+    'monotonic-structure': '📊',
+    'segment-tree-bit': '🌳'
+  };
+  return icons[topicId] ?? '📚';
+}
+
+export function sourceClass(source: Source) {
+  const classes: Record<Source, string> = {
+    leetcode: 'border-amber-400/40 bg-amber-500/15 text-amber-300',
+    codeforces: 'border-red-400/40 bg-red-500/15 text-red-200',
+    luogu: 'border-teal-400/40 bg-teal-500/15 text-teal-200',
+    atcoder: 'border-sky-400/40 bg-sky-500/15 text-sky-200'
+  };
+  return classes[source];
+}
+
 export function ratingBands(currentRating: number): RatingBand[] {
   return [
     {
