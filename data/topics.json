@@ -4,8 +4,19 @@
     "title": "二分搜尋",
     "slug": "binary-search",
     "description": "把答案空間或有序序列切成可判定的左右兩半，快速定位邊界。",
-    "core_idea": "二分搜尋的核心是找到一個單調判定：當某個條件在位置 x 成立時，右側或左側也會保持成立。先明確搜尋區間是閉區間或半開區間，再用中點縮小範圍，最後回傳第一個滿足條件的位置或最後一個不滿足的位置。",
+    "motivation": "在一個長度 n 的有序序列裡找某個邊界，最直覺的做法是從頭掃到尾，需要 O(n)；當查詢次數很多、或答案範圍大到 10^9 時，線性掃描完全跑不動。更棘手的是「二分答案」類題目：答案不是序列裡的某個元素，而是一個抽象數值（最小的最大值、最大的最小值），根本沒有現成陣列可以掃。難點在於——要在龐大且不顯式存在的解空間裡，只用少量幾次判斷就鎖定答案。\n\n既然線性掃描太慢，關鍵就在於：能不能每問一次就把搜尋範圍砍半？這正是核心想法要利用的單調性。",
+    "core_idea": "二分搜尋能成立的唯一前提是**單調判定（monotone predicate）**：存在某個臨界值 x，使判定函式 `check` 在 x 左側恆為 false、右側恆為 true（或相反），整個解空間只有「一次轉折」。只要找得到這種單調性，就能用一次 `check` 把候選範圍對半砍。\n\n- **什麼問題能二分？** 把問題改寫成「答案是否 ≥ x」這種是非題；若答案隨 x 變化只翻轉一次就能二分，若 `check` 會反覆 true/false（非單調），二分會給出錯誤結果。\n- **為何偏好半開區間 `[left, right)`？** 讓 `right` 永遠指向「第一個尚未確認合法的位置」。迴圈用 `while (left < right)`，每步把區間收窄到 `[left, mid)` 或 `[mid+1, right)`，結束時 `left == right`，這個位置就是答案，不需額外後處理，天然避開閉區間常見的 off-by-one。\n\n至於 mid 該往哪邊收、邊界怎麼寫才不會跳過答案或卡死，留到下面的過程剖析逐步拆解。",
     "complexity": "時間複雜度 O(log n) 或 O(log V)，空間複雜度 O(1)。",
+    "deep_dive": [
+      {
+        "title": "半開區間的收斂過程",
+        "body": "以在 `[left, right)` 找第一個 `a[i] >= target` 為例，迴圈不變式是：**答案一定落在 `[left, right)` 之中**。\n\n- 取 `mid = left + (right - left) / 2`，偏向左半。\n- 若 `a[mid] >= target`，mid 本身可能就是答案，收成 `right = mid`（保留 mid）。\n- 若 `a[mid] < target`，mid 一定不是答案，收成 `left = mid + 1`（排除 mid）。\n\n每步區間嚴格變小，`right - left` 從 n 一路減到 0，約 log₂n 步。手動 trace `a = [1,3,3,5]`、`target = 3`：`[0,4)`→mid=2 命中→`[0,2)`→mid=1 命中→`[0,1)`→mid=0 不命中→`[1,1)` 停止，回傳 1，正是第一個 3 的下標。"
+      },
+      {
+        "title": "把最佳化轉成判定：二分答案的機制",
+        "body": "「把陣列分成 k 段使最大段和最小」這種最佳化無法直接求，但**驗證**一個候選答案很容易。\n\n把問題改寫成判定函式 `check(x)`：『能不能讓最大段和 ≤ x？』——貪心地從左往右切，能不超過 x 就繼續累加，否則新開一段，統計用了幾段。\n\n- `check(x)` 對 x 單調：x 越大越容易成立，存在唯一臨界。\n- 段數 ≤ k 即 `check` 為 true，於是在 `[max(a), sum(a)]` 上二分最小可行 x。\n\n關鍵在於把『求最優』換成『問是否可行』，難度立刻下降一個量級。"
+      }
+    ],
     "reference_links": [
       {
         "label": "OI-Wiki：二分",
@@ -24,16 +35,21 @@
     "supplemental_patterns": [
       {
         "name": "lower_bound",
-        "description": "尋找第一個大於等於目標的位置，適合邊界、插入點與最小可行答案。"
+        "description": "**何時用**：找第一個 ≥ target 的位置，例如插入點、最小可行答案、有序陣列定位。\n**核心做法**：半開區間 `[left, right)`，命中 `a[mid] >= target` 時收 `right = mid`（保留 mid），否則 `left = mid + 1`；結束時 `left` 即答案。\n**複雜度**：O(log n)。\n⚠️ 反例：若把 `right = mid` 誤寫成 `right = mid - 1`，會把唯一合法位置 mid 也排除，跳過正確答案——例如在 `[2, 4]` 中找 2，第一步 mid 指向 2 卻被 `mid - 1` 跳過。"
       },
       {
         "name": "upper_bound",
-        "description": "尋找第一個大於目標的位置，常用於計數區間內元素數量。"
+        "description": "**何時用**：找第一個 > target 的位置；計算區間內某值出現次數時特別好用。\n**核心做法**：把判定改成 `a[mid] > target` 才收右界，其餘與 lower_bound 相同；於是 `[lo, hi]` 內等於某值的個數 = `upper_bound(hi) - lower_bound(lo)`。\n**複雜度**：O(log n)。\n⚠️ 反例：要算 `== v` 的個數卻用兩次 lower_bound，會少算 v 自己而得到 0。"
       },
       {
         "name": "二分答案",
-        "description": "把最佳化問題改寫為「某個答案是否可行」的判定問題，再在答案範圍上二分。"
+        "description": "**何時用**：求『最小的最大值／最大的最小值／第一個滿足條件的閾值』，且滿足三前提——答案有明確上下界、`check(x)` 容易寫、`check` 對 x 單調。\n**核心做法**：把『最小化最大值』改寫成 `check(x) = 『最大值能否 ≤ x』`，在答案範圍上二分第一個讓 `check` 為 true 的 x。\n**複雜度**：O(log V · C)，V 為值域、C 為單次 check 成本。\n⚠️ 反例：若 `check` 不單調（例如有兩段可行區間），二分回傳的位置沒有意義。"
       }
+    ],
+    "pitfalls": [
+      "⚠️ 溢位：`mid = (left + right) / 2` 在 left、right 接近 INT_MAX 時相加溢位，務必改成 `left + (right - left) / 2`。",
+      "⚠️ 死循環：`while (left < right)` 中若該寫 `left = mid + 1` 卻寫成 `left = mid`，當 `right - left == 1` 時 `mid` 恆等於 `left`（如 left=0, right=1 時 mid=0），區間永不縮小而卡死。",
+      "⚠️ 浮點二分：實數答案不能用 `left < right` 當終止條件（兩浮點數幾乎不會相等），要改用精度 `while (right - left > eps)` 或固定迭代次數（如 100 次）。"
     ]
   },
   {
@@ -41,8 +57,15 @@
     "title": "圖論 BFS／DFS",
     "slug": "graph-bfs-dfs",
     "description": "用佇列或遞迴探索圖，建立距離、連通性、拓撲順序與狀態層次。",
-    "core_idea": "BFS 依照層數擴展，天然適合無權圖最短路與狀態最少步數；DFS 依照深度追蹤，適合連通分量、環檢測與拓撲依賴。建圖時先確認節點狀態與邊的語意，再決定是否需要 visited、distance 或入度陣列。",
+    "motivation": "圖上的『最短步數』『連通分量』『相依順序』問題，若每次都重新搜尋整張圖，會在分支爆炸下退化成指數級。難點在於：節點可能被多條路徑重複抵達，若不做標記，同一個節點會被展開無數次；而我們真正想要的，是『每個節點只處理一次』就得到全域資訊（距離、是否連通、拓撲序）。\n\n要做到每個節點只進出一次，關鍵在於用一個 visited／dist 陣列控制擴展順序——這正是 BFS 與 DFS 的分野。",
+    "core_idea": "BFS 用佇列依**層**擴展，DFS 用遞迴或堆疊依**深度**擴展，兩者都靠 visited 確保每個節點只進出一次，因此都是 O(n + m)。\n\n- **為什麼 BFS 保證最短路？** BFS 嚴格按距離分層：第 d 層恰好是所有最短距離為 d 的節點。因為佇列先進先出，距離小的節點一定先出隊、先擴展，任何節點第一次被標記時就是最短距離。注意這性質只在**無權圖（或邊權皆相同）**成立；一旦邊權不同，先抵達不代表最短，就必須改用 Dijkstra。\n- **DFS 的遞迴樹視角**：一次 DFS 等於在一棵『遞迴樹』上行走，進入函式 = 入棧、回溯 = 出棧。掌握這個視角，之後看 DFS 序（時間戳）、樹鏈剖分、回溯法都會更直覺。\n\n至於遇到 0/1 邊權、多個起點、或需要相依排序時該怎麼調整，見下面的過程剖析與補充套路。",
     "complexity": "時間複雜度 O(n + m)，空間複雜度 O(n + m)。",
+    "deep_dive": [
+      {
+        "title": "建圖常見模式（影響 BFS／DFS 寫法）",
+        "body": "建圖方式直接決定怎麼枚舉鄰居，常見有三種建模：\n\n**1. 網格圖 → 方向陣列**\n把每格 `(r, c)` 當節點，用方向陣列枚舉鄰格：\n```cpp\nint dr[4] = {-1, 1, 0, 0};\nint dc[4] = {0, 0, -1, 1};\nfor (int k = 0; k < 4; ++k) {\n    int nr = r + dr[k], nc = c + dc[k];\n    if (nr < 0 || nr >= R || nc < 0 || nc >= C) continue; // 越界\n    if (grid[nr][nc] == '#') continue;                    // 障礙\n    // 將 (nr, nc) 入隊\n}\n```\n逐行：`dr/dc` 定義上下左右（八方向再加四組對角）；先檢查越界、再檢查是否可走，最後才入隊。\n\n**2. 隱式圖（如單詞接龍）→ 枚舉鄰居 + 雜湊判重**\n節點不顯式存在，鄰居由規則生成（改一個字母）。用 `unordered_map/unordered_set` 把字串映射成是否已訪問，邊在枚舉時即時產生。\n\n**3. 狀態圖（如走迷宮帶鑰匙）→ 狀態壓縮**\n節點 = `(位置, 已持有鑰匙的 bitmask)`。同一格子在不同鑰匙狀態下是**不同節點**，visited 要開成 `visited[r][c][1 << keys]`，否則會誤判已訪問而漏解。"
+      }
+    ],
     "reference_links": [
       {
         "label": "OI-Wiki：圖論基礎",
@@ -60,17 +83,22 @@
     "template_code": "vector<int> bfs(int start, const vector<vector<int>>& graph) {\n    vector<int> dist(graph.size(), -1); // -1 means unvisited\n    queue<int> q;\n    dist[start] = 0; // Source distance is zero\n    q.push(start);\n    while (!q.empty()) {\n        int u = q.front();\n        q.pop();\n        for (int v : graph[u]) {\n            if (dist[v] != -1) continue; // Each node enters queue once\n            dist[v] = dist[u] + 1; // BFS layer increases by one\n            q.push(v);\n        }\n    }\n    return dist;\n}\n\nvoid dfs(int u, const vector<vector<int>>& graph, vector<int>& seen) {\n    seen[u] = 1; // Mark before visiting neighbors\n    for (int v : graph[u]) {\n        if (!seen[v]) dfs(v, graph, seen);\n    }\n}",
     "supplemental_patterns": [
       {
-        "name": "多源 BFS",
-        "description": "把所有起點同時入隊，距離代表離最近起點的步數。"
+        "name": "0-1 BFS",
+        "description": "**何時用**：邊權只有 0 與 1 兩種值，要求最短路。\n**核心做法**：用雙端佇列取代普通佇列，走 0 權邊時 `push_front`、1 權邊時 `push_back`，使隊列始終按距離單調；和 BFS 一樣每個節點第一次出隊即最短。\n**複雜度**：O(V + E)。為何不用 Dijkstra？Dijkstra 需要堆、常數較大且多一個 log；0-1 BFS 用 deque 即可達到線性。"
       },
       {
-        "name": "0-1 BFS",
-        "description": "邊權只有 0 或 1 時使用雙端佇列，零權邊推前端、一權邊推後端。"
+        "name": "多源 BFS",
+        "description": "**何時用**：求每個點到『最近的任一個 X』的距離（如最近的火源、最近的 0）。\n**核心做法**：把所有起點一開始就同時入隊、距離設 0，等同於接一個虛擬超級源點連到每個起點，之後就是普通 BFS。\n**複雜度**：O(V + E)。"
       },
       {
         "name": "拓撲排序",
-        "description": "用入度為零的節點逐層刪除，處理 DAG 依賴與最長路轉移。"
+        "description": "**何時用**：DAG 上求一個滿足所有相依的線性順序，或在 DAG 上做 DP 轉移。\n**核心做法**：Kahn（BFS）把入度為 0 的點入隊，每彈出一個就把鄰居入度減一、變 0 再入隊；DFS 版則取後序遍歷再反轉。兩者結果都是合法拓撲序。\n**複雜度**：O(V + E)。Kahn 在偵測環上更直觀——若最後入隊節點數 < V，代表有環。"
       }
+    ],
+    "pitfalls": [
+      "⚠️ 忘記在入隊／遞迴**之前**就標記 visited：若等到出隊才標記，同一節點可能被重複入隊，最壞退化成指數爆炸。",
+      "⚠️ 把 BFS 直接套到帶權圖求最短路：邊權不同時『先抵達』不等於『最短』，必須改用 Dijkstra 或 0-1 BFS。",
+      "⚠️ 狀態圖的 visited 維度不足：忘了把『狀態』納入 visited（如帶鑰匙迷宮），會把不同狀態當成同一節點而漏解。"
     ]
   },
   {
@@ -78,8 +106,15 @@
     "title": "區間技巧",
     "slug": "intervals",
     "description": "排序端點後合併、掃描或差分，把重疊關係轉成線性事件。",
-    "core_idea": "區間題的關鍵是把「重疊、覆蓋、增減」轉成端點事件。先決定端點是閉區間或半開區間，再排序左端、右端或事件，掃描時維護目前覆蓋狀態、最大值或可合併邊界。",
+    "motivation": "區間問題（合併、覆蓋、最多重疊）若直接兩兩比較每對區間是否相交，是 O(n²)；當 n 到 10⁵ 時無法接受。更麻煩的是『同時做很多次區間加值、最後查詢』這類批次操作，逐次暴力修改是 O(nq)。難點在於：區間之間的相交關係本身組合很多，亂序處理時要同時考慮包含、部分重疊、不相交，分類爆炸。\n\n解法的第一步幾乎都是『先排序或把區間拆成端點事件』——把雜亂的二維關係壓成一條線上的有序事件，這正是核心想法。",
+    "core_idea": "區間題的關鍵是把『重疊、覆蓋、增減』轉成可線性掃描的端點事件。\n\n- **為什麼通常先排序？** 把區間按左端排序後，相鄰兩個區間的關係只剩三種——不重疊、包含、部分重疊——可以一次掃描窮舉；未排序時任意兩區間的關係組合呈平方級，難以線性處理。\n- **差分 vs 掃描線怎麼選？** 兩者都把區間化成端點變化，但場景不同：**差分陣列**適合『先做大量靜態區間加值、最後一次性查詢』；**掃描線**適合『動態事件處理』——把左端視為加入、右端視為移除，按事件順序維護當前活躍集合（如目前重疊數、覆蓋長度）。\n\n下面先給差分模板，再用補充套路看合併、會議室、最小覆蓋區間各自的掃描技巧。",
     "complexity": "通常時間複雜度 O(n log n)，使用差分且座標範圍可控時可為 O(n + V)，空間複雜度 O(n)。",
+    "deep_dive": [
+      {
+        "title": "差分陣列模板",
+        "body": "差分把『多次區間加值』轉成端點上的兩次單點修改，最後一次前綴和還原：\n```cpp\n// 區間 [l, r] 同加 val，下標從 1 開始\ndiff[l]     += val;   // 從 l 起多了 val\ndiff[r + 1] -= val;   // 過了 r 之後抵銷\n// 還原：前綴和即為每個位置的最終值\nfor (int i = 1; i <= n; ++i)\n    a[i] = a[i - 1] + diff[i];\n```\n逐行：`diff[l] += val` 標記從 l 開始增加；`diff[r + 1] -= val` 在 r 之後把增量抵銷；最後對 `diff` 求前綴和，`a[i]` 就是所有操作疊加後的值。\n\n**適用前提**：下標從 1 開始（避免 `r + 1` 為 0）；`r + 1` 不可超界（陣列開到 `n + 2`）；只支援『先全部修改、再查詢』的靜態場景，過程中要查詢就得改用線段樹／樹狀陣列。"
+      }
+    ],
     "reference_links": [
       {
         "label": "OI-Wiki：差分",
@@ -98,16 +133,21 @@
     "supplemental_patterns": [
       {
         "name": "區間合併",
-        "description": "排序後維護目前最右端，遇到斷點才開新段。"
+        "description": "**何時用**：把一堆可能重疊的區間合併成不相交的若干段。\n**核心做法**：按**左端**排序後依序掃描，維護當前段右界 `cur.end`；若 `cur.end < next.start` 代表斷開，開新段，否則 `cur.end = max(cur.end, next.end)` 延伸。\n**複雜度**：O(n log n)（排序主導）。為何只按 start 排序就夠？因為左端有序後，任何與當前段重疊的區間其 start ≤ cur.end，是否合併只看 start 與 cur.end 的關係，不需再按 end 排序。"
       },
       {
-        "name": "掃描線",
-        "description": "把左端視為加入、右端視為移除，按事件順序維護活躍集合。"
+        "name": "會議室問題（最多同時重疊）",
+        "description": "**何時用**：求最多有幾個區間同時重疊（最少會議室數）。\n**核心做法**：按 start 排序，用最小堆存放進行中會議的結束時間；處理新會議時若堆頂結束時間 ≤ 新 start，pop 再 push（複用一間），否則直接 push（新增一間）；堆的最大尺寸即答案。這等同於把端點拆成事件後做掃描。\n**複雜度**：O(n log n)。"
       },
       {
-        "name": "差分陣列",
-        "description": "把多次區間加法轉為端點變化，最後用前綴和還原。"
+        "name": "覆蓋 K 個清單的最小區間",
+        "description": "**何時用**：給 k 個各自有序的清單，求一個最小區間使其至少各含一個元素。\n**核心做法**：把每個清單的當前最小值放進最小堆（多路合併），維護目前堆中最大值；每次取出最小值更新答案區間 `[min, max]`，再從它所屬清單補入下一個——本質是堆 + 滑動視窗思維。\n**複雜度**：O(N log k)，N 為元素總數。"
       }
+    ],
+    "pitfalls": [
+      "⚠️ 差分的 `r + 1` 越界：陣列要開到 `n + 2`，且下標從 1 開始，否則 `diff[r + 1]` 在 r 為末位時越界或寫到 `diff[0]` 造成錯誤。",
+      "⚠️ 端點開閉混用：閉區間相接（如 `[1, 2]` 與 `[2, 3]`）算不算重疊，取決於判定寫 `<` 還是 `<=`，需依題意統一。",
+      "⚠️ 區間合併忘了先排序，或誤以為要同時按 end 排序——左端排序後維護右界最大值即可。"
     ]
   },
   {
@@ -115,8 +155,15 @@
     "title": "堆積／優先佇列",
     "slug": "heap-priority-queue",
     "description": "維護動態集合中的最大值或最小值，支援即時取出最佳候選。",
-    "core_idea": "堆積適合反覆取出當前最小或最大元素，常見於排程、貪心、最短路與資料流。若元素可能過期，可採用懶刪除：取堆頂時檢查是否仍有效，無效就彈出直到堆頂合法。",
+    "motivation": "很多貪心、排程、資料流問題需要『反覆取出目前最小／最大的元素，同時還會不斷插入新元素』。若每次都重新排序是 O(n log n)、每次線性掃描找極值是 O(n)，在動態插入下都太慢。難點在於：集合一直在變，我們卻只關心『當前的極值』與『動態維護它』。\n\n堆（heap）正是為此而生——push/pop 都只要 O(log n)，取極值 O(1)。",
+    "core_idea": "堆適合反覆取出當前最小或最大元素，常見於排程、貪心、最短路（Dijkstra／Prim）與資料流中位數。\n\n- **為什麼需要堆？** 完整排序一次是 O(n log n)，但很多題目只需要 top-k 或要邊插入邊取極值；堆用 O(log n) 的 push/pop 支援動態操作，比每次重排序划算得多。\n- **C++ 語法提醒**：`priority_queue<int>` 預設是**大根堆**（最大值在頂）。要小根堆需寫 `priority_queue<int, vector<int>, greater<int>>`，否則容易把 Dijkstra 寫反。\n\n當元素會失效又無法直接刪除時，常搭配『懶刪除』；下面的過程剖析與補充套路會展開多路合併、貪心排程與懶刪除三種用法。",
     "complexity": "每次 push 或 pop 為 O(log n)，查詢堆頂為 O(1)，空間複雜度 O(n)。",
+    "deep_dive": [
+      {
+        "title": "懶刪除（lazy deletion）怎麼運作",
+        "body": "`priority_queue` 不支援刪除任意元素，也沒有 `decrease-key`。當一個節點找到更短距離時，舊的 `(舊距離, 節點)` 仍留在堆裡，做法是**不刪它，等它浮到堆頂時再丟棄**：\n```cpp\nauto [d, u] = pq.top(); pq.pop();\nif (d != dist[u]) continue; // 過期條目，直接略過\n```\n逐行：取出堆頂後，比對這筆距離 `d` 是否等於目前記錄的 `dist[u]`；若不相等代表後來有更短路徑、這筆已過期，跳過即可。如此堆裡可能有重複節點，但每條邊最多推入一次，總量仍受控，複雜度維持 O((V + E) log V)。"
+      }
+    ],
     "reference_links": [
       {
         "label": "OI-Wiki：堆",
@@ -134,17 +181,22 @@
     "template_code": "priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;\nvector<int> dist(n, INF);\ndist[source] = 0;\npq.push({0, source}); // Heap stores the best known candidate\nwhile (!pq.empty()) {\n    auto [d, u] = pq.top();\n    pq.pop();\n    if (d != dist[u]) continue; // Lazy deletion for outdated entries\n    for (auto [v, w] : graph[u]) {\n        if (dist[v] > d + w) {\n            dist[v] = d + w; // Found a better path\n            pq.push({dist[v], v});\n        }\n    }\n}",
     "supplemental_patterns": [
       {
-        "name": "懶刪除堆",
-        "description": "不在任意位置刪除元素，而是在彈出時驗證版本或有效狀態。"
+        "name": "多路合併",
+        "description": "**何時用**：合併 K 個各自有序的清單／陣列成一個有序序列。\n**核心做法**：把每個清單的首元素入堆，每次 pop 出全域最小，再把它所屬清單的下一個元素推入堆，直到清空。\n**複雜度**：O(N log K)，N 為元素總數、K 為清單數。"
       },
       {
-        "name": "雙堆中位數",
-        "description": "用大根堆維護較小半部、小根堆維護較大半部，保持大小平衡。"
+        "name": "貪心排程（Dijkstra／Prim 核心）",
+        "description": "**何時用**：每一步都要在一組候選中貪心取『當前代價最小』者（最短路、最小生成樹）。\n**核心做法**：堆維護所有候選 `(代價, 節點)`，每次 pop 最小者擴展，產生的新候選再 push 進堆。\n**複雜度**：O((V + E) log V)。"
       },
       {
-        "name": "Top K 候選",
-        "description": "固定容量的小根堆可保留最大的 K 個元素，反之亦然。"
+        "name": "懶刪除（lazy deletion）",
+        "description": "**何時用**：需要刪除堆中『某個特定元素』或更新其鍵值，但堆不支援。\n**核心做法**：不真的刪除，改 push 一筆 `(新值, index)`；pop 時用版本或 `dist` 比對判斷是否過期，過期就丟棄。\n**複雜度**：單次操作仍 O(log n)，堆中冗餘元素總量受推入次數上界控制。"
       }
+    ],
+    "pitfalls": [
+      "⚠️ `priority_queue` 沒有 `decrease-key`，Dijkstra 不能就地更新舊距離，必須用懶刪除（push 新值，pop 時比對丟棄過期條目）。",
+      "⚠️ 存 `pair` 時預設先比 `first`、再比 `second`；若想按 `second` 排序必須自訂 comparator，否則排序鍵搞錯。",
+      "⚠️ 忘了 `greater<>` 而誤用預設大根堆，會把『取最小』寫成『取最大』——Dijkstra 會完全錯誤。"
     ]
   },
   {
@@ -152,8 +204,15 @@
     "title": "動態規劃基礎",
     "slug": "dp-fundamentals",
     "description": "定義狀態與轉移，把重複子問題整理成可累積的最優值或方案數。",
-    "core_idea": "動態規劃先找狀態代表的語意，再確認轉移只依賴更小或更早的狀態。寫題時優先描述 dp[i] 或 dp[i][j] 的完整含義，接著列出初始值、轉移順序與答案位置。",
+    "motivation": "很多問題的暴力解是『枚舉所有方案再取最優』，方案數往往是指數級（如每個物品選或不選有 2ⁿ 種）。難點在於：這些方案之間有大量**重複的子問題**被反覆計算，遞迴展開像一棵巨大的樹，同一個子問題出現無數次。\n\nDP 的價值就在於辨識出這些重疊子問題，把每個子問題只算一次並記下來，於是指數級枝葉被壓成多項式級的狀態表——關鍵是先學會『辨識 DP』與『定義狀態』。",
+    "core_idea": "DP 先找狀態代表的語意，再確認轉移只依賴更小或更早的狀態。\n\n- **如何辨識 DP 問題？** 三個訊號：問的是**最優值**（最大／最小）或**計數**（有幾種方式），而且**子問題重疊**（相同的小問題被反覆求解）。若方案彼此獨立、無重疊，那是貪心或枚舉，不是 DP。\n- **狀態定義是最難的部分**：`dp[i]` 或 `dp[i][j]` 代表什麼必須**無歧義**——例如『以 i 結尾的最長…』和『前 i 個的最長…』是兩回事。狀態定義清楚後，轉移方程往往能由定義自然推出，邊界與枚舉順序也隨之確定。\n\n下面先給設計 DP 的四步驟，再用 LIS、背包、區間 DP 三個經典套路示範。",
     "complexity": "依狀態數與轉移數而定，常見為 O(n)、O(n log n)、O(nW) 或 O(n^2)，空間可用滾動陣列壓縮。",
+    "deep_dive": [
+      {
+        "title": "設計 DP 的四步驟",
+        "body": "任何 DP 都可以照這四步走，順序不能亂：\n\n**1. 定義狀態**：`dp[...]` 代表什麼？必須精確到能用一句話講清楚（如『`dp[i]` = 以 a[i] 結尾的最長遞增子序列長度』）。\n\n**2. 寫轉移**：這個狀態能從哪些『更小／更早』的前驅狀態推來？寫出轉移方程。\n\n**3. 確認邊界**：base case 是什麼？（如 `dp[0] = 0` 或單一元素時的值）\n\n**4. 確認枚舉順序**：計算 `dp[x]` 前，它依賴的狀態都必須已算好——這決定 for 迴圈方向（如區間 DP 必須先小區間再大區間）。\n\n四步缺一不可：狀態錯則全盤皆錯，順序錯則會用到還沒算好的值。"
+      }
+    ],
     "reference_links": [
       {
         "label": "OI-Wiki：動態規劃",
@@ -171,17 +230,22 @@
     "template_code": "int knapsack_01(const vector<int>& weight, const vector<int>& value, int cap) {\n    vector<int> dp(cap + 1, 0); // dp[c] is best value with capacity c\n    for (int i = 0; i < (int)weight.size(); ++i) {\n        for (int c = cap; c >= weight[i]; --c) { // Reverse order prevents reusing item i\n            dp[c] = max(dp[c], dp[c - weight[i]] + value[i]);\n        }\n    }\n    return dp[cap];\n}\n\nint lis_length(const vector<int>& a) {\n    vector<int> tail; // tail[len - 1] is the minimum ending value\n    for (int x : a) {\n        auto it = lower_bound(tail.begin(), tail.end(), x);\n        if (it == tail.end()) tail.push_back(x);\n        else *it = x;\n    }\n    return (int)tail.size();\n}",
     "supplemental_patterns": [
       {
-        "name": "背包 DP",
-        "description": "用容量或限制作為維度，透過正序或逆序控制物品是否可重複使用。"
+        "name": "最長遞增子序列（LIS）",
+        "description": "**何時用**：求最長嚴格遞增子序列長度（或可轉化成此型的問題）。\n**核心做法**：樸素 DP `dp[i] = max(dp[j]) + 1 (j < i, a[j] < a[i])` 是 O(n²)；優化版維護陣列 `tails`，`tails[k]` = 長度為 k+1 的遞增子序列**最小可能結尾**，新元素用二分找插入點替換。\n**複雜度**：O(n log n)。為何 `tails` 可二分？因為它恆為嚴格遞增（單調），才能用 `lower_bound` 定位。"
       },
       {
-        "name": "最長遞增子序列",
-        "description": "用二分維護每個長度的最小結尾，將 O(n^2) 降為 O(n log n)。"
+        "name": "0/1 背包",
+        "description": "**何時用**：每個物品至多選一次，在容量限制下求最大價值。\n**核心做法**：壓成一維 `dp[c]`，外層枚舉物品、內層**逆序**枚舉容量 c 從大到小，確保每個物品本輪只被用一次；完全背包（可重複取）則改成**正序**。\n**複雜度**：O(nW)。逆序的直覺：正序會讓剛更新過的 `dp[c - w]`（已含本物品）又被本物品使用，等於重複拿。"
       },
       {
         "name": "區間 DP",
-        "description": "按區間長度枚舉，將大區間答案由左右子區間合併得到。"
+        "description": "**何時用**：答案由區間拆成左右子區間合併而得（如合併石子、矩陣連乘、回文）。\n**核心做法**：`dp[l][r]` 枚舉分割點 k，由 `dp[l][k]` 與 `dp[k+1][r]` 合併；枚舉順序**必須按區間長度由小到大**，保證子區間先算好。\n**複雜度**：O(n³)（區間數 O(n²) × 枚舉分割點 O(n)）。"
       }
+    ],
+    "pitfalls": [
+      "⚠️ 狀態定義含糊：『以 i 結尾』與『前 i 個』語意不同，混用會導致轉移方程錯誤。",
+      "⚠️ 0/1 背包用正序枚舉容量，會把同一物品重複選用，變成完全背包；要逆序。",
+      "⚠️ 枚舉順序錯：區間 DP 沒有先算小區間、或一般 DP 用到尚未計算的狀態，結果是讀到初始值而非正解。"
     ]
   },
   {
@@ -189,8 +253,15 @@
     "title": "雙指針／滑動視窗",
     "slug": "two-pointers-sliding-window",
     "description": "用兩個邊界維護一段連續區間，靠單調性避免重複枚舉。",
-    "core_idea": "雙指針的本質是讓左右邊界都只往一個方向移動，將所有候選窗口在線性時間內掃完。判斷是否能使用時，確認擴張右端與收縮左端能維持某個單調條件，例如總和、種類數或排序後的差距。",
+    "motivation": "求『最長／最短滿足某條件的連續子陣列』，若枚舉所有 `(left, right)` 區間再檢查是 O(n²) 甚至 O(n³)。難點在於：相鄰的窗口其實有大量重複資訊——right 往右移一格時，整段和、種類數其實只變動一點點，卻被從頭重算。\n\n雙指針利用『窗口的單調性』讓 left、right 各自只往一個方向走，把 O(n²) 壓到 O(n)。",
+    "core_idea": "雙指針讓左右邊界都只朝一個方向移動，在線性時間掃完所有候選窗口。\n\n- **能用雙指針的前提**：當 right 右移時，『仍滿足條件的最小 left』必須**單調不減**（left 只會往右、不會回頭）。例如『和 ≤ limit 的最長窗口』：right 加入新元素使和變大，left 只能往右縮、不可能往左放鬆——這保證每個指針總移動 O(n)。若條件不具此單調性（如含負數的『和 ≤ limit』），雙指針會失效。\n- **滑動視窗 vs 前綴和怎麼選？** 前綴和適合**靜態查詢**任意區間和；滑動視窗適合需要**動態維護窗內統計**（最大值、distinct 數、頻次表）且窗口具單調性的情境。\n\n下面給統一模板，再看對向雙指針與『恰好 K 個』技巧。",
     "complexity": "時間複雜度通常為 O(n)，若需排序則為 O(n log n)，空間複雜度依維護資訊為 O(1) 到 O(k)。",
+    "deep_dive": [
+      {
+        "title": "同向雙指針（滑動視窗）統一模板",
+        "body": "同向雙指針的通用骨架：\n```cpp\nint left = 0;\nfor (int right = 0; right < n; ++right) {\n    add(a[right]);                  // 把 right 元素加入視窗\n    while (window_invalid()) {       // 視窗違反條件就收縮\n        remove(a[left]);            // 把 left 元素移出視窗\n        ++left;\n    }\n    ans = max(ans, right - left + 1); // 此時 [left, right] 合法\n}\n```\n逐行：每輪先把 `right` 納入窗口並更新統計；只要窗口非法就從左端移出元素、`left++`，直到重新合法；迴圈結束時 `[left, right]` 是以 right 為右界的最佳窗口，據此更新答案。換成『最短窗口』時，把更新答案的位置移進 while 迴圈內即可。"
+      }
+    ],
     "reference_links": [
       {
         "label": "OI-Wiki：尺取法",
@@ -208,17 +279,22 @@
     "template_code": "int longest_window(const vector<int>& a, int limit) {\n    int left = 0, sum = 0, ans = 0;\n    for (int right = 0; right < (int)a.size(); ++right) {\n        sum += a[right]; // Expand window by including right\n        while (sum > limit) {\n            sum -= a[left]; // Shrink until the invariant is restored\n            ++left;\n        }\n        ans = max(ans, right - left + 1); // Window [left, right] is valid\n    }\n    return ans;\n}",
     "supplemental_patterns": [
       {
+        "name": "對向雙指針",
+        "description": "**何時用**：在**有序**陣列上找兩數和，或求容器盛水這類『左右夾逼』問題。\n**核心做法**：left 從頭、right 從尾，依當前狀態移動一側。如盛水問題每次移動**較短**那側——因為面積受短邊限制，移動長邊只會更糟，移動短邊才有機會變大。\n**複雜度**：O(n)（若需先排序則 O(n log n)）。"
+      },
+      {
+        "name": "恰好 K 個",
+        "description": "**何時用**：要計算『恰好含 K 個不同元素／恰好 K 個奇數…』的子陣列**數量**。\n**核心做法**：精確計數難寫，改用 `exactly(K) = atMost(K) - atMost(K-1)`，把它拆成兩次『至多 K 個』的滑動視窗計數相減。\n**複雜度**：O(n)（兩次線性掃描）。"
+      },
+      {
         "name": "固定長度視窗",
-        "description": "每次加入右端並移除超出長度的左端，適合固定 k 的統計。"
-      },
-      {
-        "name": "可變長度視窗",
-        "description": "依條件過大或過小來收縮左端，常用於最長或最短子陣列。"
-      },
-      {
-        "name": "排序雙指針",
-        "description": "排序後用左右端夾逼，處理兩數和、配對或差值限制。"
+        "description": "**何時用**：窗口長度固定為 k 的統計（平均、和、最大頻次）。\n**核心做法**：每步把 `a[right]` 加入、把超出長度的 `a[right - k]` 移出，維持窗口恆為 k。\n**複雜度**：O(n)。"
       }
+    ],
+    "pitfalls": [
+      "⚠️ 用雙指針的前提是窗口單調；陣列含負數時『和 ≤ target 的最長窗口』不單調，left 縮了還可能再放鬆，不能用同向雙指針。",
+      "⚠️ 『恰好 K』直接寫一個窗口很容易漏算或重算，改用 `atMost(K) - atMost(K-1)` 較穩。",
+      "⚠️ 對向雙指針忘了先排序，或移動了錯誤的一側（盛水問題該動短邊卻動長邊），會錯過最優解。"
     ]
   },
   {
@@ -226,8 +302,15 @@
     "title": "並查集（DSU）",
     "slug": "union-find-dsu",
     "description": "維護動態連通分量，快速合併集合並查詢代表節點。",
-    "core_idea": "並查集透過父指標表示集合樹，find 找到根代表，union 把兩個集合合併。路徑壓縮與按大小合併讓操作近似常數時間，適合連通性、等價關係與 Kruskal 類問題。",
+    "motivation": "當我們不斷地『把兩個東西歸為同一類』並隨時要問『這兩個東西現在同類嗎』，若用一般圖每次查連通都做一次 BFS/DFS 是 O(n + m)，反覆查詢無法承受。難點在於：等價類會動態合併，我們需要一個能在近常數時間同時支援『合併』與『查代表』的結構。\n\n並查集（DSU）正是用一棵棵『指向代表元的樹』來維護動態等價類，讓 union 與 find 都接近 O(1)。",
+    "core_idea": "並查集用父指標把每個集合表示成一棵樹，根即代表元；`find` 沿父指標找根，`union` 把一個根掛到另一個根下。\n\n- **它解決什麼問題？** 動態維護**等價類**（equivalence classes）：支援 `union`（合併兩類）與 `find`（查代表元，藉此判斷是否同類）。\n- **路徑壓縮 + 按秩合併的直覺**：路徑壓縮在 `find` 時把沿途節點直接接到根，讓樹越走越扁，使 `find` 攤還接近 O(1)；按秩（或按大小）合併總是把小樹掛到大樹下，避免樹退化成一條鏈。兩者合用後單次操作為 O(α(n))，α 是反阿克曼函式，實務上 ≤ 4，幾乎是常數。\n\n下面的過程剖析看帶權並查集的維護細節，補充套路則看環偵測與 Kruskal 的離線用法。",
     "complexity": "單次操作攤還時間 O(α(n))，空間複雜度 O(n)。",
+    "deep_dive": [
+      {
+        "title": "帶權並查集：維護到根的偏移",
+        "body": "帶權並查集在父指標上額外記錄『到父節點的權值』，`find` 時把沿途權值累加成『到根的偏移』，可解食物鏈、差值等式類問題：\n```cpp\nint find(int x) {\n    if (parent[x] == x) return x;\n    int root = find(parent[x]);\n    rel[x] += rel[parent[x]]; // 把到父的偏移累加成到根的偏移\n    parent[x] = root;          // 路徑壓縮\n    return root;\n}\n```\n逐行：先遞迴求父的根（此時 `rel[parent[x]]` 已是父到根的偏移）；把 `rel[x]` 累加上父到根的值，得到 x 到根的偏移；再把 x 直接掛到根。`union(a, b, w)`（表示 b − a = w）時，先 find 兩端的根，再依 `rel[a]`、`rel[b]`、`w` 推出兩根之間應設的權值。"
+      }
+    ],
     "reference_links": [
       {
         "label": "OI-Wiki：並查集",
@@ -246,16 +329,21 @@
     "supplemental_patterns": [
       {
         "name": "帶權並查集",
-        "description": "在父指標上維護到根的權值差，處理比例、距離或異或關係。"
+        "description": "**何時用**：節點間有『差值、比例、異或、分類』等可傳遞的關係（食物鏈、帶權差等式）。\n**核心做法**：在父指標上維護到根的權值偏移，`find` 時同步累加並壓縮；合併時依兩端到根的偏移推算兩根之間的權值。\n**複雜度**：單次 O(α(n))。"
       },
       {
-        "name": "可回滾並查集",
-        "description": "記錄每次合併前的狀態，支援離線分治中的撤銷操作。"
+        "name": "冗餘連線偵測",
+        "description": "**何時用**：判斷加一條邊是否成環、或找出多餘的那條邊。\n**核心做法**：`union` 前先對兩端 `find`；若兩端已在同一集合（同根），這條邊就是環／冗餘邊。\n**複雜度**：單次 O(α(n))。"
       },
       {
-        "name": "離線動態連通性",
-        "description": "把邊存在的時間區間掛到線段樹上，搭配回滾並查集回答查詢。"
+        "name": "離線動態連通性（Kruskal 核心）",
+        "description": "**何時用**：最小生成樹，或可離線、按某種順序加邊的連通性問題。\n**核心做法**：把所有邊按權排序，依序嘗試 `union`：成功合併代表這條邊有用（選入 MST），失敗代表會成環、跳過。\n**複雜度**：O(m log m)（排序主導）。"
       }
+    ],
+    "pitfalls": [
+      "⚠️ 先 union 才 find：合併前一定要先對兩端 `find` 取得**根**，直接 `parent[a] = b` 用的是節點而非根，會破壞結構。",
+      "⚠️ 帶權並查集做路徑壓縮時要**同步更新權值偏移**（`rel[x] += rel[parent[x]]`），只壓縮父指標卻不更新權值會算錯關係。",
+      "⚠️ 忘記路徑壓縮或按秩合併，最壞情況樹退化成鏈，單次 find 變 O(n)。"
     ]
   },
   {
@@ -263,8 +351,15 @@
     "title": "倍增與最近公共祖先",
     "slug": "binary-lifting-lca",
     "description": "預處理每個節點的 2^k 級祖先，快速回答樹上跳躍與路徑查詢。",
-    "core_idea": "倍增把長距離跳躍拆成二進位位元，預處理 up[v][k] 表示 v 的第 2^k 個祖先。LCA 查詢先把兩點提到同深度，再從高位往低位同步上跳，最後得到最低的共同祖先。",
+    "motivation": "在一棵樹上反覆問『u 的第 k 個祖先是誰』或『u、v 的最近公共祖先』，若每次都一步步往上跳父節點，最壞情況是一條鏈狀樹，單次查詢 O(n)，q 次就是 O(nq)。難點在於：跳躍距離可能很長，逐步上跳太慢，我們需要『一次跳很多步』的能力。\n\n倍增（binary lifting）預處理每個節點的 2^k 級祖先，把任意長度的跳躍拆成二進位、用 O(log n) 步完成。",
+    "core_idea": "倍增預處理 `up[v][k]` = 節點 v 往上跳 2^k 步的祖先，建表時用 `up[v][k] = up[up[v][k-1]][k-1]`（跳兩次 2^(k-1)）。\n\n- **為什麼用倍增而非暴力跳父節點？** 暴力每次查詢最壞 O(n)（鏈狀樹）；倍增花 O(n log n) 預處理後，每次查詢只要 O(log n)。\n- **倍增的本質是二進位分解**：任意距離 k 都能寫成若干個 2^i 之和（k 的二進位表示），於是『跳 k 步』= 依 k 的每個為 1 的位元，依序跳 2^i 步。LCA 查詢同理：先把較深的點提到與另一點同深度，再從高位到低位讓兩點同步上跳，直到再跳一步就會相遇，此時的父節點即 LCA。\n\n下面看 LCA 查詢的兩階段流程，以及求法比較、路徑查詢與第 k 祖先。",
     "complexity": "預處理 O(n log n)，每次查詢 O(log n)，空間複雜度 O(n log n)。",
+    "deep_dive": [
+      {
+        "title": "LCA 查詢的兩階段",
+        "body": "LCA 查詢分兩階段，都靠二進位分解：\n```cpp\nint lca(int u, int v) {\n    if (depth[u] < depth[v]) swap(u, v);      // 讓 u 較深\n    int diff = depth[u] - depth[v];\n    for (int k = 0; k < LOG; ++k)              // 階段一：把 u 提到與 v 同深度\n        if (diff >> k & 1) u = up[u][k];\n    if (u == v) return u;                       // v 是 u 的祖先\n    for (int k = LOG - 1; k >= 0; --k)          // 階段二：高位到低位同步上跳\n        if (up[u][k] != up[v][k]) { u = up[u][k]; v = up[v][k]; }\n    return up[u][0];                            // 再跳一步即 LCA\n}\n```\n逐行：先確保 u 較深，用 `diff` 的二進位把 u 上提對齊深度；若對齊後相等，v 本身就是 LCA；否則**從高位往低位**同步跳——只在『跳了之後兩者仍不相同』時才跳，保證停在 LCA 正下方，最後 `up[u][0]` 就是 LCA。階段二必須由高位往低位，才能逼近而不越過。"
+      }
+    ],
     "reference_links": [
       {
         "label": "OI-Wiki：最近公共祖先",
@@ -282,17 +377,22 @@
     "template_code": "const int LOG = 20;\nvector<array<int, LOG>> up;\nvector<int> depth;\n\nvoid dfs_lift(int u, int p, const vector<vector<int>>& tree) {\n    up[u][0] = p; // Immediate parent\n    for (int k = 1; k < LOG; ++k) {\n        up[u][k] = up[up[u][k - 1]][k - 1]; // Jump twice by 2^(k-1)\n    }\n    for (int v : tree[u]) {\n        if (v == p) continue;\n        depth[v] = depth[u] + 1;\n        dfs_lift(v, u, tree);\n    }\n}\n\nint kth_ancestor(int u, int k) {\n    for (int bit = 0; bit < LOG; ++bit) {\n        if (k >> bit & 1) u = up[u][bit]; // Apply binary decomposition\n    }\n    return u;\n}",
     "supplemental_patterns": [
       {
-        "name": "LCA 查詢",
-        "description": "先對齊深度，再高位同步跳躍直到父節點相同。"
-      },
-      {
-        "name": "第 k 祖先",
-        "description": "把 k 拆成二進位，依位元跳到對應祖先。"
+        "name": "LCA 求法比較",
+        "description": "**何時用**：依題目規模與是否離線選擇 LCA 演算法。\n**核心做法**：倍增——預處理 O(n log n)、查詢 O(log n)，好寫且支援線上；Euler tour + RMQ（稀疏表）——O(n log n) 預處理、查詢 O(1)，常數小但程式較長；Tarjan 離線——O((n + q)α(n))，需一次拿到所有查詢。\n**複雜度**：見各法；一般競賽首選倍增。"
       },
       {
         "name": "樹上路徑查詢",
-        "description": "在倍增表中同時維護最大值、最小值或權值和。"
+        "description": "**何時用**：求樹上兩點距離，或路徑上的最大／最小邊權、權值和。\n**核心做法**：用根到節點的前綴量 `query(x)` 配合 LCA：`ans = query(u) + query(v) - 2 * query(lca(u, v))`（距離型）；最值型則在倍增表中同時維護 `maxw[v][k]` 等資訊。\n**複雜度**：每次 O(log n)。"
+      },
+      {
+        "name": "第 k 祖先",
+        "description": "**何時用**：直接問『u 往上 k 層的節點』。\n**核心做法**：把 k 拆成二進位，對每個為 1 的位元 `bit` 執行 `u = up[u][bit]`，依序跳完即達。\n**複雜度**：每次 O(log n)。"
       }
+    ],
+    "pitfalls": [
+      "⚠️ `LOG` 設太小：需滿足 `2^LOG ≥ n`，否則深樹的高位祖先表不夠、跳不到位。",
+      "⚠️ 階段二的同步上跳必須**由高位到低位**，且只在 `up[u][k] != up[v][k]` 時才跳，順序反了會越過 LCA。",
+      "⚠️ 邊界：根節點的祖先要設成自身或哨兵（如 0），否則 `up[root][k]` 越界或指到無效節點。"
     ]
   },
   {
@@ -300,8 +400,15 @@
     "title": "單調棧／單調佇列",
     "slug": "monotonic-stack-queue",
     "description": "維護單調候選集合，快速找到下一個更大值或滑動視窗極值。",
-    "core_idea": "單調結構會刪除永遠不可能成為答案的候選。單調棧常用於找左／右第一個更大或更小元素；單調佇列則在滑動視窗中維護最大或最小值，讓每個元素最多進出一次。",
+    "motivation": "『對每個元素，找它右邊第一個比它大的數』這類問題，暴力對每個元素往後掃是 O(n²)；滑動視窗最大值若每次重算也是 O(nk)。難點在於：大量比較其實是重複的——一個被更大元素擋住的小元素，永遠不可能成為後面元素的答案，卻一再被檢查。\n\n單調棧／單調佇列的核心，就是即時丟掉這些『永遠不可能成為答案』的候選，讓每個元素最多進出結構一次，達到 O(n)。",
+    "core_idea": "單調結構會主動刪除『永遠不可能成為答案』的候選。\n\n- **單調棧解決什麼？** 對每個元素找『下一個（或上一個）更大／更小值』。核心直覺：當新元素比棧頂大時，棧頂這個較小值被新元素『擋住』，它對後續元素而言永遠輪不到，於是直接彈出並結算——每個元素入棧、出棧各一次，總計 O(n)。\n- **單調佇列 vs 滑動視窗最大值**：單調佇列存的是**下標**，隊頭永遠是當前視窗最大值的下標。每步先從隊頭彈掉超出視窗範圍的下標，再從隊尾彈掉所有比新元素小的下標（它們被新元素支配、不可能再當最大值），保證隊列值單調遞減。\n\n下面看『入棧記錄、出棧計算』的執行順序，以及柱狀圖最大矩形與貢獻計數兩個套路。",
     "complexity": "時間複雜度 O(n)，空間複雜度 O(n) 或 O(k)。",
+    "deep_dive": [
+      {
+        "title": "入棧記錄、出棧計算：執行順序",
+        "body": "單調棧題的關鍵在『何時記錄、何時結算』。以柱狀圖最大矩形為例，棧內保持下標對應高度遞增：\n```cpp\nstack<int> st;                 // 存下標，對應高度遞增\nfor (int i = 0; i <= n; ++i) {\n    int h = (i == n) ? 0 : height[i];   // 末尾補 0 強制清空棧\n    while (!st.empty() && height[st.top()] > h) {\n        int top = st.top(); st.pop();\n        int left = st.empty() ? -1 : st.top();         // 左邊界：新棧頂\n        ans = max(ans, height[top] * (i - left - 1));  // 右邊界即 i\n    }\n    st.push(i);\n}\n```\n逐行：遇到比棧頂矮的 `h`，代表棧頂柱子的『右邊第一個更矮』就是 i，於是**出棧時結算**——以 `height[top]` 為高、寬度 `(i - left - 1)`（左邊界是出棧後的新棧頂）。末尾補一個高度 0 確保所有柱子都被結算。記住順序：**入棧時只記下標，面積一律在出棧時計算**。"
+      }
+    ],
     "reference_links": [
       {
         "label": "OI-Wiki：單調棧",
@@ -319,17 +426,22 @@
     "template_code": "vector<int> next_greater(const vector<int>& a) {\n    vector<int> ans(a.size(), -1), st;\n    for (int i = 0; i < (int)a.size(); ++i) {\n        while (!st.empty() && a[st.back()] < a[i]) {\n            ans[st.back()] = i; // Current i is the first greater element\n            st.pop_back();\n        }\n        st.push_back(i); // Indices in stack have decreasing values\n    }\n    return ans;\n}\n\nvector<int> sliding_max(const vector<int>& a, int k) {\n    deque<int> dq;\n    vector<int> ans;\n    for (int i = 0; i < (int)a.size(); ++i) {\n        while (!dq.empty() && dq.front() <= i - k) dq.pop_front(); // Remove expired index\n        while (!dq.empty() && a[dq.back()] <= a[i]) dq.pop_back(); // Remove dominated values\n        dq.push_back(i);\n        if (i >= k - 1) ans.push_back(a[dq.front()]);\n    }\n    return ans;\n}",
     "supplemental_patterns": [
       {
-        "name": "下一個更大元素",
-        "description": "掃描時彈出被當前元素支配的索引，當前元素就是它們的答案。"
-      },
-      {
-        "name": "滑動視窗最大值",
-        "description": "佇列內保持值遞減，隊首永遠是目前視窗最大值。"
+        "name": "柱狀圖最大矩形",
+        "description": "**何時用**：在直方圖中找面積最大的矩形（或可轉化成此型，如最大全 1 子矩形）。\n**核心做法**：對每根柱子找『左、右第一個更矮的柱子』作為矩形左右邊界，寬度 = 右界 − 左界 − 1；用單調遞增棧在一次掃描中『入棧記錄、出棧結算面積』。\n**複雜度**：O(n)。"
       },
       {
         "name": "貢獻計數",
-        "description": "用左右第一個更小或更大元素計算每個元素作為極值的區間數。"
+        "description": "**何時用**：要對所有子陣列求『以某元素為最大／最小值』的統計（如所有子陣列最小值之和）。\n**核心做法**：用單調棧求每個 `a[k]` 作為極值時能向左、向右延伸的邊界 `(L, R)`，則它作為極值的子陣列個數 = 左可選 × 右可選，直接相乘累加貢獻。\n**複雜度**：O(n)。"
+      },
+      {
+        "name": "滑動視窗最大值",
+        "description": "**何時用**：長度固定 k 的視窗滑動，求每個視窗的最大（或最小）值。\n**核心做法**：單調佇列存下標、值遞減；每步先從隊頭移除超出視窗的下標，再從隊尾移除比新元素小的下標，隊頭即當前視窗最大值。\n**複雜度**：O(n)，每個下標進出佇列各一次。"
       }
+    ],
+    "pitfalls": [
+      "⚠️ 單調棧弄錯比較方向（`>` 還是 `>=`）會影響『相等元素』的歸屬，導致重複計算或漏算邊界，需依題意（找嚴格更大或不小於）決定。",
+      "⚠️ 單調佇列存的是**下標**不是值，否則無法判斷隊頭是否已超出視窗範圍。",
+      "⚠️ 柱狀圖忘了在末尾補一個高度 0（或遍歷到 n）強制清空棧，最後仍留在棧中的柱子不會被結算。"
     ]
   },
   {
@@ -337,8 +449,15 @@
     "title": "線段樹／樹狀陣列",
     "slug": "segment-tree-bit",
     "description": "維護可合併區間資訊，支援動態更新與區間查詢。",
-    "core_idea": "線段樹把區間遞迴拆成左右子區間，可維護和、最大值、最小值或自訂資訊；樹狀陣列用 lowbit 管理前綴貢獻，適合前綴和與單點更新。選擇資料結構時先確認操作是否可逆、是否需要懶標記與區間修改。",
+    "motivation": "陣列上要『反覆做區間查詢，同時又不斷單點或區間修改』。前綴和雖能 O(1) 查任意區間和，但只要改動一個元素就得 O(n) 重建整個前綴和；反過來，原陣列直接改是 O(1)，但每次區間查詢又退化成 O(n)。難點在於：修改與查詢這兩個需求互相拉扯，靜態結構顧此失彼。\n\n線段樹與樹狀陣列（BIT）用一棵層次結構把區間資訊分塊維護，讓修改與查詢都只要 O(log n)。",
+    "core_idea": "線段樹把區間遞迴拆成左右子區間，每個節點維護可合併資訊（和、最值、GCD…）；樹狀陣列（BIT／Fenwick）用 lowbit 管理前綴貢獻。\n\n- **為什麼不用前綴和？** 前綴和支援靜態查詢 O(1)，但一旦要動態修改，區間修改需 O(n) 重建——無法兼顧『改』與『查』。線段樹／BIT 兩者都壓到 O(log n)。\n- **BIT 的直覺**：`i & (-i)`（lowbit）取出 i 最低位的 1，代表 `bit[i]` 這個節點『負責』的區間長度。更新時沿 `i += i & -i` 往上跳、查詢前綴時沿 `i -= i & -i` 往下跳，每次只觸碰 O(log n) 個節點。\n\n下面先看懶標記為何需要下推，再談 BIT 上二分與權值線段樹三種進階用法。",
     "complexity": "建樹 O(n)，單次更新或查詢 O(log n)，空間複雜度 O(n)。",
+    "deep_dive": [
+      {
+        "title": "懶標記（lazy propagation）為何需要下推",
+        "body": "區間修改若每次都遞迴改到葉子是 O(n)，懶標記的做法是『改到完全覆蓋的節點就停手、打個標記』，等之後真的要訪問其子節點時才把標記下推：\n```cpp\nvoid pushdown(int node, int len) {\n    if (lazy[node] == 0) return;\n    long long t = lazy[node];\n    lazy[2*node]   += t; sum[2*node]   += t * (len - len/2); // 左子\n    lazy[2*node+1] += t; sum[2*node+1] += t * (len/2);       // 右子\n    lazy[node] = 0;       // 標記已下放，清空\n}\n```\n逐行：若無待下推標記直接返回；否則把標記累加到左右子節點的 `lazy`，並依各自長度更新其 `sum`；最後清空本節點標記。**為何不能直接改完就算？** 若只更新當前節點的 `sum` 而不在進入子樹前下推，後續對子區間的查詢會讀到尚未套用本次修改的舊值——下推就是在『訪問子節點之前』補上這筆延遲更新。"
+      }
+    ],
     "reference_links": [
       {
         "label": "OI-Wiki：線段樹",
@@ -356,17 +475,22 @@
     "template_code": "struct Fenwick {\n    int n;\n    vector<long long> bit;\n    Fenwick(int n) : n(n), bit(n + 1, 0) {}\n    void add(int index, long long delta) {\n        for (++index; index <= n; index += index & -index) {\n            bit[index] += delta; // Update all ranges covering index\n        }\n    }\n    long long sum_prefix(int index) {\n        long long ans = 0;\n        for (++index; index > 0; index -= index & -index) {\n            ans += bit[index]; // Collect disjoint prefix blocks\n        }\n        return ans;\n    }\n    long long range_sum(int left, int right) {\n        return sum_prefix(right) - (left ? sum_prefix(left - 1) : 0);\n    }\n};",
     "supplemental_patterns": [
       {
-        "name": "單點更新",
-        "description": "更新一個位置後沿父節點重算，適合動態陣列查詢。"
+        "name": "懶標記（lazy propagation）",
+        "description": "**何時用**：需要**區間修改 + 區間查詢**（如區間加值並查區間和／最值）。\n**核心做法**：修改時遞迴到『完全被覆蓋』的節點就停，記下 `lazy` 標記不再深入；任何要進入其子節點的操作（查詢或後續修改）前先 `pushdown` 把標記下放。\n**複雜度**：單次 O(log n)。"
       },
       {
-        "name": "區間查詢",
-        "description": "把查詢區間拆成 O(log n) 個完全覆蓋節點並合併資訊。"
+        "name": "BIT 求 lower_bound",
+        "description": "**何時用**：在前綴和單調的 BIT 上找『前綴和首次 ≥ k 的位置』（如第 k 小、第 k 個存在的元素）。\n**核心做法**：在外層直接套二分是 O(log² n)；改用『倍增法』在 BIT 上一次走完——從最高位開始嘗試跨越 2^j 長度的塊，累加不超過 k 就前進，降到 O(log n)。\n**複雜度**：O(log n)。"
       },
       {
-        "name": "懶標記",
-        "description": "區間修改時先記錄延遲資訊，必要時再下推到子節點。"
+        "name": "權值線段樹／權值 BIT",
+        "description": "**何時用**：要查『第 k 小』『小於 x 的元素個數』『逆序對數』等與**值域**有關的統計。\n**核心做法**：下標改成**值域**而非位置，插入一個值就在對應位置 +1；前綴和即『≤ x 的個數』，在權值樹上二分即得第 k 小。值域大時先離散化。\n**複雜度**：單次 O(log V)。"
       }
+    ],
+    "pitfalls": [
+      "⚠️ 用前綴和硬撐動態修改：單點改一次就要 O(n) 重建，資料一旦會變就該換線段樹／BIT。",
+      "⚠️ 懶標記忘了在進入子節點前 `pushdown`，會讀到尚未套用修改的舊值；下推與合併的順序不能顛倒。",
+      "⚠️ 權值線段樹值域過大未離散化會 MLE／TLE；BIT 下標從 1 開始，`i & -i` 對 0 會死循環。"
     ]
   }
 ]

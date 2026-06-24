@@ -16,16 +16,24 @@ export interface SupplementalPattern {
   description: string;
 }
 
+export interface DeepDiveSection {
+  title: string;
+  body: string;
+}
+
 export interface Topic {
   id: string;
   title: string;
   slug: string;
   description: string;
+  motivation?: string;
   core_idea: string;
   complexity: string;
+  deep_dive?: DeepDiveSection[];
   reference_links: ReferenceLink[];
   template_code: string;
   supplemental_patterns: SupplementalPattern[];
+  pitfalls?: string[];
   children?: string[];
 }
 

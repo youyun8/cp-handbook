@@ -10,7 +10,12 @@ export function MarkdownBlock({ children, className }: { children: string; class
       components={{
         p: ({ children: paragraphChildren }) => <p>{paragraphChildren}</p>,
         ul: ({ children: listChildren }) => <ul className="space-y-2">{listChildren}</ul>,
-        li: ({ children: itemChildren }) => <li>・{itemChildren}</li>
+        li: ({ children: itemChildren }) => <li>・{itemChildren}</li>,
+        pre: ({ children: preChildren }) => (
+          <pre className="overflow-x-auto rounded-2xl border border-border bg-slate-950/70 p-4 text-xs leading-6">
+            {preChildren}
+          </pre>
+        )
       }}
     >
       {children}
