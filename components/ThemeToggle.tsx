@@ -1,14 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/button';
+import { useMounted } from '@/lib/useMounted';
 
 export function ThemeToggle() {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const { theme, setTheme } = useTheme();
-
-  useEffect(() => setMounted(true), []);
 
   if (!mounted) {
     return (

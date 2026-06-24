@@ -1,19 +1,18 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { Problem, Topic } from '@/lib/types';
+import { useMounted } from '@/lib/useMounted';
 import { useProgressStore } from '@/store/useProgressStore';
 
 export function ProgressSummary({ problems, topics }: { problems: Problem[]; topics: Topic[] }) {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const reviewedProblemIds = useProgressStore((state) => state.reviewedProblemIds);
   const contestSessions = useProgressStore((state) => state.contestSessions);
   const currentRating = useProgressStore((state) => state.currentRating);
   const submissions = useProgressStore((state) => state.submissions);
   const reviewEvents = useProgressStore((state) => state.reviewEvents);
-
-  useEffect(() => setMounted(true), []);
 
   const topicCount = useMemo(() => {
     const reviewed = new Set(reviewedProblemIds);
