@@ -31,19 +31,35 @@ npm run build
 
 ## GitHub Pages 部署
 
-安裝依賴後執行：
+專案已提供 `deploy` 指令，可將 `next build` 產生的靜態輸出發佈到 GitHub Pages。第一次部署前請先確認：
+
+1. 已安裝 Node.js 18.17 以上版本。
+2. 已在 GitHub 儲存庫的 **Settings > Pages** 將來源設為 **Deploy from a branch**，分支選擇 `gh-pages`，目錄選擇 `/ (root)`。
+3. 本機 Git 遠端儲存庫已有寫入權限，因為 `gh-pages` 套件會把 `out/` 的內容推送到 `gh-pages` 分支。
+
+安裝依賴：
+
+```bash
+npm install
+```
+
+接著執行部署：
 
 ```bash
 npm run deploy
 ```
 
-`deploy` 指令會先執行 `npm run build`，再透過 `gh-pages -d out` 發佈靜態輸出。若網站部署在儲存庫子路徑，建置時可設定：
+`deploy` 指令會先執行 `npm run build`，再透過 `gh-pages -d out` 發佈靜態輸出。部署完成後，GitHub Pages 會從 `gh-pages` 分支讀取檔案並更新網站。
+
+若網站部署在儲存庫子路徑，例如 `https://使用者名稱.github.io/儲存庫名稱/`，建置時需設定 `NEXT_PUBLIC_BASE_PATH`，讓 Next.js 產生正確的連結與靜態資源路徑：
 
 ```bash
 NEXT_PUBLIC_BASE_PATH=/儲存庫名稱 npm run deploy
 ```
 
-在 GitHub Actions 環境中，設定檔會依 `GITHUB_REPOSITORY` 自動推導 base path。
+若是部署到使用者或組織首頁，例如 `https://使用者名稱.github.io/`，通常不需要設定 `NEXT_PUBLIC_BASE_PATH`。
+
+在 GitHub Actions 環境中，`next.config.mjs` 會依 `GITHUB_REPOSITORY` 自動推導 base path，因此部署到儲存庫子路徑時不需要手動指定 `NEXT_PUBLIC_BASE_PATH`。
 
 ## 資料來源
 
