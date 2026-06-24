@@ -43,10 +43,10 @@ export function difficultyLabel(rating: number) {
 }
 
 export function difficultyClass(rating: number) {
-  if (rating < 1400) return 'border-emerald-400/40 bg-emerald-500/15 text-emerald-300';
-  if (rating <= 1800) return 'border-yellow-400/40 bg-yellow-500/15 text-yellow-200';
-  if (rating < 2100) return 'border-orange-400/40 bg-orange-500/15 text-orange-200';
-  return 'border-red-400/40 bg-red-500/15 text-red-200';
+  if (rating < 1400) return 'border-emerald-400/40 bg-emerald-500/15 text-emerald-800 dark:text-emerald-300';
+  if (rating <= 1800) return 'border-yellow-400/40 bg-yellow-500/15 text-yellow-800 dark:text-yellow-200';
+  if (rating < 2100) return 'border-orange-400/40 bg-orange-500/15 text-orange-800 dark:text-orange-200';
+  return 'border-red-400/40 bg-red-500/15 text-red-800 dark:text-red-200';
 }
 
 export function problemTypeLabel(problemType: ProblemType) {
@@ -60,9 +60,9 @@ export function problemTypeLabel(problemType: ProblemType) {
 
 export function problemTypeClass(problemType: ProblemType) {
   const classes: Record<ProblemType, string> = {
-    template: 'border-slate-400/40 bg-slate-500/15 text-slate-200',
-    classic: 'border-blue-400/40 bg-blue-500/15 text-blue-200',
-    insight_transfer: 'border-purple-400/40 bg-purple-500/15 text-purple-200'
+    template: 'border-slate-400/40 bg-slate-500/15 text-slate-700 dark:text-slate-200',
+    classic: 'border-blue-400/40 bg-blue-500/15 text-blue-800 dark:text-blue-200',
+    insight_transfer: 'border-purple-400/40 bg-purple-500/15 text-purple-800 dark:text-purple-200'
   };
   return classes[problemType];
 }
@@ -104,10 +104,10 @@ export function topicIcon(topicId: string) {
 
 export function sourceClass(source: Source) {
   const classes: Record<Source, string> = {
-    leetcode: 'border-amber-400/40 bg-amber-500/15 text-amber-300',
-    codeforces: 'border-red-400/40 bg-red-500/15 text-red-200',
-    luogu: 'border-teal-400/40 bg-teal-500/15 text-teal-200',
-    atcoder: 'border-sky-400/40 bg-sky-500/15 text-sky-200'
+    leetcode: 'border-amber-400/40 bg-amber-500/15 text-amber-800 dark:text-amber-300',
+    codeforces: 'border-red-400/40 bg-red-500/15 text-red-800 dark:text-red-200',
+    luogu: 'border-teal-400/40 bg-teal-500/15 text-teal-800 dark:text-teal-200',
+    atcoder: 'border-sky-400/40 bg-sky-500/15 text-sky-800 dark:text-sky-200'
   };
   return classes[source];
 }

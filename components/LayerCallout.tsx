@@ -8,7 +8,7 @@ const variantClass: Record<LayerVariant, string> = {
   core: 'border-blue-400/40 bg-blue-500/10',
   deepdive: 'border-cyan-400/30 bg-cyan-500/10',
   references: 'border-border bg-card/70',
-  template: 'border-slate-600 bg-slate-950/20',
+  template: 'border-slate-400/40 bg-slate-500/10 dark:border-slate-600 dark:bg-slate-950/20',
   supplemental: 'border-violet-400/30 bg-violet-500/10',
   pitfalls: 'border-rose-400/40 bg-rose-500/10',
   problems: 'border-emerald-400/30 bg-emerald-500/10'

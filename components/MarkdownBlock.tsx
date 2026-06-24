@@ -11,8 +11,19 @@ export function MarkdownBlock({ children, className }: { children: string; class
         p: ({ children: paragraphChildren }) => <p>{paragraphChildren}</p>,
         ul: ({ children: listChildren }) => <ul className="space-y-2">{listChildren}</ul>,
         li: ({ children: itemChildren }) => <li>・{itemChildren}</li>,
+        code: ({ children: codeChildren, className: codeClassName }) => {
+          if (codeClassName) {
+            return <code className={codeClassName}>{codeChildren}</code>;
+          }
+
+          return (
+            <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-[0.85em] text-foreground">
+              {codeChildren}
+            </code>
+          );
+        },
         pre: ({ children: preChildren }) => (
-          <pre className="overflow-x-auto rounded-2xl border border-border bg-slate-950/70 p-4 text-xs leading-6">
+          <pre className="overflow-x-auto rounded-2xl border border-border bg-slate-100 p-4 text-xs leading-6 text-slate-800 dark:bg-[#0d1117] dark:text-slate-200">
             {preChildren}
           </pre>
         )

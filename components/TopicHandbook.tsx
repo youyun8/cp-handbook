@@ -35,7 +35,9 @@ export function TopicHandbook({
 
         <LayerCallout eyebrow="第一層" title="核心想法" variant="core">
           <MarkdownBlock>{topic.core_idea}</MarkdownBlock>
-          <p className="mt-3 rounded-2xl bg-background/55 p-3 text-sm font-medium text-blue-200">複雜度：{topic.complexity}</p>
+          <p className="mt-3 rounded-2xl bg-background/55 p-3 text-sm font-medium text-blue-800 dark:text-blue-200">
+            複雜度：{topic.complexity}
+          </p>
         </LayerCallout>
 
         {topic.deep_dive && topic.deep_dive.length > 0 ? (
@@ -43,7 +45,7 @@ export function TopicHandbook({
             <div className="space-y-5">
               {topic.deep_dive.map((section) => (
                 <div key={section.title} className="rounded-2xl border border-border bg-background/45 p-4">
-                  <h3 className="text-lg font-semibold tracking-tight text-cyan-100">{section.title}</h3>
+                  <h3 className="text-lg font-semibold tracking-tight text-cyan-900 dark:text-cyan-100">{section.title}</h3>
                   <MarkdownBlock className="mt-2 text-muted-foreground">{section.body}</MarkdownBlock>
                 </div>
               ))}
@@ -82,7 +84,7 @@ export function TopicHandbook({
               {topic.pitfalls.map((pitfall) => (
                 <li
                   key={pitfall}
-                  className="rounded-2xl border border-rose-400/30 bg-background/45 p-3 text-sm leading-7 text-rose-100"
+                  className="rounded-2xl border border-rose-400/30 bg-background/45 p-3 text-sm leading-7 text-rose-900 dark:text-rose-100"
                 >
                   {pitfall}
                 </li>

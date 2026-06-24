@@ -6,7 +6,7 @@
   --background: 210 40% 98%;
   --foreground: 222 47% 11%;
   --muted: 215 25% 91%;
-  --muted-foreground: 215 16% 42%;
+  --muted-foreground: 215 20% 38%;
   --card: 0 0% 100%;
   --card-foreground: 222 47% 11%;
   --border: 214 32% 88%;
@@ -20,7 +20,7 @@
   --background: 222 47% 7%;
   --foreground: 210 40% 96%;
   --muted: 217 33% 17%;
-  --muted-foreground: 215 20% 70%;
+  --muted-foreground: 215 20% 75%;
   --card: 222 47% 10%;
   --card-foreground: 210 40% 96%;
   --border: 217 33% 20%;
@@ -54,6 +54,21 @@ body {
   background: transparent !important;
   font-size: 0.875rem;
   line-height: 1.75;
+}
+
+.dark .shiki,
+.dark .shiki span {
+  color: var(--shiki-dark) !important;
+}
+
+.dark .shiki {
+  background-color: var(--shiki-dark-bg) !important;
+}
+
+.dark .shiki span {
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
 }
 
 .shiki code {

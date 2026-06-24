@@ -11,9 +11,9 @@ export async function CodeBlock({ code, lang = 'cpp' }: { code: string; lang?: s
   });
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-slate-950/70">
-      <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
-        <span className="text-sm font-medium text-slate-200">C++ 註解模板</span>
+    <div className="overflow-hidden rounded-2xl border border-border bg-slate-100 dark:bg-[#0d1117]">
+      <div className="flex items-center justify-between border-b border-border px-4 py-3">
+        <span className="text-sm font-medium text-muted-foreground">C++ 註解模板</span>
         <CopyButton text={code} />
       </div>
       <div className="overflow-x-auto p-4" dangerouslySetInnerHTML={{ __html: html }} />
