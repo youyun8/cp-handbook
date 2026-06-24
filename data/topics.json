@@ -1,0 +1,372 @@
+[
+  {
+    "id": "binary-search",
+    "title": "二分搜尋",
+    "slug": "binary-search",
+    "description": "把答案空間或有序序列切成可判定的左右兩半，快速定位邊界。",
+    "core_idea": "二分搜尋的核心是找到一個單調判定：當某個條件在位置 x 成立時，右側或左側也會保持成立。先明確搜尋區間是閉區間或半開區間，再用中點縮小範圍，最後回傳第一個滿足條件的位置或最後一個不滿足的位置。",
+    "complexity": "時間複雜度 O(log n) 或 O(log V)，空間複雜度 O(1)。",
+    "reference_links": [
+      {
+        "label": "OI-Wiki：二分",
+        "url": "https://oi-wiki.org/basic/binary/"
+      },
+      {
+        "label": "cp-algorithms：Binary search",
+        "url": "https://cp-algorithms.com/num_methods/binary_search.html"
+      },
+      {
+        "label": "靈茶山艾府：二分答案專題",
+        "url": "https://www.bilibili.com/video/BV1AP41137w7/"
+      }
+    ],
+    "template_code": "int lower_bound_custom(const vector<int>& a, int target) {\n    int left = 0, right = (int)a.size(); // Search in [left, right)\n    while (left < right) {\n        int mid = left + (right - left) / 2; // Avoid overflow\n        if (a[mid] >= target) {\n            right = mid; // mid can still be the first valid index\n        } else {\n            left = mid + 1; // mid is invalid, remove it\n        }\n    }\n    return left; // First index with a[i] >= target\n}\n\nlong long binary_search_answer(long long low, long long high) {\n    while (low < high) {\n        long long mid = low + (high - low) / 2; // Candidate answer\n        if (check(mid)) {\n            high = mid; // Feasible, try a smaller answer\n        } else {\n            low = mid + 1; // Infeasible, need a larger answer\n        }\n    }\n    return low; // Minimum feasible answer\n}",
+    "supplemental_patterns": [
+      {
+        "name": "lower_bound",
+        "description": "尋找第一個大於等於目標的位置，適合邊界、插入點與最小可行答案。"
+      },
+      {
+        "name": "upper_bound",
+        "description": "尋找第一個大於目標的位置，常用於計數區間內元素數量。"
+      },
+      {
+        "name": "二分答案",
+        "description": "把最佳化問題改寫為「某個答案是否可行」的判定問題，再在答案範圍上二分。"
+      }
+    ]
+  },
+  {
+    "id": "graph-traversal",
+    "title": "圖論 BFS／DFS",
+    "slug": "graph-bfs-dfs",
+    "description": "用佇列或遞迴探索圖，建立距離、連通性、拓撲順序與狀態層次。",
+    "core_idea": "BFS 依照層數擴展，天然適合無權圖最短路與狀態最少步數；DFS 依照深度追蹤，適合連通分量、環檢測與拓撲依賴。建圖時先確認節點狀態與邊的語意，再決定是否需要 visited、distance 或入度陣列。",
+    "complexity": "時間複雜度 O(n + m)，空間複雜度 O(n + m)。",
+    "reference_links": [
+      {
+        "label": "OI-Wiki：圖論基礎",
+        "url": "https://oi-wiki.org/graph/"
+      },
+      {
+        "label": "cp-algorithms：Breadth First Search",
+        "url": "https://cp-algorithms.com/graph/breadth-first-search.html"
+      },
+      {
+        "label": "靈茶山艾府：圖論題單",
+        "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/graph.go"
+      }
+    ],
+    "template_code": "vector<int> bfs(int start, const vector<vector<int>>& graph) {\n    vector<int> dist(graph.size(), -1); // -1 means unvisited\n    queue<int> q;\n    dist[start] = 0; // Source distance is zero\n    q.push(start);\n    while (!q.empty()) {\n        int u = q.front();\n        q.pop();\n        for (int v : graph[u]) {\n            if (dist[v] != -1) continue; // Each node enters queue once\n            dist[v] = dist[u] + 1; // BFS layer increases by one\n            q.push(v);\n        }\n    }\n    return dist;\n}\n\nvoid dfs(int u, const vector<vector<int>>& graph, vector<int>& seen) {\n    seen[u] = 1; // Mark before visiting neighbors\n    for (int v : graph[u]) {\n        if (!seen[v]) dfs(v, graph, seen);\n    }\n}",
+    "supplemental_patterns": [
+      {
+        "name": "多源 BFS",
+        "description": "把所有起點同時入隊，距離代表離最近起點的步數。"
+      },
+      {
+        "name": "0-1 BFS",
+        "description": "邊權只有 0 或 1 時使用雙端佇列，零權邊推前端、一權邊推後端。"
+      },
+      {
+        "name": "拓撲排序",
+        "description": "用入度為零的節點逐層刪除，處理 DAG 依賴與最長路轉移。"
+      }
+    ]
+  },
+  {
+    "id": "intervals",
+    "title": "區間技巧",
+    "slug": "intervals",
+    "description": "排序端點後合併、掃描或差分，把重疊關係轉成線性事件。",
+    "core_idea": "區間題的關鍵是把「重疊、覆蓋、增減」轉成端點事件。先決定端點是閉區間或半開區間，再排序左端、右端或事件，掃描時維護目前覆蓋狀態、最大值或可合併邊界。",
+    "complexity": "通常時間複雜度 O(n log n)，使用差分且座標範圍可控時可為 O(n + V)，空間複雜度 O(n)。",
+    "reference_links": [
+      {
+        "label": "OI-Wiki：差分",
+        "url": "https://oi-wiki.org/basic/prefix-sum/"
+      },
+      {
+        "label": "cp-algorithms：Scanline",
+        "url": "https://cp-algorithms.com/geometry/vertical_decomposition.html"
+      },
+      {
+        "label": "靈茶山艾府：區間合併與掃描",
+        "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/sort.go"
+      }
+    ],
+    "template_code": "vector<pair<int, int>> merge_intervals(vector<pair<int, int>> intervals) {\n    sort(intervals.begin(), intervals.end()); // Sort by left endpoint first\n    vector<pair<int, int>> merged;\n    for (auto [l, r] : intervals) {\n        if (merged.empty() || merged.back().second < l) {\n            merged.push_back({l, r}); // No overlap with previous interval\n        } else {\n            merged.back().second = max(merged.back().second, r); // Extend coverage\n        }\n    }\n    return merged;\n}\n\nvector<long long> difference_apply(int n, vector<array<int, 3>> ops) {\n    vector<long long> diff(n + 1);\n    for (auto [l, r, delta] : ops) {\n        diff[l] += delta; // Range starts gaining delta\n        if (r + 1 < n) diff[r + 1] -= delta; // Range stops after r\n    }\n    for (int i = 1; i < n; ++i) diff[i] += diff[i - 1]; // Prefix restores values\n    diff.pop_back();\n    return diff;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "區間合併",
+        "description": "排序後維護目前最右端，遇到斷點才開新段。"
+      },
+      {
+        "name": "掃描線",
+        "description": "把左端視為加入、右端視為移除，按事件順序維護活躍集合。"
+      },
+      {
+        "name": "差分陣列",
+        "description": "把多次區間加法轉為端點變化，最後用前綴和還原。"
+      }
+    ]
+  },
+  {
+    "id": "heap-priority-queue",
+    "title": "堆積／優先佇列",
+    "slug": "heap-priority-queue",
+    "description": "維護動態集合中的最大值或最小值，支援即時取出最佳候選。",
+    "core_idea": "堆積適合反覆取出當前最小或最大元素，常見於排程、貪心、最短路與資料流。若元素可能過期，可採用懶刪除：取堆頂時檢查是否仍有效，無效就彈出直到堆頂合法。",
+    "complexity": "每次 push 或 pop 為 O(log n)，查詢堆頂為 O(1)，空間複雜度 O(n)。",
+    "reference_links": [
+      {
+        "label": "OI-Wiki：堆",
+        "url": "https://oi-wiki.org/ds/heap/"
+      },
+      {
+        "label": "cp-algorithms：Dijkstra",
+        "url": "https://cp-algorithms.com/graph/dijkstra.html"
+      },
+      {
+        "label": "靈茶山艾府：堆與貪心",
+        "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/heap.go"
+      }
+    ],
+    "template_code": "priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;\nvector<int> dist(n, INF);\ndist[source] = 0;\npq.push({0, source}); // Heap stores the best known candidate\nwhile (!pq.empty()) {\n    auto [d, u] = pq.top();\n    pq.pop();\n    if (d != dist[u]) continue; // Lazy deletion for outdated entries\n    for (auto [v, w] : graph[u]) {\n        if (dist[v] > d + w) {\n            dist[v] = d + w; // Found a better path\n            pq.push({dist[v], v});\n        }\n    }\n}",
+    "supplemental_patterns": [
+      {
+        "name": "懶刪除堆",
+        "description": "不在任意位置刪除元素，而是在彈出時驗證版本或有效狀態。"
+      },
+      {
+        "name": "雙堆中位數",
+        "description": "用大根堆維護較小半部、小根堆維護較大半部，保持大小平衡。"
+      },
+      {
+        "name": "Top K 候選",
+        "description": "固定容量的小根堆可保留最大的 K 個元素，反之亦然。"
+      }
+    ]
+  },
+  {
+    "id": "dp-fundamentals",
+    "title": "動態規劃基礎",
+    "slug": "dp-fundamentals",
+    "description": "定義狀態與轉移，把重複子問題整理成可累積的最優值或方案數。",
+    "core_idea": "動態規劃先找狀態代表的語意，再確認轉移只依賴更小或更早的狀態。寫題時優先描述 dp[i] 或 dp[i][j] 的完整含義，接著列出初始值、轉移順序與答案位置。",
+    "complexity": "依狀態數與轉移數而定，常見為 O(n)、O(n log n)、O(nW) 或 O(n^2)，空間可用滾動陣列壓縮。",
+    "reference_links": [
+      {
+        "label": "OI-Wiki：動態規劃",
+        "url": "https://oi-wiki.org/dp/"
+      },
+      {
+        "label": "cp-algorithms：Dynamic Programming",
+        "url": "https://cp-algorithms.com/dynamic_programming/intro-to-dp.html"
+      },
+      {
+        "label": "靈茶山艾府：DP 題單",
+        "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/dp.go"
+      }
+    ],
+    "template_code": "int knapsack_01(const vector<int>& weight, const vector<int>& value, int cap) {\n    vector<int> dp(cap + 1, 0); // dp[c] is best value with capacity c\n    for (int i = 0; i < (int)weight.size(); ++i) {\n        for (int c = cap; c >= weight[i]; --c) { // Reverse order prevents reusing item i\n            dp[c] = max(dp[c], dp[c - weight[i]] + value[i]);\n        }\n    }\n    return dp[cap];\n}\n\nint lis_length(const vector<int>& a) {\n    vector<int> tail; // tail[len - 1] is the minimum ending value\n    for (int x : a) {\n        auto it = lower_bound(tail.begin(), tail.end(), x);\n        if (it == tail.end()) tail.push_back(x);\n        else *it = x;\n    }\n    return (int)tail.size();\n}",
+    "supplemental_patterns": [
+      {
+        "name": "背包 DP",
+        "description": "用容量或限制作為維度，透過正序或逆序控制物品是否可重複使用。"
+      },
+      {
+        "name": "最長遞增子序列",
+        "description": "用二分維護每個長度的最小結尾，將 O(n^2) 降為 O(n log n)。"
+      },
+      {
+        "name": "區間 DP",
+        "description": "按區間長度枚舉，將大區間答案由左右子區間合併得到。"
+      }
+    ]
+  },
+  {
+    "id": "two-pointers",
+    "title": "雙指針／滑動視窗",
+    "slug": "two-pointers-sliding-window",
+    "description": "用兩個邊界維護一段連續區間，靠單調性避免重複枚舉。",
+    "core_idea": "雙指針的本質是讓左右邊界都只往一個方向移動，將所有候選窗口在線性時間內掃完。判斷是否能使用時，確認擴張右端與收縮左端能維持某個單調條件，例如總和、種類數或排序後的差距。",
+    "complexity": "時間複雜度通常為 O(n)，若需排序則為 O(n log n)，空間複雜度依維護資訊為 O(1) 到 O(k)。",
+    "reference_links": [
+      {
+        "label": "OI-Wiki：尺取法",
+        "url": "https://oi-wiki.org/misc/two-pointer/"
+      },
+      {
+        "label": "cp-algorithms：Two Pointers",
+        "url": "https://cp-algorithms.com/search/two-pointers.html"
+      },
+      {
+        "label": "靈茶山艾府：滑動視窗",
+        "url": "https://www.bilibili.com/video/BV1hd4y1r7Gq/"
+      }
+    ],
+    "template_code": "int longest_window(const vector<int>& a, int limit) {\n    int left = 0, sum = 0, ans = 0;\n    for (int right = 0; right < (int)a.size(); ++right) {\n        sum += a[right]; // Expand window by including right\n        while (sum > limit) {\n            sum -= a[left]; // Shrink until the invariant is restored\n            ++left;\n        }\n        ans = max(ans, right - left + 1); // Window [left, right] is valid\n    }\n    return ans;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "固定長度視窗",
+        "description": "每次加入右端並移除超出長度的左端，適合固定 k 的統計。"
+      },
+      {
+        "name": "可變長度視窗",
+        "description": "依條件過大或過小來收縮左端，常用於最長或最短子陣列。"
+      },
+      {
+        "name": "排序雙指針",
+        "description": "排序後用左右端夾逼，處理兩數和、配對或差值限制。"
+      }
+    ]
+  },
+  {
+    "id": "dsu",
+    "title": "並查集（DSU）",
+    "slug": "union-find-dsu",
+    "description": "維護動態連通分量，快速合併集合並查詢代表節點。",
+    "core_idea": "並查集透過父指標表示集合樹，find 找到根代表，union 把兩個集合合併。路徑壓縮與按大小合併讓操作近似常數時間，適合連通性、等價關係與 Kruskal 類問題。",
+    "complexity": "單次操作攤還時間 O(α(n))，空間複雜度 O(n)。",
+    "reference_links": [
+      {
+        "label": "OI-Wiki：並查集",
+        "url": "https://oi-wiki.org/ds/dsu/"
+      },
+      {
+        "label": "cp-algorithms：Disjoint Set Union",
+        "url": "https://cp-algorithms.com/data_structures/disjoint_set_union.html"
+      },
+      {
+        "label": "靈茶山艾府：並查集模板",
+        "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/union_find.go"
+      }
+    ],
+    "template_code": "struct DSU {\n    vector<int> parent, size;\n    DSU(int n) : parent(n), size(n, 1) {\n        iota(parent.begin(), parent.end(), 0); // Every node starts as its own root\n    }\n    int find(int x) {\n        if (parent[x] == x) return x;\n        return parent[x] = find(parent[x]); // Path compression\n    }\n    bool unite(int a, int b) {\n        a = find(a);\n        b = find(b);\n        if (a == b) return false;\n        if (size[a] < size[b]) swap(a, b); // Attach smaller tree to larger tree\n        parent[b] = a;\n        size[a] += size[b];\n        return true;\n    }\n};",
+    "supplemental_patterns": [
+      {
+        "name": "帶權並查集",
+        "description": "在父指標上維護到根的權值差，處理比例、距離或異或關係。"
+      },
+      {
+        "name": "可回滾並查集",
+        "description": "記錄每次合併前的狀態，支援離線分治中的撤銷操作。"
+      },
+      {
+        "name": "離線動態連通性",
+        "description": "把邊存在的時間區間掛到線段樹上，搭配回滾並查集回答查詢。"
+      }
+    ]
+  },
+  {
+    "id": "binary-lifting-lca",
+    "title": "倍增與最近公共祖先",
+    "slug": "binary-lifting-lca",
+    "description": "預處理每個節點的 2^k 級祖先，快速回答樹上跳躍與路徑查詢。",
+    "core_idea": "倍增把長距離跳躍拆成二進位位元，預處理 up[v][k] 表示 v 的第 2^k 個祖先。LCA 查詢先把兩點提到同深度，再從高位往低位同步上跳，最後得到最低的共同祖先。",
+    "complexity": "預處理 O(n log n)，每次查詢 O(log n)，空間複雜度 O(n log n)。",
+    "reference_links": [
+      {
+        "label": "OI-Wiki：最近公共祖先",
+        "url": "https://oi-wiki.org/graph/lca/"
+      },
+      {
+        "label": "cp-algorithms：Lowest Common Ancestor",
+        "url": "https://cp-algorithms.com/graph/lca_binary_lifting.html"
+      },
+      {
+        "label": "靈茶山艾府：樹上倍增",
+        "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/graph_tree.go"
+      }
+    ],
+    "template_code": "const int LOG = 20;\nvector<array<int, LOG>> up;\nvector<int> depth;\n\nvoid dfs_lift(int u, int p, const vector<vector<int>>& tree) {\n    up[u][0] = p; // Immediate parent\n    for (int k = 1; k < LOG; ++k) {\n        up[u][k] = up[up[u][k - 1]][k - 1]; // Jump twice by 2^(k-1)\n    }\n    for (int v : tree[u]) {\n        if (v == p) continue;\n        depth[v] = depth[u] + 1;\n        dfs_lift(v, u, tree);\n    }\n}\n\nint kth_ancestor(int u, int k) {\n    for (int bit = 0; bit < LOG; ++bit) {\n        if (k >> bit & 1) u = up[u][bit]; // Apply binary decomposition\n    }\n    return u;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "LCA 查詢",
+        "description": "先對齊深度，再高位同步跳躍直到父節點相同。"
+      },
+      {
+        "name": "第 k 祖先",
+        "description": "把 k 拆成二進位，依位元跳到對應祖先。"
+      },
+      {
+        "name": "樹上路徑查詢",
+        "description": "在倍增表中同時維護最大值、最小值或權值和。"
+      }
+    ]
+  },
+  {
+    "id": "monotonic-structure",
+    "title": "單調棧／單調佇列",
+    "slug": "monotonic-stack-queue",
+    "description": "維護單調候選集合，快速找到下一個更大值或滑動視窗極值。",
+    "core_idea": "單調結構會刪除永遠不可能成為答案的候選。單調棧常用於找左／右第一個更大或更小元素；單調佇列則在滑動視窗中維護最大或最小值，讓每個元素最多進出一次。",
+    "complexity": "時間複雜度 O(n)，空間複雜度 O(n) 或 O(k)。",
+    "reference_links": [
+      {
+        "label": "OI-Wiki：單調棧",
+        "url": "https://oi-wiki.org/ds/monotonous-stack/"
+      },
+      {
+        "label": "OI-Wiki：單調佇列",
+        "url": "https://oi-wiki.org/ds/monotonous-queue/"
+      },
+      {
+        "label": "靈茶山艾府：單調棧題單",
+        "url": "https://www.bilibili.com/video/BV1VN411J7S7/"
+      }
+    ],
+    "template_code": "vector<int> next_greater(const vector<int>& a) {\n    vector<int> ans(a.size(), -1), st;\n    for (int i = 0; i < (int)a.size(); ++i) {\n        while (!st.empty() && a[st.back()] < a[i]) {\n            ans[st.back()] = i; // Current i is the first greater element\n            st.pop_back();\n        }\n        st.push_back(i); // Indices in stack have decreasing values\n    }\n    return ans;\n}\n\nvector<int> sliding_max(const vector<int>& a, int k) {\n    deque<int> dq;\n    vector<int> ans;\n    for (int i = 0; i < (int)a.size(); ++i) {\n        while (!dq.empty() && dq.front() <= i - k) dq.pop_front(); // Remove expired index\n        while (!dq.empty() && a[dq.back()] <= a[i]) dq.pop_back(); // Remove dominated values\n        dq.push_back(i);\n        if (i >= k - 1) ans.push_back(a[dq.front()]);\n    }\n    return ans;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "下一個更大元素",
+        "description": "掃描時彈出被當前元素支配的索引，當前元素就是它們的答案。"
+      },
+      {
+        "name": "滑動視窗最大值",
+        "description": "佇列內保持值遞減，隊首永遠是目前視窗最大值。"
+      },
+      {
+        "name": "貢獻計數",
+        "description": "用左右第一個更小或更大元素計算每個元素作為極值的區間數。"
+      }
+    ]
+  },
+  {
+    "id": "segment-tree-bit",
+    "title": "線段樹／樹狀陣列",
+    "slug": "segment-tree-bit",
+    "description": "維護可合併區間資訊，支援動態更新與區間查詢。",
+    "core_idea": "線段樹把區間遞迴拆成左右子區間，可維護和、最大值、最小值或自訂資訊；樹狀陣列用 lowbit 管理前綴貢獻，適合前綴和與單點更新。選擇資料結構時先確認操作是否可逆、是否需要懶標記與區間修改。",
+    "complexity": "建樹 O(n)，單次更新或查詢 O(log n)，空間複雜度 O(n)。",
+    "reference_links": [
+      {
+        "label": "OI-Wiki：線段樹",
+        "url": "https://oi-wiki.org/ds/seg/"
+      },
+      {
+        "label": "OI-Wiki：樹狀陣列",
+        "url": "https://oi-wiki.org/ds/fenwick/"
+      },
+      {
+        "label": "cp-algorithms：Fenwick Tree",
+        "url": "https://cp-algorithms.com/data_structures/fenwick.html"
+      }
+    ],
+    "template_code": "struct Fenwick {\n    int n;\n    vector<long long> bit;\n    Fenwick(int n) : n(n), bit(n + 1, 0) {}\n    void add(int index, long long delta) {\n        for (++index; index <= n; index += index & -index) {\n            bit[index] += delta; // Update all ranges covering index\n        }\n    }\n    long long sum_prefix(int index) {\n        long long ans = 0;\n        for (++index; index > 0; index -= index & -index) {\n            ans += bit[index]; // Collect disjoint prefix blocks\n        }\n        return ans;\n    }\n    long long range_sum(int left, int right) {\n        return sum_prefix(right) - (left ? sum_prefix(left - 1) : 0);\n    }\n};",
+    "supplemental_patterns": [
+      {
+        "name": "單點更新",
+        "description": "更新一個位置後沿父節點重算，適合動態陣列查詢。"
+      },
+      {
+        "name": "區間查詢",
+        "description": "把查詢區間拆成 O(log n) 個完全覆蓋節點並合併資訊。"
+      },
+      {
+        "name": "懶標記",
+        "description": "區間修改時先記錄延遲資訊，必要時再下推到子節點。"
+      }
+    ]
+  }
+]
