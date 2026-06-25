@@ -10,7 +10,7 @@ import {
   TierBadge,
   type CompletionStatus
 } from '@/components/Badges';
-import { ProblemNotesPanel } from '@/components/ProblemNotesPanel';
+import { ProblemNotesModal } from '@/components/ProblemNotesModal';
 import { ProblemSourceLink } from '@/components/ProblemSourceLink';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -74,8 +74,8 @@ export function ProblemCard({ problem }: { problem: Problem }) {
           <Button type="button" variant="ghost" size="sm" onClick={() => setShowHint((value) => !value)}>
             {showHint ? '隱藏提示' : '策略提示'}
           </Button>
-          <Button type="button" variant="outline" size="sm" onClick={() => setShowNotes((value) => !value)}>
-            {showNotes ? '收起記錄' : problemNote ? '查看記錄' : '記錄解答'}
+          <Button type="button" variant="outline" size="sm" onClick={() => setShowNotes(true)}>
+            {problemNote ? '查看記錄' : '記錄解答'}
           </Button>
         </div>
         {showHint ? (
@@ -85,7 +85,12 @@ export function ProblemCard({ problem }: { problem: Problem }) {
             ))}
           </ul>
         ) : null}
-        {showNotes ? <ProblemNotesPanel key={problemNote?.updatedAt ?? problem.id} problemId={problem.id} /> : null}
+        <ProblemNotesModal
+          problemId={problem.id}
+          title={problem.title}
+          open={showNotes}
+          onClose={() => setShowNotes(false)}
+        />
       </CardContent>
     </Card>
   );

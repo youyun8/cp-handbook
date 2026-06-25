@@ -65,6 +65,7 @@ export interface PracticeProblem {
 export interface ProblemNote {
   solution: string;
   thought: string;
+  language?: string;
   updatedAt: string;
 }
 

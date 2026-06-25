@@ -85,3 +85,118 @@ body {
   color: hsl(var(--muted-foreground));
   text-align: right;
 }
+
+/* ---- Code editor (react-simple-code-editor + highlight.js) ---- */
+.code-editor-textarea {
+  caret-color: hsl(var(--foreground));
+  outline: none !important;
+}
+
+.code-editor-textarea::placeholder {
+  color: hsl(var(--muted-foreground) / 0.7);
+}
+
+/* highlight.js token palette — light (GitHub-like). Background transparent so
+   the surrounding container controls it; works for both the notes editor and
+   any rendered .hljs block. */
+.hljs {
+  background: transparent;
+  color: #1f2328;
+}
+.hljs-comment,
+.hljs-quote {
+  color: #6e7781;
+  font-style: italic;
+}
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-meta-keyword,
+.hljs-doctag,
+.hljs-section,
+.hljs-name {
+  color: #cf222e;
+}
+.hljs-built_in,
+.hljs-type,
+.hljs-class .hljs-title,
+.hljs-title.class_,
+.hljs-title.function_,
+.hljs-title {
+  color: #8250df;
+}
+.hljs-string,
+.hljs-regexp,
+.hljs-attribute,
+.hljs-attr,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+  color: #0a3069;
+}
+.hljs-number,
+.hljs-literal {
+  color: #0550ae;
+}
+.hljs-variable,
+.hljs-template-variable,
+.hljs-params,
+.hljs-property {
+  color: #1f2328;
+}
+.hljs-meta,
+.hljs-comment.hljs-meta {
+  color: #6e7781;
+}
+.hljs-deletion {
+  color: #82071e;
+}
+
+/* highlight.js token palette — dark (GitHub-dark-like). */
+.dark .hljs {
+  color: #e6edf3;
+}
+.dark .hljs-comment,
+.dark .hljs-quote {
+  color: #8b949e;
+}
+.dark .hljs-keyword,
+.dark .hljs-selector-tag,
+.dark .hljs-meta-keyword,
+.dark .hljs-doctag,
+.dark .hljs-section,
+.dark .hljs-name {
+  color: #ff7b72;
+}
+.dark .hljs-built_in,
+.dark .hljs-type,
+.dark .hljs-class .hljs-title,
+.dark .hljs-title.class_,
+.dark .hljs-title.function_,
+.dark .hljs-title {
+  color: #d2a8ff;
+}
+.dark .hljs-string,
+.dark .hljs-regexp,
+.dark .hljs-attribute,
+.dark .hljs-attr,
+.dark .hljs-symbol,
+.dark .hljs-bullet,
+.dark .hljs-addition {
+  color: #a5d6ff;
+}
+.dark .hljs-number,
+.dark .hljs-literal {
+  color: #79c0ff;
+}
+.dark .hljs-variable,
+.dark .hljs-template-variable,
+.dark .hljs-params,
+.dark .hljs-property {
+  color: #e6edf3;
+}
+.dark .hljs-meta {
+  color: #8b949e;
+}
+.dark .hljs-deletion {
+  color: #ffdcd7;
+}

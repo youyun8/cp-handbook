@@ -111,7 +111,10 @@ export function topicIcon(topicId: string) {
     'string-algorithms': '🔤',
     'math-number-theory': '🔢',
     'bitmask-dp': '🎚️',
-    'computational-geometry': '📐'
+    'computational-geometry': '📐',
+    greedy: '🧠',
+    backtracking: '🔙',
+    'network-flow': '🌊'
   };
   return icons[topicId] ?? '📚';
 }

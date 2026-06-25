@@ -168,14 +168,14 @@
         ]
       },
       {
-        "title": "Who is Missing?",
-        "source": "atcoder",
-        "source_id": "abc236_c",
-        "rating": 1200,
-        "tier": "warmup",
+        "source": "luogu",
+        "source_id": "P5410",
+        "title": "【模板】擴展 KMP（Z 函數）",
+        "rating": 1800,
+        "tier": "core",
         "tags": [
-          "字串集合",
-          "匹配"
+          "Z函數",
+          "exKMP"
         ]
       }
     ]
@@ -520,14 +520,14 @@
         ]
       },
       {
-        "title": "Currency Exchange",
-        "source": "codeforces",
-        "source_id": "20C",
+        "source": "luogu",
+        "source_id": "P2850",
+        "title": "[USACO06DEC] Wormholes 蟲洞",
         "rating": 1700,
         "tier": "core",
         "tags": [
-          "最短路",
-          "鬆弛"
+          "Bellman-Ford",
+          "負環"
         ]
       },
       {
@@ -780,7 +780,7 @@
         ]
       },
       {
-        "title": "距離查詢",
+        "title": "倉鼠找 sugar",
         "source": "luogu",
         "source_id": "P3398",
         "rating": 1800,
@@ -1041,14 +1041,14 @@
     ],
     "practice_problems": [
       {
-        "title": "Closest to the Left",
-        "source": "codeforces",
-        "source_id": "1167B",
-        "rating": 1300,
+        "source": "luogu",
+        "source_id": "P3382",
+        "title": "【模板】三分法",
+        "rating": 1500,
         "tier": "warmup",
         "tags": [
-          "單峰",
-          "搜尋"
+          "三分",
+          "單峰函數"
         ]
       },
       {
@@ -1392,25 +1392,25 @@
     ],
     "practice_problems": [
       {
-        "title": "Line Segment Distance",
-        "source": "atcoder",
-        "source_id": "abc343_e",
-        "rating": 1800,
-        "tier": "core",
+        "source": "leetcode",
+        "source_id": "valid-boomerang",
+        "title": "有效的迴旋鏢",
+        "rating": 1100,
+        "tier": "warmup",
         "tags": [
-          "幾何",
-          "座標"
+          "向量",
+          "叉積"
         ]
       },
       {
-        "title": "凸多邊形",
-        "source": "luogu",
-        "source_id": "P2742",
-        "rating": 1800,
-        "tier": "core",
+        "source": "leetcode",
+        "source_id": "check-if-it-is-a-straight-line",
+        "title": "綴點成線",
+        "rating": 1200,
+        "tier": "warmup",
         "tags": [
-          "叉積",
-          "向量"
+          "向量",
+          "共線"
         ]
       },
       {
@@ -1506,25 +1506,14 @@
         ]
       },
       {
-        "title": "Mr. Kitayuta vs. Bamboos",
-        "source": "codeforces",
-        "source_id": "505C",
+        "source": "cses",
+        "source_id": "2195",
+        "title": "Convex Hull",
         "rating": 1900,
         "tier": "core",
         "tags": [
-          "幾何思維",
-          "DP"
-        ]
-      },
-      {
-        "title": "Line Empire",
-        "source": "codeforces",
-        "source_id": "1659A",
-        "rating": 1200,
-        "tier": "warmup",
-        "tags": [
-          "座標",
-          "貪心"
+          "凸包",
+          "Andrew 單調鏈"
         ]
       }
     ]
@@ -1587,7 +1576,7 @@
         ]
       },
       {
-        "title": "Line Segment Intersection",
+        "title": "多邊形的面積",
         "source": "luogu",
         "source_id": "P1183",
         "rating": 1800,
@@ -1598,18 +1587,18 @@
         ]
       },
       {
-        "title": "Cows in a Row",
-        "source": "codeforces",
-        "source_id": "101B",
-        "rating": 1800,
-        "tier": "core",
+        "source": "leetcode",
+        "source_id": "rectangle-overlap",
+        "title": "矩形重疊",
+        "rating": 1300,
+        "tier": "warmup",
         "tags": [
-          "幾何",
-          "排序"
+          "計算幾何",
+          "矩形相交"
         ]
       },
       {
-        "title": "Point in Polygon",
+        "title": "Polygon and Points",
         "source": "atcoder",
         "source_id": "abc296_g",
         "rating": 2000,
@@ -1690,14 +1679,14 @@
         ]
       },
       {
-        "title": "Minimum Euclidean Distance",
         "source": "atcoder",
-        "source_id": "abc234_ex",
-        "rating": 2300,
+        "source_id": "abc234_h",
+        "title": "Enumerate Pairs",
+        "rating": 2400,
         "tier": "challenge",
         "tags": [
-          "幾何",
-          "分治"
+          "最近點對",
+          "網格分桶"
         ]
       },
       {
@@ -2149,7 +2138,7 @@
         ]
       },
       {
-        "title": "Cutting a Graph",
+        "title": "Connected Components",
         "source": "codeforces",
         "source_id": "292D",
         "rating": 1900,
@@ -2328,14 +2317,14 @@
         ]
       },
       {
-        "title": "Parity Alternated Deletions",
-        "source": "codeforces",
-        "source_id": "1144D",
-        "rating": 1500,
+        "source": "leetcode",
+        "source_id": "satisfiability-of-equality-equations",
+        "title": "等式方程的可滿足性",
+        "rating": 1400,
         "tier": "warmup",
         "tags": [
-          "分類",
-          "關係"
+          "並查集",
+          "種類"
         ]
       }
     ]
@@ -2958,14 +2947,14 @@
         ]
       },
       {
-        "title": "Expedition",
         "source": "luogu",
-        "source_id": "P1090",
-        "rating": 1400,
-        "tier": "warmup",
+        "source_id": "P1801",
+        "title": "黑匣子 Black Box",
+        "rating": 1700,
+        "tier": "core",
         "tags": [
-          "堆",
-          "貪心"
+          "對頂堆",
+          "第K小"
         ]
       }
     ]
@@ -3209,7 +3198,7 @@
         ]
       },
       {
-        "title": "活動選擇",
+        "title": "凌亂的 yyy / 線段覆蓋",
         "source": "luogu",
         "source_id": "P1803",
         "rating": 1200,
@@ -3840,7 +3829,7 @@
         ]
       },
       {
-        "title": "曹沖養豬",
+        "title": "[TJOI2009] 猜數字",
         "source": "luogu",
         "source_id": "P3868",
         "rating": 1900,
@@ -3954,7 +3943,7 @@
         ]
       },
       {
-        "title": "Graph and MST",
+        "title": "Minimum spanning tree for each edge",
         "source": "codeforces",
         "source_id": "609E",
         "rating": 2200,
@@ -4112,7 +4101,7 @@
         ]
       },
       {
-        "title": "Graph and MST",
+        "title": "Minimum spanning tree for each edge",
         "source": "codeforces",
         "source_id": "609E",
         "rating": 2200,
@@ -4393,7 +4382,7 @@
         ]
       },
       {
-        "title": "烽火傳遞",
+        "title": "[POI2014] PTA-Little Bird",
         "source": "luogu",
         "source_id": "P3572",
         "rating": 2100,
@@ -5408,7 +5397,7 @@
         ]
       },
       {
-        "title": "Cow Marathon",
+        "title": "[APIO2010] 巡邏",
         "source": "luogu",
         "source_id": "P3629",
         "rating": 1700,
@@ -5776,6 +5765,3020 @@
         "tags": [
           "快慢指針",
           "循環"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tp-fixed-window",
+    "parent_id": "two-pointers",
+    "title": "定長滑動視窗",
+    "slug": "fixed-window",
+    "description": "視窗長度固定為 k，進一個、出一個，維持窗內統計量以 O(n) 掃完所有長度 k 的子陣列。",
+    "core_idea": "定長滑窗是滑動視窗最單純的形態：**視窗大小恆為 `k`**，不需要 while 收縮。每當 `right` 前進一格就把 `a[right]` 加入統計，並在視窗超過長度時把 `a[right-k]` 移出，於是任一時刻維護的都是長度 `k` 的窗。\n\n關鍵在於辨認「**入–更新–出**」三步驟的順序：先入元素，待視窗湊滿 `k` 個（`right >= k-1`）才更新答案，再把最左元素移出為下一輪讓位。把這個節奏寫對，平均值、區間和、母音數、最大頻次等問題都套同一骨架。",
+    "complexity": "時間 O(n)，空間 O(1) 到 O(k)（依維護的統計量而定）。",
+    "deep_dive": [
+      {
+        "title": "入–更新–出 三步驟模板",
+        "body": "以「長度 k 的子陣列最大和」為例，視窗和 `sum` 隨指針滑動增量維護：\n\n```cpp\nlong long maxSumFixed(const vector<int>& a, int k) {\n    long long sum = 0, best = LLONG_MIN;\n    for (int i = 0; i < (int)a.size(); i++) {\n        sum += a[i];                 // 1) enter a[i]\n        if (i < k - 1) continue;     // window not full yet\n        best = max(best, sum);       // 2) update with a full window\n        sum -= a[i - k + 1];         // 3) leave the leftmost element\n    }\n    return best;\n}\n```\n\n三步驟的順序不能亂：必須等視窗湊滿 `k` 個元素才更新答案，否則會把長度不足的前綴也算進去。"
+      },
+      {
+        "title": "維護視窗內的「種類／頻次」",
+        "body": "當統計量不是單純的和，而是「不同字母數」「某條件元素的個數」時，用一個計數器或頻次表搭配相同骨架。例如求每個長度 k 視窗內的母音數：\n\n```cpp\nvector<int> vowelsInWindows(const string& s, int k) {\n    auto isVowel = [](char c){ return c=='a'||c=='e'||c=='i'||c=='o'||c=='u'; };\n    vector<int> res;\n    int cnt = 0;\n    for (int i = 0; i < (int)s.size(); i++) {\n        cnt += isVowel(s[i]);            // enter\n        if (i < k - 1) continue;\n        res.push_back(cnt);              // record\n        cnt -= isVowel(s[i - k + 1]);    // leave\n    }\n    return res;\n}\n```\n\n只要「入」與「出」是對稱的可逆操作（加一/減一、insert/erase），這個模板就成立。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：尺取法（雙指針）",
+        "url": "https://oi-wiki.org/misc/two-pointer/"
+      },
+      {
+        "label": "靈茶山艾府：定長滑動視窗套路",
+        "url": "https://leetcode.cn/circle/discuss/0viNMK/"
+      }
+    ],
+    "template_code": "// Fixed-length sliding window: enter -> update -> leave\nlong long fixedWindow(const vector<int>& a, int k) {\n    long long sum = 0, best = LLONG_MIN;\n    for (int i = 0; i < (int)a.size(); i++) {\n        sum += a[i];                 // enter a[i]\n        if (i < k - 1) continue;     // wait until the window holds k items\n        best = max(best, sum);       // window [i-k+1, i] is exactly length k\n        sum -= a[i - k + 1];         // leave the leftmost item\n    }\n    return best;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "定長視窗的最大頻次／眾數",
+        "description": "**觸發**：求每個長度 k 視窗內出現最多次的元素次數。\n**做法**：用 `unordered_map` 維護頻次，入時 `++cnt[x]` 並更新當前最大值，出時 `--cnt[x]`；最大值無法 O(1) 回退時可改用「歷史最大值」近似或配合多重集合。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 一定要等 `i >= k-1` 視窗湊滿才更新答案，否則會把長度不足 k 的前綴納入比較。",
+      "⚠️ 移出的元素是 `a[i-k+1]`（視窗最左端），不是 `a[i-k]`，差一格就整段錯位。",
+      "⚠️ 視窗和可能溢位，元素值大或 n 大時用 `long long` 累加。"
+    ],
+    "practice_problems": [
+      {
+        "title": "大小為 K 且平均值大於等於閾值的子陣列數目",
+        "source": "leetcode",
+        "source_id": "number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold",
+        "rating": 1300,
+        "tier": "warmup",
+        "tags": [
+          "定長滑窗",
+          "區間和"
+        ]
+      },
+      {
+        "title": "長度為 K 子陣列中的最大和",
+        "source": "leetcode",
+        "source_id": "maximum-sum-of-distinct-subarrays-with-length-k",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "定長滑窗",
+          "去重"
+        ]
+      },
+      {
+        "title": "可獲得的最大點數",
+        "source": "leetcode",
+        "source_id": "maximum-points-you-can-obtain-from-cards",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "定長滑窗",
+          "逆向思考"
+        ]
+      },
+      {
+        "title": "幾乎唯一子陣列的最大和",
+        "source": "leetcode",
+        "source_id": "maximum-sum-of-almost-unique-subarray",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "定長滑窗",
+          "頻次表"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tp-two-sequence",
+    "parent_id": "two-pointers",
+    "title": "雙序列雙指針（歸併型）",
+    "slug": "two-sequence",
+    "description": "兩個各自有序的序列，用兩根指針依大小關係前進，O(n+m) 完成合併、交集、配對。",
+    "core_idea": "當兩個序列**各自有序**時，可以各派一根指針 `i`、`j`，每步比較 `a[i]` 與 `b[j]` 並只推進較小（或符合條件）的一側。因為兩指針都只增不減，總步數是 `O(n+m)`。\n\n這是歸併排序 merge 階段的核心，也是「兩有序陣列求交集／中位數」「按條件配對」「判斷子序列」的共同骨架。難點不在程式碼，而在**想清楚每一步該推進哪一側、何時同時推進**。",
+    "complexity": "時間 O(n+m)，空間 O(1)（不計輸出）。",
+    "deep_dive": [
+      {
+        "title": "合併兩有序陣列",
+        "body": "最基礎的歸併：誰小先放誰，某側走完後把另一側剩餘全部接上。\n\n```cpp\nvector<int> mergeSorted(const vector<int>& a, const vector<int>& b) {\n    vector<int> res;\n    res.reserve(a.size() + b.size());\n    int i = 0, j = 0;\n    while (i < (int)a.size() && j < (int)b.size()) {\n        if (a[i] <= b[j]) res.push_back(a[i++]);\n        else              res.push_back(b[j++]);\n    }\n    while (i < (int)a.size()) res.push_back(a[i++]);\n    while (j < (int)b.size()) res.push_back(b[j++]);\n    return res;\n}\n```\n\n`a[i] <= b[j]` 用 `<=` 而非 `<` 可保持穩定性（相等時先取 a），在需要穩定歸併時很重要。"
+      },
+      {
+        "title": "交集與「判斷子序列」",
+        "body": "求兩有序陣列交集時，相等才同時記錄並雙雙前進；否則推進較小側：\n\n```cpp\nvector<int> intersect(const vector<int>& a, const vector<int>& b) {\n    vector<int> res;\n    int i = 0, j = 0;\n    while (i < (int)a.size() && j < (int)b.size()) {\n        if (a[i] == b[j]) { res.push_back(a[i]); i++; j++; }\n        else if (a[i] < b[j]) i++;\n        else j++;\n    }\n    return res;\n}\n```\n\n判斷 `s` 是否為 `t` 的子序列也是雙序列指針：`j` 掃 `t`，若 `t[j]==s[i]` 就 `i++`，最後看 `i` 是否走完 `s`。差別只在「不要求 t 有序，只要求順序匹配」。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：尺取法（雙指針）",
+        "url": "https://oi-wiki.org/misc/two-pointer/"
+      },
+      {
+        "label": "OI-Wiki：歸併排序",
+        "url": "https://oi-wiki.org/basic/merge-sort/"
+      }
+    ],
+    "template_code": "// Merge two sorted sequences in O(n+m)\nvector<int> mergeSorted(const vector<int>& a, const vector<int>& b) {\n    vector<int> res;\n    res.reserve(a.size() + b.size());\n    int i = 0, j = 0;\n    while (i < (int)a.size() && j < (int)b.size())\n        res.push_back(a[i] <= b[j] ? a[i++] : b[j++]);\n    while (i < (int)a.size()) res.push_back(a[i++]);\n    while (j < (int)b.size()) res.push_back(b[j++]);\n    return res;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "判斷子序列",
+        "description": "**觸發**：問 `s` 是否能由 `t` 刪去若干字元得到。\n**做法**：雙指針同向掃 `t`，匹配到就推進 `s` 指針，`s` 先走完即為子序列；多個 `s` 查詢同一 `t` 時可預處理子序列自動機。"
+      },
+      {
+        "name": "兩有序陣列的中位數／第 K 小",
+        "description": "**觸發**：兩有序陣列合併後的第 k 小元素。\n**做法**：雙指針推進 k 次即 O(k)；要 O(log) 則改用二分／遞迴砍半。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 某一側走完後別忘了把另一側剩餘元素接上，漏掉會少元素。",
+      "⚠️ 求交集時相等要「同時」推進兩側，只推一側會在重複值上死循環或重複計入。",
+      "⚠️ 前提是兩序列各自有序；未排序時雙序列指針不成立，需先排序或改用雜湊。"
+    ],
+    "practice_problems": [
+      {
+        "title": "合併兩個有序陣列",
+        "source": "leetcode",
+        "source_id": "merge-sorted-array",
+        "rating": 1100,
+        "tier": "warmup",
+        "tags": [
+          "歸併",
+          "雙指針"
+        ]
+      },
+      {
+        "title": "判斷子序列",
+        "source": "leetcode",
+        "source_id": "is-subsequence",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "雙序列指針",
+          "子序列"
+        ]
+      },
+      {
+        "title": "兩個陣列的交集 II",
+        "source": "leetcode",
+        "source_id": "intersection-of-two-arrays-ii",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "交集",
+          "雙指針"
+        ]
+      },
+      {
+        "title": "尋找兩個正序陣列的中位數",
+        "source": "leetcode",
+        "source_id": "median-of-two-sorted-arrays",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "雙序列",
+          "二分"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tp-grouping-loop",
+    "parent_id": "two-pointers",
+    "title": "分組循環",
+    "slug": "grouping-loop",
+    "description": "把陣列切成若干「連續同性質段」，外層找段起點、內層擴展段尾，避免巢狀迴圈索引混亂。",
+    "core_idea": "分組循環是處理「**把序列分成連續相同／遞增／符合規則的段落**」的固定寫法。核心模板是：外層 `i` 指向當前段起點，內層用 `j` 從 `i` 出發、只要滿足段內條件就 `j++`，跳出時 `[i, j)` 即一段，處理完令 `i = j` 進入下一段。\n\n它的價值在於**消除易錯的索引邊界**：很多人寫「統計最長連續相同／最長遞增段」時用單迴圈加狀態變數，常在段交界處 off-by-one。分組循環把「找一段」這件事獨立成內層迴圈，邏輯清楚且不重不漏。",
+    "complexity": "時間 O(n)（每個元素恰好被內層存取一次），空間 O(1)。",
+    "deep_dive": [
+      {
+        "title": "通用骨架",
+        "body": "以「最長連續相同字元段長度」為例：\n\n```cpp\nint longestRun(const string& s) {\n    int n = s.size(), ans = 0, i = 0;\n    while (i < n) {\n        int j = i;\n        while (j < n && s[j] == s[i]) j++;  // extend the current group\n        ans = max(ans, j - i);              // group is [i, j)\n        i = j;                              // jump to next group's start\n    }\n    return ans;\n}\n```\n\n不論段的定義是什麼（相同、遞增、奇偶交替……），都只要替換內層 while 的條件，外層永遠是 `i = j` 跳段，保證每個元素只被掃一次。"
+      },
+      {
+        "title": "段內條件依賴相鄰元素",
+        "body": "當「是否屬於同一段」取決於相鄰兩元素關係（如嚴格遞增、交替奇偶），內層條件比較 `s[j]` 與 `s[j-1]`：\n\n```cpp\nint longestAlternating(const vector<int>& a) {\n    int n = a.size(), ans = 0, i = 0;\n    while (i < n) {\n        int j = i + 1;\n        // same group while parity keeps alternating\n        while (j < n && (a[j] % 2) != (a[j - 1] % 2)) j++;\n        ans = max(ans, j - i);\n        i = j;                              // next group starts where this broke\n    }\n    return ans;\n}\n```\n\n注意內層從 `i+1` 開始（單一元素自成一段），跳出後 `i = j` 讓**斷點**成為下一段起點，而不是 `i = j+1`，否則會漏掉斷點元素。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：尺取法（雙指針）",
+        "url": "https://oi-wiki.org/misc/two-pointer/"
+      },
+      {
+        "label": "靈茶山艾府：分組循環套路",
+        "url": "https://leetcode.cn/circle/discuss/SJFwQI/"
+      }
+    ],
+    "template_code": "// Grouping loop: split a sequence into maximal qualifying segments\n// Replace the inner condition to fit the segment definition.\nint groupingLoop(const vector<int>& a) {\n    int n = a.size(), ans = 0, i = 0;\n    while (i < n) {\n        int j = i + 1;\n        while (j < n && /* a[j] belongs to the same group as a[j-1] */ a[j] > a[j - 1]) j++;\n        ans = max(ans, j - i); // segment [i, j)\n        i = j;                 // the break point becomes the next start\n    }\n    return ans;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "最長遞增／遞減連續段",
+        "description": "**觸發**：求最長連續嚴格遞增（或山形先增後減）子陣列。\n**做法**：分組循環，內層條件 `a[j] > a[j-1]`；山形可在一段內再記錄「峰值」拆兩半。"
+      },
+      {
+        "name": "行程編碼（RLE）",
+        "description": "**觸發**：把連續相同元素壓成「值×次數」。\n**做法**：分組循環每段輸出 `(s[i], j-i)`，常用於壓縮與計數型問題前處理。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 跳段是 `i = j` 不是 `i = j + 1`，斷點元素必須成為下一段起點，否則漏元素。",
+      "⚠️ 段內條件依賴相鄰關係時，內層要從 `i+1` 起並比較 `a[j]` 與 `a[j-1]`。",
+      "⚠️ 空序列或單元素要能正確處理（外層 while 自然涵蓋，避免額外特判出錯）。"
+    ],
+    "practice_problems": [
+      {
+        "title": "最長連續遞增序列",
+        "source": "leetcode",
+        "source_id": "longest-continuous-increasing-subsequence",
+        "rating": 1100,
+        "tier": "warmup",
+        "tags": [
+          "分組循環",
+          "連續段"
+        ]
+      },
+      {
+        "title": "最長奇偶子陣列",
+        "source": "leetcode",
+        "source_id": "longest-even-odd-subarray-with-threshold",
+        "rating": 1400,
+        "tier": "core",
+        "tags": [
+          "分組循環",
+          "相鄰條件"
+        ]
+      },
+      {
+        "title": "交替子陣列計數",
+        "source": "leetcode",
+        "source_id": "count-alternating-subarrays",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "分組循環",
+          "計數"
+        ]
+      },
+      {
+        "title": "平滑下降階段的數目",
+        "source": "leetcode",
+        "source_id": "number-of-smooth-descent-periods-of-a-stock",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "分組循環",
+          "段落"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bs-kth-smallest",
+    "parent_id": "binary-search",
+    "title": "二分第 K 小（值域二分）",
+    "slug": "kth-smallest",
+    "description": "對「答案值」二分，用 count(≤x) 是否達到 k 來定位第 K 小，化「排序找第 K」為「判定」。",
+    "core_idea": "當無法或不值得把所有候選值排序時，可對**值域**二分：猜一個值 `x`，計算「不超過 `x` 的元素有幾個」`cnt(x)`。由於 `cnt` 對 `x` 單調不減，第 K 小就是**最小的滿足 `cnt(x) >= k` 的 `x`**。\n\n關鍵是 `cnt(x)` 必須能高效計算（通常 O(n) 或 O(n log n)），而且第 K 小一定是某個真實可達的候選值——所以最終的 `x` 自動落在合法取值上。這把「在 `n·m` 個乘積／距離／和裡找第 K 小」從不可能排序變成 `O(log(值域) · 計數成本)`。",
+    "complexity": "時間 O(log(值域) × C)，其中 C 是 cnt(x) 的計算成本；空間視 cnt 實作而定。",
+    "deep_dive": [
+      {
+        "title": "乘法表中的第 K 小",
+        "body": "`m×n` 乘法表第 K 小：`cnt(x) = Σ min(x / i, n)`（第 i 列有幾個 `i·j <= x`）。對答案二分：\n\n```cpp\nint findKthNumber(int m, int n, int k) {\n    auto cnt = [&](long long x) {\n        long long c = 0;\n        for (int i = 1; i <= m; i++) c += min(x / i, (long long)n);\n        return c;\n    };\n    int lo = 1, hi = m * n;\n    while (lo < hi) {\n        int mid = lo + (hi - lo) / 2;\n        if (cnt(mid) >= k) hi = mid;   // enough numbers <= mid, shrink\n        else lo = mid + 1;\n    }\n    return lo; // smallest x with cnt(x) >= k\n}\n```\n\n迴圈結束時 `lo` 即第 K 小。即使 `mid` 不在乘法表內，因 `cnt` 在真實值處才「跳級」，最終收斂到的 `lo` 必為表內真實值。"
+      },
+      {
+        "title": "第 K 小的距離對（搭配雙指針計數）",
+        "body": "求所有數對絕對差中的第 K 小：排序後，`cnt(x)=` 差 `<= x` 的對數，用雙指針 O(n) 求得：\n\n```cpp\nint smallestDistancePair(vector<int>& a, int k) {\n    sort(a.begin(), a.end());\n    int n = a.size();\n    auto cnt = [&](int x) {\n        int c = 0, l = 0;\n        for (int r = 0; r < n; r++) {\n            while (a[r] - a[l] > x) l++;   // keep diff within x\n            c += r - l;                     // pairs ending at r\n        }\n        return c;\n    };\n    int lo = 0, hi = a[n - 1] - a[0];\n    while (lo < hi) {\n        int mid = lo + (hi - lo) / 2;\n        if (cnt(mid) >= k) hi = mid;\n        else lo = mid + 1;\n    }\n    return lo;\n}\n```\n\n這裡 `cnt` 本身是一個不定長滑動視窗：外層值域二分 × 內層雙指針，是「二分套計數」的經典組合。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：二分",
+        "url": "https://oi-wiki.org/basic/binary/"
+      },
+      {
+        "label": "cp-algorithms：Binary search",
+        "url": "https://cp-algorithms.com/num_methods/binary_search.html"
+      }
+    ],
+    "template_code": "// Kth smallest by binary searching the value, using count(<= x) >= k\ntemplate <class Cnt>\nlong long kthSmallest(long long lo, long long hi, long long k, Cnt cnt) {\n    while (lo < hi) {\n        long long mid = lo + (hi - lo) / 2;\n        if (cnt(mid) >= k) hi = mid;   // at least k values are <= mid\n        else lo = mid + 1;\n    }\n    return lo; // smallest value whose prefix count reaches k\n}",
+    "supplemental_patterns": [
+      {
+        "name": "矩陣（行列有序）第 K 小",
+        "description": "**觸發**：每行每列皆遞增的矩陣求第 K 小。\n**做法**：值域二分，`cnt(x)` 從左下角走階梯 O(n+m) 計算 `<= x` 的個數。"
+      },
+      {
+        "name": "第 K 小子陣列和／第 K 大",
+        "description": "**觸發**：所有子陣列和裡第 K 小。\n**做法**：對和值二分，`cnt(x)` 用雙指針數「和 ≤ x 的子陣列數」（需非負或前綴單調）。第 K 大可轉成第 `total-k+1` 小。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 邊界要用「最小滿足 `cnt>=k`」的寫法（`if(cnt>=k) hi=mid; else lo=mid+1;`），回傳 `lo`，才落在真實值上。",
+      "⚠️ `hi` 上界要取值域真正最大值（如乘法表 `m*n`、距離 `max-min`），取小了會漏答案。",
+      "⚠️ `cnt(x)` 與二分值都可能很大，注意 `long long` 與溢位。"
+    ],
+    "practice_problems": [
+      {
+        "title": "有序矩陣中第 K 小的元素",
+        "source": "leetcode",
+        "source_id": "kth-smallest-element-in-a-sorted-matrix",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "值域二分",
+          "計數"
+        ]
+      },
+      {
+        "title": "找出第 K 小的數對距離",
+        "source": "leetcode",
+        "source_id": "find-k-th-smallest-pair-distance",
+        "rating": 2000,
+        "tier": "challenge",
+        "tags": [
+          "值域二分",
+          "雙指針"
+        ]
+      },
+      {
+        "title": "乘法表中第 K 小的數",
+        "source": "leetcode",
+        "source_id": "kth-smallest-number-in-multiplication-table",
+        "rating": 2000,
+        "tier": "challenge",
+        "tags": [
+          "值域二分",
+          "計數"
+        ]
+      },
+      {
+        "title": "第 K 小的子陣列和",
+        "source": "leetcode",
+        "source_id": "kth-smallest-subarray-sum",
+        "rating": 1900,
+        "tier": "challenge",
+        "tags": [
+          "值域二分",
+          "雙指針"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bs-minmax",
+    "parent_id": "binary-search",
+    "title": "最小化最大值／最大化最小值",
+    "slug": "min-max",
+    "description": "把「讓最大值盡量小」或「讓最小值盡量大」轉成單調可行性判定，再二分答案。",
+    "core_idea": "一大類最優化問題形如「分配／切割使**最大負擔最小**」或「擺放使**最近距離最大**」。直接最佳化很難，但若改問判定題「**能否做到最大值 ≤ x**（或最小值 ≥ x）」，答案通常具單調性：`x` 越寬鬆越容易成立。\n\n於是「最小化最大值」= 找**最小的可行 `x`**，「最大化最小值」= 找**最大的可行 `x`**。寫一個 `check(x)` 用貪心 O(n) 判可行，再二分。難點全在設計 `check` 並確認其單調方向。",
+    "complexity": "時間 O(log(值域) × n)，空間 O(1)（check 多為貪心）。",
+    "deep_dive": [
+      {
+        "title": "最小化最大值：分割陣列 / 送貨能力",
+        "body": "「把陣列分成 m 段使各段和的最大值最小」：`check(x)=` 以「段和不超過 x」貪心切，所需段數 `<= m` 即可行。可行性對 `x` 單調遞增，找最小可行 `x`：\n\n```cpp\nint splitArray(vector<int>& a, int m) {\n    auto check = [&](long long x) {\n        int parts = 1; long long cur = 0;\n        for (int v : a) {\n            if (v > x) return false;     // a single element exceeds x\n            if (cur + v > x) { parts++; cur = 0; }\n            cur += v;\n        }\n        return parts <= m;               // feasible with <= m segments\n    };\n    long long lo = *max_element(a.begin(), a.end());\n    long long hi = accumulate(a.begin(), a.end(), 0LL);\n    while (lo < hi) {\n        long long mid = lo + (hi - lo) / 2;\n        if (check(mid)) hi = mid;        // feasible -> try smaller max\n        else lo = mid + 1;\n    }\n    return lo;\n}\n```\n\n`lo` 取單一元素最大值（任何段至少裝得下最大元素），`hi` 取總和（全放一段）。"
+      },
+      {
+        "title": "最大化最小值：愛吃香蕉 / 牛棚放牛",
+        "body": "「在 n 個位置放 k 頭牛使任兩頭最近距離最大」：`check(x)=` 貪心從最左開始、每超過 `x` 才放一頭，能放 `>= k` 即可行。可行性對 `x` 單調遞減，找**最大**可行 `x`：\n\n```cpp\nint maxMinDistance(vector<int>& pos, int k) {\n    sort(pos.begin(), pos.end());\n    auto check = [&](int x) {\n        int cnt = 1, last = pos[0];\n        for (int p : pos) if (p - last >= x) { cnt++; last = p; }\n        return cnt >= k;\n    };\n    int lo = 1, hi = pos.back() - pos.front(), ans = 0;\n    while (lo <= hi) {\n        int mid = lo + (hi - lo) / 2;\n        if (check(mid)) { ans = mid; lo = mid + 1; } // feasible -> try larger\n        else hi = mid - 1;\n    }\n    return ans;\n}\n```\n\n注意方向相反：最大化最小值時，可行就往**大**走（`lo = mid + 1`），用 `ans` 記錄最後一個可行解。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：二分答案",
+        "url": "https://oi-wiki.org/basic/binary/"
+      },
+      {
+        "label": "cp-algorithms：Binary search",
+        "url": "https://cp-algorithms.com/num_methods/binary_search.html"
+      }
+    ],
+    "template_code": "// Minimize the maximum: find the smallest feasible x\ntemplate <class Check>\nlong long minimizeMax(long long lo, long long hi, Check feasible) {\n    while (lo < hi) {\n        long long mid = lo + (hi - lo) / 2;\n        if (feasible(mid)) hi = mid;     // feasible -> push the bound down\n        else lo = mid + 1;\n    }\n    return lo;\n}\n// Maximize the minimum: mirror it (feasible -> lo = mid + 1, track ans).",
+    "supplemental_patterns": [
+      {
+        "name": "速率／時間型最小化最大值",
+        "description": "**觸發**：在時限內完成（吃香蕉、運貨、製作），求最小速率。\n**做法**：`check(speed)=` 累加 `ceil(load/speed)` 是否 ≤ 限制；速率越大越可行，二分最小可行速率。"
+      },
+      {
+        "name": "判定方向自檢",
+        "description": "**觸發**：不確定 check 該往哪邊收斂。\n**做法**：先想「x 變大時 check 更容易還是更難成立」；最小化最大值→可行就縮小 x，最大化最小值→可行就放大 x。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 搞反二分方向是最常見錯誤：先確定「x 增大時 check 變易或變難」再決定邊界更新。",
+      "⚠️ `lo`/`hi` 初值要涵蓋整個合法值域（如分割問題 lo=max 元素、hi=總和）。",
+      "⚠️ check 內貪心要正確且 O(n)；貪心策略錯了會破壞單調性與正確性。"
+    ],
+    "practice_problems": [
+      {
+        "title": "愛吃香蕉的珂珂",
+        "source": "leetcode",
+        "source_id": "koko-eating-bananas",
+        "rating": 1500,
+        "tier": "warmup",
+        "tags": [
+          "二分答案",
+          "最小化最大值"
+        ]
+      },
+      {
+        "title": "分割陣列的最大值",
+        "source": "leetcode",
+        "source_id": "split-array-largest-sum",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "二分答案",
+          "最小化最大值"
+        ]
+      },
+      {
+        "title": "兩球之間的磁力",
+        "source": "leetcode",
+        "source_id": "magnetic-force-between-two-balls",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "二分答案",
+          "最大化最小值"
+        ]
+      },
+      {
+        "title": "Odd-Even Subsequence",
+        "source": "codeforces",
+        "source_id": "1370D",
+        "rating": 1900,
+        "tier": "challenge",
+        "tags": [
+          "二分答案",
+          "最小化最大值"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "iv-prefix-sum",
+    "parent_id": "intervals",
+    "title": "前綴和（含二維與雜湊）",
+    "slug": "prefix-sum",
+    "description": "預處理累積和，使任意區間和 O(1) 查詢；配合雜湊表可數「和為定值」的子陣列。",
+    "core_idea": "前綴和 `pre[i] = a[0] + ... + a[i-1]`（`pre[0]=0`）讓任意區間和變成一次減法：`sum(l, r) = pre[r+1] - pre[l]`。它把「區間查詢」從每次 O(n) 降到 O(1)，代價是 O(n) 預處理。\n\n更強的用法是與**雜湊表**結合：要數「和恰為 `k` 的子陣列」，固定右端 `r`，需要的左端滿足 `pre[r+1] - pre[l] = k`，即 `pre[l] = pre[r+1] - k`；邊掃邊用雜湊統計出現過的前綴值即可 O(n)。二維前綴和則用容斥求任意子矩陣和。",
+    "complexity": "一維／二維預處理 O(n)／O(nm)，查詢 O(1)；和為 k 計數 O(n)。",
+    "deep_dive": [
+      {
+        "title": "一維前綴和與「和為 K 的子陣列數」",
+        "body": "經典：含負數時不能用滑窗，改用前綴和 + 雜湊。\n\n```cpp\nint subarraySum(vector<int>& a, int k) {\n    unordered_map<long long, int> seen{{0, 1}}; // empty prefix\n    long long pre = 0; int cnt = 0;\n    for (int v : a) {\n        pre += v;\n        cnt += seen.count(pre - k) ? seen[pre - k] : 0; // need pre[l] = pre - k\n        seen[pre]++;\n    }\n    return cnt;\n}\n```\n\n初始放入 `{0:1}` 代表「空前綴」，否則會漏掉從頭開始就等於 k 的子陣列。"
+      },
+      {
+        "title": "二維前綴和（子矩陣和）",
+        "body": "`S[i][j]` 為左上角到 `(i-1,j-1)` 的矩形和，建表與查詢都用容斥：\n\n```cpp\n// build: S has size (n+1) x (m+1), zero-padded\nfor (int i = 1; i <= n; i++)\n    for (int j = 1; j <= m; j++)\n        S[i][j] = a[i-1][j-1] + S[i-1][j] + S[i][j-1] - S[i-1][j-1];\n\n// query rectangle [r1..r2] x [c1..c2] (0-indexed, inclusive):\nauto rect = [&](int r1, int c1, int r2, int c2) {\n    return S[r2+1][c2+1] - S[r1][c2+1] - S[r2+1][c1] + S[r1][c1];\n};\n```\n\n建表的 `- S[i-1][j-1]` 與查詢的 `+ S[r1][c1]` 都是「多減一塊要補回」的容斥；padding 一圈 0 可免邊界特判。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：前綴和與差分",
+        "url": "https://oi-wiki.org/basic/prefix-sum/"
+      },
+      {
+        "label": "靈茶山艾府：前綴和技巧",
+        "url": "https://leetcode.cn/circle/discuss/SqopEo/"
+      }
+    ],
+    "template_code": "// 1D prefix sums: O(1) range queries after O(n) build\nstruct Prefix {\n    vector<long long> pre;\n    Prefix(const vector<int>& a) : pre(a.size() + 1, 0) {\n        for (int i = 0; i < (int)a.size(); i++) pre[i + 1] = pre[i] + a[i];\n    }\n    long long sum(int l, int r) const { return pre[r + 1] - pre[l]; } // inclusive\n};",
+    "supplemental_patterns": [
+      {
+        "name": "前綴和 + 餘數（整除子陣列）",
+        "description": "**觸發**：數「和能被 k 整除」的子陣列。\n**做法**：對 `pre % k` 計數，同餘的兩前綴相減即整除；負數取餘要 `((x%k)+k)%k` 校正。"
+      },
+      {
+        "name": "前綴最值／前綴異或",
+        "description": "**觸發**：區間異或、區間最值的離線查詢。\n**做法**：異或同樣可前綴化（`xor(l,r)=pre[r+1]^pre[l]`）；最值不可逆，需改用稀疏表或線段樹。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 雜湊計數務必先放 `{0:1}`，否則漏掉「整段前綴即等於 k」的情況。",
+      "⚠️ 二維建表與查詢的容斥符號要對齊，建議統一用 1-indexed、padding 一圈 0。",
+      "⚠️ 前綴和易溢位，用 `long long`；取餘時負數要先校正到非負。"
+    ],
+    "practice_problems": [
+      {
+        "title": "區域和檢索 - 陣列不可變",
+        "source": "leetcode",
+        "source_id": "range-sum-query-immutable",
+        "rating": 1100,
+        "tier": "warmup",
+        "tags": [
+          "前綴和",
+          "區間查詢"
+        ]
+      },
+      {
+        "title": "和為 K 的子陣列",
+        "source": "leetcode",
+        "source_id": "subarray-sum-equals-k",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "前綴和",
+          "雜湊"
+        ]
+      },
+      {
+        "title": "二維區域和檢索 - 矩陣不可變",
+        "source": "leetcode",
+        "source_id": "range-sum-query-2d-immutable",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "二維前綴和",
+          "容斥"
+        ]
+      },
+      {
+        "title": "連續的子陣列和",
+        "source": "leetcode",
+        "source_id": "continuous-subarray-sum",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "前綴和",
+          "餘數"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ms-contribution",
+    "parent_id": "monotonic-structure",
+    "title": "貢獻法（單調棧算區間貢獻）",
+    "slug": "contribution",
+    "description": "改成「每個元素作為最小／最大值的次數」累加總貢獻，用單調棧求每元素的管轄區間。",
+    "core_idea": "面對「所有子陣列的最小值之和」「所有子陣列極差之和」這類**對全部子陣列求和**的問題，逐一枚舉子陣列是 O(n²)。貢獻法反過來想：**固定某元素 `a[i]`，它在多少個子陣列裡是最小值？** 把每個元素的「身分次數 × 數值」加總就是答案。\n\n求 `a[i]` 作為最小值的管轄範圍，就是找它**左邊第一個更小**、**右邊第一個更小**的位置 `L`、`R`，則含 `a[i]` 且 `a[i]` 為最小的子陣列數 = `(i-L) × (R-i)`。這正是單調棧的拿手好戲。處理相等元素時，一邊取嚴格、一邊取非嚴格以避免重複計數。",
+    "complexity": "時間 O(n)（單調棧求左右邊界），空間 O(n)。",
+    "deep_dive": [
+      {
+        "title": "所有子陣列最小值之和",
+        "body": "用單調棧求每個元素左右第一個更小者，左邊嚴格、右邊非嚴格避免重複：\n\n```cpp\nconst long long MOD = 1e9 + 7;\nint sumSubarrayMins(vector<int>& a) {\n    int n = a.size();\n    vector<int> L(n), R(n);            // boundaries where a[i] is the strict min\n    stack<int> st;\n    for (int i = 0; i < n; i++) {      // left: first index with a[left] < a[i]\n        while (!st.empty() && a[st.top()] >= a[i]) st.pop();\n        L[i] = st.empty() ? -1 : st.top();\n        st.push(i);\n    }\n    while (!st.empty()) st.pop();\n    for (int i = n - 1; i >= 0; i--) { // right: first index with a[right] < a[i]\n        while (!st.empty() && a[st.top()] > a[i]) st.pop();\n        R[i] = st.empty() ? n : st.top();\n        st.push(i);\n    }\n    long long ans = 0;\n    for (int i = 0; i < n; i++)\n        ans = (ans + 1LL * a[i] * (i - L[i]) % MOD * (R[i] - i)) % MOD;\n    return ans;\n}\n```\n\n左用 `>=`（嚴格更小才停）、右用 `>`（遇相等不停），保證每個子陣列的最小值唯一歸給最左邊那個，避免重算。"
+      },
+      {
+        "title": "極差之和 = 最大值之和 − 最小值之和",
+        "body": "「所有子陣列 (max − min) 之和」可拆成兩個獨立貢獻問題：\n\n```cpp\n// sum of maxima - sum of minima over all subarrays\nlong long subArrayRanges(vector<int>& a) {\n    auto solve = [&](bool wantMax) {\n        int n = a.size(); long long s = 0;\n        vector<int> L(n), R(n); stack<int> st;\n        for (int i = 0; i < n; i++) {\n            while (!st.empty() && (wantMax ? a[st.top()] <= a[i] : a[st.top()] >= a[i])) st.pop();\n            L[i] = st.empty() ? -1 : st.top(); st.push(i);\n        }\n        st = {};\n        for (int i = n - 1; i >= 0; i--) {\n            while (!st.empty() && (wantMax ? a[st.top()] < a[i] : a[st.top()] > a[i])) st.pop();\n            R[i] = st.empty() ? n : st.top(); st.push(i);\n        }\n        for (int i = 0; i < n; i++) s += 1LL * a[i] * (i - L[i]) * (R[i] - i);\n        return s;\n    };\n    return solve(true) - solve(false);\n}\n```\n\n「極差」「逆序貢獻」「最大值×長度」等都能用同一框架：先確定每元素的管轄區間，再乘上對應權重累加。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：單調棧",
+        "url": "https://oi-wiki.org/ds/monotonous-stack/"
+      },
+      {
+        "label": "靈茶山艾府：貢獻法",
+        "url": "https://leetcode.cn/circle/discuss/9oZFK9/"
+      }
+    ],
+    "template_code": "// For each i, the range [L[i]+1, R[i]-1] where a[i] is the (leftmost) minimum.\n// Left strict (>=), right non-strict (>) to avoid double counting equal values.\nvoid minRanges(const vector<int>& a, vector<int>& L, vector<int>& R) {\n    int n = a.size(); L.assign(n, -1); R.assign(n, n);\n    stack<int> st;\n    for (int i = 0; i < n; i++) {\n        while (!st.empty() && a[st.top()] >= a[i]) st.pop();\n        L[i] = st.empty() ? -1 : st.top(); st.push(i);\n    }\n    st = stack<int>();\n    for (int i = n - 1; i >= 0; i--) {\n        while (!st.empty() && a[st.top()] > a[i]) st.pop();\n        R[i] = st.empty() ? n : st.top(); st.push(i);\n    }\n}",
+    "supplemental_patterns": [
+      {
+        "name": "子陣列最大值之和 / 加權貢獻",
+        "description": "**觸發**：對所有子陣列的 max、長度、或某函數求和。\n**做法**：求每元素作為極值的管轄區間後乘權重；max 與 min 的嚴格／非嚴格方向互換。"
+      },
+      {
+        "name": "直方圖最大矩形",
+        "description": "**觸發**：柱狀圖內最大矩形面積。\n**做法**：同樣求每根柱子左右第一個更矮者，面積 = 高 ×(R−L−1)，取最大；見「直方圖最大矩形」子主題。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 相等元素若兩邊都用嚴格或都用非嚴格，會重複或漏算；務必一邊嚴格、一邊非嚴格。",
+      "⚠️ `(i-L)*(R-i)` 會溢位，先轉 `long long` 再相乘，必要時邊乘邊取模。",
+      "⚠️ 邊界哨兵：左界初值 −1、右界初值 n，對應「沒有更小者」。"
+    ],
+    "practice_problems": [
+      {
+        "title": "子陣列的最小值之和",
+        "source": "leetcode",
+        "source_id": "sum-of-subarray-minimums",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "貢獻法",
+          "單調棧"
+        ]
+      },
+      {
+        "title": "子陣列範圍和",
+        "source": "leetcode",
+        "source_id": "sum-of-subarray-ranges",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "貢獻法",
+          "極差"
+        ]
+      },
+      {
+        "title": "統計子陣列中固定邊界元素的個數",
+        "source": "leetcode",
+        "source_id": "count-subarrays-with-fixed-bounds",
+        "rating": 2000,
+        "tier": "challenge",
+        "tags": [
+          "貢獻法",
+          "區間"
+        ]
+      },
+      {
+        "title": "最大子陣列最小乘積",
+        "source": "leetcode",
+        "source_id": "maximum-subarray-min-product",
+        "rating": 2000,
+        "tier": "challenge",
+        "tags": [
+          "貢獻法",
+          "單調棧",
+          "前綴和"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ms-lexicographic",
+    "parent_id": "monotonic-structure",
+    "title": "單調棧求最小字典序",
+    "slug": "lexicographic",
+    "description": "在保留限制下用單調棧貪心刪除較大前導元素，得到字典序最小的結果。",
+    "core_idea": "「移除 k 位使數字最小」「不重複字元的字典序最小子序列」這類問題，核心貪心是：**從左到右維護一個棧，當新元素比棧頂小且仍允許刪除時，就把棧頂彈掉**。因為高位（靠左）變小對字典序的影響遠大於低位，所以遇到「前面大、後面小」就該把前面的大元素刪掉。\n\n單調棧天然支援這個「能刪就刪」的貪心，並用額外條件（剩餘可刪次數、後面是否還會出現、是否已在棧中）約束何時停止。寫對停止條件，就能在 O(n) 內構造出字典序最小（或最大）的答案。",
+    "complexity": "時間 O(n)（每元素進出棧各一次），空間 O(n)。",
+    "deep_dive": [
+      {
+        "title": "移掉 k 位使數字最小",
+        "body": "維護遞增棧，棧頂比當前大且還能刪就彈：\n\n```cpp\nstring removeKdigits(string num, int k) {\n    string st;\n    for (char c : num) {\n        while (!st.empty() && k > 0 && st.back() > c) { st.pop_back(); k--; }\n        st.push_back(c);\n    }\n    while (k > 0) { st.pop_back(); k--; }       // still must remove from the tail\n    int i = 0; while (i < (int)st.size() && st[i] == '0') i++; // strip leading zeros\n    string res = st.substr(i);\n    return res.empty() ? \"0\" : res;\n}\n```\n\n若掃完還有刪除額度（整體遞增的情況），從尾端補刪；最後去前導零。"
+      },
+      {
+        "title": "不重複字元的字典序最小子序列",
+        "body": "每個字元恰留一個，要求字典序最小。多了兩個約束：當前字元已在棧中就跳過；彈棧前要確認被彈字元**後面還會再出現**。\n\n```cpp\nstring smallestSubsequence(string s) {\n    int cnt[26] = {0}; bool inSt[26] = {false};\n    for (char c : s) cnt[c - 'a']++;\n    string st;\n    for (char c : s) {\n        cnt[c - 'a']--;                         // one fewer remaining\n        if (inSt[c - 'a']) continue;            // keep only one of each\n        while (!st.empty() && st.back() > c && cnt[st.back() - 'a'] > 0) {\n            inSt[st.back() - 'a'] = false;      // safe to pop: appears later\n            st.pop_back();\n        }\n        st.push_back(c); inSt[c - 'a'] = true;\n    }\n    return st;\n}\n```\n\n彈棧條件 `cnt[st.back()] > 0` 保證被刪字元之後還能補回，否則會丟失必須保留的字元。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：單調棧",
+        "url": "https://oi-wiki.org/ds/monotonous-stack/"
+      },
+      {
+        "label": "靈茶山艾府：單調棧與字典序",
+        "url": "https://leetcode.cn/circle/discuss/9oZFK9/"
+      }
+    ],
+    "template_code": "// Lexicographically smallest by removing k chars (monotone increasing stack)\nstring smallestAfterRemoval(const string& num, int k) {\n    string st;\n    for (char c : num) {\n        while (!st.empty() && k > 0 && st.back() > c) { st.pop_back(); k--; }\n        st.push_back(c);\n    }\n    st.resize(st.size() - k);                    // remove leftover from the tail\n    return st;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "字典序最大",
+        "description": "**觸發**：要求結果字典序最大。\n**做法**：把比較反向（棧頂比當前**小**才彈），其餘骨架不變。"
+      },
+      {
+        "name": "帶保留下界的拼接最大數",
+        "description": "**觸發**：從多個陣列各取若干、拼接成最大數。\n**做法**：對每段用單調棧取「長度固定下字典序最大子序列」，再用歸併比較拼接。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 不重複子序列問題中，彈棧前必須確認被彈字元後面還會出現（剩餘計數 > 0），否則會少字元。",
+      "⚠️ 掃完仍有刪除額度時，要從尾端補刪（遞增序列的情形）。",
+      "⚠️ 數字題最後別忘了去前導零，且空結果要回傳 \"0\"。"
+    ],
+    "practice_problems": [
+      {
+        "title": "移掉 K 位數字",
+        "source": "leetcode",
+        "source_id": "remove-k-digits",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "單調棧",
+          "字典序"
+        ]
+      },
+      {
+        "title": "去除重複字母",
+        "source": "leetcode",
+        "source_id": "remove-duplicate-letters",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "單調棧",
+          "字典序"
+        ]
+      },
+      {
+        "title": "不同字元的最小子序列",
+        "source": "leetcode",
+        "source_id": "smallest-subsequence-of-distinct-characters",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "單調棧",
+          "字典序"
+        ]
+      },
+      {
+        "title": "拼接最大數",
+        "source": "leetcode",
+        "source_id": "create-maximum-number",
+        "rating": 2300,
+        "tier": "challenge",
+        "tags": [
+          "單調棧",
+          "貪心",
+          "歸併"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gt-grid",
+    "parent_id": "graph-traversal",
+    "title": "網格圖（DFS／BFS／洪水填充）",
+    "slug": "grid",
+    "description": "把矩陣每格當節點、四／八方向當邊，用 DFS/BFS 做連通塊、最短步數與洪水填充。",
+    "core_idea": "網格圖是隱式圖：節點是格子 `(r,c)`，邊是相鄰格（上下左右，必要時含對角）。所有圖論遍歷都能套用，只是「鄰居」改成方向陣列枚舉，並用邊界與訪問標記控制。\n\n選擇 DFS 或 BFS 取決於問題：**連通塊／島嶼數量／面積**用 DFS 或 BFS 皆可；**最少步數／最短路（邊權皆 1）**必須用 BFS（層序保證最短）；起點有多個時用**多源 BFS**（一次把所有起點入隊）。洪水填充就是從一格出發把整個連通同色區改寫。",
+    "complexity": "時間 O(R×C)（每格訪問一次），空間 O(R×C)（訪問標記與佇列／遞迴）。",
+    "deep_dive": [
+      {
+        "title": "DFS 數島嶼 / 算面積",
+        "body": "方向陣列 + 就地標記（把走過的陸地改成水）避免額外 visited：\n\n```cpp\nint dr[] = {-1, 1, 0, 0}, dc[] = {0, 0, -1, 1};\nint dfs(vector<vector<char>>& g, int r, int c) {\n    int R = g.size(), C = g[0].size();\n    if (r < 0 || r >= R || c < 0 || c >= C || g[r][c] != '1') return 0;\n    g[r][c] = '0';                         // mark visited in place\n    int area = 1;\n    for (int k = 0; k < 4; k++) area += dfs(g, r + dr[k], c + dc[k]);\n    return area;\n}\nint numIslands(vector<vector<char>>& g) {\n    int cnt = 0;\n    for (int r = 0; r < (int)g.size(); r++)\n        for (int c = 0; c < (int)g[0].size(); c++)\n            if (g[r][c] == '1') { dfs(g, r, c); cnt++; }\n    return cnt;\n}\n```\n\n大網格用遞迴 DFS 可能爆棧，改用顯式 stack 或 BFS 較安全。"
+      },
+      {
+        "title": "多源 BFS：最短距離 / 腐爛橘子",
+        "body": "所有源點同時入隊，按層擴散，第一次到達即最短：\n\n```cpp\nint orangesRotting(vector<vector<int>>& g) {\n    int R = g.size(), C = g[0].size(), fresh = 0;\n    queue<pair<int,int>> q;\n    for (int r = 0; r < R; r++) for (int c = 0; c < C; c++) {\n        if (g[r][c] == 2) q.push({r, c});  // all sources enqueued first\n        else if (g[r][c] == 1) fresh++;\n    }\n    int dr[] = {-1,1,0,0}, dc[] = {0,0,-1,1}, minutes = 0;\n    while (!q.empty() && fresh) {\n        int sz = q.size();\n        while (sz--) {\n            auto [r, c] = q.front(); q.pop();\n            for (int k = 0; k < 4; k++) {\n                int nr = r + dr[k], nc = c + dc[k];\n                if (nr<0||nr>=R||nc<0||nc>=C||g[nr][nc]!=1) continue;\n                g[nr][nc] = 2; fresh--; q.push({nr, nc});\n            }\n        }\n        minutes++;                          // one layer = one minute\n    }\n    return fresh ? -1 : minutes;\n}\n```\n\n每處理完一整層 `minutes++`，這就是 BFS「按邊數分層」的特性；多源只是初始把所有起點放進同一層。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：BFS",
+        "url": "https://oi-wiki.org/graph/bfs/"
+      },
+      {
+        "label": "OI-Wiki：DFS",
+        "url": "https://oi-wiki.org/graph/dfs/"
+      }
+    ],
+    "template_code": "// Grid BFS shortest steps (unit edges) from a single source\nint dr[] = {-1, 1, 0, 0}, dc[] = {0, 0, -1, 1};\nint bfsGrid(vector<vector<int>>& g, int sr, int sc) {\n    int R = g.size(), C = g[0].size();\n    vector<vector<int>> dist(R, vector<int>(C, -1));\n    queue<pair<int,int>> q; q.push({sr, sc}); dist[sr][sc] = 0;\n    while (!q.empty()) {\n        auto [r, c] = q.front(); q.pop();\n        for (int k = 0; k < 4; k++) {\n            int nr = r + dr[k], nc = c + dc[k];\n            if (nr<0||nr>=R||nc<0||nc>=C||g[nr][nc]==0||dist[nr][nc]!=-1) continue;\n            dist[nr][nc] = dist[r][c] + 1;\n            q.push({nr, nc});\n        }\n    }\n    return dist[R-1][C-1];\n}",
+    "supplemental_patterns": [
+      {
+        "name": "0-1 網格最短路",
+        "description": "**觸發**：格子間移動成本只有 0 或 1（如打通牆代價 1）。\n**做法**：用 deque 做 0-1 BFS，成本 0 的鄰居 push_front、成本 1 push_back。"
+      },
+      {
+        "name": "八方向 / 對角連通",
+        "description": "**觸發**：對角也算相鄰（如最短橋、對角路徑）。\n**做法**：方向陣列擴成 8 個 `(±1,±1,0)` 組合（排除原地）。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ BFS 要在「入隊時」標記已訪問，否則同一格會被多次入隊導致重複與超時。",
+      "⚠️ 求最短步數必須用 BFS，DFS 找到的不保證最短。",
+      "⚠️ 大網格遞迴 DFS 易爆棧，改顯式堆疊或 BFS。"
+    ],
+    "practice_problems": [
+      {
+        "title": "島嶼數量",
+        "source": "leetcode",
+        "source_id": "number-of-islands",
+        "rating": 1400,
+        "tier": "warmup",
+        "tags": [
+          "網格圖",
+          "DFS",
+          "連通塊"
+        ]
+      },
+      {
+        "title": "腐爛的橘子",
+        "source": "leetcode",
+        "source_id": "rotting-oranges",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "多源BFS",
+          "網格圖"
+        ]
+      },
+      {
+        "title": "01 矩陣",
+        "source": "leetcode",
+        "source_id": "01-matrix",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "多源BFS",
+          "最短距離"
+        ]
+      },
+      {
+        "title": "在網格圖中訪問一個格子的最少時間",
+        "source": "leetcode",
+        "source_id": "minimum-time-to-visit-a-cell-in-a-grid",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "網格圖",
+          "Dijkstra"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gt-functional-graph",
+    "parent_id": "graph-traversal",
+    "title": "基環樹與內向函數圖",
+    "slug": "functional-graph",
+    "description": "每點恰一條出邊的圖由「環＋掛在環上的樹」組成，用找環＋拓撲剝葉處理。",
+    "core_idea": "若每個節點恰有**一條出邊**（如 `next[i]`、`f(i)`），整張圖稱為**內向函數圖**：從任一點不斷沿出邊走，必然進入一個環。其結構是若干個「**基環樹**」——一個環，加上若干掛在環上的樹枝。\n\n處理套路有二：(1) **找環**——用快慢指針或記錄訪問時間戳偵測環、求環長；(2) **拓撲剝葉**——反向圖上不斷刪入度為 0 的節點，剩下的就是環。許多題（最長鏈、能否回到起點、環上博弈、最大環）都建立在「先把樹枝和環分開」之上。",
+    "complexity": "時間 O(n)，空間 O(n)。",
+    "deep_dive": [
+      {
+        "title": "拓撲剝葉找出所有環點",
+        "body": "統計每點入度，反覆移除入度 0 的點；最後 `onCycle` 為真者即在某個環上：\n\n```cpp\nvector<char> findCycleNodes(const vector<int>& next) { // next[i] = i's out-edge\n    int n = next.size();\n    vector<int> indeg(n, 0);\n    for (int i = 0; i < n; i++) indeg[next[i]]++;\n    queue<int> q;\n    for (int i = 0; i < n; i++) if (indeg[i] == 0) q.push(i);\n    vector<char> onCycle(n, 1);\n    while (!q.empty()) {\n        int u = q.front(); q.pop();\n        onCycle[u] = 0;                        // peeled off -> a tree node\n        if (--indeg[next[u]] == 0) q.push(next[u]);\n    }\n    return onCycle;                            // remaining 1's lie on cycles\n}\n```\n\n剝葉後仍留有入度的節點全部在環上；這比 DFS 找環更不易出錯，也方便接著做環上計算。"
+      },
+      {
+        "title": "快慢指針求環長（Floyd）",
+        "body": "從某點出發，快指針一次兩步、慢指針一步，相遇後再繞一圈量環長：\n\n```cpp\nint cycleLength(const vector<int>& next, int start) {\n    int slow = start, fast = start;\n    do {\n        slow = next[slow];\n        fast = next[next[fast]];\n    } while (slow != fast);                    // meet inside the cycle\n    int len = 0;\n    do { fast = next[fast]; len++; } while (fast != slow);\n    return len;\n}\n```\n\n函數圖一定有環，所以快慢指針必相遇；這常用於「能否回到自己／最大環長」這類題。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：圖論基礎（基環樹）",
+        "url": "https://oi-wiki.org/graph/concept/"
+      },
+      {
+        "label": "OI-Wiki：拓撲排序",
+        "url": "https://oi-wiki.org/graph/topo/"
+      }
+    ],
+    "template_code": "// Mark cycle nodes of a functional graph (each node has one out-edge) by peeling.\nvector<char> functionalGraphCycle(const vector<int>& next) {\n    int n = next.size();\n    vector<int> indeg(n, 0);\n    for (int v : next) indeg[v]++;\n    queue<int> q;\n    for (int i = 0; i < n; i++) if (!indeg[i]) q.push(i);\n    vector<char> onCycle(n, 1);\n    while (!q.empty()) {\n        int u = q.front(); q.pop();\n        onCycle[u] = 0;\n        if (--indeg[next[u]] == 0) q.push(next[u]);\n    }\n    return onCycle;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "最長鏈 / 樹枝深度",
+        "description": "**觸發**：求進入環前最長的樹枝路徑。\n**做法**：剝葉時順便 DP 每個環點上掛的最長鏈，環點答案 = max(各入鏈長)。"
+      },
+      {
+        "name": "雙向基環樹（無向恰 n 邊）",
+        "description": "**觸發**：n 個點 n 條無向邊（恰一個環）。\n**做法**：先用拓撲剝葉找環，再在環上斷一邊做樹形 DP，或環上單獨處理。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 函數圖可能有多個環與多個連通塊，別假設只有一個環。",
+      "⚠️ 拓撲剝葉用的是「出邊」累計入度；方向弄反會把環點誤判為葉。",
+      "⚠️ 自環（`next[i]==i`）是長度 1 的環，計數時別漏。"
+    ],
+    "practice_problems": [
+      {
+        "title": "陣列嵌套",
+        "source": "leetcode",
+        "source_id": "array-nesting",
+        "rating": 1500,
+        "tier": "warmup",
+        "tags": [
+          "函數圖",
+          "找環"
+        ]
+      },
+      {
+        "title": "最長環",
+        "source": "leetcode",
+        "source_id": "longest-cycle-in-a-graph",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "函數圖",
+          "環長"
+        ]
+      },
+      {
+        "title": "參加會議的最多員工數",
+        "source": "leetcode",
+        "source_id": "maximum-employees-to-be-invited-to-a-meeting",
+        "rating": 2300,
+        "tier": "challenge",
+        "tags": [
+          "基環樹",
+          "拓撲排序"
+        ]
+      },
+      {
+        "title": "Directed Roads",
+        "source": "codeforces",
+        "source_id": "711D",
+        "rating": 2000,
+        "tier": "challenge",
+        "tags": [
+          "基環樹",
+          "函數圖",
+          "計數"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bm-bit-basics",
+    "parent_id": "bitmask-dp",
+    "title": "位元性質、拆位與恆等式",
+    "slug": "bit-basics",
+    "description": "掌握逐位獨立、lowbit、x&(x-1) 與 a+b = (a^b)+2(a&b) 等恆等式，化整為零地思考位元題。",
+    "core_idea": "許多看似困難的位元題，關鍵在兩個觀念：**逐位獨立**與**恆等式**。逐位獨立指——AND/OR/XOR 在每個二進位位上互不影響，於是可以「**拆位**」：把問題分解成 30 個獨立的單比特子問題分別統計，再合併。\n\n常用恆等式與技巧包括：`x & (x-1)` 清除最低位的 1（可數 popcount、判 2 冪）、`x & -x` 取最低位的 1（lowbit）、`a + b = (a ^ b) + 2·(a & b)`（加法 = 無進位和 + 進位）、`a | b = (a ^ b) + (a & b)`、以及 `a ^ b` 在前綴和裡可逆。把這些當積木，位元題往往能從暴力 O(n²) 降到 O(n·位數)。",
+    "complexity": "拆位統計通常 O(n × B)，B 為位數（常 30 或 64）。",
+    "deep_dive": [
+      {
+        "title": "拆位統計：所有數對 AND/XOR 之和",
+        "body": "對每一位獨立統計有幾個數該位為 1，AND 的貢獻來自「兩數該位都是 1 的對數」：\n\n```cpp\n// sum over all pairs (i<j) of (a[i] & a[j])\nlong long pairAndSum(const vector<int>& a) {\n    long long total = 0;\n    for (int b = 0; b < 30; b++) {\n        long long ones = 0;\n        for (int x : a) if (x >> b & 1) ones++;\n        total += (ones * (ones - 1) / 2) << b;   // C(ones,2) pairs contribute 2^b\n    }\n    return total;\n}\n```\n\nXOR 之和則改成 `ones * (n - ones)`（一 0 一 1 的對才貢獻）。逐位獨立讓 O(n²) 變 O(n·30)。"
+      },
+      {
+        "title": "popcount 與 lowbit 慣用法",
+        "body": "常見的位元小工具：\n\n```cpp\nint popcount(unsigned x) {           // count set bits\n    int c = 0;\n    while (x) { x &= x - 1; c++; }    // drop the lowest set bit each step\n    return c;\n}\nint lowbit(int x) { return x & -x; } // isolate the lowest set bit\nbool isPow2(unsigned x) { return x && !(x & (x - 1)); }\n// enumerate all submasks of m (descending):\n// for (int s = m; s; s = (s - 1) & m) { /* use s */ }\n```\n\nC++20 可直接用 `std::popcount`、`std::countr_zero`；競賽常用 GCC 內建 `__builtin_popcount` / `__builtin_ctz`。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：位運算",
+        "url": "https://oi-wiki.org/math/bit/"
+      },
+      {
+        "label": "靈茶山艾府：位運算技巧",
+        "url": "https://leetcode.cn/circle/discuss/dHn9Vk/"
+      }
+    ],
+    "template_code": "// Per-bit decomposition: count contribution of each bit independently.\nlong long perBitSum(const vector<int>& a, int B = 30) {\n    long long total = 0;\n    for (int b = 0; b < B; b++) {\n        long long ones = 0;\n        for (int x : a) ones += (x >> b) & 1;\n        // example: XOR-sum over all pairs uses ones * (n - ones) << b\n        total += ones * ((long long)a.size() - ones) << b;\n    }\n    return total;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "加法拆成 XOR 與進位",
+        "description": "**觸發**：題目混用加法與位運算。\n**做法**：用 `a + b = (a ^ b) + 2·(a & b)`，把進位獨立出來分析或實作無加號加法。"
+      },
+      {
+        "name": "子集枚舉",
+        "description": "**觸發**：需枚舉某遮罩的所有子集。\n**做法**：`for (int s = m; s; s = (s-1) & m)`，總複雜度 O(3^n)（所有遮罩的子集數和）。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ `x & -x` 需 `x` 為有號型別且補碼；無號型別請用 `x & (~x + 1)` 觀念等價但留意型別。",
+      "⚠️ 位移 `1 << b` 當 b ≥ 31 會溢位，需要 `1LL << b`。",
+      "⚠️ 拆位上限要涵蓋資料最大值（如值到 1e9 需 30 位，到 1e18 需 60+ 位）。"
+    ],
+    "practice_problems": [
+      {
+        "title": "位元計數",
+        "source": "leetcode",
+        "source_id": "counting-bits",
+        "rating": 1100,
+        "tier": "warmup",
+        "tags": [
+          "位運算",
+          "popcount"
+        ]
+      },
+      {
+        "title": "陣列中兩個數的最大異或值",
+        "source": "leetcode",
+        "source_id": "maximum-xor-of-two-numbers-in-an-array",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "拆位",
+          "貪心"
+        ]
+      },
+      {
+        "title": "找出陣列中的 K-or 值",
+        "source": "leetcode",
+        "source_id": "find-the-k-or-of-an-array",
+        "rating": 1400,
+        "tier": "warmup",
+        "tags": [
+          "拆位",
+          "計數"
+        ]
+      },
+      {
+        "title": "Sum of XOR Functions",
+        "source": "codeforces",
+        "source_id": "1879D",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "位運算",
+          "拆位",
+          "貢獻法"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bm-bit-greedy",
+    "parent_id": "bitmask-dp",
+    "title": "試填法與最大異或（0-1 Trie）",
+    "slug": "bit-greedy",
+    "description": "從最高位往低位逐位「試填」決策，配合 0-1 Trie 在 O(B) 內查最大異或值。",
+    "core_idea": "試填法（逐位貪心）的精神是：**從最高位開始，每一位都先試「能不能填成最有利的值」，能就鎖定、不能就退而求其次**。因為高位的權重壓倒所有低位，所以高位的貪心決策是安全的。\n\n最經典的應用是「最大異或」：要讓 `x ^ y` 最大，對 `x` 的每一位都希望 `y` 在該位取相反值。把所有候選數插入 **0-1 Trie**（每個節點兩個子：0 與 1），查詢時從高位沿「相反方向」走，走不通才退回同向，即得最大異或。這套「高位優先 + Trie」框架延伸到「異或 ≥ k 的對數」「區間最大異或」等。",
+    "complexity": "插入／查詢皆 O(B)，B 為位數；整體 O(n·B)。",
+    "deep_dive": [
+      {
+        "title": "0-1 Trie 求最大異或",
+        "body": "插入每個數的二進位（高位在上），查詢時貪心走相反位：\n\n```cpp\nstruct XorTrie {\n    static const int B = 30;\n    vector<array<int,2>> ch{ {{0,0}} };       // node 0 is the root\n    void insert(int x) {\n        int u = 0;\n        for (int b = B; b >= 0; b--) {\n            int d = x >> b & 1;\n            if (!ch[u][d]) { ch.push_back({0,0}); ch[u][d] = ch.size()-1; }\n            u = ch[u][d];\n        }\n    }\n    int queryMax(int x) {                       // max (x ^ y) over inserted y\n        int u = 0, res = 0;\n        for (int b = B; b >= 0; b--) {\n            int d = x >> b & 1;\n            if (ch[u][d ^ 1]) { res |= 1 << b; u = ch[u][d ^ 1]; } // go opposite\n            else u = ch[u][d];\n        }\n        return res;\n    }\n};\n```\n\n每一位優先走「與 x 相反」的子（讓該位異或為 1），走不通才同向；高位優先保證結果最大。"
+      },
+      {
+        "title": "純試填：不建 Trie 的最大異或對",
+        "body": "若只需最大異或對，可用集合逐位試填，無需顯式 Trie：\n\n```cpp\nint findMaximumXOR(vector<int>& a) {\n    int ans = 0, mask = 0;\n    for (int b = 30; b >= 0; b--) {\n        mask |= 1 << b;                          // consider prefixes up to bit b\n        unordered_set<int> pref;\n        for (int x : a) pref.insert(x & mask);\n        int want = ans | (1 << b);               // can we make this bit a 1?\n        for (int p : pref)\n            if (pref.count(want ^ p)) { ans = want; break; } // two prefixes xor to 'want'\n    }\n    return ans;\n}\n```\n\n每位假設答案該位能是 1（`want`），若存在兩前綴異或得到 `want` 就鎖定；這是「試填 + 雜湊」的代表。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：01-Trie",
+        "url": "https://oi-wiki.org/string/trie/#维护异或极值"
+      },
+      {
+        "label": "靈茶山艾府：試填法",
+        "url": "https://leetcode.cn/circle/discuss/dHn9Vk/"
+      }
+    ],
+    "template_code": "// 0-1 Trie for maximum XOR queries\nstruct XorTrie {\n    static const int B = 30;\n    vector<array<int,2>> ch{ {{0,0}} };\n    void insert(int x) {\n        int u = 0;\n        for (int b = B; b >= 0; b--) {\n            int d = (x >> b) & 1;\n            if (!ch[u][d]) { ch.push_back({0,0}); ch[u][d] = (int)ch.size()-1; }\n            u = ch[u][d];\n        }\n    }\n    int queryMax(int x) {\n        int u = 0, res = 0;\n        for (int b = B; b >= 0; b--) {\n            int d = (x >> b) & 1;\n            if (ch[u][d ^ 1]) { res |= 1 << b; u = ch[u][d ^ 1]; }\n            else u = ch[u][d];\n        }\n        return res;\n    }\n};",
+    "supplemental_patterns": [
+      {
+        "name": "異或值 ≥ k 的對數 / 第 K 大異或",
+        "description": "**觸發**：統計滿足異或條件的數對。\n**做法**：在 0-1 Trie 節點記子樹大小，查詢時按位累計符合分支的數量。"
+      },
+      {
+        "name": "可刪除 / 帶區間限制的異或",
+        "description": "**觸發**：滑動視窗內最大異或、可離線的區間異或。\n**做法**：Trie 節點加計數支援刪除，或用可持久化 Trie 處理區間版本。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 位數上限 B 要夠大（值到 1e9 用 30，1e18 用 60），不足會丟高位資訊。",
+      "⚠️ Trie 用 vector 動態擴節點時，`push_back` 可能使引用失效，先存索引再操作。",
+      "⚠️ 試填時是「先假設能填 1，驗證可行才採用」，順序必須從高位到低位。"
+    ],
+    "practice_problems": [
+      {
+        "title": "陣列中兩個數的最大異或值",
+        "source": "leetcode",
+        "source_id": "maximum-xor-of-two-numbers-in-an-array",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "0-1 Trie",
+          "試填"
+        ]
+      },
+      {
+        "title": "與陣列中元素的最大異或值",
+        "source": "leetcode",
+        "source_id": "maximum-xor-with-an-element-from-array",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "0-1 Trie",
+          "離線"
+        ]
+      },
+      {
+        "title": "統計異或值在範圍內的數對有多少",
+        "source": "leetcode",
+        "source_id": "count-pairs-with-xor-in-a-range",
+        "rating": 2300,
+        "tier": "challenge",
+        "tags": [
+          "0-1 Trie",
+          "計數"
+        ]
+      },
+      {
+        "title": "最大異或乘積",
+        "source": "leetcode",
+        "source_id": "maximum-xor-product",
+        "rating": 2000,
+        "tier": "challenge",
+        "tags": [
+          "試填",
+          "貪心"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mt-combinatorics",
+    "parent_id": "math-number-theory",
+    "title": "組合數學（隔板法與容斥）",
+    "slug": "combinatorics",
+    "description": "預處理階乘逆元 O(1) 取組合數，再用隔板法、容斥原理數方案。",
+    "core_idea": "組合計數的兩大主力是**隔板法**與**容斥原理**。隔板法解「把 n 個相同物分給 k 人」一類問題：正整數解有 `C(n-1, k-1)` 種，非負整數解有 `C(n+k-1, k-1)` 種——想像在物件序列的縫隙插隔板。\n\n容斥原理處理「至少滿足某些條件」的去重：`|A∪B∪C| = ΣA − Σ(A∩B) + (A∩B∩C)`，常用於「不被任一質數整除」「錯位排列」「至少一個位置匹配」。兩者都需要快速取組合數：預處理階乘 `fact[]` 與其模逆元 `inv_fact[]`，使 `C(n,r)=fact[n]·inv_fact[r]·inv_fact[n-r]` 在 O(1) 完成。",
+    "complexity": "預處理 O(n)，單次組合數 O(1)；容斥依子集數而定。",
+    "deep_dive": [
+      {
+        "title": "階乘逆元預處理與 O(1) 組合數",
+        "body": "用費馬小定理求逆元，遞推 `inv_fact` 避免每次快速冪：\n\n```cpp\nconst long long MOD = 1e9 + 7;\nconst int N = 1e6 + 5;\nlong long fact[N], inv_fact[N];\nlong long power(long long a, long long b, long long m) {\n    long long r = 1; a %= m;\n    for (; b; b >>= 1, a = a * a % m) if (b & 1) r = r * a % m;\n    return r;\n}\nvoid initComb() {\n    fact[0] = 1;\n    for (int i = 1; i < N; i++) fact[i] = fact[i-1] * i % MOD;\n    inv_fact[N-1] = power(fact[N-1], MOD - 2, MOD);\n    for (int i = N-1; i > 0; i--) inv_fact[i-1] = inv_fact[i] * i % MOD;\n}\nlong long C(int n, int r) {\n    if (r < 0 || r > n) return 0;\n    return fact[n] * inv_fact[r] % MOD * inv_fact[n-r] % MOD;\n}\n```\n\n`inv_fact` 從大到小遞推（`inv_fact[i-1] = inv_fact[i]·i`）只需一次快速冪，整體 O(n)。"
+      },
+      {
+        "title": "容斥：錯位排列與「至少」轉「恰好」",
+        "body": "錯位排列（沒有元素在原位）用容斥：\n\n```cpp\n// D(n): permutations with no fixed point, via inclusion-exclusion\nlong long derangement(int n) {\n    long long res = 0;\n    for (int k = 0; k <= n; k++) {\n        long long term = C(n, k) * fact[n - k] % MOD; // fix k positions\n        res = (k & 1) ? (res - term + MOD) % MOD : (res + term) % MOD;\n    }\n    return res;                                  // = sum (-1)^k C(n,k)(n-k)!\n}\n```\n\n「至少 k 個滿足」的計數常先算「指定某 k 個都滿足、其餘任意」再容斥成「恰好」；符號隨容斥層數正負交替。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "cp-algorithms：Binomial coefficients",
+        "url": "https://cp-algorithms.com/combinatorics/binomial-coefficients.html"
+      },
+      {
+        "label": "OI-Wiki：組合數學",
+        "url": "https://oi-wiki.org/math/combinatorics/combination/"
+      }
+    ],
+    "template_code": "// O(1) binomial coefficients modulo a prime after O(n) preprocessing.\nconst long long MOD = 1e9 + 7;\nvector<long long> fact, inv_fact;\nlong long power(long long a, long long b) {\n    long long r = 1; a %= MOD;\n    for (; b; b >>= 1, a = a * a % MOD) if (b & 1) r = r * a % MOD;\n    return r;\n}\nvoid initComb(int n) {\n    fact.assign(n + 1, 1); inv_fact.assign(n + 1, 1);\n    for (int i = 1; i <= n; i++) fact[i] = fact[i-1] * i % MOD;\n    inv_fact[n] = power(fact[n], MOD - 2);\n    for (int i = n; i > 0; i--) inv_fact[i-1] = inv_fact[i] * i % MOD;\n}\nlong long C(int n, int r) {\n    if (r < 0 || r > n) return 0;\n    return fact[n] * inv_fact[r] % MOD * inv_fact[n-r] % MOD;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "隔板法（非負解）",
+        "description": "**觸發**：x1+...+xk = n 的非負整數解數。\n**做法**：等於 `C(n+k-1, k-1)`；有下界先平移、有上界用容斥扣除。"
+      },
+      {
+        "name": "路徑計數（格點）",
+        "description": "**觸發**：網格只能右／下走的路徑數。\n**做法**：`C(R+C, R)`；有障礙用容斥或路徑 DP；不越界路徑用卡塔蘭數。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 取模逆元要求 MOD 為質數（費馬小定理）；非質數模需用擴展歐幾里得或 Lucas。",
+      "⚠️ 容斥的正負號別弄反，且每一項都要取模、減法後 `+MOD` 防負。",
+      "⚠️ 預處理上限 N 要 ≥ 用到的最大 n，否則越界。"
+    ],
+    "practice_problems": [
+      {
+        "title": "不同路徑",
+        "source": "leetcode",
+        "source_id": "unique-paths",
+        "rating": 1300,
+        "tier": "warmup",
+        "tags": [
+          "組合數",
+          "路徑計數"
+        ]
+      },
+      {
+        "title": "優美的排列 II",
+        "source": "leetcode",
+        "source_id": "beautiful-arrangement-ii",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "組合",
+          "構造"
+        ]
+      },
+      {
+        "title": "統計同位異構字串數目",
+        "source": "leetcode",
+        "source_id": "count-anagrams",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "組合數",
+          "逆元"
+        ]
+      },
+      {
+        "title": "信封問題（錯位排列）",
+        "source": "luogu",
+        "source_id": "P1595",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "容斥",
+          "錯位排列"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mt-game-sg",
+    "parent_id": "math-number-theory",
+    "title": "博弈論（Nim 與 SG 函數）",
+    "slug": "game-sg",
+    "description": "用 Nim 和與 Sprague-Grundy 定理把公平組合遊戲化為 mex 與異或運算判勝負。",
+    "core_idea": "**公平組合遊戲**（雙方可選操作相同、無隨機、最後無法行動者輸）有完整理論。最基礎的 **Nim**：若干堆石子，每次從一堆取任意正數，**所有堆大小異或為 0 時先手必敗**，否則必勝。\n\n更一般的遊戲用 **SG 函數**：定義 `SG(狀態) = mex{ SG(所有後繼狀態) }`（mex 是不在集合中的最小非負整數）。`SG = 0` 即必敗態。**Sprague-Grundy 定理**指出，多個獨立子遊戲的組合，其 SG 值等於各子遊戲 SG 的**異或**——於是 Nim 只是「每堆 SG = 堆大小」的特例。會算 SG，就能把複雜遊戲拆成獨立局面分別求值再異或。",
+    "complexity": "單狀態 SG 為 O(後繼數)；打表求前 n 個 SG 為 O(n × 後繼數)。",
+    "deep_dive": [
+      {
+        "title": "Nim 與必勝判定",
+        "body": "Nim 結論只需一行異或：\n\n```cpp\nbool firstPlayerWinsNim(const vector<int>& piles) {\n    int x = 0;\n    for (int p : piles) x ^= p;     // Nim-sum\n    return x != 0;                  // nonzero -> first player wins\n}\n```\n\n直覺：異或非 0 時，先手總能取一步讓異或變 0（把對手丟進必敗態），反之先手怎麼動都會破壞全 0。"
+      },
+      {
+        "title": "SG 打表與遊戲組合",
+        "body": "對「每次可取 1..m 顆」之類的取石子遊戲求 SG：\n\n```cpp\n// SG for a game where from a pile of size i you may remove any value in moves[]\nvector<int> computeSG(int n, const vector<int>& moves) {\n    vector<int> sg(n + 1, 0);\n    for (int i = 1; i <= n; i++) {\n        set<int> reachable;\n        for (int m : moves) if (i - m >= 0) reachable.insert(sg[i - m]);\n        int mex = 0;\n        while (reachable.count(mex)) mex++;     // smallest excluded value\n        sg[i] = mex;\n    }\n    return sg;\n}\n// Combine independent games: overall losing iff XOR of their SG values == 0.\n```\n\n把局面拆成互不干擾的子遊戲，各自查 SG 後全部異或；結果為 0 即先手必敗。這就是 SG 定理的威力。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "cp-algorithms：Sprague-Grundy & Nim",
+        "url": "https://cp-algorithms.com/game_theory/sprague-grundy-nim.html"
+      },
+      {
+        "label": "OI-Wiki：公平組合遊戲",
+        "url": "https://oi-wiki.org/math/game-theory/impartial-game/"
+      }
+    ],
+    "template_code": "// Grundy (SG) values for a subtraction game; combine subgames by XOR.\nvector<int> grundy(int n, const vector<int>& moves) {\n    vector<int> sg(n + 1, 0);\n    for (int i = 1; i <= n; i++) {\n        set<int> s;\n        for (int m : moves) if (i >= m) s.insert(sg[i - m]);\n        int mex = 0; while (s.count(mex)) mex++;\n        sg[i] = mex;\n    }\n    return sg;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "巴什博弈（Bash Game）",
+        "description": "**觸發**：一堆 n 顆、每次取 1..m 顆、取走最後一顆者勝。\n**做法**：`n % (m+1) == 0` 先手必敗，否則必勝（SG = n mod (m+1)）。"
+      },
+      {
+        "name": "找規律打表",
+        "description": "**觸發**：規則複雜、SG 不易推導。\n**做法**：先 `computeSG` 打小表觀察週期或規律，再猜結論並驗證。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ SG 定理只適用「公平組合遊戲」；雙方可選操作不同（如部分棋類）不適用。",
+      "⚠️ mex 是「最小未出現的非負整數」，從 0 起算，別誤用最小值或最大值。",
+      "⚠️ 組合多個子遊戲是「SG 異或」，不是相加或取最大。"
+    ],
+    "practice_problems": [
+      {
+        "title": "Nim 遊戲",
+        "source": "leetcode",
+        "source_id": "nim-game",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "博弈",
+          "Bash"
+        ]
+      },
+      {
+        "title": "石子遊戲 IV",
+        "source": "leetcode",
+        "source_id": "stone-game-iv",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "博弈DP",
+          "必勝態"
+        ]
+      },
+      {
+        "title": "【模板】Nim 遊戲",
+        "source": "luogu",
+        "source_id": "P2197",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "Nim",
+          "SG"
+        ]
+      },
+      {
+        "title": "高手過招",
+        "source": "luogu",
+        "source_id": "P2575",
+        "rating": 2400,
+        "tier": "challenge",
+        "tags": [
+          "SG函數",
+          "遊戲組合"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "string-manacher",
+    "parent_id": "string-algorithms",
+    "title": "Manacher 最長回文",
+    "slug": "manacher",
+    "description": "插入分隔符統一奇偶，利用回文對稱性複用已知半徑，O(n) 求每個中心的最長回文。",
+    "core_idea": "暴力枚舉回文中心是 O(n²)。Manacher 的關鍵是**利用已算出的回文資訊加速**：維護當前右端最靠右的回文 `[l, r]`，對新中心 `i`，若 `i < r`，其回文半徑至少能繼承「對稱位置 `mirror = l+r-i` 的半徑」與「到右界 `r-i`」中的較小者，省去重複比較。\n\n為避免奇偶長度回文要分別處理，先把字串改寫成 `^#a#b#a#$`（字元間插 `#`，首尾加哨兵）。改寫後**所有回文長度都變成奇數**，每個位置只需求一種半徑 `p[i]`，而 `p[i]` 同時編碼了原串對應回文的長度（恰為 `p[i]`）。",
+    "complexity": "時間 O(n)，空間 O(n)。",
+    "deep_dive": [
+      {
+        "title": "改寫字串與半徑遞推",
+        "body": "插入分隔符後對每個中心求半徑，利用對稱複用：\n\n```cpp\nvector<int> manacher(const string& s) {\n    string t = \"^\";\n    for (char c : s) { t += '#'; t += c; }\n    t += \"#$\";                                  // sentinels avoid bounds checks\n    int n = t.size();\n    vector<int> p(n, 0);\n    int center = 0, right = 0;\n    for (int i = 1; i < n - 1; i++) {\n        if (i < right) p[i] = min(right - i, p[2 * center - i]); // mirror reuse\n        while (t[i + p[i] + 1] == t[i - p[i] - 1]) p[i]++;       // expand\n        if (i + p[i] > right) { center = i; right = i + p[i]; }  // extend window\n    }\n    return p;                                   // p[i] = palindrome radius in t\n}\n```\n\n`p[i]` 正好等於原串中以該位置為中心的最長回文**長度**（分隔符的巧妙之處）。"
+      },
+      {
+        "title": "還原最長回文子串",
+        "body": "找最大的 `p[i]`，由 `t` 的下標換回原串區間：\n\n```cpp\nstring longestPalindrome(const string& s) {\n    if (s.empty()) return \"\";\n    vector<int> p = manacher(s);\n    int bestLen = 0, bestCenter = 0;\n    for (int i = 1; i + 1 < (int)p.size(); i++)\n        if (p[i] > bestLen) { bestLen = p[i]; bestCenter = i; }\n    int start = (bestCenter - bestLen) / 2;     // map back to original index\n    return s.substr(start, bestLen);\n}\n```\n\n原串起點 `= (center - radius) / 2`，長度即 `radius`；推導來自插入 `#` 後每個原字元下標翻倍的關係。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "cp-algorithms：Manacher",
+        "url": "https://cp-algorithms.com/string/manacher.html"
+      },
+      {
+        "label": "OI-Wiki：Manacher",
+        "url": "https://oi-wiki.org/string/manacher/"
+      }
+    ],
+    "template_code": "// Manacher: p[i] is the palindrome radius around position i in the transformed\n// string; it equals the length of the longest palindrome centered there in s.\nvector<int> manacher(const string& s) {\n    string t = \"^\";\n    for (char c : s) { t += '#'; t += c; }\n    t += \"#$\";\n    int n = t.size();\n    vector<int> p(n, 0);\n    for (int i = 1, center = 0, right = 0; i < n - 1; i++) {\n        if (i < right) p[i] = min(right - i, p[2 * center - i]);\n        while (t[i + p[i] + 1] == t[i - p[i] - 1]) p[i]++;\n        if (i + p[i] > right) { center = i; right = i + p[i]; }\n    }\n    return p;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "回文子串計數",
+        "description": "**觸發**：數有多少回文子串。\n**做法**：每個中心貢獻 `(p[i] + 1) / 2` 個回文，累加即總數。"
+      },
+      {
+        "name": "以每個位置結尾／開頭的最長回文",
+        "description": "**觸發**：DP 需要「以 i 結尾的最長回文」。\n**做法**：由 Manacher 半徑反推每個端點的覆蓋，配合差分標記。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 哨兵 `^`、`$`、`#` 必須不出現在原字串字元集中，否則對稱判斷出錯。",
+      "⚠️ 還原原串下標的公式 `(center - radius) / 2` 依賴插入 `#` 的方式，改寫法就要改公式。",
+      "⚠️ 別忘了 `min(right - i, p[mirror])` 取較小者，超過右界的部分仍需逐步擴展驗證。"
+    ],
+    "practice_problems": [
+      {
+        "title": "最長回文子串",
+        "source": "leetcode",
+        "source_id": "longest-palindromic-substring",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "Manacher",
+          "回文"
+        ]
+      },
+      {
+        "title": "回文子串",
+        "source": "leetcode",
+        "source_id": "palindromic-substrings",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "Manacher",
+          "計數"
+        ]
+      },
+      {
+        "title": "最短回文串",
+        "source": "leetcode",
+        "source_id": "shortest-palindrome",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "回文",
+          "KMP/Manacher"
+        ]
+      },
+      {
+        "title": "計算兩個不重疊回文子串的最大乘積",
+        "source": "leetcode",
+        "source_id": "maximum-product-of-the-length-of-two-palindromic-substrings",
+        "rating": 2400,
+        "tier": "challenge",
+        "tags": [
+          "Manacher",
+          "前後綴"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "string-aho-corasick",
+    "parent_id": "string-algorithms",
+    "title": "AC 自動機（多模式匹配）",
+    "slug": "aho-corasick",
+    "description": "在 Trie 上建失敗指針，一次掃描文本即可同時匹配多個模式串。",
+    "core_idea": "AC 自動機是 **KMP 在多模式上的推廣**：把所有模式串建成 Trie，再為每個節點建「**失敗指針 fail**」——指向「當前已匹配後綴所對應的、Trie 中最長的真後綴節點」。匹配文本時沿 Trie 走，失配就跳 fail，等同 KMP 的失敗回退，但能同時涵蓋所有模式。\n\nfail 指針用 **BFS 逐層建構**：根的子節點 fail 指向根；節點 `u` 經字元 `c` 的轉移，若不存在就「繼承」`fail[u]` 的對應轉移（路徑壓縮成自動機，使每步 O(1)）。掃描時在每個到達的節點沿 fail 鏈收集所有以此結尾的模式（或預處理出現次數），即完成多模式統計。",
+    "complexity": "建構 O(Σ模式長度 × 字元集)，匹配 O(文本長度 + 命中數)。",
+    "deep_dive": [
+      {
+        "title": "建 Trie 與 BFS 失敗指針",
+        "body": "把轉移補全為自動機，使匹配時無需顯式跳 fail：\n\n```cpp\nstruct AhoCorasick {\n    static const int K = 26;\n    vector<array<int,K>> go{ {} };       // node 0 = root, transitions\n    vector<int> fail{0}, cnt{0};         // fail link, #patterns ending here\n    void insert(const string& s) {\n        int u = 0;\n        for (char c : s) {\n            int d = c - 'a';\n            if (!go[u][d]) { go.push_back({}); fail.push_back(0); cnt.push_back(0); go[u][d] = go.size()-1; }\n            u = go[u][d];\n        }\n        cnt[u]++;\n    }\n    void build() {\n        queue<int> q;\n        for (int c = 0; c < K; c++) if (go[0][c]) q.push(go[0][c]);\n        while (!q.empty()) {\n            int u = q.front(); q.pop();\n            for (int c = 0; c < K; c++) {\n                int v = go[u][c];\n                if (v) { fail[v] = go[fail[u]][c]; q.push(v); }\n                else   go[u][c] = go[fail[u]][c];   // path-compress transition\n            }\n        }\n    }\n};\n```\n\n`else go[u][c] = go[fail[u]][c]` 是關鍵：不存在的邊直接指向 fail 的轉移，匹配時每步 O(1)、無需迴圈跳 fail。"
+      },
+      {
+        "title": "掃描文本統計命中",
+        "body": "沿自動機走，累計每個前綴節點沿 fail 鏈的命中數（可用拓撲序優化）：\n\n```cpp\nlong long countMatches(AhoCorasick& ac, const string& text) {\n    long long total = 0;\n    int u = 0;\n    for (char c : text) {\n        u = ac.go[u][c - 'a'];               // O(1) transition\n        for (int v = u; v; v = ac.fail[v])   // walk fail chain (or precompute)\n            total += ac.cnt[v];\n    }\n    return total;\n}\n```\n\n若命中很密集，沿 fail 鏈逐節點累加可能退化；可按 fail 樹的拓撲序把 `cnt` 累加到 fail 父節點，查詢變 O(1)。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "cp-algorithms：Aho-Corasick",
+        "url": "https://cp-algorithms.com/string/aho_corasick.html"
+      },
+      {
+        "label": "OI-Wiki：AC 自動機",
+        "url": "https://oi-wiki.org/string/ac-automaton/"
+      }
+    ],
+    "template_code": "// Aho-Corasick: multi-pattern matching with BFS-built fail links.\nstruct AhoCorasick {\n    static const int K = 26;\n    vector<array<int,K>> go{ {} };\n    vector<int> fail{0}, cnt{0};\n    void insert(const string& s) {\n        int u = 0;\n        for (char c : s) {\n            int d = c - 'a';\n            if (!go[u][d]) { go.push_back({}); fail.push_back(0); cnt.push_back(0); go[u][d] = (int)go.size()-1; }\n            u = go[u][d];\n        }\n        cnt[u]++;\n    }\n    void build() {\n        queue<int> q;\n        for (int c = 0; c < K; c++) if (go[0][c]) q.push(go[0][c]);\n        while (!q.empty()) {\n            int u = q.front(); q.pop();\n            for (int c = 0; c < K; c++) {\n                int v = go[u][c];\n                if (v) { fail[v] = go[fail[u]][c]; q.push(v); }\n                else   go[u][c] = go[fail[u]][c];\n            }\n        }\n    }\n};",
+    "supplemental_patterns": [
+      {
+        "name": "fail 樹上 DP",
+        "description": "**觸發**：求每個模式在文本出現次數、或文本經過各節點次數。\n**做法**：fail 指針構成樹，按拓撲序把計數從子累加到父（子樹和）。"
+      },
+      {
+        "name": "AC 自動機上 DP",
+        "description": "**觸發**：構造不含／包含某些模式的字串計數。\n**做法**：以「自動機節點 × 長度」為狀態做 DP，標記含完整模式的節點為禁止／必經狀態。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 一定要先 `build()` 補全轉移再匹配，否則 `go[u][c]` 可能為 0（錯指根）。",
+      "⚠️ 命中密集時逐一沿 fail 鏈累加會退化成 O(n·深度)，需改用 fail 樹子樹和。",
+      "⚠️ 節點用 vector 動態增長時注意 `push_back` 後引用失效，操作用索引而非引用。"
+    ],
+    "practice_problems": [
+      {
+        "title": "單詞拆分 II",
+        "source": "leetcode",
+        "source_id": "word-break-ii",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "Trie",
+          "多模式"
+        ]
+      },
+      {
+        "title": "【模板】AC 自動機（簡單版）",
+        "source": "luogu",
+        "source_id": "P3808",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "AC自動機",
+          "多模式匹配"
+        ]
+      },
+      {
+        "title": "【模板】AC 自動機（二次加強版）",
+        "source": "luogu",
+        "source_id": "P5357",
+        "rating": 2300,
+        "tier": "challenge",
+        "tags": [
+          "AC自動機",
+          "fail樹"
+        ]
+      },
+      {
+        "title": "阿狸的打字機",
+        "source": "luogu",
+        "source_id": "P2414",
+        "rating": 2600,
+        "tier": "challenge",
+        "tags": [
+          "AC自動機",
+          "fail樹",
+          "樹狀陣列"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "string-subseq-automaton",
+    "parent_id": "string-algorithms",
+    "title": "子序列自動機",
+    "slug": "subsequence-automaton",
+    "description": "預處理每個位置「之後各字元首次出現位置」，O(m) 判斷子序列、加速多次查詢。",
+    "core_idea": "判斷單一字串是否為子序列用雙指針即可，但若要對**同一文本反覆查詢**很多個模式，逐次雙指針會重複掃描。子序列自動機把文本預處理成轉移表 `nxt[i][c]` = 「從位置 `i` 起，字元 `c` 第一次出現的位置」，於是匹配任何模式都變成沿轉移表跳躍，每個模式只花 `O(模式長度)`。\n\n建表從右往左遞推：`nxt[i][c]` 若 `s[i]==c` 就是 `i`，否則繼承 `nxt[i+1][c]`。這張表本質是一個 DFA，接受所有「文本的子序列」。它也是「統計本質不同子序列數」「字典序第 k 小子序列」等 DP 的基礎結構。",
+    "complexity": "建表 O(n × |Σ|)，單次子序列查詢 O(m)。",
+    "deep_dive": [
+      {
+        "title": "建轉移表並查詢子序列",
+        "body": "從右往左遞推 `nxt`，查詢時沿表跳：\n\n```cpp\nstruct SubseqAutomaton {\n    vector<array<int,26>> nxt;       // nxt[i][c] = first index >= i with char c, or n\n    int n;\n    SubseqAutomaton(const string& s) : n(s.size()) {\n        nxt.assign(n + 1, {});\n        for (int c = 0; c < 26; c++) nxt[n][c] = n; // n = \"not found\"\n        for (int i = n - 1; i >= 0; i--) {\n            nxt[i] = nxt[i + 1];\n            nxt[i][s[i] - 'a'] = i;                 // s[i] available from i itself\n        }\n    }\n    bool isSubsequence(const string& t) const {\n        int pos = 0;\n        for (char c : t) {\n            pos = nxt[pos][c - 'a'];\n            if (pos == n) return false;             // char not found afterwards\n            pos++;                                   // consume it, move past\n        }\n        return true;\n    }\n};\n```\n\n查詢時 `pos = nxt[pos][c]` 找到該字元位置後 `pos++` 往後推進；`pos == n` 代表後面再也沒有此字元，匹配失敗。"
+      },
+      {
+        "title": "計數本質不同子序列",
+        "body": "子序列自動機讓「不同子序列數」DP 一目了然：`f[i]` = 從位置 i 出發的不同子序列數，沿每個字元的首次出現轉移避免重複：\n\n```cpp\n// number of distinct non-empty subsequences (mod p), using first-occurrence\nlong long distinctSubseq(const string& s) {\n    const long long MOD = 1e9 + 7;\n    int n = s.size();\n    SubseqAutomaton sa(s);\n    vector<long long> f(n + 1, 0);\n    f[n] = 1;                                    // empty subsequence (counted once)\n    for (int i = n - 1; i >= 0; i--) {\n        f[i] = 0;\n        for (int c = 0; c < 26; c++)\n            if (sa.nxt[i][c] < n) f[i] = (f[i] + f[sa.nxt[i][c] + 1]) % MOD;\n        f[i] = (f[i] + 1) % MOD;                 // the subsequence ending choices\n    }\n    return (f[0] - 1 + MOD) % MOD;               // exclude the empty one\n}\n```\n\n只從「每個字元的首次出現」轉移，天然去重——這正是子序列自動機去除重複子序列的核心。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：子序列自動機",
+        "url": "https://oi-wiki.org/string/seq-automaton/"
+      },
+      {
+        "label": "OI-Wiki：DAG 上 DP",
+        "url": "https://oi-wiki.org/dp/dag/"
+      }
+    ],
+    "template_code": "// Subsequence automaton: nxt[i][c] = first index >= i holding char c (else n).\nstruct SubseqAutomaton {\n    vector<array<int,26>> nxt;\n    int n;\n    SubseqAutomaton(const string& s) : n(s.size()) {\n        nxt.assign(n + 1, {});\n        for (int c = 0; c < 26; c++) nxt[n][c] = n;\n        for (int i = n - 1; i >= 0; i--) {\n            nxt[i] = nxt[i + 1];\n            nxt[i][s[i] - 'a'] = i;\n        }\n    }\n    bool isSubsequence(const string& t) const {\n        int pos = 0;\n        for (char c : t) {\n            pos = nxt[pos][c - 'a'];\n            if (pos == n) return false;\n            pos++;\n        }\n        return true;\n    }\n};",
+    "supplemental_patterns": [
+      {
+        "name": "多模式子序列批次查詢",
+        "description": "**觸發**：對固定文本判斷大量字串是否為其子序列。\n**做法**：建一次自動機，每次查詢 O(m)，遠勝每次雙指針 O(n)。"
+      },
+      {
+        "name": "兩串公共子序列自動機",
+        "description": "**觸發**：在兩串上同時匹配（如最短非公共子序列）。\n**做法**：對兩串各建自動機，在兩自動機的狀態積上 BFS／DP。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 記憶體 O(n·26)，n 很大時要注意；字元集大時改用映射或可持久化結構。",
+      "⚠️ 查詢時找到字元後要 `pos++` 推進，忘了會卡在原地或重複用同一字元。",
+      "⚠️ 哨兵 `nxt[n][c] = n` 代表找不到，作為終止條件，別初始化成 0。"
+    ],
+    "practice_problems": [
+      {
+        "title": "判斷子序列",
+        "source": "leetcode",
+        "source_id": "is-subsequence",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "子序列自動機",
+          "雙指針"
+        ]
+      },
+      {
+        "title": "通過刪除字母匹配到字典裡最長單詞",
+        "source": "leetcode",
+        "source_id": "longest-word-in-dictionary-through-deleting",
+        "rating": 1400,
+        "tier": "warmup",
+        "tags": [
+          "子序列",
+          "批次查詢"
+        ]
+      },
+      {
+        "title": "不同的子序列",
+        "source": "leetcode",
+        "source_id": "distinct-subsequences",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "子序列自動機",
+          "DP"
+        ]
+      },
+      {
+        "title": "【模板】子序列自動機",
+        "source": "luogu",
+        "source_id": "P5826",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "子序列自動機",
+          "可持久化"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dp-partition",
+    "parent_id": "dp-fundamentals",
+    "title": "劃分型 DP",
+    "slug": "partition",
+    "description": "把序列切成若干連續段並最佳化某代價，狀態為「前 i 個元素分成若干段」的最優值。",
+    "core_idea": "劃分型 DP 處理「**把序列切成連續若干段**，每段有代價，求總代價最優／方案數」的問題。狀態通常是 `f[i]` =「前 `i` 個元素合法劃分的最優值」，轉移枚舉**最後一段的起點 `j`**：`f[i] = best over j of f[j] + cost(j, i)`。\n\n關鍵是把「最後一刀切在哪」當決策點。若再限制段數 `k`，狀態升為 `f[i][k]`。樸素轉移 O(n²)（或 O(n²k)），常可用前綴和 O(1) 算段代價，或用單調性、決策單調性、斜率優化進一步降階。",
+    "complexity": "基本 O(n²)（限制段數則 O(n²k)），段代價可前綴和 O(1)。",
+    "deep_dive": [
+      {
+        "title": "基本骨架：分割回文 / 最少切割",
+        "body": "`f[i]` = 前 i 字元的最少劃分次數，枚舉最後一段 `[j, i)`：\n\n```cpp\nint minCut(const string& s) {\n    int n = s.size();\n    // pal[j][i] = whether s[j..i-1] is a palindrome (precomputed)\n    vector<vector<char>> pal(n, vector<char>(n + 1, 0));\n    for (int j = n - 1; j >= 0; j--)\n        for (int i = j + 1; i <= n; i++)\n            pal[j][i] = (s[j] == s[i-1]) && (i - j < 3 || pal[j+1][i-1]);\n    vector<int> f(n + 1, INT_MAX);\n    f[0] = 0;\n    for (int i = 1; i <= n; i++)\n        for (int j = 0; j < i; j++)\n            if (pal[j][i] && f[j] != INT_MAX) f[i] = min(f[i], f[j] + 1);\n    return f[n] - 1;                         // cuts = segments - 1\n}\n```\n\n「最後一段必須合法（回文）」是轉移的前提；先預處理合法性表，轉移就乾淨。"
+      },
+      {
+        "title": "限制段數 + 前綴和算段代價",
+        "body": "把陣列分成恰 k 段使各段和平方差等代價最小，`f[i][t]` = 前 i 個分成 t 段：\n\n```cpp\n// minimize total cost splitting a[0..n) into exactly k segments\nlong long partitionK(const vector<long long>& pre, int n, int k,\n                     function<long long(int,int)> cost) { // cost(j,i)=segment [j,i)\n    const long long INF = 1e18;\n    vector<vector<long long>> f(n + 1, vector<long long>(k + 1, INF));\n    f[0][0] = 0;\n    for (int i = 1; i <= n; i++)\n        for (int t = 1; t <= min(i, k); t++)\n            for (int j = t - 1; j < i; j++)\n                if (f[j][t-1] < INF)\n                    f[i][t] = min(f[i][t], f[j][t-1] + cost(j, i)); // last seg [j,i)\n    return f[n][k];\n}\n```\n\n`cost(j, i)` 多半能用前綴和 O(1) 求得；若代價滿足四邊形不等式，可用決策單調性把這層 O(n) 降到 O(log n) 或更低。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：DP 入門與線性 DP",
+        "url": "https://oi-wiki.org/dp/basic/"
+      },
+      {
+        "label": "OI-Wiki：決策單調性優化",
+        "url": "https://oi-wiki.org/dp/opt/quadrangle/"
+      }
+    ],
+    "template_code": "// Partition DP: f[i] = best over last segment [j, i)\n// f[i] = min_{0<=j<i, valid(j,i)} f[j] + cost(j, i)\nvector<long long> partitionDP(int n, function<bool(int,int)> valid,\n                              function<long long(int,int)> cost) {\n    const long long INF = 1e18;\n    vector<long long> f(n + 1, INF);\n    f[0] = 0;\n    for (int i = 1; i <= n; i++)\n        for (int j = 0; j < i; j++)\n            if (f[j] < INF && valid(j, i))\n                f[i] = min(f[i], f[j] + cost(j, i));\n    return f;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "方案數版本",
+        "description": "**觸發**：問合法劃分的方案數而非最優值。\n**做法**：把 min/max 換成求和，`f[i] = Σ f[j]`（合法的 j），注意取模。"
+      },
+      {
+        "name": "段數限制下的最優",
+        "description": "**觸發**：恰分成 k 段。\n**做法**：加一維 `f[i][t]`；若代價凸可用 wqs 二分（帶權二分）去掉段數維。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 初始化 `f[0]=0`（空前綴）是所有劃分 DP 的起點，漏了會全錯。",
+      "⚠️ 轉移前要檢查 `f[j]` 是否可達（非 INF），否則加法溢位或污染答案。",
+      "⚠️ 「切割數 = 段數 − 1」，輸出時別把段數當成切割數。"
+    ],
+    "practice_problems": [
+      {
+        "title": "分割回文串 II",
+        "source": "leetcode",
+        "source_id": "palindrome-partitioning-ii",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "劃分DP",
+          "回文"
+        ]
+      },
+      {
+        "title": "分割陣列的最大值",
+        "source": "leetcode",
+        "source_id": "split-array-largest-sum",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "劃分DP",
+          "段數限制"
+        ]
+      },
+      {
+        "title": "分割陣列以得到最大和",
+        "source": "leetcode",
+        "source_id": "partition-array-for-maximum-sum",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "劃分DP",
+          "段代價"
+        ]
+      },
+      {
+        "title": "最大平均值和的分組",
+        "source": "leetcode",
+        "source_id": "largest-sum-of-averages",
+        "rating": 1900,
+        "tier": "challenge",
+        "tags": [
+          "劃分DP",
+          "段數限制"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dp-state-machine",
+    "parent_id": "dp-fundamentals",
+    "title": "狀態機 DP",
+    "slug": "state-machine",
+    "description": "把問題建模成有限狀態與轉移（持有／空倉、冷凍期…），逐步推進每個狀態的最優值。",
+    "core_idea": "狀態機 DP 的精髓是**先畫出狀態圖**：列出系統能處於的有限「狀態」，以及在每個時間步、各狀態之間如何轉移與獲得收益。最典型的是「買賣股票」系列——狀態如「持股 / 不持股 / 冷凍期」，每天根據買、賣、休息在狀態間轉移。\n\n一旦狀態與轉移畫清楚，DP 就是逐天（逐元素）更新每個狀態的最優值：`f[i][s] = best over previous state s' that can reach s of f[i-1][s'] + gain`。它的威力在於把「能不能做某操作、有沒有限制次數、有沒有冷卻」全部編碼進狀態，避免雜亂的條件分支。",
+    "complexity": "時間 O(n × 狀態數 × 轉移數)，空間可滾動到 O(狀態數)。",
+    "deep_dive": [
+      {
+        "title": "股票含冷凍期：三狀態機",
+        "body": "狀態：`hold`（持股）、`sold`（剛賣出，次日冷凍）、`rest`（空倉可買）：\n\n```cpp\nint maxProfitCooldown(vector<int>& p) {\n    int n = p.size();\n    if (!n) return 0;\n    int hold = -p[0], sold = 0, rest = 0;        // day 0\n    for (int i = 1; i < n; i++) {\n        int nhold = max(hold, rest - p[i]);      // keep, or buy from rest\n        int nsold = hold + p[i];                 // sell today\n        int nrest = max(rest, sold);             // stay rest, or recover from sold\n        hold = nhold; sold = nsold; rest = nrest;\n    }\n    return max(sold, rest);                       // not holding at the end\n}\n```\n\n每個轉移直接對應狀態圖的一條邊：買（rest→hold）、賣（hold→sold）、冷卻（sold→rest）、休息（自環）。"
+      },
+      {
+        "title": "限制交易次數 k：加一維",
+        "body": "把「已用幾次交易」放進狀態，`buy[j]`/`sell[j]` 表示第 j 筆交易的持股／已賣最優：\n\n```cpp\nint maxProfitK(int k, vector<int>& p) {\n    if (p.empty() || k == 0) return 0;\n    vector<int> buy(k + 1, INT_MIN), sell(k + 1, 0);\n    for (int price : p)\n        for (int j = 1; j <= k; j++) {\n            buy[j]  = max(buy[j], sell[j-1] - price); // open j-th position\n            sell[j] = max(sell[j], buy[j] + price);   // close j-th position\n        }\n    return sell[k];\n}\n```\n\n交易次數本身就是狀態的一維；內層從 1 到 k 的遞推等價於 k 台狀態機串接。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：線性 DP",
+        "url": "https://oi-wiki.org/dp/basic/"
+      },
+      {
+        "label": "靈茶山艾府：狀態機 DP",
+        "url": "https://leetcode.cn/circle/discuss/tXLS3i/"
+      }
+    ],
+    "template_code": "// State-machine DP skeleton: iterate items, update each state from reachable ones.\n// Example states for stock-with-cooldown: hold / sold / rest.\nint stateMachine(const vector<int>& p) {\n    int hold = INT_MIN, sold = 0, rest = 0;\n    for (int price : p) {\n        int nhold = max(hold, rest - price);\n        int nsold = hold + price;\n        int nrest = max(rest, sold);\n        hold = nhold; sold = nsold; rest = nrest;\n    }\n    return max(sold, rest);\n}",
+    "supplemental_patterns": [
+      {
+        "name": "含手續費 / 持有上限",
+        "description": "**觸發**：每筆交易扣手續費，或同時最多持有 m 份。\n**做法**：賣出轉移時減手續費；持有上限再加一維「目前持有量」。"
+      },
+      {
+        "name": "打家劫舍類（相鄰約束）",
+        "description": "**觸發**：選了某元素就不能選相鄰。\n**做法**：兩狀態機「選 / 不選」，`take = skip_prev + a; skip = max(take_prev, skip_prev)`。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 同一輪更新要用「上一輪」的值，先存到臨時變數再賦回，否則狀態互相污染。",
+      "⚠️ 持股初值用很小的數（如 `INT_MIN` 或 `-p[0]`）代表「尚未/不可能」，別用 0。",
+      "⚠️ 結尾答案通常是「不持股」的狀態，別錯用持股狀態。"
+    ],
+    "practice_problems": [
+      {
+        "title": "最佳買賣股票時機含冷凍期",
+        "source": "leetcode",
+        "source_id": "best-time-to-buy-and-sell-stock-with-cooldown",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "狀態機DP",
+          "股票"
+        ]
+      },
+      {
+        "title": "買賣股票的最佳時機 IV",
+        "source": "leetcode",
+        "source_id": "best-time-to-buy-and-sell-stock-iv",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "狀態機DP",
+          "交易次數"
+        ]
+      },
+      {
+        "title": "打家劫舍 II",
+        "source": "leetcode",
+        "source_id": "house-robber-ii",
+        "rating": 1500,
+        "tier": "warmup",
+        "tags": [
+          "狀態機DP",
+          "相鄰約束"
+        ]
+      },
+      {
+        "title": "最大化交替子序列和",
+        "source": "leetcode",
+        "source_id": "maximum-alternating-subsequence-sum",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "狀態機DP",
+          "子序列"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dp-digit",
+    "parent_id": "dp-fundamentals",
+    "title": "數位 DP",
+    "slug": "digit-dp",
+    "description": "逐位填數並用 tight/前導零等狀態，計數「區間內滿足某數位性質」的數的個數。",
+    "core_idea": "數位 DP 解「在 `[L, R]` 中有多少數滿足某數位條件」（如不含 4、相鄰位差 ≤ k、各位和為定值）。核心技巧有二：(1) **差分**——`count(R) - count(L-1)`，把區間問題化為前綴問題；(2) **逐位填寫 + 記憶化**——從最高位往低位決定每一位的數字。\n\n關鍵狀態是 `tight`（是否仍貼著上界：若前面都填到上界值，當前位就不能超過上界對應位）與 `lead`（是否仍是前導零）。當 `tight=false` 時，後續位可自由填 0..9，這部分結果與「已填內容」無關，可記憶化複用 `dp[pos][其他狀態]`，使複雜度降為位數 × 狀態數。",
+    "complexity": "時間 O(位數 × 狀態數 × 10)，空間 O(位數 × 狀態數)。",
+    "deep_dive": [
+      {
+        "title": "模板：逐位記憶化",
+        "body": "以「統計 [0, n] 中數位不含 4 的數」為例：\n\n```cpp\nstring digits;\nint dp[12][2];                       // dp[pos][started]; valid only when !tight\nint dfs(int pos, bool tight, bool started) {\n    if (pos == (int)digits.size()) return started ? 1 : 1; // count this number\n    if (!tight && dp[pos][started] != -1) return dp[pos][started];\n    int hi = tight ? digits[pos] - '0' : 9;\n    int res = 0;\n    for (int d = 0; d <= hi; d++) {\n        if (d == 4) continue;        // the digit constraint\n        res += dfs(pos + 1, tight && (d == hi), started || d > 0);\n    }\n    if (!tight) dp[pos][started] = res;\n    return res;\n}\nint countNoFour(int n) {\n    digits = to_string(n);\n    memset(dp, -1, sizeof dp);\n    return dfs(0, true, false);\n}\n```\n\n只有 `tight=false` 時才記憶化（此時剩餘位的答案與上界無關）；`tight=true` 的分支唯一、無需快取。"
+      },
+      {
+        "title": "帶「上一位」狀態與區間差分",
+        "body": "若條件涉及相鄰位（如相鄰數字差 ≥ 2），把上一位放進狀態，區間用差分：\n\n```cpp\n// answer for [L, R] = solve(R) - solve(L - 1)\n// dp state adds 'prev' (last placed digit) when the rule couples adjacent digits:\n//   dfs(pos, prev, tight, started)\n// transition: for d in [0..hi], require started==false || abs(d - prev) >= 2\n// memoize on dp[pos][prev] only when !tight && started.\nlong long countRange(long long L, long long R,\n                     function<long long(long long)> solve) {\n    return solve(R) - solve(L - 1);  // classic prefix differencing\n}\n```\n\n把「與相鄰位的約束」「目前數位和」「是否已出現某模式」等都放進狀態，是數位 DP 的擴展方向；前導零狀態 `started` 決定約束何時開始生效。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：數位 DP",
+        "url": "https://oi-wiki.org/dp/number/"
+      },
+      {
+        "label": "靈茶山艾府：數位 DP 通用模板",
+        "url": "https://leetcode.cn/circle/discuss/dpzj4w/"
+      }
+    ],
+    "template_code": "// Digit DP template: count numbers in [0, n] with some digit property.\n// States: pos, tight (still bounded by n), started (leading-zero handling).\n// Memoize only when !tight (then the suffix is independent of the bound).\nstring g_digits;\nlong long g_dp[20][2];\nlong long digitDFS(int pos, bool tight, bool started) {\n    if (pos == (int)g_digits.size()) return 1;          // adjust to your counting\n    if (!tight && g_dp[pos][started] != -1) return g_dp[pos][started];\n    int hi = tight ? g_digits[pos] - '0' : 9;\n    long long res = 0;\n    for (int d = 0; d <= hi; d++) {\n        // if (!allowed(d, started)) continue;          // place your constraint\n        res += digitDFS(pos + 1, tight && d == hi, started || d > 0);\n    }\n    if (!tight) g_dp[pos][started] = res;\n    return res;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "數位和 / 餘數約束",
+        "description": "**觸發**：要求各位數字和為某值、或數本身模 m 為定值。\n**做法**：狀態加「當前數位和」或「當前餘數」，轉移累加 `(cur*10 + d) % m`。"
+      },
+      {
+        "name": "統計出現次數（如數字 1 的個數）",
+        "description": "**觸發**：問 [0,n] 中數字 d 共出現幾次。\n**做法**：DP 值改記「次數」而非「個數」，轉移時把當前位是否為 d 的貢獻累加。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 只能在 `tight=false` 時讀寫記憶化陣列，否則不同上界的結果互相污染。",
+      "⚠️ 前導零要單獨用 `started` 處理，否則「000…」會被錯誤約束或重複計數。",
+      "⚠️ 區間用 `solve(R) - solve(L-1)`，`L-1` 可能需要處理 L=0 的邊界。"
+    ],
+    "practice_problems": [
+      {
+        "title": "統計各位數字都不同的數字個數",
+        "source": "leetcode",
+        "source_id": "count-numbers-with-unique-digits",
+        "rating": 1500,
+        "tier": "warmup",
+        "tags": [
+          "數位DP",
+          "計數"
+        ]
+      },
+      {
+        "title": "統計整數數目",
+        "source": "leetcode",
+        "source_id": "count-of-integers",
+        "rating": 2000,
+        "tier": "core",
+        "tags": [
+          "數位DP",
+          "數位和"
+        ]
+      },
+      {
+        "title": "至少有 1 位重複的數字",
+        "source": "leetcode",
+        "source_id": "numbers-with-repeated-digits",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "數位DP",
+          "容斥"
+        ]
+      },
+      {
+        "title": "windy 數",
+        "source": "luogu",
+        "source_id": "P2657",
+        "rating": 1900,
+        "tier": "challenge",
+        "tags": [
+          "數位DP",
+          "相鄰約束"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dp-game",
+    "parent_id": "dp-fundamentals",
+    "title": "博弈 DP（極小化極大）",
+    "slug": "game-dp",
+    "description": "雙方輪流且都最優，用 minimax 思想對狀態做 DP：我方取最大、對手取最小。",
+    "core_idea": "博弈 DP 處理「兩人輪流、都採最優策略」的問題。核心是 **minimax**：在我方回合選讓自己最有利的後繼，在對手回合則假設對手選讓我方最不利的後繼。常見以「**當前玩家相對得分差**」建模——`f[狀態]` = 當前該行動的人，在此局面下能取得的（我方分 − 對手分）最大值。\n\n以區間取數為例：`f[l][r]` = 面對 `[l, r]` 的當前玩家最大淨得分，取左端則得 `a[l] - f[l+1][r]`（減去對手在剩餘局面的淨得分），取右端同理，兩者取大。這個「減去對手最優」的遞迴正是 minimax 的精簡寫法，避免顯式區分兩個玩家的 DP 表。",
+    "complexity": "依狀態數而定，區間型 O(n²)；一般 O(狀態數 × 決策數)。",
+    "deep_dive": [
+      {
+        "title": "相對得分模型：石子博弈",
+        "body": "`f[l][r]` = 當前玩家在 `[l, r]` 的最大淨得分（自己減對手）：\n\n```cpp\nbool firstWins(vector<int>& a) {\n    int n = a.size();\n    vector<vector<int>> f(n, vector<int>(n, 0));\n    for (int i = 0; i < n; i++) f[i][i] = a[i];      // one pile: take it all\n    for (int len = 2; len <= n; len++)\n        for (int l = 0; l + len - 1 < n; l++) {\n            int r = l + len - 1;\n            f[l][r] = max(a[l] - f[l+1][r],           // take left\n                          a[r] - f[l][r-1]);          // take right\n        }\n    return f[0][n-1] >= 0;                            // first player not behind\n}\n```\n\n「`a[l] - f[l+1][r]`」中減號的意義：剩下局面換對手當「當前玩家」，其淨得分要從我方視角扣除。"
+      },
+      {
+        "title": "必勝態 / 必敗態：記憶化布林 DP",
+        "body": "當只問勝負（非分數），用布林：存在一步讓對手必敗，則當前必勝：\n\n```cpp\n// can the current player force a win taking 1..3 stones, last taker wins?\nunordered_map<int,int> memo;\nbool canWin(int n) {\n    if (n <= 0) return false;\n    auto it = memo.find(n);\n    if (it != memo.end()) return it->second;\n    bool win = false;\n    for (int take = 1; take <= 3 && take <= n; take++)\n        if (!canWin(n - take)) { win = true; break; }  // opponent loses next\n    return memo[n] = win;\n}\n```\n\n「存在一個後繼是對手必敗（`!canWin`）」⇒ 當前必勝；所有後繼皆對手必勝 ⇒ 當前必敗。這是必勝/必敗態 DP 的通用判據。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：區間 DP",
+        "url": "https://oi-wiki.org/dp/interval/"
+      },
+      {
+        "label": "OI-Wiki：博弈論",
+        "url": "https://oi-wiki.org/math/game-theory/intro/"
+      }
+    ],
+    "template_code": "// Game DP via relative score: f[state] = best (my score - opponent score)\n// for the player to move. Interval version (take from either end):\nint gameInterval(const vector<int>& a) {\n    int n = a.size();\n    vector<vector<int>> f(n, vector<int>(n, 0));\n    for (int i = 0; i < n; i++) f[i][i] = a[i];\n    for (int len = 2; len <= n; len++)\n        for (int l = 0, r; (r = l + len - 1) < n; l++)\n            f[l][r] = max(a[l] - f[l+1][r], a[r] - f[l][r-1]);\n    return f[0][n-1]; // >= 0 means the first player does not lose\n}",
+    "supplemental_patterns": [
+      {
+        "name": "必勝/必敗態（與 SG 連結）",
+        "description": "**觸發**：只問勝負、可拆成獨立子遊戲。\n**做法**：布林 DP 或 SG 函數；多個獨立遊戲用 SG 異或判定，見「博弈論（Nim 與 SG）」。"
+      },
+      {
+        "name": "帶機率的期望博弈",
+        "description": "**觸發**：行動結果含隨機。\n**做法**：把 min/max 與期望混合，輪到自己取最優、隨機節點取期望，見「概率期望 DP」。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 用「相對得分」模型時，轉移要減去對手的最優值（換手視角），不是直接相加。",
+      "⚠️ 區間 DP 必須按長度由小到大遞推，確保子區間先算好。",
+      "⚠️ 布林博弈是「存在一步使對手必敗即必勝」，別寫成「所有步…」。"
+    ],
+    "practice_problems": [
+      {
+        "title": "預測贏家",
+        "source": "leetcode",
+        "source_id": "predict-the-winner",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "博弈DP",
+          "區間"
+        ]
+      },
+      {
+        "title": "石子遊戲",
+        "source": "leetcode",
+        "source_id": "stone-game",
+        "rating": 1500,
+        "tier": "warmup",
+        "tags": [
+          "博弈DP",
+          "區間"
+        ]
+      },
+      {
+        "title": "石子遊戲 II",
+        "source": "leetcode",
+        "source_id": "stone-game-ii",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "博弈DP",
+          "狀態"
+        ]
+      },
+      {
+        "title": "貓和老鼠",
+        "source": "leetcode",
+        "source_id": "cat-and-mouse",
+        "rating": 2500,
+        "tier": "challenge",
+        "tags": [
+          "博弈DP",
+          "拓撲",
+          "BFS"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dp-prob-exp",
+    "parent_id": "dp-fundamentals",
+    "title": "概率與期望 DP",
+    "slug": "probability-expectation",
+    "description": "用期望的線性性與全期望公式建立遞推；期望 DP 常需逆向（從終態往初態）求解。",
+    "core_idea": "期望 DP 的兩大工具是**期望線性性**（`E[X+Y]=E[X]+E[Y]`，不需獨立）與**全期望公式**（按下一步的隨機結果加權：`E[狀態] = Σ p · (代價 + E[下一狀態])`）。\n\n一個關鍵直覺：**概率 DP 通常正向**（從初態推向終態累積機率），而**期望 DP 通常逆向**（從終態 `E=0` 往初態推）。因為期望往往定義成「從當前狀態到達目標還需的期望步數／代價」，終點期望為 0，再依轉移倒推。遇到狀態互相依賴成環（如骰子重擲）時，需要列方程組或用高斯消元、或代數化簡消去自環。",
+    "complexity": "無環時 O(狀態數 × 轉移數)；有環需解線性方程組。",
+    "deep_dive": [
+      {
+        "title": "逆向期望：到達終點的期望步數",
+        "body": "直線上每步以機率前進，求到終點期望步數，從終態倒推：\n\n```cpp\n// expected number of dice tosses to go from 0 to >= n, die is 1..6 uniform\ndouble expectedTosses(int n) {\n    vector<double> E(n + 7, 0.0);             // E[i] = expected tosses from i\n    for (int i = n - 1; i >= 0; i--) {\n        double e = 1.0;                       // this toss counts as 1\n        for (int f = 1; f <= 6; f++)\n            e += (i + f >= n ? 0.0 : E[i + f]) / 6.0;\n        E[i] = e;\n    }\n    return E[0];\n}\n```\n\n終態 `E[>=n]=0`，每個狀態的期望 = 1（本次操作）+ 各後繼期望的加權平均；逆向遞推自然滿足依賴順序。"
+      },
+      {
+        "title": "期望線性性：拆成各事件貢獻",
+        "body": "「抽卡集齊 n 種的期望次數」（贈券收集）用線性性直接加總各階段期望：\n\n```cpp\n// coupon collector: expected draws to collect all n distinct types\ndouble couponCollector(int n) {\n    double exp = 0.0;\n    for (int k = 1; k <= n; k++)\n        exp += (double)n / k;                 // when k-1 owned, P(new)= (n-k+1)/n\n    return exp;                               // sum of geometric expectations\n}\n```\n\n把「集滿」拆成 n 個獨立階段，「已有 k−1 種、抽到第 k 種新卡」服從幾何分布，期望 `n/(n-k+1)`；線性性允許直接相加，無需處理聯合分布。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：概率與期望 DP",
+        "url": "https://oi-wiki.org/dp/probability/"
+      },
+      {
+        "label": "OI-Wiki：高斯消元",
+        "url": "https://oi-wiki.org/math/linear-algebra/gauss/"
+      }
+    ],
+    "template_code": "// Backward expectation DP: E[goal] = 0, then E[s] = cost + sum p * E[next].\n// Example: expected steps with uniform 1..6 transitions on a line.\ndouble expectedSteps(int n) {\n    vector<double> E(n + 7, 0.0);\n    for (int i = n - 1; i >= 0; i--) {\n        double e = 1.0;\n        for (int f = 1; f <= 6; f++)\n            e += (i + f >= n ? 0.0 : E[i + f]) / 6.0;\n        E[i] = e;\n    }\n    return E[0];\n}",
+    "supplemental_patterns": [
+      {
+        "name": "有環期望（自環化簡）",
+        "description": "**觸發**：狀態可能停留原地（如失敗重來）。\n**做法**：`E = 1 + p·E + (其他)` 把含 E 的項移項求解：`E = (1 + 其他)/(1 - p)`。"
+      },
+      {
+        "name": "機率 DP（正向累積）",
+        "description": "**觸發**：求某事件發生機率分佈。\n**做法**：從初態正向推，`f[next] += f[cur]·p`，最後對目標態求和。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 期望 DP 多為逆向（終態 E=0 往回推），方向搞反會無法收斂。",
+      "⚠️ 有自環時要移項解 `E`，不能直接遞推（會用到尚未求出的自己）。",
+      "⚠️ 模意義下的期望要用乘法逆元處理除法，浮點與取模兩種實作別混用。"
+    ],
+    "practice_problems": [
+      {
+        "title": "新 21 點",
+        "source": "leetcode",
+        "source_id": "new-21-game",
+        "rating": 2000,
+        "tier": "core",
+        "tags": [
+          "概率DP",
+          "滑動視窗"
+        ]
+      },
+      {
+        "title": "分湯",
+        "source": "leetcode",
+        "source_id": "soup-servings",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "概率DP",
+          "期望"
+        ]
+      },
+      {
+        "title": "拋擲骰子等於目標和的方法數",
+        "source": "leetcode",
+        "source_id": "number-of-dice-rolls-with-target-sum",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "概率DP",
+          "計數"
+        ]
+      },
+      {
+        "title": "OSU!（期望）",
+        "source": "luogu",
+        "source_id": "P1654",
+        "rating": 2000,
+        "tier": "challenge",
+        "tags": [
+          "期望DP",
+          "線性性"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gr-exchange",
+    "parent_id": "greedy",
+    "title": "交換論證與基本貪心",
+    "slug": "exchange-argument",
+    "description": "選對排序關鍵字後一遍掃描取局部最優，並用交換論證證明全域最優。",
+    "core_idea": "基本貪心的流程幾乎都是「**先排序、再掃描**」：把元素按某關鍵字排序，使「當下最優選擇」有明確定義，然後一次掃描逐步決策。正確性靠**交換論證**保證：假設存在嚴格更優的最優解，證明能把它的某對元素交換成貪心的順序而不變差，反覆交換後即化為貪心解。\n\n難點永遠在「排序關鍵字選什麼」。錯的關鍵字會讓貪心崩潰，對的關鍵字則讓問題瞬間變簡單。經典如「按結束時間排序做區間調度」「按性價比排序做分數背包」「按 `a+b` 比較做雙屬性排序」。",
+    "complexity": "時間 O(n log n)（排序主導），掃描 O(n)，空間 O(1)。",
+    "deep_dive": [
+      {
+        "title": "雙關鍵字交換論證：等待時間最小化",
+        "body": "讓總等待時間最小，應按服務時間升序；交換論證可證相鄰逆序對交換會變差：\n\n```cpp\nlong long minTotalWait(vector<int>& t) {\n    sort(t.begin(), t.end());               // shortest job first\n    long long pre = 0, total = 0;\n    for (int x : t) { total += pre; pre += x; } // each later job waits for all earlier\n    return total;\n}\n```\n\n若存在相鄰兩人服務時間 `a > b` 卻 a 在前，交換他們會減少總等待——故最優解中必為升序，貪心正確。"
+      },
+      {
+        "title": "比較式排序：拼接最小數",
+        "body": "把數字拼成最小，需自訂比較子 `a+b < b+a`（字串拼接比較）：\n\n```cpp\nstring smallestConcat(vector<int>& nums) {\n    vector<string> s;\n    for (int x : nums) s.push_back(to_string(x));\n    sort(s.begin(), s.end(), [](const string& a, const string& b){\n        return a + b < b + a;               // a should precede b\n    });\n    string res;\n    for (auto& x : s) res += x;\n    return res;\n}\n```\n\n這個比較子滿足全序（可遞移），交換論證保證排序後拼接最優；最大數版本把 `<` 改成 `>`。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：貪心",
+        "url": "https://oi-wiki.org/basic/greedy/"
+      },
+      {
+        "label": "靈茶山艾府：貪心題單",
+        "url": "https://leetcode.cn/circle/discuss/g6KTKL/"
+      }
+    ],
+    "template_code": "// Greedy by sorting key, then one pass. Prove with an exchange argument.\nlong long greedyScan(vector<int>& a) {\n    sort(a.begin(), a.end());\n    long long pre = 0, total = 0;\n    for (int x : a) { total += pre; pre += x; }\n    return total;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "分數背包（性價比排序）",
+        "description": "**觸發**：物品可分割、求單位重量最大價值。\n**做法**：按 value/weight 降序裝，最後一件按比例裝入。"
+      },
+      {
+        "name": "相鄰交換確定比較子",
+        "description": "**觸發**：雙屬性排序不知關鍵字。\n**做法**：假設相鄰兩元素，比較兩種擺法的代價，推出比較條件。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 自訂比較子必須是嚴格弱序（可遞移），否則 `sort` 行為未定義。",
+      "⚠️ 貪心結論要能交換論證或舉反例排除，別只靠樣例通過。",
+      "⚠️ 排序關鍵字錯誤是最常見失敗點，先想清「當下最優」定義。"
+    ],
+    "practice_problems": [
+      {
+        "title": "最大數",
+        "source": "leetcode",
+        "source_id": "largest-number",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "貪心",
+          "排序",
+          "比較子"
+        ]
+      },
+      {
+        "title": "用最少數量的箭引爆氣球",
+        "source": "leetcode",
+        "source_id": "minimum-number-of-arrows-to-burst-balloons",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "貪心",
+          "區間排序"
+        ]
+      },
+      {
+        "title": "兩地調度",
+        "source": "leetcode",
+        "source_id": "two-city-scheduling",
+        "rating": 1400,
+        "tier": "warmup",
+        "tags": [
+          "貪心",
+          "差值排序"
+        ]
+      },
+      {
+        "title": "國王遊戲",
+        "source": "luogu",
+        "source_id": "P1080",
+        "rating": 2000,
+        "tier": "challenge",
+        "tags": [
+          "貪心",
+          "交換論證",
+          "高精度"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gr-regret",
+    "parent_id": "greedy",
+    "title": "反悔貪心",
+    "slug": "regret",
+    "description": "先做出選擇，之後遇到更優項時用堆「反悔」彈出最差已選，達到全域最優。",
+    "core_idea": "反悔貪心用於「先選後悔」型問題：當下做了看似最優的選擇，後來發現換掉之前的某個選擇會更好。它的精髓是用**堆**維護「已做的選擇集合」，遇到新機會時，若它比已選中最差的還好，就把最差的彈出（反悔）、換成新的。\n\n反悔有兩種風味：(1) **反悔加入**——錢不夠就先不買，但把「放棄的代價」存堆裡，之後若騰得出空間再回頭補；(2) **反悔替換**——堆裡放已選項，新項更優時替換堆頂最差者。它讓貪心擁有「修正過去決策」的能力，能解一些純排序貪心解不了的題。",
+    "complexity": "時間 O(n log n)（每個元素至多進出堆一次），空間 O(n)。",
+    "deep_dive": [
+      {
+        "title": "反悔替換：截止時間排程最大化收益",
+        "body": "每個任務有截止期與利潤，每單位時間做一個，最大化總利潤：\n\n```cpp\nint maxProfitJobs(vector<pair<int,int>>& jobs) { // {deadline, profit}\n    sort(jobs.begin(), jobs.end());          // by deadline ascending\n    priority_queue<int, vector<int>, greater<int>> done; // min-heap of chosen profits\n    for (auto& [d, p] : jobs) {\n        done.push(p);\n        if ((int)done.size() > d) done.pop(); // too many by this deadline: drop worst\n    }\n    int total = 0;\n    while (!done.empty()) { total += done.top(); done.pop(); }\n    return total;\n}\n```\n\n到截止 d 為止最多做 d 個任務；超額時彈出利潤最小者「反悔」，保證留下的永遠是利潤最大的可行子集。"
+      },
+      {
+        "title": "反悔加入：加油站最少加油次數",
+        "body": "路上經過加油站把可加油量存進堆，油不夠時回頭「加」之前最大的那桶：\n\n```cpp\nint minRefuel(int target, int startFuel, vector<vector<int>>& st) {\n    priority_queue<int> pq;                  // fuel available at passed stations\n    int fuel = startFuel, refuels = 0, i = 0, n = st.size();\n    int pos = 0;\n    while (fuel < target) {\n        while (i < n && st[i][0] <= fuel) pq.push(st[i++][1]); // reachable stations\n        if (pq.empty()) return -1;           // cannot reach target\n        fuel += pq.top(); pq.pop();          // regret: take the biggest tank now\n        refuels++;\n    }\n    return refuels;\n}\n```\n\n不預先決定在哪加油，而是「先開到沒油，再回頭挑之前能加的最大一桶」，等價於最少加油次數。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：貪心（反悔）",
+        "url": "https://oi-wiki.org/basic/greedy/"
+      },
+      {
+        "label": "靈茶山艾府：反悔貪心",
+        "url": "https://leetcode.cn/circle/discuss/g6KTKL/"
+      }
+    ],
+    "template_code": "// Regret greedy: keep chosen items in a heap; replace the worst when overfull.\nint regretSchedule(vector<pair<int,int>>& jobs) { // {deadline, profit}\n    sort(jobs.begin(), jobs.end());\n    priority_queue<int, vector<int>, greater<int>> heap; // min-heap of profits\n    for (auto& [d, p] : jobs) {\n        heap.push(p);\n        if ((int)heap.size() > d) heap.pop(); // drop the least profitable\n    }\n    int total = 0;\n    while (!heap.empty()) { total += heap.top(); heap.pop(); }\n    return total;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "反悔替換堆",
+        "description": "**觸發**：容量/期限受限的最大化收益。\n**做法**：min-heap 維護已選，超限時彈最差，留下最優可行集。"
+      },
+      {
+        "name": "反悔加入堆",
+        "description": "**觸發**：資源不足時希望回頭補救（加油、預算）。\n**做法**：max-heap 存「可動用資源」，需要時取最大者補上並計一次操作。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 堆的方向（min/max）依「要彈最差還是取最大」而定，選錯整體就反了。",
+      "⚠️ 反悔貪心仍需先排序（多按截止/位置），順序錯會破壞可行性。",
+      "⚠️ 計數時注意「彈出」代表放棄，別把彈出的也算進答案。"
+    ],
+    "practice_problems": [
+      {
+        "title": "課程表 III",
+        "source": "leetcode",
+        "source_id": "course-schedule-iii",
+        "rating": 2000,
+        "tier": "core",
+        "tags": [
+          "反悔貪心",
+          "堆"
+        ]
+      },
+      {
+        "title": "最低加油次數",
+        "source": "leetcode",
+        "source_id": "minimum-number-of-refueling-stops",
+        "rating": 2000,
+        "tier": "core",
+        "tags": [
+          "反悔貪心",
+          "堆"
+        ]
+      },
+      {
+        "title": "IPO",
+        "source": "leetcode",
+        "source_id": "ipo",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "貪心",
+          "雙堆"
+        ]
+      },
+      {
+        "title": "最大的團隊表現值",
+        "source": "leetcode",
+        "source_id": "maximum-performance-of-a-team",
+        "rating": 2000,
+        "tier": "challenge",
+        "tags": [
+          "反悔貪心",
+          "排序",
+          "堆"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gr-lexicographic",
+    "parent_id": "greedy",
+    "title": "字典序貪心",
+    "slug": "lexicographic-greedy",
+    "description": "逐位決定字元並貪心取「在可行前提下最小（或最大）」的選擇，前提是後續仍有合法解。",
+    "core_idea": "求「字典序最小／最大」的結果時，貪心地**逐位確定**：在每一位都嘗試放最小（求最小）的字元，前提是**剩下的位仍能湊出合法解**。因為高位對字典序的影響壓倒低位，所以只要保證可行，當前位取最小一定不會更差。\n\n關鍵在「可行性檢查」——放了這個字元後，剩餘資源／約束是否還能完成。常見做法是預處理後綴資訊（後面還剩多少某字元、後綴是否可達），或用單調棧在掃描中維護「能刪就刪」。寫對可行性判斷，字典序貪心就能在線性或近線性時間構造最優串。",
+    "complexity": "多為 O(n) 或 O(n·|Σ|)（每位嘗試字元集並做 O(1) 可行性判斷）。",
+    "deep_dive": [
+      {
+        "title": "逐位試最小 + 剩餘計數可行性",
+        "body": "在保留每種字元至少需求量下，貪心組出字典序最小結果（示意：從計數構造最小排列且滿足某約束）：\n\n```cpp\n// build lexicographically smallest string using counts cnt[26],\n// placing the smallest usable char whose use still leaves a feasible suffix.\nstring smallestFromCounts(int cnt[26], int total,\n                          function<bool(int,int*)> feasible) {\n    string res;\n    for (int pos = 0; pos < total; pos++) {\n        for (int c = 0; c < 26; c++) {\n            if (!cnt[c]) continue;\n            cnt[c]--;\n            if (feasible(pos + 1, cnt)) { res += char('a' + c); break; } // keep choice\n            cnt[c]++;                                  // revert, try next char\n        }\n    }\n    return res;\n}\n```\n\n每位從最小字元開始試，`feasible` 確認用掉它後剩餘仍可完成；不可行就還原計數換下一個字元。"
+      },
+      {
+        "title": "單調棧版字典序貪心",
+        "body": "「能刪就刪」型字典序最小（如移除 k 位）用單調棧最直接：\n\n```cpp\nstring smallestAfterRemoveK(const string& s, int k) {\n    string st;\n    for (char c : s) {\n        while (!st.empty() && k > 0 && st.back() > c) { st.pop_back(); k--; }\n        st.push_back(c);                               // greedily keep small prefix\n    }\n    st.resize(st.size() - k);                          // remove leftover from tail\n    return st;\n}\n```\n\n當棧頂比當前字元大且還能刪，就彈掉它讓高位變小——這正是「逐位取最小且保證可行」在棧上的實現。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：貪心",
+        "url": "https://oi-wiki.org/basic/greedy/"
+      },
+      {
+        "label": "OI-Wiki：單調棧",
+        "url": "https://oi-wiki.org/ds/monotonous-stack/"
+      }
+    ],
+    "template_code": "// Lexicographic greedy: at each position take the smallest feasible char.\nstring lexSmallest(int n, function<bool(int,char)> canPlace) {\n    string res;\n    for (int i = 0; i < n; i++)\n        for (char c = 'a'; c <= 'z'; c++)\n            if (canPlace(i, c)) { res += c; break; } // smallest that keeps a valid suffix\n    return res;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "字典序最大",
+        "description": "**觸發**：要求結果字典序最大。\n**做法**：逐位取最大可行字元；單調棧版把比較反向（棧頂較小才彈）。"
+      },
+      {
+        "name": "後綴可行性預處理",
+        "description": "**觸發**：可行性需看「後面還剩什麼」。\n**做法**：預處理後綴計數／可達表，使每位判斷 O(1)。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 取最小前必須確認「剩餘仍可完成」，否則貪心會走進死路。",
+      "⚠️ 嘗試失敗要正確還原狀態（計數、標記），否則污染後續決策。",
+      "⚠️ 單調棧版掃完別忘了處理剩餘刪除額度與前導零等收尾。"
+    ],
+    "practice_problems": [
+      {
+        "title": "移掉 K 位數字",
+        "source": "leetcode",
+        "source_id": "remove-k-digits",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "字典序貪心",
+          "單調棧"
+        ]
+      },
+      {
+        "title": "字典序最小的字串",
+        "source": "leetcode",
+        "source_id": "using-a-robot-to-print-the-lexicographically-smallest-string",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "字典序貪心",
+          "棧"
+        ]
+      },
+      {
+        "title": "找出最具競爭力的子序列",
+        "source": "leetcode",
+        "source_id": "find-the-most-competitive-subsequence",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "字典序貪心",
+          "單調棧"
+        ]
+      },
+      {
+        "title": "字典序最小的合法序列",
+        "source": "leetcode",
+        "source_id": "construct-smallest-number-from-di-string",
+        "rating": 1600,
+        "tier": "warmup",
+        "tags": [
+          "字典序貪心",
+          "構造"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gr-construct",
+    "parent_id": "greedy",
+    "title": "構造題",
+    "slug": "construction",
+    "description": "不是搜索而是「設計」出一個滿足所有約束的解，靠觀察性質、對稱與不變量直接給法則。",
+    "core_idea": "構造題要求「給出**任一個**滿足條件的解」，重點不在最優化，而在**找到一套確定的構造法則**並證明其正確。解法來自觀察：問題往往有對稱性、奇偶不變量、極端情形或可遞迴拼接的結構，抓住它就能直接寫出答案。\n\n常見策略：(1) **從小情形手算**找規律再推廣；(2) **極端/邊界構造**（全相同、交替、首尾配對）；(3) **奇偶/不變量分析**判斷可行性與構造方向；(4) **遞迴拼接**把大規模拆成已解決的小塊。構造題沒有萬用模板，但「先猜結構、再驗證、再形式化」是通用思路。",
+    "complexity": "構造本身多為 O(n) 輸出；難點在思維而非複雜度。",
+    "deep_dive": [
+      {
+        "title": "配對構造：和為定值的排列",
+        "body": "把 `1..n` 重排，使相鄰差或首尾和符合要求，常用首尾配對：\n\n```cpp\n// arrange 1..n so adjacent pairs from both ends sum constantly (zigzag pairing)\nvector<int> pairConstruct(int n) {\n    vector<int> res;\n    int lo = 1, hi = n;\n    while (lo <= hi) {\n        res.push_back(lo++);\n        if (lo <= hi) res.push_back(hi--);   // interleave small and large\n    }\n    return res;                              // 1, n, 2, n-1, ...\n}\n```\n\n「最小配最大」是構造題的常見招式，能讓和或差呈現規律；正確性由配對的對稱性直接保證。"
+      },
+      {
+        "title": "奇偶不變量：判可行再構造",
+        "body": "許多構造先用不變量判定有無解，再給法則。例如把 `n` 拆成若干不同正整數之和的最大個數：\n\n```cpp\n// max count of distinct positive integers summing to n: greedily 1,2,3,...\nvector<int> maxDistinctParts(int n) {\n    vector<int> res;\n    int cur = 1;\n    while (n - cur >= cur + 1) { res.push_back(cur); n -= cur; cur++; }\n    res.push_back(n);                        // dump the remainder into the last term\n    return res;\n}\n```\n\n貪心地用 `1,2,3,...` 累加，最後把剩餘塞進最大一項——保證互不相同且個數最多；這是「先找單調規律再構造」的典型。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：構造",
+        "url": "https://oi-wiki.org/basic/construction/"
+      },
+      {
+        "label": "OI-Wiki：貪心",
+        "url": "https://oi-wiki.org/basic/greedy/"
+      }
+    ],
+    "template_code": "// Construction has no single template; a frequent device is two-pointer pairing\n// (smallest with largest) to enforce a regular sum/difference structure.\nvector<int> pairConstruct(int n) {\n    vector<int> res;\n    int lo = 1, hi = n;\n    while (lo <= hi) {\n        res.push_back(lo++);\n        if (lo <= hi) res.push_back(hi--);\n    }\n    return res;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "從小情形找規律",
+        "description": "**觸發**：看不出構造法。\n**做法**：手算 n=1,2,3,4 的解，觀察模式再推廣並證明。"
+      },
+      {
+        "name": "不變量判可行",
+        "description": "**觸發**：可能無解。\n**做法**：找奇偶、總和、計數等不變量，先判定再構造，無解輸出 -1。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 構造題要證明法則正確，不能只在樣例上湊；務必論證所有約束都滿足。",
+      "⚠️ 別忽略「無解」情形，先用不變量判定可行性。",
+      "⚠️ 邊界小情形（n=1、n=2）常是反例來源，單獨驗證。"
+    ],
+    "practice_problems": [
+      {
+        "title": "DI 字串匹配",
+        "source": "leetcode",
+        "source_id": "di-string-match",
+        "rating": 1300,
+        "tier": "warmup",
+        "tags": [
+          "構造",
+          "雙指針"
+        ]
+      },
+      {
+        "title": "優美的排列 II",
+        "source": "leetcode",
+        "source_id": "beautiful-arrangement-ii",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "構造",
+          "規律"
+        ]
+      },
+      {
+        "title": "Matching Numbers",
+        "source": "codeforces",
+        "source_id": "1788C",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "構造",
+          "配對"
+        ]
+      },
+      {
+        "title": "Special Permutation",
+        "source": "codeforces",
+        "source_id": "1352G",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "構造",
+          "奇偶"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bt-subsets",
+    "parent_id": "backtracking",
+    "title": "子集型回溯",
+    "slug": "subsets",
+    "description": "每個元素「選或不選」，用 start 索引只往後選，DFS 枚舉所有 2^n 個子集。",
+    "core_idea": "子集型回溯枚舉「每個元素選或不選」的所有組合，共 `2^n` 個。實作有兩種等價視角：(1) **選/不選**——對第 `i` 個元素遞迴兩條分支；(2) **start 索引**——在每個節點都記錄當前路徑為一個子集，迴圈從 `start` 往後選下一個加入元素。後者天然不重不漏，因為只往後選，不會產生 `{1,2}` 與 `{2,1}` 的重複。\n\n含重複元素時，先排序，再在「同一層」跳過與前一個相同的元素（`i > start && a[i] == a[i-1]`），即可避免重複子集。",
+    "complexity": "時間 O(n · 2^n)（2^n 個子集、每個複製 O(n)），空間 O(n) 遞迴深度。",
+    "deep_dive": [
+      {
+        "title": "start 索引枚舉子集",
+        "body": "每個遞迴節點本身就是一個合法子集：\n\n```cpp\nvoid dfs(int start, vector<int>& a, vector<int>& path, vector<vector<int>>& res) {\n    res.push_back(path);                     // record current subset\n    for (int i = start; i < (int)a.size(); i++) {\n        path.push_back(a[i]);                // choose a[i]\n        dfs(i + 1, a, path, res);            // only pick from i+1 onward\n        path.pop_back();                     // undo\n    }\n}\nvector<vector<int>> subsets(vector<int>& a) {\n    vector<vector<int>> res; vector<int> path;\n    dfs(0, a, path, res);\n    return res;\n}\n```\n\n`i + 1` 確保元素按序、不回頭，自動去除排列順序造成的重複。"
+      },
+      {
+        "title": "含重複元素去重",
+        "body": "先排序，同一層跳過相同元素：\n\n```cpp\nvoid dfsUnique(int start, vector<int>& a, vector<int>& path, vector<vector<int>>& res) {\n    res.push_back(path);\n    for (int i = start; i < (int)a.size(); i++) {\n        if (i > start && a[i] == a[i-1]) continue; // skip duplicate at this level\n        path.push_back(a[i]);\n        dfsUnique(i + 1, a, path, res);\n        path.pop_back();\n    }\n}\n```\n\n`i > start`（而非 `i > 0`）是關鍵：只跳過「同一層」的重複，仍允許同一元素值在不同深度被選入。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：DFS（搜索）",
+        "url": "https://oi-wiki.org/search/dfs/"
+      },
+      {
+        "label": "靈茶山艾府：回溯（子集型）",
+        "url": "https://leetcode.cn/circle/discuss/SJFwQI/"
+      }
+    ],
+    "template_code": "// Subset enumeration via start index (no duplicates among element orderings).\nvoid subsetsDFS(int start, vector<int>& a, vector<int>& path, vector<vector<int>>& res) {\n    res.push_back(path);\n    for (int i = start; i < (int)a.size(); i++) {\n        path.push_back(a[i]);\n        subsetsDFS(i + 1, a, path, res);\n        path.pop_back();\n    }\n}",
+    "supplemental_patterns": [
+      {
+        "name": "位元枚舉子集",
+        "description": "**觸發**：n 小（≤ 20）且要遍歷所有子集。\n**做法**：`for (int m = 0; m < (1<<n); m++)` 用位元判斷第 i 位是否選。"
+      },
+      {
+        "name": "子集和 / 目標和",
+        "description": "**觸發**：找和為定值的子集。\n**做法**：回溯加可行性剪枝（剩餘和不足提前回退），或用子集和 DP。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 記錄答案要存 `path` 副本（值拷貝），存引用會被後續回溯改掉。",
+      "⚠️ 去重條件是 `i > start`（同層），寫成 `i > 0` 會漏解。",
+      "⚠️ 去重前必須先排序，否則相同元素不相鄰、跳過邏輯失效。"
+    ],
+    "practice_problems": [
+      {
+        "title": "子集",
+        "source": "leetcode",
+        "source_id": "subsets",
+        "rating": 1300,
+        "tier": "warmup",
+        "tags": [
+          "回溯",
+          "子集"
+        ]
+      },
+      {
+        "title": "子集 II",
+        "source": "leetcode",
+        "source_id": "subsets-ii",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "回溯",
+          "去重"
+        ]
+      },
+      {
+        "title": "分割等和子集",
+        "source": "leetcode",
+        "source_id": "partition-equal-subset-sum",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "子集和",
+          "DP"
+        ]
+      },
+      {
+        "title": "優美的子集數目",
+        "source": "leetcode",
+        "source_id": "the-number-of-beautiful-subsets",
+        "rating": 2000,
+        "tier": "challenge",
+        "tags": [
+          "回溯",
+          "計數"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bt-permutations",
+    "parent_id": "backtracking",
+    "title": "排列型回溯",
+    "slug": "permutations",
+    "description": "用 used[] 標記已用元素枚舉全排列，含重複時先排序再同層去重。",
+    "core_idea": "排列型回溯枚舉元素的所有排列順序，共 `n!` 個。與子集不同，排列在意順序，所以每層可從**任一未使用**的元素選起，用 `used[]` 陣列標記哪些已在當前路徑中。遞迴到路徑長度等於 `n` 即得一個排列。\n\n含重複元素時去重稍微微妙：先排序，再在同一層跳過「與前一個相同且前一個尚未使用」的元素（`a[i]==a[i-1] && !used[i-1]`）。`!used[i-1]` 表示前一個相同元素在本層已被嘗試並回溯，故當前重複者應跳過，避免生成相同排列。",
+    "complexity": "時間 O(n · n!)，空間 O(n)（路徑與 used 標記）。",
+    "deep_dive": [
+      {
+        "title": "全排列（used 標記）",
+        "body": "路徑滿即記錄，否則枚舉所有未用元素：\n\n```cpp\nvoid dfs(vector<int>& a, vector<char>& used, vector<int>& path, vector<vector<int>>& res) {\n    if (path.size() == a.size()) { res.push_back(path); return; }\n    for (int i = 0; i < (int)a.size(); i++) {\n        if (used[i]) continue;\n        used[i] = 1; path.push_back(a[i]);   // choose\n        dfs(a, used, path, res);             // recurse\n        path.pop_back(); used[i] = 0;        // undo\n    }\n}\n```\n\n每層從 0 開始掃，靠 `used` 跳過已選；這保證枚舉的是「順序」而非「組合」。"
+      },
+      {
+        "title": "含重複的去重排列",
+        "body": "先排序，再用 `!used[i-1]` 同層去重：\n\n```cpp\nvoid dfsUnique(vector<int>& a, vector<char>& used, vector<int>& path, vector<vector<int>>& res) {\n    if (path.size() == a.size()) { res.push_back(path); return; }\n    for (int i = 0; i < (int)a.size(); i++) {\n        if (used[i]) continue;\n        if (i > 0 && a[i] == a[i-1] && !used[i-1]) continue; // dup at same level\n        used[i] = 1; path.push_back(a[i]);\n        dfsUnique(a, used, path, res);\n        path.pop_back(); used[i] = 0;\n    }\n}\n```\n\n`!used[i-1]`：前一個相同元素已回溯（本層用過），故此重複者跳過；若改成 `used[i-1]` 則會錯誤去重、漏掉合法排列。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：DFS（搜索）",
+        "url": "https://oi-wiki.org/search/dfs/"
+      },
+      {
+        "label": "靈茶山艾府：回溯（排列型）",
+        "url": "https://leetcode.cn/circle/discuss/SJFwQI/"
+      }
+    ],
+    "template_code": "// Permutations with used[] marking; sort + !used[i-1] to dedup equal elements.\nvoid permuteDFS(vector<int>& a, vector<char>& used, vector<int>& path, vector<vector<int>>& res) {\n    if (path.size() == a.size()) { res.push_back(path); return; }\n    for (int i = 0; i < (int)a.size(); i++) {\n        if (used[i]) continue;\n        if (i > 0 && a[i] == a[i-1] && !used[i-1]) continue;\n        used[i] = 1; path.push_back(a[i]);\n        permuteDFS(a, used, path, res);\n        path.pop_back(); used[i] = 0;\n    }\n}",
+    "supplemental_patterns": [
+      {
+        "name": "next_permutation 迭代",
+        "description": "**觸發**：只需按字典序逐一產生排列。\n**做法**：排序後反覆呼叫 `std::next_permutation` 直到回到起點。"
+      },
+      {
+        "name": "部分排列 / 第 k 個排列",
+        "description": "**觸發**：只要長度 r 的排列或第 k 個。\n**做法**：限制遞迴深度為 r；第 k 個用康托展開按位確定，無需枚舉全部。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 去重條件是 `a[i]==a[i-1] && !used[i-1]`，把 `!used` 寫成 `used` 會漏解。",
+      "⚠️ 別忘了回溯時同時還原 `used[i]=0` 與 `path.pop_back()`。",
+      "⚠️ 結果存 `path` 副本，且去重排列前必須先排序。"
+    ],
+    "practice_problems": [
+      {
+        "title": "全排列",
+        "source": "leetcode",
+        "source_id": "permutations",
+        "rating": 1400,
+        "tier": "warmup",
+        "tags": [
+          "回溯",
+          "排列"
+        ]
+      },
+      {
+        "title": "全排列 II",
+        "source": "leetcode",
+        "source_id": "permutations-ii",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "回溯",
+          "去重"
+        ]
+      },
+      {
+        "title": "字串的排列",
+        "source": "leetcode",
+        "source_id": "permutation-in-string",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "排列",
+          "滑動視窗"
+        ]
+      },
+      {
+        "title": "第 K 個排列",
+        "source": "leetcode",
+        "source_id": "permutation-sequence",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "排列",
+          "康托展開"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bt-combinations",
+    "parent_id": "backtracking",
+    "title": "組合型回溯",
+    "slug": "combinations",
+    "description": "從 n 個中選 k 個（不計順序），用 start 索引往後選並以「剩餘不足」剪枝。",
+    "core_idea": "組合型回溯選出固定大小（或滿足某和）的子集，不計順序。骨架與子集型相同——用 `start` 索引只往後選——但多了**目標約束**（選滿 k 個、或和為 target）作為遞迴終止與剪枝條件。\n\n組合題的剪枝特別有效：(1) **數量剪枝**——若「剩餘可選元素數」不足以補滿還需的個數，直接回退（`n - i + 1 < need`）；(2) **和剪枝**——元素排序後，若當前元素已超過剩餘目標，後面更大也不必試。好的剪枝能把組合搜索的實際分支數大幅壓低。",
+    "complexity": "時間 O(C(n,k) · k)（解的數量 × 複製成本），空間 O(k)。",
+    "deep_dive": [
+      {
+        "title": "組合 + 數量剪枝",
+        "body": "選 k 個數，用「剩餘不足就回退」剪枝：\n\n```cpp\nvoid dfs(int start, int n, int k, vector<int>& path, vector<vector<int>>& res) {\n    if ((int)path.size() == k) { res.push_back(path); return; }\n    int need = k - path.size();\n    // prune: not enough numbers left in [start, n] to fill 'need'\n    for (int i = start; i <= n - need + 1; i++) {\n        path.push_back(i);\n        dfs(i + 1, n, k, path, res);\n        path.pop_back();\n    }\n}\n```\n\n迴圈上界 `n - need + 1` 就是數量剪枝：再往後起點會湊不滿 k 個，直接不進入。"
+      },
+      {
+        "title": "組合總和（可重複用 + 和剪枝）",
+        "body": "同一元素可重複選時，遞迴傳 `i`（不是 `i+1`）；排序後用和剪枝：\n\n```cpp\nvoid dfs(int start, vector<int>& a, int target, vector<int>& path, vector<vector<int>>& res) {\n    if (target == 0) { res.push_back(path); return; }\n    for (int i = start; i < (int)a.size(); i++) {\n        if (a[i] > target) break;            // sorted: no larger one can fit either\n        path.push_back(a[i]);\n        dfs(i, a, target - a[i], path, res); // i (not i+1): reuse allowed\n        path.pop_back();\n    }\n}\n```\n\n`dfs(i, ...)` 允許重複使用當前元素；先排序後 `a[i] > target` 即可 `break`，省去所有更大元素的分支。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：DFS（搜索）",
+        "url": "https://oi-wiki.org/search/dfs/"
+      },
+      {
+        "label": "靈茶山艾府：回溯（組合型）",
+        "url": "https://leetcode.cn/circle/discuss/SJFwQI/"
+      }
+    ],
+    "template_code": "// Combinations of size k from 1..n, with the \"not enough left\" pruning.\nvoid combine(int start, int n, int k, vector<int>& path, vector<vector<int>>& res) {\n    if ((int)path.size() == k) { res.push_back(path); return; }\n    int need = k - (int)path.size();\n    for (int i = start; i <= n - need + 1; i++) {\n        path.push_back(i);\n        combine(i + 1, n, k, path, res);\n        path.pop_back();\n    }\n}",
+    "supplemental_patterns": [
+      {
+        "name": "組合總和去重",
+        "description": "**觸發**：元素有重複且每個至多用一次。\n**做法**：排序後同層跳過 `i>start && a[i]==a[i-1]`，遞迴傳 `i+1`。"
+      },
+      {
+        "name": "和剪枝（排序後 break）",
+        "description": "**觸發**：固定目標和的組合。\n**做法**：升序排序，`a[i] > 剩餘目標` 即 break，砍掉所有更大分支。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 可重複用元素傳 `i`、不可重複傳 `i+1`，別混淆。",
+      "⚠️ 數量剪枝上界 `n - need + 1` 要算準，否則少解或越界。",
+      "⚠️ 和剪枝前要先排序，否則 `break` 會誤砍合法分支。"
+    ],
+    "practice_problems": [
+      {
+        "title": "組合",
+        "source": "leetcode",
+        "source_id": "combinations",
+        "rating": 1400,
+        "tier": "warmup",
+        "tags": [
+          "回溯",
+          "組合",
+          "剪枝"
+        ]
+      },
+      {
+        "title": "組合總和",
+        "source": "leetcode",
+        "source_id": "combination-sum",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "回溯",
+          "組合總和"
+        ]
+      },
+      {
+        "title": "組合總和 II",
+        "source": "leetcode",
+        "source_id": "combination-sum-ii",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "回溯",
+          "去重"
+        ]
+      },
+      {
+        "title": "組合總和 III",
+        "source": "leetcode",
+        "source_id": "combination-sum-iii",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "回溯",
+          "剪枝"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bt-pruning",
+    "parent_id": "backtracking",
+    "title": "剪枝與搜索優化",
+    "slug": "pruning",
+    "description": "用可行性、最優性、對稱性剪枝與搜索順序調整，把指數搜索壓到可接受範圍。",
+    "core_idea": "剪枝是讓回溯實際可跑的關鍵。理論上界是指數級，但好的剪枝能砍掉絕大多數無望分支。常見種類：(1) **可行性剪枝**——進入分支前判斷「這條路還可能有解嗎」，不可能就回退；(2) **最優性剪枝**——若當前部分解已不可能優於已知最優，停止深入；(3) **對稱性剪枝**——等價的分支只走一個（如固定第一步、棋盤對稱）。\n\n此外，**搜索順序**影響極大：優先嘗試「選擇最少／約束最緊」的決策點（最少剩餘值啟發式），能更快觸發剪枝。把這些結合，數獨、N 皇后、精確覆蓋等爆搜題都能在合理時間解出。",
+    "complexity": "最壞仍指數級，但剪枝後實測分支數遠小於上界。",
+    "deep_dive": [
+      {
+        "title": "N 皇后：用集合 O(1) 判合法 + 對稱剪枝",
+        "body": "用三個布林集合維護列與兩對角線的佔用，放置 O(1) 檢查：\n\n```cpp\nint total = 0, n;\nvector<char> col, diag, anti;                 // occupied columns / diagonals\nvoid place(int r) {\n    if (r == n) { total++; return; }\n    for (int c = 0; c < n; c++) {\n        int d = r + c, a = r - c + n;          // diagonal indices\n        if (col[c] || diag[d] || anti[a]) continue; // feasibility prune\n        col[c] = diag[d] = anti[a] = 1;\n        place(r + 1);\n        col[c] = diag[d] = anti[a] = 0;        // undo\n    }\n}\n```\n\n把「同列／同對角衝突」做成 O(1) 查表的可行性剪枝；還可只枚舉第一列的前半並利用左右對稱把答案 ×2。"
+      },
+      {
+        "title": "最優性剪枝 + 搜索順序",
+        "body": "在「最少分組／最小代價」型爆搜中，已超過當前最優就回退，並優先放難安置的元素：\n\n```cpp\nint best;\n// assign items to groups, prune when used groups already >= best\nvoid dfs(int idx, int groupsUsed, vector<int>& groupLoad,\n         const vector<int>& items, int cap) {\n    if (groupsUsed >= best) return;            // optimality prune\n    if (idx == (int)items.size()) { best = min(best, groupsUsed); return; }\n    for (int g = 0; g < groupsUsed; g++)\n        if (groupLoad[g] + items[idx] <= cap) {\n            groupLoad[g] += items[idx];\n            dfs(idx + 1, groupsUsed, groupLoad, items, cap);\n            groupLoad[g] -= items[idx];\n        }\n    groupLoad[groupsUsed] += items[idx];        // open a new group\n    dfs(idx + 1, groupsUsed + 1, groupLoad, items, cap);\n    groupLoad[groupsUsed] -= items[idx];\n}\n```\n\n先把 `items` 由大到小排序（搜索順序優化）能更早撐爆容量、更快觸發剪枝；`groupsUsed >= best` 是最優性剪枝。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：剪枝",
+        "url": "https://oi-wiki.org/search/pruning/"
+      },
+      {
+        "label": "OI-Wiki：DFS（搜索）",
+        "url": "https://oi-wiki.org/search/dfs/"
+      }
+    ],
+    "template_code": "// Pruned backtracking template: feasibility + optimality pruning.\nint best;\nvoid dfsPruned(int idx, int cost, /* state */ const vector<int>& a) {\n    if (cost >= best) return;                 // optimality prune\n    if (idx == (int)a.size()) { best = min(best, cost); return; }\n    // try choices ordered by \"most constrained first\" for earlier pruning\n    // for (each feasible choice) { apply; dfsPruned(idx+1, cost+delta, a); undo; }\n}",
+    "supplemental_patterns": [
+      {
+        "name": "最少剩餘值（MRV）啟發式",
+        "description": "**觸發**：數獨、約束滿足。\n**做法**：每步挑「可填選項最少」的格子先填，最快觸發矛盾與剪枝。"
+      },
+      {
+        "name": "迭代加深（IDDFS）",
+        "description": "**觸發**：深度未知但解較淺、記憶體受限。\n**做法**：限制深度逐層加深做 DFS，兼顧 BFS 的最短性與 DFS 的省記憶體。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 剪枝條件必須「保證不漏最優解」，過度剪枝會剪掉正解。",
+      "⚠️ 對稱性剪枝要正確補回倍數（如 N 皇后對稱 ×2、奇數中列特判）。",
+      "⚠️ 狀態用集合/標記加速時，回溯務必對稱還原，否則後續判斷出錯。"
+    ],
+    "practice_problems": [
+      {
+        "title": "N 皇后",
+        "source": "leetcode",
+        "source_id": "n-queens",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "回溯",
+          "剪枝",
+          "對稱"
+        ]
+      },
+      {
+        "title": "解數獨",
+        "source": "leetcode",
+        "source_id": "sudoku-solver",
+        "rating": 2000,
+        "tier": "core",
+        "tags": [
+          "回溯",
+          "MRV",
+          "剪枝"
+        ]
+      },
+      {
+        "title": "火柴拼正方形",
+        "source": "leetcode",
+        "source_id": "matchsticks-to-square",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "回溯",
+          "可行性剪枝"
+        ]
+      },
+      {
+        "title": "將陣列分成最多數目的子集（最優性剪枝）",
+        "source": "leetcode",
+        "source_id": "partition-to-k-equal-sum-subsets",
+        "rating": 2000,
+        "tier": "challenge",
+        "tags": [
+          "回溯",
+          "剪枝",
+          "狀壓"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "nf-maxflow",
+    "parent_id": "network-flow",
+    "title": "最大流（Dinic）",
+    "slug": "max-flow-dinic",
+    "description": "用分層圖 BFS 加多路增廣 DFS 求源到匯的最大流量，反向邊提供反悔能力。",
+    "core_idea": "最大流問題：在每條邊有容量上限的有向網路中，求從源 `s` 到匯 `t` 能推送的最大流量。基礎是**增廣路定理**——只要殘量網路上還存在 s 到 t 的路徑，就能沿它增加流量，直到沒有為止即達最大流。\n\n**Dinic** 是高效實作：每輪先用 **BFS 建分層圖**（`level[]` 記錄到各點的最短邊數），只允許沿層次 +1 的邊前進，避免繞圈；再用 **DFS 多路增廣**在分層圖上一次推送多條路徑，並透過**反向邊**（容量初始 0，正向流走後反向加上）讓後續增廣能「抵銷」先前的次優選擇。配合**當前弧優化** `it[]`，達到一般圖 O(V²E)、單位容量圖 O(E√V)。",
+    "complexity": "一般圖 O(V²E)，單位容量／二分圖 O(E√V)；實測通常遠快於上界。",
+    "deep_dive": [
+      {
+        "title": "分層 BFS 與當前弧 DFS",
+        "body": "Dinic 主體：BFS 分層，DFS 沿層推流並更新反向邊：\n\n```cpp\nstruct Dinic {\n    struct E { int to, rev; long long cap; };\n    vector<vector<E>> g; vector<int> level, it;\n    Dinic(int n): g(n), level(n), it(n) {}\n    void addEdge(int u, int v, long long c) {\n        g[u].push_back({v, (int)g[v].size(), c});\n        g[v].push_back({u, (int)g[u].size()-1, 0}); // reverse edge\n    }\n    bool bfs(int s, int t) {\n        fill(level.begin(), level.end(), -1);\n        queue<int> q; q.push(s); level[s] = 0;\n        while (!q.empty()) { int u = q.front(); q.pop();\n            for (auto& e : g[u]) if (e.cap > 0 && level[e.to] < 0) {\n                level[e.to] = level[u] + 1; q.push(e.to);\n            } }\n        return level[t] >= 0;\n    }\n    long long dfs(int u, int t, long long f) {\n        if (u == t) return f;\n        for (int& i = it[u]; i < (int)g[u].size(); i++) {\n            E& e = g[u][i];\n            if (e.cap > 0 && level[e.to] == level[u] + 1) {\n                long long d = dfs(e.to, t, min(f, e.cap));\n                if (d > 0) { e.cap -= d; g[e.to][e.rev].cap += d; return d; }\n            }\n        }\n        return 0;\n    }\n    long long maxflow(int s, int t) {\n        long long flow = 0;\n        while (bfs(s, t)) { fill(it.begin(), it.end(), 0);\n            while (long long f = dfs(s, t, LLONG_MAX)) flow += f; }\n        return flow;\n    }\n};\n```\n\n`for (int& i = it[u]; ...)` 用引用實現當前弧優化：已確定無用的邊不再重訪，是 Dinic 達標複雜度的核心。"
+      },
+      {
+        "title": "為何需要反向邊",
+        "body": "反向邊讓算法能「反悔」先前推送的流，避免貪心走錯路卡死：\n\n```cpp\n// When we push d units along edge u->v:\n//   e.cap     -= d;            // forward residual decreases\n//   g[v][e.rev].cap += d;      // reverse residual increases, enabling cancellation\n// A later augmenting path can traverse the reverse edge to redirect earlier flow.\n```\n\n沒有反向邊，一旦某條增廣選擇不是全域最優就無法修正，會得到偏小的流；反向邊把「重新分配」內建進殘量網路。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "cp-algorithms：Dinic",
+        "url": "https://cp-algorithms.com/graph/dinic.html"
+      },
+      {
+        "label": "OI-Wiki：最大流",
+        "url": "https://oi-wiki.org/graph/flow/max-flow/"
+      }
+    ],
+    "template_code": "// Dinic max flow (see topic page for the full struct). Usage:\n//   Dinic din(n);\n//   din.addEdge(u, v, cap);   // for each directed edge\n//   long long F = din.maxflow(s, t);\n// Each addEdge also inserts a reverse edge of capacity 0 to allow cancellation.",
+    "supplemental_patterns": [
+      {
+        "name": "多源多匯",
+        "description": "**觸發**：多個源點/匯點。\n**做法**：建超級源連所有源（容量為各源供給）、超級匯連所有匯，化為單源單匯。"
+      },
+      {
+        "name": "邊/點容量下界",
+        "description": "**觸發**：流量有下界限制（有源匯上下界流）。\n**做法**：用附加源匯把下界轉成必須流，再跑可行流/最大流。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 每條正向邊都要成對加反向邊（容量 0），否則無法反悔、結果偏小。",
+      "⚠️ 當前弧 `it[]` 每輪 BFS 後重置；DFS 用引用迭代器才有效。",
+      "⚠️ 容量總和可能很大，用 `long long`；`LLONG_MAX` 當初始增廣量。"
+    ],
+    "practice_problems": [
+      {
+        "title": "【模板】網路最大流",
+        "source": "luogu",
+        "source_id": "P3376",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "最大流",
+          "Dinic"
+        ]
+      },
+      {
+        "title": "草地排水（最大流）",
+        "source": "luogu",
+        "source_id": "P2740",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "最大流",
+          "建模"
+        ]
+      },
+      {
+        "title": "飛行員配對方案（轉匹配）",
+        "source": "luogu",
+        "source_id": "P2756",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "最大流",
+          "二分圖"
+        ]
+      },
+      {
+        "title": "最大流加強版",
+        "source": "luogu",
+        "source_id": "P4722",
+        "rating": 2400,
+        "tier": "challenge",
+        "tags": [
+          "最大流",
+          "ISAP/HLPP"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "nf-mincut",
+    "parent_id": "network-flow",
+    "title": "最小割與建模",
+    "slug": "min-cut",
+    "description": "最大流 = 最小割；用「源/匯代表二選一、割邊代表代價」把最小化問題轉成最大流。",
+    "core_idea": "**最大流最小割定理**：把節點分成含 `s` 與含 `t` 兩部分，需切斷的「從 s 側指向 t 側」邊容量總和最小者即最小割，其值等於最大流。這讓許多**最小化／二選一**問題能用最大流求解。\n\n建模套路：每個物件要在「歸 S 類」或「歸 T 類」二選一，把「選錯類的代價」設成連向源或匯的邊容量；物件之間若有「不一致就罰款」的關係，用中間邊表達。求最小割就得到最小總代價。求出最大流後，再從源在殘量網路上 BFS，可達的點屬 S 側，即還原出割的具體分劃（哪些物件歸哪類）。",
+    "complexity": "與所用最大流算法同階（Dinic O(V²E)）；還原割 O(V+E)。",
+    "deep_dive": [
+      {
+        "title": "跑完最大流後還原最小割",
+        "body": "最大流後，殘量網路上從 s 可達的點集即 S 側，跨越到不可達點的滿流邊即割邊：\n\n```cpp\n// after din.maxflow(s, t), find the S-side of the min cut\nvector<char> minCutSide(Dinic& din, int s, int n) {\n    vector<char> side(n, 0);\n    queue<int> q; q.push(s); side[s] = 1;\n    while (!q.empty()) {\n        int u = q.front(); q.pop();\n        for (auto& e : din.g[u])\n            if (e.cap > 0 && !side[e.to]) { side[e.to] = 1; q.push(e.to); }\n    }\n    return side;                              // side[v]=1 -> v on S side\n}\n```\n\n只沿「仍有殘量」的邊走；走不到的點屬 T 側。一條 `side[u]=1, side[v]=0` 的原始邊即割邊。"
+      },
+      {
+        "title": "建模範例：最大權閉合子圖",
+        "body": "選一些點，選了某點就必須選其後繼，最大化點權和——轉成最小割：\n\n```cpp\n// max-weight closure: source -> positive nodes (cap = weight),\n//   negative nodes -> sink (cap = -weight), dependency u->v as cap +INF.\n// answer = (sum of positive weights) - maxflow(s, t).\nvoid buildClosure(Dinic& din, int s, int t, const vector<int>& w,\n                  const vector<pair<int,int>>& deps) {\n    long long INF = 1e18;\n    for (int i = 0; i < (int)w.size(); i++) {\n        if (w[i] > 0) din.addEdge(s, i, w[i]);\n        else if (w[i] < 0) din.addEdge(i, t, -w[i]);\n    }\n    for (auto& [u, v] : deps) din.addEdge(u, v, INF); // must-take dependency\n}\n```\n\n依賴邊容量設 `INF` 表示「絕不切斷」，強制閉合性；答案 = 正權總和 − 最小割（= 最大流）。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：最小割",
+        "url": "https://oi-wiki.org/graph/flow/min-cut/"
+      },
+      {
+        "label": "cp-algorithms：Maximum flow（min-cut）",
+        "url": "https://cp-algorithms.com/graph/edmonds_karp.html"
+      }
+    ],
+    "template_code": "// Min-cut value = max-flow value. Recover the S-side by BFS on the residual graph.\nvector<char> recoverMinCut(Dinic& din, int s, int n) {\n    vector<char> side(n, 0);\n    queue<int> q; q.push(s); side[s] = 1;\n    while (!q.empty()) {\n        int u = q.front(); q.pop();\n        for (auto& e : din.g[u])\n            if (e.cap > 0 && !side[e.to]) { side[e.to] = 1; q.push(e.to); }\n    }\n    return side;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "最大權閉合子圖",
+        "description": "**觸發**：選了某項就必須選依賴項，最大化權值。\n**做法**：正權連源、負權連匯、依賴 INF；答案 = 正權和 − 最大流。"
+      },
+      {
+        "name": "二選一最小代價（項目分配）",
+        "description": "**觸發**：每物件歸 A 或 B 有不同成本，且相鄰不同會罰款。\n**做法**：成本連源/匯、罰款連中間邊，最小割即最小總成本。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 「不可切斷」的約束邊容量要設成足夠大的 INF，且 INF 不能讓加總溢位。",
+      "⚠️ 還原割要在「跑完最大流後」的殘量網路上做，跑之前無意義。",
+      "⚠️ 最小割對應的是最小化；若題目是最大化收益，常要用「總和 − 最小割」轉換。"
+    ],
+    "practice_problems": [
+      {
+        "title": "【模板】網路最大流（最小割值）",
+        "source": "luogu",
+        "source_id": "P3376",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "最小割",
+          "最大流"
+        ]
+      },
+      {
+        "title": "太空飛行計劃問題（最大權閉合）",
+        "source": "luogu",
+        "source_id": "P2762",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "最小割",
+          "最大權閉合子圖"
+        ]
+      },
+      {
+        "title": "文理分科（二選一最小割）",
+        "source": "luogu",
+        "source_id": "P4313",
+        "rating": 2300,
+        "tier": "challenge",
+        "tags": [
+          "最小割",
+          "建模"
+        ]
+      },
+      {
+        "title": "小M的作物",
+        "source": "luogu",
+        "source_id": "P1361",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "最小割",
+          "二選一",
+          "虛點"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "nf-bipartite-matching",
+    "parent_id": "network-flow",
+    "title": "二分圖匹配",
+    "slug": "bipartite-matching",
+    "description": "用匈牙利算法（增廣路）或最大流求最大匹配，並由König定理連結最小點覆蓋。",
+    "core_idea": "二分圖最大匹配：左右兩部、邊只連跨部，求最多的兩兩配對。兩種解法：(1) **匈牙利算法**——對每個左點找**增廣路**（交替未匹配／已匹配邊，末端是未匹配右點），找到就沿路翻轉使匹配數 +1；(2) **轉最大流**——源連左部容量 1、右部連匯容量 1、匹配邊容量 1，最大流即最大匹配。\n\n二分圖匹配是建模利器，靠幾條經典定理擴展：**König 定理**（最大匹配 = 最小點覆蓋）、**最大獨立集 = 點數 − 最大匹配**、**最小路徑覆蓋（DAG）= 點數 − 拆點後最大匹配**。認出問題的二分結構並套對定理，往往比直接想算法更重要。",
+    "complexity": "匈牙利 O(V·E)；轉 Dinic O(E√V)（單位容量），適合稠密或大圖。",
+    "deep_dive": [
+      {
+        "title": "匈牙利算法（增廣路）",
+        "body": "對每個左點 DFS 找增廣路，`matchR[r]` 記右點當前匹配的左點：\n\n```cpp\nvector<vector<int>> adj;          // adj[u] = right nodes adjacent to left u\nvector<int> matchR;               // matchR[r] = matched left node, or -1\nvector<char> vis;\nbool augment(int u) {\n    for (int v : adj[u]) {\n        if (vis[v]) continue;\n        vis[v] = 1;\n        if (matchR[v] == -1 || augment(matchR[v])) { // v free or its match can move\n            matchR[v] = u;\n            return true;\n        }\n    }\n    return false;\n}\nint hungarian(int nLeft, int nRight) {\n    matchR.assign(nRight, -1);\n    int res = 0;\n    for (int u = 0; u < nLeft; u++) {\n        vis.assign(nRight, 0);\n        if (augment(u)) res++;     // found an augmenting path for u\n    }\n    return res;\n}\n```\n\n`augment(matchR[v])` 嘗試把佔用 v 的左點「讓位」到別處，這就是增廣路翻轉；每成功一次匹配數 +1。"
+      },
+      {
+        "title": "König 定理與衍生",
+        "body": "最大匹配連結多個經典量，建模時直接套用：\n\n```cpp\n// Bipartite identities (no code needed, just the relations):\n// max matching                = M\n// minimum vertex cover        = M            (Konig's theorem)\n// maximum independent set     = V - M\n// DAG minimum path cover      = V - (max matching after node-splitting)\n```\n\n很多「最少選幾個覆蓋所有邊」「最多選互不衝突的點」「用最少鏈覆蓋 DAG」的題，本質都是先求最大匹配再套定理。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "cp-algorithms：Kuhn 二分圖匹配",
+        "url": "https://cp-algorithms.com/graph/kuhn_maximum_bipartite_matching.html"
+      },
+      {
+        "label": "OI-Wiki：二分圖最大匹配",
+        "url": "https://oi-wiki.org/graph/graph-matching/bigraph-match/"
+      }
+    ],
+    "template_code": "// Hungarian algorithm (Kuhn) for maximum bipartite matching.\nvector<vector<int>> adj;   // adj[u] = right neighbors of left node u\nvector<int> matchR;        // matchR[v] = left node matched to right v, or -1\nvector<char> vis;\nbool augment(int u) {\n    for (int v : adj[u]) {\n        if (vis[v]) continue;\n        vis[v] = 1;\n        if (matchR[v] == -1 || augment(matchR[v])) { matchR[v] = u; return true; }\n    }\n    return false;\n}\nint maxMatching(int nLeft, int nRight) {\n    matchR.assign(nRight, -1);\n    int res = 0;\n    for (int u = 0; u < nLeft; u++) { vis.assign(nRight, 0); res += augment(u); }\n    return res;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "最小路徑覆蓋（DAG）",
+        "description": "**觸發**：用最少條不相交路徑覆蓋 DAG 所有點。\n**做法**：拆點成左右部，最小路徑覆蓋 = 點數 − 二分圖最大匹配。"
+      },
+      {
+        "name": "帶權匹配（KM 算法）",
+        "description": "**觸發**：邊有權、求最大權完美匹配。\n**做法**：用 KM（匈牙利的帶權版）或最小費用最大流求解。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 每次對新左點增廣前要重置 `vis`，否則找不到增廣路。",
+      "⚠️ 套 König／獨立集等定理前，務必確認圖確實是二分圖（可染色）。",
+      "⚠️ 稠密大圖用匈牙利可能超時，改轉最大流（Dinic）較穩。"
+    ],
+    "practice_problems": [
+      {
+        "title": "【模板】二分圖最大匹配",
+        "source": "luogu",
+        "source_id": "P3386",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "二分圖",
+          "匈牙利"
+        ]
+      },
+      {
+        "title": "完美的牛欄 The Perfect Stall",
+        "source": "luogu",
+        "source_id": "P1894",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "二分圖",
+          "建模"
+        ]
+      },
+      {
+        "title": "最小路徑覆蓋問題",
+        "source": "luogu",
+        "source_id": "P2764",
+        "rating": 2000,
+        "tier": "challenge",
+        "tags": [
+          "二分圖",
+          "路徑覆蓋"
+        ]
+      },
+      {
+        "title": "[HEOI2016/TJOI2016] 遊戲",
+        "source": "luogu",
+        "source_id": "P2825",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "二分圖",
+          "建模"
         ]
       }
     ]

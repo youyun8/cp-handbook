@@ -8,7 +8,7 @@ import {
   TierBadge,
   type CompletionStatus
 } from '@/components/Badges';
-import { ProblemNotesPanel } from '@/components/ProblemNotesPanel';
+import { ProblemNotesModal } from '@/components/ProblemNotesModal';
 import { ProblemSourceLink } from '@/components/ProblemSourceLink';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -57,12 +57,17 @@ function SubtopicPracticeProblemCard({ problem }: { problem: PracticeProblem }) 
           >
             打開原題
           </ProblemSourceLink>
-          <Button type="button" variant="outline" size="sm" onClick={() => setShowNotes((value) => !value)}>
-            {showNotes ? '收起記錄' : note ? '查看記錄' : '記錄解答'}
+          <Button type="button" variant="outline" size="sm" onClick={() => setShowNotes(true)}>
+            {note ? '查看記錄' : '記錄解答'}
           </Button>
         </div>
 
-        {showNotes ? <ProblemNotesPanel key={note?.updatedAt ?? problemId} problemId={problemId} /> : null}
+        <ProblemNotesModal
+          problemId={problemId}
+          title={problem.title}
+          open={showNotes}
+          onClose={() => setShowNotes(false)}
+        />
       </CardContent>
     </Card>
   );

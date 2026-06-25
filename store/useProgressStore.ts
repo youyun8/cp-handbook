@@ -53,7 +53,10 @@ interface ProgressState {
   setFilters: (filters: Partial<PracticeFilters>) => void;
   markReviewed: (problemId: string, topicId?: string) => void;
   logSubmission: (problemId: string, status: SubmissionStatus, topicId?: string) => void;
-  saveProblemNote: (problemId: string, note: Partial<Pick<ProblemNote, 'solution' | 'thought'>>) => void;
+  saveProblemNote: (
+    problemId: string,
+    note: Partial<Pick<ProblemNote, 'solution' | 'thought' | 'language'>>
+  ) => void;
   startContest: (problemIds: string[], durationMinutes: number) => void;
   endContest: () => void;
   syncToCloud: () => Promise<{ ok: boolean; error?: string }>;
@@ -125,6 +128,7 @@ export const useProgressStore = create<ProgressState>()(
             [problemId]: {
               solution: note.solution ?? state.problemNotes[problemId]?.solution ?? '',
               thought: note.thought ?? state.problemNotes[problemId]?.thought ?? '',
+              language: note.language ?? state.problemNotes[problemId]?.language,
               updatedAt: new Date().toISOString()
             }
           }

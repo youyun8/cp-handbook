@@ -1005,5 +1005,135 @@
       "⚠️ 凸包中 `cross <= 0` 會移除共線點；若題目要求保留共線點（如統計邊界上的整點），改成 `cross < 0`。",
       "⚠️ 旋轉卡殼要在凸包（而非原始點集）上執行，且凸包點需要按逆時針（或順時針）排列。"
     ]
+  },
+  {
+    "id": "greedy",
+    "title": "貪心與思維",
+    "slug": "greedy",
+    "description": "每一步取當下最優，並用交換論證、反悔機制與排序確保全域最優。",
+    "motivation": "很多最優化問題若用 DP 會狀態爆炸，但其實存在「每步都選當下最好」即可達到全域最優的結構。難點不在程式碼，而在**證明貪心正確**——為什麼局部最優不會害死全域？這需要交換論證、擬陣或反悔等思維工具。\n\n貪心也是「思維題／構造題」的底色：先觀察性質、找到單調或可交換的不變量，再設計逐步決策。",
+    "core_idea": "貪心的正確性多半建立在**交換論證**（exchange argument）：假設存在比貪心更優的最優解，證明可以把它一步步「改造」成貪心解而不變差，於是貪心也最優。\n\n- **排序是貪心的前置**：許多貪心要先按某個關鍵字排序（截止時間、性價比、結束點），讓「當下最優」有明確定義。\n- **反悔貪心**處理「先做了某選擇，之後發現換掉更好」：用堆維護已選集合，遇到更優選項時彈出最差的已選項「反悔」。\n- 貪心失敗時往往要退回 DP；判斷依據是「局部最優能否保證全域」。",
+    "complexity": "多為 O(n log n)（排序主導）或 O(n)；反悔貪心含堆操作 O(n log n)。",
+    "deep_dive": [
+      {
+        "title": "交換論證範例：最少箭引爆氣球",
+        "body": "貪心：按右端點排序，每次射在當前最小的右端點，能覆蓋的氣球一起消去。\n```cpp\nint findMinArrows(vector<vector<int>>& a) {\n    sort(a.begin(), a.end(), [](auto& x, auto& y){ return x[1] < y[1]; });\n    int arrows = 0; long long last = LLONG_MIN;\n    for (auto& b : a)\n        if (b[0] > last) { arrows++; last = b[1]; } // need a new arrow at b[1]\n    return arrows;\n}\n```\n交換論證：把箭放在最早結束的區間右端，能覆蓋的區間至少和任何其他放法一樣多，故不會變差。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：貪心",
+        "url": "https://oi-wiki.org/basic/greedy/"
+      },
+      {
+        "label": "OI-Wiki：構造",
+        "url": "https://oi-wiki.org/basic/construction/"
+      }
+    ],
+    "template_code": "// Typical greedy skeleton: sort by a key, then make one pass taking local optima.\nint greedyBySorting(vector<vector<int>>& a) {\n    sort(a.begin(), a.end(), [](auto& x, auto& y){ return x[1] < y[1]; });\n    int taken = 0; long long last = LLONG_MIN;\n    for (auto& it : a)\n        if (it[0] > last) { taken++; last = it[1]; }\n    return taken;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "排序 + 掃描",
+        "description": "**觸發**：區間、性價比、截止時間類最優化。\n**做法**：選對排序關鍵字後一遍掃描貪心，用交換論證驗證正確性。"
+      },
+      {
+        "name": "反悔堆",
+        "description": "**觸發**：先選後悔型（任務調度、最大化收益）。\n**做法**：用堆維護已選，遇更優項彈出最差已選來「反悔」。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 貪心一定要能證明（交換論證／反例排除），憑直覺寫很容易在邊界 case 出錯。",
+      "⚠️ 排序關鍵字選錯會讓整個貪心失效，務必先想清楚「當下最優」的定義。",
+      "⚠️ 若局部最優無法保證全域，應改用 DP 而非硬湊貪心。"
+    ],
+    "children": []
+  },
+  {
+    "id": "backtracking",
+    "title": "回溯",
+    "slug": "backtracking",
+    "description": "系統地枚舉子集／排列／組合，沿 DFS 做選擇、遞迴、撤銷，並用剪枝砍掉無望分支。",
+    "motivation": "當問題要「列出所有可行解」或「在指數空間中搜索」（子集、排列、組合、棋盤放置、劃分），回溯是基本武器。它的本質是有系統的 DFS：在每個決策點嘗試所有選項，遞迴深入，回來時**撤銷選擇**還原狀態。\n\n難點在於不重不漏地枚舉（去重）與用剪枝控制指數爆炸，使實際搜索遠小於理論上界。",
+    "core_idea": "回溯 = **選擇 → 遞迴 → 撤銷**（make / recurse / undo）。把「目前已做的選擇」維護在一個路徑陣列中，遞迴到底（滿足條件）就記錄答案，否則枚舉下一個決策。\n\n- **子集／組合**用「起始索引 `start`」避免重複（只往後選）；**排列**用 `used[]` 標記已用元素。\n- **含重複元素去重**：先排序，同層跳過與前一個相同且未被使用的元素（`i>start && a[i]==a[i-1]`）。\n- **剪枝**是回溯的靈魂：可行性剪枝（提前判定無解）、最優性剪枝（已超過當前最優就回退）、對稱性剪枝，能把指數搜索壓到可接受。",
+    "complexity": "與解空間同階：子集 O(2^n)、排列 O(n!)，剪枝後實際遠小於上界。",
+    "deep_dive": [
+      {
+        "title": "子集與組合（start 防重）",
+        "body": "只往後選，天然不重不漏：\n```cpp\nvoid subsets(vector<int>& a, int start, vector<int>& path, vector<vector<int>>& res) {\n    res.push_back(path);                    // every node is a valid subset\n    for (int i = start; i < (int)a.size(); i++) {\n        path.push_back(a[i]);               // choose\n        subsets(a, i + 1, path, res);       // recurse with next start\n        path.pop_back();                    // undo\n    }\n}\n```\n`i + 1` 保證每個元素最多選一次且按序，避免 {1,2} 與 {2,1} 重複。"
+      },
+      {
+        "title": "排列與含重複去重",
+        "body": "排列用 `used[]`；有重複元素時先排序再同層跳過：\n```cpp\nvoid permuteUnique(vector<int>& a, vector<char>& used,\n                   vector<int>& path, vector<vector<int>>& res) {\n    if (path.size() == a.size()) { res.push_back(path); return; }\n    for (int i = 0; i < (int)a.size(); i++) {\n        if (used[i]) continue;\n        if (i > 0 && a[i] == a[i-1] && !used[i-1]) continue; // skip dup at same level\n        used[i] = 1; path.push_back(a[i]);\n        permuteUnique(a, used, path, res);\n        path.pop_back(); used[i] = 0;\n    }\n}\n```\n去重關鍵 `!used[i-1]`：同一層若前一個相同元素尚未使用，代表它本層已被嘗試過，跳過避免重複排列。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：DFS（搜索）",
+        "url": "https://oi-wiki.org/search/dfs/"
+      },
+      {
+        "label": "OI-Wiki：剪枝",
+        "url": "https://oi-wiki.org/search/pruning/"
+      }
+    ],
+    "template_code": "// Backtracking skeleton: choose -> recurse -> undo.\nvoid backtrack(int start, vector<int>& path, vector<vector<int>>& res, const vector<int>& a) {\n    res.push_back(path);                 // record (problem-specific)\n    for (int i = start; i < (int)a.size(); i++) {\n        path.push_back(a[i]);            // choose\n        backtrack(i + 1, path, res, a);  // recurse\n        path.pop_back();                 // undo\n    }\n}",
+    "supplemental_patterns": [
+      {
+        "name": "組合去重",
+        "description": "**觸發**：含重複元素的子集/組合。\n**做法**：先排序，同層跳過 `i>start && a[i]==a[i-1]`。"
+      },
+      {
+        "name": "可行性剪枝",
+        "description": "**觸發**：分支大量無望（如剩餘和不足、放置衝突）。\n**做法**：進入分支前先判可行，提早 return 砍枝。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 「撤銷選擇」必須與「做選擇」對稱，漏掉 pop_back／復位會污染後續分支。",
+      "⚠️ 去重前要先排序，且判斷條件 `!used[i-1]`（同層）與 `used[i-1]`（同路徑）意義不同，別寫反。",
+      "⚠️ 記錄答案時要存路徑「副本」（值拷貝），存引用會在回溯後被改掉。"
+    ],
+    "children": []
+  },
+  {
+    "id": "network-flow",
+    "title": "網路流",
+    "slug": "network-flow",
+    "description": "在容量網路上求最大流與最小割，並用其建模匹配、覆蓋、調度等問題。",
+    "motivation": "網路流是把「資源在容量限制下從源點流向匯點」抽象出來的強大模型。許多看似不相關的問題——二分圖匹配、最小路徑覆蓋、專案選擇、區間調度——都能歸約成最大流／最小割求解。\n\n難點不在背模板，而在**建模**：如何設計點、邊與容量，使原問題的最優解對應到流／割的值。",
+    "core_idea": "核心定理是 **最大流 = 最小割**（max-flow min-cut）：源到匯能推送的最大流量，等於把圖分成含源、含匯兩側所需切斷的最小容量。求最大流的主流算法是 **Dinic**：反覆用 BFS 建分層圖（只保留層次 +1 的邊），再用 DFS 多路增廣並加入反向邊（允許「反悔」已推送的流），直到無增廣路。\n\n建模常見套路：二分圖匹配 = 源連左部、右部連匯、匹配邊容量 1，最大流即最大匹配；最小割可表達「二選一且有衝突代價」的最小化。掌握「拆點、容量設計、反向邊」三件事，網路流就從模板變成建模工具。",
+    "complexity": "Dinic 一般圖 O(V²E)，單位容量圖 O(E√V)；二分圖匹配 O(E√V)。",
+    "deep_dive": [
+      {
+        "title": "Dinic 最大流",
+        "body": "分層 BFS + 多路增廣 DFS，反向邊容量初始為 0：\n```cpp\nstruct Dinic {\n    struct E { int to, rev; long long cap; };\n    vector<vector<E>> g; vector<int> level, it; int n;\n    Dinic(int n): g(n), level(n), it(n), n(n) {}\n    void addEdge(int u, int v, long long c) {\n        g[u].push_back({v, (int)g[v].size(), c});\n        g[v].push_back({u, (int)g[u].size()-1, 0}); // reverse edge, cap 0\n    }\n    bool bfs(int s, int t) {\n        fill(level.begin(), level.end(), -1);\n        queue<int> q; q.push(s); level[s] = 0;\n        while (!q.empty()) {\n            int u = q.front(); q.pop();\n            for (auto& e : g[u]) if (e.cap > 0 && level[e.to] < 0) {\n                level[e.to] = level[u] + 1; q.push(e.to);\n            }\n        }\n        return level[t] >= 0;\n    }\n    long long dfs(int u, int t, long long f) {\n        if (u == t) return f;\n        for (int& i = it[u]; i < (int)g[u].size(); i++) {\n            E& e = g[u][i];\n            if (e.cap > 0 && level[e.to] == level[u] + 1) {\n                long long d = dfs(e.to, t, min(f, e.cap));\n                if (d > 0) { e.cap -= d; g[e.to][e.rev].cap += d; return d; }\n            }\n        }\n        return 0;\n    }\n    long long maxflow(int s, int t) {\n        long long flow = 0;\n        while (bfs(s, t)) {\n            fill(it.begin(), it.end(), 0);\n            while (long long f = dfs(s, t, LLONG_MAX)) flow += f;\n        }\n        return flow;\n    }\n};\n```\n`it[u]` 是當前弧優化，避免每次 DFS 重掃已用盡的邊，是 Dinic 達到理論複雜度的關鍵。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "cp-algorithms：Dinic",
+        "url": "https://cp-algorithms.com/graph/dinic.html"
+      },
+      {
+        "label": "OI-Wiki：最大流",
+        "url": "https://oi-wiki.org/graph/flow/max-flow/"
+      }
+    ],
+    "template_code": "// Dinic max flow with reverse edges and current-arc optimization.\nstruct Dinic {\n    struct E { int to, rev; long long cap; };\n    vector<vector<E>> g; vector<int> level, it; int n;\n    Dinic(int n): g(n), level(n), it(n), n(n) {}\n    void addEdge(int u, int v, long long c) {\n        g[u].push_back({v, (int)g[v].size(), c});\n        g[v].push_back({u, (int)g[u].size()-1, 0});\n    }\n    bool bfs(int s, int t) {\n        fill(level.begin(), level.end(), -1);\n        queue<int> q; q.push(s); level[s] = 0;\n        while (!q.empty()) {\n            int u = q.front(); q.pop();\n            for (auto& e : g[u]) if (e.cap > 0 && level[e.to] < 0) {\n                level[e.to] = level[u] + 1; q.push(e.to);\n            }\n        }\n        return level[t] >= 0;\n    }\n    long long dfs(int u, int t, long long f) {\n        if (u == t) return f;\n        for (int& i = it[u]; i < (int)g[u].size(); i++) {\n            E& e = g[u][i];\n            if (e.cap > 0 && level[e.to] == level[u] + 1) {\n                long long d = dfs(e.to, t, min(f, e.cap));\n                if (d > 0) { e.cap -= d; g[e.to][e.rev].cap += d; return d; }\n            }\n        }\n        return 0;\n    }\n    long long maxflow(int s, int t) {\n        long long flow = 0;\n        while (bfs(s, t)) {\n            fill(it.begin(), it.end(), 0);\n            while (long long f = dfs(s, t, LLONG_MAX)) flow += f;\n        }\n        return flow;\n    }\n};",
+    "supplemental_patterns": [
+      {
+        "name": "拆點（點容量）",
+        "description": "**觸發**：限制經過某點的流量／次數。\n**做法**：把點拆成入點→出點，中間邊容量為點容量。"
+      },
+      {
+        "name": "最小割建模",
+        "description": "**觸發**：二選一且有衝突代價的最小化。\n**做法**：源/匯代表兩種選擇，割邊代價對應違背成本，最小割 = 最小代價。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 每條正向邊都要配一條容量 0 的反向邊，反悔機制靠它，漏了結果會偏小。",
+      "⚠️ 當前弧優化 `it[]` 每輪 BFS 後要重置為 0，否則漏增廣。",
+      "⚠️ 容量與流量可能很大，用 `long long`；建模時別把「最大化」誤接成最小割方向。"
+    ],
+    "children": []
   }
 ]
