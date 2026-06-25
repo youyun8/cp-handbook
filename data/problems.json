@@ -24,7 +24,7 @@
   },
   {
     "id": "bs-002",
-    "title": "旋轉排序陣列中的搜尋",
+    "title": "搜尋旋轉排序陣列",
     "source": "leetcode",
     "source_id": "search-in-rotated-sorted-array",
     "rating": 1800,
@@ -47,7 +47,7 @@
   },
   {
     "id": "bs-003",
-    "title": "漢堡配方最大產量",
+    "title": "Hamburgers",
     "source": "codeforces",
     "source_id": "371C",
     "rating": 1800,
@@ -70,7 +70,7 @@
   },
   {
     "id": "bs-004",
-    "title": "跳石頭的最短距離最大化",
+    "title": "[NOIP 2015 提高組] 跳石頭",
     "source": "luogu",
     "source_id": "P2678",
     "rating": 2100,
@@ -93,7 +93,7 @@
   },
   {
     "id": "bs-005",
-    "title": "乘法表中第 K 小的數",
+    "title": "乘法表中第k小的數",
     "source": "leetcode",
     "source_id": "kth-smallest-number-in-multiplication-table",
     "rating": 2200,
@@ -117,7 +117,7 @@
   },
   {
     "id": "graph-001",
-    "title": "腐爛橘子",
+    "title": "腐爛的橘子",
     "source": "leetcode",
     "source_id": "rotting-oranges",
     "rating": 1300,
@@ -163,7 +163,7 @@
   },
   {
     "id": "graph-003",
-    "title": "修改網格方向的最小代價",
+    "title": "使網格圖至少有一條有效路徑的最小代價",
     "source": "leetcode",
     "source_id": "minimum-cost-to-make-at-least-one-valid-path-in-a-grid",
     "rating": 2000,
@@ -186,7 +186,7 @@
   },
   {
     "id": "graph-004",
-    "title": "課程先修關係查詢",
+    "title": "課程表 IV",
     "source": "leetcode",
     "source_id": "course-schedule-iv",
     "rating": 2100,
@@ -209,7 +209,7 @@
   },
   {
     "id": "graph-005",
-    "title": "取得所有鑰匙的最短路徑",
+    "title": "獲取所有鑰匙的最短路徑",
     "source": "leetcode",
     "source_id": "shortest-path-to-get-all-keys",
     "rating": 2200,
@@ -256,7 +256,7 @@
   },
   {
     "id": "int-002",
-    "title": "會議室最少數量",
+    "title": "會議室 II",
     "source": "leetcode",
     "source_id": "meeting-rooms-ii",
     "rating": 1800,
@@ -325,7 +325,7 @@
   },
   {
     "id": "int-005",
-    "title": "員工共同空閒時間",
+    "title": "員工空閒時間",
     "source": "leetcode",
     "source_id": "employee-free-time",
     "rating": 2200,
@@ -395,7 +395,7 @@
   },
   {
     "id": "heap-003",
-    "title": "覆蓋 K 個列表的最小區間",
+    "title": "最小區間",
     "source": "leetcode",
     "source_id": "smallest-range-covering-elements-from-k-lists",
     "rating": 2000,
@@ -441,7 +441,7 @@
   },
   {
     "id": "heap-005",
-    "title": "有序矩陣第 K 小和",
+    "title": "有序矩陣中的第 k 個最小陣列和",
     "source": "leetcode",
     "source_id": "find-the-kth-smallest-sum-of-a-matrix-with-sorted-rows",
     "rating": 2200,
@@ -465,7 +465,7 @@
   },
   {
     "id": "dp-001",
-    "title": "採藥",
+    "title": "[NOIP 2005 普及組] 採藥",
     "source": "luogu",
     "source_id": "P1048",
     "rating": 1300,
@@ -557,7 +557,7 @@
   },
   {
     "id": "dp-005",
-    "title": "奇怪印表機",
+    "title": "奇怪的印表機",
     "source": "leetcode",
     "source_id": "strange-printer",
     "rating": 2200,
@@ -604,7 +604,7 @@
   },
   {
     "id": "tp-002",
-    "title": "恰好 K 個不同整數的子陣列",
+    "title": "K 個不同整數的子陣列",
     "source": "leetcode",
     "source_id": "subarrays-with-k-different-integers",
     "rating": 2000,
@@ -650,7 +650,7 @@
   },
   {
     "id": "tp-004",
-    "title": "最小覆蓋子字串",
+    "title": "最小覆蓋子串",
     "source": "leetcode",
     "source_id": "minimum-window-substring",
     "rating": 2100,
@@ -673,7 +673,7 @@
   },
   {
     "id": "tp-005",
-    "title": "替換後最長重複字元",
+    "title": "替換後的最長重複字元",
     "source": "leetcode",
     "source_id": "longest-repeating-character-replacement",
     "rating": 2200,
@@ -766,7 +766,7 @@
   },
   {
     "id": "dsu-004",
-    "title": "移除最多的同行同列石頭",
+    "title": "移除最多的同行或同列石頭",
     "source": "leetcode",
     "source_id": "most-stones-removed-with-same-row-or-column",
     "rating": 2100,
@@ -789,7 +789,7 @@
   },
   {
     "id": "dsu-005",
-    "title": "相似字串群組",
+    "title": "相似字串組",
     "source": "leetcode",
     "source_id": "similar-string-groups",
     "rating": 2200,
@@ -836,7 +836,7 @@
   },
   {
     "id": "lift-002",
-    "title": "貨車運輸",
+    "title": "[NOIP 2013 提高組] 貨車運輸",
     "source": "luogu",
     "source_id": "P1967",
     "rating": 1900,
@@ -859,7 +859,7 @@
   },
   {
     "id": "lift-003",
-    "title": "最近公共祖先模板",
+    "title": "【模板】最近公共祖先（LCA）",
     "source": "luogu",
     "source_id": "P3379",
     "rating": 1800,
@@ -882,7 +882,7 @@
   },
   {
     "id": "lift-004",
-    "title": "血緣表親查詢",
+    "title": "Blood Cousins",
     "source": "codeforces",
     "source_id": "208E",
     "rating": 2100,
@@ -905,7 +905,7 @@
   },
   {
     "id": "lift-005",
-    "title": "完全二元樹中的循環長度查詢",
+    "title": "查詢樹中環的長度",
     "source": "leetcode",
     "source_id": "cycle-length-queries-in-a-tree",
     "rating": 2200,
@@ -998,7 +998,7 @@
   },
   {
     "id": "mono-004",
-    "title": "子陣列最小值之和",
+    "title": "子陣列的最小值之和",
     "source": "leetcode",
     "source_id": "sum-of-subarray-minimums",
     "rating": 2100,
@@ -1045,7 +1045,7 @@
   },
   {
     "id": "seg-001",
-    "title": "區域和檢索：陣列可修改",
+    "title": "區域和檢索 - 陣列可修改",
     "source": "leetcode",
     "source_id": "range-sum-query-mutable",
     "rating": 1500,
@@ -1068,7 +1068,7 @@
   },
   {
     "id": "seg-002",
-    "title": "計算右側小於目前元素的個數",
+    "title": "計算右側小於當前元素的個數",
     "source": "leetcode",
     "source_id": "count-of-smaller-numbers-after-self",
     "rating": 2000,
@@ -1137,7 +1137,7 @@
   },
   {
     "id": "seg-005",
-    "title": "反轉對",
+    "title": "翻轉對",
     "source": "leetcode",
     "source_id": "reverse-pairs",
     "rating": 2200,
@@ -1161,7 +1161,7 @@
   },
   {
     "id": "bs-lc-704",
-    "title": "二分搜尋",
+    "title": "二分查詢",
     "source": "leetcode",
     "source_id": "binary-search",
     "rating": 1200,
@@ -1251,7 +1251,7 @@
   },
   {
     "id": "bs-lc-34",
-    "title": "在排序陣列中查找元素的第一個和最後一個位置",
+    "title": "在排序陣列中查詢元素的第一個和最後一個位置",
     "source": "leetcode",
     "source_id": "find-first-and-last-position-of-element-in-sorted-array",
     "rating": 1500,
@@ -1344,7 +1344,7 @@
   },
   {
     "id": "bs-lc-2141",
-    "title": "同時運行 N 台電腦的最長時間",
+    "title": "同時執行 N 臺電腦的最長時間",
     "source": "leetcode",
     "source_id": "maximum-running-time-of-n-computers",
     "rating": 2100,
@@ -1370,7 +1370,7 @@
     "id": "bs-lc-3399",
     "title": "統計最大元素出現至少 K 次的子陣列",
     "source": "leetcode",
-    "source_id": "count-subarrays-with-maximum-element-at-least-k",
+    "source_id": "count-subarrays-where-max-element-appears-at-least-k-times",
     "rating": 2300,
     "solve_count": 45000,
     "tags": [
@@ -1415,7 +1415,7 @@
   },
   {
     "id": "graph-lc-207",
-    "title": "課程安排",
+    "title": "課程表",
     "source": "leetcode",
     "source_id": "course-schedule",
     "rating": 1500,
@@ -1438,7 +1438,7 @@
   },
   {
     "id": "graph-lc-210",
-    "title": "課程安排 II",
+    "title": "課程表 II",
     "source": "leetcode",
     "source_id": "course-schedule-ii",
     "rating": 1500,
@@ -1716,7 +1716,7 @@
   },
   {
     "id": "heap-lc-215",
-    "title": "陣列中的第 K 個最大元素",
+    "title": "陣列中的第K個最大元素",
     "source": "leetcode",
     "source_id": "kth-largest-element-in-an-array",
     "rating": 1400,
@@ -1738,7 +1738,7 @@
   },
   {
     "id": "heap-lc-23",
-    "title": "合併 K 個升序鏈結串列",
+    "title": "合併 K 個升序連結串列",
     "source": "leetcode",
     "source_id": "merge-k-sorted-lists",
     "rating": 1500,
@@ -1782,7 +1782,7 @@
   },
   {
     "id": "heap-lc-2542",
-    "title": "最大化子序列的得分",
+    "title": "最大子序列的分數",
     "source": "leetcode",
     "source_id": "maximum-subsequence-score",
     "rating": 1700,
@@ -1826,7 +1826,7 @@
   },
   {
     "id": "heap-lc-1675",
-    "title": "最小化陣列中的最大值",
+    "title": "陣列的最小偏移量",
     "source": "leetcode",
     "source_id": "minimize-deviation-in-array",
     "rating": 2000,
@@ -1851,7 +1851,7 @@
   },
   {
     "id": "dp-lc-322",
-    "title": "硬幣兌換",
+    "title": "零錢兌換",
     "source": "leetcode",
     "source_id": "coin-change",
     "rating": 1400,
@@ -1896,7 +1896,7 @@
   },
   {
     "id": "dp-lc-516",
-    "title": "最長回文子序列",
+    "title": "最長迴文子序列",
     "source": "leetcode",
     "source_id": "longest-palindromic-subsequence",
     "rating": 1600,
@@ -1943,7 +1943,7 @@
   },
   {
     "id": "dp-lc-1312",
-    "title": "讓字串成為回文串的最少插入次數",
+    "title": "讓字串成為迴文串的最少插入次數",
     "source": "leetcode",
     "source_id": "minimum-insertion-steps-to-make-a-string-palindrome",
     "rating": 1900,
@@ -1966,7 +1966,7 @@
   },
   {
     "id": "dp-lc-2707",
-    "title": "字串中的額外字符",
+    "title": "字串中的額外字元",
     "source": "leetcode",
     "source_id": "extra-characters-in-a-string",
     "rating": 2100,
@@ -2036,7 +2036,7 @@
   },
   {
     "id": "tp-lc-1004",
-    "title": "最大連續 1 的個數 III",
+    "title": "最大連續1的個數 III",
     "source": "leetcode",
     "source_id": "max-consecutive-ones-iii",
     "rating": 1600,
@@ -2059,7 +2059,7 @@
   },
   {
     "id": "tp-lc-2444",
-    "title": "統計固定邊界子數組的數目",
+    "title": "統計定界子陣列的數目",
     "source": "leetcode",
     "source_id": "count-subarrays-with-fixed-bounds",
     "rating": 2000,
@@ -2083,7 +2083,7 @@
   },
   {
     "id": "tp-lc-2799",
-    "title": "統計完全子數組的數目",
+    "title": "統計完全子陣列的數目",
     "source": "leetcode",
     "source_id": "count-complete-subarrays-in-an-array",
     "rating": 2100,
@@ -2153,7 +2153,7 @@
   },
   {
     "id": "dsu-lc-1697",
-    "title": "檢查邊長限制的路徑是否存在",
+    "title": "檢查邊長度限制的路徑是否存在",
     "source": "leetcode",
     "source_id": "checking-existence-of-edge-length-limited-paths",
     "rating": 1900,
@@ -2224,7 +2224,7 @@
   },
   {
     "id": "lift-lc-2846",
-    "title": "邊權之和最小的樹中的節點",
+    "title": "邊權重均等查詢",
     "source": "leetcode",
     "source_id": "minimum-edge-weight-equilibrium-queries-in-a-tree",
     "rating": 2000,
@@ -2248,7 +2248,7 @@
   },
   {
     "id": "lift-lc-2458",
-    "title": "刪除操作後的子樹大小",
+    "title": "移除子樹後的二叉樹高度",
     "source": "leetcode",
     "source_id": "height-of-binary-tree-after-subtree-removal-queries",
     "rating": 2200,
@@ -2296,7 +2296,7 @@
   },
   {
     "id": "mono-lc-2104",
-    "title": "子陣列範圍之和",
+    "title": "子陣列範圍和",
     "source": "leetcode",
     "source_id": "sum-of-subarray-ranges",
     "rating": 1800,
@@ -2341,7 +2341,7 @@
   },
   {
     "id": "mono-lc-1944",
-    "title": "隊列中可以看到的人數",
+    "title": "佇列中可以看到的人數",
     "source": "leetcode",
     "source_id": "number-of-visible-people-in-a-queue",
     "rating": 2000,
@@ -2531,7 +2531,7 @@
   },
   {
     "id": "sp-lc-1514",
-    "title": "概率最大的路徑",
+    "title": "機率最大的路徑",
     "source": "leetcode",
     "source_id": "path-with-maximum-probability",
     "rating": 1500,
@@ -2623,7 +2623,7 @@
     "id": "sp-lc-2699",
     "title": "修改圖中的邊權",
     "source": "leetcode",
-    "source_id": "modify-edge-weights",
+    "source_id": "modify-graph-edge-weights",
     "rating": 2300,
     "solve_count": 30000,
     "tags": [
@@ -2646,7 +2646,7 @@
   },
   {
     "id": "mst-lc-1584",
-    "title": "連接所有點的最小費用",
+    "title": "連線所有點的最小費用",
     "source": "leetcode",
     "source_id": "min-cost-to-connect-all-points",
     "rating": 1700,
@@ -2692,7 +2692,7 @@
   },
   {
     "id": "mst-lc-1168",
-    "title": "水資源分配優化",
+    "title": "水資源分配最佳化",
     "source": "leetcode",
     "source_id": "optimize-water-distribution-in-a-village",
     "rating": 2100,
@@ -2786,7 +2786,7 @@
   },
   {
     "id": "treedp-lc-543",
-    "title": "二元樹的直徑",
+    "title": "二叉樹的直徑",
     "source": "leetcode",
     "source_id": "diameter-of-binary-tree",
     "rating": 1200,
@@ -2831,7 +2831,7 @@
   },
   {
     "id": "treedp-lc-124",
-    "title": "二元樹中的最大路徑和",
+    "title": "二叉樹中的最大路徑和",
     "source": "leetcode",
     "source_id": "binary-tree-maximum-path-sum",
     "rating": 1700,
@@ -2898,7 +2898,7 @@
   },
   {
     "id": "treedp-lc-968",
-    "title": "監控二元樹",
+    "title": "監控二叉樹",
     "source": "leetcode",
     "source_id": "binary-tree-cameras",
     "rating": 2000,
@@ -2944,7 +2944,7 @@
   },
   {
     "id": "str-lc-208",
-    "title": "實現 Trie（前綴樹）",
+    "title": "實現 Trie (字首樹)",
     "source": "leetcode",
     "source_id": "implement-trie-prefix-tree",
     "rating": 1500,
@@ -2966,7 +2966,7 @@
   },
   {
     "id": "str-lc-1392",
-    "title": "最長快樂前綴",
+    "title": "最長快樂字首",
     "source": "leetcode",
     "source_id": "longest-happy-prefix",
     "rating": 1800,
@@ -2988,7 +2988,7 @@
   },
   {
     "id": "str-lc-214",
-    "title": "最短回文串",
+    "title": "最短迴文串",
     "source": "leetcode",
     "source_id": "shortest-palindrome",
     "rating": 1800,
@@ -3240,7 +3240,7 @@
   },
   {
     "id": "bm-lc-698",
-    "title": "劃分為 k 個相等的子集",
+    "title": "劃分為k個相等的子集",
     "source": "leetcode",
     "source_id": "partition-to-k-equal-sum-subsets",
     "rating": 1900,
@@ -3262,7 +3262,7 @@
   },
   {
     "id": "bm-lc-847",
-    "title": "存取所有節點的最短路徑",
+    "title": "訪問所有節點的最短路徑",
     "source": "leetcode",
     "source_id": "shortest-path-visiting-all-nodes",
     "rating": 2200,

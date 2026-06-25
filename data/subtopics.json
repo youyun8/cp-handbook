@@ -71,7 +71,7 @@
         ]
       },
       {
-        "title": "最長快樂前綴",
+        "title": "最長快樂字首",
         "source": "leetcode",
         "source_id": "longest-happy-prefix",
         "rating": 1900,
@@ -135,7 +135,7 @@
     ],
     "practice_problems": [
       {
-        "title": "Sum of Scores of Built Strings",
+        "title": "構造字串的總得分和",
         "source": "leetcode",
         "source_id": "sum-of-scores-of-built-strings",
         "rating": 2100,
@@ -170,7 +170,7 @@
       {
         "source": "luogu",
         "source_id": "P5410",
-        "title": "【模板】擴展 KMP（Z 函數）",
+        "title": "【模板】擴展 KMP / exKMP（Z 函式）",
         "rating": 1800,
         "tier": "core",
         "tags": [
@@ -233,7 +233,7 @@
         ]
       },
       {
-        "title": "重複的 DNA 序列",
+        "title": "重複的DNA序列",
         "source": "leetcode",
         "source_id": "repeated-dna-sequences",
         "rating": 1600,
@@ -255,7 +255,7 @@
         ]
       },
       {
-        "title": "最短回文串",
+        "title": "最短迴文串",
         "source": "leetcode",
         "source_id": "shortest-palindrome",
         "rating": 2100,
@@ -313,7 +313,7 @@
     ],
     "practice_problems": [
       {
-        "title": "實現 Trie",
+        "title": "實現 Trie (字首樹)",
         "source": "leetcode",
         "source_id": "implement-trie-prefix-tree",
         "rating": 1200,
@@ -324,7 +324,7 @@
         ]
       },
       {
-        "title": "添加與搜尋單詞",
+        "title": "新增與搜尋單詞 - 資料結構設計",
         "source": "leetcode",
         "source_id": "design-add-and-search-words-data-structure",
         "rating": 1700,
@@ -412,7 +412,7 @@
     ],
     "practice_problems": [
       {
-        "title": "後綴排序",
+        "title": "【模板】字尾排序",
         "source": "luogu",
         "source_id": "P3809",
         "rating": 2200,
@@ -434,7 +434,7 @@
         ]
       },
       {
-        "title": "Distinct Substrings",
+        "title": "Number of Substrings",
         "source": "atcoder",
         "source_id": "practice2_i",
         "rating": 2100,
@@ -509,7 +509,7 @@
         ]
       },
       {
-        "title": "判負環",
+        "title": "【模板】負環",
         "source": "luogu",
         "source_id": "P3385",
         "rating": 1700,
@@ -522,7 +522,7 @@
       {
         "source": "luogu",
         "source_id": "P2850",
-        "title": "[USACO06DEC] Wormholes 蟲洞",
+        "title": "[USACO06DEC] Wormholes G",
         "rating": 1700,
         "tier": "core",
         "tags": [
@@ -590,7 +590,7 @@
     ],
     "practice_problems": [
       {
-        "title": "最近公共祖先",
+        "title": "【模板】最近公共祖先（LCA）",
         "source": "luogu",
         "source_id": "P3379",
         "rating": 1700,
@@ -769,7 +769,7 @@
     ],
     "practice_problems": [
       {
-        "title": "最近公共祖先",
+        "title": "【模板】最近公共祖先（LCA）",
         "source": "luogu",
         "source_id": "P3379",
         "rating": 1700,
@@ -791,7 +791,7 @@
         ]
       },
       {
-        "title": "緊急集合",
+        "title": "[AHOI2008] 緊急集合 / 聚會",
         "source": "luogu",
         "source_id": "P4281",
         "rating": 1900,
@@ -861,7 +861,7 @@
     ],
     "practice_problems": [
       {
-        "title": "乘法表中第 K 小的數",
+        "title": "乘法表中第k小的數",
         "source": "leetcode",
         "source_id": "kth-smallest-number-in-multiplication-table",
         "rating": 2200,
@@ -894,7 +894,7 @@
         ]
       },
       {
-        "title": "跳石頭",
+        "title": "[NOIP 2015 提高組] 跳石頭",
         "source": "luogu",
         "source_id": "P2678",
         "rating": 2100,
@@ -982,7 +982,7 @@
         ]
       },
       {
-        "title": "山脈陣列中查找目標值",
+        "title": "山脈陣列中查詢目標值",
         "source": "leetcode",
         "source_id": "find-in-mountain-array",
         "rating": 1900,
@@ -1043,7 +1043,7 @@
       {
         "source": "luogu",
         "source_id": "P3382",
-        "title": "【模板】三分法",
+        "title": "三分",
         "rating": 1500,
         "tier": "warmup",
         "tags": [
@@ -1074,7 +1074,7 @@
         ]
       },
       {
-        "title": "Best Cow Fences",
+        "title": "尋找段落",
         "source": "luogu",
         "source_id": "P1419",
         "rating": 2100,
@@ -1140,7 +1140,7 @@
         ]
       },
       {
-        "title": "位元 1 的個數",
+        "title": "位1的個數",
         "source": "leetcode",
         "source_id": "number-of-1-bits",
         "rating": 1200,
@@ -1151,7 +1151,7 @@
         ]
       },
       {
-        "title": "位元 AND 範圍",
+        "title": "數字範圍按位與",
         "source": "leetcode",
         "source_id": "bitwise-and-of-numbers-range",
         "rating": 1600,
@@ -1217,7 +1217,7 @@
     ],
     "practice_problems": [
       {
-        "title": "最短超字串",
+        "title": "最短超級串",
         "source": "leetcode",
         "source_id": "find-the-shortest-superstring",
         "rating": 2300,
@@ -1338,7 +1338,7 @@
         ]
       },
       {
-        "title": "Count Ways to Build Good Strings",
+        "title": "統計構造好字串的方案數",
         "source": "leetcode",
         "source_id": "count-ways-to-build-good-strings",
         "rating": 1600,
@@ -1425,7 +1425,7 @@
         ]
       },
       {
-        "title": "Self Crossing",
+        "title": "路徑交叉",
         "source": "leetcode",
         "source_id": "self-crossing",
         "rating": 2100,
@@ -1484,7 +1484,7 @@
     ],
     "practice_problems": [
       {
-        "title": "Erect the Fence",
+        "title": "安裝柵欄",
         "source": "leetcode",
         "source_id": "erect-the-fence",
         "rating": 2100,
@@ -1495,7 +1495,7 @@
         ]
       },
       {
-        "title": "凸包模板",
+        "title": "【模板】二維凸包 / [USACO5.1] 圈奶牛Fencing the Cows",
         "source": "luogu",
         "source_id": "P2742",
         "rating": 1800,
@@ -1565,7 +1565,7 @@
     ],
     "practice_problems": [
       {
-        "title": "Self Crossing",
+        "title": "路徑交叉",
         "source": "leetcode",
         "source_id": "self-crossing",
         "rating": 2100,
@@ -1657,7 +1657,7 @@
     ],
     "practice_problems": [
       {
-        "title": "平面最近點對",
+        "title": "平面最近點對（加強版）",
         "source": "luogu",
         "source_id": "P1429",
         "rating": 2100,
@@ -1668,7 +1668,7 @@
         ]
       },
       {
-        "title": "Closest Pair",
+        "title": "平面最近點對（加強加強版）",
         "source": "luogu",
         "source_id": "P7883",
         "rating": 2200,
@@ -1958,7 +1958,7 @@
         ]
       },
       {
-        "title": "石子合併",
+        "title": "[NOI1995] 石子合併",
         "source": "luogu",
         "source_id": "P1880",
         "rating": 1900,
@@ -2024,7 +2024,7 @@
         ]
       },
       {
-        "title": "奇怪印表機",
+        "title": "奇怪的印表機",
         "source": "leetcode",
         "source_id": "strange-printer",
         "rating": 2200,
@@ -2105,7 +2105,7 @@
     ],
     "practice_problems": [
       {
-        "title": "冗餘連接",
+        "title": "冗餘連線",
         "source": "leetcode",
         "source_id": "redundant-connection",
         "rating": 1600,
@@ -2207,7 +2207,7 @@
         ]
       },
       {
-        "title": "食物鏈",
+        "title": "[NOI2001] 食物鏈",
         "source": "luogu",
         "source_id": "P2024",
         "rating": 1900,
@@ -2218,7 +2218,7 @@
         ]
       },
       {
-        "title": "銀河英雄傳說",
+        "title": "[NOI2002] 銀河英雄傳說",
         "source": "luogu",
         "source_id": "P1196",
         "rating": 1900,
@@ -2231,7 +2231,7 @@
       {
         "title": "People on a Line",
         "source": "atcoder",
-        "source_id": "abc087_d",
+        "source_id": "arc090_b",
         "rating": 1600,
         "tier": "core",
         "tags": [
@@ -2284,7 +2284,7 @@
     ],
     "practice_problems": [
       {
-        "title": "Possible Bipartition",
+        "title": "可能的二分法",
         "source": "leetcode",
         "source_id": "possible-bipartition",
         "rating": 1700,
@@ -2295,7 +2295,7 @@
         ]
       },
       {
-        "title": "食物鏈",
+        "title": "[NOI2001] 食物鏈",
         "source": "luogu",
         "source_id": "P2024",
         "rating": 1900,
@@ -2306,7 +2306,7 @@
         ]
       },
       {
-        "title": "關押罪犯",
+        "title": "[NOIP 2010 提高組] 關押罪犯",
         "source": "luogu",
         "source_id": "P1525",
         "rating": 1900,
@@ -2376,7 +2376,7 @@
     ],
     "practice_problems": [
       {
-        "title": "腐爛橘子",
+        "title": "腐爛的橘子",
         "source": "leetcode",
         "source_id": "rotting-oranges",
         "rating": 1300,
@@ -2398,7 +2398,7 @@
         ]
       },
       {
-        "title": "最小代價構造有效路徑",
+        "title": "使網格圖至少有一條有效路徑的最小代價",
         "source": "leetcode",
         "source_id": "minimum-cost-to-make-at-least-one-valid-path-in-a-grid",
         "rating": 2000,
@@ -2661,7 +2661,7 @@
         ]
       },
       {
-        "title": "Possible Bipartition",
+        "title": "可能的二分法",
         "source": "leetcode",
         "source_id": "possible-bipartition",
         "rating": 1700,
@@ -2683,7 +2683,7 @@
         ]
       },
       {
-        "title": "BUGLIFE",
+        "title": "[NOIP 2010 提高組] 關押罪犯",
         "source": "luogu",
         "source_id": "P1525",
         "rating": 1800,
@@ -2738,7 +2738,7 @@
     ],
     "practice_problems": [
       {
-        "title": "陣列中的第 K 個最大元素",
+        "title": "陣列中的第K個最大元素",
         "source": "leetcode",
         "source_id": "kth-largest-element-in-an-array",
         "rating": 1500,
@@ -2760,7 +2760,7 @@
         ]
       },
       {
-        "title": "合併 K 個升序鏈表",
+        "title": "合併 K 個升序連結串列",
         "source": "leetcode",
         "source_id": "merge-k-sorted-lists",
         "rating": 1800,
@@ -2771,7 +2771,7 @@
         ]
       },
       {
-        "title": "Supermarket",
+        "title": "[USACO09OPEN] Work Scheduling G",
         "source": "luogu",
         "source_id": "P2949",
         "rating": 1700,
@@ -2848,7 +2848,7 @@
         ]
       },
       {
-        "title": "查找和最小的 K 對數字",
+        "title": "查詢和最小的 K 對數字",
         "source": "leetcode",
         "source_id": "find-k-pairs-with-smallest-sums",
         "rating": 1900,
@@ -2859,7 +2859,7 @@
         ]
       },
       {
-        "title": "K-th Number",
+        "title": "【模板】可持久化線段樹 2",
         "source": "luogu",
         "source_id": "P3834",
         "rating": 2100,
@@ -2925,7 +2925,7 @@
         ]
       },
       {
-        "title": "滑動窗口中位數",
+        "title": "滑動視窗中位數",
         "source": "leetcode",
         "source_id": "sliding-window-median",
         "rating": 2300,
@@ -2936,7 +2936,7 @@
         ]
       },
       {
-        "title": "Running Median",
+        "title": "中位數",
         "source": "luogu",
         "source_id": "P1168",
         "rating": 1700,
@@ -2949,7 +2949,7 @@
       {
         "source": "luogu",
         "source_id": "P1801",
-        "title": "黑匣子 Black Box",
+        "title": "黑匣子",
         "rating": 1700,
         "tier": "core",
         "tags": [
@@ -3002,7 +3002,7 @@
     ],
     "practice_problems": [
       {
-        "title": "滑動窗口最大值",
+        "title": "滑動視窗最大值",
         "source": "leetcode",
         "source_id": "sliding-window-maximum",
         "rating": 1900,
@@ -3013,7 +3013,7 @@
         ]
       },
       {
-        "title": "滑動窗口中位數",
+        "title": "滑動視窗中位數",
         "source": "leetcode",
         "source_id": "sliding-window-median",
         "rating": 2300,
@@ -3198,7 +3198,7 @@
         ]
       },
       {
-        "title": "凌亂的 yyy / 線段覆蓋",
+        "title": "凌亂的yyy / 線段覆蓋",
         "source": "luogu",
         "source_id": "P1803",
         "rating": 1200,
@@ -3289,7 +3289,7 @@
         ]
       },
       {
-        "title": "Range Addition",
+        "title": "區間加法",
         "source": "leetcode",
         "source_id": "range-addition",
         "rating": 1400,
@@ -3380,7 +3380,7 @@
         ]
       },
       {
-        "title": "Perfect Rectangle",
+        "title": "完美矩形",
         "source": "leetcode",
         "source_id": "perfect-rectangle",
         "rating": 2200,
@@ -3461,7 +3461,7 @@
         ]
       },
       {
-        "title": "質數距離",
+        "title": "素數密度",
         "source": "luogu",
         "source_id": "P1835",
         "rating": 1700,
@@ -3553,7 +3553,7 @@
         ]
       },
       {
-        "title": "Water and Jug Problem",
+        "title": "水壺問題",
         "source": "leetcode",
         "source_id": "water-and-jug-problem",
         "rating": 1600,
@@ -3564,7 +3564,7 @@
         ]
       },
       {
-        "title": "同餘方程",
+        "title": "[NOIP 2012 提高組] 同餘方程",
         "source": "luogu",
         "source_id": "P1082",
         "rating": 1400,
@@ -3656,7 +3656,7 @@
         ]
       },
       {
-        "title": "快速冪模板",
+        "title": "【模板】快速冪",
         "source": "luogu",
         "source_id": "P1226",
         "rating": 1200,
@@ -3726,7 +3726,7 @@
     ],
     "practice_problems": [
       {
-        "title": "組合數問題",
+        "title": "[NOIP 2016 提高組] 組合數問題",
         "source": "luogu",
         "source_id": "P2822",
         "rating": 1700,
@@ -3737,7 +3737,7 @@
         ]
       },
       {
-        "title": "求逆元",
+        "title": "【模板】模意義下的乘法逆元",
         "source": "luogu",
         "source_id": "P3811",
         "rating": 1400,
@@ -3759,7 +3759,7 @@
         ]
       },
       {
-        "title": "Count Anagrams",
+        "title": "統計同位異構字串數目",
         "source": "leetcode",
         "source_id": "count-anagrams",
         "rating": 2200,
@@ -3818,7 +3818,7 @@
     ],
     "practice_problems": [
       {
-        "title": "中國剩餘定理模板",
+        "title": "【模板】中國剩餘定理（CRT）/ 曹衝養豬",
         "source": "luogu",
         "source_id": "P1495",
         "rating": 1600,
@@ -3840,7 +3840,7 @@
         ]
       },
       {
-        "title": "Powers of Two",
+        "title": "Powers Of Two",
         "source": "codeforces",
         "source_id": "1095C",
         "rating": 1600,
@@ -3910,7 +3910,7 @@
     ],
     "practice_problems": [
       {
-        "title": "連接所有點的最小費用",
+        "title": "連線所有點的最小費用",
         "source": "leetcode",
         "source_id": "min-cost-to-connect-all-points",
         "rating": 1700,
@@ -3921,7 +3921,7 @@
         ]
       },
       {
-        "title": "最小生成樹模板",
+        "title": "【模板】最小生成樹",
         "source": "luogu",
         "source_id": "P3366",
         "rating": 1500,
@@ -4002,7 +4002,7 @@
     ],
     "practice_problems": [
       {
-        "title": "連接所有點的最小費用",
+        "title": "連線所有點的最小費用",
         "source": "leetcode",
         "source_id": "min-cost-to-connect-all-points",
         "rating": 1700,
@@ -4013,7 +4013,7 @@
         ]
       },
       {
-        "title": "最小生成樹模板",
+        "title": "【模板】最小生成樹",
         "source": "luogu",
         "source_id": "P3366",
         "rating": 1500,
@@ -4024,7 +4024,7 @@
         ]
       },
       {
-        "title": "Watering the Fields",
+        "title": "無線通訊網",
         "source": "luogu",
         "source_id": "P1991",
         "rating": 1700,
@@ -4090,7 +4090,7 @@
     ],
     "practice_problems": [
       {
-        "title": "嚴格次小生成樹",
+        "title": "[BJWC2010] 嚴格次小生成樹",
         "source": "luogu",
         "source_id": "P4180",
         "rating": 2300,
@@ -4112,7 +4112,7 @@
         ]
       },
       {
-        "title": "最小生成樹計數",
+        "title": "[JSOI2008] 最小生成樹計數",
         "source": "luogu",
         "source_id": "P4208",
         "rating": 2300,
@@ -4215,7 +4215,7 @@
         ]
       },
       {
-        "title": "Bad Hair Day",
+        "title": "[USACO06NOV] Bad Hair Day S",
         "source": "luogu",
         "source_id": "P2866",
         "rating": 1700,
@@ -4273,7 +4273,7 @@
     ],
     "practice_problems": [
       {
-        "title": "滑動窗口最大值",
+        "title": "滑動視窗最大值",
         "source": "leetcode",
         "source_id": "sliding-window-maximum",
         "rating": 1900,
@@ -4284,7 +4284,7 @@
         ]
       },
       {
-        "title": "Shortest Subarray with Sum at Least K",
+        "title": "和至少為 K 的最短子陣列",
         "source": "leetcode",
         "source_id": "shortest-subarray-with-sum-at-least-k",
         "rating": 2300,
@@ -4295,7 +4295,7 @@
         ]
       },
       {
-        "title": "滑動窗口",
+        "title": "【模板】單調佇列 / 滑動視窗",
         "source": "luogu",
         "source_id": "P1886",
         "rating": 1500,
@@ -4360,7 +4360,7 @@
     ],
     "practice_problems": [
       {
-        "title": "Constrained Subsequence Sum",
+        "title": "帶限制的子序列和",
         "source": "leetcode",
         "source_id": "constrained-subsequence-sum",
         "rating": 2000,
@@ -4371,7 +4371,7 @@
         ]
       },
       {
-        "title": "Jump Game VI",
+        "title": "跳躍遊戲 VI",
         "source": "leetcode",
         "source_id": "jump-game-vi",
         "rating": 1900,
@@ -4382,7 +4382,7 @@
         ]
       },
       {
-        "title": "[POI2014] PTA-Little Bird",
+        "title": "[POI 2014] PTA-Little Bird",
         "source": "luogu",
         "source_id": "P3572",
         "rating": 2100,
@@ -4393,7 +4393,7 @@
         ]
       },
       {
-        "title": "烽火傳遞",
+        "title": "琪露諾",
         "source": "luogu",
         "source_id": "P1725",
         "rating": 1900,
@@ -4470,7 +4470,7 @@
         ]
       },
       {
-        "title": "Bad Hair Day",
+        "title": "[USACO06NOV] Bad Hair Day S",
         "source": "luogu",
         "source_id": "P2866",
         "rating": 1700,
@@ -4481,7 +4481,7 @@
         ]
       },
       {
-        "title": "Largest Rectangle",
+        "title": "玉蟾宮",
         "source": "luogu",
         "source_id": "P4147",
         "rating": 1900,
@@ -4562,7 +4562,7 @@
         ]
       },
       {
-        "title": "樹狀陣列 1",
+        "title": "【模板】樹狀陣列 1",
         "source": "luogu",
         "source_id": "P3374",
         "rating": 1300,
@@ -4647,7 +4647,7 @@
         ]
       },
       {
-        "title": "線段樹 1",
+        "title": "【模板】線段樹 1",
         "source": "luogu",
         "source_id": "P3372",
         "rating": 1700,
@@ -4728,7 +4728,7 @@
     ],
     "practice_problems": [
       {
-        "title": "線段樹 1",
+        "title": "【模板】線段樹 1",
         "source": "luogu",
         "source_id": "P3372",
         "rating": 1700,
@@ -4739,7 +4739,7 @@
         ]
       },
       {
-        "title": "線段樹 2",
+        "title": "【模板】線段樹 2",
         "source": "luogu",
         "source_id": "P3373",
         "rating": 2100,
@@ -4761,7 +4761,7 @@
         ]
       },
       {
-        "title": "Ahoy, Pirates!",
+        "title": "[TJOI2009] 開關",
         "source": "luogu",
         "source_id": "P3870",
         "rating": 1900,
@@ -4838,7 +4838,7 @@
         ]
       },
       {
-        "title": "Global and Local Inversions",
+        "title": "全域性倒置與區域性倒置",
         "source": "leetcode",
         "source_id": "global-and-local-inversions",
         "rating": 1700,
@@ -4923,7 +4923,7 @@
         ]
       },
       {
-        "title": "最短路徑模板",
+        "title": "【模板】單源最短路徑（標準版）",
         "source": "luogu",
         "source_id": "P4779",
         "rating": 1600,
@@ -5008,7 +5008,7 @@
     ],
     "practice_problems": [
       {
-        "title": "找到閾值距離內鄰居最少的城市",
+        "title": "閾值距離內鄰居最少的城市",
         "source": "leetcode",
         "source_id": "find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance",
         "rating": 1800,
@@ -5019,7 +5019,7 @@
         ]
       },
       {
-        "title": "Floyd 標準模板",
+        "title": "[USACO08OPEN] Clear And Present Danger S",
         "source": "luogu",
         "source_id": "P2910",
         "rating": 1500,
@@ -5100,7 +5100,7 @@
     ],
     "practice_problems": [
       {
-        "title": "最小代價構造有效路徑",
+        "title": "使網格圖至少有一條有效路徑的最小代價",
         "source": "leetcode",
         "source_id": "minimum-cost-to-make-at-least-one-valid-path-in-a-grid",
         "rating": 2000,
@@ -5111,7 +5111,7 @@
         ]
       },
       {
-        "title": "邊權限制下的路徑查詢",
+        "title": "檢查邊長度限制的路徑是否存在",
         "source": "leetcode",
         "source_id": "checking-existence-of-edge-length-limited-paths",
         "rating": 2100,
@@ -5122,7 +5122,7 @@
         ]
       },
       {
-        "title": "Ocean Currents",
+        "title": "小明的遊戲",
         "source": "luogu",
         "source_id": "P4554",
         "rating": 1900,
@@ -5133,7 +5133,7 @@
         ]
       },
       {
-        "title": "KATHTHI",
+        "title": "[BalticOI 2011] Switch the Lamp On (Day1)",
         "source": "luogu",
         "source_id": "P4667",
         "rating": 1900,
@@ -5188,7 +5188,7 @@
     ],
     "practice_problems": [
       {
-        "title": "House Robber III",
+        "title": "打家劫舍 III",
         "source": "leetcode",
         "source_id": "house-robber-iii",
         "rating": 1600,
@@ -5364,7 +5364,7 @@
     ],
     "practice_problems": [
       {
-        "title": "樹的直徑",
+        "title": "二叉樹的直徑",
         "source": "leetcode",
         "source_id": "diameter-of-binary-tree",
         "rating": 1300,
@@ -5452,7 +5452,7 @@
     ],
     "practice_problems": [
       {
-        "title": "選課",
+        "title": "[CTSC1997] 選課",
         "source": "luogu",
         "source_id": "P2014",
         "rating": 2100,
@@ -5632,7 +5632,7 @@
     ],
     "practice_problems": [
       {
-        "title": "無重複字元的最長子字串",
+        "title": "無重複字元的最長子串",
         "source": "leetcode",
         "source_id": "longest-substring-without-repeating-characters",
         "rating": 1500,
@@ -5654,7 +5654,7 @@
         ]
       },
       {
-        "title": "恰好 K 個不同整數的子陣列",
+        "title": "K 個不同整數的子陣列",
         "source": "leetcode",
         "source_id": "subarrays-with-k-different-integers",
         "rating": 2200,
@@ -5724,7 +5724,7 @@
     ],
     "practice_problems": [
       {
-        "title": "環形鏈表",
+        "title": "環形連結串列",
         "source": "leetcode",
         "source_id": "linked-list-cycle",
         "rating": 1200,
@@ -5735,7 +5735,7 @@
         ]
       },
       {
-        "title": "環形鏈表 II",
+        "title": "環形連結串列 II",
         "source": "leetcode",
         "source_id": "linked-list-cycle-ii",
         "rating": 1600,
@@ -6026,7 +6026,7 @@
         ]
       },
       {
-        "title": "平滑下降階段的數目",
+        "title": "股票平滑下跌階段的數目",
         "source": "leetcode",
         "source_id": "number-of-smooth-descent-periods-of-a-stock",
         "rating": 1500,
@@ -6106,7 +6106,7 @@
         ]
       },
       {
-        "title": "乘法表中第 K 小的數",
+        "title": "乘法表中第k小的數",
         "source": "leetcode",
         "source_id": "kth-smallest-number-in-multiplication-table",
         "rating": 2000,
@@ -6379,7 +6379,7 @@
         ]
       },
       {
-        "title": "統計子陣列中固定邊界元素的個數",
+        "title": "統計定界子陣列的數目",
         "source": "leetcode",
         "source_id": "count-subarrays-with-fixed-bounds",
         "rating": 2000,
@@ -6390,7 +6390,7 @@
         ]
       },
       {
-        "title": "最大子陣列最小乘積",
+        "title": "子陣列最小乘積的最大值",
         "source": "leetcode",
         "source_id": "maximum-subarray-min-product",
         "rating": 2000,
@@ -6633,7 +6633,7 @@
     ],
     "practice_problems": [
       {
-        "title": "陣列嵌套",
+        "title": "陣列巢狀",
         "source": "leetcode",
         "source_id": "array-nesting",
         "rating": 1500,
@@ -6644,7 +6644,7 @@
         ]
       },
       {
-        "title": "最長環",
+        "title": "圖中的最長環",
         "source": "leetcode",
         "source_id": "longest-cycle-in-a-graph",
         "rating": 1900,
@@ -6725,7 +6725,7 @@
     ],
     "practice_problems": [
       {
-        "title": "位元計數",
+        "title": "位元位計數",
         "source": "leetcode",
         "source_id": "counting-bits",
         "rating": 1100,
@@ -6941,7 +6941,7 @@
         ]
       },
       {
-        "title": "信封問題（錯位排列）",
+        "title": "信封問題",
         "source": "luogu",
         "source_id": "P1595",
         "rating": 1600,
@@ -7010,7 +7010,7 @@
         ]
       },
       {
-        "title": "石子遊戲 IV",
+        "title": "石子游戲 IV",
         "source": "leetcode",
         "source_id": "stone-game-iv",
         "rating": 1700,
@@ -7090,7 +7090,7 @@
     ],
     "practice_problems": [
       {
-        "title": "最長回文子串",
+        "title": "最長迴文子串",
         "source": "leetcode",
         "source_id": "longest-palindromic-substring",
         "rating": 1500,
@@ -7101,7 +7101,7 @@
         ]
       },
       {
-        "title": "回文子串",
+        "title": "迴文子串",
         "source": "leetcode",
         "source_id": "palindromic-substrings",
         "rating": 1600,
@@ -7112,7 +7112,7 @@
         ]
       },
       {
-        "title": "最短回文串",
+        "title": "最短迴文串",
         "source": "leetcode",
         "source_id": "shortest-palindrome",
         "rating": 1900,
@@ -7123,7 +7123,7 @@
         ]
       },
       {
-        "title": "計算兩個不重疊回文子串的最大乘積",
+        "title": "兩個迴文子字串長度的最大乘積",
         "source": "leetcode",
         "source_id": "maximum-product-of-the-length-of-two-palindromic-substrings",
         "rating": 2400,
@@ -7192,7 +7192,7 @@
         ]
       },
       {
-        "title": "【模板】AC 自動機（簡單版）",
+        "title": "AC 自動機（簡單版）",
         "source": "luogu",
         "source_id": "P3808",
         "rating": 1800,
@@ -7203,7 +7203,7 @@
         ]
       },
       {
-        "title": "【模板】AC 自動機（二次加強版）",
+        "title": "【模板】AC 自動機",
         "source": "luogu",
         "source_id": "P5357",
         "rating": 2300,
@@ -7214,7 +7214,7 @@
         ]
       },
       {
-        "title": "阿狸的打字機",
+        "title": "[NOI2011] 阿狸的打字機",
         "source": "luogu",
         "source_id": "P2414",
         "rating": 2600,
@@ -7386,7 +7386,7 @@
         ]
       },
       {
-        "title": "分割陣列以得到最大和",
+        "title": "分隔陣列以得到最大和",
         "source": "leetcode",
         "source_id": "partition-array-for-maximum-sum",
         "rating": 1600,
@@ -7455,7 +7455,7 @@
     ],
     "practice_problems": [
       {
-        "title": "最佳買賣股票時機含冷凍期",
+        "title": "買賣股票的最佳時機含冷凍期",
         "source": "leetcode",
         "source_id": "best-time-to-buy-and-sell-stock-with-cooldown",
         "rating": 1600,
@@ -7488,7 +7488,7 @@
         ]
       },
       {
-        "title": "最大化交替子序列和",
+        "title": "最大交替子序列和",
         "source": "leetcode",
         "source_id": "maximum-alternating-subsequence-sum",
         "rating": 1800,
@@ -7579,7 +7579,7 @@
         ]
       },
       {
-        "title": "windy 數",
+        "title": "[SCOI2009] windy 數",
         "source": "luogu",
         "source_id": "P2657",
         "rating": 1900,
@@ -7648,7 +7648,7 @@
         ]
       },
       {
-        "title": "石子遊戲",
+        "title": "石子游戲",
         "source": "leetcode",
         "source_id": "stone-game",
         "rating": 1500,
@@ -7659,7 +7659,7 @@
         ]
       },
       {
-        "title": "石子遊戲 II",
+        "title": "石子游戲 II",
         "source": "leetcode",
         "source_id": "stone-game-ii",
         "rating": 1900,
@@ -7751,7 +7751,7 @@
         ]
       },
       {
-        "title": "拋擲骰子等於目標和的方法數",
+        "title": "擲骰子等於目標和的方法數",
         "source": "leetcode",
         "source_id": "number-of-dice-rolls-with-target-sum",
         "rating": 1600,
@@ -7762,7 +7762,7 @@
         ]
       },
       {
-        "title": "OSU!（期望）",
+        "title": "OSU!",
         "source": "luogu",
         "source_id": "P1654",
         "rating": 2000,
@@ -7843,7 +7843,7 @@
         ]
       },
       {
-        "title": "兩地調度",
+        "title": "兩地排程",
         "source": "leetcode",
         "source_id": "two-city-scheduling",
         "rating": 1400,
@@ -7854,7 +7854,7 @@
         ]
       },
       {
-        "title": "國王遊戲",
+        "title": "[NOIP 2012 提高組] 國王遊戲",
         "source": "luogu",
         "source_id": "P1080",
         "rating": 2000,
@@ -8016,7 +8016,7 @@
         ]
       },
       {
-        "title": "字典序最小的字串",
+        "title": "使用機器人列印字典序最小的字串",
         "source": "leetcode",
         "source_id": "using-a-robot-to-print-the-lexicographically-smallest-string",
         "rating": 1800,
@@ -8038,7 +8038,7 @@
         ]
       },
       {
-        "title": "字典序最小的合法序列",
+        "title": "根據模式串構造最小數字",
         "source": "leetcode",
         "source_id": "construct-smallest-number-from-di-string",
         "rating": 1600,
@@ -8096,7 +8096,7 @@
     ],
     "practice_problems": [
       {
-        "title": "DI 字串匹配",
+        "title": "增減字串匹配",
         "source": "leetcode",
         "source_id": "di-string-match",
         "rating": 1300,
@@ -8220,7 +8220,7 @@
         ]
       },
       {
-        "title": "優美的子集數目",
+        "title": "美麗子集的數目",
         "source": "leetcode",
         "source_id": "the-number-of-beautiful-subsets",
         "rating": 2000,
@@ -8311,7 +8311,7 @@
         ]
       },
       {
-        "title": "第 K 個排列",
+        "title": "排列序列",
         "source": "leetcode",
         "source_id": "permutation-sequence",
         "rating": 1800,
@@ -8496,7 +8496,7 @@
         ]
       },
       {
-        "title": "將陣列分成最多數目的子集（最優性剪枝）",
+        "title": "劃分為k個相等的子集",
         "source": "leetcode",
         "source_id": "partition-to-k-equal-sum-subsets",
         "rating": 2000,
@@ -8566,7 +8566,7 @@
         ]
       },
       {
-        "title": "草地排水（最大流）",
+        "title": "[USACO4.2] 草地排水 Drainage Ditches",
         "source": "luogu",
         "source_id": "P2740",
         "rating": 1700,
@@ -8577,7 +8577,7 @@
         ]
       },
       {
-        "title": "飛行員配對方案（轉匹配）",
+        "title": "飛行員配對方案問題",
         "source": "luogu",
         "source_id": "P2756",
         "rating": 1900,
@@ -8588,7 +8588,7 @@
         ]
       },
       {
-        "title": "最大流加強版",
+        "title": "【模板】最大流 加強版 / 預流推進",
         "source": "luogu",
         "source_id": "P4722",
         "rating": 2400,
@@ -8646,7 +8646,7 @@
     ],
     "practice_problems": [
       {
-        "title": "【模板】網路最大流（最小割值）",
+        "title": "【模板】網路最大流",
         "source": "luogu",
         "source_id": "P3376",
         "rating": 1900,
@@ -8657,7 +8657,7 @@
         ]
       },
       {
-        "title": "太空飛行計劃問題（最大權閉合）",
+        "title": "太空飛行計劃問題",
         "source": "luogu",
         "source_id": "P2762",
         "rating": 2200,
@@ -8668,7 +8668,7 @@
         ]
       },
       {
-        "title": "文理分科（二選一最小割）",
+        "title": "文理分科",
         "source": "luogu",
         "source_id": "P4313",
         "rating": 2300,
@@ -8749,7 +8749,7 @@
         ]
       },
       {
-        "title": "完美的牛欄 The Perfect Stall",
+        "title": "[USACO4.2] 完美的牛欄The Perfect Stall",
         "source": "luogu",
         "source_id": "P1894",
         "rating": 1800,
