@@ -7,7 +7,7 @@ import { isStaticExport } from '@/lib/runtime';
 
 export function ClientProviders({ children }: { children: ReactNode }) {
   const themed = (
-    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
       {children}
     </ThemeProvider>
   );

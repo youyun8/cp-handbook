@@ -46,6 +46,52 @@
       "⚠️ 分隔符 `'#'` 必須是不在字母表中的字元，否則 fail 值會跨越兩段字串，產生假匹配。",
       "⚠️ `fail[0] = 0` 是固定的（長度 1 的字串不存在真前後綴），從 `i=1` 開始建構。",
       "⚠️ 匹配到後若需繼續找下一個重疊的匹配，`j` 應設為 `fail[m-1]` 而非 0。"
+    ],
+    "practice_problems": [
+      {
+        "title": "找出字串中第一個匹配項的下標",
+        "source": "leetcode",
+        "source_id": "find-the-index-of-the-first-occurrence-in-a-string",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "KMP",
+          "字串匹配"
+        ]
+      },
+      {
+        "title": "重複的子字串",
+        "source": "leetcode",
+        "source_id": "repeated-substring-pattern",
+        "rating": 1400,
+        "tier": "warmup",
+        "tags": [
+          "失敗函數",
+          "週期"
+        ]
+      },
+      {
+        "title": "最長快樂前綴",
+        "source": "leetcode",
+        "source_id": "longest-happy-prefix",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "前後綴",
+          "KMP"
+        ]
+      },
+      {
+        "title": "Password",
+        "source": "codeforces",
+        "source_id": "126B",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "前綴函數",
+          "邊界"
+        ]
+      }
     ]
   },
   {
@@ -86,6 +132,52 @@
     "pitfalls": [
       "⚠️ Z[0] 的定義在不同實作中可能是 n 或 0，使用前確認定義，避免比對時誤判。",
       "⚠️ 延伸條件要同時檢查 `i + z[i] < n`，否則陣列越界。"
+    ],
+    "practice_problems": [
+      {
+        "title": "Sum of Scores of Built Strings",
+        "source": "leetcode",
+        "source_id": "sum-of-scores-of-built-strings",
+        "rating": 2100,
+        "tier": "core",
+        "tags": [
+          "Z 函數",
+          "LCP"
+        ]
+      },
+      {
+        "title": "Prefixes and Suffixes",
+        "source": "codeforces",
+        "source_id": "432D",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "Z 函數",
+          "前後綴"
+        ]
+      },
+      {
+        "title": "Password",
+        "source": "codeforces",
+        "source_id": "126B",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "Z 函數",
+          "邊界"
+        ]
+      },
+      {
+        "title": "Who is Missing?",
+        "source": "atcoder",
+        "source_id": "abc236_c",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "字串集合",
+          "匹配"
+        ]
+      }
     ]
   },
   {
@@ -127,6 +219,52 @@
       "⚠️ 減法結果可能為負，需加 `MOD * 2` 再取模，不能只加一個 MOD（若中間有兩次減法）。",
       "⚠️ 單哈希在競賽中可能被 Hack（特意構造碰撞），高風險題目改用雙哈希。",
       "⚠️ base B 最好隨機化（`mt19937` 生成），避免被特定 B 值的 anti-hash 測資攻擊。"
+    ],
+    "practice_problems": [
+      {
+        "title": "最長重複子串",
+        "source": "leetcode",
+        "source_id": "longest-duplicate-substring",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "字串哈希",
+          "二分"
+        ]
+      },
+      {
+        "title": "重複的 DNA 序列",
+        "source": "leetcode",
+        "source_id": "repeated-dna-sequences",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "滾動哈希",
+          "集合"
+        ]
+      },
+      {
+        "title": "Good Substrings",
+        "source": "codeforces",
+        "source_id": "271D",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "哈希",
+          "子字串計數"
+        ]
+      },
+      {
+        "title": "最短回文串",
+        "source": "leetcode",
+        "source_id": "shortest-palindrome",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "哈希",
+          "前後綴"
+        ]
+      }
     ]
   },
   {
@@ -172,6 +310,52 @@
       "⚠️ 靜態陣列 Trie 必須預估最大節點數（= 總字元數），開小了會越界，開大了浪費記憶體。",
       "⚠️ 01-Trie 必須從最高位開始插入，方向反了異或最大值的貪心會錯。",
       "⚠️ 查詢結束時要確認最後節點的 `end_count > 0`（字串確實存在），而非只確認節點存在。"
+    ],
+    "practice_problems": [
+      {
+        "title": "實現 Trie",
+        "source": "leetcode",
+        "source_id": "implement-trie-prefix-tree",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "Trie",
+          "前綴"
+        ]
+      },
+      {
+        "title": "添加與搜尋單詞",
+        "source": "leetcode",
+        "source_id": "design-add-and-search-words-data-structure",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "Trie",
+          "DFS"
+        ]
+      },
+      {
+        "title": "單詞搜尋 II",
+        "source": "leetcode",
+        "source_id": "word-search-ii",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "Trie",
+          "回溯"
+        ]
+      },
+      {
+        "title": "陣列中兩個數的最大異或值",
+        "source": "leetcode",
+        "source_id": "maximum-xor-of-two-numbers-in-an-array",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "01-Trie",
+          "異或"
+        ]
+      }
     ]
   },
   {
@@ -225,6 +409,52 @@
       "⚠️ 倍增建構中，`i + gap` 可能越界，越界時排名設為 -1（或 sentinel），確保排序穩定。",
       "⚠️ 拼接兩字串時，分隔符 '$' 必須小於所有字母（ASCII 值 36 < 97），否則後綴排序會錯。",
       "⚠️ Kasai 算法計算 `h--` 時確保 `h >= 0`，若 h 已為 0 就不再遞減。"
+    ],
+    "practice_problems": [
+      {
+        "title": "後綴排序",
+        "source": "luogu",
+        "source_id": "P3809",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "後綴陣列",
+          "模板"
+        ]
+      },
+      {
+        "title": "最長重複子串",
+        "source": "leetcode",
+        "source_id": "longest-duplicate-substring",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "後綴陣列",
+          "LCP"
+        ]
+      },
+      {
+        "title": "Distinct Substrings",
+        "source": "atcoder",
+        "source_id": "practice2_i",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "後綴陣列",
+          "不同子串"
+        ]
+      },
+      {
+        "title": "String",
+        "source": "codeforces",
+        "source_id": "128B",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "後綴排序",
+          "第 K 子串"
+        ]
+      }
     ]
   },
   {
@@ -265,6 +495,52 @@
     "pitfalls": [
       "⚠️ SPFA 在特定圖（如網格圖或菊花圖）上可能被卡到 O(VE)，競賽中遇到可能被 Hack 時改用 Dijkstra（若無負邊）。",
       "⚠️ 限制層數版本的 Bellman-Ford 每輪必須用前一輪的副本，否則單輪內連鎖更新等於多跳。"
+    ],
+    "practice_problems": [
+      {
+        "title": "K 站中轉內最便宜的航班",
+        "source": "leetcode",
+        "source_id": "cheapest-flights-within-k-stops",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "Bellman-Ford",
+          "有限輪鬆弛"
+        ]
+      },
+      {
+        "title": "判負環",
+        "source": "luogu",
+        "source_id": "P3385",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "SPFA",
+          "負環"
+        ]
+      },
+      {
+        "title": "Currency Exchange",
+        "source": "codeforces",
+        "source_id": "20C",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "最短路",
+          "鬆弛"
+        ]
+      },
+      {
+        "title": "Graph and String",
+        "source": "codeforces",
+        "source_id": "623A",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "圖建模",
+          "判定"
+        ]
+      }
     ]
   },
   {
@@ -311,6 +587,52 @@
       "⚠️ `LOG` 必須滿足 `LOG >= ceil(log2(n)) + 1`；例如 `n = 10^5` 常設 `LOG = 17`，`n = 10^6` 常設 `LOG = 20`。",
       "⚠️ 第二階段的條件是 `up[u][k] != up[v][k]` 才一起跳，不能寫反。",
       "⚠️ 第一階段拉平深度後，必須立刻檢查 `u == v`；這正是其中一點本來就是另一點祖先的情況。"
+    ],
+    "practice_problems": [
+      {
+        "title": "最近公共祖先",
+        "source": "luogu",
+        "source_id": "P3379",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "LCA",
+          "倍增"
+        ]
+      },
+      {
+        "title": "Tree Queries",
+        "source": "codeforces",
+        "source_id": "1328E",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "LCA",
+          "祖先判定"
+        ]
+      },
+      {
+        "title": "Distance in Tree",
+        "source": "codeforces",
+        "source_id": "161D",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "樹距離",
+          "LCA"
+        ]
+      },
+      {
+        "title": "樹節點的第 K 個祖先",
+        "source": "leetcode",
+        "source_id": "kth-ancestor-of-a-tree-node",
+        "rating": 2000,
+        "tier": "core",
+        "tags": [
+          "倍增",
+          "祖先"
+        ]
+      }
     ]
   },
   {
@@ -352,6 +674,52 @@
       "⚠️ 若 `k > dep[v]`，在 root sentinel 設計下程式可能默默回傳根節點；正確做法是先檢查並回傳 `-1`。",
       "⚠️ `treeDist(u, v)` 算出的是邊數；若題目要路徑上的節點數，答案要再 `+1`。",
       "⚠️ 從 `u` 朝 `v` 方向的第 `k` 個節點，不等於 `u` 的第 `k` 級祖先，除非 `v` 本來就在 `u` 的祖先鏈上。"
+    ],
+    "practice_problems": [
+      {
+        "title": "樹節點的第 K 個祖先",
+        "source": "leetcode",
+        "source_id": "kth-ancestor-of-a-tree-node",
+        "rating": 2000,
+        "tier": "core",
+        "tags": [
+          "倍增",
+          "k 級祖先"
+        ]
+      },
+      {
+        "title": "Company Queries I",
+        "source": "cses",
+        "source_id": "1687",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "倍增",
+          "祖先"
+        ]
+      },
+      {
+        "title": "Company Queries II",
+        "source": "cses",
+        "source_id": "1688",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "LCA",
+          "樹距離"
+        ]
+      },
+      {
+        "title": "Blood Cousins",
+        "source": "codeforces",
+        "source_id": "208E",
+        "rating": 1900,
+        "tier": "challenge",
+        "tags": [
+          "倍增",
+          "子樹"
+        ]
+      }
     ]
   },
   {
@@ -398,6 +766,52 @@
       "⚠️ 合併必須寫成 `par[findSet(u)] = v`，不能直接 `par[u] = v`，因為路徑壓縮後 `u` 未必仍是集合代表元。",
       "⚠️ Tarjan 是離線演算法；若查詢會邊讀邊問，就不能直接套用，應改用倍增或 Euler Tour + RMQ 等線上方法。",
       "⚠️ `u == v` 的自查詢要特判成該節點本身；若等到 `color[u] == 2` 再做 `findSet(u)`，可能得到已被合併到更高層的祖先。"
+    ],
+    "practice_problems": [
+      {
+        "title": "最近公共祖先",
+        "source": "luogu",
+        "source_id": "P3379",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "離線 LCA",
+          "並查集"
+        ]
+      },
+      {
+        "title": "距離查詢",
+        "source": "luogu",
+        "source_id": "P3398",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "LCA",
+          "路徑相交"
+        ]
+      },
+      {
+        "title": "緊急集合",
+        "source": "luogu",
+        "source_id": "P4281",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "LCA",
+          "三點距離"
+        ]
+      },
+      {
+        "title": "Company Queries II",
+        "source": "cses",
+        "source_id": "1688",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "LCA",
+          "多查詢"
+        ]
+      }
     ]
   },
   {
@@ -444,6 +858,52 @@
       "⚠️ check 函式的單調方向必須正確：最小化時「x 越大越容易通過」，通過就縮右邊界；最大化時「x 越小越容易通過」，通過就縮左邊界。方向搞反會收斂到錯誤端點。",
       "⚠️ lo 與 hi 的初始值要覆蓋所有合法答案：lo 必須 ≤ 真正的最優解，hi 必須 ≥ 真正的最優解，邊界過窄會漏掉真正答案。",
       "⚠️ check 函式內的累加若可能超過 int 範圍，必須使用 `long long`；mid 計算也應用 `lo + (hi - lo) / 2` 避免 `(lo + hi)` 本身溢位。"
+    ],
+    "practice_problems": [
+      {
+        "title": "乘法表中第 K 小的數",
+        "source": "leetcode",
+        "source_id": "kth-smallest-number-in-multiplication-table",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "二分答案",
+          "計數"
+        ]
+      },
+      {
+        "title": "分割陣列的最大值",
+        "source": "leetcode",
+        "source_id": "split-array-largest-sum",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "二分答案",
+          "貪心判定"
+        ]
+      },
+      {
+        "title": "Hamburgers",
+        "source": "codeforces",
+        "source_id": "371C",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "二分答案",
+          "資源判定"
+        ]
+      },
+      {
+        "title": "跳石頭",
+        "source": "luogu",
+        "source_id": "P2678",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "二分答案",
+          "最大化最小值"
+        ]
+      }
     ]
   },
   {
@@ -486,6 +946,52 @@
       "⚠️ 峰值搜尋必須寫 `hi = mid`，不能寫 `hi = mid - 1`，因為 `a[mid]` 本身可能就是峰值；誤寫 `mid - 1` 會把峰值排除在搜尋範圍之外。",
       "⚠️ 旋轉陣列中判斷左半有序要用 `a[lo] <= a[mid]`（含等號），否則當 `lo == mid`（區間剩兩元素）時判斷錯誤，導致 target 落在正確半卻往錯誤方向縮。",
       "⚠️ `findPeak` 要求相鄰元素嚴格不等（`a[i] != a[i+1]`）；若有重複值，「上升/下降」判斷失效，演算法不保證正確。"
+    ],
+    "practice_problems": [
+      {
+        "title": "搜尋旋轉排序陣列",
+        "source": "leetcode",
+        "source_id": "search-in-rotated-sorted-array",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "旋轉陣列",
+          "二分"
+        ]
+      },
+      {
+        "title": "尋找旋轉排序陣列中的最小值",
+        "source": "leetcode",
+        "source_id": "find-minimum-in-rotated-sorted-array",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "旋轉陣列",
+          "最小值"
+        ]
+      },
+      {
+        "title": "尋找峰值",
+        "source": "leetcode",
+        "source_id": "find-peak-element",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "峰值",
+          "二分"
+        ]
+      },
+      {
+        "title": "山脈陣列中查找目標值",
+        "source": "leetcode",
+        "source_id": "find-in-mountain-array",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "峰值",
+          "雙二分"
+        ]
+      }
     ]
   },
   {
@@ -532,6 +1038,52 @@
       "⚠️ 整數三分的迴圈條件是 `hi - lo > 2`，不要改成 `lo < hi`——當區間剩 2 個點時 `m1 == lo`、`m2 == hi`，`lo = m1 + 1` 可能超過 `hi`，或 `hi = m2 - 1` 跳過峰值。",
       "⚠️ 實數三分不要使用 `while (hi - lo > EPS)` 配合極小 EPS，浮點精度損失可能導致無窮迴圈；改用固定迭代次數（100～200 次）更穩定。",
       "⚠️ 若問題的函數並非全域單峰（有多個局部極值），三分搜尋只找到局部極值而非全域最優，此時需先確認問題的凸/凹結構或改用其他全域最佳化方法。"
+    ],
+    "practice_problems": [
+      {
+        "title": "Closest to the Left",
+        "source": "codeforces",
+        "source_id": "1167B",
+        "rating": 1300,
+        "tier": "warmup",
+        "tags": [
+          "單峰",
+          "搜尋"
+        ]
+      },
+      {
+        "title": "The Meeting Place Cannot Be Changed",
+        "source": "codeforces",
+        "source_id": "782B",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "三分",
+          "實數二分"
+        ]
+      },
+      {
+        "title": "Garland",
+        "source": "codeforces",
+        "source_id": "408B",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "搜尋",
+          "判定"
+        ]
+      },
+      {
+        "title": "Best Cow Fences",
+        "source": "luogu",
+        "source_id": "P1419",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "答案搜尋",
+          "平均值"
+        ]
+      }
     ]
   },
   {
@@ -574,6 +1126,52 @@
       "⚠️ 子集枚舉迴圈 `for (int t = S; t; t = (t-1) & S)` 不包含空集（t=0），若題目需要空集需在迴圈外另行處理。",
       "⚠️ `S & ~(1 << i)` 在 32 位 int 下，若 i=31 且 `~(1 << i)` 的符號位為 0 則行為正確；但對 `long long` 操作時應寫成 `S & ~(1LL << i)`，否則高位截斷。",
       "⚠️ 超集枚舉迴圈需在迴圈體中加 `if (t == 0) break`，因為 `(0 - 1) & comp` 會產生全 1 的值，造成無限迴圈。"
+    ],
+    "practice_problems": [
+      {
+        "title": "只出現一次的數字",
+        "source": "leetcode",
+        "source_id": "single-number",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "異或",
+          "位元"
+        ]
+      },
+      {
+        "title": "位元 1 的個數",
+        "source": "leetcode",
+        "source_id": "number-of-1-bits",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "lowbit",
+          "位元計數"
+        ]
+      },
+      {
+        "title": "位元 AND 範圍",
+        "source": "leetcode",
+        "source_id": "bitwise-and-of-numbers-range",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "公共前綴",
+          "位元"
+        ]
+      },
+      {
+        "title": "XOR and OR",
+        "source": "codeforces",
+        "source_id": "282C",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "位元觀察",
+          "構造"
+        ]
+      }
     ]
   },
   {
@@ -616,6 +1214,52 @@
       "⚠️ 轉移時必須確認 `v` 在 `mask` 中（`mask & (1<<v)` 非零）且 `u` 不在 `mask` 中；若遺漏這兩個條件，會更新非法狀態。",
       "⚠️ 路徑重建時反向追蹤，每步應在取出前驅 `prev[mask][cur]` 後再將 `cur` 從 `mask` 中移除（`mask ^= 1<<cur`）；順序顛倒會導致查到錯誤的前驅。",
       "⚠️ n = 20 時 dp 陣列大小為 2^20 × 20 ≈ 2000 萬個元素；若元素型別為 `long long`（8 bytes），需約 160 MB，需注意記憶體限制。"
+    ],
+    "practice_problems": [
+      {
+        "title": "最短超字串",
+        "source": "leetcode",
+        "source_id": "find-the-shortest-superstring",
+        "rating": 2300,
+        "tier": "challenge",
+        "tags": [
+          "狀壓 DP",
+          "Hamilton 路徑"
+        ]
+      },
+      {
+        "title": "訪問所有節點的最短路徑",
+        "source": "leetcode",
+        "source_id": "shortest-path-visiting-all-nodes",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "狀壓 BFS",
+          "TSP"
+        ]
+      },
+      {
+        "title": "Close Group",
+        "source": "atcoder",
+        "source_id": "abc187_f",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "狀壓 DP",
+          "集合覆蓋"
+        ]
+      },
+      {
+        "title": "Traveling Salesman among Aerial Cities",
+        "source": "atcoder",
+        "source_id": "abc180_e",
+        "rating": 2000,
+        "tier": "challenge",
+        "tags": [
+          "TSP",
+          "狀壓"
+        ]
+      }
     ]
   },
   {
@@ -658,6 +1302,52 @@
       "⚠️ 初始化 `dp[] = f[]` 後才能呼叫 SOS DP；若初始化為全 0 再加 f，需要在 SOS 之前完成，不能在 SOS 過程中混入原始值。",
       "⚠️ 子集枚舉暴力 `O(3^n)` 在 n=20 時約 3.5×10^9 次操作，會超時；n>15 時應改用 SOS DP（O(2^n × n) ≈ 2×10^7）。",
       "⚠️ SOS DP 計算的是「所有子集的和」，若需要「恰好等於 S 的子集之和」（Möbius 逆）需要額外做一次 Möbius 反演，不能直接讀 `dp[S]`。"
+    ],
+    "practice_problems": [
+      {
+        "title": "Compatible Numbers",
+        "source": "codeforces",
+        "source_id": "165E",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "SOS DP",
+          "子集"
+        ]
+      },
+      {
+        "title": "Vasya and Binary String",
+        "source": "codeforces",
+        "source_id": "1107E",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "狀壓",
+          "DP"
+        ]
+      },
+      {
+        "title": "Close Group",
+        "source": "atcoder",
+        "source_id": "abc187_f",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "子集枚舉",
+          "DP"
+        ]
+      },
+      {
+        "title": "Count Ways to Build Good Strings",
+        "source": "leetcode",
+        "source_id": "count-ways-to-build-good-strings",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "DP",
+          "計數"
+        ]
+      }
     ]
   },
   {
@@ -699,6 +1389,52 @@
       "⚠️ 叉積在座標較大時容易溢位：`x*y` 可達 1e18 等級，務必使用 `long long`（座標到 1e9 時甚至要 `__int128`）。",
       "⚠️ 只在必要時才用浮點求長度或角度；判斷方向、共線、相交一律用整數叉積比較符號，避免 `eps` 帶來的錯判。",
       "⚠️ 鞋帶公式要求頂點按沿邊順序給定（不可亂序），且結果是有號的兩倍面積，別忘了取絕對值再除以 2。"
+    ],
+    "practice_problems": [
+      {
+        "title": "Line Segment Distance",
+        "source": "atcoder",
+        "source_id": "abc343_e",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "幾何",
+          "座標"
+        ]
+      },
+      {
+        "title": "凸多邊形",
+        "source": "luogu",
+        "source_id": "P2742",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "叉積",
+          "向量"
+        ]
+      },
+      {
+        "title": "Points and Powers of Two",
+        "source": "codeforces",
+        "source_id": "988D",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "座標",
+          "枚舉"
+        ]
+      },
+      {
+        "title": "Self Crossing",
+        "source": "leetcode",
+        "source_id": "self-crossing",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "幾何分類",
+          "線段"
+        ]
+      }
     ]
   },
   {
@@ -745,6 +1481,52 @@
       "⚠️ 點數 `n < 3`（含全部共線、重複點）需特判，否則建鏈會越界或回傳退化結果。",
       "⚠️ 記得先去除重複點（`unique`），重複點會讓叉積為 0 而干擾彈棧判斷。",
       "⚠️ 叉積用 `long long`，座標相減後相乘在 1e9 座標下可達 1e18，`int` 會溢位。"
+    ],
+    "practice_problems": [
+      {
+        "title": "Erect the Fence",
+        "source": "leetcode",
+        "source_id": "erect-the-fence",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "凸包",
+          "Andrew"
+        ]
+      },
+      {
+        "title": "凸包模板",
+        "source": "luogu",
+        "source_id": "P2742",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "凸包",
+          "叉積"
+        ]
+      },
+      {
+        "title": "Mr. Kitayuta vs. Bamboos",
+        "source": "codeforces",
+        "source_id": "505C",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "幾何思維",
+          "DP"
+        ]
+      },
+      {
+        "title": "Line Empire",
+        "source": "codeforces",
+        "source_id": "1659A",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "座標",
+          "貪心"
+        ]
+      }
     ]
   },
   {
@@ -791,6 +1573,52 @@
       "⚠️ 射線法的跨越條件用嚴格不等 `(a.y>q.y)!=(b.y>q.y)`（半開區間），否則在頂點高度會重複計數導致內外判斷錯誤。",
       "⚠️ 邊界點要不要算「在內」依題意而定；本實作回傳 -1 讓呼叫端自行決定，別忽略這個情形。",
       "⚠️ 多邊形若非簡單多邊形（自交），射線法的奇偶規則會失效。"
+    ],
+    "practice_problems": [
+      {
+        "title": "Self Crossing",
+        "source": "leetcode",
+        "source_id": "self-crossing",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "線段相交",
+          "分類"
+        ]
+      },
+      {
+        "title": "Line Segment Intersection",
+        "source": "luogu",
+        "source_id": "P1183",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "線段相交",
+          "叉積"
+        ]
+      },
+      {
+        "title": "Cows in a Row",
+        "source": "codeforces",
+        "source_id": "101B",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "幾何",
+          "排序"
+        ]
+      },
+      {
+        "title": "Point in Polygon",
+        "source": "atcoder",
+        "source_id": "abc296_g",
+        "rating": 2000,
+        "tier": "challenge",
+        "tags": [
+          "點在多邊形內",
+          "凸多邊形"
+        ]
+      }
     ]
   },
   {
@@ -837,6 +1665,52 @@
       "⚠️ 距離平方在座標到 1e9 時可達 ~4e18，逼近 `long long` 上限，務必用 `long long`（必要時 `__int128`）。",
       "⚠️ 帶狀區內層迴圈一定要有 `y` 差距 `< d` 的提前 break，否則退化成 O(n²)。",
       "⚠️ 分治版依賴點先按 x 排序、回溯時按 y 合併；若自行改寫，務必維持這個排序不變量。"
+    ],
+    "practice_problems": [
+      {
+        "title": "平面最近點對",
+        "source": "luogu",
+        "source_id": "P1429",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "最近點對",
+          "分治"
+        ]
+      },
+      {
+        "title": "Closest Pair",
+        "source": "luogu",
+        "source_id": "P7883",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "最近點對",
+          "掃描線"
+        ]
+      },
+      {
+        "title": "Minimum Euclidean Distance",
+        "source": "atcoder",
+        "source_id": "abc234_ex",
+        "rating": 2300,
+        "tier": "challenge",
+        "tags": [
+          "幾何",
+          "分治"
+        ]
+      },
+      {
+        "title": "Points on Plane",
+        "source": "codeforces",
+        "source_id": "576C",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "座標排序",
+          "幾何"
+        ]
+      }
     ]
   },
   {
@@ -883,6 +1757,52 @@
       "⚠️ 嚴格遞增 LIS 用 `lower_bound`，非嚴格遞增用 `upper_bound`，兩者混用會導致答案偏小或偏大。",
       "⚠️ 最大子段和若子段允許為空（長度 0），答案下界為 0；若要求子段非空，初始值應設 `cur = a[0]`、`ans = a[0]`，而非從 0 出發，否則全負陣列會錯誤回傳 0。",
       "⚠️ LCS 使用滾動陣列節省空間時，每輪掃描前需將 `cur` 列清零，且 `swap` 後舊的 `cur` 即下一輪的 `prev`，順序不能顛倒。"
+    ],
+    "practice_problems": [
+      {
+        "title": "最長遞增子序列",
+        "source": "leetcode",
+        "source_id": "longest-increasing-subsequence",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "LIS",
+          "二分"
+        ]
+      },
+      {
+        "title": "最長公共子序列",
+        "source": "leetcode",
+        "source_id": "longest-common-subsequence",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "LCS",
+          "二維 DP"
+        ]
+      },
+      {
+        "title": "最大子陣列和",
+        "source": "leetcode",
+        "source_id": "maximum-subarray",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "Kadane",
+          "線性 DP"
+        ]
+      },
+      {
+        "title": "Vacation",
+        "source": "atcoder",
+        "source_id": "dp_c",
+        "rating": 1300,
+        "tier": "warmup",
+        "tags": [
+          "線性 DP",
+          "狀態轉移"
+        ]
+      }
     ]
   },
   {
@@ -925,6 +1845,52 @@
       "⚠️ 多重背包直接展開成 c 個相同物品再做 0/1 背包，若 c 高達 10⁶ 會 TLE；必須使用二進位分組（O(log C) 組）或單調隊列優化（O(nW)）。",
       "⚠️ 「恰好裝滿」與「至多裝滿」初始化不同：前者除 `dp[0]=0` 外均為 `-INF`，後者全部為 0；混淆後答案可能偏大或出現非法值。",
       "⚠️ 物品價值之和可能超過 `int` 範圍，若 n 和 v[i] 均較大應改用 `long long`；比較時也要注意 `-INF` 加正值的溢位問題。"
+    ],
+    "practice_problems": [
+      {
+        "title": "分割等和子集",
+        "source": "leetcode",
+        "source_id": "partition-equal-subset-sum",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "01 背包",
+          "可行性"
+        ]
+      },
+      {
+        "title": "目標和",
+        "source": "leetcode",
+        "source_id": "target-sum",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "背包轉化",
+          "計數"
+        ]
+      },
+      {
+        "title": "Knapsack 1",
+        "source": "atcoder",
+        "source_id": "dp_d",
+        "rating": 1400,
+        "tier": "warmup",
+        "tags": [
+          "01 背包",
+          "容量"
+        ]
+      },
+      {
+        "title": "Knapsack 2",
+        "source": "atcoder",
+        "source_id": "dp_e",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "價值維度",
+          "背包"
+        ]
+      }
     ]
   },
   {
@@ -967,6 +1933,52 @@
       "⚠️ 分割點 k 的範圍是 `[l, r-1]`（k 為左半部分右端點）；寫成 `[l+1, r]` 或邊界錯誤會導致答案偏大。",
       "⚠️ 環形問題複製序列後注意下標：dp 陣列需擴展至 2n，且答案只從 `dp[i][i+n-1]`（剛好 n 個元素的區間）中取。",
       "⚠️ `INT_MAX` 作初始值時，若再加正數會整數溢位；改用足夠大但不溢位的常數（如 `1e9`），或改用 `long long` 及 `LLONG_MAX/2`。"
+    ],
+    "practice_problems": [
+      {
+        "title": "戳氣球",
+        "source": "leetcode",
+        "source_id": "burst-balloons",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "區間 DP",
+          "枚舉斷點"
+        ]
+      },
+      {
+        "title": "移除盒子",
+        "source": "leetcode",
+        "source_id": "remove-boxes",
+        "rating": 2400,
+        "tier": "challenge",
+        "tags": [
+          "區間 DP",
+          "狀態擴展"
+        ]
+      },
+      {
+        "title": "Slimes",
+        "source": "atcoder",
+        "source_id": "dp_n",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "區間 DP",
+          "合併代價"
+        ]
+      },
+      {
+        "title": "石子合併",
+        "source": "luogu",
+        "source_id": "P1880",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "環形區間 DP",
+          "前綴和"
+        ]
+      }
     ]
   },
   {
@@ -1009,6 +2021,52 @@
       "⚠️ 遞迴深度過深（序列長度達 10⁵ 等）會導致系統棧溢位（stack overflow）；此時改用迭代 DP 或手動模擬棧。",
       "⚠️ 多測試資料時必須在每個測試案例前重置 memo（`fill` 或 `assign`），否則前一筆的快取值會污染後續答案。",
       "⚠️ 記憶化搜尋只適用於**有向無環圖（DAG）**上的轉移；若狀態轉移存在環（如無記憶遞迴），會導致無限遞迴或錯誤的快取覆蓋，需先拓撲排序或改用迭代 DP。"
+    ],
+    "practice_problems": [
+      {
+        "title": "不同路徑 III",
+        "source": "leetcode",
+        "source_id": "unique-paths-iii",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "記憶化搜尋",
+          "狀壓"
+        ]
+      },
+      {
+        "title": "奇怪印表機",
+        "source": "leetcode",
+        "source_id": "strange-printer",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "記憶化",
+          "區間"
+        ]
+      },
+      {
+        "title": "Deque",
+        "source": "atcoder",
+        "source_id": "dp_l",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "記憶化",
+          "博弈 DP"
+        ]
+      },
+      {
+        "title": "Digit Sum",
+        "source": "atcoder",
+        "source_id": "dp_s",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "數位 DP",
+          "記憶化"
+        ]
+      }
     ]
   },
   {
@@ -1055,6 +2113,52 @@
       "⚠️ `rank` 只有在兩棵根的秩相等時才要加一，不是每次 `union` 都遞增。",
       "⚠️ 做過路徑壓縮後，`rank` 已不再是樹的精確高度，只能視為高度上界。",
       "⚠️ 想得到 O(α(n)) 必須把路徑壓縮與按秩／按大小合併一起用；單獨使用任一種優化通常只保證 O(log n) 等級。"
+    ],
+    "practice_problems": [
+      {
+        "title": "冗餘連接",
+        "source": "leetcode",
+        "source_id": "redundant-connection",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "並查集",
+          "判環"
+        ]
+      },
+      {
+        "title": "省份數量",
+        "source": "leetcode",
+        "source_id": "number-of-provinces",
+        "rating": 1300,
+        "tier": "warmup",
+        "tags": [
+          "並查集",
+          "連通分量"
+        ]
+      },
+      {
+        "title": "親戚",
+        "source": "luogu",
+        "source_id": "P1551",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "並查集",
+          "模板"
+        ]
+      },
+      {
+        "title": "Cutting a Graph",
+        "source": "codeforces",
+        "source_id": "292D",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "離線並查集",
+          "連通性"
+        ]
+      }
     ]
   },
   {
@@ -1100,6 +2204,52 @@
       "⚠️ 一定要在 `find()` 之後再讀 `d[x]`、`d[y]`，因為路徑壓縮會把它們更新成相對根的值。",
       "⚠️ 兩點已在同一集合時，仍要檢查 `d[x] - d[y] == w` 是否成立，不能默默跳過新約束。",
       "⚠️ 乘法型要小心除以 0 與浮點誤差；比較答案或檢查相容性時應搭配 `EPS`。"
+    ],
+    "practice_problems": [
+      {
+        "title": "除法求值",
+        "source": "leetcode",
+        "source_id": "evaluate-division",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "帶權並查集",
+          "比例"
+        ]
+      },
+      {
+        "title": "食物鏈",
+        "source": "luogu",
+        "source_id": "P2024",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "帶權並查集",
+          "關係"
+        ]
+      },
+      {
+        "title": "銀河英雄傳說",
+        "source": "luogu",
+        "source_id": "P1196",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "帶權並查集",
+          "距離"
+        ]
+      },
+      {
+        "title": "People on a Line",
+        "source": "atcoder",
+        "source_id": "abc087_d",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "差分約束",
+          "帶權並查集"
+        ]
+      }
     ]
   },
   {
@@ -1142,6 +2292,52 @@
       "⚠️ 矛盾檢查一定要放在 `unite` 之前，因為一旦先合併，錯誤資訊就已經污染整個結構。",
       "⚠️ `x` 吃 `x` 永遠是矛盾，處理食物鏈的 `op = 2` 時要先特判 `x == y`。",
       "⚠️ 3 域食物鏈的 `op = 2` 必須完整做三次 `unite()`；少掉任何一條對應關係都會讓答案失真。"
+    ],
+    "practice_problems": [
+      {
+        "title": "Possible Bipartition",
+        "source": "leetcode",
+        "source_id": "possible-bipartition",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "種類並查集",
+          "二分圖"
+        ]
+      },
+      {
+        "title": "食物鏈",
+        "source": "luogu",
+        "source_id": "P2024",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "種類並查集",
+          "三類關係"
+        ]
+      },
+      {
+        "title": "關押罪犯",
+        "source": "luogu",
+        "source_id": "P1525",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "擴展域",
+          "二分答案"
+        ]
+      },
+      {
+        "title": "Parity Alternated Deletions",
+        "source": "codeforces",
+        "source_id": "1144D",
+        "rating": 1500,
+        "tier": "warmup",
+        "tags": [
+          "分類",
+          "關係"
+        ]
+      }
     ]
   },
   {
@@ -1188,6 +2384,52 @@
       "⚠️ 多源 BFS 必須**同時**把所有源點初始化並一起入隊；若分批執行會破壞最短距離的保證。",
       "⚠️ 0-1 BFS 的 deque 中同一節點可能出現多次；出隊後若距離已被更新為更短值，舊項會被 `if (dist[u] + w < dist[v])` 自然過濾，無需額外標記。",
       "⚠️ BFS 只保證無權圖（邊權均等）的最短路；邊權不同時需改用 Dijkstra 或 Bellman-Ford。"
+    ],
+    "practice_problems": [
+      {
+        "title": "腐爛橘子",
+        "source": "leetcode",
+        "source_id": "rotting-oranges",
+        "rating": 1300,
+        "tier": "warmup",
+        "tags": [
+          "多源 BFS",
+          "網格"
+        ]
+      },
+      {
+        "title": "01 矩陣",
+        "source": "leetcode",
+        "source_id": "01-matrix",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "多源 BFS",
+          "距離"
+        ]
+      },
+      {
+        "title": "最小代價構造有效路徑",
+        "source": "leetcode",
+        "source_id": "minimum-cost-to-make-at-least-one-valid-path-in-a-grid",
+        "rating": 2000,
+        "tier": "challenge",
+        "tags": [
+          "0-1 BFS",
+          "網格"
+        ]
+      },
+      {
+        "title": "Labyrinth",
+        "source": "cses",
+        "source_id": "1193",
+        "rating": 1300,
+        "tier": "warmup",
+        "tags": [
+          "BFS",
+          "路徑還原"
+        ]
+      }
     ]
   },
   {
@@ -1233,6 +2475,52 @@
       "⚠️ 在稠密圖或深鏈圖（n = 10⁵ 的長鏈）上使用**遞迴 DFS** 會觸發堆疊溢出（Stack Overflow）；競賽中應改用迭代 DFS 或在程式開頭手動擴大堆疊大小。",
       "⚠️ 有向圖的**強連通分量**（SCC）不能用無向圖的簡單 DFS 計數法；兩個互相可達的節點才屬於同一 SCC，必須使用 Kosaraju 或 Tarjan。",
       "⚠️ 無向圖 DFS 跳過父節點時，若圖有**重邊**（兩節點間有多條邊），單純比較節點編號會誤跳合法後向邊；應傳入邊的索引（edge index）而非父節點編號。"
+    ],
+    "practice_problems": [
+      {
+        "title": "島嶼數量",
+        "source": "leetcode",
+        "source_id": "number-of-islands",
+        "rating": 1300,
+        "tier": "warmup",
+        "tags": [
+          "DFS",
+          "連通分量"
+        ]
+      },
+      {
+        "title": "被圍繞的區域",
+        "source": "leetcode",
+        "source_id": "surrounded-regions",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "DFS",
+          "邊界染色"
+        ]
+      },
+      {
+        "title": "Counting Rooms",
+        "source": "cses",
+        "source_id": "1192",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "DFS",
+          "網格連通"
+        ]
+      },
+      {
+        "title": "Building Roads",
+        "source": "cses",
+        "source_id": "1666",
+        "rating": 1300,
+        "tier": "warmup",
+        "tags": [
+          "連通分量",
+          "建邊"
+        ]
+      }
     ]
   },
   {
@@ -1278,6 +2566,52 @@
       "⚠️ Kahn 算法結束後若 `order.size() < n`，代表圖中有**有向環**，不存在合法拓撲序；必須特判此情況，不能直接使用不完整的 `order`。",
       "⚠️ DFS 後序法需用**三色標記**（未訪問 / 訪問中 / 已完成）；若只用布林 `visited`，無法區分「正在遞迴中」與「已完全訪問」，無法偵測有向環。",
       "⚠️ 拓撲序**不唯一**；若題目要求特定順序（如字典序最小），需額外使用優先佇列；普通 BFS/DFS 的輸出順序取決於鄰接表順序，是不確定的。"
+    ],
+    "practice_problems": [
+      {
+        "title": "課程表",
+        "source": "leetcode",
+        "source_id": "course-schedule",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "拓撲排序",
+          "判環"
+        ]
+      },
+      {
+        "title": "課程表 II",
+        "source": "leetcode",
+        "source_id": "course-schedule-ii",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "拓撲序",
+          "有向圖"
+        ]
+      },
+      {
+        "title": "Longest Path",
+        "source": "atcoder",
+        "source_id": "dp_g",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "DAG DP",
+          "拓撲排序"
+        ]
+      },
+      {
+        "title": "Fox And Names",
+        "source": "codeforces",
+        "source_id": "510C",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "字母圖",
+          "拓撲排序"
+        ]
+      }
     ]
   },
   {
@@ -1324,6 +2658,52 @@
       "⚠️ **自環**（節點連向自身的邊）使圖直接非二分（等價於奇環長度 1）；標準染色邏輯會偵測到 `color[v] == color[u]`（此時 v == u），需確認算法能正確處理或預先過濾自環。",
       "⚠️ 二分圖染色只適用於**無向圖**；有向圖不能直接使用此法，同色節點間可能有有向邊而不構成矛盾。",
       "⚠️ 染色結果 `color[]` 只在圖確認為二分圖後才有意義；若 `isBipartite` 返回 `false`，`color[]` 中的值是不完整的，不應用於後續匹配。"
+    ],
+    "practice_problems": [
+      {
+        "title": "判斷二分圖",
+        "source": "leetcode",
+        "source_id": "is-graph-bipartite",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "二分圖染色",
+          "BFS"
+        ]
+      },
+      {
+        "title": "Possible Bipartition",
+        "source": "leetcode",
+        "source_id": "possible-bipartition",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "二分圖",
+          "染色"
+        ]
+      },
+      {
+        "title": "Building Teams",
+        "source": "cses",
+        "source_id": "1668",
+        "rating": 1400,
+        "tier": "warmup",
+        "tags": [
+          "二分圖",
+          "染色"
+        ]
+      },
+      {
+        "title": "BUGLIFE",
+        "source": "luogu",
+        "source_id": "P1525",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "二分圖",
+          "矛盾"
+        ]
+      }
     ]
   },
   {
@@ -1366,6 +2746,52 @@
       "⚠️ C++ 的 `priority_queue` 預設是大根堆；若要小根堆，必須改用 `greater<int>` 當比較器。",
       "⚠️ `buildHeap` 應該從 `n/2` 開始往前做 `siftDown`，不是從 `n` 開始，因為葉節點根本不需要下沉。",
       "⚠️ `pop` 時必須先交換 `heap[1]` 與 `heap[heapSize]` 再遞減 `heapSize`，順序寫反很容易把最後一個元素遺失。"
+    ],
+    "practice_problems": [
+      {
+        "title": "陣列中的第 K 個最大元素",
+        "source": "leetcode",
+        "source_id": "kth-largest-element-in-an-array",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "堆",
+          "選擇"
+        ]
+      },
+      {
+        "title": "最後一塊石頭的重量",
+        "source": "leetcode",
+        "source_id": "last-stone-weight",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "最大堆",
+          "模擬"
+        ]
+      },
+      {
+        "title": "合併 K 個升序鏈表",
+        "source": "leetcode",
+        "source_id": "merge-k-sorted-lists",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "最小堆",
+          "多路合併"
+        ]
+      },
+      {
+        "title": "Supermarket",
+        "source": "luogu",
+        "source_id": "P2949",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "堆",
+          "貪心"
+        ]
+      }
     ]
   },
   {
@@ -1408,6 +2834,52 @@
       "⚠️ 在把堆頂當成第 K 大之前，必須先確認 `pq.size() >= k`，否則讀到的只會是目前元素中的最小值。",
       "⚠️ `nth_element` 的平均複雜度是 O(n)，但最壞情況仍可能退化成 O(n²)。",
       "⚠️ C++ 的 `priority_queue` 不支援任意位置刪除；若題目還需要刪除中間元素，通常要改用 `multiset` 或延遲刪除。"
+    ],
+    "practice_problems": [
+      {
+        "title": "前 K 個高頻元素",
+        "source": "leetcode",
+        "source_id": "top-k-frequent-elements",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "Top-K",
+          "堆"
+        ]
+      },
+      {
+        "title": "資料流中的第 K 大元素",
+        "source": "leetcode",
+        "source_id": "kth-largest-element-in-a-stream",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "小根堆",
+          "資料流"
+        ]
+      },
+      {
+        "title": "查找和最小的 K 對數字",
+        "source": "leetcode",
+        "source_id": "find-k-pairs-with-smallest-sums",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "Top-K",
+          "多路擴展"
+        ]
+      },
+      {
+        "title": "K-th Number",
+        "source": "luogu",
+        "source_id": "P3834",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "第 K 大",
+          "資料結構"
+        ]
+      }
     ]
   },
   {
@@ -1450,6 +2922,52 @@
       "⚠️ 在兩個堆之間搬移元素做平衡時，記得先從來源堆 `pop()`，再把值 `push()` 到另一邊。",
       "⚠️ 計算 `(maxHeap.top() + minHeap.top()) / 2` 時可能整數溢位，應先轉成 `long long` 或直接用 `double`。",
       "⚠️ 呼叫 `top()` 前必須先確認堆非空；空資料流沒有中位數，模板通常要自行約定回傳值或額外判斷。"
+    ],
+    "practice_problems": [
+      {
+        "title": "資料流的中位數",
+        "source": "leetcode",
+        "source_id": "find-median-from-data-stream",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "對頂堆",
+          "資料流"
+        ]
+      },
+      {
+        "title": "滑動窗口中位數",
+        "source": "leetcode",
+        "source_id": "sliding-window-median",
+        "rating": 2300,
+        "tier": "challenge",
+        "tags": [
+          "對頂堆",
+          "延遲刪除"
+        ]
+      },
+      {
+        "title": "Running Median",
+        "source": "luogu",
+        "source_id": "P1168",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "中位數",
+          "堆"
+        ]
+      },
+      {
+        "title": "Expedition",
+        "source": "luogu",
+        "source_id": "P1090",
+        "rating": 1400,
+        "tier": "warmup",
+        "tags": [
+          "堆",
+          "貪心"
+        ]
+      }
     ]
   },
   {
@@ -1492,6 +3010,52 @@
       "⚠️ `unordered_map` 裡的 `toDelete[x]` 應該在減到 0 時刪掉鍵值，或至少只把 `> 0` 視為有效標記，不能一路減成負數。",
       "⚠️ `empty()` 也必須先做 `cleanup()`，否則當堆裡只剩邏輯上已刪除的元素時，會錯誤地回報非空。",
       "⚠️ 把延遲刪除和對頂堆一起用時，還要另外維護『有效元素數』，否則重新平衡時會被已失效的舊值誤導。"
+    ],
+    "practice_problems": [
+      {
+        "title": "滑動窗口最大值",
+        "source": "leetcode",
+        "source_id": "sliding-window-maximum",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "堆",
+          "延遲刪除"
+        ]
+      },
+      {
+        "title": "滑動窗口中位數",
+        "source": "leetcode",
+        "source_id": "sliding-window-median",
+        "rating": 2300,
+        "tier": "challenge",
+        "tags": [
+          "雙堆",
+          "延遲刪除"
+        ]
+      },
+      {
+        "title": "最大子序列的分數",
+        "source": "leetcode",
+        "source_id": "maximum-subsequence-score",
+        "rating": 2000,
+        "tier": "challenge",
+        "tags": [
+          "堆",
+          "排序"
+        ]
+      },
+      {
+        "title": "Online Courses In BSU",
+        "source": "codeforces",
+        "source_id": "770C",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "堆",
+          "依賴"
+        ]
+      }
     ]
   },
   {
@@ -1533,6 +3097,52 @@
       "⚠️ 題目定義的「重疊」可能包含端點接觸（`l <= r`）或不包含（`l < r`），判斷條件要對應調整。",
       "⚠️ 輸入未必已排序，別忘了先 `sort`；若直接在已排序結構（`set`）上插入，才可省略。",
       "⚠️ 動態插入版本的 `lower_bound` 要多往前看一格（`--it`），否則遺漏左端更小但右端覆蓋新區間左端的區間。"
+    ],
+    "practice_problems": [
+      {
+        "title": "合併區間",
+        "source": "leetcode",
+        "source_id": "merge-intervals",
+        "rating": 1300,
+        "tier": "warmup",
+        "tags": [
+          "區間合併",
+          "排序"
+        ]
+      },
+      {
+        "title": "插入區間",
+        "source": "leetcode",
+        "source_id": "insert-interval",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "區間合併",
+          "分類"
+        ]
+      },
+      {
+        "title": "無重疊區間",
+        "source": "leetcode",
+        "source_id": "non-overlapping-intervals",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "排序",
+          "貪心"
+        ]
+      },
+      {
+        "title": "Covered Points Count",
+        "source": "codeforces",
+        "source_id": "1000C",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "區間",
+          "差分"
+        ]
+      }
     ]
   },
   {
@@ -1574,6 +3184,52 @@
       "⚠️ 排序基準是**結束時間**，不是開始時間；按開始時間貪心是貪心的常見錯誤，反例不難構造。",
       "⚠️ 端點接觸是否算重疊依題目定義，`l >= last` vs `l > last` 要對應，不同題目判斷不同。",
       "⚠️ 「最少機器數」掃描線事件排序中，閉區間的結束 `-1` 必須排在同時刻的開始 `+1` 之前，否則重疊計數多一。"
+    ],
+    "practice_problems": [
+      {
+        "title": "無重疊區間",
+        "source": "leetcode",
+        "source_id": "non-overlapping-intervals",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "區間調度",
+          "貪心"
+        ]
+      },
+      {
+        "title": "用最少數量的箭引爆氣球",
+        "source": "leetcode",
+        "source_id": "minimum-number-of-arrows-to-burst-balloons",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "區間調度",
+          "右端點"
+        ]
+      },
+      {
+        "title": "活動選擇",
+        "source": "luogu",
+        "source_id": "P1803",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "貪心",
+          "右端點排序"
+        ]
+      },
+      {
+        "title": "Movie Festival",
+        "source": "cses",
+        "source_id": "1629",
+        "rating": 1300,
+        "tier": "warmup",
+        "tags": [
+          "區間調度",
+          "貪心"
+        ]
+      }
     ]
   },
   {
@@ -1619,6 +3275,52 @@
       "⚠️ `d` 陣列大小至少開 `n + 1`（0-indexed 時，`r+1` 最大為 `n`），否則 `d[r+1]` 會越界。",
       "⚠️ 差分陣列適合**靜態**批次修改後一次 `build`；若修改和查詢交錯，必須改用 BIT 或線段樹。",
       "⚠️ 二維差分的四個角落要用容斥正確設定（`+v, -v, -v, +v`），方向搞錯會讓 `build` 結果完全錯誤。"
+    ],
+    "practice_problems": [
+      {
+        "title": "航班預訂統計",
+        "source": "leetcode",
+        "source_id": "corporate-flight-bookings",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "差分陣列",
+          "區間加"
+        ]
+      },
+      {
+        "title": "拼車",
+        "source": "leetcode",
+        "source_id": "car-pooling",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "差分",
+          "掃描"
+        ]
+      },
+      {
+        "title": "Range Addition",
+        "source": "leetcode",
+        "source_id": "range-addition",
+        "rating": 1400,
+        "tier": "warmup",
+        "tags": [
+          "差分",
+          "區間更新"
+        ]
+      },
+      {
+        "title": "地毯",
+        "source": "luogu",
+        "source_id": "P3397",
+        "rating": 1300,
+        "tier": "warmup",
+        "tags": [
+          "二維差分",
+          "矩陣"
+        ]
+      }
     ]
   },
   {
@@ -1664,6 +3366,52 @@
       "⚠️ 閉區間 `[l, r]` 在同時刻有結束和開始時，必須讓結束事件（`-1`）先於開始事件（`+1`）處理，否則「會議室」等並發題目計數多一。",
       "⚠️ 計算覆蓋長度時，累加的時機是**處理事件之前**（累加 `t - prev`），不是之後；順序搞錯會讓最後一段或第一段長度計算錯誤。",
       "⚠️ 半開區間 `[l, r)` 與閉區間 `[l, r]` 的事件排序行為不同，套用模板前先確認題目用的是哪種定義。"
+    ],
+    "practice_problems": [
+      {
+        "title": "會議室 II",
+        "source": "leetcode",
+        "source_id": "meeting-rooms-ii",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "掃描線",
+          "堆"
+        ]
+      },
+      {
+        "title": "矩形面積 II",
+        "source": "leetcode",
+        "source_id": "rectangle-area-ii",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "掃描線",
+          "離散化"
+        ]
+      },
+      {
+        "title": "Perfect Rectangle",
+        "source": "leetcode",
+        "source_id": "perfect-rectangle",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "掃描線",
+          "矩形覆蓋"
+        ]
+      },
+      {
+        "title": "Restaurant Customers",
+        "source": "cses",
+        "source_id": "1619",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "事件排序",
+          "掃描線"
+        ]
+      }
     ]
   },
   {
@@ -1710,6 +3458,52 @@
       "⚠️ 線性篩必須在 `p > spf[i]` 時立即 break，否則同一合數會被多個質數重複標記，複雜度不再是 O(n)。",
       "⚠️ `phi_arr[1] = 1` 需在迴圈外單獨初始化；1 不是質數，不進入 `if (!spf[i])` 分支，否則 phi[1] 留在 0。",
       "⚠️ 全域陣列 `spf` 初始值為 0，靠 `!spf[i]` 判斷是否為質數；切勿對 `spf` 做非零的 memset。"
+    ],
+    "practice_problems": [
+      {
+        "title": "計數質數",
+        "source": "leetcode",
+        "source_id": "count-primes",
+        "rating": 1400,
+        "tier": "warmup",
+        "tags": [
+          "埃氏篩",
+          "質數"
+        ]
+      },
+      {
+        "title": "質數距離",
+        "source": "luogu",
+        "source_id": "P1835",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "區間篩",
+          "質數"
+        ]
+      },
+      {
+        "title": "Prime Multiples",
+        "source": "cses",
+        "source_id": "2185",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "質數",
+          "容斥"
+        ]
+      },
+      {
+        "title": "DZY Loves Sequences",
+        "source": "codeforces",
+        "source_id": "446A",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "數論",
+          "觀察"
+        ]
+      }
     ]
   },
   {
@@ -1756,6 +3550,52 @@
       "⚠️ 同餘方程的解週期是 `m / gcd(a, m)` 而非 m 本身，混淆兩者會導致答案錯誤。",
       "⚠️ 計算 `x * (c / g)` 時若 x 和 c/g 都是 `long long`，乘積可能超過 `LLONG_MAX`；用 `__int128` 或先對 mod 取模。",
       "⚠️ `c % g != 0` 是無解的充要條件，別漏掉這個判斷就直接使用回傳的特解。"
+    ],
+    "practice_problems": [
+      {
+        "title": "最大公因數等於 K 的子陣列數目",
+        "source": "leetcode",
+        "source_id": "number-of-subarrays-with-gcd-equal-to-k",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "GCD",
+          "子陣列"
+        ]
+      },
+      {
+        "title": "Water and Jug Problem",
+        "source": "leetcode",
+        "source_id": "water-and-jug-problem",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "裴蜀定理",
+          "GCD"
+        ]
+      },
+      {
+        "title": "同餘方程",
+        "source": "luogu",
+        "source_id": "P1082",
+        "rating": 1400,
+        "tier": "warmup",
+        "tags": [
+          "擴展歐幾里得",
+          "模逆元"
+        ]
+      },
+      {
+        "title": "Ebony and Ivory",
+        "source": "codeforces",
+        "source_id": "633A",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "線性丟番圖",
+          "GCD"
+        ]
+      }
     ]
   },
   {
@@ -1802,6 +3642,52 @@
       "⚠️ 當 m 超過約 3×10⁹ 時，`a * a % m` 中間值可能超過 `LLONG_MAX`；需改用 `(__int128)a * a % m` 或龜速乘。",
       "⚠️ 矩陣快速冪的初始矩陣 R 必須設為**單位矩陣**（對角線為 1，其餘為 0），對應純量快速冪中 `res = 1` 的角色。",
       "⚠️ 矩陣快速冪中迴圈條件是 `p > 0`，`p >>= 1` 每步右移；確認轉移矩陣的維度和遞推初始狀態向量方向一致（行向量 vs 列向量）。"
+    ],
+    "practice_problems": [
+      {
+        "title": "Pow(x, n)",
+        "source": "leetcode",
+        "source_id": "powx-n",
+        "rating": 1300,
+        "tier": "warmup",
+        "tags": [
+          "快速冪",
+          "二進位"
+        ]
+      },
+      {
+        "title": "超級次方",
+        "source": "leetcode",
+        "source_id": "super-pow",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "快速冪",
+          "模運算"
+        ]
+      },
+      {
+        "title": "快速冪模板",
+        "source": "luogu",
+        "source_id": "P1226",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "快速冪",
+          "模板"
+        ]
+      },
+      {
+        "title": "Raising Bacteria",
+        "source": "codeforces",
+        "source_id": "579A",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "二進位",
+          "位元"
+        ]
+      }
     ]
   },
   {
@@ -1848,6 +3734,52 @@
       "⚠️ `C(n, k)` 中若 k > n 應回傳 0；直接計算 `inv_fact[n-k]` 時 n-k < 0 會導致越界訪問。",
       "⚠️ Lucas 定理要求模數 p 是質數；若模數是合數（如 p = 4）需改用擴展 Lucas（exlucas），複雜度更高。",
       "⚠️ 線性逆元遞推公式中 `MOD - MOD/i` 確保結果非負；若直接寫 `-(MOD/i) * inv[MOD%i]`，負數取模行為在 C++ 中未定義（可能為負）。"
+    ],
+    "practice_problems": [
+      {
+        "title": "組合數問題",
+        "source": "luogu",
+        "source_id": "P2822",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "組合數",
+          "前綴和"
+        ]
+      },
+      {
+        "title": "求逆元",
+        "source": "luogu",
+        "source_id": "P3811",
+        "rating": 1400,
+        "tier": "warmup",
+        "tags": [
+          "模逆元",
+          "線性遞推"
+        ]
+      },
+      {
+        "title": "Binomial Coefficients",
+        "source": "cses",
+        "source_id": "1079",
+        "rating": 1400,
+        "tier": "warmup",
+        "tags": [
+          "組合數",
+          "模逆元"
+        ]
+      },
+      {
+        "title": "Count Anagrams",
+        "source": "leetcode",
+        "source_id": "count-anagrams",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "組合數",
+          "模逆元"
+        ]
+      }
     ]
   },
   {
@@ -1894,6 +3826,52 @@
       "⚠️ exgcd 回傳的 x 可能為負；`t = (...) * x % (m2/g)` 結果也可能為負，必須加 `m2/g` 後再取模。",
       "⚠️ 互質版建構時每步 `r[i] * Mi * xi` 要即時對 M 取模，否則連乘後溢位；使用 `__int128` 確保安全。",
       "⚠️ `crt_merge` 回傳的 r 在 [0, lcm) 之間；若題目要求「最小正整數解」，r = 0 的情況需特判回傳 lcm（或依題意）。"
+    ],
+    "practice_problems": [
+      {
+        "title": "中國剩餘定理模板",
+        "source": "luogu",
+        "source_id": "P1495",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "CRT",
+          "模逆元"
+        ]
+      },
+      {
+        "title": "曹沖養豬",
+        "source": "luogu",
+        "source_id": "P3868",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "CRT",
+          "同餘方程"
+        ]
+      },
+      {
+        "title": "Powers of Two",
+        "source": "codeforces",
+        "source_id": "1095C",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "數論",
+          "構造"
+        ]
+      },
+      {
+        "title": "Remainder Problem",
+        "source": "codeforces",
+        "source_id": "1207F",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "同餘",
+          "分塊"
+        ]
+      }
     ]
   },
   {
@@ -1940,6 +3918,52 @@
       "⚠️ DSU 的 `find` 若忘記路徑壓縮，每次查找退化為 O(n)，整體複雜度惡化為 O(E·V)；競賽中建議同時使用路徑壓縮和按秩合併。",
       "⚠️ 邊以 tuple `{weight, u, v}` 排序時，weight 必須在第一個位置；若寫成 `{u, v, w}` 則 `std::sort` 先比較節點編號，選出的不是最小邊。",
       "⚠️ 邊權可能有重複值；Kruskal 選哪條等重邊可能不同，MST 不唯一，但所有 MST 的**邊權總和唯一**（由 MST 定理保證）。"
+    ],
+    "practice_problems": [
+      {
+        "title": "連接所有點的最小費用",
+        "source": "leetcode",
+        "source_id": "min-cost-to-connect-all-points",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "Kruskal",
+          "MST"
+        ]
+      },
+      {
+        "title": "最小生成樹模板",
+        "source": "luogu",
+        "source_id": "P3366",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "Kruskal",
+          "並查集"
+        ]
+      },
+      {
+        "title": "Road Reparation",
+        "source": "cses",
+        "source_id": "1675",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "MST",
+          "Kruskal"
+        ]
+      },
+      {
+        "title": "Graph and MST",
+        "source": "codeforces",
+        "source_id": "609E",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "MST",
+          "倍增"
+        ]
+      }
     ]
   },
   {
@@ -1986,6 +4010,52 @@
       "⚠️ 堆版 Prim 的懶惰刪除用 `if (inMST[u]) continue;`——已入樹的節點的舊堆項目直接跳過；不同於 Dijkstra 用 `if (k > dist[u]) continue;`，兩者邏輯不可互換。",
       "⚠️ Prim 只適用於**無向圖**；有向圖的最小樹形圖問題需用 Edmonds（朱劉）算法，兩者不可混用。",
       "⚠️ 對於不連通的圖，Prim 只能生成起點所在連通分量的生成樹，`cnt < n` 時應回傳 -1 或提示無法構成完整 MST。"
+    ],
+    "practice_problems": [
+      {
+        "title": "連接所有點的最小費用",
+        "source": "leetcode",
+        "source_id": "min-cost-to-connect-all-points",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "Prim",
+          "稠密圖"
+        ]
+      },
+      {
+        "title": "最小生成樹模板",
+        "source": "luogu",
+        "source_id": "P3366",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "Prim",
+          "MST"
+        ]
+      },
+      {
+        "title": "Watering the Fields",
+        "source": "luogu",
+        "source_id": "P1991",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "Prim",
+          "完全圖"
+        ]
+      },
+      {
+        "title": "Road Reparation",
+        "source": "cses",
+        "source_id": "1675",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "MST",
+          "圖連通"
+        ]
+      }
     ]
   },
   {
@@ -2028,6 +4098,52 @@
       "⚠️ 查詢 LCA 路徑最大邊時，提升到同深度後的最後一步（`maxE[u][0]` 和 `maxE[v][0]`）極易遺漏；需確保 u 和 v 都到達 LCA 的子節點後，把這兩條邊納入 max。",
       "⚠️ Kruskal 得到的 MST 邊集可能不唯一（等重邊）；以任意一棵 MST 為基礎枚舉非樹邊，所得次小生成樹的**總重唯一**，實作結果正確。",
       "⚠️ 對嚴格次小生成樹，不能把「第二小總重 == MST 總重」的情況計入；應跳過 `w' == mx` 的非樹邊（換入換出等重不改變總重）。"
+    ],
+    "practice_problems": [
+      {
+        "title": "嚴格次小生成樹",
+        "source": "luogu",
+        "source_id": "P4180",
+        "rating": 2300,
+        "tier": "challenge",
+        "tags": [
+          "次小生成樹",
+          "倍增"
+        ]
+      },
+      {
+        "title": "Graph and MST",
+        "source": "codeforces",
+        "source_id": "609E",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "MST",
+          "替換邊"
+        ]
+      },
+      {
+        "title": "最小生成樹計數",
+        "source": "luogu",
+        "source_id": "P4208",
+        "rating": 2300,
+        "tier": "challenge",
+        "tags": [
+          "MST",
+          "矩陣樹"
+        ]
+      },
+      {
+        "title": "Road Improvement",
+        "source": "codeforces",
+        "source_id": "638C",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "樹",
+          "貪心"
+        ]
+      }
     ]
   },
   {
@@ -2074,6 +4190,52 @@
       "⚠️ 棧裡通常存的是下標不是值，真正比較時要寫成 `a[st.top()]`，否則之後沒辦法回填答案位置。",
       "⚠️ 主迴圈結束後，仍留在棧裡的元素代表「沒有找到下一個更大值」；答案陣列要先初始化成 `n` 或 `-1` 之類的預設值。",
       "⚠️ `next` 與 `prev` 問題的掃描方向常被搞反；先想清楚你要在『遇到新元素時結算舊元素』，還是『用目前棧頂回答當前元素』。"
+    ],
+    "practice_problems": [
+      {
+        "title": "每日溫度",
+        "source": "leetcode",
+        "source_id": "daily-temperatures",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "單調棧",
+          "下一個更大"
+        ]
+      },
+      {
+        "title": "下一個更大元素 II",
+        "source": "leetcode",
+        "source_id": "next-greater-element-ii",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "循環陣列",
+          "單調棧"
+        ]
+      },
+      {
+        "title": "移掉 K 位數字",
+        "source": "leetcode",
+        "source_id": "remove-k-digits",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "單調棧",
+          "貪心"
+        ]
+      },
+      {
+        "title": "Bad Hair Day",
+        "source": "luogu",
+        "source_id": "P2866",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "單調棧",
+          "可見對"
+        ]
+      }
     ]
   },
   {
@@ -2119,6 +4281,52 @@
       "⚠️ 過期判斷寫成 `dq.front() <= i-k` 最直觀；雖然與 `dq.front() < i-k+1` 等價，但前者更不容易在邊界上搞錯。",
       "⚠️ 雙端佇列裡存的是下標不是值，比較時要寫 `a[dq.back()]`，否則你無法同時處理過期檢查與大小比較。",
       "⚠️ 只有當 `i >= k-1` 時視窗才完整；太早輸出答案會把長度不足 `k` 的前綴也算進去。"
+    ],
+    "practice_problems": [
+      {
+        "title": "滑動窗口最大值",
+        "source": "leetcode",
+        "source_id": "sliding-window-maximum",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "單調佇列",
+          "滑動窗口"
+        ]
+      },
+      {
+        "title": "Shortest Subarray with Sum at Least K",
+        "source": "leetcode",
+        "source_id": "shortest-subarray-with-sum-at-least-k",
+        "rating": 2300,
+        "tier": "challenge",
+        "tags": [
+          "前綴和",
+          "單調佇列"
+        ]
+      },
+      {
+        "title": "滑動窗口",
+        "source": "luogu",
+        "source_id": "P1886",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "單調佇列",
+          "模板"
+        ]
+      },
+      {
+        "title": "Queue",
+        "source": "codeforces",
+        "source_id": "91B",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "單調結構",
+          "查詢"
+        ]
+      }
     ]
   },
   {
@@ -2160,6 +4368,52 @@
       "⚠️ 一般滑動視窗 DP 必須先讀雙端佇列隊頭算 `dp[i]`，再把 `i` 插入；順序反了就可能讓 `dp[i]` 從自己轉移。",
       "⚠️ 只有在合法前驅集合會隨 `i` 單調滑動時才適用；若可行 `j` 不是一段連續視窗，就不能直接套單調佇列。",
       "⚠️ 多重背包的調整值要寫成 `dp[r+t*w] - t*v`；正負號一旦寫反，雙端佇列維護的就不是同一個轉移式，答案會整體偏掉。"
+    ],
+    "practice_problems": [
+      {
+        "title": "Constrained Subsequence Sum",
+        "source": "leetcode",
+        "source_id": "constrained-subsequence-sum",
+        "rating": 2000,
+        "tier": "challenge",
+        "tags": [
+          "單調佇列",
+          "DP 優化"
+        ]
+      },
+      {
+        "title": "Jump Game VI",
+        "source": "leetcode",
+        "source_id": "jump-game-vi",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "單調佇列",
+          "轉移最大值"
+        ]
+      },
+      {
+        "title": "烽火傳遞",
+        "source": "luogu",
+        "source_id": "P3572",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "單調佇列優化",
+          "DP"
+        ]
+      },
+      {
+        "title": "烽火傳遞",
+        "source": "luogu",
+        "source_id": "P1725",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "單調佇列",
+          "DP"
+        ]
+      }
     ]
   },
   {
@@ -2202,6 +4456,52 @@
       "⚠️ 柱子被彈出後，它的左邊界是**新的**棧頂，不是剛剛被彈出的自己；這是最常見的寬度 邊界偏一錯誤。",
       "⚠️ 對等高柱子使用 `>` 時，通常由最後一根等高柱子負責較大的矩形；這種代表者差異不影響最大值，但比較式改成 `>=` 後行為會不同。",
       "⚠️ 二維最大全 1 矩形裡，`matrix[r][c] == 0` 時必須把 `h[c]` 直接重設成 `0`；高度表示的是「往上連續多少個 1」，不能累加穿牆。"
+    ],
+    "practice_problems": [
+      {
+        "title": "柱狀圖中最大的矩形",
+        "source": "leetcode",
+        "source_id": "largest-rectangle-in-histogram",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "單調棧",
+          "直方圖"
+        ]
+      },
+      {
+        "title": "最大矩形",
+        "source": "leetcode",
+        "source_id": "maximal-rectangle",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "直方圖",
+          "矩陣"
+        ]
+      },
+      {
+        "title": "Bad Hair Day",
+        "source": "luogu",
+        "source_id": "P2866",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "單調棧",
+          "可見性"
+        ]
+      },
+      {
+        "title": "Largest Rectangle",
+        "source": "luogu",
+        "source_id": "P4147",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "直方圖",
+          "矩陣"
+        ]
+      }
     ]
   },
   {
@@ -2248,6 +4548,52 @@
       "⚠️ 差分 BIT 做 `rangeAdd(l, r, val)` 時別忘了處理 `r + 1`，因此陣列通常要比原長度多開一格。",
       "⚠️ 值域很大時不能直接把原值當下標，先做座標壓縮才能避免空間爆掉。",
       "⚠️ 一般 BIT 依賴前綴可逆性，最常見是加法；像 `min/max` 這種運算不能直接照搬同一套模板。"
+    ],
+    "practice_problems": [
+      {
+        "title": "區域和檢索 - 陣列可修改",
+        "source": "leetcode",
+        "source_id": "range-sum-query-mutable",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "Fenwick",
+          "單點修改"
+        ]
+      },
+      {
+        "title": "計算右側小於當前元素的個數",
+        "source": "leetcode",
+        "source_id": "count-of-smaller-numbers-after-self",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "Fenwick",
+          "離散化"
+        ]
+      },
+      {
+        "title": "樹狀陣列 1",
+        "source": "luogu",
+        "source_id": "P3374",
+        "rating": 1300,
+        "tier": "warmup",
+        "tags": [
+          "Fenwick",
+          "模板"
+        ]
+      },
+      {
+        "title": "Dynamic Range Sum Queries",
+        "source": "cses",
+        "source_id": "1648",
+        "rating": 1400,
+        "tier": "warmup",
+        "tags": [
+          "Fenwick",
+          "區間和"
+        ]
+      }
     ]
   },
   {
@@ -2298,6 +4644,52 @@
       "⚠️ 單點更新回溯時忘了 `pushup`，父節點就會保留舊答案，之後查詢整段都會錯。",
       "⚠️ 查詢能直接回傳的條件是 `ql <= l && r <= qr` 的完整包含，不是只要區間有交集就可以停。",
       "⚠️ `mid = (l + r) / 2` 在座標很大時可能溢位，改寫成 `l + (r - l) / 2` 比較安全。"
+    ],
+    "practice_problems": [
+      {
+        "title": "區域和檢索 - 陣列可修改",
+        "source": "leetcode",
+        "source_id": "range-sum-query-mutable",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "線段樹",
+          "單點修改"
+        ]
+      },
+      {
+        "title": "線段樹 1",
+        "source": "luogu",
+        "source_id": "P3372",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "線段樹",
+          "區間加"
+        ]
+      },
+      {
+        "title": "Dynamic Range Minimum Queries",
+        "source": "cses",
+        "source_id": "1649",
+        "rating": 1400,
+        "tier": "warmup",
+        "tags": [
+          "線段樹",
+          "RMQ"
+        ]
+      },
+      {
+        "title": "Xenia and Bit Operations",
+        "source": "codeforces",
+        "source_id": "339D",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "線段樹",
+          "合併"
+        ]
+      }
     ]
   },
   {
@@ -2344,6 +4736,52 @@
       "⚠️ `applyLazy` 不能只改 `lazy[node]`，也要同步更新 `tree[node]`，不然當前節點答案就不正確。",
       "⚠️ 把 `0` 當成『沒標記』只適用於加法型 lazy；乘法、賦值等操作都需要另外的哨兵或旗標。",
       "⚠️ 區間更新遞迴回來後仍要 `pushup`，否則父節點無法反映左右子樹的新答案。"
+    ],
+    "practice_problems": [
+      {
+        "title": "線段樹 1",
+        "source": "luogu",
+        "source_id": "P3372",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "懶標記",
+          "區間加"
+        ]
+      },
+      {
+        "title": "線段樹 2",
+        "source": "luogu",
+        "source_id": "P3373",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "懶標記",
+          "乘加標記"
+        ]
+      },
+      {
+        "title": "Range Updates and Sums",
+        "source": "cses",
+        "source_id": "1735",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "懶標記",
+          "區間賦值"
+        ]
+      },
+      {
+        "title": "Ahoy, Pirates!",
+        "source": "luogu",
+        "source_id": "P3870",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "懶標記",
+          "翻轉"
+        ]
+      }
     ]
   },
   {
@@ -2386,6 +4824,52 @@
       "⚠️ 重複值必須映到同一個 rank，否則相等元素可能被錯誤算成逆序對。",
       "⚠️ 逆序對總數最壞可到 `n * (n - 1) / 2`，答案務必用 `long long`。",
       "⚠️ 多組測資時要記得清空 BIT 或重新初始化，不然前一組的頻次會污染下一組答案。"
+    ],
+    "practice_problems": [
+      {
+        "title": "逆序對",
+        "source": "luogu",
+        "source_id": "P1908",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "逆序對",
+          "Fenwick"
+        ]
+      },
+      {
+        "title": "計算右側小於當前元素的個數",
+        "source": "leetcode",
+        "source_id": "count-of-smaller-numbers-after-self",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "逆序對",
+          "離散化"
+        ]
+      },
+      {
+        "title": "Global and Local Inversions",
+        "source": "leetcode",
+        "source_id": "global-and-local-inversions",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "逆序對",
+          "觀察"
+        ]
+      },
+      {
+        "title": "Nested Ranges Count",
+        "source": "cses",
+        "source_id": "2169",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "Fenwick",
+          "排序"
+        ]
+      }
     ]
   },
   {
@@ -2436,6 +4920,52 @@
       "⚠️ 懶惰刪除必須加 `if (d > dist[u]) continue;` 判斷，省略此行會重複處理過時項目，導致 TLE 甚至錯誤答案。",
       "⚠️ `dist[]` 初始化為 INF 後做加法時，`dist[u] + w` 可能溢位（若用 `int`）；建議使用 `long long` 並以 `1e18` 作為 INF。",
       "⚠️ 若圖為不連通，`dist[v] == INF` 表示 v 不可達，輸出時需特判而非直接輸出 INF 值。"
+    ],
+    "practice_problems": [
+      {
+        "title": "網路延遲時間",
+        "source": "leetcode",
+        "source_id": "network-delay-time",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "Dijkstra",
+          "最短路"
+        ]
+      },
+      {
+        "title": "最短路徑模板",
+        "source": "luogu",
+        "source_id": "P4779",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "Dijkstra",
+          "堆優化"
+        ]
+      },
+      {
+        "title": "Shortest Routes I",
+        "source": "cses",
+        "source_id": "1671",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "Dijkstra",
+          "有向圖"
+        ]
+      },
+      {
+        "title": "Dijkstra?",
+        "source": "codeforces",
+        "source_id": "20C",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "Dijkstra",
+          "路徑還原"
+        ]
+      }
     ]
   },
   {
@@ -2486,6 +5016,52 @@
       "⚠️ 初始化時對角線 `dist[i][i]` 必須設 0（而非 INF），否則 INF + INF 在 `long long` 下溢位成負數，造成偽負環。",
       "⚠️ 存在負環時，Floyd 跑完後 `dist[i][j]` 可能因繞環而無意義；偵測到 `dist[i][i] < 0` 時需提前告知無解，不可直接輸出距離。",
       "⚠️ Floyd 僅適用 V ≤ 400～500 的小圖（V³ 操作數超過 10⁸ 即可能 TLE）；節點數大時應換用多次 Dijkstra 或 Johnson 算法。"
+    ],
+    "practice_problems": [
+      {
+        "title": "找到閾值距離內鄰居最少的城市",
+        "source": "leetcode",
+        "source_id": "find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "Floyd",
+          "全源最短路"
+        ]
+      },
+      {
+        "title": "Floyd 標準模板",
+        "source": "luogu",
+        "source_id": "P2910",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "Floyd",
+          "多源查詢"
+        ]
+      },
+      {
+        "title": "Shortest Routes II",
+        "source": "cses",
+        "source_id": "1672",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "Floyd",
+          "全源最短路"
+        ]
+      },
+      {
+        "title": "Greg and Graph",
+        "source": "codeforces",
+        "source_id": "295B",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "Floyd",
+          "逆序加點"
+        ]
+      }
     ]
   },
   {
@@ -2532,6 +5108,52 @@
       "⚠️ 與普通 BFS 不同，0-1 BFS 不能用 `visited[]` 跳過節點——同一節點可能因 0 邊被多次推入 deque，必須以 `dist[u] + w < dist[v]` 作更新條件。",
       "⚠️ deque 中可能有同一節點的多個舊副本；取出後若距離已更新（舊副本），鬆弛條件 `dist[u] + w < dist[v]` 不會觸發，不造成錯誤，但會浪費時間。可加 `if (dist[u] < d_popped) continue;` 剪枝。",
       "⚠️ 建圖時若邊為無向邊，需雙向加入鄰接表（u→v 與 v→u 各一條），與有向圖的建法不同。"
+    ],
+    "practice_problems": [
+      {
+        "title": "最小代價構造有效路徑",
+        "source": "leetcode",
+        "source_id": "minimum-cost-to-make-at-least-one-valid-path-in-a-grid",
+        "rating": 2000,
+        "tier": "challenge",
+        "tags": [
+          "0-1 BFS",
+          "網格"
+        ]
+      },
+      {
+        "title": "邊權限制下的路徑查詢",
+        "source": "leetcode",
+        "source_id": "checking-existence-of-edge-length-limited-paths",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "離線",
+          "並查集"
+        ]
+      },
+      {
+        "title": "Ocean Currents",
+        "source": "luogu",
+        "source_id": "P4554",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "0-1 BFS",
+          "方向代價"
+        ]
+      },
+      {
+        "title": "KATHTHI",
+        "source": "luogu",
+        "source_id": "P4667",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "0-1 BFS",
+          "網格"
+        ]
+      }
     ]
   },
   {
@@ -2574,6 +5196,52 @@
       "⚠️ 答案應取 `max(dp[root][0], dp[root][1])` 而非直接取 `dp[root][1]`；若根節點本身不應被選，只取 dp[root][1] 將得到次優解。",
       "⚠️ 無向樹 DFS 需傳入父節點 `par`（或使用 visited 陣列）以避免回頭遍歷造成無限遞迴。",
       "⚠️ 節點編號從 1 開始時，陣列大小需為 n+1，且初始 DFS 調用傳入 `(1, -1)` 而非 `(0, -1)`。"
+    ],
+    "practice_problems": [
+      {
+        "title": "House Robber III",
+        "source": "leetcode",
+        "source_id": "house-robber-iii",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "樹形 DP",
+          "最大獨立集"
+        ]
+      },
+      {
+        "title": "沒有上司的舞會",
+        "source": "luogu",
+        "source_id": "P1352",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "樹形 DP",
+          "選不選"
+        ]
+      },
+      {
+        "title": "Independent Set",
+        "source": "atcoder",
+        "source_id": "dp_p",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "樹 DP",
+          "染色"
+        ]
+      },
+      {
+        "title": "Appleman and Tree",
+        "source": "codeforces",
+        "source_id": "461B",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "樹 DP",
+          "計數"
+        ]
+      }
     ]
   },
   {
@@ -2616,6 +5284,52 @@
       "⚠️ 最大值/次大值技巧中，若多個子節點貢獻值相同，只需保留一個作為 `src1`；其他相同值的子節點查詢時取 `max1`（`src1` 子節點仍存在），邏輯依然正確。",
       "⚠️ 第二次 DFS 的初始 `upVal` 應為問題的**中性值**（距離問題為 0），不要傳入 `down[root]`，否則根節點的答案會被計算兩次。",
       "⚠️ 若邊權可為負，`down[v]` 初始為 0 表示路徑可在 v 截止；若題目要求路徑至少包含一條邊，需調整初始值為 -INF 並重設轉移邏輯。"
+    ],
+    "practice_problems": [
+      {
+        "title": "樹中距離之和",
+        "source": "leetcode",
+        "source_id": "sum-of-distances-in-tree",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "換根 DP",
+          "距離和"
+        ]
+      },
+      {
+        "title": "Subordinates",
+        "source": "cses",
+        "source_id": "1674",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "子樹大小",
+          "樹 DP"
+        ]
+      },
+      {
+        "title": "Tree Painting",
+        "source": "codeforces",
+        "source_id": "1187E",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "換根 DP",
+          "貢獻"
+        ]
+      },
+      {
+        "title": "Tree Distances I",
+        "source": "cses",
+        "source_id": "1132",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "換根",
+          "最大距離"
+        ]
+      }
     ]
   },
   {
@@ -2658,6 +5372,52 @@
       "⚠️ 樹形 DP 合併子節點時，必須先更新全域直徑（`diameter = max(...)`），再更新 `down[v]`；順序顛倒會讓同一子樹的路徑被重複統計。",
       "⚠️ 若題目要求直徑為嚴格正值（至少一條邊），且可能有負邊，初始 `diameter` 應設為 `LLONG_MIN` 而非 0，否則空路徑（長度 0）可能成為錯誤答案。",
       "⚠️ 直徑路徑可能有多條（長度相同），若題目要求輸出字典序最小的路徑，需在 DFS 中額外追蹤端點資訊並選擇合適的一條。"
+    ],
+    "practice_problems": [
+      {
+        "title": "樹的直徑",
+        "source": "leetcode",
+        "source_id": "diameter-of-binary-tree",
+        "rating": 1300,
+        "tier": "warmup",
+        "tags": [
+          "樹直徑",
+          "DFS"
+        ]
+      },
+      {
+        "title": "Tree Diameter",
+        "source": "cses",
+        "source_id": "1131",
+        "rating": 1400,
+        "tier": "warmup",
+        "tags": [
+          "雙 DFS",
+          "直徑"
+        ]
+      },
+      {
+        "title": "Tree Distances I",
+        "source": "cses",
+        "source_id": "1132",
+        "rating": 1800,
+        "tier": "core",
+        "tags": [
+          "直徑端點",
+          "距離"
+        ]
+      },
+      {
+        "title": "Cow Marathon",
+        "source": "luogu",
+        "source_id": "P3629",
+        "rating": 1700,
+        "tier": "core",
+        "tags": [
+          "樹直徑",
+          "DFS"
+        ]
+      }
     ]
   },
   {
@@ -2700,6 +5460,52 @@
       "⚠️ `sz[v] += sz[c]` 的更新必須放在合併迴圈**之後**；若先更新再合併，j 的有效範圍會包含 c 的節點，導致雙重計算。",
       "⚠️ 恰好選 k 個節點時，未到達的狀態應初始化為 `-INF`（不可達），不能用 0；否則「選 0 個節點的子樹」會污染「恰好選 k 個」的結果。",
       "⚠️ 鏈狀樹（即退化成一條路徑的樹）遞迴深度為 O(n)，n 較大時可能棧溢位，必要時改用迭代後序遍歷或在程式開頭調大棧空間。"
+    ],
+    "practice_problems": [
+      {
+        "title": "選課",
+        "source": "luogu",
+        "source_id": "P2014",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "樹上背包",
+          "依賴"
+        ]
+      },
+      {
+        "title": "二叉蘋果樹",
+        "source": "luogu",
+        "source_id": "P2015",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "樹上背包",
+          "邊數限制"
+        ]
+      },
+      {
+        "title": "Tree and Queries",
+        "source": "codeforces",
+        "source_id": "375D",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "樹上查詢",
+          "DSU on tree"
+        ]
+      },
+      {
+        "title": "Vacation",
+        "source": "atcoder",
+        "source_id": "dp_c",
+        "rating": 1300,
+        "tier": "warmup",
+        "tags": [
+          "DP",
+          "狀態轉移"
+        ]
+      }
     ]
   },
   {
@@ -2746,6 +5552,52 @@
       "⚠️ 三數之和去重需在找到答案後跳過 `l`、`r` 處的連續相同值，再執行 `l++; r--`；跳步順序顛倒或漏掉會導致結果集出現重複三元組。",
       "⚠️ 接雨水必須在更新 `leftMax` / `rightMax` 之後再計算差值，順序顛倒會對較高的柱子得到負數水量。",
       "⚠️ 盛最多水時高度相等的兩端可任意移動一端，但不要同時移動兩端（會遺漏當前寬度為最優的情況）。"
+    ],
+    "practice_problems": [
+      {
+        "title": "盛最多水的容器",
+        "source": "leetcode",
+        "source_id": "container-with-most-water",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "對撞指針",
+          "貪心"
+        ]
+      },
+      {
+        "title": "三數之和",
+        "source": "leetcode",
+        "source_id": "3sum",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "排序",
+          "對撞指針"
+        ]
+      },
+      {
+        "title": "接雨水",
+        "source": "leetcode",
+        "source_id": "trapping-rain-water",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "對撞指針",
+          "前後綴"
+        ]
+      },
+      {
+        "title": "Sum of Two Values",
+        "source": "cses",
+        "source_id": "1640",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "雙指針",
+          "排序"
+        ]
+      }
     ]
   },
   {
@@ -2788,6 +5640,52 @@
       "⚠️ 求「最短」視窗時，while 條件是「視窗仍合法則持續收縮」，與求「最長」的 while（不合法則收縮）邏輯相反，寫錯方向會讓視窗在合法狀態下停止收縮，得到錯誤結果。",
       "⚠️ `atMost(K) - atMost(K-1)` 中呼叫 `atMost(-1)` 需做邊界保護（直接返回 0），且 `atMost(0)` 也需正確處理（只允許空視窗，返回 0）。",
       "⚠️ 以 `freq.size()` 計算不同值個數時，刪除頻次須在歸零後立即 `erase`，否則鍵仍存在於 map 中，導致不同值計數偏高，窗口收縮邏輯錯誤。"
+    ],
+    "practice_problems": [
+      {
+        "title": "無重複字元的最長子字串",
+        "source": "leetcode",
+        "source_id": "longest-substring-without-repeating-characters",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "滑動視窗",
+          "集合"
+        ]
+      },
+      {
+        "title": "最小覆蓋子串",
+        "source": "leetcode",
+        "source_id": "minimum-window-substring",
+        "rating": 2100,
+        "tier": "challenge",
+        "tags": [
+          "滑動視窗",
+          "計數"
+        ]
+      },
+      {
+        "title": "恰好 K 個不同整數的子陣列",
+        "source": "leetcode",
+        "source_id": "subarrays-with-k-different-integers",
+        "rating": 2200,
+        "tier": "challenge",
+        "tags": [
+          "滑動視窗",
+          "恰好轉最多"
+        ]
+      },
+      {
+        "title": "Subarray Divisibility",
+        "source": "cses",
+        "source_id": "1662",
+        "rating": 1500,
+        "tier": "core",
+        "tags": [
+          "前綴和",
+          "計數"
+        ]
+      }
     ]
   },
   {
@@ -2834,6 +5732,52 @@
       "⚠️ Floyd 的相遇點在環內某處，**不等於**環入口；必須再執行第二階段（一個指針回到 head，兩者同速前進）才能定位入口，直接回傳相遇點是常見錯誤。",
       "⚠️ 找環入口的第二階段，兩個指針必須都以速度 1（每步一格）前進；若其中一個仍以兩步走，數學推導失效，得到錯誤的入口位置。",
       "⚠️ 鏈結串列歸併排序分割時必須使用左中點（`fast` 從 `head->next` 出發），否則長度為 2 的串列無法均分，遞迴呼叫傳入相同的 head，導致無限遞迴與堆疊溢位。"
+    ],
+    "practice_problems": [
+      {
+        "title": "環形鏈表",
+        "source": "leetcode",
+        "source_id": "linked-list-cycle",
+        "rating": 1200,
+        "tier": "warmup",
+        "tags": [
+          "快慢指針",
+          "判環"
+        ]
+      },
+      {
+        "title": "環形鏈表 II",
+        "source": "leetcode",
+        "source_id": "linked-list-cycle-ii",
+        "rating": 1600,
+        "tier": "core",
+        "tags": [
+          "Floyd 判圈",
+          "入口"
+        ]
+      },
+      {
+        "title": "尋找重複數",
+        "source": "leetcode",
+        "source_id": "find-the-duplicate-number",
+        "rating": 1900,
+        "tier": "core",
+        "tags": [
+          "函數圖",
+          "快慢指針"
+        ]
+      },
+      {
+        "title": "快樂數",
+        "source": "leetcode",
+        "source_id": "happy-number",
+        "rating": 1300,
+        "tier": "warmup",
+        "tags": [
+          "快慢指針",
+          "循環"
+        ]
+      }
     ]
   }
 ]

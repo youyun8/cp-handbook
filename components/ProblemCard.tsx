@@ -10,10 +10,10 @@ import {
   TierBadge,
   type CompletionStatus
 } from '@/components/Badges';
+import { ProblemSourceLink } from '@/components/ProblemSourceLink';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { Problem } from '@/lib/types';
-import { sourceLabel, sourceUrl } from '@/lib/utils';
 import { useMounted } from '@/lib/useMounted';
 import { useProgressStore } from '@/store/useProgressStore';
 
@@ -56,14 +56,12 @@ export function ProblemCard({ problem }: { problem: Problem }) {
           ))}
         </div>
         <div className="flex flex-wrap gap-2">
-          <a
-            href={sourceUrl(problem)}
-            target="_blank"
-            rel="noreferrer"
+          <ProblemSourceLink
+            problem={problem}
             className="rounded-xl border border-border px-3 py-2 text-sm text-muted-foreground transition hover:text-foreground"
           >
-            {sourceLabel(problem.source)} 題面
-          </a>
+            打開原題
+          </ProblemSourceLink>
           <Link
             href={`/problems/${problem.id}`}
             className="rounded-xl bg-primary px-3 py-2 text-sm font-medium text-primary-foreground transition hover:bg-primary/90"

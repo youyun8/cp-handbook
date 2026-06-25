@@ -1,4 +1,4 @@
-export type Source = 'leetcode' | 'codeforces' | 'luogu' | 'atcoder';
+export type Source = 'leetcode' | 'codeforces' | 'luogu' | 'atcoder' | 'cses';
 
 export type ProblemType = 'template' | 'classic' | 'insight_transfer';
 
@@ -53,6 +53,15 @@ export interface Problem {
   similar_problems: string[];
 }
 
+export interface PracticeProblem {
+  title: string;
+  source: Source;
+  source_id: string;
+  rating?: number;
+  tier?: Tier;
+  tags?: string[];
+}
+
 export interface RatingBand {
   id: 'consolidate' | 'target' | 'stretch';
   label: string;
@@ -75,6 +84,7 @@ export interface Subtopic {
   template_code: string;
   supplemental_patterns: SupplementalPattern[];
   pitfalls?: string[];
+  practice_problems?: PracticeProblem[];
 }
 
 // GitHub OAuth User

@@ -4,10 +4,11 @@ import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { DifficultyBadge, ProblemTypeBadge, TierBadge } from '@/components/Badges';
 import { MarkdownBlock } from '@/components/MarkdownBlock';
+import { ProblemSourceLink } from '@/components/ProblemSourceLink';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { Problem, Topic } from '@/lib/types';
-import { problemTypeLabel, sourceLabel, sourceUrl } from '@/lib/utils';
+import { problemTypeLabel, sourceLabel } from '@/lib/utils';
 import { useProgressStore } from '@/store/useProgressStore';
 
 type StrategyTab = 'approach' | 'pattern' | 'mistakes' | 'insight' | 'similar';
@@ -62,9 +63,9 @@ export function ProblemStrategy({
             </div>
             <div className="rounded-2xl border border-border p-3">
               <p>來源</p>
-              <a className="mt-1 block font-medium text-primary" href={sourceUrl(problem)} target="_blank" rel="noreferrer">
+              <ProblemSourceLink problem={problem} className="mt-1 block font-medium text-primary">
                 {sourceLabel(problem.source)} {problem.source_id}
-              </a>
+              </ProblemSourceLink>
             </div>
             <div className="rounded-2xl border border-border p-3">
               <p>通過數</p>

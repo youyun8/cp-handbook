@@ -3,10 +3,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { DifficultyBadge, ProblemTypeBadge } from '@/components/Badges';
+import { ProblemSourceLink } from '@/components/ProblemSourceLink';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { Problem, SubmissionStatus, Topic } from '@/lib/types';
-import { problemTypeLabel, ratingBands, sourceLabel, sourceUrl, submissionStatusLabel, cn } from '@/lib/utils';
+import { cn, problemTypeLabel, ratingBands, submissionStatusLabel } from '@/lib/utils';
 import { useProgressStore } from '@/store/useProgressStore';
 
 const statusOptions: SubmissionStatus[] = ['AC', 'WA', 'TLE', 'SKIP'];
@@ -343,9 +344,9 @@ function PracticeProblemRow({
         </div>
       </div>
       <div className="mt-3 flex flex-wrap items-center gap-2">
-        <a href={sourceUrl(problem)} target="_blank" rel="noreferrer" className="text-sm text-primary">
-          {sourceLabel(problem.source)} 題面
-        </a>
+        <ProblemSourceLink problem={problem} className="text-sm text-primary">
+          打開原題
+        </ProblemSourceLink>
         <span className="text-xs text-muted-foreground">題型：{problemTypeLabel(problem.problem_type)}</span>
       </div>
       <div className="mt-3 flex flex-wrap gap-2">

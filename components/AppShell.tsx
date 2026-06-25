@@ -10,7 +10,8 @@ const navItems = [
   { href: '/', label: '首頁' },
   { href: '/handbook', label: '手冊' },
   { href: '/practice', label: '練習場' },
-  { href: '/progress', label: '進度' }
+  { href: '/progress', label: '進度' },
+  { href: '/settings', label: '設定' }
 ];
 
 export async function AppShell({ children }: { children: ReactNode }) {

@@ -6,27 +6,30 @@ import { useMounted } from '@/lib/useMounted';
 
 export function ThemeToggle() {
   const mounted = useMounted();
-  const { theme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
 
   if (!mounted) {
     return (
       <Button type="button" variant="secondary" size="sm" aria-label="切換色彩模式">
-        色彩
+        外觀
       </Button>
     );
   }
 
-  const isDark = theme === 'dark';
+  const currentTheme = theme ?? 'system';
+  const isDark = resolvedTheme === 'dark';
+  const nextTheme = currentTheme === 'system' ? 'light' : currentTheme === 'light' ? 'dark' : 'system';
+  const label = currentTheme === 'system' ? '系統' : isDark ? '深色' : '淺色';
 
   return (
     <Button
       type="button"
       variant="secondary"
       size="sm"
-      aria-label={isDark ? '切換為淺色模式' : '切換為深色模式'}
-      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      aria-label="切換色彩模式"
+      onClick={() => setTheme(nextTheme)}
     >
-      {isDark ? '淺色' : '深色'}
+      {label}
     </Button>
   );
 }

@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import type { Problem, ProblemType, RatingBand, Source, SubmissionStatus, Tier } from '@/lib/types';
+import type { LeetCodeSite } from '@/store/useSettingsStore';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -11,14 +12,16 @@ export function sourceLabel(source: Source) {
     leetcode: '力扣',
     codeforces: 'Codeforces',
     luogu: '洛谷',
-    atcoder: 'AtCoder'
+    atcoder: 'AtCoder',
+    cses: 'CSES'
   };
   return labels[source];
 }
 
-export function sourceUrl(problem: Problem) {
+export function sourceUrl(problem: Pick<Problem, 'source' | 'source_id'>, leetCodeSite: LeetCodeSite = 'cn') {
   if (problem.source === 'leetcode') {
-    return `https://leetcode.cn/problems/${problem.source_id}/`;
+    const host = leetCodeSite === 'en' ? 'leetcode.com' : 'leetcode.cn';
+    return `https://${host}/problems/${problem.source_id}/`;
   }
 
   if (problem.source === 'codeforces') {
@@ -30,6 +33,10 @@ export function sourceUrl(problem: Problem) {
 
   if (problem.source === 'luogu') {
     return `https://www.luogu.com.cn/problem/${problem.source_id}`;
+  }
+
+  if (problem.source === 'cses') {
+    return `https://cses.fi/problemset/task/${problem.source_id}`;
   }
 
   return `https://atcoder.jp/contests/${problem.source_id.split('_')[0]}/tasks/${problem.source_id}`;
@@ -114,7 +121,8 @@ export function sourceClass(source: Source) {
     leetcode: 'border-amber-400/40 bg-amber-500/15 text-amber-800 dark:text-amber-300',
     codeforces: 'border-red-400/40 bg-red-500/15 text-red-800 dark:text-red-200',
     luogu: 'border-teal-400/40 bg-teal-500/15 text-teal-800 dark:text-teal-200',
-    atcoder: 'border-sky-400/40 bg-sky-500/15 text-sky-800 dark:text-sky-200'
+    atcoder: 'border-sky-400/40 bg-sky-500/15 text-sky-800 dark:text-sky-200',
+    cses: 'border-lime-400/40 bg-lime-500/15 text-lime-800 dark:text-lime-200'
   };
   return classes[source];
 }
