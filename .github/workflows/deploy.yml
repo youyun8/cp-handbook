@@ -1,8 +1,12 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages (static fallback)
 
+# NOTE: GitHub Pages can only host the STATIC export, where server-side GitHub
+# OAuth and cloud sync are disabled. The primary deployment is now Vercel
+# (server mode) so that GitHub login + progress sync work — see README.
+# This workflow is therefore manual-only to avoid overriding the Vercel
+# deployment on every push. Run it from the Actions tab if you want a static
+# (login-less) build on GitHub Pages.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 # Allow the workflow to publish to GitHub Pages.

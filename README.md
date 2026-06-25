@@ -80,22 +80,34 @@ openssl rand -hex 32
 
 ## 部署
 
-### Vercel（推薦，支援 OAuth）
+> **重點**：GitHub 登入與雲端同步需要伺服器端執行，**只能在伺服器模式（Vercel）下運作**。
+> GitHub Pages 為靜態託管，登入功能會自動停用。因此本專案以 **Vercel 為主要部署**。
+
+### Vercel（推薦，支援 GitHub 登入 + 雲端同步）
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/youyun8/cp-handbook)
 
 1. Fork 此 Repo 到你的 GitHub 帳號
-2. 在 [Vercel](https://vercel.com) 匯入此 Repo
-3. 在 Vercel 的 **Environment Variables** 填入所有 `.env.example` 中的變數
-4. 更新 GitHub OAuth App 的 Callback URL 為：
+2. 在 [Vercel](https://vercel.com/new) 匯入此 Repo（Vercel 會自動偵測 Next.js，使用預設 `npm run build`）
+3. 在 Vercel 的 **Settings → Environment Variables** 填入 `.env.example` 中的所有變數：
+   - `GITHUB_CLIENT_ID`、`GITHUB_CLIENT_SECRET`、`AUTH_SECRET`、`GITHUB_GIST_TOKEN`
+   - **請勿**設定 `NEXT_PUBLIC_BASE_PATH` 或 `STATIC_EXPORT`（那些只給 GitHub Pages 用）
+4. 更新 GitHub OAuth App 的 **Authorization callback URL** 為：
    ```
    https://your-vercel-domain.vercel.app/api/auth/callback/github
    ```
-5. 自動部署完成
+5. 推送到 `main`，Vercel 會自動部署。完成後：
+   - 右上角會出現「GitHub 登入」按鈕
+   - **進度頁（/progress）** 會出現「雲端同步」區塊，可登入後 ⬆ 同步 / ⬇ 載入私有 Gist
 
-> 預設的 `npm run build` 會以伺服器模式建置，OAuth 與雲端同步功能皆可用。
+> next-auth v5 已設定 `trustHost: true`，Vercel 上通常不需手動設定 `AUTH_URL`。
+> 若使用自訂網域且遇到 callback 問題，可在環境變數補上 `AUTH_URL=https://你的網域`。
 
-### GitHub Pages（靜態，不支援 OAuth）
+### GitHub Pages（靜態，**不支援** 登入／同步）
 
-GitHub Pages 不支援 Server-Side Rendering，OAuth 功能在此部署模式下不可用。進度僅存在 localStorage。
+GitHub Pages 不支援 Server-Side Rendering，OAuth 與雲端同步在此模式停用，進度僅存在 localStorage。
+對應的工作流程 `.github/workflows/deploy.yml` 已改為**手動觸發（workflow_dispatch）**，
+不會在每次 push 時覆蓋 Vercel 部署。若仍想產生靜態版，可於 Actions 分頁手動執行，或本機跑：
 
 ```bash
 npm run deploy
@@ -106,9 +118,9 @@ npm run deploy
 
 1. 設定 `STATIC_EXPORT=true`，讓 `next.config.mjs` 切換為 `output: 'export'`。
 2. 在建置期間暫時移出 `app/api`（OAuth API 路由無法靜態匯出），完成後自動還原。
-3. 將 GitHub 登入相關 UI 以 `lib/runtime.ts` 的旗標停用。
+3. 將 GitHub 登入與雲端同步 UI 以 `lib/runtime.ts` 的旗標停用。
 
-如需自訂 base path，可在執行前設定 `NEXT_PUBLIC_BASE_PATH`（預設為 `/cp-handbook`）。
+如需自訂 base path，可在執行前設定 `NEXT_PUBLIC_BASE_PATH`。
 
 ---
 

@@ -1,5 +1,6 @@
 import { PageTransition } from '@/components/PageTransition';
 import { ProgressDashboard } from '@/components/ProgressDashboard';
+import { CloudSync } from '@/components/CloudSync';
 import { problems, topics } from '@/lib/data';
 
 export default function ProgressPage() {
@@ -13,6 +14,7 @@ export default function ProgressPage() {
             追蹤複習題數、主題覆蓋率、模擬賽場次、弱區與題型比例，讓下一輪練習更有方向。
           </p>
         </div>
+        <CloudSync />
         <ProgressDashboard problems={problems} topics={topics} />
       </div>
     </PageTransition>
