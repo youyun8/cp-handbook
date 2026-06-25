@@ -60,3 +60,47 @@ export interface RatingBand {
   max: number | null;
   description: string;
 }
+
+// Subtopic: a fully self-contained section within a parent topic
+export interface Subtopic {
+  id: string;           // e.g. "string-kmp", "string-suffix-array"
+  parent_id: string;    // matches a Topic.id
+  title: string;
+  slug: string;         // URL: /handbook/[parent-slug]/[subtopic-slug]
+  description: string;
+  core_idea: string;
+  complexity: string;
+  deep_dive?: DeepDiveSection[];
+  reference_links: ReferenceLink[];
+  template_code: string;
+  supplemental_patterns: SupplementalPattern[];
+  pitfalls?: string[];
+}
+
+// GitHub OAuth User
+export interface GitHubUser {
+  id: number;
+  login: string;
+  name: string | null;
+  avatar_url: string;
+  email: string | null;
+}
+
+// Submission log entry (shared shape used by the progress store and snapshots)
+export interface SubmissionLogEntry {
+  id: string;
+  problemId: string;
+  status: SubmissionStatus;
+  createdAt: string;
+}
+
+// Sync-capable progress snapshot
+export interface ProgressSnapshot {
+  userId: number;             // GitHub user id
+  login: string;
+  currentRating: number;
+  reviewedProblemIds: string[];
+  coveredTopicIds: string[];
+  submissions: SubmissionLogEntry[];
+  updatedAt: string;          // ISO 8601
+}

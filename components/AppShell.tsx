@@ -1,6 +1,10 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { SignOutButton } from '@/components/SignOutButton';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { auth } from '@/lib/auth';
+import { isStaticExport } from '@/lib/runtime';
 
 const navItems = [
   { href: '/', label: '首頁' },
@@ -9,7 +13,9 @@ const navItems = [
   { href: '/progress', label: '進度' }
 ];
 
-export function AppShell({ children }: { children: ReactNode }) {
+export async function AppShell({ children }: { children: ReactNode }) {
+  const session = isStaticExport ? null : await auth();
+
   return (
     <div className="min-h-screen">
       <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-xl">
@@ -32,6 +38,29 @@ export function AppShell({ children }: { children: ReactNode }) {
             ))}
           </nav>
           <div className="flex items-center gap-2">
+            {session?.user ? (
+              <div className="flex items-center gap-2">
+                {session.user.image && (
+                  <Image
+                    src={session.user.image}
+                    alt="avatar"
+                    width={28}
+                    height={28}
+                    className="rounded-full border border-border"
+                  />
+                )}
+                <SignOutButton />
+              </div>
+            ) : (
+              !isStaticExport && (
+                <a
+                  href="/auth/signin"
+                  className="rounded-xl border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-accent"
+                >
+                  GitHub 登入
+                </a>
+              )
+            )}
             <ThemeToggle />
           </div>
         </div>

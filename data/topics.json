@@ -644,6 +644,9 @@
       "⚠️ Dijkstra 不能處理負邊：負邊會讓已確定的節點被重新鬆弛，破壞貪心正確性，需改用 Bellman-Ford 或 SPFA。",
       "⚠️ SPFA 在稠密圖和特定構造下會退化到 O(VE)，競程中遇到卡 SPFA 的測資需改用 Dijkstra（若無負邊）。",
       "⚠️ Floyd 的 k 必須是最外層迴圈，i、j 可任意順序；若把 k 放在內層，前驅狀態尚未用中間節點更新，結果錯誤。"
+    ],
+    "children": [
+      "sp-bellman-ford"
     ]
   },
   {
@@ -823,6 +826,13 @@
       "⚠️ KMP 失敗函數的 fail[0] = 0（空前綴），下標從 0 開始；不同實作的下標定義可能不同，混用會 off-by-one。",
       "⚠️ 字串哈希取模後可能產生碰撞，特別是在面試和競程中遇到特殊構造的反例；必要時使用雙哈希或 Z 函數確認。",
       "⚠️ 01-Trie 從最高位開始建，方向不能反；查詢異或最大值時從高位貪心取反方向節點。"
+    ],
+    "children": [
+      "string-kmp",
+      "string-z",
+      "string-hashing",
+      "string-trie",
+      "string-suffix-array"
     ]
   },
   {

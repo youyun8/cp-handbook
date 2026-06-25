@@ -1,0 +1,270 @@
+[
+  {
+    "id": "string-kmp",
+    "parent_id": "string-algorithms",
+    "title": "KMP 字串匹配",
+    "slug": "kmp",
+    "description": "利用失敗函數在 O(n+m) 時間內完成字串匹配，避免重複比較已知資訊。",
+    "core_idea": "KMP 的核心是「失敗函數（Failure Function）」`fail[i]`，表示 `p[0..i]` 最長的真前綴等於真後綴的長度。匹配失敗時，不從頭重試，而是用 `fail` 跳到上一個可能仍然匹配的位置。\n\n直覺理解：若模式 `p = \"ABABC\"`，當第五個字元不匹配時，已知前四個字元為 `\"ABAB\"`，其中前綴 `\"AB\"` = 後綴 `\"AB\"`，因此可直接從第三個字元重新比較，而非從頭。",
+    "complexity": "預處理 O(m)，匹配 O(n)，空間 O(m)。",
+    "deep_dive": [
+      {
+        "title": "失敗函數的建構",
+        "body": "```cpp\nvector<int> buildFail(const string& p) {\n    int m = p.size();\n    vector<int> fail(m, 0); // fail[0] = 0 always\n    for (int i = 1; i < m; i++) {\n        int j = fail[i - 1];\n        while (j > 0 && p[i] != p[j]) j = fail[j - 1]; // Fall back\n        if (p[i] == p[j]) j++;\n        fail[i] = j;\n    }\n    return fail;\n}\n```\n\n建構過程的不變量：`fail[i]` 代表 `p[0..i]` 最長真前後綴長度，每次用 `fail[j-1]` 跳回是因為 `p[0..j-1]` 的最長真前後綴已知。"
+      },
+      {
+        "title": "完整 KMP 匹配",
+        "body": "```cpp\nvector<int> kmpSearch(const string& text, const string& pattern) {\n    string s = pattern + '#' + text; // '#' must not appear in either string\n    auto fail = buildFail(s);\n    int m = pattern.size();\n    vector<int> matches;\n    for (int i = m + 1; i < (int)s.size(); i++)\n        if (fail[i] == m) matches.push_back(i - 2 * m); // Found at text[i-2m]\n    return matches;\n}\n```\n\n**另一種視角**：把 `pattern + '#' + text` 拼接後計算整個字串的 fail 陣列；在 text 部分，凡 `fail[i] == m` 的位置就是一個匹配點。分隔符 `'#'` 保證 fail 值不會跨越兩段。"
+      },
+      {
+        "title": "應用：最短重複週期",
+        "body": "字串 `s` 的最短重複週期 = `n - fail[n-1]`（若 `n % (n - fail[n-1]) == 0`，否則週期就是 `n` 本身）。\n\n**例**：`s = \"ABABAB\"`，`fail[5] = 4`，週期 = `6 - 4 = 2`，確實 `\"ABABAB\"` 由 `\"AB\"` 重複三次組成。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "cp-algorithms：KMP / Prefix Function",
+        "url": "https://cp-algorithms.com/string/prefix-function.html"
+      },
+      {
+        "label": "OI-Wiki：KMP 算法",
+        "url": "https://oi-wiki.org/string/kmp/"
+      }
+    ],
+    "template_code": "// KMP: find all occurrences of pattern in text\nvector<int> kmpSearch(const string& text, const string& pattern) {\n    if (pattern.empty()) return {};\n    string s = pattern + '#' + text;\n    int n = s.size(), m = pattern.size();\n    vector<int> fail(n, 0);\n    for (int i = 1; i < n; i++) {\n        int j = fail[i - 1];\n        while (j > 0 && s[i] != s[j]) j = fail[j - 1];\n        if (s[i] == s[j]) j++;\n        fail[i] = j;\n    }\n    vector<int> result;\n    for (int i = m + 1; i < n; i++)\n        if (fail[i] == m) result.push_back(i - 2 * m);\n    return result;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "最短重複週期",
+        "description": "**觸發**：詢問字串的最小正週期。\n**做法**：計算 fail 陣列，週期 = `n - fail[n-1]`，若 `n % period == 0` 則確實以該週期重複，否則無整數週期。"
+      },
+      {
+        "name": "字串中出現次數（含重疊）",
+        "description": "**觸發**：計算模式在文本中出現多少次（允許重疊）。\n**做法**：找到所有 `fail[i] == m` 的位置後，從該位置往前繼續匹配（使用 `j = fail[m-1]`），不清零 j。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 分隔符 `'#'` 必須是不在字母表中的字元，否則 fail 值會跨越兩段字串，產生假匹配。",
+      "⚠️ `fail[0] = 0` 是固定的（長度 1 的字串不存在真前後綴），從 `i=1` 開始建構。",
+      "⚠️ 匹配到後若需繼續找下一個重疊的匹配，`j` 應設為 `fail[m-1]` 而非 0。"
+    ]
+  },
+  {
+    "id": "string-z",
+    "parent_id": "string-algorithms",
+    "title": "Z 函數",
+    "slug": "z-function",
+    "description": "O(n) 計算字串每個位置與整串的最長公共前綴，是 KMP 的等價工具，但常數更小且更易推廣。",
+    "core_idea": "Z[i] 定義為從位置 i 開始的子字串與 s 的最長公共前綴長度（Z[0] 通常定義為 n 或 0）。\n\n**維護 [l, r] 視窗**：[l, r] 是當前已計算的最遠右端的「Z-box」（即某個 i 使得 s[i..i+Z[i]-1] = s[0..Z[i]-1] 且 i+Z[i]-1 最大）。對新位置 i：\n- 若 `i < r`：`Z[i] = min(r - i, Z[i - l])`（利用已知資訊），再線性延伸。\n- 若 `i >= r`：從 0 開始線性延伸。\n每個位置只被線性延伸一次，故總複雜度 O(n)。",
+    "complexity": "時間 O(n)，空間 O(n)。",
+    "deep_dive": [
+      {
+        "title": "Z 函數模板與模式匹配",
+        "body": "```cpp\nvector<int> zFunction(const string& s) {\n    int n = s.size();\n    vector<int> z(n, 0);\n    z[0] = n; // Convention: whole string matches itself\n    int l = 0, r = 0;\n    for (int i = 1; i < n; i++) {\n        if (i < r) z[i] = min(r - i, z[i - l]); // Use Z-box\n        while (i + z[i] < n && s[z[i]] == s[i + z[i]]) z[i]++; // Extend\n        if (i + z[i] > r) { l = i; r = i + z[i]; } // Update Z-box\n    }\n    return z;\n}\n\n// Pattern matching: find all positions of pattern in text\nvector<int> zSearch(const string& text, const string& pattern) {\n    string s = pattern + '#' + text;\n    auto z = zFunction(s);\n    int m = pattern.size();\n    vector<int> result;\n    for (int i = m + 1; i < (int)s.size(); i++)\n        if (z[i] == m) result.push_back(i - m - 1);\n    return result;\n}\n```"
+      },
+      {
+        "title": "Z 函數 vs KMP：等價性",
+        "body": "Z 函數和 KMP 的 fail 函數包含等價資訊，可以互相轉換：\n\n- **fail → Z**：`fail[i]` 表示 `s[0..i]` 最長真前後綴，可通過遍歷 fail 鏈反推 Z 值。\n- **Z → fail**：掃描 Z 陣列，若 `Z[i] > 0`，則 `fail[i + Z[i] - 1] = max(fail[i + Z[i] - 1], Z[i])`。\n\n實務上選擇哪個通常取決於個人偏好；Z 函數的定義更直觀，fail 函數更適合「線上」匹配（逐字元輸入）。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "cp-algorithms：Z-function",
+        "url": "https://cp-algorithms.com/string/z-function.html"
+      },
+      {
+        "label": "OI-Wiki：Z 函數",
+        "url": "https://oi-wiki.org/string/z-func/"
+      }
+    ],
+    "template_code": "vector<int> zFunction(const string& s) {\n    int n = s.size();\n    vector<int> z(n, 0);\n    z[0] = n;\n    int l = 0, r = 0;\n    for (int i = 1; i < n; i++) {\n        if (i < r) z[i] = min(r - i, z[i - l]);\n        while (i + z[i] < n && s[z[i]] == s[i + z[i]]) z[i]++;\n        if (i + z[i] > r) { l = i; r = i + z[i]; }\n    }\n    return z;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "找最小移位使兩字串相等",
+        "description": "**觸發**：s 是 t 的旋轉（cyclic shift）嗎？\n**做法**：計算 `t + '#' + s + s` 的 Z 函數，若任意位置 `z[i] >= |t|` 則是旋轉。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ Z[0] 的定義在不同實作中可能是 n 或 0，使用前確認定義，避免比對時誤判。",
+      "⚠️ 延伸條件要同時檢查 `i + z[i] < n`，否則陣列越界。"
+    ]
+  },
+  {
+    "id": "string-hashing",
+    "parent_id": "string-algorithms",
+    "title": "字串哈希（Rabin-Karp）",
+    "slug": "string-hashing",
+    "description": "用多項式哈希在 O(1) 時間比較任意子字串，以 O(n) 預處理換取後續快速比對。",
+    "core_idea": "定義字串 s 的哈希值為 `h = s[0]*B^(n-1) + s[1]*B^(n-2) + ... + s[n-1]`（mod p）。前綴哈希 `H[i] = H[i-1]*B + s[i]`，子字串 `s[l..r]` 的哈希 = `(H[r] - H[l-1]*B^(r-l+1)) mod p`。\n\n選 B 為隨機大質數（如 131 或 1e9+7），p 為大質數（如 1e9+7 或 1e9+9），或使用自然溢位（unsigned long long）。**雙哈希**（兩組不同 B、p）大幅減少碰撞機率。",
+    "complexity": "預處理 O(n)，單次子字串比較 O(1)，空間 O(n)。",
+    "deep_dive": [
+      {
+        "title": "雙哈希模板",
+        "body": "```cpp\nconst long long MOD1 = 1e9 + 7, MOD2 = 1e9 + 9;\nconst long long B1 = 131, B2 = 137;\n\nstruct StringHash {\n    int n;\n    vector<long long> h1, h2, pw1, pw2;\n    StringHash(const string& s) : n(s.size()), h1(n+1,0), h2(n+1,0), pw1(n+1,1), pw2(n+1,1) {\n        for (int i = 0; i < n; i++) {\n            h1[i+1] = (h1[i] * B1 + s[i]) % MOD1;\n            h2[i+1] = (h2[i] * B2 + s[i]) % MOD2;\n            pw1[i+1] = pw1[i] * B1 % MOD1;\n            pw2[i+1] = pw2[i] * B2 % MOD2;\n        }\n    }\n    // Get hash of s[l..r] (0-indexed, inclusive)\n    pair<long long,long long> get(int l, int r) {\n        long long v1 = (h1[r+1] - h1[l] * pw1[r-l+1] % MOD1 + MOD1*2) % MOD1;\n        long long v2 = (h2[r+1] - h2[l] * pw2[r-l+1] % MOD2 + MOD2*2) % MOD2;\n        return {v1, v2};\n    }\n    bool equal(int l1, int r1, int l2, int r2) { return get(l1,r1) == get(l2,r2); }\n};\n```"
+      },
+      {
+        "title": "二分 + 哈希求 LCP",
+        "body": "兩個字串的最長公共前綴（LCP）：二分長度 k，用哈希 O(1) 比較前 k 個字元是否相等。總複雜度 O(log n)。\n\n```cpp\n// LCP of s[l1..] and s[l2..] using StringHash\nint lcp(StringHash& h, int l1, int n1, int l2, int n2) {\n    int lo = 0, hi = min(n1, n2);\n    while (lo < hi) {\n        int mid = (lo + hi + 1) / 2;\n        if (h.equal(l1, l1+mid-1, l2, l2+mid-1)) lo = mid;\n        else hi = mid - 1;\n    }\n    return lo;\n}\n```"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "cp-algorithms：字串哈希",
+        "url": "https://cp-algorithms.com/string/string-hashing.html"
+      },
+      {
+        "label": "OI-Wiki：字串哈希",
+        "url": "https://oi-wiki.org/string/hash/"
+      }
+    ],
+    "template_code": "// Polynomial string hashing (single hash)\nstruct Hash {\n    static const long long MOD = 1e9+7, B = 131;\n    vector<long long> h, pw;\n    Hash(const string& s) : h(s.size()+1, 0), pw(s.size()+1, 1) {\n        for (int i = 0; i < (int)s.size(); i++) {\n            h[i+1] = (h[i] * B + s[i]) % MOD;\n            pw[i+1] = pw[i] * B % MOD;\n        }\n    }\n    long long get(int l, int r) { // [l, r] 0-indexed inclusive\n        return (h[r+1] - h[l] * pw[r-l+1] % MOD + MOD * 2) % MOD;\n    }\n};",
+    "supplemental_patterns": [
+      {
+        "name": "最長公共子字串（兩字串）",
+        "description": "**觸發**：求兩個字串的最長公共子字串長度。\n**做法**：二分長度 k，滑動視窗哈希枚舉 s 所有長度 k 的子字串放入哈希集合，再掃描 t 看是否有命中。O(n log n)。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 減法結果可能為負，需加 `MOD * 2` 再取模，不能只加一個 MOD（若中間有兩次減法）。",
+      "⚠️ 單哈希在競賽中可能被 Hack（特意構造碰撞），高風險題目改用雙哈希。",
+      "⚠️ base B 最好隨機化（`mt19937` 生成），避免被特定 B 值的 anti-hash 測資攻擊。"
+    ]
+  },
+  {
+    "id": "string-trie",
+    "parent_id": "string-algorithms",
+    "title": "字典樹（Trie）",
+    "slug": "trie",
+    "description": "把一組字串組織成共享前綴的樹狀結構，支援 O(|s|) 插入/查詢與前綴統計。",
+    "core_idea": "Trie 的每條根到葉路徑對應一個字串；每個節點表示一個共享前綴。從根出發沿字元走，到達目標節點時讀取計數或標記。\n\n**01-Trie**：把整數的二進位（從高位到低位）當字串建 Trie，支援「在集合中與 x 異或最大的數」查詢，每次貪心走與 x 當前位相反的分支。",
+    "complexity": "插入/查詢 O(|s|)，空間 O(Σ × 總字元數)（靜態陣列）或 O(總字元數)（動態）。",
+    "deep_dive": [
+      {
+        "title": "靜態陣列 Trie（競程常用）",
+        "body": "```cpp\nconst int MAXN = 500005; // Total characters\nint trie[MAXN][26], cnt[MAXN], tot = 1;\n\nvoid insert(const string& s) {\n    int cur = 0;\n    for (char c : s) {\n        int idx = c - 'a';\n        if (!trie[cur][idx]) trie[cur][idx] = tot++;\n        cur = trie[cur][idx];\n        cnt[cur]++; // Count strings passing through this node\n    }\n}\n\nint countPrefix(const string& prefix) {\n    int cur = 0;\n    for (char c : prefix) {\n        int idx = c - 'a';\n        if (!trie[cur][idx]) return 0;\n        cur = trie[cur][idx];\n    }\n    return cnt[cur];\n}\n```"
+      },
+      {
+        "title": "01-Trie：異或最大值",
+        "body": "```cpp\nconst int BITS = 30;\nint trie01[MAXN * BITS][2], tot01 = 1;\n\nvoid insert01(int x) {\n    int cur = 0;\n    for (int i = BITS - 1; i >= 0; i--) { // High bit first\n        int bit = (x >> i) & 1;\n        if (!trie01[cur][bit]) trie01[cur][bit] = tot01++;\n        cur = trie01[cur][bit];\n    }\n}\n\nint maxXor(int x) {\n    int cur = 0, result = 0;\n    for (int i = BITS - 1; i >= 0; i--) {\n        int want = 1 - ((x >> i) & 1); // Greedy: prefer opposite bit\n        if (trie01[cur][want]) { result |= (1 << i); cur = trie01[cur][want]; }\n        else cur = trie01[cur][1 - want];\n    }\n    return result;\n}\n```"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "cp-algorithms：Trie",
+        "url": "https://cp-algorithms.com/string/trie.html"
+      },
+      {
+        "label": "OI-Wiki：Trie 樹",
+        "url": "https://oi-wiki.org/string/trie/"
+      }
+    ],
+    "template_code": "// Dynamic Trie using struct\nstruct TrieNode {\n    array<int,26> ch{}; // 0 means null\n    int end_count = 0;  // Words ending here\n    int pass_count = 0; // Words passing through\n    TrieNode() { ch.fill(0); }\n};\nvector<TrieNode> trie(1); // Root at index 0\nvoid trieInsert(const string& s) {\n    int cur = 0;\n    for (char c : s) {\n        int idx = c - 'a';\n        if (!trie[cur].ch[idx]) { trie[cur].ch[idx] = trie.size(); trie.emplace_back(); }\n        cur = trie[cur].ch[idx];\n        trie[cur].pass_count++;\n    }\n    trie[cur].end_count++;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "01-Trie 異或最大",
+        "description": "**觸發**：在一個集合中找與給定數異或最大的數。\n**做法**：整數從高位（第 29 或 31 位）插入 Trie，查詢時貪心走與當前位相反的分支（若存在）。O(30) 或 O(32) 每次查詢。"
+      },
+      {
+        "name": "AC 自動機（多模式匹配）",
+        "description": "**觸發**：在文本中同時匹配多個模式字串。\n**做法**：在 Trie 上建 KMP 的 fail 指標（BFS 建立），文本掃描時沿 fail 鏈統計匹配次數。建構 O(Σ × 總模式長)，匹配 O(n + 匹配數)。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 靜態陣列 Trie 必須預估最大節點數（= 總字元數），開小了會越界，開大了浪費記憶體。",
+      "⚠️ 01-Trie 必須從最高位開始插入，方向反了異或最大值的貪心會錯。",
+      "⚠️ 查詢結束時要確認最後節點的 `end_count > 0`（字串確實存在），而非只確認節點存在。"
+    ]
+  },
+  {
+    "id": "string-suffix-array",
+    "parent_id": "string-algorithms",
+    "title": "後綴陣列（Suffix Array）",
+    "slug": "suffix-array",
+    "description": "將字串所有後綴排序，配合 LCP 陣列解決最長公共子字串、重複子字串等進階字串問題。",
+    "core_idea": "後綴陣列 SA[i] 表示第 i 小的後綴的起始位置；排名陣列 RK[i] 表示從位置 i 開始的後綴的排名。\n\n**倍增建構（O(n log n)）**：初始以每個字元的 ASCII 值為排名，每輪將排名長度倍增（`2^k → 2^{k+1}`），用雙關鍵字排序（當前排名 + 跳 2^k 後的排名）更新 SA 和 RK，共 O(log n) 輪，每輪 O(n log n) 排序。\n\n**LCP 陣列（Kasai 算法，O(n)）**：`LCP[i]` = SA[i] 與 SA[i-1] 為起點的後綴的最長公共前綴。從短到長計算每個後綴：若位置 i 的排名 k > 0，則 `lcp(SA[k], SA[k-1]) >= lcp(SA[k-1對應的前驅位置], ...) - 1`，利用此單調性可 O(n) 建構。",
+    "complexity": "建構 SA：O(n log n)（倍增）或 O(n)（SA-IS）；建構 LCP（Kasai）：O(n)；RMQ 後 LCP 查詢：O(1)。",
+    "deep_dive": [
+      {
+        "title": "倍增建構後綴陣列",
+        "body": "```cpp\nvector<int> buildSA(const string& s) {\n    int n = s.size();\n    vector<int> sa(n), rk(n), tmp(n);\n    iota(sa.begin(), sa.end(), 0);\n    for (int i = 0; i < n; i++) rk[i] = s[i]; // Initial rank = ASCII value\n    \n    for (int gap = 1; gap < n; gap <<= 1) {\n        // Sort by (rk[i], rk[i+gap])\n        auto cmp = [&](int a, int b) {\n            if (rk[a] != rk[b]) return rk[a] < rk[b];\n            int ra = a + gap < n ? rk[a + gap] : -1;\n            int rb = b + gap < n ? rk[b + gap] : -1;\n            return ra < rb;\n        };\n        sort(sa.begin(), sa.end(), cmp);\n        tmp[sa[0]] = 0;\n        for (int i = 1; i < n; i++)\n            tmp[sa[i]] = tmp[sa[i-1]] + (cmp(sa[i-1], sa[i]) ? 1 : 0);\n        rk = tmp;\n        if (rk[sa[n-1]] == n-1) break; // All ranks distinct, done early\n    }\n    return sa;\n}\n```"
+      },
+      {
+        "title": "Kasai 算法建構 LCP 陣列",
+        "body": "```cpp\nvector<int> buildLCP(const string& s, const vector<int>& sa) {\n    int n = s.size();\n    vector<int> rank_(n), lcp(n, 0);\n    for (int i = 0; i < n; i++) rank_[sa[i]] = i;\n    int h = 0;\n    for (int i = 0; i < n; i++) {\n        if (rank_[i] > 0) {\n            int j = sa[rank_[i] - 1]; // Previous suffix in sorted order\n            while (i + h < n && j + h < n && s[i+h] == s[j+h]) h++;\n            lcp[rank_[i]] = h;\n            if (h > 0) h--; // Key: h decreases by at most 1 each step\n        }\n    }\n    return lcp;\n}\n```\n\n**Kasai 的關鍵不等式**：若從位置 i 計算得 `lcp = h`，則從位置 i+1 計算的 lcp ≥ h-1。因此 h 的總增量 = O(n)，算法整體 O(n)。"
+      },
+      {
+        "title": "LCP 的應用：最長重複子字串",
+        "body": "**最長重複子字串**：LCP 陣列的最大值，對應 SA 中相鄰兩個後綴的最長公共前綴。\n\n**任意兩個後綴的 LCP**：建 Sparse Table 對 LCP 陣列做 RMQ，`LCP(SA[i], SA[j]) = min(LCP[i+1..j])`，O(1) 查詢。\n\n**不同子字串個數**：= `n*(n+1)/2 - sum(LCP)`（每個不同子字串對應後綴的某個前綴，減去 LCP 陣列中重複計算的部分）。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "cp-algorithms：後綴陣列",
+        "url": "https://cp-algorithms.com/string/suffix-array.html"
+      },
+      {
+        "label": "cp-algorithms：Kasai LCP",
+        "url": "https://cp-algorithms.com/string/suffix-array.html#lcp-array-construction"
+      },
+      {
+        "label": "OI-Wiki：後綴陣列",
+        "url": "https://oi-wiki.org/string/sa/"
+      }
+    ],
+    "template_code": "// Suffix Array (O(n log^2 n) doubling) + Kasai LCP\nvector<int> buildSA(const string& s) {\n    int n = s.size();\n    vector<int> sa(n), rk(n), tmp(n);\n    iota(sa.begin(), sa.end(), 0);\n    for (int i = 0; i < n; i++) rk[i] = s[i];\n    for (int gap = 1; gap < n; gap <<= 1) {\n        auto cmp = [&](int a, int b) {\n            if (rk[a] != rk[b]) return rk[a] < rk[b];\n            int ra = a+gap < n ? rk[a+gap] : -1, rb = b+gap < n ? rk[b+gap] : -1;\n            return ra < rb;\n        };\n        sort(sa.begin(), sa.end(), cmp);\n        tmp[sa[0]] = 0;\n        for (int i = 1; i < n; i++) tmp[sa[i]] = tmp[sa[i-1]] + (cmp(sa[i-1], sa[i]) ? 1 : 0);\n        rk = tmp; if (rk[sa[n-1]] == n-1) break;\n    }\n    return sa;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "最長公共子字串（兩個字串）",
+        "description": "**做法**：拼接 `s + '$' + t`（'$' < 'a'），建 SA + LCP；在 LCP 陣列中找最大的 `lcp[i]`，使得 `sa[i-1]` 和 `sa[i]` 分別來自 s 和 t。"
+      },
+      {
+        "name": "出現至少 K 次的最長子字串",
+        "description": "**做法**：二分長度 l，用 LCP 陣列滑動視窗（或 RMQ）驗證是否存在長度 l 的子字串出現 ≥ K 次。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 倍增建構中，`i + gap` 可能越界，越界時排名設為 -1（或 sentinel），確保排序穩定。",
+      "⚠️ 拼接兩字串時，分隔符 '$' 必須小於所有字母（ASCII 值 36 < 97），否則後綴排序會錯。",
+      "⚠️ Kasai 算法計算 `h--` 時確保 `h >= 0`，若 h 已為 0 就不再遞減。"
+    ]
+  },
+  {
+    "id": "sp-bellman-ford",
+    "parent_id": "shortest-path",
+    "title": "Bellman-Ford 與 SPFA",
+    "slug": "bellman-ford",
+    "description": "能處理負邊的最短路算法，以及其佇列優化版本 SPFA，並用於偵測負環。",
+    "core_idea": "Bellman-Ford 對所有邊做 V-1 輪鬆弛：每輪掃描每條邊 (u,v,w)，若 `dist[u] + w < dist[v]` 則更新。正確性依據：最短路最多經過 V-1 條邊（無負環時），故 V-1 輪後所有可達節點的 dist 已收斂。第 V 輪若仍能鬆弛，說明存在負環。\n\n**SPFA（Shortest Path Faster Algorithm）**：用佇列維護「剛被鬆弛過的節點」，只從這些節點出發再次鬆弛鄰居，避免冗餘掃描。平均快很多，但最壞仍 O(VE)。",
+    "complexity": "Bellman-Ford O(VE)；SPFA 平均 O(E)，最壞 O(VE)。",
+    "deep_dive": [
+      {
+        "title": "Bellman-Ford 與限制層數",
+        "body": "```cpp\n// K stops = K+1 edges: iterate exactly k+1 times\nvector<long long> bellmanFordK(int src, int n, const vector<tuple<int,int,int>>& edges, int k) {\n    vector<long long> dist(n, LLONG_MAX);\n    dist[src] = 0;\n    for (int iter = 0; iter <= k; iter++) {\n        vector<long long> ndist = dist; // Use previous round's values\n        for (auto [u, v, w] : edges)\n            if (dist[u] != LLONG_MAX)\n                ndist[v] = min(ndist[v], dist[u] + w);\n        dist = ndist;\n    }\n    return dist;\n}\n```\n⚠️ 每輪必須用上一輪的 dist 副本（`ndist = dist`），否則一輪內可能做多跳鬆弛，超過層數限制。"
+      },
+      {
+        "title": "SPFA 負環偵測",
+        "body": "```cpp\nbool hasNegativeCycle(int n, const vector<vector<pair<int,int>>>& g) {\n    vector<long long> dist(n, 0);\n    vector<int> cnt(n, 0); // Edge count to reach this node\n    vector<bool> inQueue(n, true);\n    queue<int> q;\n    for (int i = 0; i < n; i++) q.push(i); // Super source: start from all nodes\n    while (!q.empty()) {\n        int u = q.front(); q.pop(); inQueue[u] = false;\n        for (auto [v, w] : g[u]) {\n            if (dist[u] + w < dist[v]) {\n                dist[v] = dist[u] + w;\n                cnt[v] = cnt[u] + 1;\n                if (cnt[v] >= n) return true; // Negative cycle found\n                if (!inQueue[v]) { q.push(v); inQueue[v] = true; }\n            }\n        }\n    }\n    return false;\n}\n```"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "cp-algorithms：Bellman-Ford",
+        "url": "https://cp-algorithms.com/graph/bellman_ford.html"
+      },
+      {
+        "label": "OI-Wiki：Bellman-Ford / SPFA",
+        "url": "https://oi-wiki.org/graph/shortest-path/#bellman-ford"
+      }
+    ],
+    "template_code": "// Bellman-Ford: single source shortest path with negative edges\nvector<long long> bellmanFord(int src, int n, const vector<tuple<int,int,int>>& edges) {\n    vector<long long> dist(n, LLONG_MAX);\n    dist[src] = 0;\n    for (int i = 0; i < n - 1; i++) {\n        bool updated = false;\n        for (auto [u, v, w] : edges)\n            if (dist[u] != LLONG_MAX && dist[u] + w < dist[v])\n                { dist[v] = dist[u] + w; updated = true; }\n        if (!updated) break; // Early exit\n    }\n    return dist;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "差分約束系統",
+        "description": "**觸發**：一組 `x_i - x_j <= c_ij` 的不等式約束，問是否有可行解。\n**做法**：每個不等式 `x_i - x_j <= c` 建邊 `j -> i`（邊權 c）。加超級源點連所有節點（邊權 0）後跑 Bellman-Ford；若有負環則無解，否則 `dist[i]` 是一組可行解。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ SPFA 在特定圖（如網格圖或菊花圖）上可能被卡到 O(VE)，競賽中遇到可能被 Hack 時改用 Dijkstra（若無負邊）。",
+      "⚠️ 限制層數版本的 Bellman-Ford 每輪必須用前一輪的副本，否則單輪內連鎖更新等於多跳。"
+    ]
+  }
+]

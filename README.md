@@ -1,71 +1,147 @@
-# 競程策略手冊
+# 競程策略手冊（CP Handbook）
 
-以 Next.js App Router、TypeScript 與 Tailwind CSS 建立的靜態競程學習網站，內容結構參考靈茶山艾府模板庫的訓練思路：每個主題都包含核心想法、參考連結、註解模板、補充套路與分級題單。
+一個以繁體中文撰寫的競程演算法手冊，整合 [cp-algorithms.com](https://cp-algorithms.com) 與 [OI-Wiki](https://oi-wiki.org) 的精華內容，並提供分級題單與進度追蹤功能。
 
-## 功能
+## 功能特色
 
-- 首頁：快速開始、精選主題與本機進度摘要。
-- 手冊：十個演算法主題、側邊主題樹、五層內容結構、可複製 C++ 註解模板、補充套路摺疊區與三段式題單。
-- 題目策略頁：題目資訊、解題思路、模式辨識、常見錯誤、思維轉換筆記與相似題。
-- 練習場：分數帶、標籤、題型與完成狀態篩選，支援虛擬競賽與手動提交紀錄。
-- 進度儀表板：複習數、主題覆蓋、競賽場次、弱區偵測、題型比例與熱力圖。
+- 📚 **17 個主題** + 子主題系統，涵蓋二分搜尋至計算幾何
+- 🔤 **字串算法** 完整覆蓋 KMP、Z 函數、字串哈希、Trie、後綴陣列
+- 🧭 **可折疊 Sidebar**，階層式主題導覽，支援頁內錨點
+- 🔐 **GitHub OAuth 登入**，進度同步至私有 GitHub Gist
+- 📊 **本地進度追蹤**（localStorage），無需登入亦可使用
 
-## 本機開發
+---
 
-需要 Node.js 18.17 以上版本。
+## 本地開發
+
+### 前置需求
+
+- Node.js 18+
+- npm 9+
+
+### 安裝
 
 ```bash
+git clone https://github.com/youyun8/cp-handbook.git
+cd cp-handbook
 npm install
+```
+
+### 環境變數
+
+```bash
+cp .env.example .env.local
+```
+
+編輯 `.env.local`，填入以下值（詳見「GitHub OAuth 設定」章節）：
+
+```env
+GITHUB_CLIENT_ID=...
+GITHUB_CLIENT_SECRET=...
+AUTH_SECRET=...         # openssl rand -hex 32
+GITHUB_GIST_TOKEN=...
+```
+
+### 啟動開發伺服器
+
+```bash
 npm run dev
+# 開啟 http://localhost:3000
 ```
 
-開發伺服器啟動後，開啟 `http://localhost:3000`。
+---
 
-## 靜態建置
+## GitHub OAuth 設定
+
+### 建立 OAuth App
+
+1. 進入 [GitHub Developer Settings](https://github.com/settings/developers)
+2. 點擊 **New OAuth App**
+3. 填入：
+   - **Application name**：CP Handbook（或任意名稱）
+   - **Homepage URL**：`http://localhost:3000`（開發）或你的部署 URL
+   - **Authorization callback URL**：`http://localhost:3000/api/auth/callback/github`
+4. 建立後取得 **Client ID** 與 **Client Secret**
+
+### 建立 Personal Access Token（Gist 儲存用）
+
+1. 進入 [GitHub Token Settings](https://github.com/settings/tokens)
+2. 點擊 **Generate new token (classic)**
+3. 勾選 `gist` 權限
+4. 複製 Token 填入 `GITHUB_GIST_TOKEN`
+
+### 生成 AUTH_SECRET
 
 ```bash
-npm run build
+openssl rand -hex 32
 ```
 
-專案已在 `next.config.mjs` 設定 `output: 'export'`，建置結果會輸出到 `out/`，可直接部署為靜態網站。
+---
 
-## GitHub Pages 部署
+## 部署
 
-專案已提供 `deploy` 指令，可將 `next build` 產生的靜態輸出發佈到 GitHub Pages。第一次部署前請先確認：
+### Vercel（推薦，支援 OAuth）
 
-1. 已安裝 Node.js 18.17 以上版本。
-2. 已在 GitHub 儲存庫的 **Settings > Pages** 將來源設為 **Deploy from a branch**，分支選擇 `gh-pages`，目錄選擇 `/ (root)`。
-3. 本機 Git 遠端儲存庫已有寫入權限，因為 `gh-pages` 套件會把 `out/` 的內容推送到 `gh-pages` 分支。
+1. Fork 此 Repo 到你的 GitHub 帳號
+2. 在 [Vercel](https://vercel.com) 匯入此 Repo
+3. 在 Vercel 的 **Environment Variables** 填入所有 `.env.example` 中的變數
+4. 更新 GitHub OAuth App 的 Callback URL 為：
+   ```
+   https://your-vercel-domain.vercel.app/api/auth/callback/github
+   ```
+5. 自動部署完成
 
-安裝依賴：
+> 預設的 `npm run build` 會以伺服器模式建置，OAuth 與雲端同步功能皆可用。
 
-```bash
-npm install
-```
+### GitHub Pages（靜態，不支援 OAuth）
 
-接著執行部署：
+GitHub Pages 不支援 Server-Side Rendering，OAuth 功能在此部署模式下不可用。進度僅存在 localStorage。
 
 ```bash
 npm run deploy
+# 等同於 npm run build:static + gh-pages 推送
 ```
 
-`deploy` 指令會先執行 `npm run build`，再透過 `gh-pages -d out` 發佈靜態輸出。部署完成後，GitHub Pages 會從 `gh-pages` 分支讀取檔案並更新網站。
+`npm run build:static`（由 `scripts/build-static.mjs` 驅動）會：
 
-若網站部署在儲存庫子路徑，例如 `https://使用者名稱.github.io/儲存庫名稱/`，建置時需設定 `NEXT_PUBLIC_BASE_PATH`，讓 Next.js 產生正確的連結與靜態資源路徑：
+1. 設定 `STATIC_EXPORT=true`，讓 `next.config.mjs` 切換為 `output: 'export'`。
+2. 在建置期間暫時移出 `app/api`（OAuth API 路由無法靜態匯出），完成後自動還原。
+3. 將 GitHub 登入相關 UI 以 `lib/runtime.ts` 的旗標停用。
 
-```bash
-NEXT_PUBLIC_BASE_PATH=/儲存庫名稱 npm run deploy
+如需自訂 base path，可在執行前設定 `NEXT_PUBLIC_BASE_PATH`（預設為 `/cp-handbook`）。
+
+---
+
+## 資料結構
+
+```
+data/
+├── topics.json      # 主題資料（17 個主題）
+├── subtopics.json   # 子主題資料（字串算法子主題等）
+└── problems.json    # 題目資料（100+ 題）
 ```
 
-若是部署到使用者或組織首頁，例如 `https://使用者名稱.github.io/`，通常不需要設定 `NEXT_PUBLIC_BASE_PATH`。
+### 新增主題
 
-在 GitHub Actions 環境中，`next.config.mjs` 會依 `GITHUB_REPOSITORY` 自動推導 base path，因此部署到儲存庫子路徑時不需要手動指定 `NEXT_PUBLIC_BASE_PATH`。
+在 `data/topics.json` 新增符合 `Topic` 型別的物件，並在 `lib/utils.ts` 的 `topicIcon` 函式新增對應 emoji。
 
-## 資料來源
+### 新增子主題
 
-所有內容都放在靜態 JSON：
+在 `data/subtopics.json` 新增符合 `Subtopic` 型別的物件，`parent_id` 對應父主題的 `id`，並在父主題的 `children` 陣列新增此子主題的 `id`。
 
-- `data/topics.json`：演算法主題、核心想法、參考連結、模板與補充套路。
-- `data/problems.json`：題目、來源、分數、標籤、題型、分層、策略提示與相似題。
+子主題路由自動生成為 `/handbook/[parent-slug]/[subtopic-slug]`。
 
-使用者進度透過 Zustand persist 儲存在瀏覽器 localStorage，沒有後端與登入需求。
+---
+
+## 技術棧
+
+| 類別 | 技術 |
+|------|------|
+| 框架 | Next.js 16 (App Router) |
+| 樣式 | Tailwind CSS |
+| 認證 | next-auth v5 (GitHub OAuth) |
+| 狀態 | Zustand + localStorage |
+| 雲端同步 | GitHub Gist API |
+| 程式碼高亮 | Shiki |
+| 動畫 | Framer Motion |
+| 部署 | Vercel / GitHub Pages |

@@ -54,6 +54,8 @@ interface ProgressState {
   logSubmission: (problemId: string, status: SubmissionStatus, topicId?: string) => void;
   startContest: (problemIds: string[], durationMinutes: number) => void;
   endContest: () => void;
+  syncToCloud: () => Promise<{ ok: boolean; error?: string }>;
+  loadFromCloud: () => Promise<{ ok: boolean; error?: string }>;
 }
 
 const defaultFilters: PracticeFilters = {
@@ -132,7 +134,36 @@ export const useProgressStore = create<ProgressState>()(
               ...state.contestSessions
             ].slice(0, 50)
           };
-        })
+        }),
+      syncToCloud: async () => {
+        const state = get();
+        const payload = {
+          currentRating: state.currentRating,
+          reviewedProblemIds: state.reviewedProblemIds,
+          coveredTopicIds: state.coveredTopicIds,
+          submissions: state.submissions.slice(0, 50) // Limit size
+        };
+        const res = await fetch('/api/progress', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const json = await res.json();
+        return json.ok ? { ok: true } : { ok: false, error: json.error };
+      },
+      loadFromCloud: async () => {
+        const res = await fetch('/api/progress');
+        const json = await res.json();
+        if (!json.data) return { ok: true }; // No saved data yet
+        const data = json.data;
+        set({
+          currentRating: data.currentRating ?? 1800,
+          reviewedProblemIds: data.reviewedProblemIds ?? [],
+          coveredTopicIds: data.coveredTopicIds ?? [],
+          submissions: data.submissions ?? []
+        });
+        return { ok: true };
+      }
     }),
     {
       name: 'cp-handbook-progress',
