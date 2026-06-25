@@ -14,6 +14,11 @@ const navItems = [
   { href: '/settings', label: '設定' }
 ];
 
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1];
+const inferredBasePath = process.env.GITHUB_ACTIONS === 'true' && repoName ? `/${repoName}` : '';
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? inferredBasePath;
+const appIconSrc = `${basePath}/icon.svg`;
+
 export async function AppShell({ children }: { children: ReactNode }) {
   const session = isStaticExport ? null : await auth();
 
@@ -22,9 +27,16 @@ export async function AppShell({ children }: { children: ReactNode }) {
       <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
           <Link href="/" className="flex items-center gap-3 font-semibold tracking-tight">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-              競
-            </span>
+            <Image
+              src={appIconSrc}
+              alt=""
+              width={36}
+              height={36}
+              className="h-9 w-9 rounded-xl"
+              priority
+              unoptimized
+              aria-hidden
+            />
             <span>競程策略手冊</span>
           </Link>
           <nav className="hidden items-center gap-1 md:flex">

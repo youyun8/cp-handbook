@@ -2,7 +2,7 @@
 
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import type { ProblemType, SubmissionStatus } from '@/lib/types';
+import type { ProblemNote, ProblemType, SubmissionStatus } from '@/lib/types';
 
 export type CompletionFilter = 'all' | 'reviewed' | 'unreviewed' | 'accepted';
 export type RatingBandId = 'consolidate' | 'target' | 'stretch';
@@ -46,12 +46,14 @@ interface ProgressState {
   submissions: SubmissionLog[];
   reviewEvents: ReviewEvent[];
   contestSessions: ContestSessionRecord[];
+  problemNotes: Record<string, ProblemNote>;
   activeContest?: ActiveContestSession;
   filters: PracticeFilters;
   setCurrentRating: (rating: number) => void;
   setFilters: (filters: Partial<PracticeFilters>) => void;
   markReviewed: (problemId: string, topicId?: string) => void;
   logSubmission: (problemId: string, status: SubmissionStatus, topicId?: string) => void;
+  saveProblemNote: (problemId: string, note: Partial<Pick<ProblemNote, 'solution' | 'thought'>>) => void;
   startContest: (problemIds: string[], durationMinutes: number) => void;
   endContest: () => void;
   syncToCloud: () => Promise<{ ok: boolean; error?: string }>;
@@ -84,6 +86,7 @@ export const useProgressStore = create<ProgressState>()(
       submissions: [],
       reviewEvents: [],
       contestSessions: [],
+      problemNotes: {},
       filters: defaultFilters,
       setCurrentRating: (rating) => set({ currentRating: rating }),
       setFilters: (filters) => set((state) => ({ filters: { ...state.filters, ...filters } })),
@@ -115,6 +118,17 @@ export const useProgressStore = create<ProgressState>()(
           get().markReviewed(problemId, topicId);
         }
       },
+      saveProblemNote: (problemId, note) =>
+        set((state) => ({
+          problemNotes: {
+            ...state.problemNotes,
+            [problemId]: {
+              solution: note.solution ?? state.problemNotes[problemId]?.solution ?? '',
+              thought: note.thought ?? state.problemNotes[problemId]?.thought ?? '',
+              updatedAt: new Date().toISOString()
+            }
+          }
+        })),
       startContest: (problemIds, durationMinutes) =>
         set({
           activeContest: {
@@ -141,7 +155,8 @@ export const useProgressStore = create<ProgressState>()(
           currentRating: state.currentRating,
           reviewedProblemIds: state.reviewedProblemIds,
           coveredTopicIds: state.coveredTopicIds,
-          submissions: state.submissions.slice(0, 50) // Limit size
+          submissions: state.submissions.slice(0, 50), // Limit size
+          problemNotes: state.problemNotes
         };
         const res = await fetch('/api/progress', {
           method: 'POST',
@@ -160,7 +175,8 @@ export const useProgressStore = create<ProgressState>()(
           currentRating: data.currentRating ?? 1800,
           reviewedProblemIds: data.reviewedProblemIds ?? [],
           coveredTopicIds: data.coveredTopicIds ?? [],
-          submissions: data.submissions ?? []
+          submissions: data.submissions ?? [],
+          problemNotes: data.problemNotes ?? {}
         });
         return { ok: true };
       }

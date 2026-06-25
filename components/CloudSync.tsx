@@ -18,7 +18,7 @@ export function CloudSync() {
           <h2 className="text-lg font-semibold">進度儲存</h2>
         </div>
         <p className="mt-2 text-sm text-muted-foreground">
-          目前為靜態部署版本，進度僅儲存在此瀏覽器的 localStorage。
+          目前為靜態部署版本，進度、解答與思路僅儲存在此瀏覽器的 localStorage。
           若要使用 GitHub 登入並同步至雲端，請改用支援伺服器的部署（如 Vercel）。
         </p>
       </section>
@@ -75,7 +75,7 @@ function CloudSyncAuthed() {
             <span className="font-medium text-foreground">
               {session.user.name ?? session.user.email ?? 'GitHub 使用者'}
             </span>{' '}
-            登入。進度會儲存在你帳號下的私有 Gist。
+            登入。進度、解答與思路會儲存在你帳號下的私有 Gist。
           </p>
           <div className="flex flex-wrap gap-2">
             <button
@@ -117,8 +117,8 @@ function CloudSyncAuthed() {
       ) : (
         <div className="mt-3 space-y-3">
           <p className="text-sm text-muted-foreground">
-            使用 GitHub 帳號登入，即可把練習進度同步到你的私有 Gist，換裝置也不遺失。
-            未登入時進度仍會儲存在本機 localStorage。
+            使用 GitHub 帳號登入，即可把練習進度、解答與思路同步到你的私有 Gist，換裝置也不遺失。
+            未登入時進度、解答與思路仍會儲存在本機 localStorage。
           </p>
           <button
             type="button"

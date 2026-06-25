@@ -2,9 +2,8 @@ import { Accordion } from '@/components/Accordion';
 import { CodeBlock } from '@/components/CodeBlock';
 import { LayerCallout } from '@/components/LayerCallout';
 import { MarkdownBlock } from '@/components/MarkdownBlock';
-import { ProblemSourceLink } from '@/components/ProblemSourceLink';
+import { SubtopicPracticeProblems } from '@/components/SubtopicPracticeProblems';
 import type { Subtopic, Topic } from '@/lib/types';
-import { sourceLabel, tierLabel } from '@/lib/utils';
 
 export function SubtopicHandbook({
   subtopic,
@@ -82,32 +81,8 @@ export function SubtopicHandbook({
 
       {subtopic.practice_problems && subtopic.practice_problems.length > 0 && (
         <div id="practice">
-          <LayerCallout eyebrow="練習" title="子主題練習題" variant="references">
-            <div className="grid gap-3 md:grid-cols-2">
-              {subtopic.practice_problems.map((problem) => (
-                <ProblemSourceLink
-                  key={`${problem.source}-${problem.source_id}`}
-                  problem={problem}
-                  className="block rounded-2xl border border-border bg-background/45 p-4 transition hover:border-primary hover:text-primary"
-                >
-                  <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                    <span className="rounded-full border border-border bg-accent px-2 py-1">
-                      {sourceLabel(problem.source)}
-                    </span>
-                    {problem.rating ? (
-                      <span className="rounded-full border border-border bg-accent px-2 py-1">{problem.rating}</span>
-                    ) : null}
-                    {problem.tier ? (
-                      <span className="rounded-full border border-border bg-accent px-2 py-1">{tierLabel(problem.tier)}</span>
-                    ) : null}
-                  </div>
-                  <p className="mt-3 font-medium text-foreground">{problem.title}</p>
-                  {problem.tags && problem.tags.length > 0 ? (
-                    <p className="mt-2 text-sm leading-6 text-muted-foreground">{problem.tags.join('、')}</p>
-                  ) : null}
-                </ProblemSourceLink>
-              ))}
-            </div>
+          <LayerCallout eyebrow="練習" title="子主題練習題" variant="problems">
+            <SubtopicPracticeProblems problems={subtopic.practice_problems} />
           </LayerCallout>
         </div>
       )}

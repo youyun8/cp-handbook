@@ -62,6 +62,12 @@ export interface PracticeProblem {
   tags?: string[];
 }
 
+export interface ProblemNote {
+  solution: string;
+  thought: string;
+  updatedAt: string;
+}
+
 export interface RatingBand {
   id: 'consolidate' | 'target' | 'stretch';
   label: string;
@@ -112,5 +118,6 @@ export interface ProgressSnapshot {
   reviewedProblemIds: string[];
   coveredTopicIds: string[];
   submissions: SubmissionLogEntry[];
+  problemNotes?: Record<string, ProblemNote>;
   updatedAt: string;          // ISO 8601
 }
