@@ -5,7 +5,7 @@
     "slug": "binary-search",
     "description": "把答案空間或有序序列切成可判定的左右兩半，快速定位邊界。",
     "motivation": "在一個長度 n 的有序序列裡找某個邊界，最直覺的做法是從頭掃到尾，需要 O(n)；當查詢次數很多、或答案範圍大到 10^9 時，線性掃描完全跑不動。更棘手的是「二分答案」類題目：答案不是序列裡的某個元素，而是一個抽象數值（最小的最大值、最大的最小值），根本沒有現成陣列可以掃。難點在於——要在龐大且不顯式存在的解空間裡，只用少量幾次判斷就鎖定答案。\n\n既然線性掃描太慢，關鍵就在於：能不能每問一次就把搜尋範圍砍半？這正是核心想法要利用的單調性。",
-    "core_idea": "二分搜尋能成立的唯一前提是**單調判定（monotone predicate）**：存在某個臨界值 x，使判定函式 `check` 在 x 左側恆為 false、右側恆為 true（或相反），整個解空間只有「一次轉折」。只要找得到這種單調性，就能用一次 `check` 把候選範圍對半砍。\n\n- **什麼問題能二分？** 把問題改寫成「答案是否 ≥ x」這種是非題；若答案隨 x 變化只翻轉一次就能二分，若 `check` 會反覆 true/false（非單調），二分會給出錯誤結果。\n- **為何偏好半開區間 `[left, right)`？** 讓 `right` 永遠指向「第一個尚未確認合法的位置」。迴圈用 `while (left < right)`，每步把區間收窄到 `[left, mid)` 或 `[mid+1, right)`，結束時 `left == right`，這個位置就是答案，不需額外後處理，天然避開閉區間常見的 off-by-one。\n\n至於 mid 該往哪邊收、邊界怎麼寫才不會跳過答案或卡死，留到下面的過程剖析逐步拆解。",
+    "core_idea": "二分搜尋能成立的唯一前提是**單調判定（monotone predicate）**：存在某個臨界值 x，使判定函式 `check` 在 x 左側恆為 false、右側恆為 true（或相反），整個解空間只有「一次轉折」。只要找得到這種單調性，就能用一次 `check` 把候選範圍對半砍。\n\n- **什麼問題能二分？** 把問題改寫成「答案是否 ≥ x」這種是非題；若答案隨 x 變化只翻轉一次就能二分，若 `check` 會反覆 true/false（非單調），二分會給出錯誤結果。\n- **為何偏好半開區間 `[left, right)`？** 讓 `right` 永遠指向「第一個尚未確認合法的位置」。迴圈用 `while (left < right)`，每步把區間收窄到 `[left, mid)` 或 `[mid+1, right)`，結束時 `left == right`，這個位置就是答案，不需額外後處理，天然避開閉區間常見的 off-by-one。\n\n至於 mid 該往哪邊收、邊界怎麼寫才不會跳過答案或卡死，留到下面的過程剖析逐步拆解。\n\n二分搜尋的本質是在具有單調性（monotone predicate）的布林函數上尋找轉折點。若函數 f(x) 滿足：存在某個臨界值 x\\* 使得 f(x) = false 對所有 x < x\\*、f(x) = true 對所有 x ≥ x\\* 成立，則可以在 O(log n) 內找到 x\\*。「有序」不限於數值排列，只要對某個條件而言，左側全部「否」、右側全部「是」，就可以套二分。例如：「能否用 k 個工人在 D 天內完成任務」，答案關於 D 單調不減，即可二分 D。",
     "complexity": "時間複雜度 O(log n) 或 O(log V)，空間複雜度 O(1)。",
     "deep_dive": [
       {
@@ -15,6 +15,10 @@
       {
         "title": "把最佳化轉成判定：二分答案的機制",
         "body": "「把陣列分成 k 段使最大段和最小」這種最佳化無法直接求，但**驗證**一個候選答案很容易。\n\n把問題改寫成判定函式 `check(x)`：『能不能讓最大段和 ≤ x？』——貪心地從左往右切，能不超過 x 就繼續累加，否則新開一段，統計用了幾段。\n\n- `check(x)` 對 x 單調：x 越大越容易成立，存在唯一臨界。\n- 段數 ≤ k 即 `check` 為 true，於是在 `[max(a), sum(a)]` 上二分最小可行 x。\n\n關鍵在於把『求最優』換成『問是否可行』，難度立刻下降一個量級。"
+      },
+      {
+        "title": "浮點數二分與三分法",
+        "body": "浮點數二分解決連續解空間問題：終止條件改用精度 `while (right - left > 1e-9)` 或固定迭代 100 次，避免浮點相等永遠不成立。\n\n三分法用於單峰函數求極值：每次縮去 1/3 的範圍，取 `m1 = l + (r-l)/3`、`m2 = r - (r-l)/3`，比較 `f(m1)` 與 `f(m2)` 決定丟棄哪段。整數域三分需特別處理 `r - l < 3` 的端點枚舉。"
       }
     ],
     "reference_links": [
@@ -29,6 +33,10 @@
       {
         "label": "靈茶山艾府：二分答案專題",
         "url": "https://www.bilibili.com/video/BV1AP41137w7/"
+      },
+      {
+        "label": "cp-algorithms：Ternary Search",
+        "url": "https://cp-algorithms.com/num_methods/ternary_search.html"
       }
     ],
     "template_code": "int lower_bound_custom(const vector<int>& a, int target) {\n    int left = 0, right = (int)a.size(); // Search in [left, right)\n    while (left < right) {\n        int mid = left + (right - left) / 2; // Avoid overflow\n        if (a[mid] >= target) {\n            right = mid; // mid can still be the first valid index\n        } else {\n            left = mid + 1; // mid is invalid, remove it\n        }\n    }\n    return left; // First index with a[i] >= target\n}\n\nlong long binary_search_answer(long long low, long long high) {\n    while (low < high) {\n        long long mid = low + (high - low) / 2; // Candidate answer\n        if (check(mid)) {\n            high = mid; // Feasible, try a smaller answer\n        } else {\n            low = mid + 1; // Infeasible, need a larger answer\n        }\n    }\n    return low; // Minimum feasible answer\n}",
@@ -44,6 +52,18 @@
       {
         "name": "二分答案",
         "description": "**何時用**：求『最小的最大值／最大的最小值／第一個滿足條件的閾值』，且滿足三前提——答案有明確上下界、`check(x)` 容易寫、`check` 對 x 單調。\n**核心做法**：把『最小化最大值』改寫成 `check(x) = 『最大值能否 ≤ x』`，在答案範圍上二分第一個讓 `check` 為 true 的 x。\n**複雜度**：O(log V · C)，V 為值域、C 為單次 check 成本。\n⚠️ 反例：若 `check` 不單調（例如有兩段可行區間），二分回傳的位置沒有意義。"
+      },
+      {
+        "name": "浮點數二分",
+        "description": "**何時用**：連續解空間、答案為實數（如最小化最大距離、幾何問題）。\n**核心做法**：用 `while (right - left > eps)` 或固定迭代 100 次取代整數終止條件；每次取 `mid = (left + right) / 2.0` 套入 check。\n**複雜度**：O(log((R-L)/eps) × check 成本)。\n⚠️ eps 設太大精度不足，設太小可能超時；通常 1e-7 ~ 1e-9 足夠。"
+      },
+      {
+        "name": "三分法（Ternary Search）",
+        "description": "**何時用**：函數具有單峰性（先增後減或先減後增）時求極值。\n**核心做法**：取 m1、m2 將區間三等分，比較 f(m1) 與 f(m2)：若 f(m1) < f(m2) 則峰在右側（l = m1），否則在左側（r = m2）。\n**複雜度**：O(log n)。\n⚠️ 整數域三分在 r - l < 3 時需線性枚舉剩餘端點。"
+      },
+      {
+        "name": "並行二分（Parallel Binary Search）",
+        "description": "**何時用**：多組查詢需要在同一有序結構上二分，離線處理可攤還成本。\n**核心做法**：把所有查詢同時維護各自的 [lo, hi]，每輪取各查詢的 mid 批次驗證，把查詢分配到左右兩半繼續下一輪，共 log n 輪。\n**複雜度**：O((n + q) log² n)。\n⚠️ 每輪結束後必須 reset 查詢狀態，否則驗證結果污染下一輪。"
       }
     ],
     "pitfalls": [
@@ -58,12 +78,20 @@
     "slug": "graph-bfs-dfs",
     "description": "用佇列或遞迴探索圖，建立距離、連通性、拓撲順序與狀態層次。",
     "motivation": "圖上的『最短步數』『連通分量』『相依順序』問題，若每次都重新搜尋整張圖，會在分支爆炸下退化成指數級。難點在於：節點可能被多條路徑重複抵達，若不做標記，同一個節點會被展開無數次；而我們真正想要的，是『每個節點只處理一次』就得到全域資訊（距離、是否連通、拓撲序）。\n\n要做到每個節點只進出一次，關鍵在於用一個 visited／dist 陣列控制擴展順序——這正是 BFS 與 DFS 的分野。",
-    "core_idea": "BFS 用佇列依**層**擴展，DFS 用遞迴或堆疊依**深度**擴展，兩者都靠 visited 確保每個節點只進出一次，因此都是 O(n + m)。\n\n- **為什麼 BFS 保證最短路？** BFS 嚴格按距離分層：第 d 層恰好是所有最短距離為 d 的節點。因為佇列先進先出，距離小的節點一定先出隊、先擴展，任何節點第一次被標記時就是最短距離。注意這性質只在**無權圖（或邊權皆相同）**成立；一旦邊權不同，先抵達不代表最短，就必須改用 Dijkstra。\n- **DFS 的遞迴樹視角**：一次 DFS 等於在一棵『遞迴樹』上行走，進入函式 = 入棧、回溯 = 出棧。掌握這個視角，之後看 DFS 序（時間戳）、樹鏈剖分、回溯法都會更直覺。\n\n至於遇到 0/1 邊權、多個起點、或需要相依排序時該怎麼調整，見下面的過程剖析與補充套路。",
+    "core_idea": "BFS 用佇列依**層**擴展，DFS 用遞迴或堆疊依**深度**擴展，兩者都靠 visited 確保每個節點只進出一次，因此都是 O(n + m)。\n\n- **為什麼 BFS 保證最短路？** BFS 嚴格按距離分層：第 d 層恰好是所有最短距離為 d 的節點。因為佇列先進先出，距離小的節點一定先出隊、先擴展，任何節點第一次被標記時就是最短距離。注意這性質只在**無權圖（或邊權皆相同）**成立；一旦邊權不同，先抵達不代表最短，就必須改用 Dijkstra。\n- **DFS 的遞迴樹視角**：一次 DFS 等於在一棵『遞迴樹』上行走，進入函式 = 入棧、回溯 = 出棧。掌握這個視角，之後看 DFS 序（時間戳）、樹鏈剖分、回溯法都會更直覺。\n\n至於遇到 0/1 邊權、多個起點、或需要相依排序時該怎麼調整，見下面的過程剖析與補充套路。\n\nBFS 的正確性依賴於「FIFO 佇列保證同層擴展」：第一次到達某節點的路徑長度必然最短。這個性質在邊權為 1 的圖成立；邊權不均勻時需改用 Dijkstra（邊權 ≥ 0）或 Bellman-Ford（含負邊）。DFS 在有向圖上產生四類邊：樹邊（tree）、前向邊（forward）、後向邊（back）、橫向邊（cross）。後向邊的存在等價於有向環；無向圖的 DFS 只有樹邊和後向邊。邊權只有 0 或 1 時，用 deque 替代 queue：0 邊 push_front，1 邊 push_back，複雜度仍為 O(V+E)。",
     "complexity": "時間複雜度 O(n + m)，空間複雜度 O(n + m)。",
     "deep_dive": [
       {
         "title": "建圖常見模式（影響 BFS／DFS 寫法）",
         "body": "建圖方式直接決定怎麼枚舉鄰居，常見有三種建模：\n\n**1. 網格圖 → 方向陣列**\n把每格 `(r, c)` 當節點，用方向陣列枚舉鄰格：\n```cpp\nint dr[4] = {-1, 1, 0, 0};\nint dc[4] = {0, 0, -1, 1};\nfor (int k = 0; k < 4; ++k) {\n    int nr = r + dr[k], nc = c + dc[k];\n    if (nr < 0 || nr >= R || nc < 0 || nc >= C) continue; // 越界\n    if (grid[nr][nc] == '#') continue;                    // 障礙\n    // 將 (nr, nc) 入隊\n}\n```\n逐行：`dr/dc` 定義上下左右（八方向再加四組對角）；先檢查越界、再檢查是否可走，最後才入隊。\n\n**2. 隱式圖（如單詞接龍）→ 枚舉鄰居 + 雜湊判重**\n節點不顯式存在，鄰居由規則生成（改一個字母）。用 `unordered_map/unordered_set` 把字串映射成是否已訪問，邊在枚舉時即時產生。\n\n**3. 狀態圖（如走迷宮帶鑰匙）→ 狀態壓縮**\n節點 = `(位置, 已持有鑰匙的 bitmask)`。同一格子在不同鑰匙狀態下是**不同節點**，visited 要開成 `visited[r][c][1 << keys]`，否則會誤判已訪問而漏解。"
+      },
+      {
+        "title": "DFS 邊分類與橋和割點",
+        "body": "DFS 樹上定義 `disc[v]`（首次訪問時間）和 `low[v]`（v 子樹能回溯到的最早祖先時間）。\n\n**橋（Bridge）**：邊 (u,v) 是橋，若 `low[v] > disc[u]`，即 v 的子樹無法繞回 u 之前。\n\n**割點（Articulation Point）**：節點 u 是割點，若存在子節點 v 使得 `low[v] >= disc[u]`（根節點需有 ≥ 2 個子樹）。\n\n```cpp\nvoid dfs_bridge(int u, int parent, vector<bool>& visited,\n                vector<int>& disc, vector<int>& low, int& timer,\n                vector<pair<int,int>>& bridges) {\n    visited[u] = true;\n    disc[u] = low[u] = timer++;\n    for (int v : graph[u]) {\n        if (!visited[v]) {\n            dfs_bridge(v, u, visited, disc, low, timer, bridges);\n            low[u] = min(low[u], low[v]);\n            if (low[v] > disc[u]) bridges.push_back({u, v}); // Bridge found\n        } else if (v != parent) {\n            low[u] = min(low[u], disc[v]); // Back edge\n        }\n    }\n}\n```"
+      },
+      {
+        "title": "強連通分量（Tarjan SCC）",
+        "body": "Tarjan 算法在一次 DFS 中找出所有 SCC，利用 `low` 值和 stack 追蹤當前路徑：\n\n```cpp\nvoid tarjan(int u, vector<int>& disc, vector<int>& low,\n            stack<int>& st, vector<bool>& on_stack,\n            int& timer, vector<vector<int>>& sccs) {\n    disc[u] = low[u] = timer++;\n    st.push(u); on_stack[u] = true;\n    for (int v : graph[u]) {\n        if (disc[v] == -1) { // Unvisited\n            tarjan(v, disc, low, st, on_stack, timer, sccs);\n            low[u] = min(low[u], low[v]);\n        } else if (on_stack[v]) {\n            low[u] = min(low[u], disc[v]); // Back edge within SCC\n        }\n    }\n    if (low[u] == disc[u]) { // Root of SCC\n        vector<int> scc;\n        while (true) { int v = st.top(); st.pop(); on_stack[v] = false; scc.push_back(v); if (v == u) break; }\n        sccs.push_back(scc);\n    }\n}\n```\n⚠️ low 的更新只考慮 back edge（on_stack 中的節點），不更新 cross edge，這是 Tarjan 與 Kosaraju 的關鍵差異。"
       }
     ],
     "reference_links": [
@@ -78,6 +106,26 @@
       {
         "label": "靈茶山艾府：圖論題單",
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/graph.go"
+      },
+      {
+        "label": "cp-algorithms：DFS",
+        "url": "https://cp-algorithms.com/graph/depth-first-search.html"
+      },
+      {
+        "label": "cp-algorithms：Bridges",
+        "url": "https://cp-algorithms.com/graph/bridge-searching.html"
+      },
+      {
+        "label": "cp-algorithms：SCC Tarjan",
+        "url": "https://cp-algorithms.com/graph/strongly-connected-components.html"
+      },
+      {
+        "label": "cp-algorithms：Dijkstra",
+        "url": "https://cp-algorithms.com/graph/dijkstra.html"
+      },
+      {
+        "label": "OI-Wiki：最短路",
+        "url": "https://oi-wiki.org/graph/shortest-path/"
       }
     ],
     "template_code": "vector<int> bfs(int start, const vector<vector<int>>& graph) {\n    vector<int> dist(graph.size(), -1); // -1 means unvisited\n    queue<int> q;\n    dist[start] = 0; // Source distance is zero\n    q.push(start);\n    while (!q.empty()) {\n        int u = q.front();\n        q.pop();\n        for (int v : graph[u]) {\n            if (dist[v] != -1) continue; // Each node enters queue once\n            dist[v] = dist[u] + 1; // BFS layer increases by one\n            q.push(v);\n        }\n    }\n    return dist;\n}\n\nvoid dfs(int u, const vector<vector<int>>& graph, vector<int>& seen) {\n    seen[u] = 1; // Mark before visiting neighbors\n    for (int v : graph[u]) {\n        if (!seen[v]) dfs(v, graph, seen);\n    }\n}",
@@ -93,6 +141,18 @@
       {
         "name": "拓撲排序",
         "description": "**何時用**：DAG 上求一個滿足所有相依的線性順序，或在 DAG 上做 DP 轉移。\n**核心做法**：Kahn（BFS）把入度為 0 的點入隊，每彈出一個就把鄰居入度減一、變 0 再入隊；DFS 版則取後序遍歷再反轉。兩者結果都是合法拓撲序。\n**複雜度**：O(V + E)。Kahn 在偵測環上更直觀——若最後入隊節點數 < V，代表有環。"
+      },
+      {
+        "name": "DFS 時間戳與歐拉序",
+        "description": "**何時用**：子樹查詢、括號序列、LCA 前置處理。\n**核心做法**：DFS 進入節點時記錄 `in[v]`、離開時記錄 `out[v]`；節點 u 的子樹對應 `[in[u], out[u]]` 的連續區間，可直接用線段樹或 BIT 查詢。\n**複雜度**：前置 O(n)，查詢轉成區間問題的複雜度。\n⚠️ in/out 的定義要統一（進入時計數還是計數後進入），否則邊界差一。"
+      },
+      {
+        "name": "強連通分量（SCC）縮點",
+        "description": "**何時用**：有向圖上的等價類問題、縮點後在 DAG 上做 DP。\n**核心做法**：Tarjan 算法一次 DFS 求出所有 SCC，縮點後形成 DAG，再在 DAG 上做貪心或 DP。\n**複雜度**：O(V+E)。\n⚠️ low 值只能從 back edge（stack 中的節點）更新，不能從 cross edge 更新。"
+      },
+      {
+        "name": "Dijkstra 最短路",
+        "description": "**何時用**：邊權非負的單源最短路。\n**核心做法**：最小堆維護 `(dist, node)`，每次 pop 出距離最小的節點進行鬆弛；用懶刪除跳過過期節點。\n**複雜度**：O((V+E) log V)（二元堆）。\n⚠️ 負邊不能用 Dijkstra，需改用 Bellman-Ford 或 SPFA。"
       }
     ],
     "pitfalls": [
@@ -107,7 +167,7 @@
     "slug": "intervals",
     "description": "排序端點後合併、掃描或差分，把重疊關係轉成線性事件。",
     "motivation": "區間問題（合併、覆蓋、最多重疊）若直接兩兩比較每對區間是否相交，是 O(n²)；當 n 到 10⁵ 時無法接受。更麻煩的是『同時做很多次區間加值、最後查詢』這類批次操作，逐次暴力修改是 O(nq)。難點在於：區間之間的相交關係本身組合很多，亂序處理時要同時考慮包含、部分重疊、不相交，分類爆炸。\n\n解法的第一步幾乎都是『先排序或把區間拆成端點事件』——把雜亂的二維關係壓成一條線上的有序事件，這正是核心想法。",
-    "core_idea": "區間題的關鍵是把『重疊、覆蓋、增減』轉成可線性掃描的端點事件。\n\n- **為什麼通常先排序？** 把區間按左端排序後，相鄰兩個區間的關係只剩三種——不重疊、包含、部分重疊——可以一次掃描窮舉；未排序時任意兩區間的關係組合呈平方級，難以線性處理。\n- **差分 vs 掃描線怎麼選？** 兩者都把區間化成端點變化，但場景不同：**差分陣列**適合『先做大量靜態區間加值、最後一次性查詢』；**掃描線**適合『動態事件處理』——把左端視為加入、右端視為移除，按事件順序維護當前活躍集合（如目前重疊數、覆蓋長度）。\n\n下面先給差分模板，再用補充套路看合併、會議室、最小覆蓋區間各自的掃描技巧。",
+    "core_idea": "區間題的關鍵是把『重疊、覆蓋、增減』轉成可線性掃描的端點事件。\n\n- **為什麼通常先排序？** 把區間按左端排序後，相鄰兩個區間的關係只剩三種——不重疊、包含、部分重疊——可以一次掃描窮舉；未排序時任意兩區間的關係組合呈平方級，難以線性處理。\n- **差分 vs 掃描線怎麼選？** 兩者都把區間化成端點變化，但場景不同：**差分陣列**適合『先做大量靜態區間加值、最後一次性查詢』；**掃描線**適合『動態事件處理』——把左端視為加入、右端視為移除，按事件順序維護當前活躍集合（如目前重疊數、覆蓋長度）。\n\n下面先給差分模板，再用補充套路看合併、會議室、最小覆蓋區間各自的掃描技巧。\n\n處理區間問題的通用策略是「事件點掃描（Sweep Line）」：把每個區間的左端點記為 +1 事件、右端點記為 -1 事件，對時間軸掃描，維護當前活躍區間數。差分陣列是靜態版的掃描線：所有修改在查詢前批次完成時，用差分 + 前綴和 O(n) 還原；若修改與查詢交錯，改用線段樹或 BIT。",
     "complexity": "通常時間複雜度 O(n log n)，使用差分且座標範圍可控時可為 O(n + V)，空間複雜度 O(n)。",
     "deep_dive": [
       {
@@ -142,6 +202,14 @@
       {
         "name": "覆蓋 K 個清單的最小區間",
         "description": "**何時用**：給 k 個各自有序的清單，求一個最小區間使其至少各含一個元素。\n**核心做法**：把每個清單的當前最小值放進最小堆（多路合併），維護目前堆中最大值；每次取出最小值更新答案區間 `[min, max]`，再從它所屬清單補入下一個——本質是堆 + 滑動視窗思維。\n**複雜度**：O(N log k)，N 為元素總數。"
+      },
+      {
+        "name": "按 end 排序貪心（最少移除）",
+        "description": "**何時用**：移除最少區間使剩餘不重疊（等價於保留最多不重疊區間）。\n**核心做法**：按 end 排序，貪心保留 end 最小且與已選不重疊的區間；每次選擇 end 最小者，為後面留下最大空間。\n**複雜度**：O(n log n)。\n⚠️ 一定要按 end 排序，按 start 排序會貪心失效。"
+      },
+      {
+        "name": "差分陣列（靜態批次修改）",
+        "description": "**何時用**：多次對區間批次加值，最後一次性查詢所有結果。\n**核心做法**：`diff[l] += val; diff[r+1] -= val;`，前綴和還原。\n**複雜度**：O(n+q) 建立 + O(n) 還原。\n⚠️ 陣列需開到 n+2（r+1 可能越界）；若修改與查詢交錯，改用線段樹或 BIT。"
       }
     ],
     "pitfalls": [
@@ -211,6 +279,10 @@
       {
         "title": "設計 DP 的四步驟",
         "body": "任何 DP 都可以照這四步走，順序不能亂：\n\n**1. 定義狀態**：`dp[...]` 代表什麼？必須精確到能用一句話講清楚（如『`dp[i]` = 以 a[i] 結尾的最長遞增子序列長度』）。\n\n**2. 寫轉移**：這個狀態能從哪些『更小／更早』的前驅狀態推來？寫出轉移方程。\n\n**3. 確認邊界**：base case 是什麼？（如 `dp[0] = 0` 或單一元素時的值）\n\n**4. 確認枚舉順序**：計算 `dp[x]` 前，它依賴的狀態都必須已算好——這決定 for 迴圈方向（如區間 DP 必須先小區間再大區間）。\n\n四步缺一不可：狀態錯則全盤皆錯，順序錯則會用到還沒算好的值。"
+      },
+      {
+        "title": "LIS 的兩種視角",
+        "body": "**O(n²) DP**：`dp[i]` = 以 `a[i]` 結尾的最長遞增子序列長度，轉移 `dp[i] = max(dp[j]+1)` for `j < i, a[j] < a[i]`。\n\n**O(n log n) Patience Sort**：維護 `tails` 陣列，`tails[k]` 是長度為 k+1 的 LIS 中最小的結尾元素。對每個 `a[i]`，用 `lower_bound` 在 `tails` 上找第一個 ≥ a[i] 的位置並替換；找不到則追加。`tails` 的長度即為 LIS 長度。\n\n```cpp\nint lis(const vector<int>& a) {\n    vector<int> tails;\n    for (int x : a) {\n        auto it = lower_bound(tails.begin(), tails.end(), x); // Strict LIS\n        if (it == tails.end()) tails.push_back(x);\n        else *it = x;\n    }\n    return tails.size();\n}\n```\n⚠️ 嚴格遞增用 lower_bound；非嚴格遞增用 upper_bound。"
       }
     ],
     "reference_links": [
@@ -240,6 +312,18 @@
       {
         "name": "區間 DP",
         "description": "**何時用**：答案由區間拆成左右子區間合併而得（如合併石子、矩陣連乘、回文）。\n**核心做法**：`dp[l][r]` 枚舉分割點 k，由 `dp[l][k]` 與 `dp[k+1][r]` 合併；枚舉順序**必須按區間長度由小到大**，保證子區間先算好。\n**複雜度**：O(n³)（區間數 O(n²) × 枚舉分割點 O(n)）。"
+      },
+      {
+        "name": "完全背包",
+        "description": "**何時用**：每個物品可重複選用（如硬幣找零、完全平方數）。\n**核心做法**：與 0/1 背包只差一步：容量改為**正序**枚舉，使得每個物品可被重複使用。\n**複雜度**：O(nW)。\n⚠️ 0/1 背包必須逆序，完全背包必須正序，兩者不能混用。"
+      },
+      {
+        "name": "分組背包",
+        "description": "**何時用**：物品分成若干組，每組最多選一個。\n**核心做法**：外層枚舉組，內層枚舉容量（逆序），最內層枚舉該組內的物品選哪個。\n**複雜度**：O(組數 × 平均每組大小 × W)。\n⚠️ 每組物品只能選一個，不能在同組物品上連續 update 同一個容量狀態。"
+      },
+      {
+        "name": "記憶化搜尋",
+        "description": "**何時用**：轉移關係複雜（如多維狀態、DAG 上 DP），遞推的枚舉順序難以確定。\n**核心做法**：用 `memo` 陣列或 `unordered_map` 快取計算結果，遇到已計算的狀態直接返回。\n**複雜度**：與遞推版本相同。\n⚠️ 遞迴深度過深（如 n=10^5 的線性 DP）會 stack overflow，此時需改成遞推。"
       }
     ],
     "pitfalls": [
@@ -358,6 +442,10 @@
       {
         "title": "LCA 查詢的兩階段",
         "body": "LCA 查詢分兩階段，都靠二進位分解：\n```cpp\nint lca(int u, int v) {\n    if (depth[u] < depth[v]) swap(u, v);      // 讓 u 較深\n    int diff = depth[u] - depth[v];\n    for (int k = 0; k < LOG; ++k)              // 階段一：把 u 提到與 v 同深度\n        if (diff >> k & 1) u = up[u][k];\n    if (u == v) return u;                       // v 是 u 的祖先\n    for (int k = LOG - 1; k >= 0; --k)          // 階段二：高位到低位同步上跳\n        if (up[u][k] != up[v][k]) { u = up[u][k]; v = up[v][k]; }\n    return up[u][0];                            // 再跳一步即 LCA\n}\n```\n逐行：先確保 u 較深，用 `diff` 的二進位把 u 上提對齊深度；若對齊後相等，v 本身就是 LCA；否則**從高位往低位**同步跳——只在『跳了之後兩者仍不相同』時才跳，保證停在 LCA 正下方，最後 `up[u][0]` 就是 LCA。階段二必須由高位往低位，才能逼近而不越過。"
+      },
+      {
+        "title": "四種 LCA 算法比較",
+        "body": "| 算法 | 預處理 | 查詢 | 適用場景 |\n|------|--------|------|----------|\n| 倍增 | O(n log n) | O(log n) | 通用、線上，好寫 |\n| Euler Tour + Sparse Table | O(n log n) | O(1) | 純查詢量極大 |\n| Tarjan 離線 | O((n+q)α(n)) | — | 離線、一次處理所有查詢 |\n| 鏈剖（HLD） | O(n log n) | O(log² n) | 需同時支援路徑更新 |\n\n**Sparse Table RMQ 求 LCA**：Euler tour 展開為長度 2n-1 的序列，LCA(u,v) = 區間最小深度節點，Sparse Table O(1) 查詢。"
       }
     ],
     "reference_links": [
@@ -491,6 +579,421 @@
       "⚠️ 用前綴和硬撐動態修改：單點改一次就要 O(n) 重建，資料一旦會變就該換線段樹／BIT。",
       "⚠️ 懶標記忘了在進入子節點前 `pushdown`，會讀到尚未套用修改的舊值；下推與合併的順序不能顛倒。",
       "⚠️ 權值線段樹值域過大未離散化會 MLE／TLE；BIT 下標從 1 開始，`i & -i` 對 0 會死循環。"
+    ]
+  },
+  {
+    "id": "shortest-path",
+    "title": "最短路算法",
+    "slug": "shortest-path",
+    "description": "在帶權圖中高效求單源或多源最短路，涵蓋 Dijkstra、Bellman-Ford、SPFA 與 Floyd-Warshall。",
+    "motivation": "圖上路徑規劃是最常見的競程場景之一。若每次查詢都用 BFS 遍歷，在邊權不均勻時會完全錯誤；暴力枚舉所有路徑則是指數級。難點在於：負邊的存在會讓貪心策略失效；多源、多目標、帶限制的最短路需要不同的算法框架。",
+    "core_idea": "最短路算法的核心是「鬆弛操作（Relaxation）」：若 dist[u] + w(u,v) < dist[v]，則更新 dist[v]。不同算法的差異在於執行鬆弛的順序與策略。\n\n- **Dijkstra**：貪心策略，每次選距離最小的未確定節點進行鬆弛。正確性依賴邊權非負，確保「已確定的節點不會被後來的路徑更新」。\n- **Bellman-Ford**：對所有邊做 V-1 輪鬆弛，能處理負邊；第 V 輪若仍可鬆弛則存在負環。\n- **Floyd-Warshall**：枚舉中間節點 k，更新所有點對間最短路 `dp[i][j] = min(dp[i][j], dp[i][k]+dp[k][j])`，O(V³) 但常數小。\n- **Johnson 算法**：對每個節點加一個勢函數（用 Bellman-Ford 計算），把負邊轉成非負邊後跑 V 次 Dijkstra，複雜度 O(VE + V² log V)。",
+    "complexity": "Dijkstra（二元堆）O((V+E) log V)；Bellman-Ford O(VE)；Floyd O(V³)；SPFA 最壞 O(VE)。",
+    "deep_dive": [
+      {
+        "title": "Dijkstra 實作與懶刪除",
+        "body": "```cpp\nvector<long long> dijkstra(int src, const vector<vector<pair<int,int>>>& graph) {\n    int n = graph.size();\n    vector<long long> dist(n, LLONG_MAX);\n    priority_queue<pair<long long,int>, vector<pair<long long,int>>, greater<>> pq;\n    dist[src] = 0;\n    pq.push({0, src});\n    while (!pq.empty()) {\n        auto [d, u] = pq.top(); pq.pop();\n        if (d > dist[u]) continue; // Lazy deletion: skip stale entries\n        for (auto [v, w] : graph[u]) {\n            if (dist[u] + w < dist[v]) {\n                dist[v] = dist[u] + w;\n                pq.push({dist[v], v});\n            }\n        }\n    }\n    return dist;\n}\n```"
+      },
+      {
+        "title": "Bellman-Ford 與負環偵測",
+        "body": "```cpp\n// Returns empty if negative cycle detected\nvector<long long> bellman_ford(int src, int n, const vector<tuple<int,int,int>>& edges) {\n    vector<long long> dist(n, LLONG_MAX);\n    dist[src] = 0;\n    for (int iter = 0; iter < n - 1; iter++) {\n        bool updated = false;\n        for (auto [u, v, w] : edges) {\n            if (dist[u] != LLONG_MAX && dist[u] + w < dist[v]) {\n                dist[v] = dist[u] + w;\n                updated = true;\n            }\n        }\n        if (!updated) break; // Early termination\n    }\n    // Check for negative cycle (n-th relaxation round)\n    for (auto [u, v, w] : edges)\n        if (dist[u] != LLONG_MAX && dist[u] + w < dist[v])\n            return {}; // Negative cycle exists\n    return dist;\n}\n```"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "cp-algorithms：Dijkstra",
+        "url": "https://cp-algorithms.com/graph/dijkstra.html"
+      },
+      {
+        "label": "cp-algorithms：Bellman-Ford",
+        "url": "https://cp-algorithms.com/graph/bellman_ford.html"
+      },
+      {
+        "label": "cp-algorithms：Floyd-Warshall",
+        "url": "https://cp-algorithms.com/graph/all-pair-shortest-path-floyd-warshall.html"
+      },
+      {
+        "label": "cp-algorithms：Johnson 算法",
+        "url": "https://cp-algorithms.com/graph/johnson.html"
+      },
+      {
+        "label": "OI-Wiki：最短路",
+        "url": "https://oi-wiki.org/graph/shortest-path/"
+      },
+      {
+        "label": "靈茶山艾府：最短路專題",
+        "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/graph.go"
+      }
+    ],
+    "template_code": "// Dijkstra with min-heap\nvector<long long> dijkstra(int src, const vector<vector<pair<int,int>>>& g) {\n    int n = g.size();\n    vector<long long> dist(n, LLONG_MAX);\n    priority_queue<pair<long long,int>, vector<pair<long long,int>>, greater<>> pq;\n    dist[src] = 0; pq.push({0, src});\n    while (!pq.empty()) {\n        auto [d, u] = pq.top(); pq.pop();\n        if (d > dist[u]) continue; // Lazy deletion\n        for (auto [v, w] : g[u])\n            if (dist[u] + w < dist[v]) { dist[v] = dist[u] + w; pq.push({dist[v], v}); }\n    }\n    return dist;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "多源最短路（虛擬源點）",
+        "description": "**何時用**：有多個起點，求每個節點到最近起點的距離。\n**核心做法**：建立虛擬源點 0，對所有真實起點加一條邊權為 0 的邊，跑一次 Dijkstra。\n**複雜度**：O((V+E) log V)。\n⚠️ 虛擬節點 id 需避開現有節點編號。"
+      },
+      {
+        "name": "差分約束（Bellman-Ford 應用）",
+        "description": "**何時用**：變數間有一組 xi - xj ≤ c 的不等式約束，求是否可行或求最大/最小解。\n**核心做法**：每個不等式 xi - xj ≤ c 建邊 j → i（邊權 c），從超級源跑 Bellman-Ford；若存在負環則無解，否則 dist[i] 即為一組可行解。\n**複雜度**：O(VE)。\n⚠️ 負環對應無解，正確判斷需在第 V 輪後再驗證一次。"
+      },
+      {
+        "name": "Floyd-Warshall 全點對最短路",
+        "description": "**何時用**：需要所有點對間最短路，且 V ≤ 500。\n**核心做法**：`dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j])`，k 為外層枚舉。\n**複雜度**：O(V³)。\n⚠️ k 必須是最外層迴圈，否則動態規劃的前驅狀態尚未計算完畢。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ Dijkstra 不能處理負邊：負邊會讓已確定的節點被重新鬆弛，破壞貪心正確性，需改用 Bellman-Ford 或 SPFA。",
+      "⚠️ SPFA 在稠密圖和特定構造下會退化到 O(VE)，競程中遇到卡 SPFA 的測資需改用 Dijkstra（若無負邊）。",
+      "⚠️ Floyd 的 k 必須是最外層迴圈，i、j 可任意順序；若把 k 放在內層，前驅狀態尚未用中間節點更新，結果錯誤。"
+    ]
+  },
+  {
+    "id": "minimum-spanning-tree",
+    "title": "最小生成樹",
+    "slug": "minimum-spanning-tree",
+    "description": "在帶權無向連通圖中找邊權總和最小的生成樹，掌握 Kruskal 與 Prim 兩種策略。",
+    "motivation": "連通所有節點的網路設計（如電纜鋪設、道路規劃）希望總成本最小。暴力枚舉所有生成樹是指數級；難點在於如何貪心地「每次加邊都不後悔」。",
+    "core_idea": "MST 的兩個核心定理：\n\n- **切割性質（Cut Property）**：對任意切割，跨越切割的最小邊一定在某個 MST 中。\n- **環性質（Cycle Property）**：任意環上的最大邊不屬於任何 MST。\n\n**Kruskal**：按邊權從小到大排序，逐條用 DSU 判斷加入是否成環，不成環則加入。基於切割性質。\n\n**Prim**：從任意節點出發，每次貪心選距離當前樹最近的節點加入，用最小堆維護候選邊。思路類似 Dijkstra。",
+    "complexity": "Kruskal O(E log E)；Prim（二元堆）O((V+E) log V)；稠密圖 Prim 可用 O(V²) 實作。",
+    "deep_dive": [
+      {
+        "title": "Kruskal 實作（DSU 核心）",
+        "body": "```cpp\nstruct Edge { int u, v, w; };\nlong long kruskal(int n, vector<Edge>& edges) {\n    sort(edges.begin(), edges.end(), [](const Edge& a, const Edge& b) { return a.w < b.w; });\n    DSU dsu(n);\n    long long total = 0; int cnt = 0;\n    for (auto& e : edges) {\n        if (dsu.find(e.u) != dsu.find(e.v)) { // Not same component\n            dsu.unite(e.u, e.v);\n            total += e.w; cnt++;\n            if (cnt == n - 1) break; // MST complete\n        }\n    }\n    return cnt == n - 1 ? total : -1; // -1 if not connected\n}\n```"
+      },
+      {
+        "title": "次小生成樹（Second MST）",
+        "body": "求次小生成樹：先求 MST，再枚舉每條非樹邊 (u,v,w)，替換掉 u→v 路徑上的最大樹邊，取最小替換代價。\n\n用倍增維護樹上路徑最大邊，可在 O(n log n + m log m) 內求出次小生成樹。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "cp-algorithms：Kruskal",
+        "url": "https://cp-algorithms.com/graph/mst_kruskal.html"
+      },
+      {
+        "label": "cp-algorithms：Prim",
+        "url": "https://cp-algorithms.com/graph/mst_prim.html"
+      },
+      {
+        "label": "cp-algorithms：次小生成樹",
+        "url": "https://cp-algorithms.com/graph/second_best_mst.html"
+      },
+      {
+        "label": "OI-Wiki：最小生成樹",
+        "url": "https://oi-wiki.org/graph/mst/"
+      },
+      {
+        "label": "靈茶山艾府：圖論題單",
+        "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/graph.go"
+      }
+    ],
+    "template_code": "// Kruskal MST\nlong long kruskal(int n, vector<tuple<int,int,int>>& edges) {\n    sort(edges.begin(), edges.end()); // Sort by weight (first element)\n    vector<int> parent(n); iota(parent.begin(), parent.end(), 0);\n    function<int(int)> find = [&](int x) { return parent[x] == x ? x : parent[x] = find(parent[x]); };\n    long long total = 0; int cnt = 0;\n    for (auto& [w, u, v] : edges) {\n        int pu = find(u), pv = find(v);\n        if (pu != pv) { parent[pu] = pv; total += w; cnt++; }\n    }\n    return cnt == n - 1 ? total : -1;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "最大生成樹（Maximum Spanning Tree）",
+        "description": "**何時用**：最大化連通路徑上的最小邊（瓶頸路徑問題）。\n**核心做法**：把邊按降序排列跑 Kruskal（或把邊權取負後跑正常 Kruskal）。\n**應用**：求任意兩點間「最大瓶頸路徑」。"
+      },
+      {
+        "name": "Borůvka 算法",
+        "description": "**何時用**：並行環境或需要 O(E log V) 分治框架時。\n**核心做法**：每輪每個連通分量找出最輕離開邊，合併後重複，O(log V) 輪後完成。\n**應用**：可與分治結合處理動態 MST 或特殊構造。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ Kruskal 需要先排序邊，忘了排序就直接加邊會得到錯誤結果。",
+      "⚠️ 圖不連通時 MST 不存在，需要檢查最終加入的邊數是否恰好為 n-1。",
+      "⚠️ 邊權可能相等，Kruskal 的正確性不依賴邊權唯一，任意同權邊的選擇都能得到一個合法的 MST。"
+    ]
+  },
+  {
+    "id": "tree-dp",
+    "title": "樹形 DP",
+    "slug": "tree-dp",
+    "description": "以樹的根為起點，透過後序 DFS 把子問題的最優解合併到父節點，處理樹上路徑、選點、分組等優化問題。",
+    "motivation": "樹上問題（如「選最多點使相鄰不同時選」「染色方案數」「直徑」「重心」）無法直接套線性 DP；暴力枚舉子集是指數級。樹的遞迴結構天然適合 DP：子樹問題的解是相互獨立的，父節點只需合併子節點結果。",
+    "core_idea": "樹形 DP 的狀態通常定義在「以 v 為根的子樹」上，DFS 後序（先遞迴子節點再更新父節點）保證轉移時子問題已解。\n\n常見狀態設計：\n- `dp[v][0/1]`：v 選或不選的最優值（獨立集類）\n- `dp[v][k]`：子樹中選 k 個節點的最優值（揹包在樹上）\n- `dp[v]`：以 v 為根的子樹的最優值（路徑、直徑類）\n\n**換根 DP**：若答案需要對所有節點都當一次根（如「以每個節點為根的最大深度」），先跑一次下行 DP，再跑一次上行 DP 把父節點資訊傳回。",
+    "complexity": "基本樹形 DP O(n)；樹上背包 O(n²)；換根 DP O(n)。",
+    "deep_dive": [
+      {
+        "title": "樹的直徑（兩種求法）",
+        "body": "**方法一（兩次 BFS/DFS）**：從任意節點出發找最遠節點 u，再從 u 出發找最遠節點 v，uv 路徑長度即直徑。正確性需要對無負邊的樹成立。\n\n**方法二（樹形 DP）**：`dp[v]` = 以 v 為根的子樹中從 v 出發的最長鏈；每次合併子節點時更新全域答案 `ans = max(ans, dp[u] + dp[v] + w(u,v))`（路徑過 u）。此方法可推廣到帶負邊的樹和「加權路徑」。\n\n```cpp\nint diameter = 0;\nint dfs_diam(int u, int parent) {\n    int max_depth = 0;\n    for (auto [v, w] : graph[u]) {\n        if (v == parent) continue;\n        int d = dfs_diam(v, u) + w;\n        diameter = max(diameter, max_depth + d); // Update diameter through u\n        max_depth = max(max_depth, d);\n    }\n    return max_depth;\n}\n```"
+      },
+      {
+        "title": "換根 DP（Re-rooting）",
+        "body": "以「每個節點為根時的最大深度」為例：\n\n1. 第一次 DFS（下行）：計算 `down[v]` = 以 v 為根的子樹中從 v 出發的最大深度。\n2. 第二次 DFS（上行）：計算 `up[v]` = 通過父節點方向能到達的最大深度。轉移：`up[v] = max(up[parent], down[parent的第二大子深度] + 1) + 1`（需要區分最大和次大，避免走回自己）。\n3. 每個節點的答案 = `max(down[v], up[v])`。\n\n關鍵：維護每個節點子節點中的最大深度和次大深度，確保傳回 v 時不使用 v 自己貢獻的最大深度。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "cp-algorithms：樹形 DP",
+        "url": "https://cp-algorithms.com/graph/tree-dp.html"
+      },
+      {
+        "label": "cp-algorithms：樹的重心",
+        "url": "https://cp-algorithms.com/graph/centroid.html"
+      },
+      {
+        "label": "OI-Wiki：樹形 DP",
+        "url": "https://oi-wiki.org/dp/tree/"
+      },
+      {
+        "label": "靈茶山艾府：樹形 DP",
+        "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/dp.go"
+      }
+    ],
+    "template_code": "// Tree DP: maximum independent set\nvector<array<int,2>> dp; // dp[v][0/1]: max independent set in subtree rooted at v\nvoid dfs_indep(int u, int par, const vector<vector<int>>& tree) {\n    dp[u] = {0, 1}; // Not select u: 0, select u: 1\n    for (int v : tree[u]) {\n        if (v == par) continue;\n        dfs_indep(v, u, tree);\n        dp[u][0] += max(dp[v][0], dp[v][1]); // u not selected: child can be either\n        dp[u][1] += dp[v][0]; // u selected: child must not be selected\n    }\n}",
+    "supplemental_patterns": [
+      {
+        "name": "樹上最大獨立集",
+        "description": "**何時用**：選最多節點使相鄰節點不同時被選（加權版本：使選中節點總權值最大）。\n**核心做法**：`dp[v][0]` = v 不選時子樹最優；`dp[v][1]` = v 選時子樹最優。後序 DFS 合併。\n**複雜度**：O(n)。"
+      },
+      {
+        "name": "樹上背包",
+        "description": "**何時用**：從樹上選 k 個節點，最大化總權值（限制選的節點需形成連通子樹，或其他結構約束）。\n**核心做法**：`dp[v][j]` = 以 v 為根的子樹中選 j 個節點的最大權值。合併子節點時做一次 O(size_u × size_v) 的背包合併。\n**複雜度**：O(n²)（每對點只合併一次）。"
+      },
+      {
+        "name": "換根 DP",
+        "description": "**何時用**：需要對所有節點都當一次根計算答案（如「每個節點到所有其他節點的距離和」「以每個節點為根的子樹深度」）。\n**核心做法**：先下行 DFS 算子樹答案，再上行 DFS 把父方向資訊傳遞下來，每個節點合併兩個方向得到全樹答案。\n**複雜度**：O(n)。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 樹形 DP 必須指定根（一般選 0 或 1），並在 DFS 時傳入父節點避免回頭走，否則無限遞迴。",
+      "⚠️ 換根 DP 中，傳回給子節點的值不能包含子節點自身的貢獻，需要區分「最大」和「次大」子節點的情況。",
+      "⚠️ 樹上背包的枚舉順序：對子節點做背包合併時，外層枚舉已合併的大小，內層枚舉新加入子樹的大小，避免重複計算。"
+    ]
+  },
+  {
+    "id": "string-algorithms",
+    "title": "字串算法",
+    "slug": "string-algorithms",
+    "description": "高效處理字串的匹配、查找與分析，涵蓋 KMP、Z 函數、字典樹、後綴陣列與哈希。",
+    "motivation": "字串題目中暴力的 O(nm) 匹配在 n、m 各達 10^5 時超時；多模式匹配更需要專用資料結構。難點在於：模式匹配的「失敗後重試」可以利用已匹配資訊，避免從頭重算。",
+    "core_idea": "字串算法大致分為三類：\n\n**匹配類**：KMP 利用失敗函數跳過無效比較；Z 函數給出每個位置的最長公共前綴；Rabin-Karp 用哈希快速比對。\n\n**索引類**：字典樹（Trie）把一組字串組織成公共前綴樹，O(|s|) 插入/查詢；後綴陣列（SA）把所有後綴排序，支援最長公共子串等複雜查詢。\n\n**自動機類**：AC 自動機在 Trie 上建 KMP 的 fail 指標，O(n + m) 多模式匹配；後綴自動機（SAM）O(n) 空間表示所有子串。",
+    "complexity": "KMP O(n+m)；Z 函數 O(n)；Trie 插入/查詢 O(|s|)；SA 建構 O(n log n) 或 O(n)；AC 自動機建構 O(Σ × n)，匹配 O(m)。",
+    "deep_dive": [
+      {
+        "title": "KMP 失敗函數（Failure Function）",
+        "body": "失敗函數 `fail[i]` = 模式串 p[0..i] 的最長「不等於自身的」真前綴等於真後綴的長度。\n\n```cpp\nvector<int> kmp_fail(const string& p) {\n    int n = p.size();\n    vector<int> fail(n, 0);\n    for (int i = 1; i < n; i++) {\n        int j = fail[i - 1];\n        while (j > 0 && p[i] != p[j]) j = fail[j - 1]; // Fall back\n        if (p[i] == p[j]) j++;\n        fail[i] = j;\n    }\n    return fail;\n}\n\nvector<int> kmp_search(const string& text, const string& pattern) {\n    string s = pattern + '#' + text; // '#' is a separator not in alphabet\n    auto fail = kmp_fail(s);\n    vector<int> matches;\n    int m = pattern.size();\n    for (int i = m + 1; i < (int)s.size(); i++)\n        if (fail[i] == m) matches.push_back(i - 2 * m); // Match found\n    return matches;\n}\n```"
+      },
+      {
+        "title": "Z 函數",
+        "body": "Z[i] = 字串 s 從位置 i 開始與 s 的最長公共前綴長度（Z[0] 定義為 0 或 n）。\n\n```cpp\nvector<int> z_function(const string& s) {\n    int n = s.size();\n    vector<int> z(n, 0);\n    z[0] = n; // Convention: z[0] = n\n    int l = 0, r = 0;\n    for (int i = 1; i < n; i++) {\n        if (i < r) z[i] = min(r - i, z[i - l]); // Use previous Z values\n        while (i + z[i] < n && s[z[i]] == s[i + z[i]]) z[i]++;\n        if (i + z[i] > r) { l = i; r = i + z[i]; } // Extend window\n    }\n    return z;\n}\n```\n\nZ 函數模式匹配：對 `p + '#' + t` 計算 Z 函數，Z[i] == |p| 的位置即為匹配點。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "cp-algorithms：KMP",
+        "url": "https://cp-algorithms.com/string/prefix-function.html"
+      },
+      {
+        "label": "cp-algorithms：Z 函數",
+        "url": "https://cp-algorithms.com/string/z-function.html"
+      },
+      {
+        "label": "cp-algorithms：後綴陣列",
+        "url": "https://cp-algorithms.com/string/suffix-array.html"
+      },
+      {
+        "label": "cp-algorithms：AC 自動機",
+        "url": "https://cp-algorithms.com/string/aho_corasick.html"
+      },
+      {
+        "label": "OI-Wiki：字串",
+        "url": "https://oi-wiki.org/string/"
+      },
+      {
+        "label": "靈茶山艾府：字串題單",
+        "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/strings.go"
+      }
+    ],
+    "template_code": "// Trie for prefix/dictionary queries\nstruct Trie {\n    array<int, 26> ch;\n    int cnt; // Count of words passing through this node\n    Trie() : cnt(0) { ch.fill(-1); }\n};\nvector<Trie> trie = {Trie()};\nvoid insert(const string& s) {\n    int cur = 0;\n    for (char c : s) {\n        int idx = c - 'a';\n        if (trie[cur].ch[idx] == -1) { trie[cur].ch[idx] = trie.size(); trie.push_back(Trie()); }\n        cur = trie[cur].ch[idx];\n        trie[cur].cnt++;\n    }\n}",
+    "supplemental_patterns": [
+      {
+        "name": "KMP 字串匹配",
+        "description": "**何時用**：在文本 t 中查找模式 p 的所有出現位置，O(n+m)。\n**核心做法**：預處理 p 的失敗函數（最長前後綴）；在匹配失敗時用失敗函數跳回而非重置，每個字元最多被訪問兩次。\n⚠️ 分隔符號 '#' 必須是不在字母表中的字元，否則會影響失敗函數的計算。"
+      },
+      {
+        "name": "字典樹（Trie）",
+        "description": "**何時用**：多個字串的前綴查詢、自動完成、字典序最小路徑。\n**核心做法**：每個節點存 26 個子指標（或用 hash map 替代），插入和查詢均為 O(|s|)。\n**進階**：01-Trie 用於異或最大值查詢（把整數當作 01 字串，從高位到低位建 Trie）。\n⚠️ 靜態陣列 Trie 需預估大小；動態開點更靈活但常數較大。"
+      },
+      {
+        "name": "字串哈希（Rabin-Karp）",
+        "description": "**何時用**：快速比較子字串是否相等（避免 O(n) 比較），或在多重查詢中快速匹配。\n**核心做法**：預計算前綴哈希 `h[i] = h[i-1] * base + s[i]`，子字串 s[l..r] 的哈希值 = `(h[r] - h[l-1] * pow[r-l+1]) % MOD`。\n⚠️ 選大質數和隨機 base 減少碰撞；對抗性測資時需雙哈希。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ KMP 失敗函數的 fail[0] = 0（空前綴），下標從 0 開始；不同實作的下標定義可能不同，混用會 off-by-one。",
+      "⚠️ 字串哈希取模後可能產生碰撞，特別是在面試和競程中遇到特殊構造的反例；必要時使用雙哈希或 Z 函數確認。",
+      "⚠️ 01-Trie 從最高位開始建，方向不能反；查詢異或最大值時從高位貪心取反方向節點。"
+    ]
+  },
+  {
+    "id": "math-number-theory",
+    "title": "數學與數論",
+    "slug": "math-number-theory",
+    "description": "快速冪、質因分解、歐拉函數、模逆元、中國剩餘定理等競程數學核心工具。",
+    "motivation": "大量競程題需要對 10^9+7 取模後求組合數、判斷質數、計算 GCD；若用 O(n) 逐一計算會超時。難點在於理解模運算的代數性質，以及如何在取模後仍能做除法（模逆元）。",
+    "core_idea": "競程數學的核心工具：\n\n**快速冪（Binary Exponentiation）**：`a^n mod m`，利用 `a^n = (a^(n/2))^2` 遞迴，O(log n)。\n\n**歐幾里得算法（GCD）**：`gcd(a, b) = gcd(b, a mod b)`，O(log min(a,b))；擴展歐幾里得求 `ax + by = gcd(a,b)` 的整數解。\n\n**質數篩（埃氏篩/線性篩）**：埃氏篩 O(n log log n) 篩出 n 以內質數；線性篩 O(n) 且每個合數只被最小質因子篩一次，同時可計算歐拉函數和最小質因子。\n\n**模逆元**：若 p 為質數，`a^(-1) mod p = a^(p-2) mod p`（費馬小定理）；一般情況用擴展歐幾里得。\n\n**組合數取模**：`C(n,k) mod p`，預計算 `fact[]` 和 `inv_fact[]`，O(1) 查詢。",
+    "complexity": "快速冪 O(log n)；GCD O(log min(a,b))；質數篩 O(n log log n) 或 O(n)；預計算組合數 O(n) 預處理 + O(1) 查詢。",
+    "deep_dive": [
+      {
+        "title": "線性篩（歐拉篩）",
+        "body": "```cpp\nvector<int> primes;\nvector<bool> is_composite(n + 1, false);\nvector<int> min_prime(n + 1, 0); // Minimum prime factor\nfor (int i = 2; i <= n; i++) {\n    if (!is_composite[i]) { primes.push_back(i); min_prime[i] = i; }\n    for (int p : primes) {\n        if ((long long)i * p > n) break;\n        is_composite[i * p] = true;\n        min_prime[i * p] = p;\n        if (i % p == 0) break; // Key: each composite is sieved by its min prime factor only once\n    }\n}\n```\n\n同時計算歐拉函數 φ：`φ[1]=1`；若 i 為質數 `φ[i]=i-1`；`φ[i*p] = φ[i]*(p-1)` 若 p∤i，`φ[i*p] = φ[i]*p` 若 p|i。"
+      },
+      {
+        "title": "組合數取模與 Lucas 定理",
+        "body": "**預計算（n ≤ 10^6）**：\n```cpp\nconst int MOD = 1e9 + 7;\nvector<long long> fact(n+1), inv_fact(n+1);\nfact[0] = 1;\nfor (int i = 1; i <= n; i++) fact[i] = fact[i-1] * i % MOD;\ninv_fact[n] = power(fact[n], MOD-2, MOD); // Fermat's little theorem\nfor (int i = n-1; i >= 0; i--) inv_fact[i] = inv_fact[i+1] * (i+1) % MOD;\nauto C = [&](int n, int k) -> long long {\n    if (k < 0 || k > n) return 0;\n    return fact[n] % MOD * inv_fact[k] % MOD * inv_fact[n-k] % MOD;\n};\n```\n\n**Lucas 定理（p 為小質數）**：`C(n,k) mod p = C(n/p, k/p) * C(n%p, k%p) mod p`，可遞迴處理 n、k 很大但 p 很小的情況。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "cp-algorithms：快速冪",
+        "url": "https://cp-algorithms.com/algebra/binary-exp.html"
+      },
+      {
+        "label": "cp-algorithms：GCD 與擴展歐幾里得",
+        "url": "https://cp-algorithms.com/algebra/extended-euclid-algorithm.html"
+      },
+      {
+        "label": "cp-algorithms：質數篩",
+        "url": "https://cp-algorithms.com/algebra/sieve-of-eratosthenes.html"
+      },
+      {
+        "label": "cp-algorithms：中國剩餘定理",
+        "url": "https://cp-algorithms.com/algebra/chinese-remainder-theorem.html"
+      },
+      {
+        "label": "OI-Wiki：數學",
+        "url": "https://oi-wiki.org/math/"
+      },
+      {
+        "label": "靈茶山艾府：數學題單",
+        "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/math.go"
+      }
+    ],
+    "template_code": "// Fast power mod\nlong long power(long long base, long long exp, long long mod) {\n    long long result = 1;\n    base %= mod;\n    while (exp > 0) {\n        if (exp & 1) result = result * base % mod; // Current bit is 1\n        base = base * base % mod;\n        exp >>= 1;\n    }\n    return result;\n}\n// GCD and Extended Euclidean\nlong long gcd(long long a, long long b) { return b ? gcd(b, a % b) : a; }\nlong long ext_gcd(long long a, long long b, long long& x, long long& y) {\n    if (!b) { x = 1; y = 0; return a; }\n    long long x1, y1, g = ext_gcd(b, a % b, x1, y1);\n    x = y1; y = x1 - (a / b) * y1;\n    return g;\n}",
+    "supplemental_patterns": [
+      {
+        "name": "模逆元",
+        "description": "**何時用**：在取模運算中做除法（如組合數的分母）。\n**核心做法**：若 p 為質數，`inv(a) = power(a, p-2, p)`；一般情況用擴展歐幾里得解 `ax + py = 1`，x 即為逆元。\n**批次計算**：`inv[i] = -(p/i) * inv[p%i] % p`，可線性預計算 1..n 所有逆元。"
+      },
+      {
+        "name": "中國剩餘定理（CRT）",
+        "description": "**何時用**：同餘方程組 `x ≡ a_i (mod m_i)` 求 x（m_i 互質）。\n**核心做法**：逐一合併方程，每次用擴展歐幾里得合併兩個方程成一個。\n**非互質版本**：若 m_i 不互質，需先判斷是否有解（所有 gcd(m_i, m_j) | (a_i - a_j)）。"
+      },
+      {
+        "name": "歐拉函數（Euler's Totient）",
+        "description": "**何時用**：計算與 n 互質的 1..n 中的整數個數；RSA 等密碼學應用。\n**核心做法**：單個 n：`φ(n) = n × ∏(1 - 1/p)`（對所有質因子 p）；批量：線性篩同時計算。\n**應用**：費馬小定理的推廣：`a^φ(n) ≡ 1 (mod n)`（若 gcd(a,n)=1）。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 快速冪中 base 要先對 mod 取模（`base %= mod`），否則 base × base 可能溢位 long long。",
+      "⚠️ 組合數 C(n,k) 中 n < 0 或 k > n 時應返回 0，沒有邊界判斷會導致陣列越界。",
+      "⚠️ 取模後不能直接做除法：`(a/b) % p ≠ (a%p) / (b%p)`，必須乘以 b 的模逆元。"
+    ]
+  },
+  {
+    "id": "bitmask-dp",
+    "title": "位元運算與狀態壓縮 DP",
+    "slug": "bitmask-dp",
+    "description": "用整數的二進位表示壓縮集合狀態，在指數級狀態空間中以 O(2^n × n) 完成 DP。",
+    "motivation": "當問題涉及「n 個元素的子集選取」或「n 個節點的排列」（n ≤ 20），暴力枚舉所有子集是 2^n，加上轉移是 O(2^n × n)，往往是可接受的時間複雜度。難點在於如何用整數高效表示集合操作。",
+    "core_idea": "位元運算的集合語意：\n\n| 操作 | 位元運算 | 說明 |\n|------|----------|------|\n| 加入元素 i | `S \\| (1<<i)` | |\n| 移除元素 i | `S & ~(1<<i)` | |\n| 查詢元素 i | `(S >> i) & 1` | |\n| 枚舉子集 | `for (int t=S; t; t=(t-1)&S)` | 包含 S 本身，不含空集 |\n| 枚舉超集 | `for (int t=S; t<(1<<n); t=(t+1)\\|(~S&full))` | |\n| 最低位 1 | `S & (-S)` 或 `S & (~S+1)` | lowbit |\n| 清除最低位 1 | `S & (S-1)` | |\n\n**TSP 狀態壓縮 DP**：`dp[mask][v]` = 已訪問節點集合為 mask、當前在 v 時的最短路徑，`dp[mask|(1<<u)][u] = min(..., dp[mask][v] + dist[v][u])`。",
+    "complexity": "狀態壓縮 DP：O(2^n × n) 轉移；枚舉子集：O(3^n)（所有子集的子集之和）。",
+    "deep_dive": [
+      {
+        "title": "TSP（旅行商問題）狀態壓縮",
+        "body": "```cpp\nint tsp(const vector<vector<int>>& dist) {\n    int n = dist.size();\n    int FULL = (1 << n) - 1;\n    vector<vector<int>> dp(1<<n, vector<int>(n, INT_MAX/2));\n    dp[1][0] = 0; // Start from node 0, visited = {0}\n    for (int mask = 1; mask <= FULL; mask++) {\n        for (int u = 0; u < n; u++) {\n            if (!(mask >> u & 1) || dp[mask][u] == INT_MAX/2) continue;\n            for (int v = 0; v < n; v++) {\n                if (mask >> v & 1) continue; // Already visited\n                int new_mask = mask | (1 << v);\n                dp[new_mask][v] = min(dp[new_mask][v], dp[mask][u] + dist[u][v]);\n            }\n        }\n    }\n    int ans = INT_MAX;\n    for (int u = 1; u < n; u++) ans = min(ans, dp[FULL][u] + dist[u][0]); // Return to start\n    return ans;\n}\n```"
+      },
+      {
+        "title": "SOS DP（Sum over Subsets）",
+        "body": "計算每個集合 S 的「所有子集的值之和」：`f[S] = Σ g[T] for T ⊆ S`。\n\n```cpp\n// SOS DP: f[S] = sum of g[T] for all T subset of S\nvector<long long> f(1<<n);\nfor (int i = 0; i < (1<<n); i++) f[i] = g[i]; // Initialize with base values\nfor (int i = 0; i < n; i++) // Process each bit\n    for (int S = 0; S < (1<<n); S++)\n        if (S >> i & 1) f[S] += f[S ^ (1<<i)]; // Add contribution of i-th bit\n```\n\n複雜度 O(n × 2^n)，比枚舉所有子集的 O(3^n) 更快。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "cp-algorithms：TSP 狀態壓縮",
+        "url": "https://cp-algorithms.com/dynamic_programming/profile-dynamics.html"
+      },
+      {
+        "label": "cp-algorithms：SOS DP",
+        "url": "https://cp-algorithms.com/algebra/all-submasks.html"
+      },
+      {
+        "label": "OI-Wiki：狀態壓縮 DP",
+        "url": "https://oi-wiki.org/dp/state/"
+      },
+      {
+        "label": "靈茶山艾府：位元 DP",
+        "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/bits.go"
+      }
+    ],
+    "template_code": "// Enumerate all subsets of a given set S\nvoid enumerate_subsets(int S) {\n    for (int t = S; t > 0; t = (t - 1) & S) {\n        // Process subset t of S\n        // Note: this does NOT include the empty set\n    }\n    // To include empty set, add explicit check or handle separately\n}\n// Bitmask DP skeleton\n// dp[mask] represents optimal value for subset represented by mask\nvector<int> dp(1 << n, INF);\ndp[0] = 0; // Base case: empty set\nfor (int mask = 0; mask < (1 << n); mask++) {\n    if (dp[mask] == INF) continue;\n    // Try adding element i to mask\n    for (int i = 0; i < n; i++) {\n        if (mask >> i & 1) continue; // Already in set\n        dp[mask | (1 << i)] = min(dp[mask | (1 << i)], dp[mask] + cost[i]);\n    }\n}",
+    "supplemental_patterns": [
+      {
+        "name": "枚舉子集的子集",
+        "description": "**何時用**：需要對所有 (S, T) 對滿足 T ⊆ S 進行計算（如 SOS DP 的 naive 版本）。\n**核心做法**：`for (int S=0; S<(1<<n); S++) for (int T=S; T>0; T=(T-1)&S) { ... }`\n**複雜度**：O(3^n)（每個元素可以「不在 S 中」、「在 S 但不在 T 中」、「在 T 中」三種狀態）。"
+      },
+      {
+        "name": "最小化連通集（Steiner Tree DP）",
+        "description": "**何時用**：在圖上連通 k 個關鍵節點（k ≤ 10）的最小代價。\n**核心做法**：`dp[S][v]` = 連通關鍵節點集合 S 且根在 v 的最小代價，先做子集合併再做 Dijkstra 鬆弛。\n**複雜度**：O(3^k × n + 2^k × (n+m) log n)。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ `1 << i` 在 i ≥ 31 時整數溢位，需改用 `1LL << i` 或 `(long long)1 << i`。",
+      "⚠️ 枚舉子集 `for (int t=S; t>0; t=(t-1)&S)` 不包含空集（t=0 時不進入迴圈），若需要空集需另行處理。",
+      "⚠️ SOS DP 中外層迴圈是「枚舉位元 i」而非「枚舉集合 S」，順序不能對調，否則每個位元的貢獻會被重複累加。"
+    ]
+  },
+  {
+    "id": "computational-geometry",
+    "title": "計算幾何",
+    "slug": "computational-geometry",
+    "description": "用向量叉積和點積處理二維平面上的點、線、多邊形問題，掌握凸包與掃描線。",
+    "motivation": "幾何題暴力逐一枚舉點對是 O(n²)；凸包需要在 O(n log n) 內找出外圍輪廓。難點在於浮點精度和特殊情況（共線、重疊點）的處理。",
+    "core_idea": "計算幾何的基礎是向量運算：\n\n**叉積（Cross Product）**：`cross(a, b) = a.x*b.y - a.y*b.x`。\n- > 0：b 在 a 的逆時針方向\n- = 0：共線\n- < 0：b 在 a 的順時針方向\n\n**點積（Dot Product）**：`dot(a, b) = a.x*b.x + a.y*b.y`。\n- > 0：銳角；= 0：直角；< 0：鈍角\n\n**凸包（Convex Hull）**：Andrew's Monotone Chain，先按 x 排序，分別構造上凸包和下凸包，利用叉積判斷是否需要彈出棧頂。O(n log n)。",
+    "complexity": "基礎向量運算 O(1)；凸包 O(n log n)；旋轉卡殼 O(n)；掃描線 + 平衡樹 O(n log n)。",
+    "deep_dive": [
+      {
+        "title": "凸包（Andrew's Monotone Chain）",
+        "body": "```cpp\nusing ll = long long;\nstruct Point { ll x, y; };\nll cross(Point O, Point A, Point B) {\n    return (A.x-O.x)*(B.y-O.y) - (A.y-O.y)*(B.x-O.x);\n}\nvector<Point> convex_hull(vector<Point> pts) {\n    int n = pts.size();\n    if (n < 3) return pts;\n    sort(pts.begin(), pts.end(), [](const Point& a, const Point& b) {\n        return a.x < b.x || (a.x == b.x && a.y < b.y);\n    });\n    vector<Point> hull;\n    // Lower hull\n    for (auto& p : pts) {\n        while (hull.size() >= 2 && cross(hull[hull.size()-2], hull.back(), p) <= 0)\n            hull.pop_back(); // <= 0 removes collinear points; use < 0 to keep them\n        hull.push_back(p);\n    }\n    // Upper hull\n    int lower_size = hull.size();\n    for (int i = n-2; i >= 0; i--) {\n        while (hull.size() > lower_size && cross(hull[hull.size()-2], hull.back(), pts[i]) <= 0)\n            hull.pop_back();\n        hull.push_back(pts[i]);\n    }\n    hull.pop_back(); // Remove duplicate starting point\n    return hull;\n}\n```"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "cp-algorithms：計算幾何基礎",
+        "url": "https://cp-algorithms.com/geometry/basic-geometry.html"
+      },
+      {
+        "label": "cp-algorithms：凸包",
+        "url": "https://cp-algorithms.com/geometry/convex-hull.html"
+      },
+      {
+        "label": "cp-algorithms：旋轉卡殼",
+        "url": "https://cp-algorithms.com/geometry/rotating-calipers.html"
+      },
+      {
+        "label": "OI-Wiki：計算幾何",
+        "url": "https://oi-wiki.org/geometry/"
+      },
+      {
+        "label": "靈茶山艾府：幾何題單",
+        "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/geometry.go"
+      }
+    ],
+    "template_code": "// 2D vector with cross and dot product\nstruct Vec2 {\n    long long x, y;\n    Vec2(long long x=0, long long y=0) : x(x), y(y) {}\n    Vec2 operator-(const Vec2& b) const { return {x-b.x, y-b.y}; }\n    long long cross(const Vec2& b) const { return x*b.y - y*b.x; } // Cross product\n    long long dot(const Vec2& b) const { return x*b.x + y*b.y; }   // Dot product\n    long long norm2() const { return x*x + y*y; }                   // Squared length\n};",
+    "supplemental_patterns": [
+      {
+        "name": "點在多邊形內（射線法）",
+        "description": "**核心做法**：從點向右發射射線，計算與多邊形邊的交點數；奇數在內，偶數在外。特殊情況：射線恰好過頂點或與邊重合需特別處理。\n**複雜度**：O(n)。"
+      },
+      {
+        "name": "旋轉卡殼（Rotating Calipers）",
+        "description": "**何時用**：求凸多邊形的直徑（最遠點對距離）。\n**核心做法**：在凸包上維護兩個相對指標，每次移動叉積較小的一側，一圈後得到直徑。\n**複雜度**：O(n)（在凸包建好後）。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 整數座標可以用 `long long` 避免浮點誤差，優先使用整數版本的叉積；實數幾何必要時加 eps。",
+      "⚠️ 凸包中 `cross <= 0` 會移除共線點；若題目要求保留共線點（如統計邊界上的整點），改成 `cross < 0`。",
+      "⚠️ 旋轉卡殼要在凸包（而非原始點集）上執行，且凸包點需要按逆時針（或順時針）排列。"
     ]
   }
 ]

@@ -6,12 +6,21 @@
     "source_id": "search-insert-position",
     "rating": 1200,
     "solve_count": 950000,
-    "tags": ["二分搜尋", "陣列"],
+    "tags": [
+      "二分搜尋",
+      "陣列"
+    ],
     "topic_id": "binary-search",
     "problem_type": "template",
     "tier": "warmup",
-    "strategy_hints": ["維護半開區間 [left, right)，答案一定落在其中。", "判斷 a[mid] 是否大於等於 target，保留可能的第一個位置。"],
-    "similar_problems": ["bs-002", "bs-003"]
+    "strategy_hints": [
+      "維護半開區間 [left, right)，答案一定落在其中。",
+      "判斷 a[mid] 是否大於等於 target，保留可能的第一個位置。"
+    ],
+    "similar_problems": [
+      "bs-002",
+      "bs-003"
+    ]
   },
   {
     "id": "bs-002",
@@ -20,12 +29,21 @@
     "source_id": "search-in-rotated-sorted-array",
     "rating": 1800,
     "solve_count": 620000,
-    "tags": ["二分搜尋", "分類討論"],
+    "tags": [
+      "二分搜尋",
+      "分類討論"
+    ],
     "topic_id": "binary-search",
     "problem_type": "classic",
     "tier": "core",
-    "strategy_hints": ["每次至少有一半仍然有序，先判斷 target 是否落在有序半邊。", "不要直接比較左右端大小後立即丟棄，先確認 mid 屬於哪個有序段。"],
-    "similar_problems": ["bs-001", "bs-004"]
+    "strategy_hints": [
+      "每次至少有一半仍然有序，先判斷 target 是否落在有序半邊。",
+      "不要直接比較左右端大小後立即丟棄，先確認 mid 屬於哪個有序段。"
+    ],
+    "similar_problems": [
+      "bs-001",
+      "bs-004"
+    ]
   },
   {
     "id": "bs-003",
@@ -34,12 +52,21 @@
     "source_id": "371C",
     "rating": 1800,
     "solve_count": 115000,
-    "tags": ["二分答案", "貪心判定"],
+    "tags": [
+      "二分答案",
+      "貪心判定"
+    ],
     "topic_id": "binary-search",
     "problem_type": "classic",
     "tier": "core",
-    "strategy_hints": ["把要做 x 個漢堡視為判定題，計算缺少材料需要多少錢。", "若成本不超過預算，x 可行，代表答案可以往右擴。"],
-    "similar_problems": ["bs-004", "bs-005"]
+    "strategy_hints": [
+      "把要做 x 個漢堡視為判定題，計算缺少材料需要多少錢。",
+      "若成本不超過預算，x 可行，代表答案可以往右擴。"
+    ],
+    "similar_problems": [
+      "bs-004",
+      "bs-005"
+    ]
   },
   {
     "id": "bs-004",
@@ -48,12 +75,21 @@
     "source_id": "P2678",
     "rating": 2100,
     "solve_count": 78000,
-    "tags": ["二分答案", "貪心"],
+    "tags": [
+      "二分答案",
+      "貪心"
+    ],
     "topic_id": "binary-search",
     "problem_type": "classic",
     "tier": "challenge",
-    "strategy_hints": ["二分最小距離 d，貪心移除會讓相鄰距離小於 d 的石頭。", "可行條件是移除數量不超過限制，因此 d 越小越容易可行。"],
-    "similar_problems": ["bs-003", "tp-002"]
+    "strategy_hints": [
+      "二分最小距離 d，貪心移除會讓相鄰距離小於 d 的石頭。",
+      "可行條件是移除數量不超過限制，因此 d 越小越容易可行。"
+    ],
+    "similar_problems": [
+      "bs-003",
+      "tp-002"
+    ]
   },
   {
     "id": "bs-005",
@@ -62,13 +98,22 @@
     "source_id": "kth-smallest-number-in-multiplication-table",
     "rating": 2200,
     "solve_count": 210000,
-    "tags": ["二分答案", "計數"],
+    "tags": [
+      "二分答案",
+      "計數"
+    ],
     "topic_id": "binary-search",
     "problem_type": "insight_transfer",
     "tier": "challenge",
-    "strategy_hints": ["不要生成乘法表；改成判斷不超過 x 的數量是否至少為 k。", "每一列不超過 x 的個數是 min(n, x / row)，加總即可。"],
+    "strategy_hints": [
+      "不要生成乘法表；改成判斷不超過 x 的數量是否至少為 k。",
+      "每一列不超過 x 的個數是 min(n, x / row)，加總即可。"
+    ],
     "insight_note": "關鍵轉換是把「第 K 小」改寫成「最小的 x，使得小於等於 x 的元素數量至少為 K」，因此原本無序的二維表變成可二分的答案空間。",
-    "similar_problems": ["bs-003", "seg-003"]
+    "similar_problems": [
+      "bs-003",
+      "seg-003"
+    ]
   },
   {
     "id": "graph-001",
@@ -77,12 +122,21 @@
     "source_id": "rotting-oranges",
     "rating": 1300,
     "solve_count": 520000,
-    "tags": ["多源 BFS", "網格"],
+    "tags": [
+      "多源 BFS",
+      "網格"
+    ],
     "topic_id": "graph-traversal",
     "problem_type": "template",
     "tier": "warmup",
-    "strategy_hints": ["把所有腐爛橘子同時入隊，BFS 層數就是分鐘數。", "最後檢查是否仍有新鮮橘子未被訪問。"],
-    "similar_problems": ["graph-002", "graph-005"]
+    "strategy_hints": [
+      "把所有腐爛橘子同時入隊，BFS 層數就是分鐘數。",
+      "最後檢查是否仍有新鮮橘子未被訪問。"
+    ],
+    "similar_problems": [
+      "graph-002",
+      "graph-005"
+    ]
   },
   {
     "id": "graph-002",
@@ -91,12 +145,21 @@
     "source_id": "word-ladder",
     "rating": 1900,
     "solve_count": 430000,
-    "tags": ["BFS", "狀態建圖"],
+    "tags": [
+      "BFS",
+      "狀態建圖"
+    ],
     "topic_id": "graph-traversal",
     "problem_type": "classic",
     "tier": "core",
-    "strategy_hints": ["每個單詞是節點，一次改一個字母是邊。", "可用通配模式預處理鄰居，避免 O(n^2) 比對。"],
-    "similar_problems": ["graph-001", "graph-005"]
+    "strategy_hints": [
+      "每個單詞是節點，一次改一個字母是邊。",
+      "可用通配模式預處理鄰居，避免 O(n^2) 比對。"
+    ],
+    "similar_problems": [
+      "graph-001",
+      "graph-005"
+    ]
   },
   {
     "id": "graph-003",
@@ -105,12 +168,21 @@
     "source_id": "minimum-cost-to-make-at-least-one-valid-path-in-a-grid",
     "rating": 2000,
     "solve_count": 165000,
-    "tags": ["0-1 BFS", "最短路"],
+    "tags": [
+      "0-1 BFS",
+      "最短路"
+    ],
     "topic_id": "graph-traversal",
     "problem_type": "classic",
     "tier": "core",
-    "strategy_hints": ["沿著原方向移動成本為 0，改方向移動成本為 1。", "用雙端佇列維護距離，零成本邊放前端，一成本邊放後端。"],
-    "similar_problems": ["heap-003", "graph-004"]
+    "strategy_hints": [
+      "沿著原方向移動成本為 0，改方向移動成本為 1。",
+      "用雙端佇列維護距離，零成本邊放前端，一成本邊放後端。"
+    ],
+    "similar_problems": [
+      "heap-003",
+      "graph-004"
+    ]
   },
   {
     "id": "graph-004",
@@ -119,12 +191,21 @@
     "source_id": "course-schedule-iv",
     "rating": 2100,
     "solve_count": 140000,
-    "tags": ["拓撲排序", "傳遞閉包"],
+    "tags": [
+      "拓撲排序",
+      "傳遞閉包"
+    ],
     "topic_id": "graph-traversal",
     "problem_type": "classic",
     "tier": "challenge",
-    "strategy_hints": ["沿拓撲序把每個節點的先修集合傳給後繼節點。", "若課程數不大，可用位元集合加速集合合併。"],
-    "similar_problems": ["graph-002", "dp-003"]
+    "strategy_hints": [
+      "沿拓撲序把每個節點的先修集合傳給後繼節點。",
+      "若課程數不大，可用位元集合加速集合合併。"
+    ],
+    "similar_problems": [
+      "graph-002",
+      "dp-003"
+    ]
   },
   {
     "id": "graph-005",
@@ -133,13 +214,22 @@
     "source_id": "shortest-path-to-get-all-keys",
     "rating": 2200,
     "solve_count": 98000,
-    "tags": ["BFS", "狀態壓縮"],
+    "tags": [
+      "BFS",
+      "狀態壓縮"
+    ],
     "topic_id": "graph-traversal",
     "problem_type": "insight_transfer",
     "tier": "challenge",
-    "strategy_hints": ["位置不是完整狀態，必須把已取得鑰匙集合一起放入 visited。", "遇到鎖時檢查位元遮罩是否包含對應鑰匙。"],
+    "strategy_hints": [
+      "位置不是完整狀態，必須把已取得鑰匙集合一起放入 visited。",
+      "遇到鎖時檢查位元遮罩是否包含對應鑰匙。"
+    ],
     "insight_note": "非顯然之處在於同一格子可被多次拜訪，只要手上的鑰匙集合不同就是不同狀態；把網格最短路提升成狀態圖 BFS 後才具有層次最短性。",
-    "similar_problems": ["graph-001", "dp-005"]
+    "similar_problems": [
+      "graph-001",
+      "dp-005"
+    ]
   },
   {
     "id": "int-001",
@@ -148,12 +238,21 @@
     "source_id": "merge-intervals",
     "rating": 1300,
     "solve_count": 810000,
-    "tags": ["區間合併", "排序"],
+    "tags": [
+      "區間合併",
+      "排序"
+    ],
     "topic_id": "intervals",
     "problem_type": "template",
     "tier": "warmup",
-    "strategy_hints": ["先依左端排序，再維護目前合併段的最右端。", "當下一段左端大於目前右端時，才開啟新段。"],
-    "similar_problems": ["int-002", "int-003"]
+    "strategy_hints": [
+      "先依左端排序，再維護目前合併段的最右端。",
+      "當下一段左端大於目前右端時，才開啟新段。"
+    ],
+    "similar_problems": [
+      "int-002",
+      "int-003"
+    ]
   },
   {
     "id": "int-002",
@@ -162,12 +261,21 @@
     "source_id": "meeting-rooms-ii",
     "rating": 1800,
     "solve_count": 360000,
-    "tags": ["掃描線", "堆積"],
+    "tags": [
+      "掃描線",
+      "堆積"
+    ],
     "topic_id": "intervals",
     "problem_type": "classic",
     "tier": "core",
-    "strategy_hints": ["把開始時間視為 +1、結束時間視為 -1，掃描最大重疊數。", "同一時間結束與開始的排序規則要符合半開區間語意。"],
-    "similar_problems": ["heap-003", "int-003"]
+    "strategy_hints": [
+      "把開始時間視為 +1、結束時間視為 -1，掃描最大重疊數。",
+      "同一時間結束與開始的排序規則要符合半開區間語意。"
+    ],
+    "similar_problems": [
+      "heap-003",
+      "int-003"
+    ]
   },
   {
     "id": "int-003",
@@ -176,12 +284,21 @@
     "source_id": "my-calendar-iii",
     "rating": 1900,
     "solve_count": 175000,
-    "tags": ["差分", "掃描線"],
+    "tags": [
+      "差分",
+      "掃描線"
+    ],
     "topic_id": "intervals",
     "problem_type": "classic",
     "tier": "core",
-    "strategy_hints": ["每次預約在 start 加一、end 減一，答案是前綴和最大值。", "若資料量變大，可改用動態線段樹維護最大前綴。"],
-    "similar_problems": ["seg-004", "int-004"]
+    "strategy_hints": [
+      "每次預約在 start 加一、end 減一，答案是前綴和最大值。",
+      "若資料量變大，可改用動態線段樹維護最大前綴。"
+    ],
+    "similar_problems": [
+      "seg-004",
+      "int-004"
+    ]
   },
   {
     "id": "int-004",
@@ -190,12 +307,21 @@
     "source_id": "rectangle-area-ii",
     "rating": 2200,
     "solve_count": 120000,
-    "tags": ["掃描線", "座標壓縮"],
+    "tags": [
+      "掃描線",
+      "座標壓縮"
+    ],
     "topic_id": "intervals",
     "problem_type": "classic",
     "tier": "challenge",
-    "strategy_hints": ["按 x 事件掃描，維護目前 y 軸覆蓋總長。", "每次 x 差距乘上覆蓋長度，累加成面積。"],
-    "similar_problems": ["seg-004", "int-003"]
+    "strategy_hints": [
+      "按 x 事件掃描，維護目前 y 軸覆蓋總長。",
+      "每次 x 差距乘上覆蓋長度，累加成面積。"
+    ],
+    "similar_problems": [
+      "seg-004",
+      "int-003"
+    ]
   },
   {
     "id": "int-005",
@@ -204,13 +330,22 @@
     "source_id": "employee-free-time",
     "rating": 2200,
     "solve_count": 92000,
-    "tags": ["區間合併", "思維轉換"],
+    "tags": [
+      "區間合併",
+      "思維轉換"
+    ],
     "topic_id": "intervals",
     "problem_type": "insight_transfer",
     "tier": "challenge",
-    "strategy_hints": ["不要直接找每個人的空閒；先合併所有人的忙碌區間。", "合併後相鄰忙碌段之間的空隙就是共同空閒時間。"],
+    "strategy_hints": [
+      "不要直接找每個人的空閒；先合併所有人的忙碌區間。",
+      "合併後相鄰忙碌段之間的空隙就是共同空閒時間。"
+    ],
     "insight_note": "題目問空閒時間，但更容易處理的是忙碌時間；把補集問題轉成所有忙碌區間的合併，空隙自然成為答案。",
-    "similar_problems": ["int-001", "int-002"]
+    "similar_problems": [
+      "int-001",
+      "int-002"
+    ]
   },
   {
     "id": "heap-001",
@@ -219,12 +354,21 @@
     "source_id": "top-k-frequent-elements",
     "rating": 1400,
     "solve_count": 760000,
-    "tags": ["堆積", "計數"],
+    "tags": [
+      "堆積",
+      "計數"
+    ],
     "topic_id": "heap-priority-queue",
     "problem_type": "template",
     "tier": "warmup",
-    "strategy_hints": ["先統計頻率，再用大小為 K 的小根堆保留最高頻候選。", "若元素數不大，也可以用桶排序依頻率收集。"],
-    "similar_problems": ["heap-002", "heap-003"]
+    "strategy_hints": [
+      "先統計頻率，再用大小為 K 的小根堆保留最高頻候選。",
+      "若元素數不大，也可以用桶排序依頻率收集。"
+    ],
+    "similar_problems": [
+      "heap-002",
+      "heap-003"
+    ]
   },
   {
     "id": "heap-002",
@@ -233,12 +377,21 @@
     "source_id": "reorganize-string",
     "rating": 1900,
     "solve_count": 300000,
-    "tags": ["堆積", "貪心"],
+    "tags": [
+      "堆積",
+      "貪心"
+    ],
     "topic_id": "heap-priority-queue",
     "problem_type": "classic",
     "tier": "core",
-    "strategy_hints": ["每次取剩餘次數最多且不同於上一個字元的候選。", "可一次取兩個最高頻字元，放回仍有剩餘的字元。"],
-    "similar_problems": ["heap-001", "heap-004"]
+    "strategy_hints": [
+      "每次取剩餘次數最多且不同於上一個字元的候選。",
+      "可一次取兩個最高頻字元，放回仍有剩餘的字元。"
+    ],
+    "similar_problems": [
+      "heap-001",
+      "heap-004"
+    ]
   },
   {
     "id": "heap-003",
@@ -247,12 +400,21 @@
     "source_id": "smallest-range-covering-elements-from-k-lists",
     "rating": 2000,
     "solve_count": 170000,
-    "tags": ["堆積", "多路合併"],
+    "tags": [
+      "堆積",
+      "多路合併"
+    ],
     "topic_id": "heap-priority-queue",
     "problem_type": "classic",
     "tier": "core",
-    "strategy_hints": ["堆中放每個列表目前指標的值，同時維護當前最大值。", "每次彈出最小值並推進該列表，更新區間長度。"],
-    "similar_problems": ["int-002", "heap-005"]
+    "strategy_hints": [
+      "堆中放每個列表目前指標的值，同時維護當前最大值。",
+      "每次彈出最小值並推進該列表，更新區間長度。"
+    ],
+    "similar_problems": [
+      "int-002",
+      "heap-005"
+    ]
   },
   {
     "id": "heap-004",
@@ -261,12 +423,21 @@
     "source_id": "course-schedule-iii",
     "rating": 2100,
     "solve_count": 185000,
-    "tags": ["堆積", "貪心"],
+    "tags": [
+      "堆積",
+      "貪心"
+    ],
     "topic_id": "heap-priority-queue",
     "problem_type": "classic",
     "tier": "challenge",
-    "strategy_hints": ["依截止時間排序，先嘗試加入每門課。", "若總時間超過截止日，就移除目前耗時最長的課。"],
-    "similar_problems": ["heap-002", "int-003"]
+    "strategy_hints": [
+      "依截止時間排序，先嘗試加入每門課。",
+      "若總時間超過截止日，就移除目前耗時最長的課。"
+    ],
+    "similar_problems": [
+      "heap-002",
+      "int-003"
+    ]
   },
   {
     "id": "heap-005",
@@ -275,13 +446,22 @@
     "source_id": "find-the-kth-smallest-sum-of-a-matrix-with-sorted-rows",
     "rating": 2200,
     "solve_count": 86000,
-    "tags": ["堆積", "狀態壓縮"],
+    "tags": [
+      "堆積",
+      "狀態壓縮"
+    ],
     "topic_id": "heap-priority-queue",
     "problem_type": "insight_transfer",
     "tier": "challenge",
-    "strategy_hints": ["不要枚舉所有組合；每次只合併前 K 小的部分和。", "也可把狀態視為選擇指標向量，用堆按和擴展。"],
+    "strategy_hints": [
+      "不要枚舉所有組合；每次只合併前 K 小的部分和。",
+      "也可把狀態視為選擇指標向量，用堆按和擴展。"
+    ],
     "insight_note": "每列有序讓「部分和集合」可以逐層截斷，只保留前 K 小不會影響最終第 K 小答案，這是從完整組合轉成可控候選集合的關鍵。",
-    "similar_problems": ["bs-005", "heap-003"]
+    "similar_problems": [
+      "bs-005",
+      "heap-003"
+    ]
   },
   {
     "id": "dp-001",
@@ -290,12 +470,21 @@
     "source_id": "P1048",
     "rating": 1300,
     "solve_count": 210000,
-    "tags": ["零一背包", "動態規劃"],
+    "tags": [
+      "零一背包",
+      "動態規劃"
+    ],
     "topic_id": "dp-fundamentals",
     "problem_type": "template",
     "tier": "warmup",
-    "strategy_hints": ["dp[c] 表示容量 c 內的最大價值。", "每個物品只能選一次，因此容量要由大到小更新。"],
-    "similar_problems": ["dp-002", "dp-003"]
+    "strategy_hints": [
+      "dp[c] 表示容量 c 內的最大價值。",
+      "每個物品只能選一次，因此容量要由大到小更新。"
+    ],
+    "similar_problems": [
+      "dp-002",
+      "dp-003"
+    ]
   },
   {
     "id": "dp-002",
@@ -304,12 +493,21 @@
     "source_id": "longest-increasing-subsequence",
     "rating": 1800,
     "solve_count": 620000,
-    "tags": ["LIS", "二分"],
+    "tags": [
+      "LIS",
+      "二分"
+    ],
     "topic_id": "dp-fundamentals",
     "problem_type": "classic",
     "tier": "core",
-    "strategy_hints": ["tail[i] 表示長度 i+1 的遞增子序列最小結尾。", "用 lower_bound 替換第一個大於等於 x 的位置。"],
-    "similar_problems": ["bs-001", "dp-005"]
+    "strategy_hints": [
+      "tail[i] 表示長度 i+1 的遞增子序列最小結尾。",
+      "用 lower_bound 替換第一個大於等於 x 的位置。"
+    ],
+    "similar_problems": [
+      "bs-001",
+      "dp-005"
+    ]
   },
   {
     "id": "dp-003",
@@ -318,12 +516,21 @@
     "source_id": "partition-equal-subset-sum",
     "rating": 1900,
     "solve_count": 460000,
-    "tags": ["背包 DP", "可行性"],
+    "tags": [
+      "背包 DP",
+      "可行性"
+    ],
     "topic_id": "dp-fundamentals",
     "problem_type": "classic",
     "tier": "core",
-    "strategy_hints": ["問題等價於是否能選出總和為 sum / 2 的子集。", "布林背包也要逆序更新，避免同一元素被使用多次。"],
-    "similar_problems": ["dp-001", "graph-004"]
+    "strategy_hints": [
+      "問題等價於是否能選出總和為 sum / 2 的子集。",
+      "布林背包也要逆序更新，避免同一元素被使用多次。"
+    ],
+    "similar_problems": [
+      "dp-001",
+      "graph-004"
+    ]
   },
   {
     "id": "dp-004",
@@ -332,12 +539,21 @@
     "source_id": "burst-balloons",
     "rating": 2200,
     "solve_count": 300000,
-    "tags": ["區間 DP", "枚舉分割點"],
+    "tags": [
+      "區間 DP",
+      "枚舉分割點"
+    ],
     "topic_id": "dp-fundamentals",
     "problem_type": "classic",
     "tier": "challenge",
-    "strategy_hints": ["倒著想最後戳破的氣球，左右兩側才會互不影響。", "dp[l][r] 表示開區間內全部戳完的最大收益。"],
-    "similar_problems": ["dp-005", "int-004"]
+    "strategy_hints": [
+      "倒著想最後戳破的氣球，左右兩側才會互不影響。",
+      "dp[l][r] 表示開區間內全部戳完的最大收益。"
+    ],
+    "similar_problems": [
+      "dp-005",
+      "int-004"
+    ]
   },
   {
     "id": "dp-005",
@@ -346,13 +562,22 @@
     "source_id": "strange-printer",
     "rating": 2200,
     "solve_count": 150000,
-    "tags": ["區間 DP", "思維轉換"],
+    "tags": [
+      "區間 DP",
+      "思維轉換"
+    ],
     "topic_id": "dp-fundamentals",
     "problem_type": "insight_transfer",
     "tier": "challenge",
-    "strategy_hints": ["先壓縮連續相同字元，減少無意義狀態。", "若 s[l] 與某個 s[k] 相同，可讓它們在同一次列印中合併。"],
+    "strategy_hints": [
+      "先壓縮連續相同字元，減少無意義狀態。",
+      "若 s[l] 與某個 s[k] 相同，可讓它們在同一次列印中合併。"
+    ],
     "insight_note": "真正的狀態不是列印順序，而是區間最少列印次數；相同字元可跨越中間區間合併列印，這需要把操作順序轉成區間合併思考。",
-    "similar_problems": ["dp-004", "graph-005"]
+    "similar_problems": [
+      "dp-004",
+      "graph-005"
+    ]
   },
   {
     "id": "tp-001",
@@ -361,12 +586,21 @@
     "source_id": "minimum-size-subarray-sum",
     "rating": 1300,
     "solve_count": 520000,
-    "tags": ["滑動視窗", "正數陣列"],
+    "tags": [
+      "滑動視窗",
+      "正數陣列"
+    ],
     "topic_id": "two-pointers",
     "problem_type": "template",
     "tier": "warmup",
-    "strategy_hints": ["右端擴張直到總和足夠，再持續收縮左端更新答案。", "正數保證左端右移時總和單調下降。"],
-    "similar_problems": ["tp-002", "tp-004"]
+    "strategy_hints": [
+      "右端擴張直到總和足夠，再持續收縮左端更新答案。",
+      "正數保證左端右移時總和單調下降。"
+    ],
+    "similar_problems": [
+      "tp-002",
+      "tp-004"
+    ]
   },
   {
     "id": "tp-002",
@@ -375,12 +609,21 @@
     "source_id": "subarrays-with-k-different-integers",
     "rating": 2000,
     "solve_count": 250000,
-    "tags": ["滑動視窗", "計數轉換"],
+    "tags": [
+      "滑動視窗",
+      "計數轉換"
+    ],
     "topic_id": "two-pointers",
     "problem_type": "classic",
     "tier": "core",
-    "strategy_hints": ["恰好 K 種可轉成至多 K 種減去至多 K-1 種。", "至多 K 種的窗口每次加入右端後，若種類超限就收縮左端。"],
-    "similar_problems": ["tp-001", "tp-005"]
+    "strategy_hints": [
+      "恰好 K 種可轉成至多 K 種減去至多 K-1 種。",
+      "至多 K 種的窗口每次加入右端後，若種類超限就收縮左端。"
+    ],
+    "similar_problems": [
+      "tp-001",
+      "tp-005"
+    ]
   },
   {
     "id": "tp-003",
@@ -389,12 +632,21 @@
     "source_id": "container-with-most-water",
     "rating": 1800,
     "solve_count": 930000,
-    "tags": ["雙指針", "貪心"],
+    "tags": [
+      "雙指針",
+      "貪心"
+    ],
     "topic_id": "two-pointers",
     "problem_type": "classic",
     "tier": "core",
-    "strategy_hints": ["面積受較短邊限制，因此移動較短的一側才可能變好。", "寬度只會變小，若不提高短邊就不可能改善答案。"],
-    "similar_problems": ["tp-001", "mono-002"]
+    "strategy_hints": [
+      "面積受較短邊限制，因此移動較短的一側才可能變好。",
+      "寬度只會變小，若不提高短邊就不可能改善答案。"
+    ],
+    "similar_problems": [
+      "tp-001",
+      "mono-002"
+    ]
   },
   {
     "id": "tp-004",
@@ -403,12 +655,21 @@
     "source_id": "minimum-window-substring",
     "rating": 2100,
     "solve_count": 620000,
-    "tags": ["滑動視窗", "字元計數"],
+    "tags": [
+      "滑動視窗",
+      "字元計數"
+    ],
     "topic_id": "two-pointers",
     "problem_type": "classic",
     "tier": "challenge",
-    "strategy_hints": ["右端擴張補足需求字元，當所有需求滿足後收縮左端。", "維護 missing 或 satisfied 數量，避免每次掃描整張表。"],
-    "similar_problems": ["tp-002", "heap-003"]
+    "strategy_hints": [
+      "右端擴張補足需求字元，當所有需求滿足後收縮左端。",
+      "維護 missing 或 satisfied 數量，避免每次掃描整張表。"
+    ],
+    "similar_problems": [
+      "tp-002",
+      "heap-003"
+    ]
   },
   {
     "id": "tp-005",
@@ -417,13 +678,22 @@
     "source_id": "longest-repeating-character-replacement",
     "rating": 2200,
     "solve_count": 420000,
-    "tags": ["滑動視窗", "思維轉換"],
+    "tags": [
+      "滑動視窗",
+      "思維轉換"
+    ],
     "topic_id": "two-pointers",
     "problem_type": "insight_transfer",
     "tier": "challenge",
-    "strategy_hints": ["窗口長度減去最高頻字元數，就是需要替換的數量。", "最高頻可以只維護歷史最大值，因為答案窗口只會在可行時更新。"],
+    "strategy_hints": [
+      "窗口長度減去最高頻字元數，就是需要替換的數量。",
+      "最高頻可以只維護歷史最大值，因為答案窗口只會在可行時更新。"
+    ],
     "insight_note": "題目看似要選擇替換哪些字元，其實只需保留窗口內最多的字元，其他全部替換；操作問題轉成窗口統計問題後就具備單調性。",
-    "similar_problems": ["tp-002", "mono-003"]
+    "similar_problems": [
+      "tp-002",
+      "mono-003"
+    ]
   },
   {
     "id": "dsu-001",
@@ -432,12 +702,21 @@
     "source_id": "number-of-provinces",
     "rating": 1200,
     "solve_count": 520000,
-    "tags": ["並查集", "連通分量"],
+    "tags": [
+      "並查集",
+      "連通分量"
+    ],
     "topic_id": "dsu",
     "problem_type": "template",
     "tier": "warmup",
-    "strategy_hints": ["遇到相連城市就 union，最後統計根節點數量。", "矩陣是對稱的，只枚舉上三角即可。"],
-    "similar_problems": ["dsu-002", "dsu-003"]
+    "strategy_hints": [
+      "遇到相連城市就 union，最後統計根節點數量。",
+      "矩陣是對稱的，只枚舉上三角即可。"
+    ],
+    "similar_problems": [
+      "dsu-002",
+      "dsu-003"
+    ]
   },
   {
     "id": "dsu-002",
@@ -446,12 +725,21 @@
     "source_id": "redundant-connection-ii",
     "rating": 1900,
     "solve_count": 145000,
-    "tags": ["並查集", "有向圖"],
+    "tags": [
+      "並查集",
+      "有向圖"
+    ],
     "topic_id": "dsu",
     "problem_type": "classic",
     "tier": "core",
-    "strategy_hints": ["先檢查是否有節點入度為二，再分情況嘗試刪邊。", "並查集負責判斷刪除候選邊後是否仍存在環。"],
-    "similar_problems": ["dsu-001", "dsu-004"]
+    "strategy_hints": [
+      "先檢查是否有節點入度為二，再分情況嘗試刪邊。",
+      "並查集負責判斷刪除候選邊後是否仍存在環。"
+    ],
+    "similar_problems": [
+      "dsu-001",
+      "dsu-004"
+    ]
   },
   {
     "id": "dsu-003",
@@ -460,12 +748,21 @@
     "source_id": "satisfiability-of-equality-equations",
     "rating": 1800,
     "solve_count": 260000,
-    "tags": ["並查集", "等價關係"],
+    "tags": [
+      "並查集",
+      "等價關係"
+    ],
     "topic_id": "dsu",
     "problem_type": "classic",
     "tier": "core",
-    "strategy_hints": ["先處理所有相等關係，把同一集合合併。", "再檢查不等關係是否落在同一集合中。"],
-    "similar_problems": ["dsu-001", "dsu-005"]
+    "strategy_hints": [
+      "先處理所有相等關係，把同一集合合併。",
+      "再檢查不等關係是否落在同一集合中。"
+    ],
+    "similar_problems": [
+      "dsu-001",
+      "dsu-005"
+    ]
   },
   {
     "id": "dsu-004",
@@ -474,12 +771,21 @@
     "source_id": "most-stones-removed-with-same-row-or-column",
     "rating": 2100,
     "solve_count": 210000,
-    "tags": ["並查集", "建模"],
+    "tags": [
+      "並查集",
+      "建模"
+    ],
     "topic_id": "dsu",
     "problem_type": "classic",
     "tier": "challenge",
-    "strategy_hints": ["同一列或同一欄的石頭屬於同一連通分量。", "每個分量至少保留一顆，因此答案是石頭數減分量數。"],
-    "similar_problems": ["dsu-002", "int-005"]
+    "strategy_hints": [
+      "同一列或同一欄的石頭屬於同一連通分量。",
+      "每個分量至少保留一顆，因此答案是石頭數減分量數。"
+    ],
+    "similar_problems": [
+      "dsu-002",
+      "int-005"
+    ]
   },
   {
     "id": "dsu-005",
@@ -488,13 +794,22 @@
     "source_id": "similar-string-groups",
     "rating": 2200,
     "solve_count": 135000,
-    "tags": ["並查集", "思維轉換"],
+    "tags": [
+      "並查集",
+      "思維轉換"
+    ],
     "topic_id": "dsu",
     "problem_type": "insight_transfer",
     "tier": "challenge",
-    "strategy_hints": ["兩個字串若差異位置不超過兩個，就可視為同一群組。", "群組關係具有傳遞性，因此不需找實際交換序列，只需 union。"],
+    "strategy_hints": [
+      "兩個字串若差異位置不超過兩個，就可視為同一群組。",
+      "群組關係具有傳遞性，因此不需找實際交換序列，只需 union。"
+    ],
     "insight_note": "相似關係不是只看直接可交換的字串，而是看相似關係形成的連通分量；把字串集合轉成圖後，並查集自然統計群組數。",
-    "similar_problems": ["dsu-003", "graph-002"]
+    "similar_problems": [
+      "dsu-003",
+      "graph-002"
+    ]
   },
   {
     "id": "lift-001",
@@ -503,12 +818,21 @@
     "source_id": "kth-ancestor-of-a-tree-node",
     "rating": 1500,
     "solve_count": 120000,
-    "tags": ["倍增", "樹"],
+    "tags": [
+      "倍增",
+      "樹"
+    ],
     "topic_id": "binary-lifting-lca",
     "problem_type": "template",
     "tier": "warmup",
-    "strategy_hints": ["預處理 up[v][j] 表示 v 往上 2^j 步的祖先。", "查詢時把 k 的二進位位元逐一套用。"],
-    "similar_problems": ["lift-002", "lift-003"]
+    "strategy_hints": [
+      "預處理 up[v][j] 表示 v 往上 2^j 步的祖先。",
+      "查詢時把 k 的二進位位元逐一套用。"
+    ],
+    "similar_problems": [
+      "lift-002",
+      "lift-003"
+    ]
   },
   {
     "id": "lift-002",
@@ -517,12 +841,21 @@
     "source_id": "P1967",
     "rating": 1900,
     "solve_count": 86000,
-    "tags": ["倍增", "最大生成樹"],
+    "tags": [
+      "倍增",
+      "最大生成樹"
+    ],
     "topic_id": "binary-lifting-lca",
     "problem_type": "classic",
     "tier": "core",
-    "strategy_hints": ["先用最大生成樹保留任意兩點間瓶頸最大的路徑。", "倍增表同時維護往上跳過程中的最小邊權。"],
-    "similar_problems": ["lift-003", "dsu-004"]
+    "strategy_hints": [
+      "先用最大生成樹保留任意兩點間瓶頸最大的路徑。",
+      "倍增表同時維護往上跳過程中的最小邊權。"
+    ],
+    "similar_problems": [
+      "lift-003",
+      "dsu-004"
+    ]
   },
   {
     "id": "lift-003",
@@ -531,12 +864,21 @@
     "source_id": "P3379",
     "rating": 1800,
     "solve_count": 190000,
-    "tags": ["LCA", "倍增"],
+    "tags": [
+      "LCA",
+      "倍增"
+    ],
     "topic_id": "binary-lifting-lca",
     "problem_type": "classic",
     "tier": "core",
-    "strategy_hints": ["先 DFS 記錄深度與第一層父節點。", "查詢時先提深度，再從高位往低位一起跳。"],
-    "similar_problems": ["lift-001", "lift-004"]
+    "strategy_hints": [
+      "先 DFS 記錄深度與第一層父節點。",
+      "查詢時先提深度，再從高位往低位一起跳。"
+    ],
+    "similar_problems": [
+      "lift-001",
+      "lift-004"
+    ]
   },
   {
     "id": "lift-004",
@@ -545,12 +887,21 @@
     "source_id": "208E",
     "rating": 2100,
     "solve_count": 47000,
-    "tags": ["倍增", "離線查詢"],
+    "tags": [
+      "倍增",
+      "離線查詢"
+    ],
     "topic_id": "binary-lifting-lca",
     "problem_type": "classic",
     "tier": "challenge",
-    "strategy_hints": ["先用倍增找到每個查詢節點往上 p 層的祖先。", "同一祖先子樹內、指定深度的節點數可用 DFS 序或分桶統計。"],
-    "similar_problems": ["lift-002", "seg-003"]
+    "strategy_hints": [
+      "先用倍增找到每個查詢節點往上 p 層的祖先。",
+      "同一祖先子樹內、指定深度的節點數可用 DFS 序或分桶統計。"
+    ],
+    "similar_problems": [
+      "lift-002",
+      "seg-003"
+    ]
   },
   {
     "id": "lift-005",
@@ -559,13 +910,22 @@
     "source_id": "cycle-length-queries-in-a-tree",
     "rating": 2200,
     "solve_count": 90000,
-    "tags": ["倍增", "思維轉換"],
+    "tags": [
+      "倍增",
+      "思維轉換"
+    ],
     "topic_id": "binary-lifting-lca",
     "problem_type": "insight_transfer",
     "tier": "challenge",
-    "strategy_hints": ["完全二元樹節點的父節點是 x / 2，不需實際建樹。", "兩點一路除以二直到相同，步數加一就是循環長度。"],
+    "strategy_hints": [
+      "完全二元樹節點的父節點是 x / 2，不需實際建樹。",
+      "兩點一路除以二直到相同，步數加一就是循環長度。"
+    ],
     "insight_note": "查詢看似需要在巨大樹上建圖，但完全二元樹的編號已隱含父子關係；把節點值當成路徑編碼即可直接求 LCA。",
-    "similar_problems": ["lift-001", "bs-005"]
+    "similar_problems": [
+      "lift-001",
+      "bs-005"
+    ]
   },
   {
     "id": "mono-001",
@@ -574,12 +934,21 @@
     "source_id": "daily-temperatures",
     "rating": 1300,
     "solve_count": 720000,
-    "tags": ["單調棧", "下一個更大值"],
+    "tags": [
+      "單調棧",
+      "下一個更大值"
+    ],
     "topic_id": "monotonic-structure",
     "problem_type": "template",
     "tier": "warmup",
-    "strategy_hints": ["棧中保存還沒找到更高溫的日期索引。", "遇到更高溫時，彈出所有較低溫日期並填入等待天數。"],
-    "similar_problems": ["mono-002", "mono-003"]
+    "strategy_hints": [
+      "棧中保存還沒找到更高溫的日期索引。",
+      "遇到更高溫時，彈出所有較低溫日期並填入等待天數。"
+    ],
+    "similar_problems": [
+      "mono-002",
+      "mono-003"
+    ]
   },
   {
     "id": "mono-002",
@@ -588,12 +957,21 @@
     "source_id": "largest-rectangle-in-histogram",
     "rating": 2000,
     "solve_count": 360000,
-    "tags": ["單調棧", "貢獻計算"],
+    "tags": [
+      "單調棧",
+      "貢獻計算"
+    ],
     "topic_id": "monotonic-structure",
     "problem_type": "classic",
     "tier": "core",
-    "strategy_hints": ["對每根柱子找左右第一個比它矮的位置。", "在單調遞增棧中彈出柱子時，當下即可計算以它為高度的最大寬度。"],
-    "similar_problems": ["mono-001", "mono-004"]
+    "strategy_hints": [
+      "對每根柱子找左右第一個比它矮的位置。",
+      "在單調遞增棧中彈出柱子時，當下即可計算以它為高度的最大寬度。"
+    ],
+    "similar_problems": [
+      "mono-001",
+      "mono-004"
+    ]
   },
   {
     "id": "mono-003",
@@ -602,12 +980,21 @@
     "source_id": "sliding-window-maximum",
     "rating": 1900,
     "solve_count": 520000,
-    "tags": ["單調佇列", "視窗極值"],
+    "tags": [
+      "單調佇列",
+      "視窗極值"
+    ],
     "topic_id": "monotonic-structure",
     "problem_type": "classic",
     "tier": "core",
-    "strategy_hints": ["佇列保存索引，且對應值保持遞減。", "先移除過期索引，再移除被新元素支配的尾端。"],
-    "similar_problems": ["tp-005", "mono-001"]
+    "strategy_hints": [
+      "佇列保存索引，且對應值保持遞減。",
+      "先移除過期索引，再移除被新元素支配的尾端。"
+    ],
+    "similar_problems": [
+      "tp-005",
+      "mono-001"
+    ]
   },
   {
     "id": "mono-004",
@@ -616,12 +1003,21 @@
     "source_id": "sum-of-subarray-minimums",
     "rating": 2100,
     "solve_count": 240000,
-    "tags": ["單調棧", "貢獻計數"],
+    "tags": [
+      "單調棧",
+      "貢獻計數"
+    ],
     "topic_id": "monotonic-structure",
     "problem_type": "classic",
     "tier": "challenge",
-    "strategy_hints": ["對每個元素計算它作為最小值能覆蓋多少個子陣列。", "左右邊界一側用嚴格比較、一側用非嚴格比較，避免重複計數。"],
-    "similar_problems": ["mono-002", "seg-005"]
+    "strategy_hints": [
+      "對每個元素計算它作為最小值能覆蓋多少個子陣列。",
+      "左右邊界一側用嚴格比較、一側用非嚴格比較，避免重複計數。"
+    ],
+    "similar_problems": [
+      "mono-002",
+      "seg-005"
+    ]
   },
   {
     "id": "mono-005",
@@ -630,13 +1026,22 @@
     "source_id": "maximum-width-ramp",
     "rating": 2200,
     "solve_count": 130000,
-    "tags": ["單調棧", "思維轉換"],
+    "tags": [
+      "單調棧",
+      "思維轉換"
+    ],
     "topic_id": "monotonic-structure",
     "problem_type": "insight_transfer",
     "tier": "challenge",
-    "strategy_hints": ["先建立值嚴格遞減的左端候選棧。", "從右往左掃描，能配對就盡量彈出左端以得到更大寬度。"],
+    "strategy_hints": [
+      "先建立值嚴格遞減的左端候選棧。",
+      "從右往左掃描，能配對就盡量彈出左端以得到更大寬度。"
+    ],
     "insight_note": "寬度坡不是找最近的較小值，而是保留所有可能成為最左端的遞減候選；從右側反向匹配能一次消除已經得到最佳答案的左端。",
-    "similar_problems": ["mono-001", "tp-003"]
+    "similar_problems": [
+      "mono-001",
+      "tp-003"
+    ]
   },
   {
     "id": "seg-001",
@@ -645,12 +1050,21 @@
     "source_id": "range-sum-query-mutable",
     "rating": 1500,
     "solve_count": 250000,
-    "tags": ["樹狀陣列", "線段樹"],
+    "tags": [
+      "樹狀陣列",
+      "線段樹"
+    ],
     "topic_id": "segment-tree-bit",
     "problem_type": "template",
     "tier": "warmup",
-    "strategy_hints": ["用樹狀陣列維護前綴和，更新時加入差值。", "區間和等於 prefix(r) - prefix(l-1)。"],
-    "similar_problems": ["seg-002", "seg-003"]
+    "strategy_hints": [
+      "用樹狀陣列維護前綴和，更新時加入差值。",
+      "區間和等於 prefix(r) - prefix(l-1)。"
+    ],
+    "similar_problems": [
+      "seg-002",
+      "seg-003"
+    ]
   },
   {
     "id": "seg-002",
@@ -659,12 +1073,21 @@
     "source_id": "count-of-smaller-numbers-after-self",
     "rating": 2000,
     "solve_count": 300000,
-    "tags": ["樹狀陣列", "座標壓縮"],
+    "tags": [
+      "樹狀陣列",
+      "座標壓縮"
+    ],
     "topic_id": "segment-tree-bit",
     "problem_type": "classic",
     "tier": "core",
-    "strategy_hints": ["從右往左掃描，已加入的數就是目前右側元素。", "座標壓縮後查詢小於當前值的出現次數。"],
-    "similar_problems": ["seg-001", "seg-005"]
+    "strategy_hints": [
+      "從右往左掃描，已加入的數就是目前右側元素。",
+      "座標壓縮後查詢小於當前值的出現次數。"
+    ],
+    "similar_problems": [
+      "seg-001",
+      "seg-005"
+    ]
   },
   {
     "id": "seg-003",
@@ -673,12 +1096,21 @@
     "source_id": "count-of-range-sum",
     "rating": 2100,
     "solve_count": 190000,
-    "tags": ["樹狀陣列", "前綴和"],
+    "tags": [
+      "樹狀陣列",
+      "前綴和"
+    ],
     "topic_id": "segment-tree-bit",
     "problem_type": "classic",
     "tier": "core",
-    "strategy_hints": ["把子陣列和轉成兩個前綴和的差。", "對每個右端前綴，查詢先前前綴落在 [sum-upper, sum-lower] 的數量。"],
-    "similar_problems": ["bs-005", "seg-002"]
+    "strategy_hints": [
+      "把子陣列和轉成兩個前綴和的差。",
+      "對每個右端前綴，查詢先前前綴落在 [sum-upper, sum-lower] 的數量。"
+    ],
+    "similar_problems": [
+      "bs-005",
+      "seg-002"
+    ]
   },
   {
     "id": "seg-004",
@@ -687,12 +1119,21 @@
     "source_id": "falling-squares",
     "rating": 2200,
     "solve_count": 120000,
-    "tags": ["線段樹", "座標壓縮"],
+    "tags": [
+      "線段樹",
+      "座標壓縮"
+    ],
     "topic_id": "segment-tree-bit",
     "problem_type": "classic",
     "tier": "challenge",
-    "strategy_hints": ["每個方塊先查詢落點區間目前最高高度。", "再把整個區間更新成新高度，維護全域最大值。"],
-    "similar_problems": ["int-004", "seg-001"]
+    "strategy_hints": [
+      "每個方塊先查詢落點區間目前最高高度。",
+      "再把整個區間更新成新高度，維護全域最大值。"
+    ],
+    "similar_problems": [
+      "int-004",
+      "seg-001"
+    ]
   },
   {
     "id": "seg-005",
@@ -701,12 +1142,1506 @@
     "source_id": "reverse-pairs",
     "rating": 2200,
     "solve_count": 210000,
-    "tags": ["樹狀陣列", "思維轉換"],
+    "tags": [
+      "樹狀陣列",
+      "思維轉換"
+    ],
     "topic_id": "segment-tree-bit",
     "problem_type": "insight_transfer",
     "tier": "challenge",
-    "strategy_hints": ["條件 nums[i] > 2 * nums[j] 可在掃描時轉成查詢已出現大於 2x 的數量。", "座標壓縮必須同時放入 nums[i] 與 2 * nums[i]，避免比較邊界錯誤。"],
+    "strategy_hints": [
+      "條件 nums[i] > 2 * nums[j] 可在掃描時轉成查詢已出現大於 2x 的數量。",
+      "座標壓縮必須同時放入 nums[i] 與 2 * nums[i]，避免比較邊界錯誤。"
+    ],
     "insight_note": "題目是成對比較，但可將右端固定並把左側已出現元素放入資料結構；不等式計數因此轉成動態排名查詢。",
-    "similar_problems": ["seg-002", "mono-004"]
+    "similar_problems": [
+      "seg-002",
+      "mono-004"
+    ]
+  },
+  {
+    "id": "bs-lc-704",
+    "title": "二分搜尋",
+    "source": "leetcode",
+    "source_id": "binary-search",
+    "rating": 1200,
+    "solve_count": 1200000,
+    "tags": [
+      "二分搜尋",
+      "陣列"
+    ],
+    "topic_id": "binary-search",
+    "problem_type": "template",
+    "tier": "warmup",
+    "strategy_hints": [
+      "閉區間 [left, right] vs 半開區間 [left, right) 的收斂條件不同，選定一種後保持一致。",
+      "用 left + (right - left) / 2 避免溢位。"
+    ],
+    "similar_problems": [
+      "bs-001",
+      "bs-lc-35"
+    ]
+  },
+  {
+    "id": "bs-lc-35",
+    "title": "搜尋插入位置",
+    "source": "leetcode",
+    "source_id": "search-insert-position",
+    "rating": 1200,
+    "solve_count": 950000,
+    "tags": [
+      "二分搜尋",
+      "lower_bound"
+    ],
+    "topic_id": "binary-search",
+    "problem_type": "template",
+    "tier": "warmup",
+    "strategy_hints": [
+      "插入位置 = lower_bound 語意：第一個 >= target 的位置。",
+      "若 target 不存在，答案是第一個比它大的位置。"
+    ],
+    "similar_problems": [
+      "bs-lc-704",
+      "bs-lc-34"
+    ]
+  },
+  {
+    "id": "bs-lc-162",
+    "title": "尋找峰值",
+    "source": "leetcode",
+    "source_id": "find-peak-element",
+    "rating": 1500,
+    "solve_count": 650000,
+    "tags": [
+      "二分搜尋",
+      "峰值"
+    ],
+    "topic_id": "binary-search",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "若 nums[mid] < nums[mid+1]，則右側一定有峰值（單調遞增必到頂）。",
+      "局部最大即可，不需全域，因此任意峰值均為合法答案。"
+    ],
+    "similar_problems": [
+      "bs-lc-704"
+    ]
+  },
+  {
+    "id": "bs-lc-153",
+    "title": "尋找旋轉排序陣列中的最小值",
+    "source": "leetcode",
+    "source_id": "find-minimum-in-rotated-sorted-array",
+    "rating": 1500,
+    "solve_count": 900000,
+    "tags": [
+      "二分搜尋",
+      "旋轉陣列"
+    ],
+    "topic_id": "binary-search",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "判斷 nums[mid] 與 nums[right] 的大小關係，確認 mid 在哪一個有序段。",
+      "最小值一定在無序段（旋轉點）附近。"
+    ],
+    "similar_problems": [
+      "bs-002"
+    ]
+  },
+  {
+    "id": "bs-lc-34",
+    "title": "在排序陣列中查找元素的第一個和最後一個位置",
+    "source": "leetcode",
+    "source_id": "find-first-and-last-position-of-element-in-sorted-array",
+    "rating": 1500,
+    "solve_count": 1100000,
+    "tags": [
+      "二分搜尋",
+      "lower_bound",
+      "upper_bound"
+    ],
+    "topic_id": "binary-search",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "同時用兩次二分：lower_bound 找左邊界，upper_bound 找右邊界。",
+      "右邊界 = upper_bound - 1。"
+    ],
+    "similar_problems": [
+      "bs-lc-35",
+      "bs-lc-704"
+    ]
+  },
+  {
+    "id": "bs-lc-1011",
+    "title": "在 D 天內送達包裹的能力",
+    "source": "leetcode",
+    "source_id": "capacity-to-ship-packages-within-d-days",
+    "rating": 1600,
+    "solve_count": 720000,
+    "tags": [
+      "二分答案",
+      "貪心"
+    ],
+    "topic_id": "binary-search",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "二分運載能力 cap，check 函式貪心模擬：按序分組直到超重才開新船。",
+      "答案下界 = max(weights)，上界 = sum(weights)。"
+    ],
+    "similar_problems": [
+      "bs-lc-410",
+      "bs-004"
+    ]
+  },
+  {
+    "id": "bs-lc-410",
+    "title": "分割陣列的最大值",
+    "source": "leetcode",
+    "source_id": "split-array-largest-sum",
+    "rating": 1800,
+    "solve_count": 520000,
+    "tags": [
+      "二分答案",
+      "貪心"
+    ],
+    "topic_id": "binary-search",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "二分「最大段和」，check 函式貪心計算需要多少段。",
+      "段數 <= k 時可行，答案往左壓縮。"
+    ],
+    "similar_problems": [
+      "bs-lc-1011",
+      "bs-004"
+    ]
+  },
+  {
+    "id": "bs-lc-878",
+    "title": "第 N 個神奇數字",
+    "source": "leetcode",
+    "source_id": "nth-magical-number",
+    "rating": 2000,
+    "solve_count": 180000,
+    "tags": [
+      "二分答案",
+      "數學",
+      "容斥原理"
+    ],
+    "topic_id": "binary-search",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "二分答案 x，不超過 x 的神奇數字個數 = x/a + x/b - x/lcm(a,b)（容斥）。",
+      "答案取模 1e9+7，但二分過程中不能取模。"
+    ],
+    "similar_problems": [
+      "bs-005"
+    ]
+  },
+  {
+    "id": "bs-lc-2141",
+    "title": "同時運行 N 台電腦的最長時間",
+    "source": "leetcode",
+    "source_id": "maximum-running-time-of-n-computers",
+    "rating": 2100,
+    "solve_count": 130000,
+    "tags": [
+      "二分答案",
+      "貪心"
+    ],
+    "topic_id": "binary-search",
+    "problem_type": "insight_transfer",
+    "tier": "challenge",
+    "strategy_hints": [
+      "二分能運行的時間 T，check：每塊電池貢獻 min(battery, T)，總貢獻是否 >= N*T。",
+      "關鍵洞察：不易直觀想到此問題可二分，轉化後 check 函式是簡單的貪心。"
+    ],
+    "insight_note": "排程問題看似複雜，但「能否運行 T 分鐘」具有單調性（能運行 T 分鐘則一定能運行更短時間），因此可二分 T 後用貪心驗證。",
+    "similar_problems": [
+      "bs-lc-410",
+      "bs-004"
+    ]
+  },
+  {
+    "id": "bs-lc-3399",
+    "title": "統計最大元素出現至少 K 次的子陣列",
+    "source": "leetcode",
+    "source_id": "count-subarrays-with-maximum-element-at-least-k",
+    "rating": 2300,
+    "solve_count": 45000,
+    "tags": [
+      "並行二分",
+      "離線查詢"
+    ],
+    "topic_id": "binary-search",
+    "problem_type": "insight_transfer",
+    "tier": "challenge",
+    "strategy_hints": [
+      "多組查詢離線二分，每輪批次處理所有查詢的 mid。",
+      "每輪 reset 後重新驗證，避免狀態污染。"
+    ],
+    "insight_note": "當多組查詢都在同一有序結構上做二分時，可以把所有查詢的二分過程合併成 log n 輪批次處理，攤還後比逐一二分快。",
+    "similar_problems": [
+      "bs-lc-410"
+    ]
+  },
+  {
+    "id": "graph-lc-200",
+    "title": "島嶼數量",
+    "source": "leetcode",
+    "source_id": "number-of-islands",
+    "rating": 1300,
+    "solve_count": 1800000,
+    "tags": [
+      "DFS",
+      "連通分量",
+      "網格"
+    ],
+    "topic_id": "graph-traversal",
+    "problem_type": "template",
+    "tier": "warmup",
+    "strategy_hints": [
+      "DFS 或 BFS 從每個未訪問的陸地出發，標記整個連通區域。",
+      "BFS 方案：把所有相連陸地入隊，每次出隊就標記訪問過。"
+    ],
+    "similar_problems": [
+      "graph-001",
+      "graph-lc-827"
+    ]
+  },
+  {
+    "id": "graph-lc-207",
+    "title": "課程安排",
+    "source": "leetcode",
+    "source_id": "course-schedule",
+    "rating": 1500,
+    "solve_count": 1100000,
+    "tags": [
+      "拓撲排序",
+      "判環"
+    ],
+    "topic_id": "graph-traversal",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "用 Kahn 算法（BFS 入度為 0 的節點）判環：若最終出隊數量 < 節點總數，說明有環。",
+      "也可用 DFS 三色標記（白未訪/灰訪問中/黑完成）判環。"
+    ],
+    "similar_problems": [
+      "graph-004",
+      "graph-lc-210"
+    ]
+  },
+  {
+    "id": "graph-lc-210",
+    "title": "課程安排 II",
+    "source": "leetcode",
+    "source_id": "course-schedule-ii",
+    "rating": 1500,
+    "solve_count": 950000,
+    "tags": [
+      "拓撲排序",
+      "輸出順序"
+    ],
+    "topic_id": "graph-traversal",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "Kahn 算法出隊的順序就是拓撲順序。",
+      "若有環則無法完成所有課程，返回空陣列。"
+    ],
+    "similar_problems": [
+      "graph-lc-207"
+    ]
+  },
+  {
+    "id": "graph-lc-542",
+    "title": "01 矩陣",
+    "source": "leetcode",
+    "source_id": "01-matrix",
+    "rating": 1600,
+    "solve_count": 780000,
+    "tags": [
+      "多源 BFS",
+      "最短距離"
+    ],
+    "topic_id": "graph-traversal",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "把所有 0 作為起點同時入隊，BFS 擴展得到每個格子到最近 0 的距離。",
+      "初始化：0 格距離為 0，1 格距離為無窮大。"
+    ],
+    "similar_problems": [
+      "graph-001",
+      "graph-lc-1162"
+    ]
+  },
+  {
+    "id": "graph-lc-1162",
+    "title": "地圖分析",
+    "source": "leetcode",
+    "source_id": "as-far-from-land-as-possible",
+    "rating": 1600,
+    "solve_count": 280000,
+    "tags": [
+      "多源 BFS",
+      "最遠距離"
+    ],
+    "topic_id": "graph-traversal",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "把所有陸地（1）同時入隊，BFS 找到最後一個被訪問的海洋格子，其距離即為答案。",
+      "若全是陸地或全是海洋，返回 -1。"
+    ],
+    "similar_problems": [
+      "graph-lc-542"
+    ]
+  },
+  {
+    "id": "graph-lc-827",
+    "title": "最大人工島",
+    "source": "leetcode",
+    "source_id": "making-a-large-island",
+    "rating": 1800,
+    "solve_count": 190000,
+    "tags": [
+      "DFS",
+      "縮點",
+      "枚舉"
+    ],
+    "topic_id": "graph-traversal",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "先用 DFS 給每個連通分量標記 id 並記錄大小。",
+      "再枚舉每個 0 格，嘗試翻轉為 1，合併周圍不同 id 的分量大小。"
+    ],
+    "similar_problems": [
+      "graph-lc-200",
+      "dsu-001"
+    ]
+  },
+  {
+    "id": "graph-lc-1345",
+    "title": "跳躍遊戲 IV",
+    "source": "leetcode",
+    "source_id": "jump-game-iv",
+    "rating": 1900,
+    "solve_count": 145000,
+    "tags": [
+      "BFS",
+      "隱式圖",
+      "哈希"
+    ],
+    "topic_id": "graph-traversal",
+    "problem_type": "insight_transfer",
+    "tier": "challenge",
+    "strategy_hints": [
+      "建立隱式圖：相同值的位置互相連通（一步可跳）。",
+      "BFS 層數即最少跳躍次數；用哈希表預處理相同值的位置列表。"
+    ],
+    "insight_note": "題目的難點在於同值位置間的傳送看似非圖結構，但建成隱式圖後就是標準 BFS 最短路問題。",
+    "similar_problems": [
+      "graph-002",
+      "graph-lc-207"
+    ]
+  },
+  {
+    "id": "graph-lc-2608",
+    "title": "圖中的最短環",
+    "source": "leetcode",
+    "source_id": "shortest-cycle-in-a-graph",
+    "rating": 2100,
+    "solve_count": 55000,
+    "tags": [
+      "BFS",
+      "尋找橋",
+      "最短環"
+    ],
+    "topic_id": "graph-traversal",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "對每個節點做 BFS，當再次遇到已訪問節點時（非父節點）即找到環，長度 = dist[u] + dist[v] + 1。",
+      "取所有節點為起點的最小環即為答案。"
+    ],
+    "similar_problems": [
+      "graph-lc-207",
+      "dsu-002"
+    ]
+  },
+  {
+    "id": "int-lc-57",
+    "title": "插入區間",
+    "source": "leetcode",
+    "source_id": "insert-interval",
+    "rating": 1500,
+    "solve_count": 680000,
+    "tags": [
+      "區間插入",
+      "合併"
+    ],
+    "topic_id": "intervals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "把不重疊的左側區間直接加入、遇到重疊則合併、加入合併後的區間、再加入右側不重疊區間。",
+      "判斷重疊：newInterval.end >= intervals[i].start 且 newInterval.start <= intervals[i].end。"
+    ],
+    "similar_problems": [
+      "int-001",
+      "int-lc-452"
+    ]
+  },
+  {
+    "id": "int-lc-452",
+    "title": "用最少數量的箭引爆氣球",
+    "source": "leetcode",
+    "source_id": "minimum-number-of-arrows-to-burst-balloons",
+    "rating": 1500,
+    "solve_count": 450000,
+    "tags": [
+      "按 end 排序",
+      "貪心"
+    ],
+    "topic_id": "intervals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "按 end 排序後貪心：每次在當前氣球的 end 位置射箭，能一次消滅所有包含此點的氣球。",
+      "與「無重疊區間」本質相同，差一個加一。"
+    ],
+    "similar_problems": [
+      "int-lc-435",
+      "int-001"
+    ]
+  },
+  {
+    "id": "int-lc-435",
+    "title": "無重疊區間",
+    "source": "leetcode",
+    "source_id": "non-overlapping-intervals",
+    "rating": 1500,
+    "solve_count": 490000,
+    "tags": [
+      "按 end 排序",
+      "貪心"
+    ],
+    "topic_id": "intervals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "移除最少 = 保留最多不重疊，等價於活動選擇問題。",
+      "按 end 排序後貪心選，答案 = 總數 - 最多不重疊數。"
+    ],
+    "similar_problems": [
+      "int-lc-452"
+    ]
+  },
+  {
+    "id": "int-lc-1094",
+    "title": "拼車",
+    "source": "leetcode",
+    "source_id": "car-pooling",
+    "rating": 1600,
+    "solve_count": 350000,
+    "tags": [
+      "差分陣列",
+      "區間修改"
+    ],
+    "topic_id": "intervals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "上車 from 站人數增加，下車 to 站人數減少，差分陣列模型。",
+      "掃描前綴和，若任一站超過 capacity 則不可行。"
+    ],
+    "similar_problems": [
+      "int-003"
+    ]
+  },
+  {
+    "id": "int-lc-2406",
+    "title": "將區間分為最少組數",
+    "source": "leetcode",
+    "source_id": "divide-intervals-into-minimum-number-of-groups",
+    "rating": 1700,
+    "solve_count": 170000,
+    "tags": [
+      "掃描線",
+      "最小堆",
+      "貪心"
+    ],
+    "topic_id": "intervals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "等價於求最大重疊區間數（與會議室問題相同）。",
+      "掃描線：start+1, end-1 事件排序後累加，最大值即答案。"
+    ],
+    "similar_problems": [
+      "int-002",
+      "int-003"
+    ]
+  },
+  {
+    "id": "int-lc-218",
+    "title": "天際線問題",
+    "source": "leetcode",
+    "source_id": "the-skyline-problem",
+    "rating": 1900,
+    "solve_count": 310000,
+    "tags": [
+      "掃描線",
+      "有序集合"
+    ],
+    "topic_id": "intervals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "把建築物分解成左右兩個事件，按 x 排序掃描。",
+      "用 multiset 維護當前活躍建築物高度，當最大高度變化時記錄關鍵點。"
+    ],
+    "insight_note": "天際線問題的難點在於同一 x 座標可能有多個事件（進入/離開），需要特別處理排序優先順序（進入先於離開，高度高的先於低的）。",
+    "similar_problems": [
+      "int-004",
+      "seg-004"
+    ]
+  },
+  {
+    "id": "heap-lc-215",
+    "title": "陣列中的第 K 個最大元素",
+    "source": "leetcode",
+    "source_id": "kth-largest-element-in-an-array",
+    "rating": 1400,
+    "solve_count": 1500000,
+    "tags": [
+      "堆積",
+      "快速選擇"
+    ],
+    "topic_id": "heap-priority-queue",
+    "problem_type": "template",
+    "tier": "warmup",
+    "strategy_hints": [
+      "用 size K 的最小堆：若堆大小超過 K 就 pop，最終堆頂即第 K 大。",
+      "也可用 nth_element（平均 O(n)）或快速選擇。"
+    ],
+    "similar_problems": [
+      "heap-001"
+    ]
+  },
+  {
+    "id": "heap-lc-23",
+    "title": "合併 K 個升序鏈結串列",
+    "source": "leetcode",
+    "source_id": "merge-k-sorted-lists",
+    "rating": 1500,
+    "solve_count": 1200000,
+    "tags": [
+      "K 路合併",
+      "堆積"
+    ],
+    "topic_id": "heap-priority-queue",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "最小堆存 (節點值, 鏈表索引, 節點指標)，每次 pop 後推入同鏈表下一節點。",
+      "堆大小始終 <= K，總複雜度 O(N log K)。"
+    ],
+    "similar_problems": [
+      "heap-003"
+    ]
+  },
+  {
+    "id": "heap-lc-295",
+    "title": "資料流的中位數",
+    "source": "leetcode",
+    "source_id": "find-median-from-data-stream",
+    "rating": 1700,
+    "solve_count": 680000,
+    "tags": [
+      "雙堆",
+      "動態中位數"
+    ],
+    "topic_id": "heap-priority-queue",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "維護一個大根堆（下半部）和一個小根堆（上半部），保持大小差 <= 1。",
+      "中位數是大根堆頂（奇數個時）或兩堆頂的平均（偶數個時）。"
+    ],
+    "similar_problems": [
+      "heap-004"
+    ]
+  },
+  {
+    "id": "heap-lc-2542",
+    "title": "最大化子序列的得分",
+    "source": "leetcode",
+    "source_id": "maximum-subsequence-score",
+    "rating": 1700,
+    "solve_count": 150000,
+    "tags": [
+      "貪心",
+      "堆積"
+    ],
+    "topic_id": "heap-priority-queue",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "按 nums2 降序排序，從左到右用最小堆維護 nums1 的前 K 大，同時記錄 nums1 前 K 大之和。",
+      "每次更新答案為 sum * nums2[i]。"
+    ],
+    "similar_problems": [
+      "heap-lc-1642"
+    ]
+  },
+  {
+    "id": "heap-lc-1642",
+    "title": "可以到達的最遠建築",
+    "source": "leetcode",
+    "source_id": "furthest-building-you-can-reach",
+    "rating": 1600,
+    "solve_count": 280000,
+    "tags": [
+      "貪心",
+      "堆積"
+    ],
+    "topic_id": "heap-priority-queue",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "貪心：優先用磚塊，若磚塊不夠，從已用磚塊中換回最大的一次改用梯子。",
+      "最小堆維護已用磚塊（存差值），當梯子用完前取最大差值換梯子。"
+    ],
+    "similar_problems": [
+      "heap-002"
+    ]
+  },
+  {
+    "id": "heap-lc-1675",
+    "title": "最小化陣列中的最大值",
+    "source": "leetcode",
+    "source_id": "minimize-deviation-in-array",
+    "rating": 2000,
+    "solve_count": 120000,
+    "tags": [
+      "貪心",
+      "堆積",
+      "統一處理"
+    ],
+    "topic_id": "heap-priority-queue",
+    "problem_type": "insight_transfer",
+    "tier": "challenge",
+    "strategy_hints": [
+      "把所有奇數乘 2 統一成偶數，用最大堆維護；每次減半堆頂（偶數除以 2），更新最小值，計算差值。",
+      "關鍵洞察：奇數只能乘 2，偶數只能除 2，統一後只需處理「縮小最大值」的操作。"
+    ],
+    "insight_note": "把奇偶統一成偶數後，所有操作方向相同（只縮不擴），貪心地縮小最大值直到無法縮小為止。",
+    "similar_problems": [
+      "heap-004",
+      "bs-lc-2141"
+    ]
+  },
+  {
+    "id": "dp-lc-322",
+    "title": "硬幣兌換",
+    "source": "leetcode",
+    "source_id": "coin-change",
+    "rating": 1400,
+    "solve_count": 1500000,
+    "tags": [
+      "完全背包",
+      "DP"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "完全背包：正序枚舉容量，每種硬幣可重複選。",
+      "初始化 dp[0]=0，其餘 INF；若最終 dp[amount] 仍為 INF 則無解。"
+    ],
+    "similar_problems": [
+      "dp-001",
+      "dp-003"
+    ]
+  },
+  {
+    "id": "dp-lc-1143",
+    "title": "最長公共子序列",
+    "source": "leetcode",
+    "source_id": "longest-common-subsequence",
+    "rating": 1500,
+    "solve_count": 1100000,
+    "tags": [
+      "LCS",
+      "二維 DP"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "dp[i][j] = text1[0..i-1] 和 text2[0..j-1] 的 LCS 長度。",
+      "若 text1[i-1] == text2[j-1]：dp[i][j] = dp[i-1][j-1] + 1，否則 max(dp[i-1][j], dp[i][j-1])。"
+    ],
+    "similar_problems": [
+      "dp-002"
+    ]
+  },
+  {
+    "id": "dp-lc-516",
+    "title": "最長回文子序列",
+    "source": "leetcode",
+    "source_id": "longest-palindromic-subsequence",
+    "rating": 1600,
+    "solve_count": 600000,
+    "tags": [
+      "區間 DP",
+      "回文"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "dp[l][r] = s[l..r] 的最長回文子序列長度。",
+      "若 s[l]==s[r]：dp[l][r] = dp[l+1][r-1] + 2，否則 max(dp[l+1][r], dp[l][r-1])。"
+    ],
+    "similar_problems": [
+      "dp-004",
+      "dp-lc-1312"
+    ]
+  },
+  {
+    "id": "dp-lc-1235",
+    "title": "規劃兼職工作",
+    "source": "leetcode",
+    "source_id": "maximum-profit-in-job-scheduling",
+    "rating": 1800,
+    "solve_count": 360000,
+    "tags": [
+      "DP",
+      "二分",
+      "區間排序"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "按 end 排序，dp[i] = 前 i 個工作的最大收益。",
+      "轉移：選第 i 份工作 -> dp[i] = dp[最後一份不衝突的工作] + profit[i]，二分找前驅。"
+    ],
+    "similar_problems": [
+      "dp-002",
+      "bs-lc-1011"
+    ]
+  },
+  {
+    "id": "dp-lc-1312",
+    "title": "讓字串成為回文串的最少插入次數",
+    "source": "leetcode",
+    "source_id": "minimum-insertion-steps-to-make-a-string-palindrome",
+    "rating": 1900,
+    "solve_count": 240000,
+    "tags": [
+      "區間 DP",
+      "回文"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "dp[l][r] = 使 s[l..r] 成為回文所需最少插入次數。",
+      "若 s[l]==s[r]：dp[l][r] = dp[l+1][r-1]；否則 min(dp[l+1][r], dp[l][r-1]) + 1。"
+    ],
+    "similar_problems": [
+      "dp-lc-516",
+      "dp-004"
+    ]
+  },
+  {
+    "id": "dp-lc-2707",
+    "title": "字串中的額外字符",
+    "source": "leetcode",
+    "source_id": "extra-characters-in-a-string",
+    "rating": 2100,
+    "solve_count": 130000,
+    "tags": [
+      "DP",
+      "字典樹",
+      "字串"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "insight_transfer",
+    "tier": "challenge",
+    "strategy_hints": [
+      "dp[i] = s[0..i-1] 中最少的額外字符數。",
+      "對每個右端 i，枚舉所有以 i 結尾且在字典中的子字串 s[j..i-1]：dp[i] = min(dp[i], dp[j])。用字典樹加速查詢。"
+    ],
+    "insight_note": "關鍵在於把「分割字串」轉成「DP 狀態轉移 + 字典匹配」的組合，字典樹讓匹配從 O(n²) 降到 O(n × max_word_len)。",
+    "similar_problems": [
+      "dp-002",
+      "dp-lc-1235"
+    ]
+  },
+  {
+    "id": "tp-lc-167",
+    "title": "兩數之和 II - 輸入有序陣列",
+    "source": "leetcode",
+    "source_id": "two-sum-ii-input-array-is-sorted",
+    "rating": 1300,
+    "solve_count": 950000,
+    "tags": [
+      "對向雙指針",
+      "有序陣列"
+    ],
+    "topic_id": "two-pointers",
+    "problem_type": "template",
+    "tier": "warmup",
+    "strategy_hints": [
+      "left 從頭、right 從尾，若和偏大則 right--，偏小則 left++。",
+      "已排序是使用對向雙指針的前提。"
+    ],
+    "similar_problems": [
+      "tp-003"
+    ]
+  },
+  {
+    "id": "tp-lc-992",
+    "title": "K 個不同整數的子陣列",
+    "source": "leetcode",
+    "source_id": "subarrays-with-k-different-integers",
+    "rating": 1800,
+    "solve_count": 210000,
+    "tags": [
+      "恰好 K 個",
+      "滑動視窗"
+    ],
+    "topic_id": "two-pointers",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "exactly(K) = atMost(K) - atMost(K-1)，把精確計數轉成兩次「至多」查詢。",
+      "atMost(K) 函式：維護視窗內不同整數數量，超過 K 就縮左端。"
+    ],
+    "similar_problems": [
+      "tp-002",
+      "tp-lc-2799"
+    ]
+  },
+  {
+    "id": "tp-lc-1004",
+    "title": "最大連續 1 的個數 III",
+    "source": "leetcode",
+    "source_id": "max-consecutive-ones-iii",
+    "rating": 1600,
+    "solve_count": 420000,
+    "tags": [
+      "滑動視窗",
+      "同向雙指針"
+    ],
+    "topic_id": "two-pointers",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "視窗內 0 的個數超過 k 時，縮小左端直到不超過 k。",
+      "答案是最長合法視窗的長度。"
+    ],
+    "similar_problems": [
+      "tp-001",
+      "tp-005"
+    ]
+  },
+  {
+    "id": "tp-lc-2444",
+    "title": "統計固定邊界子數組的數目",
+    "source": "leetcode",
+    "source_id": "count-subarrays-with-fixed-bounds",
+    "rating": 2000,
+    "solve_count": 120000,
+    "tags": [
+      "雙指針",
+      "恰好 K 個",
+      "計數"
+    ],
+    "topic_id": "two-pointers",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "同向雙指針：維護最近的越界位置、最近的 minK 位置、最近的 maxK 位置。",
+      "以每個 right 為右端，合法子陣列數量 = max(0, min(last_minK, last_maxK) - last_bad)。"
+    ],
+    "similar_problems": [
+      "tp-002",
+      "tp-lc-992"
+    ]
+  },
+  {
+    "id": "tp-lc-2799",
+    "title": "統計完全子數組的數目",
+    "source": "leetcode",
+    "source_id": "count-complete-subarrays-in-an-array",
+    "rating": 2100,
+    "solve_count": 90000,
+    "tags": [
+      "恰好 K 個",
+      "滑動視窗"
+    ],
+    "topic_id": "two-pointers",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "完全子陣列 = 與整個陣列不同元素數相同的子陣列。",
+      "用 atMost 轉換，或直接維護視窗內不同元素數的滑動視窗計數。"
+    ],
+    "similar_problems": [
+      "tp-lc-992",
+      "tp-002"
+    ]
+  },
+  {
+    "id": "dsu-lc-1202",
+    "title": "交換字串中的元素",
+    "source": "leetcode",
+    "source_id": "smallest-string-with-swaps",
+    "rating": 1700,
+    "solve_count": 200000,
+    "tags": [
+      "DSU",
+      "分組排序"
+    ],
+    "topic_id": "dsu",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "同一連通分量內的字元可以任意重排，貪心排成最小字典序。",
+      "用 DSU 合併可交換的位置對，按分量分別排序。"
+    ],
+    "similar_problems": [
+      "dsu-003",
+      "dsu-004"
+    ]
+  },
+  {
+    "id": "dsu-lc-1579",
+    "title": "保證圖可完全遍歷",
+    "source": "leetcode",
+    "source_id": "remove-max-number-of-edges-to-keep-graph-fully-traversable",
+    "rating": 2000,
+    "solve_count": 170000,
+    "tags": [
+      "雙色 DSU",
+      "貪心"
+    ],
+    "topic_id": "dsu",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "優先加入類型 3（雙方都可用）的邊，再分別加入類型 1 和 2 的邊。",
+      "維護兩個獨立的 DSU（Alice 和 Bob），能連通才加邊，否則計為可刪除。"
+    ],
+    "insight_note": "關鍵在於「共用邊優先」：類型 3 的邊同時對兩人有效，貪心先加入後，剩下的才用類型 1/2 補全各自的連通性。",
+    "similar_problems": [
+      "dsu-002",
+      "dsu-004"
+    ]
+  },
+  {
+    "id": "dsu-lc-1697",
+    "title": "檢查邊長限制的路徑是否存在",
+    "source": "leetcode",
+    "source_id": "checking-existence-of-edge-length-limited-paths",
+    "rating": 1900,
+    "solve_count": 110000,
+    "tags": [
+      "離線",
+      "DSU",
+      "排序"
+    ],
+    "topic_id": "dsu",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "離線：把查詢和邊都按限制/邊權排序，逐步加邊後回答查詢。",
+      "對每個查詢 limit，加入所有邊權 < limit 的邊，再用 DSU 判斷 u、v 是否連通。"
+    ],
+    "similar_problems": [
+      "dsu-lc-2503",
+      "lift-002"
+    ]
+  },
+  {
+    "id": "dsu-lc-2503",
+    "title": "矩陣查詢可獲得的最大分數",
+    "source": "leetcode",
+    "source_id": "maximum-number-of-points-from-grid-queries",
+    "rating": 2100,
+    "solve_count": 80000,
+    "tags": [
+      "離線",
+      "DSU",
+      "BFS"
+    ],
+    "topic_id": "dsu",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "離線排序查詢；用最小堆按格子值從小到大擴展，類似 Prim/Dijkstra 的貪心加邊。",
+      "每次加入格子後查詢左上角 (0,0) 所在連通分量的大小。"
+    ],
+    "similar_problems": [
+      "dsu-lc-1697",
+      "graph-lc-827"
+    ]
+  },
+  {
+    "id": "lift-lc-1483",
+    "title": "樹節點的第 K 個祖先",
+    "source": "leetcode",
+    "source_id": "kth-ancestor-of-a-tree-node",
+    "rating": 1900,
+    "solve_count": 110000,
+    "tags": [
+      "倍增",
+      "第 K 祖先"
+    ],
+    "topic_id": "binary-lifting-lca",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "直接考倍增模板：預處理 up[v][j] = v 往上 2^j 步的祖先。",
+      "查詢時把 k 拆成二進位，逐位跳躍。"
+    ],
+    "similar_problems": [
+      "lift-001",
+      "lift-003"
+    ]
+  },
+  {
+    "id": "lift-lc-2846",
+    "title": "邊權之和最小的樹中的節點",
+    "source": "leetcode",
+    "source_id": "minimum-edge-weight-equilibrium-queries-in-a-tree",
+    "rating": 2000,
+    "solve_count": 55000,
+    "tags": [
+      "倍增",
+      "前綴計數",
+      "LCA"
+    ],
+    "topic_id": "binary-lifting-lca",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "預處理每個節點到根路徑上各邊權的出現次數，用前綴陣列存儲。",
+      "查詢 (u, v) 的路徑：用 LCA 找路徑，差分計算路徑上各邊權頻次，需要替換的邊 = 路徑長 - 最高頻次。"
+    ],
+    "similar_problems": [
+      "lift-002",
+      "lift-003"
+    ]
+  },
+  {
+    "id": "lift-lc-2458",
+    "title": "刪除操作後的子樹大小",
+    "source": "leetcode",
+    "source_id": "height-of-binary-tree-after-subtree-removal-queries",
+    "rating": 2200,
+    "solve_count": 65000,
+    "tags": [
+      "Euler Tour",
+      "線段樹",
+      "DFS"
+    ],
+    "topic_id": "binary-lifting-lca",
+    "problem_type": "insight_transfer",
+    "tier": "challenge",
+    "strategy_hints": [
+      "用 DFS 序（Euler tour）把子樹轉換為連續區間。",
+      "刪除一個子樹後，最大深度 = 不在被刪子樹區間內的最大深度，用線段樹維護。"
+    ],
+    "insight_note": "把樹問題轉成 Euler tour 後，子樹對應連續區間，刪除問題轉成「在區間外取最大值」，線段樹高效支援。",
+    "similar_problems": [
+      "lift-004",
+      "seg-003"
+    ]
+  },
+  {
+    "id": "mono-lc-907",
+    "title": "子陣列的最小值之和",
+    "source": "leetcode",
+    "source_id": "sum-of-subarray-minimums",
+    "rating": 1800,
+    "solve_count": 330000,
+    "tags": [
+      "貢獻計數",
+      "單調棧"
+    ],
+    "topic_id": "monotonic-structure",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "對每個元素計算以其為最小值的子陣列個數（貢獻）。",
+      "用單調棧找左邊第一個嚴格更小（left[k]）和右邊第一個不大於（right[k]）的位置，避免重複計數。"
+    ],
+    "similar_problems": [
+      "mono-004",
+      "mono-lc-2104"
+    ]
+  },
+  {
+    "id": "mono-lc-2104",
+    "title": "子陣列範圍之和",
+    "source": "leetcode",
+    "source_id": "sum-of-subarray-ranges",
+    "rating": 1800,
+    "solve_count": 220000,
+    "tags": [
+      "貢獻計數",
+      "單調棧"
+    ],
+    "topic_id": "monotonic-structure",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "範圍 = 最大值 - 最小值，分別用貢獻計數求所有子陣列最大值之和與最小值之和。",
+      "本質是 mono-lc-907 的組合題。"
+    ],
+    "similar_problems": [
+      "mono-lc-907",
+      "mono-004"
+    ]
+  },
+  {
+    "id": "mono-lc-85",
+    "title": "最大矩形",
+    "source": "leetcode",
+    "source_id": "maximal-rectangle",
+    "rating": 1800,
+    "solve_count": 450000,
+    "tags": [
+      "單調棧",
+      "逐行柱狀圖"
+    ],
+    "topic_id": "monotonic-structure",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "逐行把矩陣轉成高度柱狀圖（累計連續 1 的高度），再對每行套用「柱狀圖最大矩形」解法。",
+      "時間複雜度 O(mn)。"
+    ],
+    "similar_problems": [
+      "mono-002"
+    ]
+  },
+  {
+    "id": "mono-lc-1944",
+    "title": "隊列中可以看到的人數",
+    "source": "leetcode",
+    "source_id": "number-of-visible-people-in-a-queue",
+    "rating": 2000,
+    "solve_count": 120000,
+    "tags": [
+      "單調棧",
+      "可見性"
+    ],
+    "topic_id": "monotonic-structure",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "從右往左掃描，單調棧維護右側遞減候選。",
+      "能看到的人 = 彈出的人（被當前人擋住前可見）+ 1（若棧非空，棧頂也可見）。"
+    ],
+    "similar_problems": [
+      "mono-001",
+      "mono-002"
+    ]
+  },
+  {
+    "id": "mono-lc-3113",
+    "title": "邊界元素是最大值的子陣列數目",
+    "source": "leetcode",
+    "source_id": "find-the-number-of-subarrays-where-boundary-elements-are-maximum",
+    "rating": 2200,
+    "solve_count": 45000,
+    "tags": [
+      "貢獻計數進階",
+      "單調棧"
+    ],
+    "topic_id": "monotonic-structure",
+    "problem_type": "insight_transfer",
+    "tier": "challenge",
+    "strategy_hints": [
+      "用單調棧維護遞減棧，記錄每個棧元素出現的次數（等值元素合併計數）。",
+      "入棧時加上當前棧頂的計數；彈棧時移除貢獻。"
+    ],
+    "insight_note": "等值元素的處理是此題的難點：相同值的元素互相可見（都是邊界最大值），需合併計數而非個別處理。",
+    "similar_problems": [
+      "mono-004",
+      "mono-lc-907"
+    ]
+  },
+  {
+    "id": "seg-lc-315",
+    "title": "計算右側小於當前元素的個數",
+    "source": "leetcode",
+    "source_id": "count-of-smaller-numbers-after-self",
+    "rating": 1700,
+    "solve_count": 430000,
+    "tags": [
+      "逆序對",
+      "BIT",
+      "座標壓縮"
+    ],
+    "topic_id": "segment-tree-bit",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "從右往左掃描，查詢比當前值小的已出現元素數量，再插入當前值。",
+      "座標壓縮後用 BIT 維護頻次前綴和。"
+    ],
+    "similar_problems": [
+      "seg-002",
+      "seg-lc-493"
+    ]
+  },
+  {
+    "id": "seg-lc-493",
+    "title": "翻轉對",
+    "source": "leetcode",
+    "source_id": "reverse-pairs",
+    "rating": 1800,
+    "solve_count": 250000,
+    "tags": [
+      "逆序對變體",
+      "BIT",
+      "離散化"
+    ],
+    "topic_id": "segment-tree-bit",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "條件 nums[i] > 2*nums[j] 的不等式需要把 nums[i] 和 2*nums[j] 同時加入離散化，避免邊界遺漏。",
+      "查詢大於 2x 的數量，再插入 x。"
+    ],
+    "similar_problems": [
+      "seg-002",
+      "seg-lc-315"
+    ]
+  },
+  {
+    "id": "seg-lc-2286",
+    "title": "以組為單位訂音樂會的門票",
+    "source": "leetcode",
+    "source_id": "booking-concert-tickets-in-groups",
+    "rating": 2000,
+    "solve_count": 55000,
+    "tags": [
+      "線段樹",
+      "懶標記"
+    ],
+    "topic_id": "segment-tree-bit",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "gather 操作：找第一個剩餘座位 >= k 的排，用線段樹維護區間最大值查詢。",
+      "scatter 操作：從第一行開始貪心填充，用線段樹維護區間和。"
+    ],
+    "similar_problems": [
+      "seg-004",
+      "seg-lc-2407"
+    ]
+  },
+  {
+    "id": "seg-lc-2407",
+    "title": "最長遞增子序列 II",
+    "source": "leetcode",
+    "source_id": "longest-increasing-subsequence-ii",
+    "rating": 2000,
+    "solve_count": 75000,
+    "tags": [
+      "線段樹",
+      "DP",
+      "值域查詢"
+    ],
+    "topic_id": "segment-tree-bit",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "dp[i] = 以 nums[i] 結尾且滿足差值 <= k 的 LIS 長度。",
+      "用值域線段樹維護 dp 值的區間最大，轉移時查詢 [nums[i]-k, nums[i]-1] 的最大 dp 值。"
+    ],
+    "similar_problems": [
+      "dp-002",
+      "seg-002"
+    ]
+  },
+  {
+    "id": "seg-lc-2940",
+    "title": "找到 Alice 和 Bob 可以相遇的建築",
+    "source": "leetcode",
+    "source_id": "find-building-where-alice-and-bob-can-meet",
+    "rating": 2300,
+    "solve_count": 40000,
+    "tags": [
+      "線段樹",
+      "單調棧",
+      "離線"
+    ],
+    "topic_id": "segment-tree-bit",
+    "problem_type": "insight_transfer",
+    "tier": "challenge",
+    "strategy_hints": [
+      "若 a < b 且 heights[a] < heights[b]，答案直接是 b。",
+      "否則離線：對每個查詢找右側第一個 height > max(heights[a], heights[b]) 的位置，用線段樹（維護後綴最大值）+ 二分 或 單調棧 + 優先佇列解決。"
+    ],
+    "insight_note": "線段樹單調棧組合：把查詢掛在右端點上，從右向左掃描並維護單調棧；對每個查詢用堆找到第一個比閾值高的建築。",
+    "similar_problems": [
+      "mono-002",
+      "seg-lc-2407"
+    ]
+  },
+  {
+    "id": "sp-lc-743",
+    "title": "網路延遲時間",
+    "source": "leetcode",
+    "source_id": "network-delay-time",
+    "rating": 1400,
+    "solve_count": 680000,
+    "tags": [
+      "Dijkstra",
+      "單源最短路"
+    ],
+    "topic_id": "shortest-path",
+    "problem_type": "template",
+    "tier": "warmup",
+    "strategy_hints": [
+      "Dijkstra 模板題：從 k 出發，求到所有節點的最短距離，取最大值。",
+      "若存在不可達節點，返回 -1。"
+    ],
+    "similar_problems": [
+      "sp-lc-1514",
+      "graph-003"
+    ]
+  },
+  {
+    "id": "sp-lc-1514",
+    "title": "概率最大的路徑",
+    "source": "leetcode",
+    "source_id": "path-with-maximum-probability",
+    "rating": 1500,
+    "solve_count": 290000,
+    "tags": [
+      "Dijkstra 變體",
+      "最大機率路徑"
+    ],
+    "topic_id": "shortest-path",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "把「最小距離」改為「最大機率」，Dijkstra 用最大堆。",
+      "邊的機率相乘，取 log 後變加法，也可用最大堆直接做。"
+    ],
+    "similar_problems": [
+      "sp-lc-743"
+    ]
+  },
+  {
+    "id": "sp-lc-787",
+    "title": "K 站中轉內最便宜的航班",
+    "source": "leetcode",
+    "source_id": "cheapest-flights-within-k-stops",
+    "rating": 1600,
+    "solve_count": 560000,
+    "tags": [
+      "Bellman-Ford",
+      "限制層數"
+    ],
+    "topic_id": "shortest-path",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "Bellman-Ford 只做 k+1 輪：第 i 輪代表恰好走 i 條邊的最短路。",
+      "每輪更新要用上一輪的結果（需要複製 dist 陣列），否則一輪內連鎖更新違反層數限制。"
+    ],
+    "similar_problems": [
+      "sp-lc-743",
+      "dp-001"
+    ]
+  },
+  {
+    "id": "sp-lc-1334",
+    "title": "閾值距離內鄰居最少的城市",
+    "source": "leetcode",
+    "source_id": "find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance",
+    "rating": 1600,
+    "solve_count": 260000,
+    "tags": [
+      "Floyd-Warshall",
+      "全點對最短路"
+    ],
+    "topic_id": "shortest-path",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "Floyd-Warshall 求所有點對最短路，再統計每個城市距離 <= threshold 的鄰居數。",
+      "節點數 <= 100，Floyd O(n³) = 10^6 完全可行。"
+    ],
+    "similar_problems": [
+      "sp-lc-743"
+    ]
+  },
+  {
+    "id": "sp-lc-2642",
+    "title": "設計可以求最短路徑的圖類",
+    "source": "leetcode",
+    "source_id": "design-graph-with-shortest-path-calculator",
+    "rating": 1800,
+    "solve_count": 140000,
+    "tags": [
+      "Dijkstra",
+      "動態加邊"
+    ],
+    "topic_id": "shortest-path",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "每次 shortestPath 查詢都跑一次 Dijkstra（因為圖是動態變化的）。",
+      "addEdge 直接加入鄰接表即可。"
+    ],
+    "similar_problems": [
+      "sp-lc-743",
+      "graph-003"
+    ]
+  },
+  {
+    "id": "sp-lc-2699",
+    "title": "修改圖中的邊權",
+    "source": "leetcode",
+    "source_id": "modify-edge-weights",
+    "rating": 2300,
+    "solve_count": 30000,
+    "tags": [
+      "Dijkstra",
+      "差分約束",
+      "構造"
+    ],
+    "topic_id": "shortest-path",
+    "problem_type": "insight_transfer",
+    "tier": "challenge",
+    "strategy_hints": [
+      "先跑一次忽略可修改邊的 Dijkstra，得到不考慮修改時的最短路。",
+      "再按 Dijkstra 的訪問順序逐個設定可修改邊的值，使最終最短路恰好等於 target。"
+    ],
+    "insight_note": "此題需要理解 Dijkstra 的執行過程：沿 Dijkstra 樹逐條設定邊權，確保每條路徑的貢獻恰好達到 target。",
+    "similar_problems": [
+      "sp-lc-743",
+      "sp-lc-787"
+    ]
   }
 ]
