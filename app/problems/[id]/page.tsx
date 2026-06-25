@@ -7,8 +7,9 @@ export function generateStaticParams() {
   return problems.map((problem) => ({ id: problem.id }));
 }
 
-export default function ProblemPage({ params }: { params: { id: string } }) {
-  const problem = problemById.get(params.id);
+export default async function ProblemPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const problem = problemById.get(id);
 
   if (!problem) {
     notFound();

@@ -7,8 +7,9 @@ export function generateStaticParams() {
   return topics.map((topic) => ({ slug: topic.slug }));
 }
 
-export default function TopicPage({ params }: { params: { slug: string } }) {
-  const topic = getTopicBySlug(params.slug);
+export default async function TopicPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const topic = getTopicBySlug(slug);
 
   if (!topic) {
     notFound();
