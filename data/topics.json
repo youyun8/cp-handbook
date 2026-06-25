@@ -39,7 +39,7 @@
         "url": "https://cp-algorithms.com/num_methods/ternary_search.html"
       }
     ],
-    "template_code": "int lower_bound_custom(const vector<int>& a, int target) {\n    int left = 0, right = (int)a.size(); // Search in [left, right)\n    while (left < right) {\n        int mid = left + (right - left) / 2; // Avoid overflow\n        if (a[mid] >= target) {\n            right = mid; // mid can still be the first valid index\n        } else {\n            left = mid + 1; // mid is invalid, remove it\n        }\n    }\n    return left; // First index with a[i] >= target\n}\n\nlong long binary_search_answer(long long low, long long high) {\n    while (low < high) {\n        long long mid = low + (high - low) / 2; // Candidate answer\n        if (check(mid)) {\n            high = mid; // Feasible, try a smaller answer\n        } else {\n            low = mid + 1; // Infeasible, need a larger answer\n        }\n    }\n    return low; // Minimum feasible answer\n}",
+    "template_code": "int lowerBoundCustom(const vector<int>& a, int target) {\n    int left = 0, right = (int)a.size();  // Search in [left, right)\n    while (left < right) {\n        int mid = left + (right - left) / 2;  // Avoid overflow\n        if (a[mid] >= target) {\n            right = mid;  // mid can still be the first valid index\n        } else {\n            left = mid + 1;  // mid is invalid, remove it\n        }\n    }\n    return left;  // First index with a[i] >= target\n}\n\nlong long binarySearchAnswer(long long low, long long high) {\n    while (low < high) {\n        long long mid = low + (high - low) / 2;  // Candidate answer\n        if (check(mid)) {\n            high = mid;  // Feasible, try a smaller answer\n        } else {\n            low = mid + 1;  // Infeasible, need a larger answer\n        }\n    }\n    return low;  // Minimum feasible answer\n}",
     "supplemental_patterns": [
       {
         "name": "lower_bound",
@@ -83,15 +83,15 @@
     "deep_dive": [
       {
         "title": "建圖常見模式（影響 BFS／DFS 寫法）",
-        "body": "建圖方式直接決定怎麼枚舉鄰居，常見有三種建模：\n\n**1. 網格圖 → 方向陣列**\n把每格 `(r, c)` 當節點，用方向陣列枚舉鄰格：\n```cpp\nint dr[4] = {-1, 1, 0, 0};\nint dc[4] = {0, 0, -1, 1};\nfor (int k = 0; k < 4; ++k) {\n    int nr = r + dr[k], nc = c + dc[k];\n    if (nr < 0 || nr >= R || nc < 0 || nc >= C) continue; // 越界\n    if (grid[nr][nc] == '#') continue;                    // 障礙\n    // 將 (nr, nc) 入隊\n}\n```\n逐行：`dr/dc` 定義上下左右（八方向再加四組對角）；先檢查越界、再檢查是否可走，最後才入隊。\n\n**2. 隱式圖（如單詞接龍）→ 枚舉鄰居 + 雜湊判重**\n節點不顯式存在，鄰居由規則生成（改一個字母）。用 `unordered_map/unordered_set` 把字串映射成是否已訪問，邊在枚舉時即時產生。\n\n**3. 狀態圖（如走迷宮帶鑰匙）→ 狀態壓縮**\n節點 = `(位置, 已持有鑰匙的 bitmask)`。同一格子在不同鑰匙狀態下是**不同節點**，visited 要開成 `visited[r][c][1 << keys]`，否則會誤判已訪問而漏解。"
+        "body": "建圖方式直接決定怎麼枚舉鄰居，常見有三種建模：\n\n**1. 網格圖 → 方向陣列**\n把每格 `(r, c)` 當節點，用方向陣列枚舉鄰格：\n```cpp\nint dr[4] = {-1, 1, 0, 0};\nint dc[4] = {0, 0, -1, 1};\nfor (int k = 0; k < 4; ++k) {\n    int nr = r + dr[k], nc = c + dc[k];\n    if (nr < 0 || nr >= R || nc < 0 || nc >= C)\n        continue;  // 越界\n    if (grid[nr][nc] == '#')\n        continue;  // 障礙\n    // 將 (nr, nc) 入隊\n}\n```\n逐行：`dr/dc` 定義上下左右（八方向再加四組對角）；先檢查越界、再檢查是否可走，最後才入隊。\n\n**2. 隱式圖（如單詞接龍）→ 枚舉鄰居 + 雜湊判重**\n節點不顯式存在，鄰居由規則生成（改一個字母）。用 `unordered_map/unordered_set` 把字串映射成是否已訪問，邊在枚舉時即時產生。\n\n**3. 狀態圖（如走迷宮帶鑰匙）→ 狀態壓縮**\n節點 = `(位置, 已持有鑰匙的 bitmask)`。同一格子在不同鑰匙狀態下是**不同節點**，visited 要開成 `visited[r][c][1 << keys]`，否則會誤判已訪問而漏解。"
       },
       {
         "title": "DFS 邊分類與橋和割點",
-        "body": "DFS 樹上定義 `disc[v]`（首次訪問時間）和 `low[v]`（v 子樹能回溯到的最早祖先時間）。\n\n**橋（Bridge）**：邊 (u,v) 是橋，若 `low[v] > disc[u]`，即 v 的子樹無法繞回 u 之前。\n\n**割點（Articulation Point）**：節點 u 是割點，若存在子節點 v 使得 `low[v] >= disc[u]`（根節點需有 ≥ 2 個子樹）。\n\n```cpp\nvoid dfs_bridge(int u, int parent, vector<bool>& visited,\n                vector<int>& disc, vector<int>& low, int& timer,\n                vector<pair<int,int>>& bridges) {\n    visited[u] = true;\n    disc[u] = low[u] = timer++;\n    for (int v : graph[u]) {\n        if (!visited[v]) {\n            dfs_bridge(v, u, visited, disc, low, timer, bridges);\n            low[u] = min(low[u], low[v]);\n            if (low[v] > disc[u]) bridges.push_back({u, v}); // Bridge found\n        } else if (v != parent) {\n            low[u] = min(low[u], disc[v]); // Back edge\n        }\n    }\n}\n```"
+        "body": "DFS 樹上定義 `disc[v]`（首次訪問時間）和 `low[v]`（v 子樹能回溯到的最早祖先時間）。\n\n**橋（Bridge）**：邊 (u,v) 是橋，若 `low[v] > disc[u]`，即 v 的子樹無法繞回 u 之前。\n\n**割點（Articulation Point）**：節點 u 是割點，若存在子節點 v 使得 `low[v] >= disc[u]`（根節點需有 ≥ 2 個子樹）。\n\n```cpp\nvoid dfsBridge(int u, int parent, vector<bool>& visited, vector<int>& disc, vector<int>& low,\n               int& timer, vector<pair<int, int>>& bridges) {\n    visited[u] = true;\n    disc[u] = low[u] = timer++;\n    for (int v : graph[u]) {\n        if (!visited[v]) {\n            dfsBridge(v, u, visited, disc, low, timer, bridges);\n            low[u] = min(low[u], low[v]);\n            if (low[v] > disc[u])\n                bridges.push_back({u, v});  // Bridge found\n        } else if (v != parent) {\n            low[u] = min(low[u], disc[v]);  // Back edge\n        }\n    }\n}\n```"
       },
       {
         "title": "強連通分量（Tarjan SCC）",
-        "body": "Tarjan 算法在一次 DFS 中找出所有 SCC，利用 `low` 值和 stack 追蹤當前路徑：\n\n```cpp\nvoid tarjan(int u, vector<int>& disc, vector<int>& low,\n            stack<int>& st, vector<bool>& on_stack,\n            int& timer, vector<vector<int>>& sccs) {\n    disc[u] = low[u] = timer++;\n    st.push(u); on_stack[u] = true;\n    for (int v : graph[u]) {\n        if (disc[v] == -1) { // Unvisited\n            tarjan(v, disc, low, st, on_stack, timer, sccs);\n            low[u] = min(low[u], low[v]);\n        } else if (on_stack[v]) {\n            low[u] = min(low[u], disc[v]); // Back edge within SCC\n        }\n    }\n    if (low[u] == disc[u]) { // Root of SCC\n        vector<int> scc;\n        while (true) { int v = st.top(); st.pop(); on_stack[v] = false; scc.push_back(v); if (v == u) break; }\n        sccs.push_back(scc);\n    }\n}\n```\n⚠️ low 的更新只考慮 back edge（on_stack 中的節點），不更新 cross edge，這是 Tarjan 與 Kosaraju 的關鍵差異。"
+        "body": "Tarjan 算法在一次 DFS 中找出所有 SCC，利用 `low` 值和 stack 追蹤當前路徑：\n\n```cpp\nvoid tarjan(int u, vector<int>& disc, vector<int>& low, stack<int>& st, vector<bool>& on_stack,\n            int& timer, vector<vector<int>>& sccs) {\n    disc[u] = low[u] = timer++;\n    st.push(u);\n    on_stack[u] = true;\n    for (int v : graph[u]) {\n        if (disc[v] == -1) {  // Unvisited\n            tarjan(v, disc, low, st, on_stack, timer, sccs);\n            low[u] = min(low[u], low[v]);\n        } else if (on_stack[v]) {\n            low[u] = min(low[u], disc[v]);  // Back edge within SCC\n        }\n    }\n    if (low[u] == disc[u]) {  // Root of SCC\n        vector<int> scc;\n        while (true) {\n            int v = st.top();\n            st.pop();\n            on_stack[v] = false;\n            scc.push_back(v);\n            if (v == u)\n                break;\n        }\n        sccs.push_back(scc);\n    }\n}\n```\n⚠️ low 的更新只考慮 back edge（on_stack 中的節點），不更新 cross edge，這是 Tarjan 與 Kosaraju 的關鍵差異。"
       }
     ],
     "reference_links": [
@@ -128,7 +128,7 @@
         "url": "https://oi-wiki.org/graph/shortest-path/"
       }
     ],
-    "template_code": "vector<int> bfs(int start, const vector<vector<int>>& graph) {\n    vector<int> dist(graph.size(), -1); // -1 means unvisited\n    queue<int> q;\n    dist[start] = 0; // Source distance is zero\n    q.push(start);\n    while (!q.empty()) {\n        int u = q.front();\n        q.pop();\n        for (int v : graph[u]) {\n            if (dist[v] != -1) continue; // Each node enters queue once\n            dist[v] = dist[u] + 1; // BFS layer increases by one\n            q.push(v);\n        }\n    }\n    return dist;\n}\n\nvoid dfs(int u, const vector<vector<int>>& graph, vector<int>& seen) {\n    seen[u] = 1; // Mark before visiting neighbors\n    for (int v : graph[u]) {\n        if (!seen[v]) dfs(v, graph, seen);\n    }\n}",
+    "template_code": "vector<int> bfs(int start, const vector<vector<int>>& graph) {\n    vector<int> dist(graph.size(), -1);  // -1 means unvisited\n    queue<int> q;\n    dist[start] = 0;  // Source distance is zero\n    q.push(start);\n    while (!q.empty()) {\n        int u = q.front();\n        q.pop();\n        for (int v : graph[u]) {\n            if (dist[v] != -1)\n                continue;           // Each node enters queue once\n            dist[v] = dist[u] + 1;  // BFS layer increases by one\n            q.push(v);\n        }\n    }\n    return dist;\n}\n\nvoid dfs(int u, const vector<vector<int>>& graph, vector<int>& seen) {\n    seen[u] = 1;  // Mark before visiting neighbors\n    for (int v : graph[u]) {\n        if (!seen[v])\n            dfs(v, graph, seen);\n    }\n}",
     "supplemental_patterns": [
       {
         "name": "0-1 BFS",
@@ -172,7 +172,7 @@
     "deep_dive": [
       {
         "title": "差分陣列模板",
-        "body": "差分把『多次區間加值』轉成端點上的兩次單點修改，最後一次前綴和還原：\n```cpp\n// 區間 [l, r] 同加 val，下標從 1 開始\ndiff[l]     += val;   // 從 l 起多了 val\ndiff[r + 1] -= val;   // 過了 r 之後抵銷\n// 還原：前綴和即為每個位置的最終值\nfor (int i = 1; i <= n; ++i)\n    a[i] = a[i - 1] + diff[i];\n```\n逐行：`diff[l] += val` 標記從 l 開始增加；`diff[r + 1] -= val` 在 r 之後把增量抵銷；最後對 `diff` 求前綴和，`a[i]` 就是所有操作疊加後的值。\n\n**適用前提**：下標從 1 開始（避免 `r + 1` 為 0）；`r + 1` 不可超界（陣列開到 `n + 2`）；只支援『先全部修改、再查詢』的靜態場景，過程中要查詢就得改用線段樹／樹狀陣列。"
+        "body": "差分把『多次區間加值』轉成端點上的兩次單點修改，最後一次前綴和還原：\n```cpp\n// 區間 [l, r] 同加 val，下標從 1 開始\ndiff[l] += val;      // 從 l 起多了 val\ndiff[r + 1] -= val;  // 過了 r 之後抵銷\n// 還原：前綴和即為每個位置的最終值\nfor (int i = 1; i <= n; ++i)\n    a[i] = a[i - 1] + diff[i];\n```\n逐行：`diff[l] += val` 標記從 l 開始增加；`diff[r + 1] -= val` 在 r 之後把增量抵銷；最後對 `diff` 求前綴和，`a[i]` 就是所有操作疊加後的值。\n\n**適用前提**：下標從 1 開始（避免 `r + 1` 為 0）；`r + 1` 不可超界（陣列開到 `n + 2`）；只支援『先全部修改、再查詢』的靜態場景，過程中要查詢就得改用線段樹／樹狀陣列。"
       }
     ],
     "reference_links": [
@@ -189,7 +189,7 @@
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/sort.go"
       }
     ],
-    "template_code": "vector<pair<int, int>> merge_intervals(vector<pair<int, int>> intervals) {\n    sort(intervals.begin(), intervals.end()); // Sort by left endpoint first\n    vector<pair<int, int>> merged;\n    for (auto [l, r] : intervals) {\n        if (merged.empty() || merged.back().second < l) {\n            merged.push_back({l, r}); // No overlap with previous interval\n        } else {\n            merged.back().second = max(merged.back().second, r); // Extend coverage\n        }\n    }\n    return merged;\n}\n\nvector<long long> difference_apply(int n, vector<array<int, 3>> ops) {\n    vector<long long> diff(n + 1);\n    for (auto [l, r, delta] : ops) {\n        diff[l] += delta; // Range starts gaining delta\n        if (r + 1 < n) diff[r + 1] -= delta; // Range stops after r\n    }\n    for (int i = 1; i < n; ++i) diff[i] += diff[i - 1]; // Prefix restores values\n    diff.pop_back();\n    return diff;\n}",
+    "template_code": "vector<pair<int, int>> mergeIntervals(vector<pair<int, int>> intervals) {\n    sort(intervals.begin(), intervals.end());  // Sort by left endpoint first\n    vector<pair<int, int>> merged;\n    for (auto [l, r] : intervals) {\n        if (merged.empty() || merged.back().second < l) {\n            merged.push_back({l, r});  // No overlap with previous interval\n        } else {\n            merged.back().second = max(merged.back().second, r);  // Extend coverage\n        }\n    }\n    return merged;\n}\n\nvector<long long> differenceApply(int n, vector<array<int, 3>> ops) {\n    vector<long long> diff(n + 1);\n    for (auto [l, r, delta] : ops) {\n        diff[l] += delta;  // Range starts gaining delta\n        if (r + 1 < n)\n            diff[r + 1] -= delta;  // Range stops after r\n    }\n    for (int i = 1; i < n; ++i)\n        diff[i] += diff[i - 1];  // Prefix restores values\n    diff.pop_back();\n    return diff;\n}",
     "supplemental_patterns": [
       {
         "name": "區間合併",
@@ -229,7 +229,7 @@
     "deep_dive": [
       {
         "title": "懶刪除（lazy deletion）怎麼運作",
-        "body": "`priority_queue` 不支援刪除任意元素，也沒有 `decrease-key`。當一個節點找到更短距離時，舊的 `(舊距離, 節點)` 仍留在堆裡，做法是**不刪它，等它浮到堆頂時再丟棄**：\n```cpp\nauto [d, u] = pq.top(); pq.pop();\nif (d != dist[u]) continue; // 過期條目，直接略過\n```\n逐行：取出堆頂後，比對這筆距離 `d` 是否等於目前記錄的 `dist[u]`；若不相等代表後來有更短路徑、這筆已過期，跳過即可。如此堆裡可能有重複節點，但每條邊最多推入一次，總量仍受控，複雜度維持 O((V + E) log V)。"
+        "body": "`priority_queue` 不支援刪除任意元素，也沒有 `decrease-key`。當一個節點找到更短距離時，舊的 `(舊距離, 節點)` 仍留在堆裡，做法是**不刪它，等它浮到堆頂時再丟棄**：\n```cpp\nauto [d, u] = pq.top();\npq.pop();\nif (d != dist[u])\n    continue;  // 過期條目，直接略過\n```\n逐行：取出堆頂後，比對這筆距離 `d` 是否等於目前記錄的 `dist[u]`；若不相等代表後來有更短路徑、這筆已過期，跳過即可。如此堆裡可能有重複節點，但每條邊最多推入一次，總量仍受控，複雜度維持 O((V + E) log V)。"
       }
     ],
     "reference_links": [
@@ -246,7 +246,7 @@
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/heap.go"
       }
     ],
-    "template_code": "priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;\nvector<int> dist(n, INF);\ndist[source] = 0;\npq.push({0, source}); // Heap stores the best known candidate\nwhile (!pq.empty()) {\n    auto [d, u] = pq.top();\n    pq.pop();\n    if (d != dist[u]) continue; // Lazy deletion for outdated entries\n    for (auto [v, w] : graph[u]) {\n        if (dist[v] > d + w) {\n            dist[v] = d + w; // Found a better path\n            pq.push({dist[v], v});\n        }\n    }\n}",
+    "template_code": "priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;\nvector<int> dist(n, kInf);\ndist[source] = 0;\npq.push({0, source});  // Heap stores the best known candidate\nwhile (!pq.empty()) {\n    auto [d, u] = pq.top();\n    pq.pop();\n    if (d != dist[u])\n        continue;  // Lazy deletion for outdated entries\n    for (auto [v, w] : graph[u]) {\n        if (dist[v] > d + w) {\n            dist[v] = d + w;  // Found a better path\n            pq.push({dist[v], v});\n        }\n    }\n}",
     "supplemental_patterns": [
       {
         "name": "多路合併",
@@ -282,7 +282,7 @@
       },
       {
         "title": "LIS 的兩種視角",
-        "body": "**O(n²) DP**：`dp[i]` = 以 `a[i]` 結尾的最長遞增子序列長度，轉移 `dp[i] = max(dp[j]+1)` for `j < i, a[j] < a[i]`。\n\n**O(n log n) Patience Sort**：維護 `tails` 陣列，`tails[k]` 是長度為 k+1 的 LIS 中最小的結尾元素。對每個 `a[i]`，用 `lower_bound` 在 `tails` 上找第一個 ≥ a[i] 的位置並替換；找不到則追加。`tails` 的長度即為 LIS 長度。\n\n```cpp\nint lis(const vector<int>& a) {\n    vector<int> tails;\n    for (int x : a) {\n        auto it = lower_bound(tails.begin(), tails.end(), x); // Strict LIS\n        if (it == tails.end()) tails.push_back(x);\n        else *it = x;\n    }\n    return tails.size();\n}\n```\n⚠️ 嚴格遞增用 lower_bound；非嚴格遞增用 upper_bound。"
+        "body": "**O(n²) DP**：`dp[i]` = 以 `a[i]` 結尾的最長遞增子序列長度，轉移 `dp[i] = max(dp[j]+1)` for `j < i, a[j] < a[i]`。\n\n**O(n log n) Patience Sort**：維護 `tails` 陣列，`tails[k]` 是長度為 k+1 的 LIS 中最小的結尾元素。對每個 `a[i]`，用 `lower_bound` 在 `tails` 上找第一個 ≥ a[i] 的位置並替換；找不到則追加。`tails` 的長度即為 LIS 長度。\n\n```cpp\nint lis(const vector<int>& a) {\n    vector<int> tails;\n    for (int x : a) {\n        auto it = lower_bound(tails.begin(), tails.end(), x);  // Strict LIS\n        if (it == tails.end())\n            tails.push_back(x);\n        else\n            *it = x;\n    }\n    return tails.size();\n}\n```\n⚠️ 嚴格遞增用 lower_bound；非嚴格遞增用 upper_bound。"
       }
     ],
     "reference_links": [
@@ -299,7 +299,7 @@
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/dp.go"
       }
     ],
-    "template_code": "int knapsack_01(const vector<int>& weight, const vector<int>& value, int cap) {\n    vector<int> dp(cap + 1, 0); // dp[c] is best value with capacity c\n    for (int i = 0; i < (int)weight.size(); ++i) {\n        for (int c = cap; c >= weight[i]; --c) { // Reverse order prevents reusing item i\n            dp[c] = max(dp[c], dp[c - weight[i]] + value[i]);\n        }\n    }\n    return dp[cap];\n}\n\nint lis_length(const vector<int>& a) {\n    vector<int> tail; // tail[len - 1] is the minimum ending value\n    for (int x : a) {\n        auto it = lower_bound(tail.begin(), tail.end(), x);\n        if (it == tail.end()) tail.push_back(x);\n        else *it = x;\n    }\n    return (int)tail.size();\n}",
+    "template_code": "int knapsack01(const vector<int>& weight, const vector<int>& value, int cap) {\n    vector<int> dp(cap + 1, 0);  // dp[c] is best value with capacity c\n    for (int i = 0; i < (int)weight.size(); ++i) {\n        for (int c = cap; c >= weight[i]; --c) {  // Reverse order prevents reusing item i\n            dp[c] = max(dp[c], dp[c - weight[i]] + value[i]);\n        }\n    }\n    return dp[cap];\n}\n\nint lisLength(const vector<int>& a) {\n    vector<int> tail;  // tail[len - 1] is the minimum ending value\n    for (int x : a) {\n        auto it = lower_bound(tail.begin(), tail.end(), x);\n        if (it == tail.end())\n            tail.push_back(x);\n        else\n            *it = x;\n    }\n    return (int)tail.size();\n}",
     "supplemental_patterns": [
       {
         "name": "最長遞增子序列（LIS）",
@@ -343,7 +343,7 @@
     "deep_dive": [
       {
         "title": "同向雙指針（滑動視窗）統一模板",
-        "body": "同向雙指針的通用骨架：\n```cpp\nint left = 0;\nfor (int right = 0; right < n; ++right) {\n    add(a[right]);                  // 把 right 元素加入視窗\n    while (window_invalid()) {       // 視窗違反條件就收縮\n        remove(a[left]);            // 把 left 元素移出視窗\n        ++left;\n    }\n    ans = max(ans, right - left + 1); // 此時 [left, right] 合法\n}\n```\n逐行：每輪先把 `right` 納入窗口並更新統計；只要窗口非法就從左端移出元素、`left++`，直到重新合法；迴圈結束時 `[left, right]` 是以 right 為右界的最佳窗口，據此更新答案。換成『最短窗口』時，把更新答案的位置移進 while 迴圈內即可。"
+        "body": "同向雙指針的通用骨架：\n```cpp\nint left = 0;\nfor (int right = 0; right < n; ++right) {\n    add(a[right]);              // 把 right 元素加入視窗\n    while (window_invalid()) {  // 視窗違反條件就收縮\n        remove(a[left]);        // 把 left 元素移出視窗\n        ++left;\n    }\n    ans = max(ans, right - left + 1);  // 此時 [left, right] 合法\n}\n```\n逐行：每輪先把 `right` 納入窗口並更新統計；只要窗口非法就從左端移出元素、`left++`，直到重新合法；迴圈結束時 `[left, right]` 是以 right 為右界的最佳窗口，據此更新答案。換成『最短窗口』時，把更新答案的位置移進 while 迴圈內即可。"
       }
     ],
     "reference_links": [
@@ -360,7 +360,7 @@
         "url": "https://www.bilibili.com/video/BV1hd4y1r7Gq/"
       }
     ],
-    "template_code": "int longest_window(const vector<int>& a, int limit) {\n    int left = 0, sum = 0, ans = 0;\n    for (int right = 0; right < (int)a.size(); ++right) {\n        sum += a[right]; // Expand window by including right\n        while (sum > limit) {\n            sum -= a[left]; // Shrink until the invariant is restored\n            ++left;\n        }\n        ans = max(ans, right - left + 1); // Window [left, right] is valid\n    }\n    return ans;\n}",
+    "template_code": "int longestWindow(const vector<int>& a, int limit) {\n    int left = 0, sum = 0, ans = 0;\n    for (int right = 0; right < (int)a.size(); ++right) {\n        sum += a[right];  // Expand window by including right\n        while (sum > limit) {\n            sum -= a[left];  // Shrink until the invariant is restored\n            ++left;\n        }\n        ans = max(ans, right - left + 1);  // Window [left, right] is valid\n    }\n    return ans;\n}",
     "supplemental_patterns": [
       {
         "name": "對向雙指針",
@@ -392,7 +392,7 @@
     "deep_dive": [
       {
         "title": "帶權並查集：維護到根的偏移",
-        "body": "帶權並查集在父指標上額外記錄『到父節點的權值』，`find` 時把沿途權值累加成『到根的偏移』，可解食物鏈、差值等式類問題：\n```cpp\nint find(int x) {\n    if (parent[x] == x) return x;\n    int root = find(parent[x]);\n    rel[x] += rel[parent[x]]; // 把到父的偏移累加成到根的偏移\n    parent[x] = root;          // 路徑壓縮\n    return root;\n}\n```\n逐行：先遞迴求父的根（此時 `rel[parent[x]]` 已是父到根的偏移）；把 `rel[x]` 累加上父到根的值，得到 x 到根的偏移；再把 x 直接掛到根。`union(a, b, w)`（表示 b − a = w）時，先 find 兩端的根，再依 `rel[a]`、`rel[b]`、`w` 推出兩根之間應設的權值。"
+        "body": "帶權並查集在父指標上額外記錄『到父節點的權值』，`find` 時把沿途權值累加成『到根的偏移』，可解食物鏈、差值等式類問題：\n```cpp\nint findRoot(int x) {\n    if (parent[x] == x)\n        return x;\n    int root = findRoot(parent[x]);\n    rel[x] += rel[parent[x]];  // 把到父的偏移累加成到根的偏移\n    parent[x] = root;          // 路徑壓縮\n    return root;\n}\n```\n逐行：先遞迴求父的根（此時 `rel[parent[x]]` 已是父到根的偏移）；把 `rel[x]` 累加上父到根的值，得到 x 到根的偏移；再把 x 直接掛到根。`union(a, b, w)`（表示 b − a = w）時，先 find 兩端的根，再依 `rel[a]`、`rel[b]`、`w` 推出兩根之間應設的權值。"
       }
     ],
     "reference_links": [
@@ -409,7 +409,7 @@
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/union_find.go"
       }
     ],
-    "template_code": "struct DSU {\n    vector<int> parent, size;\n    DSU(int n) : parent(n), size(n, 1) {\n        iota(parent.begin(), parent.end(), 0); // Every node starts as its own root\n    }\n    int find(int x) {\n        if (parent[x] == x) return x;\n        return parent[x] = find(parent[x]); // Path compression\n    }\n    bool unite(int a, int b) {\n        a = find(a);\n        b = find(b);\n        if (a == b) return false;\n        if (size[a] < size[b]) swap(a, b); // Attach smaller tree to larger tree\n        parent[b] = a;\n        size[a] += size[b];\n        return true;\n    }\n};",
+    "template_code": "struct Dsu {\n    vector<int> parent, size;\n    Dsu(int n) : parent(n), size(n, 1) {\n        iota(parent.begin(), parent.end(), 0);  // Every node starts as its own root\n    }\n    int findRoot(int x) {\n        if (parent[x] == x)\n            return x;\n        return parent[x] = findRoot(parent[x]);  // Path compression\n    }\n    bool unite(int a, int b) {\n        a = findRoot(a);\n        b = findRoot(b);\n        if (a == b)\n            return false;\n        if (size[a] < size[b])\n            swap(a, b);  // Attach smaller tree to larger tree\n        parent[b] = a;\n        size[a] += size[b];\n        return true;\n    }\n};",
     "supplemental_patterns": [
       {
         "name": "帶權並查集",
@@ -441,7 +441,7 @@
     "deep_dive": [
       {
         "title": "LCA 查詢的兩階段",
-        "body": "LCA 查詢分兩階段，都靠二進位分解：\n```cpp\nint lca(int u, int v) {\n    if (depth[u] < depth[v]) swap(u, v);      // 讓 u 較深\n    int diff = depth[u] - depth[v];\n    for (int k = 0; k < LOG; ++k)              // 階段一：把 u 提到與 v 同深度\n        if (diff >> k & 1) u = up[u][k];\n    if (u == v) return u;                       // v 是 u 的祖先\n    for (int k = LOG - 1; k >= 0; --k)          // 階段二：高位到低位同步上跳\n        if (up[u][k] != up[v][k]) { u = up[u][k]; v = up[v][k]; }\n    return up[u][0];                            // 再跳一步即 LCA\n}\n```\n逐行：先確保 u 較深，用 `diff` 的二進位把 u 上提對齊深度；若對齊後相等，v 本身就是 LCA；否則**從高位往低位**同步跳——只在『跳了之後兩者仍不相同』時才跳，保證停在 LCA 正下方，最後 `up[u][0]` 就是 LCA。階段二必須由高位往低位，才能逼近而不越過。"
+        "body": "LCA 查詢分兩階段，都靠二進位分解：\n```cpp\nint lca(int u, int v) {\n    if (depth[u] < depth[v])\n        swap(u, v);  // 讓 u 較深\n    int diff = depth[u] - depth[v];\n    for (int k = 0; k < kLog; ++k)  // 階段一：把 u 提到與 v 同深度\n        if (diff >> k & 1)\n            u = up[u][k];\n    if (u == v)\n        return u;                        // v 是 u 的祖先\n    for (int k = kLog - 1; k >= 0; --k)  // 階段二：高位到低位同步上跳\n        if (up[u][k] != up[v][k]) {\n            u = up[u][k];\n            v = up[v][k];\n        }\n    return up[u][0];  // 再跳一步即 LCA\n}\n```\n逐行：先確保 u 較深，用 `diff` 的二進位把 u 上提對齊深度；若對齊後相等，v 本身就是 LCA；否則**從高位往低位**同步跳——只在『跳了之後兩者仍不相同』時才跳，保證停在 LCA 正下方，最後 `up[u][0]` 就是 LCA。階段二必須由高位往低位，才能逼近而不越過。"
       },
       {
         "title": "四種 LCA 算法比較",
@@ -462,7 +462,7 @@
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/graph_tree.go"
       }
     ],
-    "template_code": "const int LOG = 20;\nvector<array<int, LOG>> up;\nvector<int> depth;\n\nvoid dfs_lift(int u, int p, const vector<vector<int>>& tree) {\n    up[u][0] = p; // Immediate parent\n    for (int k = 1; k < LOG; ++k) {\n        up[u][k] = up[up[u][k - 1]][k - 1]; // Jump twice by 2^(k-1)\n    }\n    for (int v : tree[u]) {\n        if (v == p) continue;\n        depth[v] = depth[u] + 1;\n        dfs_lift(v, u, tree);\n    }\n}\n\nint kth_ancestor(int u, int k) {\n    for (int bit = 0; bit < LOG; ++bit) {\n        if (k >> bit & 1) u = up[u][bit]; // Apply binary decomposition\n    }\n    return u;\n}",
+    "template_code": "const int kLog = 20;\nvector<array<int, kLog>> up;\nvector<int> depth;\n\nvoid dfsLift(int u, int p, const vector<vector<int>>& tree) {\n    up[u][0] = p;  // Immediate parent\n    for (int k = 1; k < kLog; ++k) {\n        up[u][k] = up[up[u][k - 1]][k - 1];  // Jump twice by 2^(k-1)\n    }\n    for (int v : tree[u]) {\n        if (v == p)\n            continue;\n        depth[v] = depth[u] + 1;\n        dfsLift(v, u, tree);\n    }\n}\n\nint kthAncestor(int u, int k) {\n    for (int bit = 0; bit < kLog; ++bit) {\n        if (k >> bit & 1)\n            u = up[u][bit];  // Apply binary decomposition\n    }\n    return u;\n}",
     "supplemental_patterns": [
       {
         "name": "LCA 求法比較",
@@ -494,7 +494,7 @@
     "deep_dive": [
       {
         "title": "入棧記錄、出棧計算：執行順序",
-        "body": "單調棧題的關鍵在『何時記錄、何時結算』。以柱狀圖最大矩形為例，棧內保持下標對應高度遞增：\n```cpp\nstack<int> st;                 // 存下標，對應高度遞增\nfor (int i = 0; i <= n; ++i) {\n    int h = (i == n) ? 0 : height[i];   // 末尾補 0 強制清空棧\n    while (!st.empty() && height[st.top()] > h) {\n        int top = st.top(); st.pop();\n        int left = st.empty() ? -1 : st.top();         // 左邊界：新棧頂\n        ans = max(ans, height[top] * (i - left - 1));  // 右邊界即 i\n    }\n    st.push(i);\n}\n```\n逐行：遇到比棧頂矮的 `h`，代表棧頂柱子的『右邊第一個更矮』就是 i，於是**出棧時結算**——以 `height[top]` 為高、寬度 `(i - left - 1)`（左邊界是出棧後的新棧頂）。末尾補一個高度 0 確保所有柱子都被結算。記住順序：**入棧時只記下標，面積一律在出棧時計算**。"
+        "body": "單調棧題的關鍵在『何時記錄、何時結算』。以柱狀圖最大矩形為例，棧內保持下標對應高度遞增：\n```cpp\nstack<int> st;  // 存下標，對應高度遞增\nfor (int i = 0; i <= n; ++i) {\n    int h = (i == n) ? 0 : height[i];  // 末尾補 0 強制清空棧\n    while (!st.empty() && height[st.top()] > h) {\n        int top = st.top();\n        st.pop();\n        int left = st.empty() ? -1 : st.top();         // 左邊界：新棧頂\n        ans = max(ans, height[top] * (i - left - 1));  // 右邊界即 i\n    }\n    st.push(i);\n}\n```\n逐行：遇到比棧頂矮的 `h`，代表棧頂柱子的『右邊第一個更矮』就是 i，於是**出棧時結算**——以 `height[top]` 為高、寬度 `(i - left - 1)`（左邊界是出棧後的新棧頂）。末尾補一個高度 0 確保所有柱子都被結算。記住順序：**入棧時只記下標，面積一律在出棧時計算**。"
       }
     ],
     "reference_links": [
@@ -511,7 +511,7 @@
         "url": "https://www.bilibili.com/video/BV1VN411J7S7/"
       }
     ],
-    "template_code": "vector<int> next_greater(const vector<int>& a) {\n    vector<int> ans(a.size(), -1), st;\n    for (int i = 0; i < (int)a.size(); ++i) {\n        while (!st.empty() && a[st.back()] < a[i]) {\n            ans[st.back()] = i; // Current i is the first greater element\n            st.pop_back();\n        }\n        st.push_back(i); // Indices in stack have decreasing values\n    }\n    return ans;\n}\n\nvector<int> sliding_max(const vector<int>& a, int k) {\n    deque<int> dq;\n    vector<int> ans;\n    for (int i = 0; i < (int)a.size(); ++i) {\n        while (!dq.empty() && dq.front() <= i - k) dq.pop_front(); // Remove expired index\n        while (!dq.empty() && a[dq.back()] <= a[i]) dq.pop_back(); // Remove dominated values\n        dq.push_back(i);\n        if (i >= k - 1) ans.push_back(a[dq.front()]);\n    }\n    return ans;\n}",
+    "template_code": "vector<int> nextGreater(const vector<int>& a) {\n    vector<int> ans(a.size(), -1), st;\n    for (int i = 0; i < (int)a.size(); ++i) {\n        while (!st.empty() && a[st.back()] < a[i]) {\n            ans[st.back()] = i;  // Current i is the first greater element\n            st.pop_back();\n        }\n        st.push_back(i);  // Indices in stack have decreasing values\n    }\n    return ans;\n}\n\nvector<int> slidingMax(const vector<int>& a, int k) {\n    deque<int> dq;\n    vector<int> ans;\n    for (int i = 0; i < (int)a.size(); ++i) {\n        while (!dq.empty() && dq.front() <= i - k)\n            dq.pop_front();  // Remove expired index\n        while (!dq.empty() && a[dq.back()] <= a[i])\n            dq.pop_back();  // Remove dominated values\n        dq.push_back(i);\n        if (i >= k - 1)\n            ans.push_back(a[dq.front()]);\n    }\n    return ans;\n}",
     "supplemental_patterns": [
       {
         "name": "柱狀圖最大矩形",
@@ -543,7 +543,7 @@
     "deep_dive": [
       {
         "title": "懶標記（lazy propagation）為何需要下推",
-        "body": "區間修改若每次都遞迴改到葉子是 O(n)，懶標記的做法是『改到完全覆蓋的節點就停手、打個標記』，等之後真的要訪問其子節點時才把標記下推：\n```cpp\nvoid pushdown(int node, int len) {\n    if (lazy[node] == 0) return;\n    long long t = lazy[node];\n    lazy[2*node]   += t; sum[2*node]   += t * (len - len/2); // 左子\n    lazy[2*node+1] += t; sum[2*node+1] += t * (len/2);       // 右子\n    lazy[node] = 0;       // 標記已下放，清空\n}\n```\n逐行：若無待下推標記直接返回；否則把標記累加到左右子節點的 `lazy`，並依各自長度更新其 `sum`；最後清空本節點標記。**為何不能直接改完就算？** 若只更新當前節點的 `sum` 而不在進入子樹前下推，後續對子區間的查詢會讀到尚未套用本次修改的舊值——下推就是在『訪問子節點之前』補上這筆延遲更新。"
+        "body": "區間修改若每次都遞迴改到葉子是 O(n)，懶標記的做法是『改到完全覆蓋的節點就停手、打個標記』，等之後真的要訪問其子節點時才把標記下推：\n```cpp\nvoid pushdown(int node, int len) {\n    if (lazy[node] == 0)\n        return;\n    long long t = lazy[node];\n    lazy[2 * node] += t;\n    sum[2 * node] += t * (len - len / 2);  // 左子\n    lazy[2 * node + 1] += t;\n    sum[2 * node + 1] += t * (len / 2);  // 右子\n    lazy[node] = 0;                      // 標記已下放，清空\n}\n```\n逐行：若無待下推標記直接返回；否則把標記累加到左右子節點的 `lazy`，並依各自長度更新其 `sum`；最後清空本節點標記。**為何不能直接改完就算？** 若只更新當前節點的 `sum` 而不在進入子樹前下推，後續對子區間的查詢會讀到尚未套用本次修改的舊值——下推就是在『訪問子節點之前』補上這筆延遲更新。"
       }
     ],
     "reference_links": [
@@ -560,7 +560,7 @@
         "url": "https://cp-algorithms.com/data_structures/fenwick.html"
       }
     ],
-    "template_code": "struct Fenwick {\n    int n;\n    vector<long long> bit;\n    Fenwick(int n) : n(n), bit(n + 1, 0) {}\n    void add(int index, long long delta) {\n        for (++index; index <= n; index += index & -index) {\n            bit[index] += delta; // Update all ranges covering index\n        }\n    }\n    long long sum_prefix(int index) {\n        long long ans = 0;\n        for (++index; index > 0; index -= index & -index) {\n            ans += bit[index]; // Collect disjoint prefix blocks\n        }\n        return ans;\n    }\n    long long range_sum(int left, int right) {\n        return sum_prefix(right) - (left ? sum_prefix(left - 1) : 0);\n    }\n};",
+    "template_code": "struct Fenwick {\n    int n;\n    vector<long long> bit;\n    Fenwick(int n) : n(n), bit(n + 1, 0) {}\n    void add(int index, long long delta) {\n        for (++index; index <= n; index += index & -index) {\n            bit[index] += delta;  // Update all ranges covering index\n        }\n    }\n    long long sumPrefix(int index) {\n        long long ans = 0;\n        for (++index; index > 0; index -= index & -index) {\n            ans += bit[index];  // Collect disjoint prefix blocks\n        }\n        return ans;\n    }\n    long long rangeSum(int left, int right) {\n        return sumPrefix(right) - (left ? sumPrefix(left - 1) : 0);\n    }\n};",
     "supplemental_patterns": [
       {
         "name": "懶標記（lazy propagation）",
@@ -592,11 +592,11 @@
     "deep_dive": [
       {
         "title": "Dijkstra 實作與懶刪除",
-        "body": "```cpp\nvector<long long> dijkstra(int src, const vector<vector<pair<int,int>>>& graph) {\n    int n = graph.size();\n    vector<long long> dist(n, LLONG_MAX);\n    priority_queue<pair<long long,int>, vector<pair<long long,int>>, greater<>> pq;\n    dist[src] = 0;\n    pq.push({0, src});\n    while (!pq.empty()) {\n        auto [d, u] = pq.top(); pq.pop();\n        if (d > dist[u]) continue; // Lazy deletion: skip stale entries\n        for (auto [v, w] : graph[u]) {\n            if (dist[u] + w < dist[v]) {\n                dist[v] = dist[u] + w;\n                pq.push({dist[v], v});\n            }\n        }\n    }\n    return dist;\n}\n```"
+        "body": "```cpp\nvector<long long> dijkstra(int src, const vector<vector<pair<int, int>>>& graph) {\n    int n = graph.size();\n    vector<long long> dist(n, LLONG_MAX);\n    priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<>> pq;\n    dist[src] = 0;\n    pq.push({0, src});\n    while (!pq.empty()) {\n        auto [d, u] = pq.top();\n        pq.pop();\n        if (d > dist[u])\n            continue;  // Lazy deletion: skip stale entries\n        for (auto [v, w] : graph[u]) {\n            if (dist[u] + w < dist[v]) {\n                dist[v] = dist[u] + w;\n                pq.push({dist[v], v});\n            }\n        }\n    }\n    return dist;\n}\n```"
       },
       {
         "title": "Bellman-Ford 與負環偵測",
-        "body": "```cpp\n// Returns empty if negative cycle detected\nvector<long long> bellman_ford(int src, int n, const vector<tuple<int,int,int>>& edges) {\n    vector<long long> dist(n, LLONG_MAX);\n    dist[src] = 0;\n    for (int iter = 0; iter < n - 1; iter++) {\n        bool updated = false;\n        for (auto [u, v, w] : edges) {\n            if (dist[u] != LLONG_MAX && dist[u] + w < dist[v]) {\n                dist[v] = dist[u] + w;\n                updated = true;\n            }\n        }\n        if (!updated) break; // Early termination\n    }\n    // Check for negative cycle (n-th relaxation round)\n    for (auto [u, v, w] : edges)\n        if (dist[u] != LLONG_MAX && dist[u] + w < dist[v])\n            return {}; // Negative cycle exists\n    return dist;\n}\n```"
+        "body": "```cpp\n// Returns empty if negative cycle detected\nvector<long long> bellmanFord(int src, int n, const vector<tuple<int, int, int>>& edges) {\n    vector<long long> dist(n, LLONG_MAX);\n    dist[src] = 0;\n    for (int iter = 0; iter < n - 1; iter++) {\n        bool updated = false;\n        for (auto [u, v, w] : edges) {\n            if (dist[u] != LLONG_MAX && dist[u] + w < dist[v]) {\n                dist[v] = dist[u] + w;\n                updated = true;\n            }\n        }\n        if (!updated)\n            break;  // Early termination\n    }\n    // Check for negative cycle (n-th relaxation round)\n    for (auto [u, v, w] : edges)\n        if (dist[u] != LLONG_MAX && dist[u] + w < dist[v])\n            return {};  // Negative cycle exists\n    return dist;\n}\n```"
       }
     ],
     "reference_links": [
@@ -625,7 +625,7 @@
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/graph.go"
       }
     ],
-    "template_code": "// Dijkstra with min-heap\nvector<long long> dijkstra(int src, const vector<vector<pair<int,int>>>& g) {\n    int n = g.size();\n    vector<long long> dist(n, LLONG_MAX);\n    priority_queue<pair<long long,int>, vector<pair<long long,int>>, greater<>> pq;\n    dist[src] = 0; pq.push({0, src});\n    while (!pq.empty()) {\n        auto [d, u] = pq.top(); pq.pop();\n        if (d > dist[u]) continue; // Lazy deletion\n        for (auto [v, w] : g[u])\n            if (dist[u] + w < dist[v]) { dist[v] = dist[u] + w; pq.push({dist[v], v}); }\n    }\n    return dist;\n}",
+    "template_code": "// Dijkstra with min-heap\nvector<long long> dijkstra(int src, const vector<vector<pair<int, int>>>& g) {\n    int n = g.size();\n    vector<long long> dist(n, LLONG_MAX);\n    priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<>> pq;\n    dist[src] = 0;\n    pq.push({0, src});\n    while (!pq.empty()) {\n        auto [d, u] = pq.top();\n        pq.pop();\n        if (d > dist[u])\n            continue;  // Lazy deletion\n        for (auto [v, w] : g[u])\n            if (dist[u] + w < dist[v]) {\n                dist[v] = dist[u] + w;\n                pq.push({dist[v], v});\n            }\n    }\n    return dist;\n}",
     "supplemental_patterns": [
       {
         "name": "多源最短路（虛擬源點）",
@@ -660,7 +660,7 @@
     "deep_dive": [
       {
         "title": "Kruskal 實作（DSU 核心）",
-        "body": "```cpp\nstruct Edge { int u, v, w; };\nlong long kruskal(int n, vector<Edge>& edges) {\n    sort(edges.begin(), edges.end(), [](const Edge& a, const Edge& b) { return a.w < b.w; });\n    DSU dsu(n);\n    long long total = 0; int cnt = 0;\n    for (auto& e : edges) {\n        if (dsu.find(e.u) != dsu.find(e.v)) { // Not same component\n            dsu.unite(e.u, e.v);\n            total += e.w; cnt++;\n            if (cnt == n - 1) break; // MST complete\n        }\n    }\n    return cnt == n - 1 ? total : -1; // -1 if not connected\n}\n```"
+        "body": "```cpp\nstruct Edge {\n    int u, v, w;\n};\nlong long kruskal(int n, vector<Edge>& edges) {\n    sort(edges.begin(), edges.end(), [](const Edge& a, const Edge& b) { return a.w < b.w; });\n    Dsu dsu(n);\n    long long total = 0;\n    int cnt = 0;\n    for (auto& e : edges) {\n        if (dsu.find(e.u) != dsu.find(e.v)) {  // Not same component\n            dsu.unite(e.u, e.v);\n            total += e.w;\n            cnt++;\n            if (cnt == n - 1)\n                break;  // MST complete\n        }\n    }\n    return cnt == n - 1 ? total : -1;  // -1 if not connected\n}\n```"
       },
       {
         "title": "次小生成樹（Second MST）",
@@ -689,7 +689,7 @@
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/graph.go"
       }
     ],
-    "template_code": "// Kruskal MST\nlong long kruskal(int n, vector<tuple<int,int,int>>& edges) {\n    sort(edges.begin(), edges.end()); // Sort by weight (first element)\n    vector<int> parent(n); iota(parent.begin(), parent.end(), 0);\n    function<int(int)> find = [&](int x) { return parent[x] == x ? x : parent[x] = find(parent[x]); };\n    long long total = 0; int cnt = 0;\n    for (auto& [w, u, v] : edges) {\n        int pu = find(u), pv = find(v);\n        if (pu != pv) { parent[pu] = pv; total += w; cnt++; }\n    }\n    return cnt == n - 1 ? total : -1;\n}",
+    "template_code": "// Kruskal MST\nlong long kruskal(int n, vector<tuple<int, int, int>>& edges) {\n    sort(edges.begin(), edges.end());  // Sort by weight (first element)\n    vector<int> parent(n);\n    iota(parent.begin(), parent.end(), 0);\n    function<int(int)> findRoot = [&parent, &findRoot](int x) {\n        return parent[x] == x ? x : parent[x] = findRoot(parent[x]);\n    };\n    long long total = 0;\n    int cnt = 0;\n    for (auto& [w, u, v] : edges) {\n        int pu = findRoot(u), pv = findRoot(v);\n        if (pu != pv) {\n            parent[pu] = pv;\n            total += w;\n            cnt++;\n        }\n    }\n    return cnt == n - 1 ? total : -1;\n}",
     "supplemental_patterns": [
       {
         "name": "最大生成樹（Maximum Spanning Tree）",
@@ -717,7 +717,7 @@
     "deep_dive": [
       {
         "title": "樹的直徑（兩種求法）",
-        "body": "**方法一（兩次 BFS/DFS）**：從任意節點出發找最遠節點 u，再從 u 出發找最遠節點 v，uv 路徑長度即直徑。正確性需要對無負邊的樹成立。\n\n**方法二（樹形 DP）**：`dp[v]` = 以 v 為根的子樹中從 v 出發的最長鏈；每次合併子節點時更新全域答案 `ans = max(ans, dp[u] + dp[v] + w(u,v))`（路徑過 u）。此方法可推廣到帶負邊的樹和「加權路徑」。\n\n```cpp\nint diameter = 0;\nint dfs_diam(int u, int parent) {\n    int max_depth = 0;\n    for (auto [v, w] : graph[u]) {\n        if (v == parent) continue;\n        int d = dfs_diam(v, u) + w;\n        diameter = max(diameter, max_depth + d); // Update diameter through u\n        max_depth = max(max_depth, d);\n    }\n    return max_depth;\n}\n```"
+        "body": "**方法一（兩次 BFS/DFS）**：從任意節點出發找最遠節點 u，再從 u 出發找最遠節點 v，uv 路徑長度即直徑。正確性需要對無負邊的樹成立。\n\n**方法二（樹形 DP）**：`dp[v]` = 以 v 為根的子樹中從 v 出發的最長鏈；每次合併子節點時更新全域答案 `ans = max(ans, dp[u] + dp[v] + w(u,v))`（路徑過 u）。此方法可推廣到帶負邊的樹和「加權路徑」。\n\n```cpp\nint diameter = 0;\nint dfsDiam(int u, int parent) {\n    int max_depth = 0;\n    for (auto [v, w] : graph[u]) {\n        if (v == parent)\n            continue;\n        int d = dfsDiam(v, u) + w;\n        diameter = max(diameter, max_depth + d);  // Update diameter through u\n        max_depth = max(max_depth, d);\n    }\n    return max_depth;\n}\n```"
       },
       {
         "title": "換根 DP（Re-rooting）",
@@ -742,7 +742,7 @@
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/dp.go"
       }
     ],
-    "template_code": "// Tree DP: maximum independent set\nvector<array<int,2>> dp; // dp[v][0/1]: max independent set in subtree rooted at v\nvoid dfs_indep(int u, int par, const vector<vector<int>>& tree) {\n    dp[u] = {0, 1}; // Not select u: 0, select u: 1\n    for (int v : tree[u]) {\n        if (v == par) continue;\n        dfs_indep(v, u, tree);\n        dp[u][0] += max(dp[v][0], dp[v][1]); // u not selected: child can be either\n        dp[u][1] += dp[v][0]; // u selected: child must not be selected\n    }\n}",
+    "template_code": "// Tree DP: maximum independent set\nvector<array<int, 2>> dp;  // dp[v][0/1]: max independent set in subtree rooted at v\nvoid dfsIndep(int u, int par, const vector<vector<int>>& tree) {\n    dp[u] = {0, 1};  // Not select u: 0, select u: 1\n    for (int v : tree[u]) {\n        if (v == par)\n            continue;\n        dfsIndep(v, u, tree);\n        dp[u][0] += max(dp[v][0], dp[v][1]);  // u not selected: child can be either\n        dp[u][1] += dp[v][0];                 // u selected: child must not be selected\n    }\n}",
     "supplemental_patterns": [
       {
         "name": "樹上最大獨立集",
@@ -774,11 +774,11 @@
     "deep_dive": [
       {
         "title": "KMP 失敗函數（Failure Function）",
-        "body": "失敗函數 `fail[i]` = 模式串 p[0..i] 的最長「不等於自身的」真前綴等於真後綴的長度。\n\n```cpp\nvector<int> kmp_fail(const string& p) {\n    int n = p.size();\n    vector<int> fail(n, 0);\n    for (int i = 1; i < n; i++) {\n        int j = fail[i - 1];\n        while (j > 0 && p[i] != p[j]) j = fail[j - 1]; // Fall back\n        if (p[i] == p[j]) j++;\n        fail[i] = j;\n    }\n    return fail;\n}\n\nvector<int> kmp_search(const string& text, const string& pattern) {\n    string s = pattern + '#' + text; // '#' is a separator not in alphabet\n    auto fail = kmp_fail(s);\n    vector<int> matches;\n    int m = pattern.size();\n    for (int i = m + 1; i < (int)s.size(); i++)\n        if (fail[i] == m) matches.push_back(i - 2 * m); // Match found\n    return matches;\n}\n```"
+        "body": "失敗函數 `fail[i]` = 模式串 p[0..i] 的最長「不等於自身的」真前綴等於真後綴的長度。\n\n```cpp\nvector<int> kmpFail(const string& p) {\n    int n = p.size();\n    vector<int> fail(n, 0);\n    for (int i = 1; i < n; i++) {\n        int j = fail[i - 1];\n        while (j > 0 && p[i] != p[j])\n            j = fail[j - 1];  // Fall back\n        if (p[i] == p[j])\n            j++;\n        fail[i] = j;\n    }\n    return fail;\n}\n\nvector<int> kmpSearch(const string& text, const string& pattern) {\n    string s = pattern + '#' + text;  // '#' is a separator not in alphabet\n    auto fail = kmpFail(s);\n    vector<int> matches;\n    int m = pattern.size();\n    for (int i = m + 1; i < (int)s.size(); i++)\n        if (fail[i] == m)\n            matches.push_back(i - 2 * m);  // Match found\n    return matches;\n}\n```"
       },
       {
         "title": "Z 函數",
-        "body": "Z[i] = 字串 s 從位置 i 開始與 s 的最長公共前綴長度（Z[0] 定義為 0 或 n）。\n\n```cpp\nvector<int> z_function(const string& s) {\n    int n = s.size();\n    vector<int> z(n, 0);\n    z[0] = n; // Convention: z[0] = n\n    int l = 0, r = 0;\n    for (int i = 1; i < n; i++) {\n        if (i < r) z[i] = min(r - i, z[i - l]); // Use previous Z values\n        while (i + z[i] < n && s[z[i]] == s[i + z[i]]) z[i]++;\n        if (i + z[i] > r) { l = i; r = i + z[i]; } // Extend window\n    }\n    return z;\n}\n```\n\nZ 函數模式匹配：對 `p + '#' + t` 計算 Z 函數，Z[i] == |p| 的位置即為匹配點。"
+        "body": "Z[i] = 字串 s 從位置 i 開始與 s 的最長公共前綴長度（Z[0] 定義為 0 或 n）。\n\n```cpp\nvector<int> zFunction(const string& s) {\n    int n = s.size();\n    vector<int> z(n, 0);\n    z[0] = n;  // Convention: z[0] = n\n    int l = 0, r = 0;\n    for (int i = 1; i < n; i++) {\n        if (i < r)\n            z[i] = min(r - i, z[i - l]);  // Use previous Z values\n        while (i + z[i] < n && s[z[i]] == s[i + z[i]])\n            z[i]++;\n        if (i + z[i] > r) {\n            l = i;\n            r = i + z[i];\n        }  // Extend window\n    }\n    return z;\n}\n```\n\nZ 函數模式匹配：對 `p + '#' + t` 計算 Z 函數，Z[i] == |p| 的位置即為匹配點。"
       }
     ],
     "reference_links": [
@@ -807,7 +807,7 @@
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/strings.go"
       }
     ],
-    "template_code": "// Trie for prefix/dictionary queries\nstruct Trie {\n    array<int, 26> ch;\n    int cnt; // Count of words passing through this node\n    Trie() : cnt(0) { ch.fill(-1); }\n};\nvector<Trie> trie = {Trie()};\nvoid insert(const string& s) {\n    int cur = 0;\n    for (char c : s) {\n        int idx = c - 'a';\n        if (trie[cur].ch[idx] == -1) { trie[cur].ch[idx] = trie.size(); trie.push_back(Trie()); }\n        cur = trie[cur].ch[idx];\n        trie[cur].cnt++;\n    }\n}",
+    "template_code": "// Trie for prefix/dictionary queries\nstruct Trie {\n    array<int, 26> ch;\n    int cnt;  // Count of words passing through this node\n    Trie() : cnt(0) {\n        ch.fill(-1);\n    }\n};\nvector<Trie> trie = {Trie()};\nvoid insert(const string& s) {\n    int cur = 0;\n    for (char c : s) {\n        int idx = c - 'a';\n        if (trie[cur].ch[idx] == -1) {\n            trie[cur].ch[idx] = trie.size();\n            trie.push_back(Trie());\n        }\n        cur = trie[cur].ch[idx];\n        trie[cur].cnt++;\n    }\n}",
     "supplemental_patterns": [
       {
         "name": "KMP 字串匹配",
@@ -846,11 +846,11 @@
     "deep_dive": [
       {
         "title": "線性篩（歐拉篩）",
-        "body": "```cpp\nvector<int> primes;\nvector<bool> is_composite(n + 1, false);\nvector<int> min_prime(n + 1, 0); // Minimum prime factor\nfor (int i = 2; i <= n; i++) {\n    if (!is_composite[i]) { primes.push_back(i); min_prime[i] = i; }\n    for (int p : primes) {\n        if ((long long)i * p > n) break;\n        is_composite[i * p] = true;\n        min_prime[i * p] = p;\n        if (i % p == 0) break; // Key: each composite is sieved by its min prime factor only once\n    }\n}\n```\n\n同時計算歐拉函數 φ：`φ[1]=1`；若 i 為質數 `φ[i]=i-1`；`φ[i*p] = φ[i]*(p-1)` 若 p∤i，`φ[i*p] = φ[i]*p` 若 p|i。"
+        "body": "```cpp\nvector<int> primes;\nvector<bool> is_composite(n + 1, false);\nvector<int> min_prime(n + 1, 0);  // Minimum prime factor\nfor (int i = 2; i <= n; i++) {\n    if (!is_composite[i]) {\n        primes.push_back(i);\n        min_prime[i] = i;\n    }\n    for (int p : primes) {\n        if ((long long)i * p > n)\n            break;\n        is_composite[i * p] = true;\n        min_prime[i * p] = p;\n        if (i % p == 0)\n            break;  // Key: each composite is sieved by its min prime factor only once\n    }\n}\n```\n\n同時計算歐拉函數 φ：`φ[1]=1`；若 i 為質數 `φ[i]=i-1`；`φ[i*p] = φ[i]*(p-1)` 若 p∤i，`φ[i*p] = φ[i]*p` 若 p|i。"
       },
       {
         "title": "組合數取模與 Lucas 定理",
-        "body": "**預計算（n ≤ 10^6）**：\n```cpp\nconst int MOD = 1e9 + 7;\nvector<long long> fact(n+1), inv_fact(n+1);\nfact[0] = 1;\nfor (int i = 1; i <= n; i++) fact[i] = fact[i-1] * i % MOD;\ninv_fact[n] = power(fact[n], MOD-2, MOD); // Fermat's little theorem\nfor (int i = n-1; i >= 0; i--) inv_fact[i] = inv_fact[i+1] * (i+1) % MOD;\nauto C = [&](int n, int k) -> long long {\n    if (k < 0 || k > n) return 0;\n    return fact[n] % MOD * inv_fact[k] % MOD * inv_fact[n-k] % MOD;\n};\n```\n\n**Lucas 定理（p 為小質數）**：`C(n,k) mod p = C(n/p, k/p) * C(n%p, k%p) mod p`，可遞迴處理 n、k 很大但 p 很小的情況。"
+        "body": "**預計算（n ≤ 10^6）**：\n```cpp\nconst int kMod = 1e9 + 7;\nvector<long long> fact(n + 1), inv_fact(n + 1);\nfact[0] = 1;\nfor (int i = 1; i <= n; i++)\n    fact[i] = fact[i - 1] * i % kMod;\ninv_fact[n] = power(fact[n], kMod - 2, kMod);  // Fermat's little theorem\nfor (int i = n - 1; i >= 0; i--)\n    inv_fact[i] = inv_fact[i + 1] * (i + 1) % kMod;\nauto comb = [&fact, &inv_fact](int n, int k) -> long long {\n    if (k < 0 || k > n)\n        return 0;\n    return fact[n] % kMod * inv_fact[k] % kMod * inv_fact[n - k] % kMod;\n};\n```\n\n**Lucas 定理（p 為小質數）**：`C(n,k) mod p = C(n/p, k/p) * C(n%p, k%p) mod p`，可遞迴處理 n、k 很大但 p 很小的情況。"
       }
     ],
     "reference_links": [
@@ -879,7 +879,7 @@
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/math.go"
       }
     ],
-    "template_code": "// Fast power mod\nlong long power(long long base, long long exp, long long mod) {\n    long long result = 1;\n    base %= mod;\n    while (exp > 0) {\n        if (exp & 1) result = result * base % mod; // Current bit is 1\n        base = base * base % mod;\n        exp >>= 1;\n    }\n    return result;\n}\n// GCD and Extended Euclidean\nlong long gcd(long long a, long long b) { return b ? gcd(b, a % b) : a; }\nlong long ext_gcd(long long a, long long b, long long& x, long long& y) {\n    if (!b) { x = 1; y = 0; return a; }\n    long long x1, y1, g = ext_gcd(b, a % b, x1, y1);\n    x = y1; y = x1 - (a / b) * y1;\n    return g;\n}",
+    "template_code": "// Fast power mod\nlong long power(long long base, long long exp, long long mod) {\n    long long result = 1;\n    base %= mod;\n    while (exp > 0) {\n        if (exp & 1)\n            result = result * base % mod;  // Current bit is 1\n        base = base * base % mod;\n        exp >>= 1;\n    }\n    return result;\n}\n// GCD and Extended Euclidean\nlong long gcd(long long a, long long b) {\n    return b ? gcd(b, a % b) : a;\n}\nlong long extGcd(long long a, long long b, long long& x, long long& y) {\n    if (!b) {\n        x = 1;\n        y = 0;\n        return a;\n    }\n    long long x1, y1, g = extGcd(b, a % b, x1, y1);\n    x = y1;\n    y = x1 - (a / b) * y1;\n    return g;\n}",
     "supplemental_patterns": [
       {
         "name": "模逆元",
@@ -911,11 +911,11 @@
     "deep_dive": [
       {
         "title": "TSP（旅行商問題）狀態壓縮",
-        "body": "```cpp\nint tsp(const vector<vector<int>>& dist) {\n    int n = dist.size();\n    int FULL = (1 << n) - 1;\n    vector<vector<int>> dp(1<<n, vector<int>(n, INT_MAX/2));\n    dp[1][0] = 0; // Start from node 0, visited = {0}\n    for (int mask = 1; mask <= FULL; mask++) {\n        for (int u = 0; u < n; u++) {\n            if (!(mask >> u & 1) || dp[mask][u] == INT_MAX/2) continue;\n            for (int v = 0; v < n; v++) {\n                if (mask >> v & 1) continue; // Already visited\n                int new_mask = mask | (1 << v);\n                dp[new_mask][v] = min(dp[new_mask][v], dp[mask][u] + dist[u][v]);\n            }\n        }\n    }\n    int ans = INT_MAX;\n    for (int u = 1; u < n; u++) ans = min(ans, dp[FULL][u] + dist[u][0]); // Return to start\n    return ans;\n}\n```"
+        "body": "```cpp\nint tsp(const vector<vector<int>>& dist) {\n    int n = dist.size();\n    int kFull = (1 << n) - 1;\n    vector<vector<int>> dp(1 << n, vector<int>(n, INT_MAX / 2));\n    dp[1][0] = 0;  // Start from node 0, visited = {0}\n    for (int mask = 1; mask <= kFull; mask++) {\n        for (int u = 0; u < n; u++) {\n            if (!(mask >> u & 1) || dp[mask][u] == INT_MAX / 2)\n                continue;\n            for (int v = 0; v < n; v++) {\n                if (mask >> v & 1)\n                    continue;  // Already visited\n                int new_mask = mask | (1 << v);\n                dp[new_mask][v] = min(dp[new_mask][v], dp[mask][u] + dist[u][v]);\n            }\n        }\n    }\n    int ans = INT_MAX;\n    for (int u = 1; u < n; u++)\n        ans = min(ans, dp[kFull][u] + dist[u][0]);  // Return to start\n    return ans;\n}\n```"
       },
       {
         "title": "SOS DP（Sum over Subsets）",
-        "body": "計算每個集合 S 的「所有子集的值之和」：`f[S] = Σ g[T] for T ⊆ S`。\n\n```cpp\n// SOS DP: f[S] = sum of g[T] for all T subset of S\nvector<long long> f(1<<n);\nfor (int i = 0; i < (1<<n); i++) f[i] = g[i]; // Initialize with base values\nfor (int i = 0; i < n; i++) // Process each bit\n    for (int S = 0; S < (1<<n); S++)\n        if (S >> i & 1) f[S] += f[S ^ (1<<i)]; // Add contribution of i-th bit\n```\n\n複雜度 O(n × 2^n)，比枚舉所有子集的 O(3^n) 更快。"
+        "body": "計算每個集合 S 的「所有子集的值之和」：`f[S] = Σ g[T] for T ⊆ S`。\n\n```cpp\n// SOS DP: f[mask] = sum of g[T] for all T subset of mask\nvector<long long> f(1 << n);\nfor (int i = 0; i < (1 << n); i++)\n    f[i] = g[i];             // Initialize with base values\nfor (int i = 0; i < n; i++)  // Process each bit\n    for (int mask = 0; mask < (1 << n); mask++)\n        if (mask >> i & 1)\n            f[mask] += f[mask ^ (1 << i)];  // Add contribution of i-th bit\n```\n\n複雜度 O(n × 2^n)，比枚舉所有子集的 O(3^n) 更快。"
       }
     ],
     "reference_links": [
@@ -936,7 +936,7 @@
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/bits.go"
       }
     ],
-    "template_code": "// Enumerate all subsets of a given set S\nvoid enumerate_subsets(int S) {\n    for (int t = S; t > 0; t = (t - 1) & S) {\n        // Process subset t of S\n        // Note: this does NOT include the empty set\n    }\n    // To include empty set, add explicit check or handle separately\n}\n// Bitmask DP skeleton\n// dp[mask] represents optimal value for subset represented by mask\nvector<int> dp(1 << n, INF);\ndp[0] = 0; // Base case: empty set\nfor (int mask = 0; mask < (1 << n); mask++) {\n    if (dp[mask] == INF) continue;\n    // Try adding element i to mask\n    for (int i = 0; i < n; i++) {\n        if (mask >> i & 1) continue; // Already in set\n        dp[mask | (1 << i)] = min(dp[mask | (1 << i)], dp[mask] + cost[i]);\n    }\n}",
+    "template_code": "// Enumerate all subsets of a given set S\nvoid enumerateSubsets(int S) {\n    for (int t = S; t > 0; t = (t - 1) & S) {\n        // Process subset t of S\n        // Note: this does NOT include the empty set\n    }\n    // To include empty set, add explicit check or handle separately\n}\n// Bitmask DP skeleton\n// dp[mask] represents optimal value for subset represented by mask\nvector<int> dp(1 << n, kInf);\ndp[0] = 0;  // Base case: empty set\nfor (int mask = 0; mask < (1 << n); mask++) {\n    if (dp[mask] == kInf)\n        continue;\n    // Try adding element i to mask\n    for (int i = 0; i < n; i++) {\n        if (mask >> i & 1)\n            continue;  // Already in set\n        dp[mask | (1 << i)] = min(dp[mask | (1 << i)], dp[mask] + cost[i]);\n    }\n}",
     "supplemental_patterns": [
       {
         "name": "枚舉子集的子集",
@@ -964,7 +964,7 @@
     "deep_dive": [
       {
         "title": "凸包（Andrew's Monotone Chain）",
-        "body": "```cpp\nusing ll = long long;\nstruct Point { ll x, y; };\nll cross(Point O, Point A, Point B) {\n    return (A.x-O.x)*(B.y-O.y) - (A.y-O.y)*(B.x-O.x);\n}\nvector<Point> convex_hull(vector<Point> pts) {\n    int n = pts.size();\n    if (n < 3) return pts;\n    sort(pts.begin(), pts.end(), [](const Point& a, const Point& b) {\n        return a.x < b.x || (a.x == b.x && a.y < b.y);\n    });\n    vector<Point> hull;\n    // Lower hull\n    for (auto& p : pts) {\n        while (hull.size() >= 2 && cross(hull[hull.size()-2], hull.back(), p) <= 0)\n            hull.pop_back(); // <= 0 removes collinear points; use < 0 to keep them\n        hull.push_back(p);\n    }\n    // Upper hull\n    int lower_size = hull.size();\n    for (int i = n-2; i >= 0; i--) {\n        while (hull.size() > lower_size && cross(hull[hull.size()-2], hull.back(), pts[i]) <= 0)\n            hull.pop_back();\n        hull.push_back(pts[i]);\n    }\n    hull.pop_back(); // Remove duplicate starting point\n    return hull;\n}\n```"
+        "body": "```cpp\nusing ll = long long;\nstruct Point {\n    ll x, y;\n};\nll cross(Point O, Point A, Point B) {\n    return (A.x - O.x) * (B.y - O.y) - (A.y - O.y) * (B.x - O.x);\n}\nvector<Point> convexHull(vector<Point> pts) {\n    int n = pts.size();\n    if (n < 3)\n        return pts;\n    sort(pts.begin(), pts.end(),\n         [](const Point& a, const Point& b) { return a.x < b.x || (a.x == b.x && a.y < b.y); });\n    vector<Point> hull;\n    // Lower hull\n    for (auto& p : pts) {\n        while (hull.size() >= 2 && cross(hull[hull.size() - 2], hull.back(), p) <= 0)\n            hull.pop_back();  // <= 0 removes collinear points; use < 0 to keep them\n        hull.push_back(p);\n    }\n    // Upper hull\n    int lower_size = hull.size();\n    for (int i = n - 2; i >= 0; i--) {\n        while (hull.size() > lower_size && cross(hull[hull.size() - 2], hull.back(), pts[i]) <= 0)\n            hull.pop_back();\n        hull.push_back(pts[i]);\n    }\n    hull.pop_back();  // Remove duplicate starting point\n    return hull;\n}\n```"
       }
     ],
     "reference_links": [
@@ -989,7 +989,7 @@
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/geometry.go"
       }
     ],
-    "template_code": "// 2D vector with cross and dot product\nstruct Vec2 {\n    long long x, y;\n    Vec2(long long x=0, long long y=0) : x(x), y(y) {}\n    Vec2 operator-(const Vec2& b) const { return {x-b.x, y-b.y}; }\n    long long cross(const Vec2& b) const { return x*b.y - y*b.x; } // Cross product\n    long long dot(const Vec2& b) const { return x*b.x + y*b.y; }   // Dot product\n    long long norm2() const { return x*x + y*y; }                   // Squared length\n};",
+    "template_code": "// 2D vector with cross and dot product\nstruct Vector2 {\n    long long x, y;\n    Vector2(long long x = 0, long long y = 0) : x(x), y(y) {}\n    Vector2 operator-(const Vector2& b) const {\n        return {x - b.x, y - b.y};\n    }\n    long long cross(const Vector2& b) const {\n        return x * b.y - y * b.x;\n    }  // Cross product\n    long long dot(const Vector2& b) const {\n        return x * b.x + y * b.y;\n    }  // Dot product\n    long long norm2() const {\n        return x * x + y * y;\n    }  // Squared length\n};",
     "supplemental_patterns": [
       {
         "name": "點在多邊形內（射線法）",
@@ -1017,7 +1017,7 @@
     "deep_dive": [
       {
         "title": "交換論證範例：最少箭引爆氣球",
-        "body": "貪心：按右端點排序，每次射在當前最小的右端點，能覆蓋的氣球一起消去。\n```cpp\nint findMinArrows(vector<vector<int>>& a) {\n    sort(a.begin(), a.end(), [](auto& x, auto& y){ return x[1] < y[1]; });\n    int arrows = 0; long long last = LLONG_MIN;\n    for (auto& b : a)\n        if (b[0] > last) { arrows++; last = b[1]; } // need a new arrow at b[1]\n    return arrows;\n}\n```\n交換論證：把箭放在最早結束的區間右端，能覆蓋的區間至少和任何其他放法一樣多，故不會變差。"
+        "body": "貪心：按右端點排序，每次射在當前最小的右端點，能覆蓋的氣球一起消去。\n```cpp\nint findMinArrows(vector<vector<int>>& a) {\n    sort(a.begin(), a.end(), [](auto& x, auto& y) { return x[1] < y[1]; });\n    int arrows = 0;\n    long long last = LLONG_MIN;\n    for (auto& b : a)\n        if (b[0] > last) {\n            arrows++;\n            last = b[1];\n        }  // need a new arrow at b[1]\n    return arrows;\n}\n```\n交換論證：把箭放在最早結束的區間右端，能覆蓋的區間至少和任何其他放法一樣多，故不會變差。"
       }
     ],
     "reference_links": [
@@ -1030,7 +1030,7 @@
         "url": "https://oi-wiki.org/basic/construction/"
       }
     ],
-    "template_code": "// Typical greedy skeleton: sort by a key, then make one pass taking local optima.\nint greedyBySorting(vector<vector<int>>& a) {\n    sort(a.begin(), a.end(), [](auto& x, auto& y){ return x[1] < y[1]; });\n    int taken = 0; long long last = LLONG_MIN;\n    for (auto& it : a)\n        if (it[0] > last) { taken++; last = it[1]; }\n    return taken;\n}",
+    "template_code": "// Typical greedy skeleton: sort by a key, then make one pass taking local optima.\nint greedyBySorting(vector<vector<int>>& a) {\n    sort(a.begin(), a.end(), [](auto& x, auto& y) { return x[1] < y[1]; });\n    int taken = 0;\n    long long last = LLONG_MIN;\n    for (auto& it : a)\n        if (it[0] > last) {\n            taken++;\n            last = it[1];\n        }\n    return taken;\n}",
     "supplemental_patterns": [
       {
         "name": "排序 + 掃描",
@@ -1059,11 +1059,11 @@
     "deep_dive": [
       {
         "title": "子集與組合（start 防重）",
-        "body": "只往後選，天然不重不漏：\n```cpp\nvoid subsets(vector<int>& a, int start, vector<int>& path, vector<vector<int>>& res) {\n    res.push_back(path);                    // every node is a valid subset\n    for (int i = start; i < (int)a.size(); i++) {\n        path.push_back(a[i]);               // choose\n        subsets(a, i + 1, path, res);       // recurse with next start\n        path.pop_back();                    // undo\n    }\n}\n```\n`i + 1` 保證每個元素最多選一次且按序，避免 {1,2} 與 {2,1} 重複。"
+        "body": "只往後選，天然不重不漏：\n```cpp\nvoid subsets(vector<int>& a, int start, vector<int>& path, vector<vector<int>>& res) {\n    res.push_back(path);  // every node is a valid subset\n    for (int i = start; i < (int)a.size(); i++) {\n        path.push_back(a[i]);          // choose\n        subsets(a, i + 1, path, res);  // recurse with next start\n        path.pop_back();               // undo\n    }\n}\n```\n`i + 1` 保證每個元素最多選一次且按序，避免 {1,2} 與 {2,1} 重複。"
       },
       {
         "title": "排列與含重複去重",
-        "body": "排列用 `used[]`；有重複元素時先排序再同層跳過：\n```cpp\nvoid permuteUnique(vector<int>& a, vector<char>& used,\n                   vector<int>& path, vector<vector<int>>& res) {\n    if (path.size() == a.size()) { res.push_back(path); return; }\n    for (int i = 0; i < (int)a.size(); i++) {\n        if (used[i]) continue;\n        if (i > 0 && a[i] == a[i-1] && !used[i-1]) continue; // skip dup at same level\n        used[i] = 1; path.push_back(a[i]);\n        permuteUnique(a, used, path, res);\n        path.pop_back(); used[i] = 0;\n    }\n}\n```\n去重關鍵 `!used[i-1]`：同一層若前一個相同元素尚未使用，代表它本層已被嘗試過，跳過避免重複排列。"
+        "body": "排列用 `used[]`；有重複元素時先排序再同層跳過：\n```cpp\nvoid permuteUnique(vector<int>& a, vector<char>& used, vector<int>& path,\n                   vector<vector<int>>& res) {\n    if (path.size() == a.size()) {\n        res.push_back(path);\n        return;\n    }\n    for (int i = 0; i < (int)a.size(); i++) {\n        if (used[i])\n            continue;\n        if (i > 0 && a[i] == a[i - 1] && !used[i - 1])\n            continue;  // skip dup at same level\n        used[i] = 1;\n        path.push_back(a[i]);\n        permuteUnique(a, used, path, res);\n        path.pop_back();\n        used[i] = 0;\n    }\n}\n```\n去重關鍵 `!used[i-1]`：同一層若前一個相同元素尚未使用，代表它本層已被嘗試過，跳過避免重複排列。"
       }
     ],
     "reference_links": [
@@ -1076,7 +1076,7 @@
         "url": "https://oi-wiki.org/search/pruning/"
       }
     ],
-    "template_code": "// Backtracking skeleton: choose -> recurse -> undo.\nvoid backtrack(int start, vector<int>& path, vector<vector<int>>& res, const vector<int>& a) {\n    res.push_back(path);                 // record (problem-specific)\n    for (int i = start; i < (int)a.size(); i++) {\n        path.push_back(a[i]);            // choose\n        backtrack(i + 1, path, res, a);  // recurse\n        path.pop_back();                 // undo\n    }\n}",
+    "template_code": "// Backtracking skeleton: choose -> recurse -> undo.\nvoid backtrack(int start, vector<int>& path, vector<vector<int>>& res, const vector<int>& a) {\n    res.push_back(path);  // record (problem-specific)\n    for (int i = start; i < (int)a.size(); i++) {\n        path.push_back(a[i]);            // choose\n        backtrack(i + 1, path, res, a);  // recurse\n        path.pop_back();                 // undo\n    }\n}",
     "supplemental_patterns": [
       {
         "name": "組合去重",
@@ -1105,7 +1105,7 @@
     "deep_dive": [
       {
         "title": "Dinic 最大流",
-        "body": "分層 BFS + 多路增廣 DFS，反向邊容量初始為 0：\n```cpp\nstruct Dinic {\n    struct E { int to, rev; long long cap; };\n    vector<vector<E>> g; vector<int> level, it; int n;\n    Dinic(int n): g(n), level(n), it(n), n(n) {}\n    void addEdge(int u, int v, long long c) {\n        g[u].push_back({v, (int)g[v].size(), c});\n        g[v].push_back({u, (int)g[u].size()-1, 0}); // reverse edge, cap 0\n    }\n    bool bfs(int s, int t) {\n        fill(level.begin(), level.end(), -1);\n        queue<int> q; q.push(s); level[s] = 0;\n        while (!q.empty()) {\n            int u = q.front(); q.pop();\n            for (auto& e : g[u]) if (e.cap > 0 && level[e.to] < 0) {\n                level[e.to] = level[u] + 1; q.push(e.to);\n            }\n        }\n        return level[t] >= 0;\n    }\n    long long dfs(int u, int t, long long f) {\n        if (u == t) return f;\n        for (int& i = it[u]; i < (int)g[u].size(); i++) {\n            E& e = g[u][i];\n            if (e.cap > 0 && level[e.to] == level[u] + 1) {\n                long long d = dfs(e.to, t, min(f, e.cap));\n                if (d > 0) { e.cap -= d; g[e.to][e.rev].cap += d; return d; }\n            }\n        }\n        return 0;\n    }\n    long long maxflow(int s, int t) {\n        long long flow = 0;\n        while (bfs(s, t)) {\n            fill(it.begin(), it.end(), 0);\n            while (long long f = dfs(s, t, LLONG_MAX)) flow += f;\n        }\n        return flow;\n    }\n};\n```\n`it[u]` 是當前弧優化，避免每次 DFS 重掃已用盡的邊，是 Dinic 達到理論複雜度的關鍵。"
+        "body": "分層 BFS + 多路增廣 DFS，反向邊容量初始為 0：\n```cpp\nstruct Dinic {\n    struct Edge {\n        int to, rev;\n        long long cap;\n    };\n    vector<vector<Edge>> g;\n    vector<int> level, it;\n    int n;\n    Dinic(int n) : g(n), level(n), it(n), n(n) {}\n    void addEdge(int u, int v, long long c) {\n        g[u].push_back({v, (int)g[v].size(), c});\n        g[v].push_back({u, (int)g[u].size() - 1, 0});  // reverse edge, cap 0\n    }\n    bool bfs(int s, int t) {\n        fill(level.begin(), level.end(), -1);\n        queue<int> q;\n        q.push(s);\n        level[s] = 0;\n        while (!q.empty()) {\n            int u = q.front();\n            q.pop();\n            for (auto& e : g[u])\n                if (e.cap > 0 && level[e.to] < 0) {\n                    level[e.to] = level[u] + 1;\n                    q.push(e.to);\n                }\n        }\n        return level[t] >= 0;\n    }\n    long long dfs(int u, int t, long long f) {\n        if (u == t)\n            return f;\n        for (int& i = it[u]; i < (int)g[u].size(); i++) {\n            Edge& e = g[u][i];\n            if (e.cap > 0 && level[e.to] == level[u] + 1) {\n                long long d = dfs(e.to, t, min(f, e.cap));\n                if (d > 0) {\n                    e.cap -= d;\n                    g[e.to][e.rev].cap += d;\n                    return d;\n                }\n            }\n        }\n        return 0;\n    }\n    long long maxflow(int s, int t) {\n        long long flow = 0;\n        while (bfs(s, t)) {\n            fill(it.begin(), it.end(), 0);\n            while (long long f = dfs(s, t, LLONG_MAX))\n                flow += f;\n        }\n        return flow;\n    }\n};\n```\n`it[u]` 是當前弧優化，避免每次 DFS 重掃已用盡的邊，是 Dinic 達到理論複雜度的關鍵。"
       }
     ],
     "reference_links": [
@@ -1118,7 +1118,7 @@
         "url": "https://oi-wiki.org/graph/flow/max-flow/"
       }
     ],
-    "template_code": "// Dinic max flow with reverse edges and current-arc optimization.\nstruct Dinic {\n    struct E { int to, rev; long long cap; };\n    vector<vector<E>> g; vector<int> level, it; int n;\n    Dinic(int n): g(n), level(n), it(n), n(n) {}\n    void addEdge(int u, int v, long long c) {\n        g[u].push_back({v, (int)g[v].size(), c});\n        g[v].push_back({u, (int)g[u].size()-1, 0});\n    }\n    bool bfs(int s, int t) {\n        fill(level.begin(), level.end(), -1);\n        queue<int> q; q.push(s); level[s] = 0;\n        while (!q.empty()) {\n            int u = q.front(); q.pop();\n            for (auto& e : g[u]) if (e.cap > 0 && level[e.to] < 0) {\n                level[e.to] = level[u] + 1; q.push(e.to);\n            }\n        }\n        return level[t] >= 0;\n    }\n    long long dfs(int u, int t, long long f) {\n        if (u == t) return f;\n        for (int& i = it[u]; i < (int)g[u].size(); i++) {\n            E& e = g[u][i];\n            if (e.cap > 0 && level[e.to] == level[u] + 1) {\n                long long d = dfs(e.to, t, min(f, e.cap));\n                if (d > 0) { e.cap -= d; g[e.to][e.rev].cap += d; return d; }\n            }\n        }\n        return 0;\n    }\n    long long maxflow(int s, int t) {\n        long long flow = 0;\n        while (bfs(s, t)) {\n            fill(it.begin(), it.end(), 0);\n            while (long long f = dfs(s, t, LLONG_MAX)) flow += f;\n        }\n        return flow;\n    }\n};",
+    "template_code": "// Dinic max flow with reverse edges and current-arc optimization.\nstruct Dinic {\n    struct Edge {\n        int to, rev;\n        long long cap;\n    };\n    vector<vector<Edge>> g;\n    vector<int> level, it;\n    int n;\n    Dinic(int n) : g(n), level(n), it(n), n(n) {}\n    void addEdge(int u, int v, long long c) {\n        g[u].push_back({v, (int)g[v].size(), c});\n        g[v].push_back({u, (int)g[u].size() - 1, 0});\n    }\n    bool bfs(int s, int t) {\n        fill(level.begin(), level.end(), -1);\n        queue<int> q;\n        q.push(s);\n        level[s] = 0;\n        while (!q.empty()) {\n            int u = q.front();\n            q.pop();\n            for (auto& e : g[u])\n                if (e.cap > 0 && level[e.to] < 0) {\n                    level[e.to] = level[u] + 1;\n                    q.push(e.to);\n                }\n        }\n        return level[t] >= 0;\n    }\n    long long dfs(int u, int t, long long f) {\n        if (u == t)\n            return f;\n        for (int& i = it[u]; i < (int)g[u].size(); i++) {\n            Edge& e = g[u][i];\n            if (e.cap > 0 && level[e.to] == level[u] + 1) {\n                long long d = dfs(e.to, t, min(f, e.cap));\n                if (d > 0) {\n                    e.cap -= d;\n                    g[e.to][e.rev].cap += d;\n                    return d;\n                }\n            }\n        }\n        return 0;\n    }\n    long long maxflow(int s, int t) {\n        long long flow = 0;\n        while (bfs(s, t)) {\n            fill(it.begin(), it.end(), 0);\n            while (long long f = dfs(s, t, LLONG_MAX))\n                flow += f;\n        }\n        return flow;\n    }\n};",
     "supplemental_patterns": [
       {
         "name": "拆點（點容量）",
