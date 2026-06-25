@@ -949,7 +949,7 @@
     "slug": "computational-geometry",
     "description": "用向量叉積和點積處理二維平面上的點、線、多邊形問題，掌握凸包與掃描線。",
     "motivation": "幾何題暴力逐一枚舉點對是 O(n²)；凸包需要在 O(n log n) 內找出外圍輪廓。難點在於浮點精度和特殊情況（共線、重疊點）的處理。",
-    "core_idea": "計算幾何的基礎是向量運算：\n\n**叉積（Cross Product）**：`cross(a, b) = a.x*b.y - a.y*b.x`。\n- > 0：b 在 a 的逆時針方向\n- = 0：共線\n- < 0：b 在 a 的順時針方向\n\n**點積（Dot Product）**：`dot(a, b) = a.x*b.x + a.y*b.y`。\n- > 0：銳角；= 0：直角；< 0：鈍角\n\n**凸包（Convex Hull）**：Andrew's Monotone Chain，先按 x 排序，分別構造上凸包和下凸包，利用叉積判斷是否需要彈出棧頂。O(n log n)。",
+    "core_idea": "計算幾何的基礎是向量運算：\n\n**叉積（Cross Product）**：`cross(a, b) = a.x*b.y - a.y*b.x`。\n- `cross > 0`：b 在 a 的逆時針方向\n- `cross = 0`：共線\n- `cross < 0`：b 在 a 的順時針方向\n\n**點積（Dot Product）**：`dot(a, b) = a.x*b.x + a.y*b.y`。\n- `dot > 0`：銳角；`dot = 0`：直角；`dot < 0`：鈍角\n\n**凸包（Convex Hull）**：Andrew's Monotone Chain，先按 x 排序，分別構造上凸包和下凸包，利用叉積判斷是否需要彈出棧頂。O(n log n)。",
     "complexity": "基礎向量運算 O(1)；凸包 O(n log n)；旋轉卡殼 O(n)；掃描線 + 平衡樹 O(n log n)。",
     "deep_dive": [
       {

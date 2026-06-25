@@ -92,12 +92,19 @@ export function topicIcon(topicId: string) {
     'graph-traversal': '🕸️',
     intervals: '📏',
     'heap-priority-queue': '⛰️',
-    'dp-fundamentals': '📐',
+    'dp-fundamentals': '🧩',
     'two-pointers': '↔️',
     dsu: '🔗',
-    'binary-lifting-lca': '🌲',
+    'binary-lifting-lca': '🪜',
     'monotonic-structure': '📊',
-    'segment-tree-bit': '🌳'
+    'segment-tree-bit': '🌳',
+    'shortest-path': '🛣️',
+    'minimum-spanning-tree': '🌉',
+    'tree-dp': '🎋',
+    'string-algorithms': '🔤',
+    'math-number-theory': '🔢',
+    'bitmask-dp': '🎚️',
+    'computational-geometry': '📐'
   };
   return icons[topicId] ?? '📚';
 }

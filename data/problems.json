@@ -2643,5 +2643,826 @@
       "sp-lc-743",
       "sp-lc-787"
     ]
+  },
+  {
+    "id": "mst-lc-1584",
+    "title": "連接所有點的最小費用",
+    "source": "leetcode",
+    "source_id": "min-cost-to-connect-all-points",
+    "rating": 1700,
+    "solve_count": 320000,
+    "tags": [
+      "最小生成樹",
+      "曼哈頓距離"
+    ],
+    "topic_id": "minimum-spanning-tree",
+    "problem_type": "template",
+    "tier": "warmup",
+    "strategy_hints": [
+      "把每兩點之間的曼哈頓距離當作邊權，建完全圖後跑 Kruskal 或 Prim。",
+      "點數 n ≤ 1000，邊數 O(n²) 可接受；稠密圖也可用 O(n²) 的 Prim。"
+    ],
+    "similar_problems": [
+      "mst-luogu-3366",
+      "mst-lc-1168"
+    ]
+  },
+  {
+    "id": "mst-luogu-3366",
+    "title": "【模板】最小生成樹",
+    "source": "luogu",
+    "source_id": "P3366",
+    "rating": 1300,
+    "solve_count": 480000,
+    "tags": [
+      "最小生成樹",
+      "Kruskal",
+      "模板"
+    ],
+    "topic_id": "minimum-spanning-tree",
+    "problem_type": "template",
+    "tier": "warmup",
+    "strategy_hints": [
+      "標準 Kruskal：邊按權排序，用並查集判環逐條加入。",
+      "若最後加入的邊數不足 n−1，代表圖不連通，輸出 orz。"
+    ],
+    "similar_problems": [
+      "mst-lc-1584"
+    ]
+  },
+  {
+    "id": "mst-lc-1168",
+    "title": "水資源分配優化",
+    "source": "leetcode",
+    "source_id": "optimize-water-distribution-in-a-village",
+    "rating": 2100,
+    "solve_count": 36000,
+    "tags": [
+      "最小生成樹",
+      "虛擬源點"
+    ],
+    "topic_id": "minimum-spanning-tree",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "建一個虛擬節點 0，向每個村莊連一條權為打井費用的邊。",
+      "把打井視為「連到虛擬源點」，問題就化成在 n+1 個點上求 MST。"
+    ],
+    "similar_problems": [
+      "mst-lc-1584",
+      "mst-cf-1245D"
+    ]
+  },
+  {
+    "id": "mst-cf-1245D",
+    "title": "Shichikuji and Power Grid",
+    "source": "codeforces",
+    "source_id": "1245D",
+    "rating": 1900,
+    "solve_count": 21000,
+    "tags": [
+      "最小生成樹",
+      "虛擬源點",
+      "建模"
+    ],
+    "topic_id": "minimum-spanning-tree",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "蓋發電站 = 連到虛擬源點的邊，連電線 = 兩城市間的邊，統一成 MST。",
+      "輸出方案時記錄每條被選中的邊屬於發電站集合還是電線集合。"
+    ],
+    "similar_problems": [
+      "mst-lc-1168"
+    ]
+  },
+  {
+    "id": "mst-lc-1489",
+    "title": "找到最小生成樹裡的關鍵邊和偽關鍵邊",
+    "source": "leetcode",
+    "source_id": "find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree",
+    "rating": 2400,
+    "solve_count": 28000,
+    "tags": [
+      "最小生成樹",
+      "列舉邊",
+      "並查集"
+    ],
+    "topic_id": "minimum-spanning-tree",
+    "problem_type": "insight_transfer",
+    "tier": "challenge",
+    "strategy_hints": [
+      "先求一次 MST 權值。關鍵邊：刪掉它後 MST 變大或不連通；偽關鍵邊：強制選它仍能得到相同權值的 MST。",
+      "對每條邊各跑一次 Kruskal（排除 / 強制納入）並比較總權值。"
+    ],
+    "insight_note": "把 MST 的唯一性問題轉成「對每條邊測試排除與強制納入的代價」，是列舉 + 重跑貪心的典型手法。",
+    "similar_problems": [
+      "mst-lc-1697"
+    ]
+  },
+  {
+    "id": "mst-lc-1697",
+    "title": "檢查邊長度限制的路徑是否存在",
+    "source": "leetcode",
+    "source_id": "checking-existence-of-edge-length-limited-paths",
+    "rating": 2300,
+    "solve_count": 38000,
+    "tags": [
+      "並查集",
+      "離線",
+      "排序"
+    ],
+    "topic_id": "minimum-spanning-tree",
+    "problem_type": "insight_transfer",
+    "tier": "challenge",
+    "strategy_hints": [
+      "把查詢按 limit 排序、邊按權排序，離線雙指針逐步加入小於 limit 的邊。",
+      "加完邊後用並查集判斷兩端是否連通，即 Kruskal 的離線連通性思路。"
+    ],
+    "insight_note": "MST 的離線版本：把「路徑上最大邊 < limit」轉成「只用小於 limit 的邊後是否連通」，靠排序 + 並查集攤還。",
+    "similar_problems": [
+      "mst-lc-1489"
+    ]
+  },
+  {
+    "id": "treedp-lc-543",
+    "title": "二元樹的直徑",
+    "source": "leetcode",
+    "source_id": "diameter-of-binary-tree",
+    "rating": 1200,
+    "solve_count": 720000,
+    "tags": [
+      "樹形 DP",
+      "直徑"
+    ],
+    "topic_id": "tree-dp",
+    "problem_type": "template",
+    "tier": "warmup",
+    "strategy_hints": [
+      "後序 DFS 回傳「從當前節點往下的最長鏈」，同時用左右鏈之和更新全域直徑。",
+      "直徑是邊數，等於經過某節點的左深度 + 右深度。"
+    ],
+    "similar_problems": [
+      "treedp-lc-124",
+      "treedp-lc-337"
+    ]
+  },
+  {
+    "id": "treedp-lc-337",
+    "title": "打家劫舍 III",
+    "source": "leetcode",
+    "source_id": "house-robber-iii",
+    "rating": 1500,
+    "solve_count": 410000,
+    "tags": [
+      "樹形 DP",
+      "最大獨立集"
+    ],
+    "topic_id": "tree-dp",
+    "problem_type": "template",
+    "tier": "warmup",
+    "strategy_hints": [
+      "dp[v][0/1] 表示不偷 / 偷 v 時子樹的最大金額。",
+      "偷 v 時兩個子節點都不能偷，不偷 v 時子節點取兩種狀態的較大值。"
+    ],
+    "similar_problems": [
+      "treedp-lc-543"
+    ]
+  },
+  {
+    "id": "treedp-lc-124",
+    "title": "二元樹中的最大路徑和",
+    "source": "leetcode",
+    "source_id": "binary-tree-maximum-path-sum",
+    "rating": 1700,
+    "solve_count": 560000,
+    "tags": [
+      "樹形 DP",
+      "路徑和"
+    ],
+    "topic_id": "tree-dp",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "後序回傳「以當前節點為端點往下的最大鏈和」，負鏈要捨棄成 0。",
+      "用 左鏈 + 節點值 + 右鏈 更新全域答案，但回傳時只能選一邊。"
+    ],
+    "similar_problems": [
+      "treedp-lc-543"
+    ]
+  },
+  {
+    "id": "treedp-lc-2049",
+    "title": "統計最高分的節點數目",
+    "source": "leetcode",
+    "source_id": "count-nodes-with-the-highest-score",
+    "rating": 1800,
+    "solve_count": 56000,
+    "tags": [
+      "樹形 DP",
+      "子樹大小"
+    ],
+    "topic_id": "tree-dp",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "移除節點 v 會把樹切成幾塊：各子樹與「上方部分」，分數是這些塊大小的乘積。",
+      "DFS 求每個子樹大小，上方部分 = n − 1 − 子樹和。"
+    ],
+    "similar_problems": [
+      "treedp-lc-834"
+    ]
+  },
+  {
+    "id": "treedp-lc-834",
+    "title": "樹中距離之和",
+    "source": "leetcode",
+    "source_id": "sum-of-distances-in-tree",
+    "rating": 2200,
+    "solve_count": 78000,
+    "tags": [
+      "換根 DP",
+      "樹形 DP"
+    ],
+    "topic_id": "tree-dp",
+    "problem_type": "insight_transfer",
+    "tier": "challenge",
+    "strategy_hints": [
+      "先一次 DFS 求根的答案與每棵子樹大小，再用換根公式 O(1) 從父推子。",
+      "換根時：移到子節點 v，v 子樹內所有點距離 −1、子樹外所有點距離 +1。"
+    ],
+    "insight_note": "換根 DP 的代表題：第二趟 DFS 用父節點答案 O(1) 推導每個節點的全樹答案，避免對每個根重跑。",
+    "similar_problems": [
+      "treedp-lc-2049"
+    ]
+  },
+  {
+    "id": "treedp-lc-968",
+    "title": "監控二元樹",
+    "source": "leetcode",
+    "source_id": "binary-tree-cameras",
+    "rating": 2000,
+    "solve_count": 140000,
+    "tags": [
+      "樹形 DP",
+      "貪心"
+    ],
+    "topic_id": "tree-dp",
+    "problem_type": "insight_transfer",
+    "tier": "challenge",
+    "strategy_hints": [
+      "每個節點三種狀態：已被監控且有相機 / 已被監控無相機 / 未被監控，後序合併。",
+      "貪心地在「子節點未被監控」時才在父節點放相機，可使數量最少。"
+    ],
+    "insight_note": "把覆蓋問題建模成三狀態樹形 DP，利用後序資訊把放相機的決策推遲到必要時刻。",
+    "similar_problems": [
+      "treedp-lc-337"
+    ]
+  },
+  {
+    "id": "str-lc-28",
+    "title": "找出字串中第一個匹配項的下標",
+    "source": "leetcode",
+    "source_id": "find-the-index-of-the-first-occurrence-in-a-string",
+    "rating": 1300,
+    "solve_count": 820000,
+    "tags": [
+      "KMP",
+      "字串匹配"
+    ],
+    "topic_id": "string-algorithms",
+    "problem_type": "template",
+    "tier": "warmup",
+    "strategy_hints": [
+      "KMP 模板題：先建模式串的失敗函數，再線性掃描文本。",
+      "也可用 Z 函數或字串哈希驗證，注意分隔符不在字母表中。"
+    ],
+    "similar_problems": [
+      "str-lc-1392",
+      "str-lc-208"
+    ]
+  },
+  {
+    "id": "str-lc-208",
+    "title": "實現 Trie（前綴樹）",
+    "source": "leetcode",
+    "source_id": "implement-trie-prefix-tree",
+    "rating": 1500,
+    "solve_count": 520000,
+    "tags": [
+      "字典樹",
+      "資料結構"
+    ],
+    "topic_id": "string-algorithms",
+    "problem_type": "template",
+    "tier": "warmup",
+    "strategy_hints": [
+      "每個節點存 26 個子指標與一個「是否為單詞結尾」標記。",
+      "insert / search / startsWith 都沿著字元一路往下走，複雜度 O(|s|)。"
+    ],
+    "similar_problems": [
+      "str-lc-28"
+    ]
+  },
+  {
+    "id": "str-lc-1392",
+    "title": "最長快樂前綴",
+    "source": "leetcode",
+    "source_id": "longest-happy-prefix",
+    "rating": 1800,
+    "solve_count": 64000,
+    "tags": [
+      "KMP",
+      "前綴函數"
+    ],
+    "topic_id": "string-algorithms",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "快樂前綴 = 既是真前綴又是真後綴的最長字串，正是 fail[n−1]。",
+      "建一次前綴函數即得答案，O(n)。"
+    ],
+    "similar_problems": [
+      "str-lc-214"
+    ]
+  },
+  {
+    "id": "str-lc-214",
+    "title": "最短回文串",
+    "source": "leetcode",
+    "source_id": "shortest-palindrome",
+    "rating": 1800,
+    "solve_count": 78000,
+    "tags": [
+      "KMP",
+      "回文",
+      "字串哈希"
+    ],
+    "topic_id": "string-algorithms",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "對 s + '#' + reverse(s) 求前綴函數，fail 末值即 s 的最長回文前綴長度。",
+      "把剩餘後綴反轉接到開頭即得最短回文串。"
+    ],
+    "similar_problems": [
+      "str-lc-1392"
+    ]
+  },
+  {
+    "id": "str-lc-1044",
+    "title": "最長重複子串",
+    "source": "leetcode",
+    "source_id": "longest-duplicate-substring",
+    "rating": 2300,
+    "solve_count": 42000,
+    "tags": [
+      "字串哈希",
+      "二分答案",
+      "後綴陣列"
+    ],
+    "topic_id": "string-algorithms",
+    "problem_type": "insight_transfer",
+    "tier": "challenge",
+    "strategy_hints": [
+      "答案長度具單調性：能找到長 L 的重複子串就能找到更短的，二分長度 L。",
+      "對固定 L 用滾動哈希把所有長 L 子串塞入集合判重，注意雙哈希防碰撞。"
+    ],
+    "insight_note": "把「最長重複子串」拆成『二分長度 + 哈希判重』，是字串問題化為判定問題的典型套路（亦可用後綴陣列 height）。",
+    "similar_problems": [
+      "str-lc-3008"
+    ]
+  },
+  {
+    "id": "str-lc-3008",
+    "title": "找出陣列中的美麗下標 II",
+    "source": "leetcode",
+    "source_id": "find-beautiful-indices-in-the-given-array-ii",
+    "rating": 2016,
+    "solve_count": 14000,
+    "tags": [
+      "KMP",
+      "Z 函數",
+      "雙指針"
+    ],
+    "topic_id": "string-algorithms",
+    "problem_type": "insight_transfer",
+    "tier": "challenge",
+    "strategy_hints": [
+      "用 KMP 各找出 a、b 在 s 中的所有出現位置。",
+      "兩組位置都有序，用雙指針 / 二分檢查是否存在距離不超過 k 的配對。"
+    ],
+    "insight_note": "把多模式匹配結果轉成兩個有序位置陣列，再用雙指針處理距離約束，是匹配 + 區間思維的結合。",
+    "similar_problems": [
+      "str-lc-1044"
+    ]
+  },
+  {
+    "id": "math-lc-50",
+    "title": "Pow(x, n)",
+    "source": "leetcode",
+    "source_id": "powx-n",
+    "rating": 1300,
+    "solve_count": 690000,
+    "tags": [
+      "快速冪",
+      "分治"
+    ],
+    "topic_id": "math-number-theory",
+    "problem_type": "template",
+    "tier": "warmup",
+    "strategy_hints": [
+      "快速冪模板：依指數的二進位逐位平方累乘。",
+      "n 為負時取倒數，並小心 INT_MIN 取負溢位（先轉成 long long）。"
+    ],
+    "similar_problems": [
+      "math-lc-1922",
+      "math-lc-372"
+    ]
+  },
+  {
+    "id": "math-lc-1922",
+    "title": "統計好數字的數目",
+    "source": "leetcode",
+    "source_id": "count-good-numbers",
+    "rating": 1450,
+    "solve_count": 86000,
+    "tags": [
+      "快速冪",
+      "取模"
+    ],
+    "topic_id": "math-number-theory",
+    "problem_type": "template",
+    "tier": "warmup",
+    "strategy_hints": [
+      "偶數位有 5 種選擇、奇數位有 4 種，答案是 5^(偶位數) × 4^(奇位數)。",
+      "用模 1e9+7 的快速冪計算兩個冪次。"
+    ],
+    "similar_problems": [
+      "math-lc-50"
+    ]
+  },
+  {
+    "id": "math-lc-204",
+    "title": "計數質數",
+    "source": "leetcode",
+    "source_id": "count-primes",
+    "rating": 1400,
+    "solve_count": 470000,
+    "tags": [
+      "質數篩",
+      "埃氏篩"
+    ],
+    "topic_id": "math-number-theory",
+    "problem_type": "classic",
+    "tier": "warmup",
+    "strategy_hints": [
+      "埃氏篩 O(n log log n)：從每個質數的平方開始標記其倍數。",
+      "想 O(n) 可改用線性篩，每個合數只被最小質因子篩一次。"
+    ],
+    "similar_problems": [
+      "math-lc-372"
+    ]
+  },
+  {
+    "id": "math-lc-372",
+    "title": "超級次方",
+    "source": "leetcode",
+    "source_id": "super-pow",
+    "rating": 1600,
+    "solve_count": 64000,
+    "tags": [
+      "快速冪",
+      "歐拉定理"
+    ],
+    "topic_id": "math-number-theory",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "指數以陣列給出，利用 a^(10k+d) = (a^k)^10 · a^d 逐位處理。",
+      "每步都對 1337 取模；快速冪是核心子程序。"
+    ],
+    "similar_problems": [
+      "math-lc-50",
+      "math-lc-1922"
+    ]
+  },
+  {
+    "id": "math-lc-1735",
+    "title": "生成乘積陣列的方案數",
+    "source": "leetcode",
+    "source_id": "count-ways-to-make-array-with-product",
+    "rating": 2470,
+    "solve_count": 9000,
+    "tags": [
+      "組合數學",
+      "質因分解",
+      "隔板法"
+    ],
+    "topic_id": "math-number-theory",
+    "problem_type": "insight_transfer",
+    "tier": "challenge",
+    "strategy_hints": [
+      "對 k 質因分解，每個質因子的指數 e 獨立地分配到 n 個位置，用隔板法 C(e+n−1, n−1)。",
+      "把各質因子的方案數相乘，需預處理階乘與模逆元做 O(1) 組合數。"
+    ],
+    "insight_note": "乘積限制可拆成各質因子指數的獨立分配，再用隔板法 + 模逆元組合數，把數論與組合計數結合。",
+    "similar_problems": [
+      "math-lc-2543"
+    ]
+  },
+  {
+    "id": "math-lc-2543",
+    "title": "判斷一個點是否可以到達",
+    "source": "leetcode",
+    "source_id": "check-if-point-is-reachable",
+    "rating": 2500,
+    "solve_count": 8000,
+    "tags": [
+      "數論",
+      "最大公因數"
+    ],
+    "topic_id": "math-number-theory",
+    "problem_type": "insight_transfer",
+    "tier": "challenge",
+    "strategy_hints": [
+      "允許的操作都不改變 gcd 的奇質因子部分，等價於不斷除以 2 後判斷。",
+      "(x, y) 可達 (1,1) 的充要條件是 gcd(x, y) 為 2 的冪。"
+    ],
+    "insight_note": "把看似搜尋的可達性問題化簡為 gcd 的性質判斷——關鍵是觀察操作對 gcd 的不變量。",
+    "similar_problems": [
+      "math-lc-1735"
+    ]
+  },
+  {
+    "id": "bm-lc-78",
+    "title": "子集",
+    "source": "leetcode",
+    "source_id": "subsets",
+    "rating": 1300,
+    "solve_count": 760000,
+    "tags": [
+      "位元枚舉",
+      "子集"
+    ],
+    "topic_id": "bitmask-dp",
+    "problem_type": "template",
+    "tier": "warmup",
+    "strategy_hints": [
+      "枚舉 0..2^n−1，每個整數的二進位對應一個子集。",
+      "第 i 位為 1 代表選第 i 個元素，O(2^n × n) 列出所有子集。"
+    ],
+    "similar_problems": [
+      "bm-lc-1239"
+    ]
+  },
+  {
+    "id": "bm-lc-1239",
+    "title": "串聯字串的最大長度",
+    "source": "leetcode",
+    "source_id": "maximum-length-of-a-concatenated-string-with-unique-characters",
+    "rating": 1700,
+    "solve_count": 130000,
+    "tags": [
+      "位元遮罩",
+      "狀態壓縮"
+    ],
+    "topic_id": "bitmask-dp",
+    "problem_type": "template",
+    "tier": "warmup",
+    "strategy_hints": [
+      "把每個字串壓成 26 位的字元 bitmask，含重複字母的直接丟棄。",
+      "枚舉已選集合，能合併（與運算為 0）時用 popcount 更新最長長度。"
+    ],
+    "similar_problems": [
+      "bm-lc-78"
+    ]
+  },
+  {
+    "id": "bm-lc-698",
+    "title": "劃分為 k 個相等的子集",
+    "source": "leetcode",
+    "source_id": "partition-to-k-equal-sum-subsets",
+    "rating": 1900,
+    "solve_count": 180000,
+    "tags": [
+      "狀態壓縮 DP",
+      "子集和"
+    ],
+    "topic_id": "bitmask-dp",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "目標桶值 = 總和 / k；dp[mask] 記錄用掉 mask 這組元素後當前桶的已填量。",
+      "從 dp 可達的 mask 出發嘗試加入未用元素，超過桶值就跳過。"
+    ],
+    "similar_problems": [
+      "bm-lc-847"
+    ]
+  },
+  {
+    "id": "bm-lc-847",
+    "title": "存取所有節點的最短路徑",
+    "source": "leetcode",
+    "source_id": "shortest-path-visiting-all-nodes",
+    "rating": 2200,
+    "solve_count": 120000,
+    "tags": [
+      "狀態壓縮",
+      "BFS"
+    ],
+    "topic_id": "bitmask-dp",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "狀態 = (已訪問集合 mask, 當前節點 u)，在狀態圖上做 BFS 求最短步數。",
+      "起點可以是任意節點，初始把所有 (1<<i, i) 同時入隊。"
+    ],
+    "similar_problems": [
+      "bm-lc-698"
+    ]
+  },
+  {
+    "id": "bm-lc-1799",
+    "title": "N 次操作後的最大分數和",
+    "source": "leetcode",
+    "source_id": "maximize-score-after-n-operations",
+    "rating": 2072,
+    "solve_count": 46000,
+    "tags": [
+      "狀態壓縮 DP",
+      "配對",
+      "GCD"
+    ],
+    "topic_id": "bitmask-dp",
+    "problem_type": "insight_transfer",
+    "tier": "challenge",
+    "strategy_hints": [
+      "dp[mask] = 已選 mask 這些數時的最大分數，每次挑兩個未用的數配對。",
+      "第 i 次操作的係數由 popcount(mask)/2 決定，分數加上 i × gcd(a, b)。"
+    ],
+    "insight_note": "把「兩兩配對」建模成在 bitmask 上每次去掉兩個位元的 DP，操作序號由已選數量推得。",
+    "similar_problems": [
+      "bm-lc-1494"
+    ]
+  },
+  {
+    "id": "bm-lc-1494",
+    "title": "並行課程 II",
+    "source": "leetcode",
+    "source_id": "parallel-courses-ii",
+    "rating": 2600,
+    "solve_count": 11000,
+    "tags": [
+      "狀態壓縮 DP",
+      "枚舉子集"
+    ],
+    "topic_id": "bitmask-dp",
+    "problem_type": "insight_transfer",
+    "tier": "challenge",
+    "strategy_hints": [
+      "dp[mask] = 修完 mask 課程的最少學期數；先算出每個狀態下「先修已滿足且可修」的課程集合。",
+      "在可修集合中枚舉大小不超過 k 的子集作為本學期選課，轉移到新狀態。"
+    ],
+    "insight_note": "在 bitmask DP 上枚舉子集（O(3^n)）來決定每學期選課，是狀態壓縮 + 子集枚舉的綜合應用。",
+    "similar_problems": [
+      "bm-lc-1799"
+    ]
+  },
+  {
+    "id": "geo-lc-1266",
+    "title": "訪問所有點的最小時間",
+    "source": "leetcode",
+    "source_id": "minimum-time-visiting-all-points",
+    "rating": 1300,
+    "solve_count": 380000,
+    "tags": [
+      "幾何",
+      "切比雪夫距離"
+    ],
+    "topic_id": "computational-geometry",
+    "problem_type": "template",
+    "tier": "warmup",
+    "strategy_hints": [
+      "可斜走時相鄰兩點時間 = 切比雪夫距離 max(|dx|, |dy|)。",
+      "依序累加每段距離即為答案。"
+    ],
+    "similar_problems": [
+      "geo-lc-836"
+    ]
+  },
+  {
+    "id": "geo-lc-587",
+    "title": "安裝柵欄",
+    "source": "leetcode",
+    "source_id": "erect-the-fence",
+    "rating": 2400,
+    "solve_count": 38000,
+    "tags": [
+      "凸包",
+      "叉積"
+    ],
+    "topic_id": "computational-geometry",
+    "problem_type": "template",
+    "tier": "challenge",
+    "strategy_hints": [
+      "Andrew's Monotone Chain 求凸包：先按座標排序，分別建上下凸包。",
+      "本題要保留邊界共線點，叉積判斷要用嚴格小於 0 才彈棧。"
+    ],
+    "similar_problems": [
+      "geo-lc-149"
+    ]
+  },
+  {
+    "id": "geo-lc-836",
+    "title": "矩形重疊",
+    "source": "leetcode",
+    "source_id": "rectangle-overlap",
+    "rating": 1400,
+    "solve_count": 210000,
+    "tags": [
+      "幾何",
+      "區間投影"
+    ],
+    "topic_id": "computational-geometry",
+    "problem_type": "classic",
+    "tier": "warmup",
+    "strategy_hints": [
+      "兩矩形重疊 ⇔ 在 x、y 兩軸上的投影區間都有正長度交集。",
+      "判斷 rec1[0] < rec2[2] && rec2[0] < rec1[2] 與 y 軸同理。"
+    ],
+    "similar_problems": [
+      "geo-lc-939"
+    ]
+  },
+  {
+    "id": "geo-lc-939",
+    "title": "最小面積矩形",
+    "source": "leetcode",
+    "source_id": "minimum-area-rectangle",
+    "rating": 1700,
+    "solve_count": 90000,
+    "tags": [
+      "幾何",
+      "哈希",
+      "枚舉"
+    ],
+    "topic_id": "computational-geometry",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "枚舉作為對角線的兩個點（x、y 都不同），檢查另外兩個角是否都存在。",
+      "用哈希集合存所有點，O(n²) 枚舉點對。"
+    ],
+    "similar_problems": [
+      "geo-lc-836"
+    ]
+  },
+  {
+    "id": "geo-lc-149",
+    "title": "直線上最多的點數",
+    "source": "leetcode",
+    "source_id": "max-points-on-a-line",
+    "rating": 1800,
+    "solve_count": 260000,
+    "tags": [
+      "幾何",
+      "叉積",
+      "共線"
+    ],
+    "topic_id": "computational-geometry",
+    "problem_type": "insight_transfer",
+    "tier": "core",
+    "strategy_hints": [
+      "固定一個點，用叉積（而非浮點斜率）判斷其餘點是否共線。",
+      "對每個基準點統計各方向上的點數，取全域最大。"
+    ],
+    "insight_note": "用整數叉積判共線取代浮點斜率，避免精度與垂直線斜率無窮大的陷阱。",
+    "similar_problems": [
+      "geo-lc-587"
+    ]
+  },
+  {
+    "id": "geo-lc-1453",
+    "title": "圓形靶內的最大飛鏢數量",
+    "source": "leetcode",
+    "source_id": "maximum-number-of-darts-inside-of-a-circular-dartboard",
+    "rating": 2531,
+    "solve_count": 7000,
+    "tags": [
+      "幾何",
+      "枚舉圓心"
+    ],
+    "topic_id": "computational-geometry",
+    "problem_type": "insight_transfer",
+    "tier": "challenge",
+    "strategy_hints": [
+      "最優圓必有兩個點落在邊界上，枚舉每對點求出半徑 r 的兩個候選圓心。",
+      "對每個候選圓心統計落在圓內（距離 ≤ r + eps）的點數，取最大。"
+    ],
+    "insight_note": "把「放置圓使覆蓋最多點」轉成「枚舉由兩點決定的候選圓心」，是幾何最優化的離散化技巧。",
+    "similar_problems": [
+      "geo-lc-939"
+    ]
   }
 ]
