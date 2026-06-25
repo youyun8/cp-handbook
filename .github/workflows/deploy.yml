@@ -33,9 +33,11 @@ jobs:
         run: npm ci
 
       - name: Build static site
-        # next.config.mjs infers basePath from GITHUB_REPOSITORY when GITHUB_ACTIONS=true,
-        # so no base path needs to be hardcoded here (rename-safe).
-        run: npm run build
+        # build:static stashes app/api (OAuth routes can't be statically
+        # exported) and sets STATIC_EXPORT=true. next.config.mjs infers basePath
+        # from GITHUB_REPOSITORY when GITHUB_ACTIONS=true, so no base path needs
+        # to be hardcoded here (rename-safe).
+        run: npm run build:static
 
       - name: Disable Jekyll processing
         run: touch out/.nojekyll

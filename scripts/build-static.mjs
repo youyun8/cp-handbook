@@ -25,14 +25,22 @@ let moved = false;
 try {
   moved = moveIfExists(apiDir, stash);
 
+  const env = {
+    ...process.env,
+    STATIC_EXPORT: 'true',
+    NEXT_PUBLIC_STATIC_EXPORT: 'true'
+  };
+
+  // For local/manual deploys default the base path to /cp-handbook. In GitHub
+  // Actions leave it unset so next.config.mjs can infer it from
+  // GITHUB_REPOSITORY (rename-safe).
+  if (env.NEXT_PUBLIC_BASE_PATH === undefined && env.GITHUB_ACTIONS !== 'true') {
+    env.NEXT_PUBLIC_BASE_PATH = '/cp-handbook';
+  }
+
   const result = spawnSync('next', ['build'], {
     stdio: 'inherit',
-    env: {
-      ...process.env,
-      STATIC_EXPORT: 'true',
-      NEXT_PUBLIC_STATIC_EXPORT: 'true',
-      NEXT_PUBLIC_BASE_PATH: process.env.NEXT_PUBLIC_BASE_PATH ?? '/cp-handbook'
-    }
+    env
   });
 
   if (result.status !== 0) {
