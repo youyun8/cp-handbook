@@ -86,7 +86,7 @@ export function TopicHandbook({
                   key={pitfall}
                   className="rounded-2xl border border-rose-400/30 bg-background/45 p-3 text-sm leading-7 text-rose-900 dark:text-rose-100"
                 >
-                  {pitfall}
+                  <MarkdownBlock className="text-rose-900 dark:text-rose-100">{pitfall}</MarkdownBlock>
                 </li>
               ))}
             </ul>
