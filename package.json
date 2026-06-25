@@ -8,6 +8,9 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "build:static": "node scripts/build-static.mjs",
+    "reconcile:titles": "node scripts/reconcile-titles.mjs",
+    "reconcile:titles:check": "node scripts/reconcile-titles.mjs --check",
+    "reconcile:titles:write": "node scripts/reconcile-titles.mjs --write",
     "deploy": "npm run build:static && gh-pages -d out --nojekyll"
   },
   "dependencies": {

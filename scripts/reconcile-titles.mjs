@@ -3,6 +3,8 @@
 //
 //   node scripts/reconcile-titles.mjs          # dry run, writes a report only
 //   node scripts/reconcile-titles.mjs --write  # apply canonical titles in place
+//   node scripts/reconcile-titles.mjs --check  # CI drift gate, exit 1 if any
+//                                                drift or dead id is found
 //
 // Sources & canonical title:
 //   leetcode   -> leetcode.cn GraphQL translatedTitle (Simplified) -> OpenCC s2twp
@@ -21,6 +23,7 @@ import * as OpenCC from 'opencc-js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const WRITE = process.argv.includes('--write');
+const CHECK = process.argv.includes('--check');
 const UA = 'Mozilla/5.0 (cp-handbook title-reconcile)';
 const toTWraw = OpenCC.Converter({ from: 'cn', to: 'twp' });
 // s2twp over-localizes a few IT phrases in a math/algorithm context.
@@ -224,4 +227,10 @@ if (report.errors.length) {
 if (!WRITE && report.changed.length) {
   console.log('\n-- first 40 proposed changes --');
   for (const c of report.changed.slice(0, 40)) console.log(`  [${c.source} ${c.source_id}] "${c.old}" -> "${c.new}"`);
+}
+
+if (CHECK && (report.changed.length || report.errors.length)) {
+  console.error(`\n✗ title drift detected: ${report.changed.length} out of sync, ${report.errors.length} unresolved id(s).`);
+  console.error('  Run `npm run reconcile:titles:write` to realign, then review the diff.');
+  process.exit(1);
 }
