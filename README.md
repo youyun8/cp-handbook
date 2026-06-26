@@ -130,6 +130,7 @@ openssl rand -hex 32
 - 前往 **進度（/progress）** 頁面，出現「**雲端同步**」區塊：
   - 未登入：顯示 GitHub 登入按鈕。
   - 登入後：顯示 **⬆ 同步至雲端** 和 **⬇ 從雲端載入** 按鈕，進度儲存至你帳號下的私有 Gist（名稱 `cp-handbook-progress-<userId>`）。
+- 進度總覽會分流到 **手冊進度（/progress/handbook）** 與 **實戰提交分析（/progress/performance）**，避免把手冊完成度和競賽提交統計混在一起。
 
 ---
 

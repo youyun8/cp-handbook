@@ -4,6 +4,7 @@
     "title": "搜尋插入位置",
     "source": "leetcode",
     "source_id": "search-insert-position",
+    "frontend_id": "35",
     "rating": 1200,
     "solve_count": 950000,
     "tags": [
@@ -27,6 +28,7 @@
     "title": "搜尋旋轉排序陣列",
     "source": "leetcode",
     "source_id": "search-in-rotated-sorted-array",
+    "frontend_id": "33",
     "rating": 1800,
     "solve_count": 620000,
     "tags": [
@@ -96,6 +98,7 @@
     "title": "乘法表中第k小的數",
     "source": "leetcode",
     "source_id": "kth-smallest-number-in-multiplication-table",
+    "frontend_id": "668",
     "rating": 2200,
     "solve_count": 210000,
     "tags": [
@@ -120,6 +123,7 @@
     "title": "腐爛的橘子",
     "source": "leetcode",
     "source_id": "rotting-oranges",
+    "frontend_id": "994",
     "rating": 1300,
     "solve_count": 520000,
     "tags": [
@@ -143,6 +147,7 @@
     "title": "單詞接龍",
     "source": "leetcode",
     "source_id": "word-ladder",
+    "frontend_id": "127",
     "rating": 1900,
     "solve_count": 430000,
     "tags": [
@@ -166,6 +171,7 @@
     "title": "使網格圖至少有一條有效路徑的最小代價",
     "source": "leetcode",
     "source_id": "minimum-cost-to-make-at-least-one-valid-path-in-a-grid",
+    "frontend_id": "1368",
     "rating": 2000,
     "solve_count": 165000,
     "tags": [
@@ -189,6 +195,7 @@
     "title": "課程表 IV",
     "source": "leetcode",
     "source_id": "course-schedule-iv",
+    "frontend_id": "1462",
     "rating": 2100,
     "solve_count": 140000,
     "tags": [
@@ -212,6 +219,7 @@
     "title": "獲取所有鑰匙的最短路徑",
     "source": "leetcode",
     "source_id": "shortest-path-to-get-all-keys",
+    "frontend_id": "864",
     "rating": 2200,
     "solve_count": 98000,
     "tags": [
@@ -236,6 +244,7 @@
     "title": "合併區間",
     "source": "leetcode",
     "source_id": "merge-intervals",
+    "frontend_id": "56",
     "rating": 1300,
     "solve_count": 810000,
     "tags": [
@@ -259,6 +268,7 @@
     "title": "會議室 II",
     "source": "leetcode",
     "source_id": "meeting-rooms-ii",
+    "frontend_id": "253",
     "rating": 1800,
     "solve_count": 360000,
     "tags": [
@@ -282,6 +292,7 @@
     "title": "我的日程安排表 III",
     "source": "leetcode",
     "source_id": "my-calendar-iii",
+    "frontend_id": "732",
     "rating": 1900,
     "solve_count": 175000,
     "tags": [
@@ -305,6 +316,7 @@
     "title": "矩形面積 II",
     "source": "leetcode",
     "source_id": "rectangle-area-ii",
+    "frontend_id": "850",
     "rating": 2200,
     "solve_count": 120000,
     "tags": [
@@ -328,6 +340,7 @@
     "title": "員工空閒時間",
     "source": "leetcode",
     "source_id": "employee-free-time",
+    "frontend_id": "759",
     "rating": 2200,
     "solve_count": 92000,
     "tags": [
@@ -352,6 +365,7 @@
     "title": "前 K 個高頻元素",
     "source": "leetcode",
     "source_id": "top-k-frequent-elements",
+    "frontend_id": "347",
     "rating": 1400,
     "solve_count": 760000,
     "tags": [
@@ -375,6 +389,7 @@
     "title": "重構字串",
     "source": "leetcode",
     "source_id": "reorganize-string",
+    "frontend_id": "767",
     "rating": 1900,
     "solve_count": 300000,
     "tags": [
@@ -398,6 +413,7 @@
     "title": "最小區間",
     "source": "leetcode",
     "source_id": "smallest-range-covering-elements-from-k-lists",
+    "frontend_id": "632",
     "rating": 2000,
     "solve_count": 170000,
     "tags": [
@@ -421,6 +437,7 @@
     "title": "課程表 III",
     "source": "leetcode",
     "source_id": "course-schedule-iii",
+    "frontend_id": "630",
     "rating": 2100,
     "solve_count": 185000,
     "tags": [
@@ -444,6 +461,7 @@
     "title": "有序矩陣中的第 k 個最小陣列和",
     "source": "leetcode",
     "source_id": "find-the-kth-smallest-sum-of-a-matrix-with-sorted-rows",
+    "frontend_id": "1439",
     "rating": 2200,
     "solve_count": 86000,
     "tags": [
@@ -491,6 +509,7 @@
     "title": "最長遞增子序列",
     "source": "leetcode",
     "source_id": "longest-increasing-subsequence",
+    "frontend_id": "300",
     "rating": 1800,
     "solve_count": 620000,
     "tags": [
@@ -514,6 +533,7 @@
     "title": "分割等和子集",
     "source": "leetcode",
     "source_id": "partition-equal-subset-sum",
+    "frontend_id": "416",
     "rating": 1900,
     "solve_count": 460000,
     "tags": [
@@ -537,6 +557,7 @@
     "title": "戳氣球",
     "source": "leetcode",
     "source_id": "burst-balloons",
+    "frontend_id": "312",
     "rating": 2200,
     "solve_count": 300000,
     "tags": [
@@ -560,6 +581,7 @@
     "title": "奇怪的印表機",
     "source": "leetcode",
     "source_id": "strange-printer",
+    "frontend_id": "664",
     "rating": 2200,
     "solve_count": 150000,
     "tags": [
@@ -584,6 +606,7 @@
     "title": "長度最小的子陣列",
     "source": "leetcode",
     "source_id": "minimum-size-subarray-sum",
+    "frontend_id": "209",
     "rating": 1300,
     "solve_count": 520000,
     "tags": [
@@ -607,6 +630,7 @@
     "title": "K 個不同整數的子陣列",
     "source": "leetcode",
     "source_id": "subarrays-with-k-different-integers",
+    "frontend_id": "992",
     "rating": 2000,
     "solve_count": 250000,
     "tags": [
@@ -630,6 +654,7 @@
     "title": "盛最多水的容器",
     "source": "leetcode",
     "source_id": "container-with-most-water",
+    "frontend_id": "11",
     "rating": 1800,
     "solve_count": 930000,
     "tags": [
@@ -653,6 +678,7 @@
     "title": "最小覆蓋子串",
     "source": "leetcode",
     "source_id": "minimum-window-substring",
+    "frontend_id": "76",
     "rating": 2100,
     "solve_count": 620000,
     "tags": [
@@ -676,6 +702,7 @@
     "title": "替換後的最長重複字元",
     "source": "leetcode",
     "source_id": "longest-repeating-character-replacement",
+    "frontend_id": "424",
     "rating": 2200,
     "solve_count": 420000,
     "tags": [
@@ -700,6 +727,7 @@
     "title": "省份數量",
     "source": "leetcode",
     "source_id": "number-of-provinces",
+    "frontend_id": "547",
     "rating": 1200,
     "solve_count": 520000,
     "tags": [
@@ -723,6 +751,7 @@
     "title": "冗餘連線 II",
     "source": "leetcode",
     "source_id": "redundant-connection-ii",
+    "frontend_id": "685",
     "rating": 1900,
     "solve_count": 145000,
     "tags": [
@@ -746,6 +775,7 @@
     "title": "等式方程的可滿足性",
     "source": "leetcode",
     "source_id": "satisfiability-of-equality-equations",
+    "frontend_id": "990",
     "rating": 1800,
     "solve_count": 260000,
     "tags": [
@@ -769,6 +799,7 @@
     "title": "移除最多的同行或同列石頭",
     "source": "leetcode",
     "source_id": "most-stones-removed-with-same-row-or-column",
+    "frontend_id": "947",
     "rating": 2100,
     "solve_count": 210000,
     "tags": [
@@ -792,6 +823,7 @@
     "title": "相似字串組",
     "source": "leetcode",
     "source_id": "similar-string-groups",
+    "frontend_id": "839",
     "rating": 2200,
     "solve_count": 135000,
     "tags": [
@@ -816,6 +848,7 @@
     "title": "樹節點的第 K 個祖先",
     "source": "leetcode",
     "source_id": "kth-ancestor-of-a-tree-node",
+    "frontend_id": "1483",
     "rating": 1500,
     "solve_count": 120000,
     "tags": [
@@ -908,6 +941,7 @@
     "title": "查詢樹中環的長度",
     "source": "leetcode",
     "source_id": "cycle-length-queries-in-a-tree",
+    "frontend_id": "2509",
     "rating": 2200,
     "solve_count": 90000,
     "tags": [
@@ -932,6 +966,7 @@
     "title": "每日溫度",
     "source": "leetcode",
     "source_id": "daily-temperatures",
+    "frontend_id": "739",
     "rating": 1300,
     "solve_count": 720000,
     "tags": [
@@ -955,6 +990,7 @@
     "title": "柱狀圖中最大的矩形",
     "source": "leetcode",
     "source_id": "largest-rectangle-in-histogram",
+    "frontend_id": "84",
     "rating": 2000,
     "solve_count": 360000,
     "tags": [
@@ -978,6 +1014,7 @@
     "title": "滑動視窗最大值",
     "source": "leetcode",
     "source_id": "sliding-window-maximum",
+    "frontend_id": "239",
     "rating": 1900,
     "solve_count": 520000,
     "tags": [
@@ -1001,6 +1038,7 @@
     "title": "子陣列的最小值之和",
     "source": "leetcode",
     "source_id": "sum-of-subarray-minimums",
+    "frontend_id": "907",
     "rating": 2100,
     "solve_count": 240000,
     "tags": [
@@ -1024,6 +1062,7 @@
     "title": "最大寬度坡",
     "source": "leetcode",
     "source_id": "maximum-width-ramp",
+    "frontend_id": "962",
     "rating": 2200,
     "solve_count": 130000,
     "tags": [
@@ -1048,6 +1087,7 @@
     "title": "區域和檢索 - 陣列可修改",
     "source": "leetcode",
     "source_id": "range-sum-query-mutable",
+    "frontend_id": "307",
     "rating": 1500,
     "solve_count": 250000,
     "tags": [
@@ -1071,6 +1111,7 @@
     "title": "計算右側小於當前元素的個數",
     "source": "leetcode",
     "source_id": "count-of-smaller-numbers-after-self",
+    "frontend_id": "315",
     "rating": 2000,
     "solve_count": 300000,
     "tags": [
@@ -1094,6 +1135,7 @@
     "title": "區間和的個數",
     "source": "leetcode",
     "source_id": "count-of-range-sum",
+    "frontend_id": "327",
     "rating": 2100,
     "solve_count": 190000,
     "tags": [
@@ -1117,6 +1159,7 @@
     "title": "掉落的方塊",
     "source": "leetcode",
     "source_id": "falling-squares",
+    "frontend_id": "699",
     "rating": 2200,
     "solve_count": 120000,
     "tags": [
@@ -1140,6 +1183,7 @@
     "title": "翻轉對",
     "source": "leetcode",
     "source_id": "reverse-pairs",
+    "frontend_id": "493",
     "rating": 2200,
     "solve_count": 210000,
     "tags": [
@@ -1164,6 +1208,7 @@
     "title": "二分查詢",
     "source": "leetcode",
     "source_id": "binary-search",
+    "frontend_id": "704",
     "rating": 1200,
     "solve_count": 1200000,
     "tags": [
@@ -1187,6 +1232,7 @@
     "title": "搜尋插入位置",
     "source": "leetcode",
     "source_id": "search-insert-position",
+    "frontend_id": "35",
     "rating": 1200,
     "solve_count": 950000,
     "tags": [
@@ -1210,6 +1256,7 @@
     "title": "尋找峰值",
     "source": "leetcode",
     "source_id": "find-peak-element",
+    "frontend_id": "162",
     "rating": 1500,
     "solve_count": 650000,
     "tags": [
@@ -1232,6 +1279,7 @@
     "title": "尋找旋轉排序陣列中的最小值",
     "source": "leetcode",
     "source_id": "find-minimum-in-rotated-sorted-array",
+    "frontend_id": "153",
     "rating": 1500,
     "solve_count": 900000,
     "tags": [
@@ -1254,6 +1302,7 @@
     "title": "在排序陣列中查詢元素的第一個和最後一個位置",
     "source": "leetcode",
     "source_id": "find-first-and-last-position-of-element-in-sorted-array",
+    "frontend_id": "34",
     "rating": 1500,
     "solve_count": 1100000,
     "tags": [
@@ -1278,6 +1327,7 @@
     "title": "在 D 天內送達包裹的能力",
     "source": "leetcode",
     "source_id": "capacity-to-ship-packages-within-d-days",
+    "frontend_id": "1011",
     "rating": 1600,
     "solve_count": 720000,
     "tags": [
@@ -1301,6 +1351,7 @@
     "title": "分割陣列的最大值",
     "source": "leetcode",
     "source_id": "split-array-largest-sum",
+    "frontend_id": "410",
     "rating": 1800,
     "solve_count": 520000,
     "tags": [
@@ -1324,6 +1375,7 @@
     "title": "第 N 個神奇數字",
     "source": "leetcode",
     "source_id": "nth-magical-number",
+    "frontend_id": "878",
     "rating": 2000,
     "solve_count": 180000,
     "tags": [
@@ -1347,6 +1399,7 @@
     "title": "同時執行 N 臺電腦的最長時間",
     "source": "leetcode",
     "source_id": "maximum-running-time-of-n-computers",
+    "frontend_id": "2141",
     "rating": 2100,
     "solve_count": 130000,
     "tags": [
@@ -1371,6 +1424,7 @@
     "title": "統計最大元素出現至少 K 次的子陣列",
     "source": "leetcode",
     "source_id": "count-subarrays-where-max-element-appears-at-least-k-times",
+    "frontend_id": "2962",
     "rating": 2300,
     "solve_count": 45000,
     "tags": [
@@ -1394,6 +1448,7 @@
     "title": "島嶼數量",
     "source": "leetcode",
     "source_id": "number-of-islands",
+    "frontend_id": "200",
     "rating": 1300,
     "solve_count": 1800000,
     "tags": [
@@ -1418,6 +1473,7 @@
     "title": "課程表",
     "source": "leetcode",
     "source_id": "course-schedule",
+    "frontend_id": "207",
     "rating": 1500,
     "solve_count": 1100000,
     "tags": [
@@ -1441,6 +1497,7 @@
     "title": "課程表 II",
     "source": "leetcode",
     "source_id": "course-schedule-ii",
+    "frontend_id": "210",
     "rating": 1500,
     "solve_count": 950000,
     "tags": [
@@ -1463,6 +1520,7 @@
     "title": "01 矩陣",
     "source": "leetcode",
     "source_id": "01-matrix",
+    "frontend_id": "542",
     "rating": 1600,
     "solve_count": 780000,
     "tags": [
@@ -1486,6 +1544,7 @@
     "title": "地圖分析",
     "source": "leetcode",
     "source_id": "as-far-from-land-as-possible",
+    "frontend_id": "1162",
     "rating": 1600,
     "solve_count": 280000,
     "tags": [
@@ -1508,6 +1567,7 @@
     "title": "最大人工島",
     "source": "leetcode",
     "source_id": "making-a-large-island",
+    "frontend_id": "827",
     "rating": 1800,
     "solve_count": 190000,
     "tags": [
@@ -1532,6 +1592,7 @@
     "title": "跳躍遊戲 IV",
     "source": "leetcode",
     "source_id": "jump-game-iv",
+    "frontend_id": "1345",
     "rating": 1900,
     "solve_count": 145000,
     "tags": [
@@ -1557,6 +1618,7 @@
     "title": "圖中的最短環",
     "source": "leetcode",
     "source_id": "shortest-cycle-in-a-graph",
+    "frontend_id": "2608",
     "rating": 2100,
     "solve_count": 55000,
     "tags": [
@@ -1581,6 +1643,7 @@
     "title": "插入區間",
     "source": "leetcode",
     "source_id": "insert-interval",
+    "frontend_id": "57",
     "rating": 1500,
     "solve_count": 680000,
     "tags": [
@@ -1604,6 +1667,7 @@
     "title": "用最少數量的箭引爆氣球",
     "source": "leetcode",
     "source_id": "minimum-number-of-arrows-to-burst-balloons",
+    "frontend_id": "452",
     "rating": 1500,
     "solve_count": 450000,
     "tags": [
@@ -1627,6 +1691,7 @@
     "title": "無重疊區間",
     "source": "leetcode",
     "source_id": "non-overlapping-intervals",
+    "frontend_id": "435",
     "rating": 1500,
     "solve_count": 490000,
     "tags": [
@@ -1649,6 +1714,7 @@
     "title": "拼車",
     "source": "leetcode",
     "source_id": "car-pooling",
+    "frontend_id": "1094",
     "rating": 1600,
     "solve_count": 350000,
     "tags": [
@@ -1671,6 +1737,7 @@
     "title": "將區間分為最少組數",
     "source": "leetcode",
     "source_id": "divide-intervals-into-minimum-number-of-groups",
+    "frontend_id": "2406",
     "rating": 1700,
     "solve_count": 170000,
     "tags": [
@@ -1695,6 +1762,7 @@
     "title": "天際線問題",
     "source": "leetcode",
     "source_id": "the-skyline-problem",
+    "frontend_id": "218",
     "rating": 1900,
     "solve_count": 310000,
     "tags": [
@@ -1719,6 +1787,7 @@
     "title": "陣列中的第K個最大元素",
     "source": "leetcode",
     "source_id": "kth-largest-element-in-an-array",
+    "frontend_id": "215",
     "rating": 1400,
     "solve_count": 1500000,
     "tags": [
@@ -1741,6 +1810,7 @@
     "title": "合併 K 個升序連結串列",
     "source": "leetcode",
     "source_id": "merge-k-sorted-lists",
+    "frontend_id": "23",
     "rating": 1500,
     "solve_count": 1200000,
     "tags": [
@@ -1763,6 +1833,7 @@
     "title": "資料流的中位數",
     "source": "leetcode",
     "source_id": "find-median-from-data-stream",
+    "frontend_id": "295",
     "rating": 1700,
     "solve_count": 680000,
     "tags": [
@@ -1785,6 +1856,7 @@
     "title": "最大子序列的分數",
     "source": "leetcode",
     "source_id": "maximum-subsequence-score",
+    "frontend_id": "2542",
     "rating": 1700,
     "solve_count": 150000,
     "tags": [
@@ -1807,6 +1879,7 @@
     "title": "可以到達的最遠建築",
     "source": "leetcode",
     "source_id": "furthest-building-you-can-reach",
+    "frontend_id": "1642",
     "rating": 1600,
     "solve_count": 280000,
     "tags": [
@@ -1829,6 +1902,7 @@
     "title": "陣列的最小偏移量",
     "source": "leetcode",
     "source_id": "minimize-deviation-in-array",
+    "frontend_id": "1675",
     "rating": 2000,
     "solve_count": 120000,
     "tags": [
@@ -1854,6 +1928,7 @@
     "title": "零錢兌換",
     "source": "leetcode",
     "source_id": "coin-change",
+    "frontend_id": "322",
     "rating": 1400,
     "solve_count": 1500000,
     "tags": [
@@ -1877,6 +1952,7 @@
     "title": "最長公共子序列",
     "source": "leetcode",
     "source_id": "longest-common-subsequence",
+    "frontend_id": "1143",
     "rating": 1500,
     "solve_count": 1100000,
     "tags": [
@@ -1899,6 +1975,7 @@
     "title": "最長迴文子序列",
     "source": "leetcode",
     "source_id": "longest-palindromic-subsequence",
+    "frontend_id": "516",
     "rating": 1600,
     "solve_count": 600000,
     "tags": [
@@ -1922,6 +1999,7 @@
     "title": "規劃兼職工作",
     "source": "leetcode",
     "source_id": "maximum-profit-in-job-scheduling",
+    "frontend_id": "1235",
     "rating": 1800,
     "solve_count": 360000,
     "tags": [
@@ -1946,6 +2024,7 @@
     "title": "讓字串成為迴文串的最少插入次數",
     "source": "leetcode",
     "source_id": "minimum-insertion-steps-to-make-a-string-palindrome",
+    "frontend_id": "1312",
     "rating": 1900,
     "solve_count": 240000,
     "tags": [
@@ -1969,6 +2048,7 @@
     "title": "字串中的額外字元",
     "source": "leetcode",
     "source_id": "extra-characters-in-a-string",
+    "frontend_id": "2707",
     "rating": 2100,
     "solve_count": 130000,
     "tags": [
@@ -1994,6 +2074,7 @@
     "title": "兩數之和 II - 輸入有序陣列",
     "source": "leetcode",
     "source_id": "two-sum-ii-input-array-is-sorted",
+    "frontend_id": "167",
     "rating": 1300,
     "solve_count": 950000,
     "tags": [
@@ -2016,6 +2097,7 @@
     "title": "K 個不同整數的子陣列",
     "source": "leetcode",
     "source_id": "subarrays-with-k-different-integers",
+    "frontend_id": "992",
     "rating": 1800,
     "solve_count": 210000,
     "tags": [
@@ -2039,6 +2121,7 @@
     "title": "最大連續1的個數 III",
     "source": "leetcode",
     "source_id": "max-consecutive-ones-iii",
+    "frontend_id": "1004",
     "rating": 1600,
     "solve_count": 420000,
     "tags": [
@@ -2062,6 +2145,7 @@
     "title": "統計定界子陣列的數目",
     "source": "leetcode",
     "source_id": "count-subarrays-with-fixed-bounds",
+    "frontend_id": "2444",
     "rating": 2000,
     "solve_count": 120000,
     "tags": [
@@ -2086,6 +2170,7 @@
     "title": "統計完全子陣列的數目",
     "source": "leetcode",
     "source_id": "count-complete-subarrays-in-an-array",
+    "frontend_id": "2799",
     "rating": 2100,
     "solve_count": 90000,
     "tags": [
@@ -2109,6 +2194,7 @@
     "title": "交換字串中的元素",
     "source": "leetcode",
     "source_id": "smallest-string-with-swaps",
+    "frontend_id": "1202",
     "rating": 1700,
     "solve_count": 200000,
     "tags": [
@@ -2132,6 +2218,7 @@
     "title": "保證圖可完全遍歷",
     "source": "leetcode",
     "source_id": "remove-max-number-of-edges-to-keep-graph-fully-traversable",
+    "frontend_id": "1579",
     "rating": 2000,
     "solve_count": 170000,
     "tags": [
@@ -2156,6 +2243,7 @@
     "title": "檢查邊長度限制的路徑是否存在",
     "source": "leetcode",
     "source_id": "checking-existence-of-edge-length-limited-paths",
+    "frontend_id": "1697",
     "rating": 1900,
     "solve_count": 110000,
     "tags": [
@@ -2180,6 +2268,7 @@
     "title": "矩陣查詢可獲得的最大分數",
     "source": "leetcode",
     "source_id": "maximum-number-of-points-from-grid-queries",
+    "frontend_id": "2503",
     "rating": 2100,
     "solve_count": 80000,
     "tags": [
@@ -2204,6 +2293,7 @@
     "title": "樹節點的第 K 個祖先",
     "source": "leetcode",
     "source_id": "kth-ancestor-of-a-tree-node",
+    "frontend_id": "1483",
     "rating": 1900,
     "solve_count": 110000,
     "tags": [
@@ -2227,6 +2317,7 @@
     "title": "邊權重均等查詢",
     "source": "leetcode",
     "source_id": "minimum-edge-weight-equilibrium-queries-in-a-tree",
+    "frontend_id": "2846",
     "rating": 2000,
     "solve_count": 55000,
     "tags": [
@@ -2251,6 +2342,7 @@
     "title": "移除子樹後的二叉樹高度",
     "source": "leetcode",
     "source_id": "height-of-binary-tree-after-subtree-removal-queries",
+    "frontend_id": "2458",
     "rating": 2200,
     "solve_count": 65000,
     "tags": [
@@ -2276,6 +2368,7 @@
     "title": "子陣列的最小值之和",
     "source": "leetcode",
     "source_id": "sum-of-subarray-minimums",
+    "frontend_id": "907",
     "rating": 1800,
     "solve_count": 330000,
     "tags": [
@@ -2299,6 +2392,7 @@
     "title": "子陣列範圍和",
     "source": "leetcode",
     "source_id": "sum-of-subarray-ranges",
+    "frontend_id": "2104",
     "rating": 1800,
     "solve_count": 220000,
     "tags": [
@@ -2322,6 +2416,7 @@
     "title": "最大矩形",
     "source": "leetcode",
     "source_id": "maximal-rectangle",
+    "frontend_id": "85",
     "rating": 1800,
     "solve_count": 450000,
     "tags": [
@@ -2344,6 +2439,7 @@
     "title": "佇列中可以看到的人數",
     "source": "leetcode",
     "source_id": "number-of-visible-people-in-a-queue",
+    "frontend_id": "1944",
     "rating": 2000,
     "solve_count": 120000,
     "tags": [
@@ -2367,6 +2463,7 @@
     "title": "邊界元素是最大值的子陣列數目",
     "source": "leetcode",
     "source_id": "find-the-number-of-subarrays-where-boundary-elements-are-maximum",
+    "frontend_id": "3113",
     "rating": 2200,
     "solve_count": 45000,
     "tags": [
@@ -2391,6 +2488,7 @@
     "title": "計算右側小於當前元素的個數",
     "source": "leetcode",
     "source_id": "count-of-smaller-numbers-after-self",
+    "frontend_id": "315",
     "rating": 1700,
     "solve_count": 430000,
     "tags": [
@@ -2415,6 +2513,7 @@
     "title": "翻轉對",
     "source": "leetcode",
     "source_id": "reverse-pairs",
+    "frontend_id": "493",
     "rating": 1800,
     "solve_count": 250000,
     "tags": [
@@ -2439,6 +2538,7 @@
     "title": "以組為單位訂音樂會的門票",
     "source": "leetcode",
     "source_id": "booking-concert-tickets-in-groups",
+    "frontend_id": "2286",
     "rating": 2000,
     "solve_count": 55000,
     "tags": [
@@ -2462,6 +2562,7 @@
     "title": "最長遞增子序列 II",
     "source": "leetcode",
     "source_id": "longest-increasing-subsequence-ii",
+    "frontend_id": "2407",
     "rating": 2000,
     "solve_count": 75000,
     "tags": [
@@ -2486,6 +2587,7 @@
     "title": "找到 Alice 和 Bob 可以相遇的建築",
     "source": "leetcode",
     "source_id": "find-building-where-alice-and-bob-can-meet",
+    "frontend_id": "2940",
     "rating": 2300,
     "solve_count": 40000,
     "tags": [
@@ -2511,6 +2613,7 @@
     "title": "網路延遲時間",
     "source": "leetcode",
     "source_id": "network-delay-time",
+    "frontend_id": "743",
     "rating": 1400,
     "solve_count": 680000,
     "tags": [
@@ -2534,6 +2637,7 @@
     "title": "機率最大的路徑",
     "source": "leetcode",
     "source_id": "path-with-maximum-probability",
+    "frontend_id": "1514",
     "rating": 1500,
     "solve_count": 290000,
     "tags": [
@@ -2556,6 +2660,7 @@
     "title": "K 站中轉內最便宜的航班",
     "source": "leetcode",
     "source_id": "cheapest-flights-within-k-stops",
+    "frontend_id": "787",
     "rating": 1600,
     "solve_count": 560000,
     "tags": [
@@ -2579,6 +2684,7 @@
     "title": "閾值距離內鄰居最少的城市",
     "source": "leetcode",
     "source_id": "find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance",
+    "frontend_id": "1334",
     "rating": 1600,
     "solve_count": 260000,
     "tags": [
@@ -2601,6 +2707,7 @@
     "title": "設計可以求最短路徑的圖類",
     "source": "leetcode",
     "source_id": "design-graph-with-shortest-path-calculator",
+    "frontend_id": "2642",
     "rating": 1800,
     "solve_count": 140000,
     "tags": [
@@ -2624,6 +2731,7 @@
     "title": "修改圖中的邊權",
     "source": "leetcode",
     "source_id": "modify-graph-edge-weights",
+    "frontend_id": "2699",
     "rating": 2300,
     "solve_count": 30000,
     "tags": [
@@ -2649,6 +2757,7 @@
     "title": "連線所有點的最小費用",
     "source": "leetcode",
     "source_id": "min-cost-to-connect-all-points",
+    "frontend_id": "1584",
     "rating": 1700,
     "solve_count": 320000,
     "tags": [
@@ -2695,6 +2804,7 @@
     "title": "水資源分配最佳化",
     "source": "leetcode",
     "source_id": "optimize-water-distribution-in-a-village",
+    "frontend_id": "1168",
     "rating": 2100,
     "solve_count": 36000,
     "tags": [
@@ -2741,6 +2851,7 @@
     "title": "找到最小生成樹裡的關鍵邊和偽關鍵邊",
     "source": "leetcode",
     "source_id": "find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree",
+    "frontend_id": "1489",
     "rating": 2400,
     "solve_count": 28000,
     "tags": [
@@ -2765,6 +2876,7 @@
     "title": "檢查邊長度限制的路徑是否存在",
     "source": "leetcode",
     "source_id": "checking-existence-of-edge-length-limited-paths",
+    "frontend_id": "1697",
     "rating": 2300,
     "solve_count": 38000,
     "tags": [
@@ -2789,6 +2901,7 @@
     "title": "二叉樹的直徑",
     "source": "leetcode",
     "source_id": "diameter-of-binary-tree",
+    "frontend_id": "543",
     "rating": 1200,
     "solve_count": 720000,
     "tags": [
@@ -2812,6 +2925,7 @@
     "title": "打家劫舍 III",
     "source": "leetcode",
     "source_id": "house-robber-iii",
+    "frontend_id": "337",
     "rating": 1500,
     "solve_count": 410000,
     "tags": [
@@ -2834,6 +2948,7 @@
     "title": "二叉樹中的最大路徑和",
     "source": "leetcode",
     "source_id": "binary-tree-maximum-path-sum",
+    "frontend_id": "124",
     "rating": 1700,
     "solve_count": 560000,
     "tags": [
@@ -2856,6 +2971,7 @@
     "title": "統計最高分的節點數目",
     "source": "leetcode",
     "source_id": "count-nodes-with-the-highest-score",
+    "frontend_id": "2049",
     "rating": 1800,
     "solve_count": 56000,
     "tags": [
@@ -2878,6 +2994,7 @@
     "title": "樹中距離之和",
     "source": "leetcode",
     "source_id": "sum-of-distances-in-tree",
+    "frontend_id": "834",
     "rating": 2200,
     "solve_count": 78000,
     "tags": [
@@ -2901,6 +3018,7 @@
     "title": "監控二叉樹",
     "source": "leetcode",
     "source_id": "binary-tree-cameras",
+    "frontend_id": "968",
     "rating": 2000,
     "solve_count": 140000,
     "tags": [
@@ -2924,6 +3042,7 @@
     "title": "找出字串中第一個匹配項的下標",
     "source": "leetcode",
     "source_id": "find-the-index-of-the-first-occurrence-in-a-string",
+    "frontend_id": "28",
     "rating": 1300,
     "solve_count": 820000,
     "tags": [
@@ -2947,6 +3066,7 @@
     "title": "實現 Trie (字首樹)",
     "source": "leetcode",
     "source_id": "implement-trie-prefix-tree",
+    "frontend_id": "208",
     "rating": 1500,
     "solve_count": 520000,
     "tags": [
@@ -2969,6 +3089,7 @@
     "title": "最長快樂字首",
     "source": "leetcode",
     "source_id": "longest-happy-prefix",
+    "frontend_id": "1392",
     "rating": 1800,
     "solve_count": 64000,
     "tags": [
@@ -2991,6 +3112,7 @@
     "title": "最短迴文串",
     "source": "leetcode",
     "source_id": "shortest-palindrome",
+    "frontend_id": "214",
     "rating": 1800,
     "solve_count": 78000,
     "tags": [
@@ -3014,6 +3136,7 @@
     "title": "最長重複子串",
     "source": "leetcode",
     "source_id": "longest-duplicate-substring",
+    "frontend_id": "1044",
     "rating": 2300,
     "solve_count": 42000,
     "tags": [
@@ -3038,6 +3161,7 @@
     "title": "找出陣列中的美麗下標 II",
     "source": "leetcode",
     "source_id": "find-beautiful-indices-in-the-given-array-ii",
+    "frontend_id": "3008",
     "rating": 2016,
     "solve_count": 14000,
     "tags": [
@@ -3062,6 +3186,7 @@
     "title": "Pow(x, n)",
     "source": "leetcode",
     "source_id": "powx-n",
+    "frontend_id": "50",
     "rating": 1300,
     "solve_count": 690000,
     "tags": [
@@ -3085,6 +3210,7 @@
     "title": "統計好數字的數目",
     "source": "leetcode",
     "source_id": "count-good-numbers",
+    "frontend_id": "1922",
     "rating": 1450,
     "solve_count": 86000,
     "tags": [
@@ -3107,6 +3233,7 @@
     "title": "計數質數",
     "source": "leetcode",
     "source_id": "count-primes",
+    "frontend_id": "204",
     "rating": 1400,
     "solve_count": 470000,
     "tags": [
@@ -3129,6 +3256,7 @@
     "title": "超級次方",
     "source": "leetcode",
     "source_id": "super-pow",
+    "frontend_id": "372",
     "rating": 1600,
     "solve_count": 64000,
     "tags": [
@@ -3152,6 +3280,7 @@
     "title": "生成乘積陣列的方案數",
     "source": "leetcode",
     "source_id": "count-ways-to-make-array-with-product",
+    "frontend_id": "1735",
     "rating": 2470,
     "solve_count": 9000,
     "tags": [
@@ -3176,6 +3305,7 @@
     "title": "判斷一個點是否可以到達",
     "source": "leetcode",
     "source_id": "check-if-point-is-reachable",
+    "frontend_id": "2543",
     "rating": 2500,
     "solve_count": 8000,
     "tags": [
@@ -3199,6 +3329,7 @@
     "title": "子集",
     "source": "leetcode",
     "source_id": "subsets",
+    "frontend_id": "78",
     "rating": 1300,
     "solve_count": 760000,
     "tags": [
@@ -3221,6 +3352,7 @@
     "title": "串聯字串的最大長度",
     "source": "leetcode",
     "source_id": "maximum-length-of-a-concatenated-string-with-unique-characters",
+    "frontend_id": "1239",
     "rating": 1700,
     "solve_count": 130000,
     "tags": [
@@ -3243,6 +3375,7 @@
     "title": "劃分為k個相等的子集",
     "source": "leetcode",
     "source_id": "partition-to-k-equal-sum-subsets",
+    "frontend_id": "698",
     "rating": 1900,
     "solve_count": 180000,
     "tags": [
@@ -3265,6 +3398,7 @@
     "title": "訪問所有節點的最短路徑",
     "source": "leetcode",
     "source_id": "shortest-path-visiting-all-nodes",
+    "frontend_id": "847",
     "rating": 2200,
     "solve_count": 120000,
     "tags": [
@@ -3287,6 +3421,7 @@
     "title": "N 次操作後的最大分數和",
     "source": "leetcode",
     "source_id": "maximize-score-after-n-operations",
+    "frontend_id": "1799",
     "rating": 2072,
     "solve_count": 46000,
     "tags": [
@@ -3311,6 +3446,7 @@
     "title": "並行課程 II",
     "source": "leetcode",
     "source_id": "parallel-courses-ii",
+    "frontend_id": "1494",
     "rating": 2600,
     "solve_count": 11000,
     "tags": [
@@ -3334,6 +3470,7 @@
     "title": "訪問所有點的最小時間",
     "source": "leetcode",
     "source_id": "minimum-time-visiting-all-points",
+    "frontend_id": "1266",
     "rating": 1300,
     "solve_count": 380000,
     "tags": [
@@ -3356,6 +3493,7 @@
     "title": "安裝柵欄",
     "source": "leetcode",
     "source_id": "erect-the-fence",
+    "frontend_id": "587",
     "rating": 2400,
     "solve_count": 38000,
     "tags": [
@@ -3378,6 +3516,7 @@
     "title": "矩形重疊",
     "source": "leetcode",
     "source_id": "rectangle-overlap",
+    "frontend_id": "836",
     "rating": 1400,
     "solve_count": 210000,
     "tags": [
@@ -3400,6 +3539,7 @@
     "title": "最小面積矩形",
     "source": "leetcode",
     "source_id": "minimum-area-rectangle",
+    "frontend_id": "939",
     "rating": 1700,
     "solve_count": 90000,
     "tags": [
@@ -3423,6 +3563,7 @@
     "title": "直線上最多的點數",
     "source": "leetcode",
     "source_id": "max-points-on-a-line",
+    "frontend_id": "149",
     "rating": 1800,
     "solve_count": 260000,
     "tags": [
@@ -3447,6 +3588,7 @@
     "title": "圓形靶內的最大飛鏢數量",
     "source": "leetcode",
     "source_id": "maximum-number-of-darts-inside-of-a-circular-dartboard",
+    "frontend_id": "1453",
     "rating": 2531,
     "solve_count": 7000,
     "tags": [

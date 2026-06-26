@@ -8,7 +8,7 @@ import { ProblemSourceLink } from '@/components/ProblemSourceLink';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { Problem, Topic } from '@/lib/types';
-import { problemTypeLabel, sourceLabel } from '@/lib/utils';
+import { problemDisplayTitle, problemTypeLabel, sourceProblemIdLabel } from '@/lib/utils';
 import { useProgressStore } from '@/store/useProgressStore';
 
 type StrategyTab = 'approach' | 'pattern' | 'mistakes' | 'insight' | 'similar';
@@ -53,7 +53,7 @@ export function ProblemStrategy({
             <ProblemTypeBadge problemType={problem.problem_type} />
             <TierBadge tier={problem.tier} />
           </div>
-          <CardTitle className="text-3xl">{problem.title}</CardTitle>
+          <CardTitle className="text-3xl">{problemDisplayTitle(problem)}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid gap-3 text-sm text-muted-foreground sm:grid-cols-2 lg:grid-cols-4">
@@ -64,7 +64,7 @@ export function ProblemStrategy({
             <div className="rounded-2xl border border-border p-3">
               <p>來源</p>
               <ProblemSourceLink problem={problem} className="mt-1 block font-medium text-primary">
-                {sourceLabel(problem.source)} {problem.source_id}
+                {sourceProblemIdLabel(problem)}
               </ProblemSourceLink>
             </div>
             <div className="rounded-2xl border border-border p-3">

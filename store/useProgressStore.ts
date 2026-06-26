@@ -28,6 +28,11 @@ export interface ReviewEvent {
   reviewedAt: string;
 }
 
+export interface PracticeCompletionEvent {
+  problemId: string;
+  completedAt: string;
+}
+
 export interface ActiveContestSession {
   id: string;
   problemIds: string[];
@@ -45,6 +50,7 @@ interface ProgressState {
   coveredTopicIds: string[];
   submissions: SubmissionLog[];
   reviewEvents: ReviewEvent[];
+  practiceCompletionEvents: PracticeCompletionEvent[];
   contestSessions: ContestSessionRecord[];
   problemNotes: Record<string, ProblemNote>;
   completedPracticeProblemIds: string[];
@@ -91,6 +97,7 @@ export const useProgressStore = create<ProgressState>()(
       coveredTopicIds: [],
       submissions: [],
       reviewEvents: [],
+      practiceCompletionEvents: [],
       contestSessions: [],
       problemNotes: {},
       completedPracticeProblemIds: [],
@@ -138,12 +145,24 @@ export const useProgressStore = create<ProgressState>()(
           }
         })),
       markPracticeProblemCompleted: (problemId) =>
-        set((state) => ({
-          completedPracticeProblemIds: uniqueAppend(state.completedPracticeProblemIds, problemId)
-        })),
+        set((state) => {
+          const alreadyCompleted = state.completedPracticeProblemIds.includes(problemId);
+          return {
+            completedPracticeProblemIds: uniqueAppend(state.completedPracticeProblemIds, problemId),
+            practiceCompletionEvents: alreadyCompleted
+              ? state.practiceCompletionEvents
+              : [
+                  ...state.practiceCompletionEvents,
+                  { problemId, completedAt: new Date().toISOString() }
+                ].slice(-200)
+          };
+        }),
       unmarkPracticeProblemCompleted: (problemId) =>
         set((state) => ({
-          completedPracticeProblemIds: state.completedPracticeProblemIds.filter((id) => id !== problemId)
+          completedPracticeProblemIds: state.completedPracticeProblemIds.filter((id) => id !== problemId),
+          practiceCompletionEvents: state.practiceCompletionEvents.filter(
+            (event) => event.problemId !== problemId
+          )
         })),
       startContest: (problemIds, durationMinutes) =>
         set({
@@ -173,6 +192,7 @@ export const useProgressStore = create<ProgressState>()(
           coveredTopicIds: state.coveredTopicIds,
           submissions: state.submissions.slice(0, 200),
           reviewEvents: state.reviewEvents.slice(0, 200),
+          practiceCompletionEvents: state.practiceCompletionEvents.slice(-200),
           contestSessions: state.contestSessions.slice(0, 50),
           problemNotes: state.problemNotes,
           completedPracticeProblemIds: state.completedPracticeProblemIds
@@ -196,6 +216,7 @@ export const useProgressStore = create<ProgressState>()(
           coveredTopicIds: data.coveredTopicIds ?? [],
           submissions: data.submissions ?? [],
           reviewEvents: data.reviewEvents ?? [],
+          practiceCompletionEvents: data.practiceCompletionEvents ?? [],
           contestSessions: data.contestSessions ?? [],
           problemNotes: data.problemNotes ?? {},
           completedPracticeProblemIds: data.completedPracticeProblemIds ?? []

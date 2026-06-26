@@ -18,6 +18,26 @@ export function sourceLabel(source: Source) {
   return labels[source];
 }
 
+export function sourceProblemIdLabel(
+  problem: Pick<Problem, 'source' | 'source_id'> & { frontend_id?: string }
+) {
+  if (problem.source === 'leetcode') {
+    return problem.frontend_id
+      ? `力扣 ID：${problem.frontend_id}・${problem.source_id}`
+      : `力扣 ID：${problem.source_id}`;
+  }
+
+  return `${sourceLabel(problem.source)} ID：${problem.source_id}`;
+}
+
+export function problemDisplayTitle(problem: Pick<Problem, 'source' | 'title'> & { frontend_id?: string }) {
+  if (problem.source === 'leetcode' && problem.frontend_id) {
+    return `${problem.frontend_id}. ${problem.title}`;
+  }
+
+  return problem.title;
+}
+
 export function sourceUrl(problem: Pick<Problem, 'source' | 'source_id'>, leetCodeSite: LeetCodeSite = 'cn') {
   if (problem.source === 'leetcode') {
     const host = leetCodeSite === 'en' ? 'leetcode.com' : 'leetcode.cn';

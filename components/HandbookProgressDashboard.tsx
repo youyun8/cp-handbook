@@ -2,11 +2,12 @@
 
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
+import { DifficultyBadge, SourceBadge, TierBadge } from '@/components/Badges';
 import { ProblemNotesModal } from '@/components/ProblemNotesModal';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import type { PracticeProblem, Problem, Subtopic, Topic } from '@/lib/types';
+import type { PracticeProblem, Subtopic, Topic } from '@/lib/types';
 import { hasPracticeNote, practiceProblemId } from '@/lib/practiceProgress';
-import { problemTypeLabel } from '@/lib/utils';
+import { problemDisplayTitle, sourceProblemIdLabel } from '@/lib/utils';
 import { useProgressStore } from '@/store/useProgressStore';
 
 type HandbookFilter = 'all' | 'incomplete' | 'completed';
@@ -16,19 +17,14 @@ interface ActivePracticeNote {
   title: string;
 }
 
-export function ProgressDashboard({
-  problems,
+export function HandbookProgressDashboard({
   topics,
   subtopics
 }: {
-  problems: Problem[];
   topics: Topic[];
   subtopics: Subtopic[];
 }) {
-  const reviewedProblemIds = useProgressStore((state) => state.reviewedProblemIds);
-  const submissions = useProgressStore((state) => state.submissions);
-  const reviewEvents = useProgressStore((state) => state.reviewEvents);
-  const contestSessions = useProgressStore((state) => state.contestSessions);
+  const practiceCompletionEvents = useProgressStore((state) => state.practiceCompletionEvents);
   const problemNotes = useProgressStore((state) => state.problemNotes);
   const completedPracticeProblemIds = useProgressStore((state) => state.completedPracticeProblemIds);
   const markPracticeProblemCompleted = useProgressStore((state) => state.markPracticeProblemCompleted);
@@ -36,81 +32,11 @@ export function ProgressDashboard({
   const [handbookFilter, setHandbookFilter] = useState<HandbookFilter>('all');
   const [activePracticeNote, setActivePracticeNote] = useState<ActivePracticeNote | null>(null);
 
-  const problemById = useMemo(() => new Map(problems.map((problem) => [problem.id, problem])), [problems]);
   const topicById = useMemo(() => new Map(topics.map((topic) => [topic.id, topic])), [topics]);
   const completedPracticeSet = useMemo(
     () => new Set(completedPracticeProblemIds),
     [completedPracticeProblemIds]
   );
-
-  const coveredTopics = useMemo(
-    () =>
-      new Set(
-        reviewedProblemIds
-          .map((id) => problemById.get(id)?.topic_id)
-          .filter((topicId): topicId is string => Boolean(topicId))
-      ),
-    [problemById, reviewedProblemIds]
-  );
-
-  const weakAreas = useMemo(() => {
-    return topics
-      .map((topic) => {
-        const topicProblems = new Set(problems.filter((problem) => problem.topic_id === topic.id).map((problem) => problem.id));
-        const attempts = submissions.filter((submission) => topicProblems.has(submission.problemId));
-        const accepted = attempts.filter((submission) => submission.status === 'AC').length;
-        const total = attempts.filter((submission) => submission.status !== 'SKIP').length;
-        return {
-          topic,
-          total,
-          rate: total === 0 ? null : accepted / total
-        };
-      })
-      .filter((item) => item.rate !== null)
-      .sort((a, b) => (a.rate ?? 1) - (b.rate ?? 1))
-      .slice(0, 4);
-  }, [problems, submissions, topics]);
-
-  const typeBreakdown = useMemo(() => {
-    const acceptedIds = new Set(submissions.filter((submission) => submission.status === 'AC').map((submission) => submission.problemId));
-    const counts = { template: 0, classic: 0, insight_transfer: 0 };
-    acceptedIds.forEach((id) => {
-      const problem = problemById.get(id);
-      if (problem) counts[problem.problem_type] += 1;
-    });
-    const total = Math.max(1, counts.template + counts.classic + counts.insight_transfer);
-    return Object.entries(counts).map(([type, count]) => ({
-      type: type as Problem['problem_type'],
-      count,
-      percent: Math.round((count / total) * 100)
-    }));
-  }, [problemById, submissions]);
-
-  const heatmapDays = useMemo(() => {
-    const counts = new Map<string, number>();
-    for (const event of reviewEvents) {
-      const key = event.reviewedAt.slice(0, 10);
-      counts.set(key, (counts.get(key) ?? 0) + 1);
-    }
-    for (const submission of submissions) {
-      const key = submission.createdAt.slice(0, 10);
-      counts.set(key, (counts.get(key) ?? 0) + 1);
-    }
-
-    return Array.from({ length: 35 }, (_, index) => {
-      const date = new Date();
-      date.setDate(date.getDate() - (34 - index));
-      const key = date.toISOString().slice(0, 10);
-      return { key, count: counts.get(key) ?? 0 };
-    });
-  }, [reviewEvents, submissions]);
-
-  const stats = [
-    { label: '已複習題目', value: reviewedProblemIds.length },
-    { label: '已覆蓋主題', value: `${coveredTopics.size}/${topics.length}` },
-    { label: '競賽場次', value: contestSessions.length },
-    { label: '提交紀錄', value: submissions.length }
-  ];
 
   const handbookPracticeBreakdown = useMemo(() => {
     return subtopics
@@ -155,6 +81,53 @@ export function ProgressDashboard({
     };
   }, [completedPracticeSet, problemNotes, subtopics]);
 
+  const coveredTopicIds = useMemo(() => {
+    const topicIds = new Set<string>();
+    for (const subtopic of subtopics) {
+      const covered = (subtopic.practice_problems ?? []).some((practiceProblem) => {
+        const id = practiceProblemId(practiceProblem);
+        return completedPracticeSet.has(id) || hasPracticeNote(problemNotes[id]);
+      });
+      if (covered) topicIds.add(subtopic.parent_id);
+    }
+    return topicIds;
+  }, [completedPracticeSet, problemNotes, subtopics]);
+
+  const noteCount = useMemo(
+    () =>
+      Object.entries(problemNotes).filter(([id, note]) => id.startsWith('practice:') && hasPracticeNote(note))
+        .length,
+    [problemNotes]
+  );
+
+  const heatmapDays = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const event of practiceCompletionEvents) {
+      const key = event.completedAt.slice(0, 10);
+      counts.set(key, (counts.get(key) ?? 0) + 1);
+    }
+    for (const [id, note] of Object.entries(problemNotes)) {
+      if (!id.startsWith('practice:')) continue;
+      if (!hasPracticeNote(note)) continue;
+      const key = note.updatedAt.slice(0, 10);
+      counts.set(key, (counts.get(key) ?? 0) + 1);
+    }
+
+    return Array.from({ length: 35 }, (_, index) => {
+      const date = new Date();
+      date.setDate(date.getDate() - (34 - index));
+      const key = date.toISOString().slice(0, 10);
+      return { key, count: counts.get(key) ?? 0 };
+    });
+  }, [practiceCompletionEvents, problemNotes]);
+
+  const stats = [
+    { label: '手冊完成題目', value: handbookPracticeTotals.completed },
+    { label: '手冊覆蓋主題', value: `${coveredTopicIds.size}/${topics.length}` },
+    { label: '筆記數', value: noteCount },
+    { label: '總完成率', value: `${handbookPracticeTotals.percent}%` }
+  ];
+
   return (
     <div className="space-y-6">
       <div className="grid gap-4 md:grid-cols-4">
@@ -168,57 +141,9 @@ export function ProgressDashboard({
         ))}
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>弱區偵測</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {weakAreas.length > 0 ? (
-              weakAreas.map((item) => (
-                <div key={item.topic.id} className="rounded-2xl border border-border p-4">
-                  <div className="flex items-center justify-between gap-3">
-                    <p className="font-medium">{item.topic.title}</p>
-                    <p className="text-sm text-muted-foreground">{Math.round((item.rate ?? 0) * 100)}%</p>
-                  </div>
-                  <div className="mt-3 h-2 rounded-full bg-accent">
-                    <div className="h-2 rounded-full bg-primary" style={{ width: `${Math.round((item.rate ?? 0) * 100)}%` }} />
-                  </div>
-                </div>
-              ))
-            ) : (
-              <p className="rounded-2xl border border-dashed border-border p-6 text-sm text-muted-foreground">
-                還沒有足夠提交紀錄可以判斷弱區。
-              </p>
-            )}
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>題型通過比例</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {typeBreakdown.map((item) => (
-              <div key={item.type}>
-                <div className="flex justify-between text-sm">
-                  <span>{problemTypeLabel(item.type)}</span>
-                  <span className="text-muted-foreground">
-                    {item.count} 題・{item.percent}%
-                  </span>
-                </div>
-                <div className="mt-2 h-3 rounded-full bg-accent">
-                  <div className="h-3 rounded-full bg-primary" style={{ width: `${item.percent}%` }} />
-                </div>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-      </div>
-
       <Card>
         <CardHeader>
-          <CardTitle>練習連續熱力圖</CardTitle>
+          <CardTitle>手冊練習熱力圖</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-7 gap-2">
@@ -313,7 +238,7 @@ export function ProgressDashboard({
                       problem={row.problem}
                       completed={row.completed}
                       onOpenNote={() =>
-                        setActivePracticeNote({ id: row.id, title: row.problem.title })
+                        setActivePracticeNote({ id: row.id, title: problemDisplayTitle(row.problem) })
                       }
                       onToggleCompleted={() =>
                         completedPracticeSet.has(row.id)
@@ -335,17 +260,17 @@ export function ProgressDashboard({
 
       <Card>
         <CardHeader>
-          <CardTitle>已覆蓋主題</CardTitle>
+          <CardTitle>手冊覆蓋主題</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-wrap gap-2">
-          {Array.from(coveredTopics).length > 0 ? (
-            Array.from(coveredTopics).map((topicId) => (
+          {coveredTopicIds.size > 0 ? (
+            Array.from(coveredTopicIds).map((topicId) => (
               <span key={topicId} className="rounded-full border border-border bg-accent px-3 py-2 text-sm">
                 {topicById.get(topicId)?.title ?? '未分類'}
               </span>
             ))
           ) : (
-            <p className="text-sm text-muted-foreground">尚未標記任何複習題目。</p>
+            <p className="text-sm text-muted-foreground">尚未完成任何手冊練習或筆記。</p>
           )}
         </CardContent>
       </Card>
@@ -378,15 +303,21 @@ function PracticeProgressRow({
   );
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-background/45 px-3 py-2">
-      <div className="min-w-0">
-        <p className="truncate text-sm font-medium">{problem.title}</p>
-        <p className="mt-1 text-xs text-muted-foreground">
-          {problem.source} {problem.source_id}
-          {problem.rating ? `・${problem.rating}` : ''}
-        </p>
+    <div className="grid gap-3 rounded-xl border border-border bg-background/55 p-3 transition hover:border-primary/35 hover:bg-background/80 md:grid-cols-[1fr_auto]">
+      <div className="min-w-0 space-y-2">
+        <div className="flex flex-wrap gap-2">
+          <SourceBadge source={problem.source} />
+          {problem.rating ? <DifficultyBadge rating={problem.rating} /> : null}
+          {problem.tier ? <TierBadge tier={problem.tier} /> : null}
+        </div>
+        <div>
+          <p className="text-sm font-semibold leading-6">{problemDisplayTitle(problem)}</p>
+          <p className="mt-1 break-all text-xs font-medium text-muted-foreground">
+            {sourceProblemIdLabel(problem)}
+          </p>
+        </div>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2 md:justify-end">
         <span
           className={
             completed

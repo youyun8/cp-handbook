@@ -42,6 +42,7 @@ export interface Problem {
   title: string;
   source: Source;
   source_id: string;
+  frontend_id?: string;
   rating: number;
   solve_count?: number;
   tags: string[];
@@ -57,6 +58,7 @@ export interface PracticeProblem {
   title: string;
   source: Source;
   source_id: string;
+  frontend_id?: string;
   rating?: number;
   tier?: Tier;
   tags?: string[];
@@ -119,6 +121,7 @@ export interface ProgressSnapshot {
   reviewedProblemIds: string[];
   coveredTopicIds: string[];
   submissions: SubmissionLogEntry[];
+  practiceCompletionEvents?: { problemId: string; completedAt: string }[];
   problemNotes?: Record<string, ProblemNote>;
   completedPracticeProblemIds?: string[];
   updatedAt: string;          // ISO 8601

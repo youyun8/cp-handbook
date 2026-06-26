@@ -22,7 +22,7 @@ const guideSteps = [
   {
     icon: '📊',
     title: '追蹤進度',
-    description: '記錄每次提交、觀察弱點主題，讓複習更有方向。',
+    description: '分開追蹤手冊完成度與實戰提交分析，讓複習更有方向。',
     href: '/progress',
     cta: '查看進度'
   }
