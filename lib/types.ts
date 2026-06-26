@@ -70,20 +70,23 @@ export interface ProblemNote {
   updatedAt: string;
 }
 
+export type Tone = 'green' | 'amber' | 'orange' | 'rose' | 'blue';
+
 export interface RatingBand {
   id: 'consolidate' | 'target' | 'stretch';
   label: string;
   min: number;
   max: number | null;
   description: string;
+  tone: Tone;
 }
 
 // Subtopic: a fully self-contained section within a parent topic
 export interface Subtopic {
-  id: string;           // e.g. "string-kmp", "string-suffix-array"
-  parent_id: string;    // matches a Topic.id
+  id: string; // e.g. "string-kmp", "string-suffix-array"
+  parent_id: string; // matches a Topic.id
   title: string;
-  slug: string;         // URL: /handbook/[parent-slug]/[subtopic-slug]
+  slug: string; // URL: /handbook/[parent-slug]/[subtopic-slug]
   description: string;
   core_idea: string;
   complexity: string;
@@ -113,7 +116,7 @@ export interface SubmissionLogEntry {
 
 // Sync-capable progress snapshot
 export interface ProgressSnapshot {
-  userId: number;             // GitHub user id
+  userId: number; // GitHub user id
   login: string;
   currentRating: number;
   reviewedProblemIds: string[];
@@ -122,5 +125,5 @@ export interface ProgressSnapshot {
   practiceCompletionEvents?: { problemId: string; completedAt: string }[];
   problemNotes?: Record<string, ProblemNote>;
   completedPracticeProblemIds?: string[];
-  updatedAt: string;          // ISO 8601
+  updatedAt: string; // ISO 8601
 }

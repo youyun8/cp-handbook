@@ -1,3 +1,4 @@
+import { ChevronDown } from 'lucide-react';
 import type { SupplementalPattern } from '@/lib/types';
 import { MarkdownBlock } from '@/components/MarkdownBlock';
 
@@ -7,14 +8,16 @@ export function Accordion({ items }: { items: SupplementalPattern[] }) {
       {items.map((item, index) => (
         <details
           key={item.name}
-          className="group rounded-2xl border border-border bg-background/45 p-4"
+          className="group rounded-2xl border border-border bg-background/45 p-4 transition hover:border-primary/40"
           open={index === 0}
         >
-          <summary className="cursor-pointer list-none font-medium">
-            <span className="mr-2 text-primary">#{index + 1}</span>
-            {item.name}
-            <span className="float-right text-sm text-muted-foreground group-open:hidden">展開</span>
-            <span className="float-right hidden text-sm text-muted-foreground group-open:inline">收合</span>
+          <summary className="flex cursor-pointer list-none items-center gap-2 font-medium">
+            <span className="text-primary">#{index + 1}</span>
+            <span className="min-w-0 flex-1">{item.name}</span>
+            <ChevronDown
+              className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180"
+              aria-hidden
+            />
           </summary>
           <MarkdownBlock className="mt-3 text-muted-foreground">{item.description}</MarkdownBlock>
         </details>

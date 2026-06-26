@@ -1,11 +1,27 @@
 'use client';
 
 import { useState } from 'react';
+import { Cloud, X } from 'lucide-react';
 import { signIn, useSession } from 'next-auth/react';
 import { isStaticExport } from '@/lib/runtime';
 import { useProgressStore } from '@/store/useProgressStore';
 
 type SyncState = { kind: 'idle' | 'ok' | 'error'; message?: string };
+
+function formatSyncTime(value?: string) {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+
+  return new Intl.DateTimeFormat('zh-TW', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  }).format(date);
+}
 
 export function FloatingCloudSync() {
   const [open, setOpen] = useState(false);
@@ -26,9 +42,9 @@ export function FloatingCloudSync() {
                 type="button"
                 onClick={() => setOpen(false)}
                 aria-label="關閉同步面板"
-                className="rounded-full px-2 py-1 text-sm text-muted-foreground hover:bg-accent"
+                className="rounded-full p-1.5 text-muted-foreground transition hover:bg-accent hover:text-foreground"
               >
-                x
+                <X className="h-4 w-4" aria-hidden />
               </button>
             </div>
           </div>
@@ -37,9 +53,9 @@ export function FloatingCloudSync() {
           type="button"
           onClick={() => setOpen((value) => !value)}
           aria-label="開啟進度同步"
-          className="flex h-14 w-14 items-center justify-center rounded-full border border-border bg-primary text-xl text-primary-foreground shadow-2xl transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          className="flex h-14 w-14 items-center justify-center rounded-full border border-border bg-primary text-primary-foreground shadow-glow transition hover:-translate-y-0.5 hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
-          ☁
+          <Cloud className="h-6 w-6" aria-hidden />
         </button>
       </div>
     );
@@ -58,8 +74,10 @@ function FloatingCloudSyncAuthed({
   const { data: session, status } = useSession();
   const syncToCloud = useProgressStore((state) => state.syncToCloud);
   const loadFromCloud = useProgressStore((state) => state.loadFromCloud);
+  const lastCloudSyncAt = useProgressStore((state) => state.lastCloudSyncAt);
   const [busy, setBusy] = useState<null | 'save' | 'load'>(null);
   const [result, setResult] = useState<SyncState>({ kind: 'idle' });
+  const lastCloudSyncText = formatSyncTime(lastCloudSyncAt);
 
   async function runSync(action: 'save' | 'load') {
     setBusy(action);
@@ -90,14 +108,17 @@ function FloatingCloudSyncAuthed({
                     ? `目前登入：${session.user.name ?? session.user.email ?? 'GitHub 使用者'}`
                     : '登入後可同步進度、解答與手冊練習完成狀態。'}
               </p>
+              {session?.user && lastCloudSyncText ? (
+                <p className="mt-1 text-xs leading-5 text-muted-foreground">最後同步：{lastCloudSyncText}</p>
+              ) : null}
             </div>
             <button
               type="button"
               onClick={() => setOpen(false)}
               aria-label="關閉同步面板"
-              className="rounded-full px-2 py-1 text-sm text-muted-foreground hover:bg-accent"
+              className="rounded-full p-1.5 text-muted-foreground transition hover:bg-accent hover:text-foreground"
             >
-              x
+              <X className="h-4 w-4" aria-hidden />
             </button>
           </div>
 
@@ -148,9 +169,9 @@ function FloatingCloudSyncAuthed({
         type="button"
         onClick={() => setOpen((value) => !value)}
         aria-label="開啟雲端同步"
-        className="flex h-14 w-14 items-center justify-center rounded-full border border-border bg-primary text-xl text-primary-foreground shadow-2xl transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        className="flex h-14 w-14 items-center justify-center rounded-full border border-border bg-primary text-primary-foreground shadow-glow transition hover:-translate-y-0.5 hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       >
-        ☁
+        <Cloud className="h-6 w-6" aria-hidden />
       </button>
     </div>
   );

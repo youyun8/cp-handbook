@@ -2,8 +2,10 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { PanelLeft, PanelLeftClose } from 'lucide-react';
+import { TopicGlyph } from '@/components/icons';
 import type { Subtopic, Topic } from '@/lib/types';
-import { cn, topicIcon } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 
 interface HandbookSidebarProps {
   topics: Topic[];
@@ -23,20 +25,19 @@ export function HandbookSidebar({
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <aside
-      className={cn(
-        'transition-all duration-200',
-        collapsed ? 'w-10' : 'w-64 lg:w-72'
-      )}
-    >
+    <aside className={cn('transition-all duration-200', collapsed ? 'w-10' : 'w-64 lg:w-72')}>
       {/* Collapse toggle */}
       <button
         onClick={() => setCollapsed(!collapsed)}
-        className="mb-2 flex w-full items-center justify-between rounded-xl border border-border bg-card/75 px-3 py-2 text-xs font-semibold text-muted-foreground hover:bg-accent"
+        className="mb-2 flex w-full items-center justify-between rounded-xl border border-border bg-card/75 px-3 py-2 text-xs font-semibold text-muted-foreground transition hover:bg-accent hover:text-foreground"
         aria-label={collapsed ? '展開側欄' : '收合側欄'}
       >
         {!collapsed && <span>主題導覽</span>}
-        <span>{collapsed ? '▶' : '◀'}</span>
+        {collapsed ? (
+          <PanelLeft className="h-4 w-4" aria-hidden />
+        ) : (
+          <PanelLeftClose className="h-4 w-4" aria-hidden />
+        )}
       </button>
 
       {!collapsed && (
@@ -59,7 +60,7 @@ export function HandbookSidebar({
                         : 'border-transparent text-muted-foreground hover:border-border hover:bg-accent hover:text-foreground'
                     )}
                   >
-                    <span className="shrink-0 text-base" aria-hidden>{topicIcon(topic.id)}</span>
+                    <TopicGlyph topicId={topic.id} className="h-4 w-4 shrink-0" />
                     <span className="truncate">{topic.title}</span>
                   </Link>
 

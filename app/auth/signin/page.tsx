@@ -1,6 +1,7 @@
 'use client';
 
 import { signIn } from 'next-auth/react';
+import { Lock } from 'lucide-react';
 import { isStaticExport } from '@/lib/runtime';
 
 export default function SignInPage() {
@@ -8,7 +9,9 @@ export default function SignInPage() {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="rounded-3xl border border-border bg-card p-8 text-center shadow-lg">
-          <div className="mb-4 text-4xl">🔐</div>
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+            <Lock className="h-7 w-7" aria-hidden />
+          </div>
           <h1 className="mb-2 text-2xl font-bold">登入功能未啟用</h1>
           <p className="max-w-sm text-sm text-muted-foreground">
             此為靜態部署版本，GitHub 登入與雲端同步不可用。你的練習進度會儲存在瀏覽器的 localStorage。
@@ -21,7 +24,9 @@ export default function SignInPage() {
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="rounded-3xl border border-border bg-card p-8 text-center shadow-lg">
-        <div className="mb-4 text-4xl">🔐</div>
+        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+          <Lock className="h-7 w-7" aria-hidden />
+        </div>
         <h1 className="mb-2 text-2xl font-bold">登入以同步進度</h1>
         <p className="mb-6 text-sm text-muted-foreground">
           使用 GitHub 帳號登入，你的練習進度將自動儲存到你的 GitHub Gist。

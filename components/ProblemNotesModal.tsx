@@ -2,12 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import {
-  CODE_LANGUAGES,
-  CodeEditor,
-  DEFAULT_CODE_LANGUAGE
-} from '@/components/CodeEditor';
+import { CODE_LANGUAGES, CodeEditor, DEFAULT_CODE_LANGUAGE } from '@/components/CodeEditor';
 import { useMounted } from '@/lib/useMounted';
 import { useProgressStore } from '@/store/useProgressStore';
 
@@ -49,11 +46,7 @@ export function ProblemNotesModal({
       className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
     >
       {/* Blurred, dimmed backdrop */}
-      <div
-        className="absolute inset-0 bg-background/60 backdrop-blur-md"
-        onClick={onClose}
-        aria-hidden
-      />
+      <div className="absolute inset-0 bg-background/60 backdrop-blur-md" onClick={onClose} aria-hidden />
       {/* The dialog body remounts each time it opens, so its form state is
           initialized from the latest saved note without a re-hydration effect. */}
       <NotesDialogBody problemId={problemId} title={title} onClose={onClose} />
@@ -98,20 +91,16 @@ function NotesDialogBody({
       <header className="flex items-start justify-between gap-3 border-b border-border px-5 py-4">
         <div className="min-w-0">
           <p className="text-sm font-semibold text-foreground">記錄解答與思路</p>
-          {title ? (
-            <p className="mt-0.5 truncate text-xs text-muted-foreground">{title}</p>
-          ) : null}
-          {updatedAt ? (
-            <p className="mt-0.5 text-xs text-muted-foreground">上次更新：{updatedAt}</p>
-          ) : null}
+          {title ? <p className="mt-0.5 truncate text-xs text-muted-foreground">{title}</p> : null}
+          {updatedAt ? <p className="mt-0.5 text-xs text-muted-foreground">上次更新：{updatedAt}</p> : null}
         </div>
         <button
           type="button"
           onClick={onClose}
           aria-label="關閉"
-          className="rounded-full border border-border px-2.5 py-1 text-sm text-muted-foreground transition hover:bg-accent hover:text-foreground"
+          className="rounded-full border border-border p-1.5 text-muted-foreground transition hover:bg-accent hover:text-foreground"
         >
-          ✕
+          <X className="h-4 w-4" aria-hidden />
         </button>
       </header>
 
@@ -170,9 +159,7 @@ function NotesDialogBody({
         </p>
         <div className="flex items-center gap-2">
           {saved ? (
-            <span className="text-xs font-medium text-emerald-600 dark:text-emerald-300">
-              已儲存
-            </span>
+            <span className="text-xs font-medium text-emerald-600 dark:text-emerald-300">已儲存</span>
           ) : null}
           <Button type="button" variant="ghost" size="sm" onClick={onClose}>
             關閉

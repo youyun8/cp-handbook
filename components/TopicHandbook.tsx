@@ -1,6 +1,6 @@
 import { Accordion } from '@/components/Accordion';
-import { CodeBlock } from '@/components/CodeBlock';
 import { HandbookSidebar } from '@/components/HandbookSidebar';
+import { TopicGlyph } from '@/components/icons';
 import { LayerCallout } from '@/components/LayerCallout';
 import { MarkdownBlock } from '@/components/MarkdownBlock';
 import { ProblemTabs } from '@/components/ProblemTabs';
@@ -27,17 +27,23 @@ export function TopicHandbook({
           { id: 'core', label: '核心想法' },
           { id: 'deepdive', label: '原理剖析' },
           { id: 'references', label: '參考連結' },
-          { id: 'template', label: '模板程式碼' },
           { id: 'patterns', label: '補充套路' },
           { id: 'pitfalls', label: '常見陷阱' },
           { id: 'problems', label: '分級題單' }
         ]}
       />
       <article className="min-w-0 flex-1 space-y-6">
-        <div className="rounded-3xl border border-border bg-card/80 p-6">
-          <p className="text-sm font-medium text-primary">演算法主題</p>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">{topic.title}</h1>
-          <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">{topic.description}</p>
+        <div className="rounded-3xl border border-border bg-card/80 p-6 shadow-card">
+          <div className="flex items-start gap-4">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+              <TopicGlyph topicId={topic.id} className="h-6 w-6" />
+            </span>
+            <div className="min-w-0">
+              <p className="text-sm font-semibold text-primary">演算法主題</p>
+              <h1 className="mt-1 text-3xl font-bold tracking-tight sm:text-4xl">{topic.title}</h1>
+              <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">{topic.description}</p>
+            </div>
+          </div>
         </div>
 
         {topic.motivation ? (
@@ -57,11 +63,13 @@ export function TopicHandbook({
 
         {topic.deep_dive && topic.deep_dive.length > 0 ? (
           <div id="deepdive">
-            <LayerCallout eyebrow="過程剖析" title="原理與進階拆解" variant="deepdive">
+            <LayerCallout eyebrow="第二層" title="原理、流程與實作拆解" variant="deepdive">
               <div className="space-y-5">
                 {topic.deep_dive.map((section) => (
                   <div key={section.title} className="rounded-2xl border border-border bg-background/45 p-4">
-                    <h3 className="text-lg font-semibold tracking-tight text-cyan-900 dark:text-cyan-100">{section.title}</h3>
+                    <h3 className="text-lg font-semibold tracking-tight text-cyan-900 dark:text-cyan-100">
+                      {section.title}
+                    </h3>
                     <MarkdownBlock className="mt-2 text-muted-foreground">{section.body}</MarkdownBlock>
                   </div>
                 ))}
@@ -71,7 +79,7 @@ export function TopicHandbook({
         ) : null}
 
         <div id="references">
-          <LayerCallout eyebrow="第二層" title="參考連結" variant="references">
+          <LayerCallout eyebrow="第三層" title="參考連結" variant="references">
             <ul className="grid gap-3 md:grid-cols-2">
               {topic.reference_links.map((link) => (
                 <li key={link.url}>
@@ -86,12 +94,6 @@ export function TopicHandbook({
                 </li>
               ))}
             </ul>
-          </LayerCallout>
-        </div>
-
-        <div id="template">
-          <LayerCallout eyebrow="第三層" title="註解模板" variant="template">
-            <CodeBlock code={topic.template_code} />
           </LayerCallout>
         </div>
 

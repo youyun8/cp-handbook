@@ -2,33 +2,47 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
+import {
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  Clock,
+  ExternalLink,
+  SkipForward,
+  X,
+  type LucideIcon
+} from 'lucide-react';
 import { DifficultyBadge, ProblemTypeBadge } from '@/components/Badges';
 import { ProblemSourceLink } from '@/components/ProblemSourceLink';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { Problem, SubmissionStatus, Topic } from '@/lib/types';
-import { cn, problemTypeLabel, ratingBands, submissionStatusLabel } from '@/lib/utils';
+import { cn, problemTypeLabel, ratingBands, submissionStatusLabel, toneSelectedClass } from '@/lib/utils';
 import { useProgressStore } from '@/store/useProgressStore';
 
 const statusOptions: SubmissionStatus[] = ['AC', 'WA', 'TLE', 'SKIP'];
 
-const statusIcon: Record<SubmissionStatus, string> = {
-  AC: '✅',
-  WA: '❌',
-  TLE: '⏱',
-  SKIP: '⏭'
+const PAGE_SIZE = 20;
+
+const statusIcon: Record<SubmissionStatus, LucideIcon> = {
+  AC: Check,
+  WA: X,
+  TLE: Clock,
+  SKIP: SkipForward
 };
 
 const statusButtonClass: Record<SubmissionStatus, string> = {
-  AC: 'hover:border-emerald-400/60 hover:bg-emerald-500/15',
-  WA: 'hover:border-red-400/60 hover:bg-red-500/15',
-  TLE: 'hover:border-yellow-400/60 hover:bg-yellow-500/15',
-  SKIP: 'hover:border-slate-400/60 hover:bg-slate-500/15'
+  AC: 'hover:border-emerald-400/60 hover:bg-emerald-500/15 hover:text-emerald-600 dark:hover:text-emerald-300',
+  WA: 'hover:border-red-400/60 hover:bg-red-500/15 hover:text-red-600 dark:hover:text-red-300',
+  TLE: 'hover:border-amber-400/60 hover:bg-amber-500/15 hover:text-amber-600 dark:hover:text-amber-300',
+  SKIP: 'hover:border-slate-400/60 hover:bg-slate-500/15 hover:text-slate-600 dark:hover:text-slate-300'
 };
 
 export function PracticeArena({ problems, topics }: { problems: Problem[]; topics: Topic[] }) {
   const [problemCount, setProblemCount] = useState(5);
   const [durationMinutes, setDurationMinutes] = useState(90);
+  const [page, setPage] = useState(1);
+  const [filterSignatureState, setFilterSignatureState] = useState('');
   const [now, setNow] = useState(() => Date.now());
   const currentRating = useProgressStore((state) => state.currentRating);
   const filters = useProgressStore((state) => state.filters);
@@ -50,10 +64,18 @@ export function PracticeArena({ problems, topics }: { problems: Problem[]; topic
   const problemById = useMemo(() => new Map(problems.map((problem) => [problem.id, problem])), [problems]);
   const reviewedSet = useMemo(() => new Set(reviewedProblemIds), [reviewedProblemIds]);
   const acceptedSet = useMemo(
-    () => new Set(submissions.filter((submission) => submission.status === 'AC').map((submission) => submission.problemId)),
+    () =>
+      new Set(
+        submissions
+          .filter((submission) => submission.status === 'AC')
+          .map((submission) => submission.problemId)
+      ),
     [submissions]
   );
-  const allTags = useMemo(() => Array.from(new Set(problems.flatMap((problem) => problem.tags))).sort(), [problems]);
+  const allTags = useMemo(
+    () => Array.from(new Set(problems.flatMap((problem) => problem.tags))).sort(),
+    [problems]
+  );
   const bands = ratingBands(currentRating);
 
   const filteredProblems = useMemo(() => {
@@ -79,6 +101,21 @@ export function PracticeArena({ problems, topics }: { problems: Problem[]; topic
     const picked = new Set(activeContest.problemIds);
     return problems.filter((problem) => picked.has(problem.id));
   }, [activeContest, problems]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredProblems.length / PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const pagedProblems = useMemo(
+    () => filteredProblems.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE),
+    [filteredProblems, currentPage]
+  );
+
+  // Snap back to the first page whenever the filter signature changes. This uses
+  // React's "adjust state while rendering" pattern instead of an effect.
+  const filterSignature = `${filters.tag}|${filters.problemType}|${filters.completion}|${filters.band}|${filters.minRating}|${filters.maxRating}|${currentRating}`;
+  if (filterSignature !== filterSignatureState) {
+    setFilterSignatureState(filterSignature);
+    setPage(1);
+  }
 
   const remainingText = useMemo(() => {
     if (!activeContest) return '尚未開始';
@@ -141,7 +178,9 @@ export function PracticeArena({ problems, topics }: { problems: Problem[]; topic
             <span className="text-muted-foreground">題型</span>
             <select
               value={filters.problemType}
-              onChange={(event) => setFilters({ problemType: event.target.value as typeof filters.problemType })}
+              onChange={(event) =>
+                setFilters({ problemType: event.target.value as typeof filters.problemType })
+              }
               className="w-full rounded-xl border border-border bg-background px-3 py-2"
             >
               <option value="all">全部題型</option>
@@ -154,7 +193,9 @@ export function PracticeArena({ problems, topics }: { problems: Problem[]; topic
             <span className="text-muted-foreground">完成狀態</span>
             <select
               value={filters.completion}
-              onChange={(event) => setFilters({ completion: event.target.value as typeof filters.completion })}
+              onChange={(event) =>
+                setFilters({ completion: event.target.value as typeof filters.completion })
+              }
               className="w-full rounded-xl border border-border bg-background px-3 py-2"
             >
               <option value="all">全部狀態</option>
@@ -193,11 +234,12 @@ export function PracticeArena({ problems, topics }: { problems: Problem[]; topic
                   key={band.id}
                   type="button"
                   onClick={() => applyBand(band.id)}
-                  className={
+                  className={cn(
+                    'rounded-xl border px-3 py-2 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
                     filters.band === band.id
-                      ? 'rounded-xl bg-primary px-3 py-2 text-primary-foreground'
-                      : 'rounded-xl border border-border px-3 py-2 text-muted-foreground'
-                  }
+                      ? toneSelectedClass(band.tone)
+                      : 'border-border text-muted-foreground hover:bg-accent hover:text-foreground'
+                  )}
                   title={band.description}
                 >
                   {band.label}
@@ -267,11 +309,16 @@ export function PracticeArena({ problems, topics }: { problems: Problem[]; topic
       </Card>
 
       <Card>
-        <CardHeader>
+        <CardHeader className="flex flex-row flex-wrap items-center justify-between gap-2">
           <CardTitle>題庫結果（{filteredProblems.length} 題）</CardTitle>
+          {filteredProblems.length > 0 ? (
+            <span className="text-sm text-muted-foreground">
+              第 {currentPage} / {totalPages} 頁
+            </span>
+          ) : null}
         </CardHeader>
         <CardContent className="grid gap-3">
-          {filteredProblems.slice(0, 30).map((problem) => (
+          {pagedProblems.map((problem) => (
             <PracticeProblemRow
               key={problem.id}
               problem={problem}
@@ -283,6 +330,15 @@ export function PracticeArena({ problems, topics }: { problems: Problem[]; topic
             <div className="rounded-2xl border border-dashed border-border p-6 text-sm text-muted-foreground">
               目前篩選條件沒有符合的題目。
             </div>
+          ) : null}
+          {totalPages > 1 ? (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              total={filteredProblems.length}
+              pageSize={PAGE_SIZE}
+              onChange={setPage}
+            />
           ) : null}
         </CardContent>
       </Card>
@@ -296,7 +352,10 @@ export function PracticeArena({ problems, topics }: { problems: Problem[]; topic
             submissions.slice(0, 12).map((submission) => {
               const problem = problemById.get(submission.problemId);
               return (
-                <div key={submission.id} className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border p-4">
+                <div
+                  key={submission.id}
+                  className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border p-4"
+                >
                   <div>
                     <p className="font-medium">{problem?.title ?? '未知題目'}</p>
                     <p className="mt-1 text-sm text-muted-foreground">
@@ -330,10 +389,10 @@ function PracticeProblemRow({
   onLog: (status: SubmissionStatus) => void;
 }) {
   return (
-    <div className="rounded-2xl border border-border bg-background/45 p-4 shadow-sm transition-shadow hover:shadow-md">
+    <div className="rounded-2xl border border-border bg-card/60 p-4 shadow-sm transition hover:border-primary/40 hover:shadow-card-hover">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <Link href={`/problems/${problem.id}`} className="font-medium hover:text-primary">
+          <Link href={`/problems/${problem.id}`} className="font-medium transition-colors hover:text-primary">
             {problem.title}
           </Link>
           <p className="mt-1 text-sm text-muted-foreground">{topicTitle}</p>
@@ -344,31 +403,126 @@ function PracticeProblemRow({
         </div>
       </div>
       <div className="mt-3 flex flex-wrap items-center gap-2">
-        <ProblemSourceLink problem={problem} className="text-sm text-primary">
+        <ProblemSourceLink
+          problem={problem}
+          className="inline-flex items-center gap-1 text-sm font-medium text-primary transition hover:gap-1.5"
+        >
+          <ExternalLink className="h-3.5 w-3.5" aria-hidden />
           打開原題
         </ProblemSourceLink>
-        <span className="text-xs text-muted-foreground">題型：{problemTypeLabel(problem.problem_type)}</span>
+        <span className="text-xs text-muted-foreground">
+          ・題型：{problemTypeLabel(problem.problem_type)}
+        </span>
       </div>
-      <div className="mt-3 flex flex-wrap gap-2">
+      <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-border/60 pt-3">
+        <span className="text-xs text-muted-foreground">記錄結果</span>
         {statusOptions.map((status) => {
           const label = submissionStatusLabel(status);
+          const Icon = statusIcon[status];
           return (
             <button
               key={status}
               type="button"
               onClick={() => onLog(status)}
               title={label}
-              aria-label={label}
               className={cn(
-                'inline-flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-background/60 text-base transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
+                'inline-flex h-8 items-center gap-1.5 rounded-lg border border-border bg-background/60 px-2.5 text-xs font-medium text-muted-foreground transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
                 statusButtonClass[status]
               )}
             >
-              <span aria-hidden>{statusIcon[status]}</span>
+              <Icon className="h-3.5 w-3.5" aria-hidden />
+              {label}
             </button>
           );
         })}
       </div>
     </div>
   );
+}
+
+function Pagination({
+  currentPage,
+  totalPages,
+  total,
+  pageSize,
+  onChange
+}: {
+  currentPage: number;
+  totalPages: number;
+  total: number;
+  pageSize: number;
+  onChange: (page: number) => void;
+}) {
+  const from = (currentPage - 1) * pageSize + 1;
+  const to = Math.min(currentPage * pageSize, total);
+  const pages = pageRange(currentPage, totalPages);
+
+  return (
+    <div className="mt-2 flex flex-wrap items-center justify-between gap-3 border-t border-border/60 pt-4">
+      <span className="text-xs text-muted-foreground">
+        顯示第 {from}–{to} 題，共 {total} 題
+      </span>
+      <div className="flex items-center gap-1">
+        <button
+          type="button"
+          onClick={() => onChange(currentPage - 1)}
+          disabled={currentPage <= 1}
+          aria-label="上一頁"
+          className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border text-muted-foreground transition hover:bg-accent hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
+        >
+          <ChevronLeft className="h-4 w-4" aria-hidden />
+        </button>
+        {pages.map((p, index) =>
+          p === null ? (
+            <span key={`gap-${index}`} className="px-1 text-sm text-muted-foreground">
+              …
+            </span>
+          ) : (
+            <button
+              key={p}
+              type="button"
+              onClick={() => onChange(p)}
+              aria-current={p === currentPage ? 'page' : undefined}
+              className={cn(
+                'inline-flex h-8 min-w-8 items-center justify-center rounded-lg border px-2 text-sm font-medium tabular-nums transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                p === currentPage
+                  ? 'border-primary bg-primary text-primary-foreground'
+                  : 'border-border text-muted-foreground hover:bg-accent hover:text-foreground'
+              )}
+            >
+              {p}
+            </button>
+          )
+        )}
+        <button
+          type="button"
+          onClick={() => onChange(currentPage + 1)}
+          disabled={currentPage >= totalPages}
+          aria-label="下一頁"
+          className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border text-muted-foreground transition hover:bg-accent hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
+        >
+          <ChevronRight className="h-4 w-4" aria-hidden />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// Build a compact page list with ellipsis gaps, e.g. [1, null, 4, 5, 6, null, 12].
+function pageRange(current: number, total: number): (number | null)[] {
+  if (total <= 7) {
+    return Array.from({ length: total }, (_, i) => i + 1);
+  }
+  const pages = new Set<number>([1, total, current, current - 1, current + 1]);
+  const sorted = Array.from(pages)
+    .filter((p) => p >= 1 && p <= total)
+    .sort((a, b) => a - b);
+  const result: (number | null)[] = [];
+  let prev = 0;
+  for (const p of sorted) {
+    if (p - prev > 1) result.push(null);
+    result.push(p);
+    prev = p;
+  }
+  return result;
 }

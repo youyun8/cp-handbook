@@ -5,29 +5,31 @@
 :root {
   --background: 210 40% 98%;
   --foreground: 222 47% 11%;
-  --muted: 215 25% 91%;
-  --muted-foreground: 215 20% 38%;
+  --muted: 214 32% 93%;
+  --muted-foreground: 215 16% 42%;
   --card: 0 0% 100%;
   --card-foreground: 222 47% 11%;
-  --border: 214 32% 88%;
+  --border: 214 30% 89%;
   --primary: 221 83% 53%;
   --primary-foreground: 210 40% 98%;
-  --accent: 215 25% 91%;
+  --accent: 214 38% 95%;
   --accent-foreground: 222 47% 11%;
+  --ring: 221 83% 53%;
 }
 
 .dark {
   --background: 222 47% 7%;
   --foreground: 210 40% 96%;
-  --muted: 217 33% 17%;
-  --muted-foreground: 215 20% 75%;
-  --card: 222 47% 10%;
+  --muted: 217 30% 16%;
+  --muted-foreground: 216 18% 68%;
+  --card: 222 40% 11%;
   --card-foreground: 210 40% 96%;
-  --border: 217 33% 20%;
-  --primary: 217 91% 60%;
-  --primary-foreground: 222 47% 11%;
-  --accent: 217 33% 17%;
+  --border: 216 28% 22%;
+  --primary: 217 91% 62%;
+  --primary-foreground: 222 47% 9%;
+  --accent: 217 30% 18%;
   --accent-foreground: 210 40% 96%;
+  --ring: 217 91% 62%;
 }
 
 * {
@@ -48,14 +50,43 @@ html[data-text-size='large'] {
 
 body {
   min-height: 100vh;
-  background:
-    radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), transparent 34rem),
-    hsl(var(--background));
+  background-color: hsl(var(--background));
+  background-image:
+    radial-gradient(60rem 32rem at 110% -8%, rgba(56, 189, 248, 0.1), transparent 70%),
+    radial-gradient(52rem 30rem at -10% 0%, rgba(37, 99, 235, 0.12), transparent 70%);
+  background-attachment: fixed;
   color: hsl(var(--foreground));
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.dark body {
+  background-image:
+    radial-gradient(60rem 32rem at 110% -8%, rgba(56, 189, 248, 0.08), transparent 70%),
+    radial-gradient(52rem 30rem at -10% 0%, rgba(37, 99, 235, 0.12), transparent 70%);
 }
 
 ::selection {
   background: rgba(59, 130, 246, 0.35);
+}
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--border)) transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--border));
+  border-radius: 9999px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .shiki {

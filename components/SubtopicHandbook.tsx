@@ -1,20 +1,13 @@
 import { Accordion } from '@/components/Accordion';
-import { CodeBlock } from '@/components/CodeBlock';
 import { LayerCallout } from '@/components/LayerCallout';
 import { MarkdownBlock } from '@/components/MarkdownBlock';
 import { SubtopicPracticeProblems } from '@/components/SubtopicPracticeProblems';
 import type { Subtopic, Topic } from '@/lib/types';
 
-export function SubtopicHandbook({
-  subtopic,
-  parentTopic
-}: {
-  subtopic: Subtopic;
-  parentTopic: Topic;
-}) {
+export function SubtopicHandbook({ subtopic, parentTopic }: { subtopic: Subtopic; parentTopic: Topic }) {
   return (
     <article className="space-y-6">
-      <div className="rounded-3xl border border-border bg-card/80 p-6">
+      <div className="rounded-3xl border border-border bg-card/80 p-6 shadow-card">
         <p className="text-sm font-medium text-muted-foreground">
           <span className="text-primary">{parentTopic.title}</span> › 子主題
         </p>
@@ -32,7 +25,7 @@ export function SubtopicHandbook({
       </div>
 
       {subtopic.deep_dive && subtopic.deep_dive.length > 0 && (
-        <LayerCallout eyebrow="過程剖析" title="原理與進階拆解" variant="deepdive">
+        <LayerCallout eyebrow="過程剖析" title="原理、流程與實作拆解" variant="deepdive">
           <div className="space-y-5">
             {subtopic.deep_dive.map((section) => (
               <div
@@ -66,12 +59,6 @@ export function SubtopicHandbook({
           ))}
         </ul>
       </LayerCallout>
-
-      <div id="template">
-        <LayerCallout eyebrow="模板" title="C++ 模板程式碼" variant="template">
-          <CodeBlock code={subtopic.template_code} />
-        </LayerCallout>
-      </div>
 
       <div id="patterns">
         <LayerCallout eyebrow="套路" title="補充套路" variant="supplemental">

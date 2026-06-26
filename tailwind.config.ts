@@ -24,7 +24,12 @@ const config: Config = {
         'accent-foreground': 'hsl(var(--accent-foreground))'
       },
       boxShadow: {
-        glow: '0 0 45px rgba(59, 130, 246, 0.18)'
+        glow: '0 18px 40px -24px rgba(37, 99, 235, 0.45)',
+        card: '0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -16px rgba(15, 23, 42, 0.18)',
+        'card-hover': '0 2px 4px rgba(15, 23, 42, 0.06), 0 16px 36px -18px rgba(15, 23, 42, 0.28)'
+      },
+      ringColor: {
+        DEFAULT: 'hsl(var(--ring))'
       }
     }
   },

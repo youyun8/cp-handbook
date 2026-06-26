@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import type { Problem, ProblemType, RatingBand, Source, SubmissionStatus, Tier } from '@/lib/types';
+import type { Problem, ProblemType, RatingBand, Source, SubmissionStatus, Tier, Tone } from '@/lib/types';
 import type { LeetCodeSite } from '@/store/useSettingsStore';
 
 export function cn(...inputs: ClassValue[]) {
@@ -69,11 +69,44 @@ export function difficultyLabel(rating: number) {
   return '專家';
 }
 
+// Shared difficulty/intensity colour scale. `soft` is used for badges and tags;
+// `selected` is the active state for segmented controls so they read on the same
+// scale (calm green -> intense rose, with blue reserved for the focus tone).
+const toneSoft: Record<Tone, string> = {
+  green: 'border-emerald-400/40 bg-emerald-500/15 text-emerald-700 dark:text-emerald-300',
+  amber: 'border-amber-400/40 bg-amber-500/15 text-amber-700 dark:text-amber-300',
+  orange: 'border-orange-400/40 bg-orange-500/15 text-orange-700 dark:text-orange-300',
+  rose: 'border-rose-400/40 bg-rose-500/15 text-rose-700 dark:text-rose-300',
+  blue: 'border-blue-400/40 bg-blue-500/15 text-blue-700 dark:text-blue-300'
+};
+
+const toneSelected: Record<Tone, string> = {
+  green:
+    'border-emerald-500/60 bg-emerald-500/20 text-emerald-700 ring-1 ring-emerald-500/30 dark:text-emerald-200',
+  amber: 'border-amber-500/60 bg-amber-500/20 text-amber-700 ring-1 ring-amber-500/30 dark:text-amber-200',
+  orange:
+    'border-orange-500/60 bg-orange-500/20 text-orange-700 ring-1 ring-orange-500/30 dark:text-orange-200',
+  rose: 'border-rose-500/60 bg-rose-500/20 text-rose-700 ring-1 ring-rose-500/30 dark:text-rose-200',
+  blue: 'border-blue-500/60 bg-blue-500/20 text-blue-700 ring-1 ring-blue-500/30 dark:text-blue-200'
+};
+
+export function toneSoftClass(tone: Tone) {
+  return toneSoft[tone];
+}
+
+export function toneSelectedClass(tone: Tone) {
+  return toneSelected[tone];
+}
+
+export function difficultyTone(rating: number): Tone {
+  if (rating < 1400) return 'green';
+  if (rating <= 1800) return 'amber';
+  if (rating < 2100) return 'orange';
+  return 'rose';
+}
+
 export function difficultyClass(rating: number) {
-  if (rating < 1400) return 'border-emerald-400/40 bg-emerald-500/15 text-emerald-800 dark:text-emerald-300';
-  if (rating <= 1800) return 'border-yellow-400/40 bg-yellow-500/15 text-yellow-800 dark:text-yellow-200';
-  if (rating < 2100) return 'border-orange-400/40 bg-orange-500/15 text-orange-800 dark:text-orange-200';
-  return 'border-red-400/40 bg-red-500/15 text-red-800 dark:text-red-200';
+  return toneSoft[difficultyTone(rating)];
 }
 
 export function problemTypeLabel(problemType: ProblemType) {
@@ -157,21 +190,24 @@ export function ratingBands(currentRating: number): RatingBand[] {
       label: '鞏固',
       min: Math.max(0, currentRating - 200),
       max: currentRating,
-      description: '補強目前分段的穩定度'
+      description: '補強目前分段的穩定度',
+      tone: 'green'
     },
     {
       id: 'target',
       label: '目標',
       min: currentRating,
       max: currentRating + 200,
-      description: '依照當前目標分數練習'
+      description: '依照當前目標分數練習',
+      tone: 'blue'
     },
     {
       id: 'stretch',
       label: '伸展',
       min: 2200,
       max: null,
-      description: '選擇二二零零以上且按通過數排序'
+      description: '選擇二二零零以上且按通過數排序',
+      tone: 'orange'
     }
   ];
 }

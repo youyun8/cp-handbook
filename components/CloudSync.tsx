@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Cloud, HardDrive } from 'lucide-react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useProgressStore } from '@/store/useProgressStore';
 import { isStaticExport } from '@/lib/runtime';
@@ -12,14 +13,14 @@ export function CloudSync() {
   // so we must not call useSession here. Render a localStorage notice instead.
   if (isStaticExport) {
     return (
-      <section className="rounded-3xl border border-border bg-card/75 p-5">
+      <section className="rounded-3xl border border-border bg-card/75 p-5 shadow-card">
         <div className="flex items-center gap-2">
-          <span className="text-lg" aria-hidden>💾</span>
+          <HardDrive className="h-5 w-5 text-primary" aria-hidden />
           <h2 className="text-lg font-semibold">進度儲存</h2>
         </div>
         <p className="mt-2 text-sm text-muted-foreground">
-          目前為靜態部署版本，進度、解答與思路僅儲存在此瀏覽器的 localStorage。
-          若要使用 GitHub 登入並同步至雲端，請改用支援伺服器的部署（如 Vercel）。
+          目前為靜態部署版本，進度、解答與思路僅儲存在此瀏覽器的 localStorage。 若要使用 GitHub
+          登入並同步至雲端，請改用支援伺服器的部署（如 Vercel）。
         </p>
       </section>
     );
@@ -60,9 +61,9 @@ function CloudSyncAuthed() {
   }
 
   return (
-    <section className="rounded-3xl border border-border bg-card/75 p-5">
+    <section className="rounded-3xl border border-border bg-card/75 p-5 shadow-card">
       <div className="flex items-center gap-2">
-        <span className="text-lg" aria-hidden>☁️</span>
+        <Cloud className="h-5 w-5 text-primary" aria-hidden />
         <h2 className="text-lg font-semibold">雲端同步</h2>
       </div>
 
