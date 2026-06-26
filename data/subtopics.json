@@ -31,7 +31,6 @@
         "url": "https://oi-wiki.org/string/kmp/"
       }
     ],
-    "template_code": "// KMP: find all occurrences of pattern in text\n// text: input string.\n// pattern: input string.\nvector<int> kmpSearch(const string& text, const string& pattern) {\n    if (pattern.empty()) {\n        return {};\n    }\n    string s = pattern + '#' + text;\n    int n = s.size(), m = pattern.size();\n    vector<int> fail(n, 0);\n    for (int i = 1; i < n; i++) {\n        int j = fail[i - 1];\n        while (j > 0 && s[i] != s[j]) {\n            j = fail[j - 1];\n        }\n        if (s[i] == s[j]) {\n            j++;\n        }\n        fail[i] = j;\n    }\n    vector<int> result;\n    for (int i = m + 1; i < n; i++) {\n        if (fail[i] == m) {\n            result.push_back(i - 2 * m);\n        }\n    }\n    return result;\n}",
     "supplemental_patterns": [
       {
         "name": "最短重複週期",
@@ -125,7 +124,6 @@
         "url": "https://oi-wiki.org/string/z-func/"
       }
     ],
-    "template_code": "// s: input string.\nvector<int> zFunction(const string& s) {\n    int n = s.size();\n    vector<int> z(n, 0);\n    z[0] = n;\n    int l = 0, r = 0;\n    for (int i = 1; i < n; i++) {\n        if (i < r) {\n            z[i] = min(r - i, z[i - l]);\n        }\n        while (i + z[i] < n && s[z[i]] == s[i + z[i]]) {\n            z[i]++;\n        }\n        if (i + z[i] > r) {\n            l = i;\n            r = i + z[i];\n        }\n    }\n    return z;\n}",
     "supplemental_patterns": [
       {
         "name": "找最小移位使兩字串相等",
@@ -212,7 +210,6 @@
         "url": "https://oi-wiki.org/string/hash/"
       }
     ],
-    "template_code": "// Polynomial string hashing (single hash)\nstruct Hash {\n    static const long long kMod = 1e9 + 7, kBase = 131;\n    vector<long long> h, pw;\n    // s: input string.\n    Hash(const string& s) : h(s.size() + 1, 0), pw(s.size() + 1, 1) {\n        for (int i = 0; i < (int)s.size(); i++) {\n            h[i + 1] = (h[i] * kBase + s[i]) % kMod;\n            pw[i + 1] = pw[i] * kBase % kMod;\n        }\n    }\n    // l: left boundary or endpoint.\n    // r: right boundary, row, or endpoint.\n    long long get(int l, int r) {  // [l, r] 0-indexed inclusive\n        return (h[r + 1] - h[l] * pw[r - l + 1] % kMod + kMod * 2) % kMod;\n    }\n};",
     "supplemental_patterns": [
       {
         "name": "最長公共子字串（兩字串）",
@@ -302,7 +299,6 @@
         "url": "https://oi-wiki.org/string/trie/"
       }
     ],
-    "template_code": "// Dynamic Trie using struct\nstruct TrieNode {\n    array<int, 26> ch{};  // 0 means null\n    int end_count = 0;    // Words ending here\n    int pass_count = 0;   // Words passing through\n    TrieNode() {\n        ch.fill(0);\n    }\n};\nvector<TrieNode> trie(1);  // Root at index 0\n// s: input string.\nvoid trieInsert(const string& s) {\n    int cur = 0;\n    for (char c : s) {\n        int idx = c - 'a';\n        if (!trie[cur].ch[idx]) {\n            trie[cur].ch[idx] = trie.size();\n            trie.emplace_back();\n        }\n        cur = trie[cur].ch[idx];\n        trie[cur].pass_count++;\n    }\n    trie[cur].end_count++;\n}",
     "supplemental_patterns": [
       {
         "name": "01-Trie 異或最大",
@@ -405,7 +401,6 @@
         "url": "https://oi-wiki.org/string/sa/"
       }
     ],
-    "template_code": "// Suffix Array (O(n log^2 n) doubling) + Kasai LCP\n// s: input string.\nvector<int> buildSA(const string& s) {\n    int n = s.size();\n    vector<int> sa(n), rk(n), tmp(n);\n    iota(sa.begin(), sa.end(), 0);\n    for (int i = 0; i < n; i++) {\n        rk[i] = s[i];\n    }\n    for (int gap = 1; gap < n; gap <<= 1) {\n        auto cmp = [&rk, gap, n](int a, int b) {\n            if (rk[a] != rk[b]) {\n                return rk[a] < rk[b];\n            }\n            int ra = a + gap < n ? rk[a + gap] : -1, rb = b + gap < n ? rk[b + gap] : -1;\n            return ra < rb;\n        };\n        sort(sa.begin(), sa.end(), cmp);\n        tmp[sa[0]] = 0;\n        for (int i = 1; i < n; i++) {\n            tmp[sa[i]] = tmp[sa[i - 1]] + (cmp(sa[i - 1], sa[i]) ? 1 : 0);\n        }\n        rk = tmp;\n        if (rk[sa[n - 1]] == n - 1) {\n            break;\n        }\n    }\n    return sa;\n}",
     "supplemental_patterns": [
       {
         "name": "最長公共子字串（兩個字串）",
@@ -497,7 +492,6 @@
         "url": "https://oi-wiki.org/graph/shortest-path/#bellman-ford"
       }
     ],
-    "template_code": "// Bellman-Ford: single source shortest path with negative edges\n// src: source node index (0-based)\n// n: number of nodes in the graph\n// edges: edge list; each tuple is (u, v, w) for edge u -> v with weight w\n// Returns empty if a reachable negative cycle is detected\nvector<long long> bellmanFord(int src, int n, const vector<tuple<int, int, int>>& edges) {\n    vector<long long> dist(n, LLONG_MAX);\n    dist[src] = 0;\n    for (int i = 0; i < n - 1; i++) {\n        bool updated = false;\n        for (auto [u, v, w] : edges) {\n            if (dist[u] != LLONG_MAX && dist[u] + w < dist[v]) {\n                dist[v] = dist[u] + w;\n                updated = true;\n            }\n        }\n        if (!updated) {\n            break;  // Early exit\n        }\n    }\n    for (auto [u, v, w] : edges) {\n        if (dist[u] != LLONG_MAX && dist[u] + w < dist[v]) {\n            return {};  // Negative cycle exists\n        }\n    }\n    return dist;\n}",
     "supplemental_patterns": [
       {
         "name": "差分約束系統",
@@ -584,7 +578,6 @@
         "url": "https://cp-algorithms.com/graph/lca_binary_lifting.html"
       }
     ],
-    "template_code": "struct BinaryLiftingLca {\n    int n = 0, kLog = 0, root = 1;\n    vector<vector<int>> g, up;\n    vector<int> dep;\n\n    BinaryLiftingLca() = default;\n    // n_: number of nodes/elements used to initialize the structure.\n    explicit BinaryLiftingLca(int n_) {\n        init(n_);\n    }\n\n    // n_: number of nodes/elements used to initialize the structure.\n    void init(int n_) {\n        n = n_;\n        kLog = 1;\n        while ((1LL << kLog) <= max(1, n)) {\n            kLog++;\n        }\n        g.assign(n + 1, {});\n        up.assign(n + 1, vector<int>(kLog, 0));\n        dep.assign(n + 1, 0);\n    }\n\n    // u: current node or left endpoint.\n    // v: neighbor node or right endpoint.\n    void addEdge(int u, int v) {\n        g[u].push_back(v);\n        g[v].push_back(u);\n    }\n\n    // v: neighbor node or right endpoint.\n    // p: parent node or previous node.\n    void dfs(int v, int p) {\n        up[v][0] = p;\n        for (int k = 1; k < kLog; k++) {\n            up[v][k] = up[up[v][k - 1]][k - 1];\n        }\n        for (int to : g[v]) {\n            if (to == p) {\n                continue;\n            }\n            dep[to] = dep[v] + 1;\n            dfs(to, v);\n        }\n    }\n\n    // root_: root node used to build the structure.\n    void build(int root_ = 1) {\n        if (n == 0) {\n            return;\n        }\n        root = root_;\n        dep[root] = 0;\n        dfs(root, root);\n    }\n\n    // v: neighbor node or right endpoint.\n    // steps: number of ancestor steps to climb.\n    int lift(int v, int steps) const {\n        for (int k = 0; k < kLog; k++) {\n            if ((steps >> k) & 1) {\n                v = up[v][k];\n            }\n        }\n        return v;\n    }\n\n    // u: current node or left endpoint.\n    // v: neighbor node or right endpoint.\n    int lca(int u, int v) const {\n        if (dep[u] < dep[v]) {\n            swap(u, v);\n        }\n        u = lift(u, dep[u] - dep[v]);\n        if (u == v) {\n            return u;\n        }\n        for (int k = kLog - 1; k >= 0; k--) {\n            if (up[u][k] != up[v][k]) {\n                u = up[u][k];\n                v = up[v][k];\n            }\n        }\n        return up[u][0];\n    }\n};",
     "supplemental_patterns": [
       {
         "name": "路徑最大邊權",
@@ -673,7 +666,6 @@
         "url": "https://oi-wiki.org/graph/lca/"
       }
     ],
-    "template_code": "struct TreeQueries {\n    int n = 0, kLog = 0, root = 1;\n    vector<vector<pair<int, int>>> g;\n    vector<vector<int>> up;\n    vector<int> dep;\n    vector<long long> dist;\n\n    TreeQueries() = default;\n    // n_: number of nodes/elements used to initialize the structure.\n    explicit TreeQueries(int n_) {\n        init(n_);\n    }\n\n    // n_: number of nodes/elements used to initialize the structure.\n    void init(int n_) {\n        n = n_;\n        kLog = 1;\n        while ((1LL << kLog) <= max(1, n)) {\n            kLog++;\n        }\n        g.assign(n + 1, {});\n        up.assign(n + 1, vector<int>(kLog, 0));\n        dep.assign(n + 1, 0);\n        dist.assign(n + 1, 0);\n    }\n\n    // u: current node or left endpoint.\n    // v: neighbor node or right endpoint.\n    // w: edge weight or node weight.\n    void addEdge(int u, int v, int w = 1) {\n        g[u].push_back({v, w});\n        g[v].push_back({u, w});\n    }\n\n    // v: neighbor node or right endpoint.\n    // p: parent node or previous node.\n    void dfs(int v, int p) {\n        up[v][0] = p;\n        for (int k = 1; k < kLog; k++) {\n            up[v][k] = up[up[v][k - 1]][k - 1];\n        }\n        for (auto [to, w] : g[v]) {\n            if (to == p) {\n                continue;\n            }\n            dep[to] = dep[v] + 1;\n            dist[to] = dist[v] + w;\n            dfs(to, v);\n        }\n    }\n\n    // root_: root node used to build the structure.\n    void build(int root_ = 1) {\n        if (n == 0) {\n            return;\n        }\n        root = root_;\n        dep[root] = 0;\n        dist[root] = 0;\n        dfs(root, root);\n    }\n\n    // v: neighbor node or right endpoint.\n    // steps: number of ancestor steps to climb.\n    int lift(int v, int steps) const {\n        for (int k = 0; k < kLog; k++) {\n            if ((steps >> k) & 1) {\n                v = up[v][k];\n            }\n        }\n        return v;\n    }\n\n    // u: current node or left endpoint.\n    // v: neighbor node or right endpoint.\n    int lca(int u, int v) const {\n        if (dep[u] < dep[v]) {\n            swap(u, v);\n        }\n        u = lift(u, dep[u] - dep[v]);\n        if (u == v) {\n            return u;\n        }\n        for (int k = kLog - 1; k >= 0; k--) {\n            if (up[u][k] != up[v][k]) {\n                u = up[u][k];\n                v = up[v][k];\n            }\n        }\n        return up[u][0];\n    }\n\n    // v: neighbor node or right endpoint.\n    // k: limit, count, or window size used by the algorithm.\n    int kthAncestor(int v, int k) const {\n        if (k > dep[v]) {\n            return -1;\n        }\n        return lift(v, k);\n    }\n\n    // u: current node or left endpoint.\n    // v: neighbor node or right endpoint.\n    int treeDist(int u, int v) const {\n        int a = lca(u, v);\n        return dep[u] + dep[v] - 2 * dep[a];\n    }\n\n    // u: current node or left endpoint.\n    // v: neighbor node or right endpoint.\n    long long treeDistW(int u, int v) const {\n        int a = lca(u, v);\n        return dist[u] + dist[v] - 2LL * dist[a];\n    }\n\n    // u: current node or left endpoint.\n    // v: neighbor node or right endpoint.\n    // w: edge weight or node weight.\n    bool onPath(int u, int v, int w) const {\n        return treeDist(u, w) + treeDist(w, v) == treeDist(u, v);\n    }\n\n    // u: current node or left endpoint.\n    // v: neighbor node or right endpoint.\n    // k: limit, count, or window size used by the algorithm.\n    int pathNode(int u, int v, int k) const {\n        int a = lca(u, v);\n        int up_len = dep[u] - dep[a];\n        int total = dep[u] + dep[v] - 2 * dep[a];\n        if (k < 0 || k > total) {\n            return -1;\n        }\n        if (k <= up_len) {\n            return kthAncestor(u, k);\n        }\n        return kthAncestor(v, total - k);\n    }\n};",
     "supplemental_patterns": [
       {
         "name": "路徑上第 k 個節點",
@@ -765,7 +757,6 @@
         "url": "https://cp-algorithms.com/graph/lca_tarjan.html"
       }
     ],
-    "template_code": "struct TarjanOfflineLca {\n    int n = 0;\n    vector<vector<int>> g;\n    vector<vector<pair<int, int>>> qs;\n    vector<int> parent, color, answer;\n\n    TarjanOfflineLca() = default;\n    // n_: number of nodes/elements used to initialize the structure.\n    explicit TarjanOfflineLca(int n_) {\n        init(n_);\n    }\n\n    // n_: number of nodes/elements used to initialize the structure.\n    void init(int n_) {\n        n = n_;\n        g.assign(n + 1, {});\n        qs.assign(n + 1, {});\n        parent.resize(n + 1);\n        color.assign(n + 1, 0);\n        iota(parent.begin(), parent.end(), 0);\n        answer.clear();\n    }\n\n    // u: current node or left endpoint.\n    // v: neighbor node or right endpoint.\n    void addEdge(int u, int v) {\n        g[u].push_back(v);\n        g[v].push_back(u);\n    }\n\n    // u: current node or left endpoint.\n    // v: neighbor node or right endpoint.\n    int addQuery(int u, int v) {\n        int id = (int)answer.size();\n        answer.push_back(-1);\n        qs[u].push_back({v, id});\n        qs[v].push_back({u, id});\n        return id;\n    }\n\n    // x: value or node being processed.\n    int findSet(int x) {\n        if (parent[x] == x) {\n            return x;\n        }\n        return parent[x] = findSet(parent[x]);\n    }\n\n    // v: neighbor node or right endpoint.\n    // p: parent node or previous node.\n    void dfs(int v, int p) {\n        color[v] = 1;\n        parent[v] = v;\n        for (int to : g[v]) {\n            if (to == p) {\n                continue;\n            }\n            dfs(to, v);\n            parent[findSet(to)] = v;\n        }\n        for (auto [u, id] : qs[v]) {\n            if (u == v) {\n                answer[id] = v;\n            }\n            else if (color[u] == 2) {\n                answer[id] = findSet(u);\n            }\n        }\n        color[v] = 2;\n    }\n\n    // root: root node.\n    vector<int> solve(int root = 1) {\n        fill(color.begin(), color.end(), 0);\n        iota(parent.begin(), parent.end(), 0);\n        fill(answer.begin(), answer.end(), -1);\n        dfs(root, -1);\n        return answer;\n    }\n};",
     "supplemental_patterns": [
       {
         "name": "離線批量路徑查詢",
@@ -857,7 +848,6 @@
         "url": "https://cp-algorithms.com/num_methods/binary_search.html"
       }
     ],
-    "template_code": "// Binary search on answer — minimize: find smallest x where check(x) is true\n// lo: lower bound of the search range.\n// hi: upper bound of the search range.\nlong long binarySearchMin(long long lo, long long hi) {\n    // Invariant: answer lies in [lo, hi]\n    while (lo < hi) {\n        long long mid = lo + (hi - lo) / 2;\n        if (check(mid)) {\n            hi = mid;  // mid is feasible, try smaller\n        }\n        else {\n            lo = mid + 1;  // mid is not feasible, must go larger\n        }\n    }\n    return lo;  // lo == hi is the answer\n}\n\n// Binary search on answer — maximize: find largest x where check(x) is true\n// lo: lower bound of the search range.\n// hi: upper bound of the search range.\nlong long binarySearchMax(long long lo, long long hi) {\n    while (lo < hi) {\n        long long mid = lo + (hi - lo + 1) / 2;  // Upper-mid prevents infinite loop\n        if (check(mid)) {\n            lo = mid;  // mid is feasible, try larger\n        }\n        else {\n            hi = mid - 1;  // mid is not feasible, must go smaller\n        }\n    }\n    return lo;\n}",
     "supplemental_patterns": [
       {
         "name": "浮點數二分答案",
@@ -947,7 +937,6 @@
         "url": "https://oi-wiki.org/basic/binary/"
       }
     ],
-    "template_code": "// Search in rotated sorted array (no duplicates), returns index or -1\n// a: input array or sequence.\n// target: target value or remaining target to satisfy.\nint searchRotated(const vector<int>& a, int target) {\n    int lo = 0, hi = (int)a.size() - 1;\n    while (lo <= hi) {\n        int mid = lo + (hi - lo) / 2;\n        if (a[mid] == target) {\n            return mid;\n        }\n        if (a[lo] <= a[mid]) {  // Left half [lo, mid] sorted\n            if (a[lo] <= target && target < a[mid]) {\n                hi = mid - 1;\n            }\n            else {\n                lo = mid + 1;\n            }\n        } else {  // Right half [mid, hi] sorted\n            if (a[mid] < target && target <= a[hi]) {\n                lo = mid + 1;\n            }\n            else {\n                hi = mid - 1;\n            }\n        }\n    }\n    return -1;\n}\n\n// Find any peak element index (adjacent elements are distinct)\n// a: input array or sequence.\nint findPeak(const vector<int>& a) {\n    int lo = 0, hi = (int)a.size() - 1;\n    while (lo < hi) {\n        int mid = lo + (hi - lo) / 2;\n        if (a[mid] < a[mid + 1]) {\n            lo = mid + 1;  // Ascending slope: go right\n        }\n        else {\n            hi = mid;  // Descending slope: peak at mid or left\n        }\n    }\n    return lo;\n}",
     "supplemental_patterns": [
       {
         "name": "找旋轉點（最小值位置）",
@@ -1043,7 +1032,6 @@
         "url": "https://cp-algorithms.com/num_methods/ternary_search.html"
       }
     ],
-    "template_code": "// Ternary search: find x in [lo, hi] maximizing strictly unimodal integer f\n// lo: lower bound of the search range.\n// hi: upper bound of the search range.\nlong long ternarySearchMax(long long lo, long long hi) {\n    while (hi - lo > 2) {\n        long long m1 = lo + (hi - lo) / 3;\n        long long m2 = hi - (hi - lo) / 3;\n        if (f(m1) < f(m2)) {\n            lo = m1 + 1;  // Eliminate left third\n        }\n        else {\n            hi = m2 - 1;  // Eliminate right third\n        }\n    }\n    long long best = lo;\n    for (long long x = lo + 1; x <= hi; x++) {\n        if (f(x) > f(best)) {\n            best = x;\n        }\n    }\n    return best;\n}\n\n// Ternary search: find x in [lo, hi] maximizing strictly unimodal real f\n// lo: lower bound of the search range.\n// hi: upper bound of the search range.\ndouble ternarySearchReal(double lo, double hi) {\n    for (int i = 0; i < 200; i++) {\n        double m1 = lo + (hi - lo) / 3.0;\n        double m2 = hi - (hi - lo) / 3.0;\n        if (f(m1) < f(m2)) {\n            lo = m1;\n        }\n        else {\n            hi = m2;\n        }\n    }\n    return (lo + hi) / 2.0;\n}",
     "supplemental_patterns": [
       {
         "name": "單谷函數求極小值",
@@ -1131,7 +1119,6 @@
         "url": "https://oi-wiki.org/math/bit/"
       }
     ],
-    "template_code": "// Bitmask set operations: n elements, universe = {0, 1, ..., n-1}\n// Represent set mask as int (or long long for n > 30)\n\n// mask: bitmask representing the current subset/state.\n// i: current index.\ninline int addElem(int mask, int i) {\n    return mask | (1 << i);\n}\n// mask: input value used by the function.\n// i: input value used by the function.\ninline int delElem(int mask, int i) {\n    return mask & ~(1 << i);\n}\n// mask: input value used by the function.\n// i: input value used by the function.\ninline bool hasElem(int mask, int i) {\n    return (mask >> i) & 1;\n}\n// mask: input value used by the function.\ninline int lowbit(int mask) {\n    return mask & (-mask);\n}\n// mask: input value used by the function.\ninline int popcount(int mask) {\n    return __builtin_popcount(mask);\n}\n// n: number of nodes or elements.\ninline int fullMask(int n) {\n    return (1 << n) - 1;\n}\n\n// Enumerate all non-empty subsets of mask\n// for (int t = mask; t; t = (t - 1) & mask) { /* use t */ }\n\n// Enumerate all set bits (elements) of mask\n// for (int t = mask; t; t &= t - 1) { int i = __builtin_ctz(t); /* use i */ }",
     "supplemental_patterns": [
       {
         "name": "用 lowbit 實現樹狀數組（BIT）",
@@ -1222,7 +1209,6 @@
         "url": "https://oi-wiki.org/dp/state/"
       }
     ],
-    "template_code": "// TSP: Shortest Hamiltonian Cycle using bitmask DP\n// dist[i][j]: directed edge weight; nodes 0-indexed\n// Time O(2^n * n^2), Space O(2^n * n)\nconst long long kInf = 1e18;\n\n// n: number of nodes or elements.\n// dist: dynamic programming or distance array.\nlong long tsp(int n, const vector<vector<long long>>& dist) {\n    int full = 1 << n;\n    vector<vector<long long>> dp(full, vector<long long>(n, kInf));\n    dp[1][0] = 0;  // Start at node 0\n    for (int mask = 1; mask < full; mask++) {\n        for (int v = 0; v < n; v++) {\n            if (!(mask & (1 << v)) || dp[mask][v] == kInf) {\n                continue;\n            }\n            for (int u = 0; u < n; u++) {\n                if (mask & (1 << u)) {\n                    continue;\n                }\n                long long nc = dp[mask][v] + dist[v][u];\n                dp[mask | (1 << u)][u] = min(dp[mask | (1 << u)][u], nc);\n            }\n        }\n    }\n    long long ans = kInf;\n    for (int v = 1; v < n; v++) {\n        if (dp[full - 1][v] < kInf) {\n            ans = min(ans, dp[full - 1][v] + dist[v][0]);\n        }\n    }\n    return ans;\n}",
     "supplemental_patterns": [
       {
         "name": "最短哈密頓路徑（不回起點）",
@@ -1312,7 +1298,6 @@
         "url": "https://oi-wiki.org/dp/state/"
       }
     ],
-    "template_code": "// SOS DP (Sum over Subsets): F[mask] = sum of f[T] for all T subset of mask\n// Initialize dp[] = f[], then call sosDp(dp, n)\n// Time O(2^n * n), Space O(2^n)\n// dp: dynamic programming or distance array.\n// n: number of nodes or elements.\nvoid sosDp(vector<long long>& dp, int n) {\n    for (int i = 0; i < n; i++) {\n        for (int mask = 0; mask < (1 << n); mask++) {\n            if (mask & (1 << i)) {\n                dp[mask] += dp[mask ^ (1 << i)];\n            }\n        }\n    }\n}\n\n// Superset sum: F[mask] = sum of f[T] for all T superset of mask\n// dp: input or working vector used by the algorithm.\n// n: number of nodes or elements.\nvoid sosDpSuper(vector<long long>& dp, int n) {\n    for (int i = 0; i < n; i++) {\n        for (int mask = 0; mask < (1 << n); mask++) {\n            if (!(mask & (1 << i))) {\n                dp[mask] += dp[mask | (1 << i)];\n            }\n        }\n    }\n}\n\n// Max over subsets variant (replace += with = max(...))\n// dp: dynamic programming or distance array.\n// n: number of nodes or elements.\nvoid maxSubsetDP(vector<int>& dp, int n) {\n    for (int i = 0; i < n; i++) {\n        for (int mask = 0; mask < (1 << n); mask++) {\n            if (mask & (1 << i)) {\n                dp[mask] = max(dp[mask], dp[mask ^ (1 << i)]);\n            }\n        }\n    }\n}",
     "supplemental_patterns": [
       {
         "name": "AND/OR 卷積（快速集合卷積）",
@@ -1401,7 +1386,6 @@
         "url": "https://oi-wiki.org/geometry/2d/"
       }
     ],
-    "template_code": "struct Point {\n    long long x, y;\n};\nPoint operator-(Point a, Point b) {\n    return {a.x - b.x, a.y - b.y};\n}\n// a: first point/vector.\n// b: second point/vector.\nlong long cross(Point a, Point b) {\n    return a.x * b.y - a.y * b.x;\n}\n// a: numeric input value.\n// b: second numeric input value.\nlong long dot(Point a, Point b) {\n    return a.x * b.x + a.y * b.y;\n}\n// v: neighbor node or right endpoint.\nint sgn(long long v) {\n    return (v > 0) - (v < 0);\n}\n\n// Orientation of c w.r.t. directed line a->b: >0 left, 0 on, <0 right\n// a: input array or sequence.\n// b: second numeric input value.\n// c: candidate character or capacity value.\nlong long ccw(Point a, Point b, Point c) {\n    return cross(b - a, c - a);\n}\n\n// Twice signed polygon area (positive if CCW)\n// p: polygon vertices in order.\nlong long area2(const vector<Point>& p) {\n    long long s = 0;\n    int n = p.size();\n    for (int i = 0; i < n; i++) {\n        s += cross(p[i], p[(i + 1) % n]);\n    }\n    return s;\n}",
     "supplemental_patterns": [
       {
         "name": "判斷三點共線 / 轉向",
@@ -1495,7 +1479,6 @@
         "url": "https://cp-algorithms.com/geometry/convex-hull.html"
       }
     ],
-    "template_code": "struct Point {\n    long long x, y;\n};\nPoint operator-(Point a, Point b) {\n    return {a.x - b.x, a.y - b.y};\n}\nbool operator==(Point a, Point b) {\n    return a.x == b.x && a.y == b.y;\n}\n// a: first point/vector.\n// b: second point/vector.\nlong long cross(Point a, Point b) {\n    return a.x * b.y - a.y * b.x;\n}\n\n// Andrew's monotone chain. Hull in CCW order; <=0 drops collinear points.\n// p: points used to build the convex hull.\nvector<Point> convexHull(vector<Point> p) {\n    sort(p.begin(), p.end(), [](Point a, Point b) { return a.x != b.x ? a.x < b.x : a.y < b.y; });\n    p.erase(unique(p.begin(), p.end()), p.end());\n    int n = p.size(), k = 0;\n    if (n < 3) {\n        return p;\n    }\n    vector<Point> h(2 * n);\n    for (int i = 0; i < n; i++) {\n        while (k >= 2 && cross(h[k - 1] - h[k - 2], p[i] - h[k - 2]) <= 0) {\n            k--;\n        }\n        h[k++] = p[i];\n    }\n    for (int i = n - 2, t = k + 1; i >= 0; i--) {\n        while (k >= t && cross(h[k - 1] - h[k - 2], p[i] - h[k - 2]) <= 0) {\n            k--;\n        }\n        h[k++] = p[i];\n    }\n    h.resize(k - 1);\n    return h;\n}",
     "supplemental_patterns": [
       {
         "name": "凸包直徑（最遠點對）",
@@ -1577,7 +1560,6 @@
         "url": "https://cp-algorithms.com/geometry/segments-intersection.html"
       }
     ],
-    "template_code": "struct Point {\n    long long x, y;\n};\nPoint operator-(Point a, Point b) {\n    return {a.x - b.x, a.y - b.y};\n}\n// a: first point/vector.\n// b: second point/vector.\nlong long cross(Point a, Point b) {\n    return a.x * b.y - a.y * b.x;\n}\n// v: neighbor node or right endpoint.\nint sgn(long long v) {\n    return (v > 0) - (v < 0);\n}\n\n// a: input array or sequence.\n// b: second numeric input value.\n// q: query list or queue-related parameter.\nbool onSegment(Point a, Point b, Point q) {\n    return min(a.x, b.x) <= q.x && q.x <= max(a.x, b.x) && min(a.y, b.y) <= q.y &&\n           q.y <= max(a.y, b.y);\n}\n\n// Segment intersection (touch counts)\n// a: input array or sequence.\n// b: second numeric input value.\n// c: first endpoint of the second segment.\n// d: second endpoint of the second segment.\nbool segInter(Point a, Point b, Point c, Point d) {\n    long long d1 = cross(b - a, c - a), d2 = cross(b - a, d - a);\n    long long d3 = cross(d - c, a - c), d4 = cross(d - c, b - c);\n    if (sgn(d1) * sgn(d2) < 0 && sgn(d3) * sgn(d4) < 0) {\n        return true;\n    }\n    if (d1 == 0 && onSegment(a, b, c)) {\n        return true;\n    }\n    if (d2 == 0 && onSegment(a, b, d)) {\n        return true;\n    }\n    if (d3 == 0 && onSegment(c, d, a)) {\n        return true;\n    }\n    if (d4 == 0 && onSegment(c, d, b)) {\n        return true;\n    }\n    return false;\n}\n\n// Point in polygon: 1 inside, 0 outside, -1 on boundary\n// q: query list or queue-related parameter.\n// poly: input or working vector used by the algorithm.\nint pointInPoly(Point q, const vector<Point>& poly) {\n    int n = poly.size(), cnt = 0;\n    for (int i = 0; i < n; i++) {\n        Point a = poly[i], b = poly[(i + 1) % n];\n        if (cross(b - a, q - a) == 0 && onSegment(a, b, q)) {\n            return -1;\n        }\n        if ((a.y > q.y) != (b.y > q.y)) {\n            Point lo = a, hi = b;\n            if (lo.y > hi.y) {\n                swap(lo, hi);\n            }\n            if (cross(hi - lo, q - lo) > 0) {\n                cnt++;\n            }\n        }\n    }\n    return cnt & 1;\n}",
     "supplemental_patterns": [
       {
         "name": "點在凸多邊形內 O(log n)",
@@ -1671,7 +1653,6 @@
         "url": "https://cp-algorithms.com/geometry/nearest_points.html"
       }
     ],
-    "template_code": "struct Point {\n    long long x, y;\n};\n// a: input array or sequence.\n// b: second numeric input value.\nlong long dist2(Point a, Point b) {\n    long long dx = a.x - b.x, dy = a.y - b.y;\n    return dx * dx + dy * dy;\n}\n\n// a[] must be sorted by x before the first call: rec(0, a.size(), a).\n// Reorders a[] by y in place. Returns SQUARED closest distance.\n// l: left boundary or endpoint.\n// r: right boundary, row, or endpoint.\n// a: input array or sequence.\nlong long rec(int l, int r, vector<Point>& a) {\n    if (r - l <= 3) {\n        long long best = LLONG_MAX;\n        for (int i = l; i < r; i++) {\n            for (int j = i + 1; j < r; j++) {\n                best = min(best, dist2(a[i], a[j]));\n            }\n        }\n        sort(a.begin() + l, a.begin() + r, [](Point p, Point q) { return p.y < q.y; });\n        return best;\n    }\n    int m = (l + r) / 2;\n    long long midx = a[m].x;\n    long long d = min(rec(l, m, a), rec(m, r, a));\n    inplace_merge(a.begin() + l, a.begin() + m, a.begin() + r,\n                  [](Point p, Point q) { return p.y < q.y; });\n    vector<Point> strip;\n    for (int i = l; i < r; i++) {\n        if ((a[i].x - midx) * (a[i].x - midx) < d) {\n            strip.push_back(a[i]);\n        }\n    }\n    for (int i = 0; i < (int)strip.size(); i++) {\n        for (int j = i + 1;\n             j < (int)strip.size() && (strip[j].y - strip[i].y) * (strip[j].y - strip[i].y) < d;\n             j++) {\n            d = min(d, dist2(strip[i], strip[j]));\n        }\n    return d;\n}\n\n// pts: input or working vector used by the algorithm.\nlong long closestPair(vector<Point> pts) {\n    sort(pts.begin(), pts.end(),\n         [](Point a, Point b) { return a.x != b.x ? a.x < b.x : a.y < b.y; });\n    return rec(0, pts.size(), pts);\n}",
     "supplemental_patterns": [
       {
         "name": "回傳實際點對而非距離",
@@ -1763,7 +1744,6 @@
         "url": "https://cp-algorithms.com/sequences/longest_increasing_subsequence.html"
       }
     ],
-    "template_code": "// LIS O(n log n) template\n// Returns length of Longest Strictly Increasing Subsequence\n// a: input array or sequence.\nint lis(vector<int>& a) {\n    vector<int> tails;  // tails[i] = smallest tail of IS of length i+1\n    for (int x : a) {\n        auto it = lower_bound(tails.begin(), tails.end(), x);\n        if (it == tails.end()) {\n            tails.push_back(x);\n        }\n        else {\n            *it = x;\n        }\n    }\n    return (int)tails.size();\n}\n\n// Reconstruct one valid LIS sequence\nvector<int> lisRecover(vector<int>& a) {\n    int n = a.size();\n    vector<int> tails, pos(n), par(n, -1);\n    vector<int> tail_pos;  // Index in a[] corresponding to each tail\n    for (int i = 0; i < n; i++) {\n        auto it = lower_bound(tails.begin(), tails.end(), a[i]);\n        int k = it - tails.begin();\n        if (it == tails.end()) {\n            tails.push_back(a[i]);\n            tail_pos.push_back(i);\n        } else {\n            tails[k] = a[i];\n            tail_pos[k] = i;\n        }\n        pos[i] = k;\n        if (k > 0) {\n            par[i] = tail_pos[k - 1];\n        }\n    }\n    vector<int> res;\n    for (int cur = tail_pos.back(); cur != -1; cur = par[cur]) {\n        res.push_back(a[cur]);\n    }\n    reverse(res.begin(), res.end());\n    return res;\n}",
     "supplemental_patterns": [
       {
         "name": "最長不下降子序列",
@@ -1854,7 +1834,6 @@
         "url": "https://oi-wiki.org/dp/knapsack/"
       }
     ],
-    "template_code": "// 0/1 Knapsack template (1D rolling array)\n// dp[j] = max value achievable with capacity <= j\n// cap: capacity limit.\n// weight: item weights.\n// value: item values.\nvector<int> solve01Knapsack(int cap, vector<int>& weight, vector<int>& value) {\n    int n = weight.size();\n    vector<int> dp(cap + 1, 0);\n    for (int i = 0; i < n; i++) {\n        for (int j = cap; j >= weight[i]; j--) {  // Reverse: each item used at most once\n            dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);\n        }\n    }\n    return dp;  // dp[cap] = answer\n}\n\n// Complete (Unbounded) Knapsack template\nvector<int> solveUnboundedKnapsack(int cap, vector<int>& weight, vector<int>& value) {\n    int n = weight.size();\n    vector<int> dp(cap + 1, 0);\n    for (int i = 0; i < n; i++) {\n        for (int j = weight[i]; j <= cap; j++) {  // Forward: item can be reused\n            dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);\n        }\n    }\n    return dp;\n}",
     "supplemental_patterns": [
       {
         "name": "恰好裝滿 vs 至多裝滿",
@@ -1944,7 +1923,6 @@
         "url": "https://oi-wiki.org/dp/interval/"
       }
     ],
-    "template_code": "// General Interval DP template\n// dp[l][r] = optimal value for interval [l, r]\n// Fill in increasing order of interval length\nconst int kMaxN = 505;\nint dp_arr[kMaxN][kMaxN];\n// calling: current recursion/call state.\nint pre[kMaxN];  // Prefix sum (fill before calling)\n\n// n: number of nodes or elements.\nvoid intervalDP(int n) {\n    // Base case: single element intervals (length 1)\n    for (int i = 0; i < n; i++) {\n        dp_arr[i][i] = 0;\n    }\n\n    for (int len = 2; len <= n; len++) {         // Length from 2 to n\n        for (int l = 0; l + len - 1 < n; l++) {  // Left endpoint\n            int r = l + len - 1;\n            dp_arr[l][r] = INT_MAX;\n            int cost = pre[r + 1] - pre[l];  // Customize merge cost\n            for (int k = l; k < r; k++) {  // Split point\n                dp_arr[l][r] = min(dp_arr[l][r], dp_arr[l][k] + dp_arr[k + 1][r] + cost);\n            }\n        }\n    }\n    // Answer: dp_arr[0][n-1]\n}",
     "supplemental_patterns": [
       {
         "name": "環形區間 DP",
@@ -2034,7 +2012,6 @@
         "url": "https://oi-wiki.org/dp/memo/"
       }
     ],
-    "template_code": "// Memoization (top-down DP) template\n// Customize: memo size, transition, base case\nconst int kUnset = -1;  // Sentinel: must not appear as a valid answer\nvector<int> memo;\n\n// state: current DP or search state.\nint dp(int state) {\n    // Base case\n    if (state == 0) {\n        return 0;\n    }\n    // Cache check\n    if (memo[state] != kUnset) {\n        return memo[state];\n    }\n    // Compute\n    // etc: additional state required by the example.\n    int res = 0;  // Replace with identity (0 / INT_MAX / etc.)\n    for (int next : /* transitions */ {}) {\n        res = max(res, dp(next) + /* cost */ 0);\n    }\n    return memo[state] = res;\n}\n\n// Usage:\n// memo.assign(MAX_STATE, kUnset);\n// int ans = dp(initial_state);",
     "supplemental_patterns": [
       {
         "name": "記憶化 + 雜湊表（稀疏狀態）",
@@ -2128,7 +2105,6 @@
         "url": "https://cp-algorithms.com/data_structures/disjoint_set_union.html"
       }
     ],
-    "template_code": "struct Dsu {\n    vector<int> par, sz;\n\n    Dsu() = default;\n    // n: number of nodes or elements.\n    explicit Dsu(int n) {\n        init(n);\n    }\n\n    // n: number of nodes or elements.\n    void init(int n) {\n        par.resize(n + 1);\n        sz.assign(n + 1, 1);\n        iota(par.begin(), par.end(), 0);\n    }\n\n    // x: value or node being processed.\n    int findRoot(int x) {\n        if (par[x] == x) {\n            return x;\n        }\n        return par[x] = findRoot(par[x]);\n    }\n\n    // a: input array or sequence.\n    // b: second numeric input value.\n    bool unite(int a, int b) {\n        a = findRoot(a);\n        b = findRoot(b);\n        if (a == b) {\n            return false;\n        }\n        if (sz[a] < sz[b]) {\n            swap(a, b);\n        }\n        par[b] = a;\n        sz[a] += sz[b];\n        return true;\n    }\n\n    // a: numeric input value.\n    // b: second numeric input value.\n    bool same(int a, int b) {\n        return findRoot(a) == findRoot(b);\n    }\n\n    // a: input array or sequence.\n    int size(int a) {\n        return sz[findRoot(a)];\n    }\n};",
     "supplemental_patterns": [
       {
         "name": "無向圖環偵測",
@@ -2222,7 +2198,6 @@
         "url": "https://cp-algorithms.com/data_structures/disjoint_set_union.html"
       }
     ],
-    "template_code": "struct WeightedDsu {\n    vector<int> par, sz;\n    vector<long long> d;\n\n    WeightedDsu() = default;\n    // n: number of nodes or elements.\n    explicit WeightedDsu(int n) {\n        init(n);\n    }\n\n    // n: number of nodes or elements.\n    void init(int n) {\n        par.resize(n + 1);\n        iota(par.begin(), par.end(), 0);\n        sz.assign(n + 1, 1);\n        d.assign(n + 1, 0);\n    }\n\n    // x: value or node being processed.\n    int findRoot(int x) {\n        if (par[x] == x) {\n            return x;\n        }\n        int p = par[x];\n        int root = findRoot(p);\n        d[x] += d[p];\n        return par[x] = root;\n    }\n\n    // x: value or node being processed.\n    // y: y-coordinate or output coefficient.\n    // w: edge weight or node weight.\n    bool unite(int x, int y, long long w) {\n        int rx = findRoot(x);\n        int ry = findRoot(y);\n        long long dx = d[x];\n        long long dy = d[y];\n        if (rx == ry) {\n            return dx - dy == w;\n        }\n\n        if (sz[rx] < sz[ry]) {\n            par[rx] = ry;\n            d[rx] = w + dy - dx;\n            sz[ry] += sz[rx];\n        } else {\n            par[ry] = rx;\n            d[ry] = dx - dy - w;\n            sz[rx] += sz[ry];\n        }\n        return true;\n    }\n\n    // x: value or node being processed.\n    // y: y-coordinate or output coefficient.\n    long long query(int x, int y) {\n        if (findRoot(x) != findRoot(y)) {\n            return LLONG_MIN;\n        }\n        return d[x] - d[y];\n    }\n};",
     "supplemental_patterns": [
       {
         "name": "差分約束查詢",
@@ -2310,7 +2285,6 @@
         "url": "https://oi-wiki.org/ds/dsu/"
       }
     ],
-    "template_code": "struct FoodChainDsu {\n    int n = 0;\n    vector<int> par, sz;\n\n    FoodChainDsu() = default;\n    // n_: number of nodes/elements used to initialize the structure.\n    explicit FoodChainDsu(int n_) {\n        init(n_);\n    }\n\n    // n_: number of nodes/elements used to initialize the structure.\n    void init(int n_) {\n        n = n_;\n        par.resize(3 * (n + 1));\n        iota(par.begin(), par.end(), 0);\n        sz.assign(3 * (n + 1), 1);\n    }\n\n    // x: value or node being processed.\n    int findRoot(int x) {\n        if (par[x] == x) {\n            return x;\n        }\n        return par[x] = findRoot(par[x]);\n    }\n\n    // a: input array or sequence.\n    // b: second numeric input value.\n    bool unite(int a, int b) {\n        a = findRoot(a);\n        b = findRoot(b);\n        if (a == b) {\n            return false;\n        }\n        if (sz[a] < sz[b]) {\n            swap(a, b);\n        }\n        par[b] = a;\n        sz[a] += sz[b];\n        return true;\n    }\n\n    // a: numeric input value.\n    // b: second numeric input value.\n    bool same(int a, int b) {\n        return findRoot(a) == findRoot(b);\n    }\n\n    // x: value or node being processed.\n    bool valid(int x) const {\n        return 1 <= x && x <= n;\n    }\n\n    // x: value or node being processed.\n    // y: y-coordinate or output coefficient.\n    bool addSame(int x, int y) {\n        if (!valid(x) || !valid(y)) {\n            return false;\n        }\n        if (same(x, y + n) || same(x, y + 2 * n)) {\n            return false;\n        }\n        unite(x, y);\n        unite(x + n, y + n);\n        unite(x + 2 * n, y + 2 * n);\n        return true;\n    }\n\n    // x: value, node, or output coefficient used by the function.\n    // y: value or output coefficient used by the function.\n    bool addEat(int x, int y) {\n        if (!valid(x) || !valid(y) || x == y) {\n            return false;\n        }\n        if (same(x, y) || same(x, y + n)) {\n            return false;\n        }\n        unite(x + n, y);\n        unite(x + 2 * n, y + n);\n        unite(x, y + 2 * n);\n        return true;\n    }\n};",
     "supplemental_patterns": [
       {
         "name": "二分圖染色",
@@ -2404,7 +2378,6 @@
         "url": "https://cp-algorithms.com/graph/breadth-first-search.html"
       }
     ],
-    "template_code": "// BFS: single-source shortest distance on unweighted graph\n// src: source node index.\n// n: number of nodes or elements.\n// g: grid or adjacency structure used by the algorithm.\nvector<int> bfs(int src, int n, const vector<vector<int>>& g) {\n    vector<int> dist(n, -1);\n    queue<int> q;\n    dist[src] = 0;\n    q.push(src);\n    while (!q.empty()) {\n        int u = q.front();\n        q.pop();\n        for (int v : g[u]) {\n            if (dist[v] == -1) {\n                dist[v] = dist[u] + 1;\n                q.push(v);\n            }\n        }\n    }\n    return dist;  // dist[v] == -1 means v is unreachable\n}",
     "supplemental_patterns": [
       {
         "name": "多源 BFS 最近距離",
@@ -2499,7 +2472,6 @@
         "url": "https://cp-algorithms.com/graph/depth-first-search.html"
       }
     ],
-    "template_code": "// DFS with entry/exit timestamps\nint timer_count;\nvector<int> tin, tout;\nvector<bool> visited;\n\n// u: current node or left endpoint.\n// par: parent node.\n// g: grid or adjacency structure used by the algorithm.\nvoid dfs(int u, int par, const vector<vector<int>>& g) {\n    visited[u] = true;\n    tin[u] = timer_count++;\n    for (int v : g[u]) {\n        if (!visited[v]) {\n            dfs(v, u, g);\n        }\n    }\n    tout[u] = timer_count++;\n}\n\n// Initialize before use:\n// tin.assign(n, 0); tout.assign(n, 0);\n// visited.assign(n, false); timer_count=0;\n// for(int i=0;i<n;i++) if(!visited[i]) dfs(i, -1, g);",
     "supplemental_patterns": [
       {
         "name": "橋與割點（Tarjan）",
@@ -2592,7 +2564,6 @@
         "url": "https://cp-algorithms.com/graph/topological-sort.html"
       }
     ],
-    "template_code": "// Kahn's topological sort (BFS-based)\n// n: number of nodes or elements.\n// g: grid or adjacency structure used by the algorithm.\nvector<int> topoSort(int n, const vector<vector<int>>& g) {\n    vector<int> indegree(n, 0);\n    for (int u = 0; u < n; u++) {\n        for (int v : g[u]) {\n            indegree[v]++;\n        }\n    }\n    queue<int> q;\n    for (int i = 0; i < n; i++) {\n        if (indegree[i] == 0) {\n            q.push(i);\n        }\n    }\n    vector<int> order;\n    while (!q.empty()) {\n        int u = q.front();\n        q.pop();\n        order.push_back(u);\n        for (int v : g[u]) {\n            if (--indegree[v] == 0) {\n                q.push(v);\n            }\n        }\n    }\n    return order;  // order.size() < n means cycle exists\n}",
     "supplemental_patterns": [
       {
         "name": "DAG 最長路（拓撲 DP）",
@@ -2685,7 +2656,6 @@
         "url": "https://cp-algorithms.com/graph/bipartite-check.html"
       }
     ],
-    "template_code": "// Bipartite check with BFS; handles disconnected graphs\n// n: number of nodes or elements.\n// g: grid or adjacency structure used by the algorithm.\nbool isBipartite(int n, const vector<vector<int>>& g) {\n    vector<int> color(n, -1);\n    for (int start = 0; start < n; start++) {\n        if (color[start] != -1) {\n            continue;\n        }\n        queue<int> q;\n        q.push(start);\n        color[start] = 0;\n        while (!q.empty()) {\n            int u = q.front();\n            q.pop();\n            for (int v : g[u]) {\n                if (color[v] == -1) {\n                    color[v] = 1 - color[u];\n                    q.push(v);\n                } else if (color[v] == color[u]) {\n                    return false;\n                }\n            }\n        }\n    }\n    return true;\n}",
     "supplemental_patterns": [
       {
         "name": "二分圖最大匹配前置",
@@ -2775,7 +2745,6 @@
         "url": "https://oi-wiki.org/ds/binary-heap/"
       }
     ],
-    "template_code": "struct BinaryMaxHeap {\n    vector<int> heap;\n\n    BinaryMaxHeap() : heap(1, 0) {}\n\n    // a: input array or sequence.\n    explicit BinaryMaxHeap(const vector<int>& a) : heap(1, 0) {\n        buildHeap(a);\n    }\n\n    int size() const {\n        return (int)heap.size() - 1;\n    }\n\n    bool empty() const {\n        return size() == 0;\n    }\n\n    // idx: current recursion index.\n    void siftUp(int idx) {\n        while (idx > 1 && heap[idx] > heap[idx / 2]) {\n            swap(heap[idx], heap[idx / 2]);\n            idx /= 2;\n        }\n    }\n\n    // idx: current recursion index.\n    void siftDown(int idx) {\n        int n = size();\n        while (true) {\n            int left = idx * 2;\n            int right = left + 1;\n            int largest = idx;\n            if (left <= n && heap[left] > heap[largest]) {\n                largest = left;\n            }\n            if (right <= n && heap[right] > heap[largest]) {\n                largest = right;\n            }\n            if (largest == idx) {\n                break;\n            }\n            swap(heap[idx], heap[largest]);\n            idx = largest;\n        }\n    }\n\n    // val: value being inserted, queried, or compared.\n    void push(int val) {\n        heap.push_back(val);\n        siftUp(size());\n    }\n\n    int top() const {\n        return heap[1];\n    }\n\n    void pop() {\n        if (empty()) {\n            return;\n        }\n        int n = size();\n        swap(heap[1], heap[n]);\n        heap.pop_back();\n        if (!empty()) {\n            siftDown(1);\n        }\n    }\n\n    // a: input array or sequence.\n    void buildHeap(const vector<int>& a) {\n        heap.assign(1, 0);\n        heap.insert(heap.end(), a.begin(), a.end());\n        for (int i = size() / 2; i >= 1; --i) {\n            siftDown(i);\n        }\n    }\n};",
     "supplemental_patterns": [
       {
         "name": "多路合併（k-way merge）",
@@ -2866,7 +2835,6 @@
         "url": "https://oi-wiki.org/ds/heap/"
       }
     ],
-    "template_code": "// a: input array or sequence.\n// k: limit, count, or window size used by the algorithm.\nvector<int> topK(const vector<int>& a, int k) {\n    if (k <= 0) {\n        return {};\n    }\n    priority_queue<int, vector<int>, greater<int>> pq;\n    for (int x : a) {\n        if ((int)pq.size() < k) {\n            pq.push(x);\n        } else if (x > pq.top()) {\n            pq.pop();\n            pq.push(x);\n        }\n    }\n    vector<int> result;\n    while (!pq.empty()) {\n        result.push_back(pq.top());\n        pq.pop();\n    }\n    sort(result.rbegin(), result.rend());\n    return result;\n}\n\nclass KthLargest {\n   private:\n    int k;\n    priority_queue<int, vector<int>, greater<int>> pq;\n\n   public:\n    // k_: requested order/statistic or limit.\n    // nums: input numbers.\n    KthLargest(int k_, const vector<int>& nums) : k(k_) {\n        for (int x : nums) {\n            add(x);\n        }\n    }\n\n    // val: value being inserted, queried, or compared.\n    int add(int val) {\n        if (k <= 0) {\n            return INT_MIN;\n        }\n        if ((int)pq.size() < k) {\n            pq.push(val);\n        } else if (val > pq.top()) {\n            pq.pop();\n            pq.push(val);\n        }\n        return (int)pq.size() == k ? pq.top() : INT_MIN;\n    }\n\n    bool ready() const {\n        return k > 0 && (int)pq.size() == k;\n    }\n\n    int kth() const {\n        return pq.top();  // Call only when ready() is true\n    }\n};",
     "supplemental_patterns": [
       {
         "name": "滑動視窗最大值（單調佇列）",
@@ -2957,7 +2925,6 @@
         "url": "https://oi-wiki.org/ds/heap/"
       }
     ],
-    "template_code": "class MedianFinder {\n   private:\n    priority_queue<int> max_heap;\n    priority_queue<int, vector<int>, greater<int>> min_heap;\n\n    void rebalance() {\n        if (max_heap.size() > min_heap.size() + 1) {\n            min_heap.push(max_heap.top());\n            max_heap.pop();\n        } else if (min_heap.size() > max_heap.size()) {\n            max_heap.push(min_heap.top());\n            min_heap.pop();\n        }\n    }\n\n   public:\n    // num: number being tested or processed.\n    void addNum(int num) {\n        if (max_heap.empty() || num <= max_heap.top()) {\n            max_heap.push(num);\n        } else {\n            min_heap.push(num);\n        }\n\n        if (!max_heap.empty() && !min_heap.empty() && max_heap.top() > min_heap.top()) {\n            int left_top = max_heap.top();\n            int right_top = min_heap.top();\n            max_heap.pop();\n            min_heap.pop();\n            max_heap.push(right_top);\n            min_heap.push(left_top);\n        }\n\n        rebalance();\n    }\n\n    double getMedian() const {\n        if (max_heap.empty() && min_heap.empty()) {\n            return 0.0;\n        }\n        if (max_heap.size() > min_heap.size()) {\n            return static_cast<double>(max_heap.top());\n        }\n        return (static_cast<long long>(max_heap.top()) + min_heap.top()) / 2.0;\n    }\n};",
     "supplemental_patterns": [
       {
         "name": "對頂堆求第 K 大（動態）",
@@ -3047,7 +3014,6 @@
         "url": "https://oi-wiki.org/ds/heap/"
       }
     ],
-    "template_code": "class LazyHeap {\n   private:\n    priority_queue<int, vector<int>, greater<int>> pq;\n    unordered_map<int, int> to_delete;\n\n    void cleanup() {\n        while (!pq.empty()) {\n            int x = pq.top();\n            auto it = to_delete.find(x);\n            if (it == to_delete.end() || it->second == 0) {\n                break;\n            }\n            if (--it->second == 0) {\n                to_delete.erase(it);\n            }\n            pq.pop();\n        }\n    }\n\n   public:\n    // x: value or node being processed.\n    void push(int x) {\n        pq.push(x);\n    }\n\n    // x: value, node, or output coefficient used by the function.\n    void erase(int x) {\n        to_delete[x]++;\n    }\n\n    int top() {\n        cleanup();\n        return pq.top();\n    }\n\n    void pop() {\n        cleanup();\n        if (!pq.empty()) {\n            pq.pop();\n        }\n    }\n\n    bool empty() {\n        cleanup();\n        return pq.empty();\n    }\n};",
     "supplemental_patterns": [
       {
         "name": "對頂堆 + 懶刪除求滑動視窗中位數",
@@ -3138,7 +3104,6 @@
         "url": "https://oi-wiki.org/misc/sort-application/"
       }
     ],
-    "template_code": "// Merge overlapping intervals (sort by left endpoint first)\n// segs: input or working vector used by the algorithm.\nvector<pair<int, int>> mergeIntervals(vector<pair<int, int>> segs) {\n    sort(segs.begin(), segs.end());\n    vector<pair<int, int>> res;\n    for (auto [l, r] : segs) {\n        if (!res.empty() && l <= res.back().second) {\n            res.back().second = max(res.back().second, r);\n        }\n        else {\n            res.push_back({l, r});\n        }\n    }\n    return res;\n}",
     "supplemental_patterns": [
       {
         "name": "合併後的區間總長度",
@@ -3228,7 +3193,6 @@
         "url": "https://oi-wiki.org/misc/greedy/"
       }
     ],
-    "template_code": "// Maximum non-overlapping intervals (sort by end time)\n// segs: input or working vector used by the algorithm.\nint maxNonOverlap(vector<pair<int, int>> segs) {\n    sort(segs.begin(), segs.end(), [](auto& a, auto& b) {\n        return a.second < b.second;  // Sort by end time\n    });\n    int count = 0, last = INT_MIN;\n    for (auto [l, r] : segs) {\n        if (l >= last) {\n            count++;\n            last = r;\n        }\n    }\n    return count;\n}\n\n// Minimum overlapping interval removal to make all non-overlapping\n// = total - maxNonOverlap(segs)",
     "supplemental_patterns": [
       {
         "name": "最少移除使不重疊（LeetCode 435）",
@@ -3321,7 +3285,6 @@
         "url": "https://cp-algorithms.com/data_structures/prefix-sum.html"
       }
     ],
-    "template_code": "// 1D difference array: O(1) range update, O(n) build\nstruct DiffArray {\n    vector<long long> d;\n    // n: number of nodes or elements.\n    DiffArray(int n) : d(n + 2, 0) {}\n    // l: left boundary or endpoint.\n    // r: right boundary, row, or endpoint.\n    // v: neighbor node or right endpoint.\n    void add(int l, int r, long long v) {\n        d[l] += v;\n        d[r + 1] -= v;\n    }\n    vector<long long> build(int n) {\n        vector<long long> a(n);\n        long long cur = 0;\n        for (int i = 0; i < n; i++) {\n            cur += d[i];\n            a[i] = cur;\n        }\n        return a;\n    }\n};",
     "supplemental_patterns": [
       {
         "name": "計算某時刻活躍區間數（覆蓋次數）",
@@ -3415,7 +3378,6 @@
         "url": "https://cp-algorithms.com/geometry/length-of-segments-union.html"
       }
     ],
-    "template_code": "// Sweep line: max concurrent intervals = minimum rooms needed\n// segs: input or working vector used by the algorithm.\nint sweepMaxConcurrent(vector<pair<int, int>>& segs) {\n    vector<pair<int, int>> ev;\n    for (auto [l, r] : segs) {\n        ev.push_back({l, 1});\n        ev.push_back({r, -1});\n    }\n    sort(ev.begin(), ev.end(), [](auto& a, auto& b) {\n        return a.first != b.first ? a.first < b.first : a.second < b.second;\n    });\n    int cur = 0, ans = 0;\n    for (auto [t, d] : ev) {\n        cur += d;\n        ans = max(ans, cur);\n    }\n    return ans;\n}\n\n// Total length covered by union of half-open intervals [l, r)\n// segs: input or working vector used by the algorithm.\nlong long sweepUnionLength(vector<pair<int, int>>& segs) {\n    vector<pair<int, int>> ev;\n    for (auto [l, r] : segs) {\n        ev.push_back({l, 1});\n        ev.push_back({r, -1});\n    }\n    sort(ev.begin(), ev.end());\n    long long total = 0, prev = 0;\n    int cnt = 0;\n    for (auto [t, d] : ev) {\n        if (cnt > 0) {\n            total += t - prev;\n        }\n        cnt += d;\n        prev = t;\n    }\n    return total;\n}",
     "supplemental_patterns": [
       {
         "name": "被至少 k 個區間覆蓋的總長度",
@@ -3509,7 +3471,6 @@
         "url": "https://cp-algorithms.com/algebra/sieve-of-eratosthenes.html"
       }
     ],
-    "template_code": "// Linear sieve: O(n). Fills primes[], spf[] (smallest prime factor), phi_arr[] (Euler phi).\nconst int kSieveN = 1e7 + 5;\nint spf[kSieveN];      // Smallest prime factor (0 = uninitialized)\nint phi_arr[kSieveN];  // Euler totient phi[i]\nvector<int> primes;\n\n// n: number of nodes or elements.\nvoid linearSieve(int n) {\n    phi_arr[1] = 1;\n    for (int i = 2; i <= n; i++) {\n        if (!spf[i]) {\n            spf[i] = i;\n            phi_arr[i] = i - 1;\n            primes.push_back(i);\n        }\n        for (int j = 0; j < (int)primes.size(); j++) {\n            int p = primes[j];\n            if ((long long)p * i > n || p > spf[i]) {\n                break;\n            }\n            spf[p * i] = p;\n            phi_arr[p * i] = (spf[i] == p) ? phi_arr[i] * p : phi_arr[i] * (p - 1);\n        }\n    }\n}\n\n// Factorize n using spf: O(log n)\n// n: number of nodes or elements.\nvector<pair<int, int>> factorize(int n) {\n    vector<pair<int, int>> res;\n    while (n > 1) {\n        int p = spf[n], cnt = 0;\n        while (n % p == 0) {\n            n /= p;\n            cnt++;\n        }\n        res.push_back({p, cnt});\n    }\n    return res;\n}",
     "supplemental_patterns": [
       {
         "name": "SPF 快速質因數分解",
@@ -3602,7 +3563,6 @@
         "url": "https://cp-algorithms.com/algebra/extended-euclid-algorithm.html"
       }
     ],
-    "template_code": "// Extended Euclidean: returns gcd(a, b), sets x, y s.t. a*x + b*y = gcd(a, b)\n// a: input array or sequence.\n// b: second numeric input value.\n// x: value or node being processed.\n// y: y-coordinate or output coefficient.\nlong long exgcd(long long a, long long b, long long& x, long long& y) {\n    if (b == 0) {\n        x = 1;\n        y = 0;\n        return a;\n    }\n    long long x1, y1;\n    long long g = exgcd(b, a % b, x1, y1);\n    x = y1;\n    y = x1 - (a / b) * y1;\n    return g;\n}\n\n// Solve ax ≡ c (mod m): returns smallest non-negative x, or -1 if no solution\n// a: input array or sequence.\n// c: candidate character or capacity value.\n// m: number of edges, columns, or elements depending on the problem.\nlong long solveCongruence(long long a, long long c, long long m) {\n    long long x, y;\n    long long g = exgcd(a, m, x, y);\n    if (c % g != 0) {\n        return -1;\n    }\n    long long mod = m / g;\n    return ((__int128)x * (c / g) % mod + mod) % mod;\n}",
     "supplemental_patterns": [
       {
         "name": "exgcd 求模逆元",
@@ -3696,7 +3656,6 @@
         "url": "https://cp-algorithms.com/algebra/binary-exp.html"
       }
     ],
-    "template_code": "// Binary exponentiation: a^b mod m in O(log b)\n// a: input array or sequence.\n// b: second numeric input value.\n// m: number of edges, columns, or elements depending on the problem.\nlong long fastPow(long long a, long long b, long long m) {\n    long long res = 1;\n    a %= m;\n    for (; b > 0; b >>= 1) {\n        if (b & 1) {\n            res = res * a % m;\n        }\n        a = a * a % m;\n    }\n    return res;\n}\n\n// Matrix exponentiation for k-th order linear recurrences\ntypedef vector<vector<long long>> Matrix;\n// matrix_a: left matrix operand.\n// matrix_b: right matrix operand.\n// mod: modulus for arithmetic operations.\nMatrix matMul(const Matrix& matrix_a, const Matrix& matrix_b, long long mod) {\n    int n = matrix_a.size();\n    Matrix result(n, vector<long long>(n, 0));\n    for (int i = 0; i < n; i++) {\n        for (int k = 0; k < n; k++) {\n            if (matrix_a[i][k]) {\n                for (int j = 0; j < n; j++) {\n                    result[i][j] = (result[i][j] + matrix_a[i][k] * matrix_b[k][j]) % mod;\n                }\n            }\n        }\n    }\n    return result;\n}\n// matrix_a: left matrix operand.\n// p: parent node or previous node.\n// mod: modulus for arithmetic operations.\nMatrix matPow(Matrix matrix_a, long long p, long long mod) {\n    int n = matrix_a.size();\n    Matrix result(n, vector<long long>(n, 0));\n    for (int i = 0; i < n; i++) {\n        result[i][i] = 1;  // Identity\n    }\n    for (; p > 0; p >>= 1) {\n        if (p & 1) {\n            result = matMul(result, matrix_a, mod);\n        }\n        matrix_a = matMul(matrix_a, matrix_a, mod);\n    }\n    return result;\n}",
     "supplemental_patterns": [
       {
         "name": "費馬小定理求模逆元",
@@ -3790,7 +3749,6 @@
         "url": "https://cp-algorithms.com/algebra/module-inverse.html"
       }
     ],
-    "template_code": "// Modular combinatorics: precompute factorials and inverse factorials mod kMod.\nconst long long kMod = 1e9 + 7;\nconst int kCombN = 2e6 + 5;\nlong long fact[kCombN], inv_fact[kCombN];\n\n// a: input array or sequence.\n// b: second numeric input value.\n// m: number of edges, columns, or elements depending on the problem.\nlong long fastPow(long long a, long long b, long long m) {\n    long long res = 1;\n    a %= m;\n    for (; b > 0; b >>= 1) {\n        if (b & 1) {\n            res = res * a % m;\n        }\n        a = a * a % m;\n    }\n    return res;\n}\n\n// n: number of nodes or elements.\nvoid precomputeComb(int n) {\n    fact[0] = 1;\n    for (int i = 1; i <= n; i++) {\n        fact[i] = fact[i - 1] * i % kMod;\n    }\n    inv_fact[n] = fastPow(fact[n], kMod - 2, kMod);\n    for (int i = n - 1; i >= 0; i--) {\n        inv_fact[i] = inv_fact[i + 1] * (i + 1) % kMod;\n    }\n}\n\n// n: number of nodes or elements.\n// k: limit, count, or window size used by the algorithm.\nlong long comb(int n, int k) {\n    if (k < 0 || k > n || n < 0) {\n        return 0;\n    }\n    return fact[n] * inv_fact[k] % kMod * inv_fact[n - k] % kMod;\n}\n\n// Linear inverse array: inv[i] = i^(-1) mod kMod for i in [1, n]\n// inv: input or working vector used by the algorithm.\n// n: number of nodes or elements.\nvoid linearInv(vector<long long>& inv, int n) {\n    inv.assign(n + 1, 0);\n    inv[1] = 1;\n    for (int i = 2; i <= n; i++) {\n        inv[i] = (kMod - kMod / i) * inv[kMod % i] % kMod;\n    }\n}",
     "supplemental_patterns": [
       {
         "name": "線性逆元表（O(n) 批量）",
@@ -3883,7 +3841,6 @@
         "url": "https://cp-algorithms.com/algebra/chinese-remainder-theorem.html"
       }
     ],
-    "template_code": "// Extended GCD (needed by CRT)\n// a: input array or sequence.\n// b: second numeric input value.\n// x: value or node being processed.\n// y: y-coordinate or output coefficient.\nlong long exgcd(long long a, long long b, long long& x, long long& y) {\n    if (b == 0) {\n        x = 1;\n        y = 0;\n        return a;\n    }\n    long long x1, y1;\n    long long g = exgcd(b, a % b, x1, y1);\n    x = y1;\n    y = x1 - (a / b) * y1;\n    return g;\n}\n\n// Merge x ≡ r1 (mod m1) and x ≡ r2 (mod m2).\n// Returns {r, lcm} where x ≡ r (mod lcm), or {-1, -1} if incompatible.\n// r1: right index of the first interval/string segment.\n// m1: first middle point in ternary search.\n// r2: right index of the second interval/string segment.\n// m2: second middle point in ternary search.\npair<long long, long long> crtMerge(long long r1, long long m1, long long r2, long long m2) {\n    long long x, y;\n    long long g = exgcd(m1, m2, x, y);\n    if ((r2 - r1) % g != 0) {\n        return {-1, -1};\n    }\n    long long lcm = m1 / g * m2;\n    long long t = (__int128)(r2 - r1) / g * x % (m2 / g);\n    long long r = (r1 + (__int128)m1 * t % lcm + lcm) % lcm;\n    return {r, lcm};\n}\n\n// Solve system of congruences; returns {solution mod lcm, lcm} or {-1, -1}\n// r: right boundary, row, or endpoint.\n// m: number of edges, columns, or elements depending on the problem.\npair<long long, long long> crtSystem(const vector<long long>& r, const vector<long long>& m) {\n    long long cr = r[0], cm = m[0];\n    for (int i = 1; i < (int)r.size(); i++) {\n        auto [nr, nm] = crtMerge(cr, cm, r[i], m[i]);\n        if (nr == -1) {\n            return {-1, -1};\n        }\n        cr = nr;\n        cm = nm;\n    }\n    return {cr, cm};\n}",
     "supplemental_patterns": [
       {
         "name": "Garner 算法（混合基數表示）",
@@ -3975,7 +3932,6 @@
         "url": "https://cp-algorithms.com/graph/mst_kruskal.html"
       }
     ],
-    "template_code": "// Kruskal MST: sort edges by weight, then greedily add with Dsu\nstruct Dsu {\n    vector<int> p, r;\n    // n: number of nodes or elements.\n    Dsu(int n) : p(n), r(n, 0) {\n        iota(p.begin(), p.end(), 0);\n    }\n    // x: value or node being processed.\n    int findRoot(int x) {\n        return p[x] == x ? x : p[x] = findRoot(p[x]);\n    }\n    // a: input array or sequence.\n    // b: second numeric input value.\n    bool unite(int a, int b) {\n        a = findRoot(a);\n        b = findRoot(b);\n        if (a == b) {\n            return false;\n        }\n        if (r[a] < r[b]) {\n            swap(a, b);\n        }\n        p[b] = a;\n        if (r[a] == r[b]) {\n            r[a]++;\n        }\n        return true;\n    }\n};\n// edges = vector of {weight, u, v}; nodes are 0-indexed\n// n: number of nodes or elements.\n// edges: edge list used by the algorithm.\nlong long kruskal(int n, vector<tuple<int, int, int>> edges) {\n    sort(edges.begin(), edges.end());\n    Dsu dsu(n);\n    long long tot = 0;\n    int cnt = 0;\n    for (auto [w, u, v] : edges) {\n        if (dsu.unite(u, v)) {\n            tot += w;\n            if (++cnt == n - 1) {\n                break;\n            }\n        }\n    }\n    return cnt == n - 1 ? tot : -1LL;  // -1 if disconnected\n}",
     "supplemental_patterns": [
       {
         "name": "最大生成樹",
@@ -4068,7 +4024,6 @@
         "url": "https://cp-algorithms.com/graph/mst_prim.html"
       }
     ],
-    "template_code": "// Prim's MST (heap-optimized, for sparse graphs)\n// g[u] = list of {neighbor, weight}; nodes are 0-indexed\n// src: source node index.\n// n: number of nodes or elements.\n// g: grid or adjacency structure used by the algorithm.\nlong long prim(int src, int n, const vector<vector<pair<int, int>>>& g) {\n    const long long kInf = 1e18;\n    vector<long long> key(n, kInf);  // Min edge weight to connect to MST\n    vector<bool> in_mst(n, false);\n    priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<>> pq;\n    key[src] = 0;\n    pq.push({0, src});\n    long long total = 0;\n    int cnt = 0;\n    while (!pq.empty()) {\n        auto [k, u] = pq.top();\n        pq.pop();\n        if (in_mst[u]) {\n            continue;  // Skip already-added nodes\n        }\n        in_mst[u] = true;\n        total += k;\n        cnt++;\n        for (auto [v, w] : g[u]) {\n            if (!in_mst[v] && w < key[v]) {\n                key[v] = w;\n                pq.push({w, v});  // Push single edge weight, not cumulative\n            }\n        }\n    }\n    return cnt == n ? total : -1LL;\n}",
     "supplemental_patterns": [
       {
         "name": "Dijkstra vs Prim 的程式碼對比",
@@ -4157,7 +4112,6 @@
         "url": "https://oi-wiki.org/graph/mst/#次小生成树"
       }
     ],
-    "template_code": "// Second Minimum Spanning Tree (strict)\n// Requires Dsu-based Kruskal (see mst-kruskal) and the helper below.\n// Step 1: run kruskalWithEdges to get mst_weight and in_mst[]\n// Step 2: build MST adjacency list mst_graph, then call dfs to precompute LCA/maxEdge\n// Step 3: call secondMST to enumerate non-tree edges\nconst int kLog = 18;\nint par_[100005][kLog], dep_[100005], max_e_[100005][kLog];\n// u: current node or left endpoint.\n// p: parent node or previous node.\n// d: current depth or distance value.\n// g: grid or adjacency structure used by the algorithm.\nvoid mstDfs(int u, int p, int d, const vector<vector<pair<int, int>>>& g) {\n    par_[u][0] = p;\n    dep_[u] = d;\n    for (int k = 1; k < kLog; k++) {\n        par_[u][k] = par_[par_[u][k - 1]][k - 1];\n        max_e_[u][k] = max(max_e_[u][k - 1], max_e_[par_[u][k - 1]][k - 1]);\n    }\n    for (auto [v, w] : g[u]) {\n        if (v != p) {\n            max_e_[v][0] = w;\n            mstDfs(v, u, d + 1, g);\n        }\n    }\n}\n// u: current node or left endpoint.\n// v: neighbor node or right endpoint.\nint queryMax_(int u, int v) {\n    int res = 0;\n    if (dep_[u] < dep_[v]) {\n        swap(u, v);\n    }\n    int diff = dep_[u] - dep_[v];\n    for (int k = 0; k < kLog; k++) {\n        if ((diff >> k) & 1) {\n            res = max(res, max_e_[u][k]);\n            u = par_[u][k];\n        }\n    }\n    if (u == v) {\n        return res;\n    }\n    for (int k = kLog - 1; k >= 0; k--) {\n        if (par_[u][k] != par_[v][k]) {\n            res = max({res, max_e_[u][k], max_e_[v][k]});\n            u = par_[u][k];\n            v = par_[v][k];\n        }\n    }\n    return max({res, max_e_[u][0], max_e_[v][0]});\n}\n// mst_weight: total weight of the minimum spanning tree.\n// edges: edge list used by the algorithm.\n// in_mst: input or working vector used by the algorithm.\nlong long secondMST_(long long mst_weight, const vector<tuple<int, int, int>>& edges,\n                     const vector<bool>& in_mst) {\n    long long ans = LLONG_MAX;\n    for (int i = 0; i < (int)edges.size(); i++) {\n        if (in_mst[i]) {\n            continue;\n        }\n        auto [w, u, v] = edges[i];\n        int mx = queryMax_(u, v);\n        if (w != mx) {\n            ans = min(ans, mst_weight - mx + w);\n        }\n    }\n    return ans;\n}",
     "supplemental_patterns": [
       {
         "name": "嚴格次小 vs 非嚴格次小",
@@ -4249,7 +4203,6 @@
         "url": "https://cp-algorithms.com/data_structures/stack_queue_modification.html"
       }
     ],
-    "template_code": "// a: input array or sequence.\nvector<int> nextGreater(const vector<int>& a) {\n    int n = (int)a.size();\n    vector<int> ans(n, n);\n    stack<int> st;  // Decreasing stack of indices\n    for (int i = 0; i < n; i++) {\n        while (!st.empty() && a[i] > a[st.top()]) {\n            ans[st.top()] = i;\n            st.pop();\n        }\n        st.push(i);\n    }\n    return ans;\n}\n\n// Change > to >= if you need next greater or equal.",
     "supplemental_patterns": [
       {
         "name": "前一個更大值（向左看）",
@@ -4344,7 +4297,6 @@
         "url": "https://cp-algorithms.com/data_structures/stack_queue_modification.html"
       }
     ],
-    "template_code": "// a: input array or sequence.\n// k: limit, count, or window size used by the algorithm.\nvector<int> slidingMax(const vector<int>& a, int k) {\n    int n = (int)a.size();\n    if (k <= 0 || k > n) {\n        return {};\n    }\n\n    deque<int> dq;  // Decreasing deque of indices\n    vector<int> ans;\n    for (int i = 0; i < n; i++) {\n        while (!dq.empty() && dq.front() <= i - k) {\n            dq.pop_front();\n        }\n        while (!dq.empty() && a[dq.back()] <= a[i]) {\n            dq.pop_back();\n        }\n        dq.push_back(i);\n        if (i >= k - 1) {\n            ans.push_back(a[dq.front()]);\n        }\n    }\n    return ans;\n}",
     "supplemental_patterns": [
       {
         "name": "多維滑動視窗（矩陣）",
@@ -4433,7 +4385,6 @@
         "url": "https://oi-wiki.org/dp/opt/monotonous-queue-stack/"
       }
     ],
-    "template_code": "// cost: current accumulated cost.\n// k: limit, count, or window size used by the algorithm.\nvector<long long> monoQueueDP(const vector<long long>& cost, int k) {\n    int n = (int)cost.size();\n    const long long kInf = (1LL << 60);\n    vector<long long> dp(n, kInf);\n    if (n == 0) {\n        return dp;\n    }\n\n    dp[0] = 0;\n    if (k <= 0) {\n        return dp;\n    }\n\n    deque<int> dq;\n    dq.push_back(0);\n    for (int i = 1; i < n; i++) {\n        while (!dq.empty() && dq.front() < i - k) {\n            dq.pop_front();\n        }\n        if (!dq.empty()) {\n            dp[i] = dp[dq.front()] + cost[i];\n        }\n        while (!dq.empty() && dp[dq.back()] >= dp[i]) {\n            dq.pop_back();\n        }\n        if (dp[i] < kInf) {\n            dq.push_back(i);\n        }\n    }\n    return dp;\n}",
     "supplemental_patterns": [
       {
         "name": "分組/多重背包",
@@ -4522,7 +4473,6 @@
         "url": "https://oi-wiki.org/ds/monotonous-stack/"
       }
     ],
-    "template_code": "// h: input or working vector used by the algorithm.\nint largestRectangle(const vector<int>& h) {\n    int n = (int)h.size();\n    stack<int> st;  // Increasing stack of indices\n    long long ans = 0;\n    for (int i = 0; i <= n; i++) {\n        int cur = (i == n ? 0 : h[i]);\n        while (!st.empty() && h[st.top()] > cur) {\n            int idx = st.top();\n            st.pop();\n            int left = st.empty() ? -1 : st.top();\n            long long width = i - left - 1;\n            ans = max(ans, 1LL * h[idx] * width);\n        }\n        if (i < n) {\n            st.push(i);\n        }\n    }\n    return (int)ans;\n}",
     "supplemental_patterns": [
       {
         "name": "逐行建直方圖求最大全 1 矩形",
@@ -4616,7 +4566,6 @@
         "url": "https://cp-algorithms.com/data_structures/fenwick.html"
       }
     ],
-    "template_code": "struct Fenwick {\n    int n;\n    vector<long long> bit;\n\n    // n: number of nodes or elements.\n    Fenwick(int n = 0) {\n        init(n);\n    }\n\n    // n_: number of nodes/elements used to initialize the structure.\n    void init(int n_) {\n        n = n_;\n        bit.assign(n + 1, 0);\n    }\n\n    // x: value or node being processed.\n    static int lowbit(int x) {\n        return x & -x;\n    }\n\n    // idx: current recursion index.\n    // delta: value added to the indexed position or range.\n    void update(int idx, long long delta) {\n        for (int i = idx; i <= n; i += lowbit(i)) {\n            bit[i] += delta;\n        }\n    }\n\n    // idx: current recursion index.\n    long long query(int idx) const {\n        long long res = 0;\n        for (int i = idx; i > 0; i -= lowbit(i)) {\n            res += bit[i];\n        }\n        return res;\n    }\n\n    // l: left boundary or endpoint.\n    // r: right boundary, row, or endpoint.\n    long long rangeQuery(int l, int r) const {\n        if (l > r) {\n            return 0;\n        }\n        return query(r) - query(l - 1);\n    }\n\n    // a: input array or sequence.\n    void build(const vector<long long>& a) {\n        int size = max(0, (int)a.size() - 1);  // a is 1-indexed\n        init(size);\n        for (int i = 1; i <= n; i++) {\n            bit[i] += a[i];\n            int j = i + lowbit(i);\n            if (j <= n) {\n                bit[j] += bit[i];\n            }\n        }\n    }\n};",
     "supplemental_patterns": [
       {
         "name": "二維 BIT",
@@ -4714,7 +4663,6 @@
         "url": "https://cp-algorithms.com/data_structures/segment_tree.html"
       }
     ],
-    "template_code": "struct SegmentTree {\n    int n;\n    vector<long long> tree;\n\n    // n: number of nodes or elements.\n    SegmentTree(int n = 0) {\n        init(n);\n    }\n\n    // n_: number of nodes/elements used to initialize the structure.\n    void init(int n_) {\n        n = n_;\n        tree.assign(max(4, 4 * n + 5), 0);\n    }\n\n    // node: segment tree node index.\n    void pushup(int node) {\n        tree[node] = tree[node * 2] + tree[node * 2 + 1];\n    }\n\n    // node: segment tree node index.\n    // l: left boundary or endpoint.\n    // r: right boundary, row, or endpoint.\n    // a: input array or sequence.\n    void build(int node, int l, int r, const vector<long long>& a) {\n        if (l == r) {\n            tree[node] = a[l];\n            return;\n        }\n        int mid = l + (r - l) / 2;\n        build(node * 2, l, mid, a);\n        build(node * 2 + 1, mid + 1, r, a);\n        pushup(node);\n    }\n\n    // a: input array or sequence.\n    void build(const vector<long long>& a) {\n        int size = max(0, (int)a.size() - 1);  // a is 1-indexed\n        init(size);\n        if (n > 0) {\n            build(1, 1, n, a);\n        }\n    }\n\n    // node: segment tree node index.\n    // l: left boundary or endpoint.\n    // r: right boundary, row, or endpoint.\n    // pos: current position being constructed.\n    // val: value being inserted, queried, or compared.\n    void update(int node, int l, int r, int pos, long long val) {\n        if (l == r) {\n            tree[node] = val;\n            return;\n        }\n        int mid = l + (r - l) / 2;\n        if (pos <= mid) {\n            update(node * 2, l, mid, pos, val);\n        }\n        else {\n            update(node * 2 + 1, mid + 1, r, pos, val);\n        }\n        pushup(node);\n    }\n\n    // node: segment tree node index.\n    // l: left boundary or endpoint.\n    // r: right boundary, row, or endpoint.\n    // ql: left boundary of the query range.\n    // qr: right boundary of the query range.\n    long long query(int node, int l, int r, int ql, int qr) const {\n        if (ql <= l && r <= qr) {\n            return tree[node];\n        }\n        int mid = l + (r - l) / 2;\n        long long ans = 0;\n        if (ql <= mid) {\n            ans += query(node * 2, l, mid, ql, qr);\n        }\n        if (qr > mid) {\n            ans += query(node * 2 + 1, mid + 1, r, ql, qr);\n        }\n        return ans;\n    }\n\n    // pos: current position being constructed.\n    // val: value being inserted, queried, or compared.\n    void update(int pos, long long val) {\n        update(1, 1, n, pos, val);\n    }\n\n    // l: left boundary or endpoint.\n    // r: right boundary, row, or endpoint.\n    long long query(int l, int r) const {\n        return query(1, 1, n, l, r);\n    }\n};",
     "supplemental_patterns": [
       {
         "name": "權值線段樹（離散化 + 值域）",
@@ -4807,7 +4755,6 @@
         "url": "https://cp-algorithms.com/data_structures/segment_tree.html"
       }
     ],
-    "template_code": "struct LazySegmentTree {\n    int n;\n    vector<long long> tree, lazy;\n\n    // n: number of nodes or elements.\n    LazySegmentTree(int n = 0) {\n        init(n);\n    }\n\n    // n_: number of nodes/elements used to initialize the structure.\n    void init(int n_) {\n        n = n_;\n        tree.assign(max(4, 4 * n + 5), 0);\n        lazy.assign(max(4, 4 * n + 5), 0);\n    }\n\n    // node: segment tree node index.\n    void pushup(int node) {\n        tree[node] = tree[node * 2] + tree[node * 2 + 1];\n    }\n\n    // node: segment tree node index.\n    // l: left boundary or endpoint.\n    // r: right boundary, row, or endpoint.\n    // a: input array or sequence.\n    void build(int node, int l, int r, const vector<long long>& a) {\n        if (l == r) {\n            tree[node] = a[l];\n            return;\n        }\n        int mid = l + (r - l) / 2;\n        build(node * 2, l, mid, a);\n        build(node * 2 + 1, mid + 1, r, a);\n        pushup(node);\n    }\n\n    // a: input array or sequence.\n    void build(const vector<long long>& a) {\n        int size = max(0, (int)a.size() - 1);  // a is 1-indexed\n        init(size);\n        if (n > 0) {\n            build(1, 1, n, a);\n        }\n    }\n\n    // node: segment tree node index.\n    // len: length of the segment represented by node.\n    // val: value being inserted, queried, or compared.\n    void applyLazy(int node, int len, long long val) {\n        tree[node] += val * len;\n        lazy[node] += val;\n    }\n\n    // node: segment tree node index.\n    // l: left boundary or endpoint.\n    // r: right boundary, row, or endpoint.\n    void pushdown(int node, int l, int r) {\n        if (lazy[node] == 0 || l == r) {\n            return;\n        }\n        int mid = l + (r - l) / 2;\n        applyLazy(node * 2, mid - l + 1, lazy[node]);\n        applyLazy(node * 2 + 1, r - mid, lazy[node]);\n        lazy[node] = 0;\n    }\n\n    // node: segment tree node index.\n    // l: left boundary or endpoint.\n    // r: right boundary, row, or endpoint.\n    // ql: left boundary of the query range.\n    // qr: right boundary of the query range.\n    // val: value being inserted, queried, or compared.\n    void rangeAdd(int node, int l, int r, int ql, int qr, long long val) {\n        if (ql <= l && r <= qr) {\n            applyLazy(node, r - l + 1, val);\n            return;\n        }\n        pushdown(node, l, r);\n        int mid = l + (r - l) / 2;\n        if (ql <= mid) {\n            rangeAdd(node * 2, l, mid, ql, qr, val);\n        }\n        if (qr > mid) {\n            rangeAdd(node * 2 + 1, mid + 1, r, ql, qr, val);\n        }\n        pushup(node);\n    }\n\n    // node: segment tree node index.\n    // l: left boundary or endpoint.\n    // r: right boundary, row, or endpoint.\n    // ql: left boundary of the query range.\n    // qr: right boundary of the query range.\n    long long rangeQuery(int node, int l, int r, int ql, int qr) {\n        if (ql <= l && r <= qr) {\n            return tree[node];\n        }\n        pushdown(node, l, r);\n        int mid = l + (r - l) / 2;\n        long long ans = 0;\n        if (ql <= mid) {\n            ans += rangeQuery(node * 2, l, mid, ql, qr);\n        }\n        if (qr > mid) {\n            ans += rangeQuery(node * 2 + 1, mid + 1, r, ql, qr);\n        }\n        return ans;\n    }\n\n    // l: left boundary or endpoint.\n    // r: right boundary, row, or endpoint.\n    // val: value being inserted, queried, or compared.\n    void rangeAdd(int l, int r, long long val) {\n        rangeAdd(1, 1, n, l, r, val);\n    }\n\n    // l: left boundary or endpoint.\n    // r: right boundary, row, or endpoint.\n    long long rangeQuery(int l, int r) {\n        return rangeQuery(1, 1, n, l, r);\n    }\n};",
     "supplemental_patterns": [
       {
         "name": "加法＋賦值混合懶標記",
@@ -4895,7 +4842,6 @@
         "url": "https://oi-wiki.org/ds/fenwick/"
       }
     ],
-    "template_code": "struct Fenwick {\n    int n;\n    vector<int> bit;\n\n    // n: number of nodes or elements.\n    Fenwick(int n = 0) {\n        init(n);\n    }\n\n    // n_: number of nodes/elements used to initialize the structure.\n    void init(int n_) {\n        n = n_;\n        bit.assign(n + 1, 0);\n    }\n\n    // idx: current recursion index.\n    // delta: value added to the indexed position or range.\n    void add(int idx, int delta) {\n        for (int i = idx; i <= n; i += i & -i) {\n            bit[i] += delta;\n        }\n    }\n\n    // idx: current recursion index.\n    int query(int idx) const {\n        int res = 0;\n        for (int i = idx; i > 0; i -= i & -i) {\n            res += bit[i];\n        }\n        return res;\n    }\n};\n\n// nums: input numbers.\nlong long countInversions(const vector<long long>& nums) {\n    vector<long long> vals = nums;\n    sort(vals.begin(), vals.end());\n    vals.erase(unique(vals.begin(), vals.end()), vals.end());\n\n    Fenwick fw((int)vals.size());\n    long long inv = 0;\n    for (int i = 0; i < (int)nums.size(); i++) {\n        int r = int(lower_bound(vals.begin(), vals.end(), nums[i]) - vals.begin()) + 1;\n        inv += i - fw.query(r);  // Previous elements greater than nums[i]\n        fw.add(r, 1);\n    }\n    return inv;\n}",
     "supplemental_patterns": [
       {
         "name": "歸併排序計逆序對",
@@ -4993,7 +4939,6 @@
         "url": "https://cp-algorithms.com/graph/dijkstra.html"
       }
     ],
-    "template_code": "// Dijkstra single-source shortest path (heap-optimized, lazy deletion)\n// g[u] = list of {neighbor, edge_weight}\n// src: source node index.\n// n: number of nodes or elements.\n// g: grid or adjacency structure used by the algorithm.\nvector<long long> dijkstra(int src, int n, const vector<vector<pair<int, int>>>& g) {\n    const long long kInf = 1e18;\n    vector<long long> dist(n, kInf);\n    priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<>> pq;\n    dist[src] = 0;\n    pq.push({0, src});\n    while (!pq.empty()) {\n        auto [d, u] = pq.top();\n        pq.pop();\n        if (d > dist[u]) {\n            continue;  // Skip outdated heap entry\n        }\n        for (auto [v, w] : g[u]) {\n            if (dist[u] + w < dist[v]) {\n                dist[v] = dist[u] + w;\n                pq.push({dist[v], v});\n            }\n        }\n    }\n    return dist;\n}",
     "supplemental_patterns": [
       {
         "name": "多源最短路",
@@ -5090,7 +5035,6 @@
         "url": "https://cp-algorithms.com/graph/all-pair-shortest-path-floyd-warshall.html"
       }
     ],
-    "template_code": "// Floyd-Warshall all-pairs shortest path\n// Input: dist[i][j] initialized to edge weight, 0 for i==j, kInf if no direct edge\n// After call: dist[i][j] = shortest path length between all pairs\nconst long long kInf = 1e18;\n// dist: dynamic programming or distance array.\n// n: number of nodes or elements.\nvoid floydWarshall(vector<vector<long long>>& dist, int n) {\n    for (int k = 0; k < n; k++) {\n        for (int i = 0; i < n; i++) {\n            if (dist[i][k] >= kInf) {\n                continue;  // Pruning: i cannot reach k\n            }\n            for (int j = 0; j < n; j++) {\n                if (dist[k][j] < kInf) {\n                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);\n                }\n            }\n        }\n    }\n    // Post-check: if dist[i][i] < 0, a negative cycle is reachable from i\n}",
     "supplemental_patterns": [
       {
         "name": "傳遞閉包",
@@ -5183,7 +5127,6 @@
         "url": "https://cp-algorithms.com/graph/01_bfs.html"
       }
     ],
-    "template_code": "// 0-1 BFS: single-source shortest path when all edge weights are 0 or 1\n// g[u] = list of {neighbor, edge_weight} where weight in {0, 1}\n// src: source node index.\n// n: number of nodes or elements.\n// g: grid or adjacency structure used by the algorithm.\nvector<int> bfs01(int src, int n, const vector<vector<pair<int, int>>>& g) {\n    const int kInf = 1e9;\n    vector<int> dist(n, kInf);\n    deque<int> dq;\n    dist[src] = 0;\n    dq.push_back(src);\n    while (!dq.empty()) {\n        int u = dq.front();\n        dq.pop_front();\n        for (auto [v, w] : g[u]) {\n            if (dist[u] + w < dist[v]) {\n                dist[v] = dist[u] + w;\n                if (w == 0) {\n                    dq.push_front(v);  // Same distance layer: to front\n                }\n                else {\n                    dq.push_back(v);  // Next distance layer: to back\n                }\n            }\n        }\n    }\n    return dist;\n}",
     "supplemental_patterns": [
       {
         "name": "推廣：Dial's Algorithm（桶式 BFS）",
@@ -5273,7 +5216,6 @@
         "url": "https://oi-wiki.org/dp/tree/"
       }
     ],
-    "template_code": "// Tree Maximum Independent Set (weighted, 1-indexed nodes)\n// val[i]: weight of node i; adj: undirected adjacency list\nvector<array<long long, 2>> dp;  // dp[v][0] = not select, dp[v][1] = select\n\n// v: neighbor node or right endpoint.\n// par: parent node.\n// val: input or working vector used by the algorithm.\n// adj: adjacency list or 2D table used by the algorithm.\nvoid treeDpDfs(int v, int par, const vector<long long>& val, const vector<vector<int>>& adj) {\n    dp[v][0] = 0;\n    dp[v][1] = val[v];\n    for (int c : adj[v]) {\n        if (c == par) {\n            continue;\n        }\n        treeDpDfs(c, v, val, adj);\n        dp[v][1] += dp[c][0];                 // v selected: all children unselected\n        dp[v][0] += max(dp[c][0], dp[c][1]);  // v unselected: children are free\n    }\n}\n\n// root: root node.\n// n: number of nodes or elements.\n// val: input or working vector used by the algorithm.\n// adj: adjacency list or 2D table used by the algorithm.\nlong long maxIndependentSet(int root, int n, const vector<long long>& val,\n                            const vector<vector<int>>& adj) {\n    dp.assign(n + 1, {0LL, 0LL});\n    treeDpDfs(root, -1, val, adj);\n    return max(dp[root][0], dp[root][1]);\n}",
     "supplemental_patterns": [
       {
         "name": "最小頂點覆蓋",
@@ -5362,7 +5304,6 @@
         "url": "https://oi-wiki.org/dp/tree/#换根-dp"
       }
     ],
-    "template_code": "// Rerooting DP: ans[v] = max distance from v to any node in the whole tree\n// Two-DFS approach, O(n) time\nvector<vector<pair<int, int>>> adj;  // {neighbor, weight}\nvector<long long> down, ans;\n\n// v: neighbor node or right endpoint.\n// par: parent node.\nvoid dfs1(int v, int par) {\n    down[v] = 0;\n    for (auto& [c, w] : adj[v]) {\n        if (c == par) {\n            continue;\n        }\n        dfs1(c, v);\n        down[v] = max(down[v], down[c] + (long long)w);\n    }\n}\n\n// v: neighbor node or right endpoint.\n// par: parent node.\n// up_val: best value propagated from the parent side.\nvoid dfs2(int v, int par, long long up_val) {\n    ans[v] = max(down[v], up_val);\n    long long max1 = up_val, max2 = up_val;\n    int src1 = -1;\n    for (auto& [c, w] : adj[v]) {\n        if (c == par) {\n            continue;\n        }\n        long long val = down[c] + w;\n        if (val >= max1) {\n            max2 = max1;\n            max1 = val;\n            src1 = c;\n        } else if (val > max2) {\n            max2 = val;\n        }\n    }\n    for (auto& [c, w] : adj[v]) {\n        if (c == par) {\n            continue;\n        }\n        dfs2(c, v, (c == src1 ? max2 : max1) + w);\n    }\n}\n\n// n: number of nodes or elements.\nvoid rerooting(int n) {\n    down.assign(n, 0);\n    ans.assign(n, 0);\n    dfs1(0, -1);\n    dfs2(0, -1, 0);\n}",
     "supplemental_patterns": [
       {
         "name": "前後綴分解（去除單一子節點貢獻）",
@@ -5451,7 +5392,6 @@
         "url": "https://oi-wiki.org/graph/tree-diameter/"
       }
     ],
-    "template_code": "// Tree Diameter via DP (supports all edge weights)\n// adj[v] = {(neighbor, weight)}, nodes 0-indexed\nvector<long long> down_dist;\nlong long diameter = 0;\n\n// v: neighbor node or right endpoint.\n// par: parent node.\n// adj: adjacency list or 2D table used by the algorithm.\nvoid diameterDFS(int v, int par, const vector<vector<pair<int, int>>>& adj) {\n    down_dist[v] = 0;\n    for (auto [c, w] : adj[v]) {\n        if (c == par) {\n            continue;\n        }\n        diameterDFS(c, v, adj);\n        diameter = max(diameter, down_dist[v] + down_dist[c] + (long long)w);\n        down_dist[v] = max(down_dist[v], down_dist[c] + (long long)w);\n    }\n}\n\n// n: number of nodes or elements.\n// adj: adjacency list or 2D table used by the algorithm.\nlong long treeDiameter(int n, const vector<vector<pair<int, int>>>& adj) {\n    down_dist.assign(n, 0);\n    diameter = 0;\n    diameterDFS(0, -1, adj);\n    return diameter;\n}",
     "supplemental_patterns": [
       {
         "name": "輸出直徑路徑",
@@ -5540,7 +5480,6 @@
         "url": "https://oi-wiki.org/dp/tree/#树上背包"
       }
     ],
-    "template_code": "// Tree Knapsack: select at most cap nodes to maximize total value (no dependency)\n// dp[v][j] = max value selecting j nodes from subtree of v\n// Complexity: O(n*cap)\nvector<int> val;\nvector<vector<int>> adj;\nvector<vector<int>> dp;\nvector<int> sz;\nint cap;\n\n// v: neighbor node or right endpoint.\n// par: parent node.\nvoid treeKnapsackDfs(int v, int par) {\n    sz[v] = 1;\n    dp[v].assign(cap + 1, 0);\n    dp[v][1] = val[v];\n    for (int c : adj[v]) {\n        if (c == par) {\n            continue;\n        }\n        treeKnapsackDfs(c, v);  // Use sz[v] as upper bound (BEFORE updating sz[v]) to keep O(nK)\n        for (int j = min(sz[v], cap); j >= 0; j--) {\n            for (int k = 1; k <= min(sz[c], cap - j); k++) {\n                dp[v][j + k] = max(dp[v][j + k], dp[v][j] + dp[c][k]);\n            }\n        }\n        sz[v] += sz[c];\n    }\n}\n\n// root: root node.\n// n: number of nodes or elements.\n// _K: requested selection limit.\nint solveTreeKnapsack(int root, int n, int _K) {\n    cap = _K;\n    dp.assign(n + 1, {});\n    sz.assign(n + 1, 0);\n    treeKnapsackDfs(root, -1);\n    int ans = 0;\n    for (int j = 0; j <= cap; j++) {\n        ans = max(ans, dp[root][j]);\n    }\n    return ans;\n}",
     "supplemental_patterns": [
       {
         "name": "恰好選 k 個節點",
@@ -5632,7 +5571,6 @@
         "url": "https://cp-algorithms.com/others/two_pointers.html"
       }
     ],
-    "template_code": "// Opposite-direction two pointers on sorted array\n// Returns the index pair (l, r) satisfying the target condition\n// a: input array or sequence.\n// target: target value or remaining target to satisfy.\nint twoSumSorted(const vector<int>& a, int target) {\n    int l = 0, r = (int)a.size() - 1;\n    while (l < r) {\n        int s = a[l] + a[r];\n        if (s == target) {\n            return l;  // Found\n        }\n        else if (s < target) {\n            l++;  // Need larger value\n        }\n        else {\n            r--;  // Need smaller value\n        }\n    }\n    return -1;  // Not found\n}",
     "supplemental_patterns": [
       {
         "name": "回文字串判斷 / 中心擴展",
@@ -5723,7 +5661,6 @@
         "url": "https://oi-wiki.org/misc/two-pointer/"
       }
     ],
-    "template_code": "// Generic sliding window: find longest subarray satisfying condition\n// Replace window state and validity check for each problem\nint left = 0, ans = 0;\nunordered_map<int, int> freq;  // Example window state\nfor (int right = 0; right < n; right++) {\n    // Expand: add a[right] into window\n    freq[a[right]]++;\n\n    // Shrink until window is valid (longest variant)\n    while (/* window invalid, e.g. freq.size() > k */) {\n        if (--freq[a[left]] == 0) {\n            freq.erase(a[left]);\n        }\n        left++;\n    }\n    ans = max(ans, right - left + 1);\n\n    // --- Shortest variant: swap the two blocks above ---\n    // while (/* window valid */) {\n    //     ans = min(ans, right - left + 1);\n    //     if (--freq[a[left]] == 0) freq.erase(a[left]);\n    //     left++;\n    // }\n}",
     "supplemental_patterns": [
       {
         "name": "固定長度滑動視窗",
@@ -5818,7 +5755,6 @@
         "url": "https://oi-wiki.org/misc/two-pointer/"
       }
     ],
-    "template_code": "// Floyd cycle detection + cycle entry finding\nListNode *slow = head, *fast = head;\n\n// Phase 1: Detect cycle and find meeting point\nwhile (fast && fast->next) {\n    slow = slow->next;\n    fast = fast->next->next;\n    if (slow == fast) {\n        break;  // Meeting point found inside cycle\n    }\n}\n\nif (!fast || !fast->next) {\n    // No cycle detected\n} else {\n    // Phase 2: Find cycle entry node\n    slow = head;  // Reset one pointer to head\n    while (slow != fast) {\n        slow = slow->next;  // Both move at speed 1\n        fast = fast->next;\n    }\n    // slow == fast == cycle entry node\n}",
     "supplemental_patterns": [
       {
         "name": "快樂數（隱式序列環檢測）",
@@ -5914,7 +5850,6 @@
         "url": "https://leetcode.cn/circle/discuss/0viNMK/"
       }
     ],
-    "template_code": "// Fixed-length sliding window: enter -> update -> leave\n// a: input array or sequence.\n// k: limit, count, or window size used by the algorithm.\nlong long fixedWindow(const vector<int>& a, int k) {\n    long long sum = 0, best = LLONG_MIN;\n    for (int i = 0; i < (int)a.size(); i++) {\n        sum += a[i];  // enter a[i]\n        if (i < k - 1) {\n            continue;           // wait until the window holds k items\n        }\n        best = max(best, sum);  // window [i-k+1, i] is exactly length k\n        sum -= a[i - k + 1];    // leave the leftmost item\n    }\n    return best;\n}",
     "supplemental_patterns": [
       {
         "name": "定長視窗的最大頻次／眾數",
@@ -6005,7 +5940,6 @@
         "url": "https://oi-wiki.org/basic/merge-sort/"
       }
     ],
-    "template_code": "// Merge two sorted sequences in O(n+m)\n// a: input array or sequence.\n// b: input or working vector used by the algorithm.\nvector<int> mergeSorted(const vector<int>& a, const vector<int>& b) {\n    vector<int> res;\n    res.reserve(a.size() + b.size());\n    int i = 0, j = 0;\n    while (i < (int)a.size() && j < (int)b.size()) {\n        res.push_back(a[i] <= b[j] ? a[i++] : b[j++]);\n    }\n    while (i < (int)a.size()) {\n        res.push_back(a[i++]);\n    }\n    while (j < (int)b.size()) {\n        res.push_back(b[j++]);\n    }\n    return res;\n}",
     "supplemental_patterns": [
       {
         "name": "判斷子序列",
@@ -6100,7 +6034,6 @@
         "url": "https://leetcode.cn/circle/discuss/SJFwQI/"
       }
     ],
-    "template_code": "// Grouping loop: split a sequence into maximal qualifying segments\n// Replace the inner condition to fit the segment definition.\n// a: input array or sequence.\nint groupingLoop(const vector<int>& a) {\n    int n = a.size(), ans = 0, i = 0;\n    while (i < n) {\n        int j = i + 1;\n        while (j < n && /* a[j] belongs to the same group as a[j-1] */ a[j] > a[j - 1]) {\n            j++;\n        }\n        ans = max(ans, j - i);  // segment [i, j)\n        i = j;                  // the break point becomes the next start\n    }\n    return ans;\n}",
     "supplemental_patterns": [
       {
         "name": "最長遞增／遞減連續段",
@@ -6195,7 +6128,6 @@
         "url": "https://cp-algorithms.com/num_methods/binary_search.html"
       }
     ],
-    "template_code": "// Kth smallest by binary searching the value, using count(<= x) >= k\ntemplate <class Cnt>\n// lo: lower bound of the search range.\n// hi: upper bound of the search range.\n// k: limit, count, or window size used by the algorithm.\n// cnt: counts or frequency table.\nlong long kthSmallest(long long lo, long long hi, long long k, Cnt cnt) {\n    while (lo < hi) {\n        long long mid = lo + (hi - lo) / 2;\n        if (cnt(mid) >= k) {\n            hi = mid;  // at least k values are <= mid\n        }\n        else {\n            lo = mid + 1;\n        }\n    }\n    return lo;  // smallest value whose prefix count reaches k\n}",
     "supplemental_patterns": [
       {
         "name": "矩陣（行列有序）第 K 小",
@@ -6290,7 +6222,6 @@
         "url": "https://cp-algorithms.com/num_methods/binary_search.html"
       }
     ],
-    "template_code": "// Minimize the maximum: find the smallest feasible x\ntemplate <class Check>\n// lo: lower bound of the search range.\n// hi: upper bound of the search range.\n// feasible: predicate that checks whether the remaining state can still be completed.\nlong long minimizeMax(long long lo, long long hi, Check feasible) {\n    while (lo < hi) {\n        long long mid = lo + (hi - lo) / 2;\n        if (feasible(mid)) {\n            hi = mid;  // feasible -> push the bound down\n        }\n        else {\n            lo = mid + 1;\n        }\n    }\n    return lo;\n}\n// Maximize the minimum: mirror it (feasible -> lo = mid + 1, track ans).",
     "supplemental_patterns": [
       {
         "name": "速率／時間型最小化最大值",
@@ -6384,7 +6315,6 @@
         "url": "https://leetcode.cn/circle/discuss/SqopEo/"
       }
     ],
-    "template_code": "// 1D prefix sums: O(1) range queries after O(n) build\nstruct Prefix {\n    vector<long long> pre;\n    // a: input array or sequence.\n    Prefix(const vector<int>& a) : pre(a.size() + 1, 0) {\n        for (int i = 0; i < (int)a.size(); i++) {\n            pre[i + 1] = pre[i] + a[i];\n        }\n    }\n    // l: left boundary or endpoint.\n    // r: right boundary, row, or endpoint.\n    long long sum(int l, int r) const {\n        return pre[r + 1] - pre[l];\n    }  // inclusive\n};",
     "supplemental_patterns": [
       {
         "name": "前綴和 + 餘數（整除子陣列）",
@@ -6479,7 +6409,6 @@
         "url": "https://leetcode.cn/circle/discuss/9oZFK9/"
       }
     ],
-    "template_code": "// For each i, the range [L[i]+1, R[i]-1] where a[i] is the (leftmost) minimum.\n// Left strict (>=), right non-strict (>) to avoid double counting equal values.\n// a: input array or sequence.\n// L: input or working vector used by the algorithm.\n// R: input or working vector used by the algorithm.\nvoid minRanges(const vector<int>& a, vector<int>& L, vector<int>& R) {\n    int n = a.size();\n    L.assign(n, -1);\n    R.assign(n, n);\n    stack<int> st;\n    for (int i = 0; i < n; i++) {\n        while (!st.empty() && a[st.top()] >= a[i]) {\n            st.pop();\n        }\n        L[i] = st.empty() ? -1 : st.top();\n        st.push(i);\n    }\n    st = stack<int>();\n    for (int i = n - 1; i >= 0; i--) {\n        while (!st.empty() && a[st.top()] > a[i]) {\n            st.pop();\n        }\n        R[i] = st.empty() ? n : st.top();\n        st.push(i);\n    }\n}",
     "supplemental_patterns": [
       {
         "name": "子陣列最大值之和 / 加權貢獻",
@@ -6575,7 +6504,6 @@
         "url": "https://leetcode.cn/circle/discuss/9oZFK9/"
       }
     ],
-    "template_code": "// Lexicographically smallest by removing k chars (monotone increasing stack)\n// num: input string.\n// k: limit, count, or window size used by the algorithm.\nstring smallestAfterRemoval(const string& num, int k) {\n    string st;\n    for (char c : num) {\n        while (!st.empty() && k > 0 && st.back() > c) {\n            st.pop_back();\n            k--;\n        }\n        st.push_back(c);\n    }\n    st.resize(st.size() - k);  // remove leftover from the tail\n    return st;\n}",
     "supplemental_patterns": [
       {
         "name": "字典序最大",
@@ -6671,7 +6599,6 @@
         "url": "https://oi-wiki.org/graph/dfs/"
       }
     ],
-    "template_code": "// Grid BFS shortest steps (unit edges) from a single source\nint dr[] = {-1, 1, 0, 0}, dc[] = {0, 0, -1, 1};\n// g: grid or adjacency structure used by the algorithm.\n// sr: source row index.\n// sc: source column index.\nint bfsGrid(vector<vector<int>>& g, int sr, int sc) {\n    int rowCount = g.size(), col_count = g[0].size();\n    vector<vector<int>> dist(rowCount, vector<int>(col_count, -1));\n    queue<pair<int, int>> q;\n    q.push({sr, sc});\n    dist[sr][sc] = 0;\n    while (!q.empty()) {\n        auto [r, c] = q.front();\n        q.pop();\n        for (int k = 0; k < 4; k++) {\n            int nr = r + dr[k], nc = c + dc[k];\n            if (nr < 0 || nr >= rowCount || nc < 0 || nc >= col_count || g[nr][nc] == 0 ||\n                dist[nr][nc] != -1) {\n                continue;\n            }\n            dist[nr][nc] = dist[r][c] + 1;\n            q.push({nr, nc});\n        }\n    }\n    return dist[rowCount - 1][col_count - 1];\n}",
     "supplemental_patterns": [
       {
         "name": "0-1 網格最短路",
@@ -6767,7 +6694,6 @@
         "url": "https://oi-wiki.org/graph/topo/"
       }
     ],
-    "template_code": "// Mark cycle nodes of a functional graph (each node has one out-edge) by peeling.\n// next: input or working vector used by the algorithm.\nvector<char> functionalGraphCycle(const vector<int>& next) {\n    int n = next.size();\n    vector<int> indeg(n, 0);\n    for (int v : next) {\n        indeg[v]++;\n    }\n    queue<int> q;\n    for (int i = 0; i < n; i++) {\n        if (!indeg[i]) {\n            q.push(i);\n        }\n    }\n    vector<char> on_cycle(n, 1);\n    while (!q.empty()) {\n        int u = q.front();\n        q.pop();\n        on_cycle[u] = 0;\n        if (--indeg[next[u]] == 0) {\n            q.push(next[u]);\n        }\n    }\n    return on_cycle;\n}",
     "supplemental_patterns": [
       {
         "name": "最長鏈 / 樹枝深度",
@@ -6862,7 +6788,6 @@
         "url": "https://leetcode.cn/circle/discuss/dHn9Vk/"
       }
     ],
-    "template_code": "// Per-bit decomposition: count contribution of each bit independently.\n// a: input array or sequence.\n// B: number of bits to process.\nlong long perBitSum(const vector<int>& a, int B = 30) {\n    long long total = 0;\n    for (int b = 0; b < B; b++) {\n        long long ones = 0;\n        for (int x : a) {\n            ones += (x >> b) & 1;\n        }\n        // example: XOR-sum over all pairs uses ones * (n - ones) << b\n        total += ones * ((long long)a.size() - ones) << b;\n    }\n    return total;\n}",
     "supplemental_patterns": [
       {
         "name": "加法拆成 XOR 與進位",
@@ -6957,7 +6882,6 @@
         "url": "https://leetcode.cn/circle/discuss/dHn9Vk/"
       }
     ],
-    "template_code": "// 0-1 Trie for maximum XOR queries\nstruct XorTrie {\n    static const int B = 30;\n    vector<array<int, 2>> ch{{{0, 0}}};\n    // x: value or node being processed.\n    void insert(int x) {\n        int u = 0;\n        for (int b = B; b >= 0; b--) {\n            int d = (x >> b) & 1;\n            if (!ch[u][d]) {\n                ch.push_back({0, 0});\n                ch[u][d] = (int)ch.size() - 1;\n            }\n            u = ch[u][d];\n        }\n    }\n    // x: value, node, or output coefficient used by the function.\n    int queryMax(int x) {\n        int u = 0, res = 0;\n        for (int b = B; b >= 0; b--) {\n            int d = (x >> b) & 1;\n            if (ch[u][d ^ 1]) {\n                res |= 1 << b;\n                u = ch[u][d ^ 1];\n            } else {\n                u = ch[u][d];\n            }\n        }\n        return res;\n    }\n};",
     "supplemental_patterns": [
       {
         "name": "異或值 ≥ k 的對數 / 第 K 大異或",
@@ -7052,7 +6976,6 @@
         "url": "https://oi-wiki.org/math/combinatorics/combination/"
       }
     ],
-    "template_code": "// O(1) binomial coefficients modulo a prime after O(n) preprocessing.\nconst long long kMod = 1e9 + 7;\nvector<long long> fact, inv_fact;\n// a: input array or sequence.\n// b: second numeric input value.\nlong long power(long long a, long long b) {\n    long long r = 1;\n    a %= kMod;\n    for (; b; b >>= 1, a = a * a % kMod) {\n        if (b & 1) {\n            r = r * a % kMod;\n        }\n    }\n    return r;\n}\n// n: number of nodes or elements.\nvoid initComb(int n) {\n    fact.assign(n + 1, 1);\n    inv_fact.assign(n + 1, 1);\n    for (int i = 1; i <= n; i++) {\n        fact[i] = fact[i - 1] * i % kMod;\n    }\n    inv_fact[n] = power(fact[n], kMod - 2);\n    for (int i = n; i > 0; i--) {\n        inv_fact[i - 1] = inv_fact[i] * i % kMod;\n    }\n}\n// n: number of nodes or elements.\n// r: right boundary, row, or endpoint.\nlong long comb(int n, int r) {\n    if (r < 0 || r > n) {\n        return 0;\n    }\n    return fact[n] * inv_fact[r] % kMod * inv_fact[n - r] % kMod;\n}",
     "supplemental_patterns": [
       {
         "name": "隔板法（非負解）",
@@ -7146,7 +7069,6 @@
         "url": "https://oi-wiki.org/math/game-theory/impartial-game/"
       }
     ],
-    "template_code": "// Grundy (SG) values for a subtraction game; combine subgames by XOR.\n// n: number of nodes or elements.\n// moves: input or working vector used by the algorithm.\nvector<int> grundy(int n, const vector<int>& moves) {\n    vector<int> sg(n + 1, 0);\n    for (int i = 1; i <= n; i++) {\n        set<int> s;\n        for (int m : moves) {\n            if (i >= m) {\n                s.insert(sg[i - m]);\n            }\n        }\n        int mex = 0;\n        while (s.count(mex)) {\n            mex++;\n        }\n        sg[i] = mex;\n    }\n    return sg;\n}",
     "supplemental_patterns": [
       {
         "name": "巴什博弈（Bash Game）",
@@ -7239,7 +7161,6 @@
         "url": "https://oi-wiki.org/string/manacher/"
       }
     ],
-    "template_code": "// Manacher: p[i] is the palindrome radius around position i in the transformed\n// string; it equals the length of the longest palindrome centered there in s.\n// s: input string.\nvector<int> manacher(const string& s) {\n    string t = \"^\";\n    for (char c : s) {\n        t += '#';\n        t += c;\n    }\n    t += \"#$\";\n    int n = t.size();\n    vector<int> p(n, 0);\n    for (int i = 1, center = 0, right = 0; i < n - 1; i++) {\n        if (i < right) {\n            p[i] = min(right - i, p[2 * center - i]);\n        }\n        while (t[i + p[i] + 1] == t[i - p[i] - 1]) {\n            p[i]++;\n        }\n        if (i + p[i] > right) {\n            center = i;\n            right = i + p[i];\n        }\n    }\n    return p;\n}",
     "supplemental_patterns": [
       {
         "name": "回文子串計數",
@@ -7334,7 +7255,6 @@
         "url": "https://oi-wiki.org/string/ac-automaton/"
       }
     ],
-    "template_code": "// Aho-Corasick: multi-pattern matching with BFS-built fail links.\nstruct AhoCorasick {\n    static const int K = 26;\n    vector<array<int, K>> go{{}};\n    vector<int> fail{0}, cnt{0};\n    // s: input string.\n    void insert(const string& s) {\n        int u = 0;\n        for (char c : s) {\n            int d = c - 'a';\n            if (!go[u][d]) {\n                go.push_back({});\n                fail.push_back(0);\n                cnt.push_back(0);\n                go[u][d] = (int)go.size() - 1;\n            }\n            u = go[u][d];\n        }\n        cnt[u]++;\n    }\n    void build() {\n        queue<int> q;\n        for (int c = 0; c < K; c++) {\n            if (go[0][c]) {\n                q.push(go[0][c]);\n            }\n        }\n        while (!q.empty()) {\n            int u = q.front();\n            q.pop();\n            for (int c = 0; c < K; c++) {\n                int v = go[u][c];\n                if (v) {\n                    fail[v] = go[fail[u]][c];\n                    q.push(v);\n                } else {\n                    go[u][c] = go[fail[u]][c];\n                }\n            }\n        }\n    }\n};",
     "supplemental_patterns": [
       {
         "name": "fail 樹上 DP",
@@ -7427,7 +7347,6 @@
         "url": "https://oi-wiki.org/dp/dag/"
       }
     ],
-    "template_code": "// Subsequence automaton: nxt[i][c] = first index >= i holding char c (else n).\nstruct SubseqAutomaton {\n    vector<array<int, 26>> nxt;\n    int n;\n    // s: input string.\n    SubseqAutomaton(const string& s) : n(s.size()) {\n        nxt.assign(n + 1, {});\n        for (int c = 0; c < 26; c++) {\n            nxt[n][c] = n;\n        }\n        for (int i = n - 1; i >= 0; i--) {\n            nxt[i] = nxt[i + 1];\n            nxt[i][s[i] - 'a'] = i;\n        }\n    }\n    // t: target/end value.\n    bool isSubsequence(const string& t) const {\n        int pos = 0;\n        for (char c : t) {\n            pos = nxt[pos][c - 'a'];\n            if (pos == n) {\n                return false;\n            }\n            pos++;\n        }\n        return true;\n    }\n};",
     "supplemental_patterns": [
       {
         "name": "多模式子序列批次查詢",
@@ -7521,7 +7440,6 @@
         "url": "https://oi-wiki.org/dp/opt/quadrangle/"
       }
     ],
-    "template_code": "// Partition DP: f[i] = best over last segment [j, i)\n// f[i] = min_{0<=j<i, valid(j, i)} f[j] + cost(j, i)\n// n: number of nodes or elements.\n// valid: callback predicate used by the algorithm.\n// cost: current accumulated cost.\nvector<long long> partitionDP(int n, function<bool(int, int)> valid,\n                              function<long long(int, int)> cost) {\n    const long long kInf = 1e18;\n    vector<long long> f(n + 1, kInf);\n    f[0] = 0;\n    for (int i = 1; i <= n; i++) {\n        for (int j = 0; j < i; j++) {\n            if (f[j] < kInf && valid(j, i)) {\n                f[i] = min(f[i], f[j] + cost(j, i));\n            }\n        }\n    }\n    return f;\n}",
     "supplemental_patterns": [
       {
         "name": "方案數版本",
@@ -7616,7 +7534,6 @@
         "url": "https://leetcode.cn/circle/discuss/tXLS3i/"
       }
     ],
-    "template_code": "// State-machine DP skeleton: iterate items, update each state from reachable ones.\n// Example states for stock-with-cooldown: hold / sold / rest.\n// p: sequence of prices or state-machine inputs.\nint stateMachine(const vector<int>& p) {\n    int hold = INT_MIN, sold = 0, rest = 0;\n    for (int price : p) {\n        int nhold = max(hold, rest - price);\n        int nsold = hold + price;\n        int nrest = max(rest, sold);\n        hold = nhold;\n        sold = nsold;\n        rest = nrest;\n    }\n    return max(sold, rest);\n}",
     "supplemental_patterns": [
       {
         "name": "含手續費 / 持有上限",
@@ -7711,7 +7628,6 @@
         "url": "https://leetcode.cn/circle/discuss/dpzj4w/"
       }
     ],
-    "template_code": "// Digit DP template: count numbers in [0, n] with some digit property.\n// States: pos, tight (still bounded by n), started (leading-zero handling).\n// Memoize only when !tight (then the suffix is independent of the bound).\nstring g_digits;\nlong long g_dp[20][2];\n// pos: current position being constructed.\n// tight: state marker or boolean-like flag.\n// started: state marker or boolean-like flag.\nlong long digitDFS(int pos, bool tight, bool started) {\n    if (pos == (int)g_digits.size()) {\n        return 1;  // adjust to your counting\n    }\n    if (!tight && g_dp[pos][started] != -1) {\n        return g_dp[pos][started];\n    }\n    int hi = tight ? g_digits[pos] - '0' : 9;\n    long long res = 0;\n    for (int d = 0; d <= hi; d++) {\n        // if (!allowed(d, started)) continue;          // place your constraint\n        res += digitDFS(pos + 1, tight && d == hi, started || d > 0);\n    }\n    if (!tight) {\n        g_dp[pos][started] = res;\n    }\n    return res;\n}",
     "supplemental_patterns": [
       {
         "name": "數位和 / 餘數約束",
@@ -7805,7 +7721,6 @@
         "url": "https://oi-wiki.org/math/game-theory/intro/"
       }
     ],
-    "template_code": "// Game DP via relative score: f[state] = best (my score - opponent score)\n// for the player to move. Interval version (take from either end):\n// a: input array or sequence.\nint gameInterval(const vector<int>& a) {\n    int n = a.size();\n    vector<vector<int>> f(n, vector<int>(n, 0));\n    for (int i = 0; i < n; i++) {\n        f[i][i] = a[i];\n    }\n    for (int len = 2; len <= n; len++) {\n        for (int l = 0, r; (r = l + len - 1) < n; l++) {\n            f[l][r] = max(a[l] - f[l + 1][r], a[r] - f[l][r - 1]);\n        }\n    }\n    return f[0][n - 1];  // >= 0 means the first player does not lose\n}",
     "supplemental_patterns": [
       {
         "name": "必勝/必敗態（與 SG 連結）",
@@ -7901,7 +7816,6 @@
         "url": "https://oi-wiki.org/math/linear-algebra/gauss/"
       }
     ],
-    "template_code": "// Backward expectation DP: expected[goal] = 0, then expected[s] = cost + sum p * expected[next].\n// Example: expected steps with uniform 1..6 transitions on a line.\n// n: number of nodes or elements.\ndouble expectedSteps(int n) {\n    vector<double> expected(n + 7, 0.0);\n    for (int i = n - 1; i >= 0; i--) {\n        double e = 1.0;\n        for (int f = 1; f <= 6; f++) {\n            e += (i + f >= n ? 0.0 : expected[i + f]) / 6.0;\n        }\n        expected[i] = e;\n    }\n    return expected[0];\n}",
     "supplemental_patterns": [
       {
         "name": "有環期望（自環化簡）",
@@ -7995,7 +7909,6 @@
         "url": "https://leetcode.cn/circle/discuss/g6KTKL/"
       }
     ],
-    "template_code": "// Greedy by sorting key, then one pass. Prove with an exchange argument.\n// a: input array or sequence.\nlong long greedyScan(vector<int>& a) {\n    sort(a.begin(), a.end());\n    long long pre = 0, total = 0;\n    for (int x : a) {\n        total += pre;\n        pre += x;\n    }\n    return total;\n}",
     "supplemental_patterns": [
       {
         "name": "分數背包（性價比排序）",
@@ -8091,7 +8004,6 @@
         "url": "https://leetcode.cn/circle/discuss/g6KTKL/"
       }
     ],
-    "template_code": "// Regret greedy: keep chosen items in a heap; replace the worst when overfull.\n// jobs: jobs or tasks to schedule.\nint regretSchedule(vector<pair<int, int>>& jobs) {  // {deadline, profit}\n    sort(jobs.begin(), jobs.end());\n    priority_queue<int, vector<int>, greater<int>> heap;  // min-heap of profits\n    for (auto& [d, p] : jobs) {\n        heap.push(p);\n        if ((int)heap.size() > d) {\n            heap.pop();  // drop the least profitable\n        }\n    }\n    int total = 0;\n    while (!heap.empty()) {\n        total += heap.top();\n        heap.pop();\n    }\n    return total;\n}",
     "supplemental_patterns": [
       {
         "name": "反悔替換堆",
@@ -8187,7 +8099,6 @@
         "url": "https://oi-wiki.org/ds/monotonous-stack/"
       }
     ],
-    "template_code": "// Lexicographic greedy: at each position take the smallest feasible char.\n// n: number of nodes or elements.\n// canPlace: predicate that checks whether a candidate can be placed.\nstring lexSmallest(int n, function<bool(int, char)> canPlace) {\n    string res;\n    for (int i = 0; i < n; i++) {\n        for (char c = 'a'; c <= 'z'; c++) {\n            if (canPlace(i, c)) {\n                res += c;\n                break;\n            }  // smallest that keeps a valid suffix\n        }\n    }\n    return res;\n}",
     "supplemental_patterns": [
       {
         "name": "字典序最大",
@@ -8282,7 +8193,6 @@
         "url": "https://oi-wiki.org/basic/greedy/"
       }
     ],
-    "template_code": "// Construction has no single template; a frequent device is two-pointer pairing\n// (smallest with largest) to enforce a regular sum/difference structure.\n// n: number of nodes or elements.\nvector<int> pairConstruct(int n) {\n    vector<int> res;\n    int lo = 1, hi = n;\n    while (lo <= hi) {\n        res.push_back(lo++);\n        if (lo <= hi) {\n            res.push_back(hi--);\n        }\n    }\n    return res;\n}",
     "supplemental_patterns": [
       {
         "name": "從小情形找規律",
@@ -8375,7 +8285,6 @@
         "url": "https://leetcode.cn/circle/discuss/SJFwQI/"
       }
     ],
-    "template_code": "// Subset enumeration via start index (no duplicates among element orderings).\n// start: starting index or node for the search.\n// a: input array or sequence.\n// path: current partial solution path.\n// res: container used to store results.\nvoid subsetsDFS(int start, vector<int>& a, vector<int>& path, vector<vector<int>>& res) {\n    res.push_back(path);\n    for (int i = start; i < (int)a.size(); i++) {\n        path.push_back(a[i]);\n        subsetsDFS(i + 1, a, path, res);\n        path.pop_back();\n    }\n}",
     "supplemental_patterns": [
       {
         "name": "位元枚舉子集",
@@ -8470,7 +8379,6 @@
         "url": "https://leetcode.cn/circle/discuss/SJFwQI/"
       }
     ],
-    "template_code": "// Permutations with used[] marking; sort + !used[i-1] to dedup equal elements.\n// a: input array or sequence.\n// used: marker array for already chosen elements.\n// path: current partial solution path.\n// res: container used to store results.\nvoid permuteDFS(vector<int>& a, vector<char>& used, vector<int>& path, vector<vector<int>>& res) {\n    if (path.size() == a.size()) {\n        res.push_back(path);\n        return;\n    }\n    for (int i = 0; i < (int)a.size(); i++) {\n        if (used[i]) {\n            continue;\n        }\n        if (i > 0 && a[i] == a[i - 1] && !used[i - 1]) {\n            continue;\n        }\n        used[i] = 1;\n        path.push_back(a[i]);\n        permuteDFS(a, used, path, res);\n        path.pop_back();\n        used[i] = 0;\n    }\n}",
     "supplemental_patterns": [
       {
         "name": "next_permutation 迭代",
@@ -8565,7 +8473,6 @@
         "url": "https://leetcode.cn/circle/discuss/SJFwQI/"
       }
     ],
-    "template_code": "// Combinations of size k from 1..n, with the \"not enough left\" pruning.\n// start: starting index or node for the search.\n// n: number of nodes or elements.\n// k: limit, count, or window size used by the algorithm.\n// path: current partial solution path.\n// res: container used to store results.\nvoid combine(int start, int n, int k, vector<int>& path, vector<vector<int>>& res) {\n    if ((int)path.size() == k) {\n        res.push_back(path);\n        return;\n    }\n    int need = k - (int)path.size();\n    for (int i = start; i <= n - need + 1; i++) {\n        path.push_back(i);\n        combine(i + 1, n, k, path, res);\n        path.pop_back();\n    }\n}",
     "supplemental_patterns": [
       {
         "name": "組合總和去重",
@@ -8661,7 +8568,6 @@
         "url": "https://oi-wiki.org/search/dfs/"
       }
     ],
-    "template_code": "// Pruned backtracking template: feasibility + optimality pruning.\nint best;\n// idx: current recursion index.\n// cost: current accumulated cost.\n// a: input array or sequence.\nvoid dfsPruned(int idx, int cost, /* state */ const vector<int>& a) {\n    if (cost >= best) {\n        return;  // optimality prune\n    }\n    if (idx == (int)a.size()) {\n        best = min(best, cost);\n        return;\n    }\n    // try choices ordered by \"most constrained first\" for earlier pruning\n    // for (each feasible choice) { apply; dfsPruned(idx+1, cost+delta, a); undo; }\n}",
     "supplemental_patterns": [
       {
         "name": "最少剩餘值（MRV）啟發式",
@@ -8759,7 +8665,6 @@
         "url": "https://oi-wiki.org/graph/flow/max-flow/"
       }
     ],
-    "template_code": "// Dinic max flow (see topic page for the full struct). Usage:\n//   Dinic din(n);\n//   din.addEdge(u, v, cap);   // for each directed edge\n//   long long F = din.maxflow(s, t);\n// Each addEdge also inserts a reverse edge of capacity 0 to allow cancellation.",
     "supplemental_patterns": [
       {
         "name": "多源多匯",
@@ -8850,7 +8755,6 @@
         "url": "https://cp-algorithms.com/graph/edmonds_karp.html"
       }
     ],
-    "template_code": "// Min-cut value = max-flow value. Recover the S-side by BFS on the residual graph.\n// din: Dinic instance containing the flow network.\n// s: source node in the flow network.\n// n: number of nodes or elements.\nvector<char> recoverMinCut(Dinic& din, int s, int n) {\n    vector<char> side(n, 0);\n    queue<int> q;\n    q.push(s);\n    side[s] = 1;\n    while (!q.empty()) {\n        int u = q.front();\n        q.pop();\n        for (auto& e : din.g[u]) {\n            if (e.cap > 0 && !side[e.to]) {\n                side[e.to] = 1;\n                q.push(e.to);\n            }\n        }\n    }\n    return side;\n}",
     "supplemental_patterns": [
       {
         "name": "最大權閉合子圖",
@@ -8942,7 +8846,6 @@
         "url": "https://oi-wiki.org/graph/graph-matching/bigraph-match/"
       }
     ],
-    "template_code": "// Hungarian algorithm (Kuhn) for maximum bipartite matching.\nvector<vector<int>> adj;  // adj[u] = right neighbors of left node u\nvector<int> match_r;      // match_r[v] = left node matched to right v, or -1\nvector<char> vis;\n// u: current node or left endpoint.\nbool augment(int u) {\n    for (int v : adj[u]) {\n        if (vis[v]) {\n            continue;\n        }\n        vis[v] = 1;\n        if (match_r[v] == -1 || augment(match_r[v])) {\n            match_r[v] = u;\n            return true;\n        }\n    }\n    return false;\n}\n// n_left: number of nodes on the left side of the bipartite graph.\n// n_right: number of nodes on the right side of the bipartite graph.\nint maxMatching(int n_left, int n_right) {\n    match_r.assign(n_right, -1);\n    int res = 0;\n    for (int u = 0; u < n_left; u++) {\n        vis.assign(n_right, 0);\n        res += augment(u);\n    }\n    return res;\n}",
     "supplemental_patterns": [
       {
         "name": "最小路徑覆蓋（DAG）",

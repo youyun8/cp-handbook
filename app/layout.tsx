@@ -6,7 +6,7 @@ import { ClientProviders } from '@/components/ClientProviders';
 
 export const metadata: Metadata = {
   title: '競程策略手冊',
-  description: '以策略、模板與分級題單為核心的互動式競程學習網站。'
+  description: '以策略、過程剖析與分級題單為核心的互動式競程學習網站。'
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

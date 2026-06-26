@@ -42,7 +42,6 @@ export default async function SubtopicPage({
               id: d.title.replace(/\s+/g, '-').toLowerCase(),
               label: d.title
             })) ?? []),
-            { id: 'template', label: '模板程式碼' },
             { id: 'patterns', label: '補充套路' }
           ]}
         />

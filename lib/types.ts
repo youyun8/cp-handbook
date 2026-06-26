@@ -31,7 +31,6 @@ export interface Topic {
   complexity: string;
   deep_dive?: DeepDiveSection[];
   reference_links: ReferenceLink[];
-  template_code: string;
   supplemental_patterns: SupplementalPattern[];
   pitfalls?: string[];
   children?: string[];
@@ -90,7 +89,6 @@ export interface Subtopic {
   complexity: string;
   deep_dive?: DeepDiveSection[];
   reference_links: ReferenceLink[];
-  template_code: string;
   supplemental_patterns: SupplementalPattern[];
   pitfalls?: string[];
   practice_problems?: PracticeProblem[];

@@ -4,7 +4,7 @@
 
 ## 功能特色
 
-- 📚 **17 個主題 × 64 個子主題**，每個子主題含核心想法、程式模板、OI-Wiki 參考、pitfalls
+- 📚 **17 個主題 × 64 個子主題**，每個子主題含核心想法、過程剖析、OI-Wiki 參考、pitfalls
 - 🔤 **字串算法** 完整覆蓋 KMP、Z 函數、字串哈希、Trie、後綴陣列
 - 🧭 **可折疊 Sidebar**，階層式主題導覽，支援頁內錨點
 - 🔐 **GitHub OAuth 登入**，進度同步至私有 GitHub Gist（需 Vercel 部署）
@@ -77,10 +77,10 @@ npm run dev
 1. 前往 [github.com/settings/developers](https://github.com/settings/developers)，點擊 **New OAuth App**。
 2. 填入以下欄位：
 
-   | 欄位 | 值 |
-   |------|----|
-   | Application name | `CP Handbook`（或任意名稱） |
-   | Homepage URL | `https://your-project.vercel.app`（部署後的域名） |
+   | 欄位                       | 值                                                         |
+   | -------------------------- | ---------------------------------------------------------- |
+   | Application name           | `CP Handbook`（或任意名稱）                                |
+   | Homepage URL               | `https://your-project.vercel.app`（部署後的域名）          |
    | Authorization callback URL | `https://your-project.vercel.app/api/auth/callback/github` |
 
 3. 點擊 **Register application**，取得 **Client ID**。
@@ -108,12 +108,12 @@ openssl rand -hex 32
 
 進入 Vercel 專案 → **Settings** → **Environment Variables**，新增以下四個變數（全選 Production / Preview / Development）：
 
-| 變數名稱 | 說明 | 範例值 |
-|---------|------|--------|
-| `GITHUB_CLIENT_ID` | OAuth App 的 Client ID | `Ov23liXXXXXXXXXXXXXX` |
-| `GITHUB_CLIENT_SECRET` | OAuth App 的 Client Secret | `abc123...`（40 字元） |
-| `AUTH_SECRET` | next-auth 加密金鑰 | `openssl rand -hex 32` 的輸出 |
-| `GITHUB_GIST_TOKEN` | 含 `gist` 範圍的 PAT | `ghp_xxxxxxxxxxxx` |
+| 變數名稱               | 說明                       | 範例值                        |
+| ---------------------- | -------------------------- | ----------------------------- |
+| `GITHUB_CLIENT_ID`     | OAuth App 的 Client ID     | `Ov23liXXXXXXXXXXXXXX`        |
+| `GITHUB_CLIENT_SECRET` | OAuth App 的 Client Secret | `abc123...`（40 字元）        |
+| `AUTH_SECRET`          | next-auth 加密金鑰         | `openssl rand -hex 32` 的輸出 |
+| `GITHUB_GIST_TOKEN`    | 含 `gist` 範圍的 PAT       | `ghp_xxxxxxxxxxxx`            |
 
 > **請勿**設定 `STATIC_EXPORT` 或 `NEXT_PUBLIC_STATIC_EXPORT`（那是 GitHub Pages 靜態模式的開關）。
 > `AUTH_URL` 通常**不需要**設定——next-auth v5 已設定 `trustHost: true`，Vercel 會自動推斷。
@@ -187,13 +187,13 @@ data/
 
 ## 技術棧
 
-| 類別 | 技術 |
-|------|------|
-| 框架 | Next.js 16 (App Router) |
-| 樣式 | Tailwind CSS |
-| 認證 | next-auth v5 (GitHub OAuth) |
-| 狀態 | Zustand + localStorage |
-| 雲端同步 | GitHub Gist API |
-| 程式碼高亮 | Shiki |
-| 動畫 | Framer Motion |
-| 部署 | Vercel / GitHub Pages |
+| 類別       | 技術                        |
+| ---------- | --------------------------- |
+| 框架       | Next.js 16 (App Router)     |
+| 樣式       | Tailwind CSS                |
+| 認證       | next-auth v5 (GitHub OAuth) |
+| 狀態       | Zustand + localStorage      |
+| 雲端同步   | GitHub Gist API             |
+| 程式碼高亮 | Shiki                       |
+| 動畫       | Framer Motion               |
+| 部署       | Vercel / GitHub Pages       |
