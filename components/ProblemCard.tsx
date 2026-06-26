@@ -16,7 +16,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { Problem } from '@/lib/types';
 import { useMounted } from '@/lib/useMounted';
-import { problemDisplayTitle, sourceProblemIdLabel } from '@/lib/utils';
+import { problemDisplayTitle } from '@/lib/utils';
 import { useProgressStore } from '@/store/useProgressStore';
 
 export function ProblemCard({ problem }: { problem: Problem }) {
@@ -53,9 +53,6 @@ export function ProblemCard({ problem }: { problem: Problem }) {
         </div>
         <div className="space-y-2">
           <CardTitle className="text-base leading-6">{problemDisplayTitle(problem)}</CardTitle>
-          <p className="break-all rounded-xl border border-border bg-background/60 px-3 py-2 text-xs font-medium text-muted-foreground">
-            {sourceProblemIdLabel(problem)}
-          </p>
         </div>
       </CardHeader>
       <CardContent className="flex flex-1 flex-col gap-4">

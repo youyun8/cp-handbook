@@ -15,7 +15,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { PracticeProblem } from '@/lib/types';
 import { useMounted } from '@/lib/useMounted';
 import { hasPracticeNote, practiceProblemId } from '@/lib/practiceProgress';
-import { problemDisplayTitle, sourceProblemIdLabel } from '@/lib/utils';
+import { problemDisplayTitle } from '@/lib/utils';
 import { useProgressStore } from '@/store/useProgressStore';
 
 function SubtopicPracticeProblemCard({ problem }: { problem: PracticeProblem }) {
@@ -43,9 +43,6 @@ function SubtopicPracticeProblemCard({ problem }: { problem: PracticeProblem }) 
 
         <div className="space-y-2">
           <CardTitle className="text-base leading-6">{problemDisplayTitle(problem)}</CardTitle>
-          <p className="break-all rounded-xl border border-border bg-background/60 px-3 py-2 text-xs font-medium text-muted-foreground">
-            {sourceProblemIdLabel(problem)}
-          </p>
         </div>
       </CardHeader>
       <CardContent className="flex flex-1 flex-col gap-4">

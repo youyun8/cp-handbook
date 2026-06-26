@@ -7,7 +7,7 @@ import { ProblemNotesModal } from '@/components/ProblemNotesModal';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { PracticeProblem, Subtopic, Topic } from '@/lib/types';
 import { hasPracticeNote, practiceProblemId } from '@/lib/practiceProgress';
-import { problemDisplayTitle, sourceProblemIdLabel } from '@/lib/utils';
+import { problemDisplayTitle } from '@/lib/utils';
 import { useProgressStore } from '@/store/useProgressStore';
 
 type HandbookFilter = 'all' | 'incomplete' | 'completed';
@@ -304,9 +304,6 @@ function PracticeProgressRow({
         </div>
         <div>
           <p className="text-sm font-semibold leading-6">{problemDisplayTitle(problem)}</p>
-          <p className="mt-1 break-all text-xs font-medium text-muted-foreground">
-            {sourceProblemIdLabel(problem)}
-          </p>
         </div>
       </div>
       <div className="flex flex-wrap items-center gap-2 md:justify-end">

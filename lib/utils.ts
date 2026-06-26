@@ -131,6 +131,7 @@ export function tierLabel(tier: Tier) {
   const labels: Record<Tier, string> = {
     warmup: '暖身',
     core: '核心',
+    advanced: '進階',
     challenge: '挑戰'
   };
   return labels[tier];

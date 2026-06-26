@@ -2,7 +2,7 @@ export type Source = 'leetcode' | 'codeforces' | 'luogu' | 'atcoder' | 'cses';
 
 export type ProblemType = 'template' | 'classic' | 'insight_transfer';
 
-export type Tier = 'warmup' | 'core' | 'challenge';
+export type Tier = 'warmup' | 'core' | 'advanced' | 'challenge';
 
 export type SubmissionStatus = 'AC' | 'WA' | 'TLE' | 'SKIP';
 
