@@ -38,6 +38,14 @@ html {
   scroll-behavior: smooth;
 }
 
+html[data-text-size='small'] {
+  font-size: 93.75%;
+}
+
+html[data-text-size='large'] {
+  font-size: 112.5%;
+}
+
 body {
   min-height: 100vh;
   background:

@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { AppWidthContainer } from '@/components/AppWidthContainer';
+import { SettingsNavButton } from '@/components/SettingsModal';
 import { SignOutButton } from '@/components/SignOutButton';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { auth } from '@/lib/auth';
@@ -10,8 +12,7 @@ const navItems = [
   { href: '/', label: '首頁' },
   { href: '/handbook', label: '手冊' },
   { href: '/practice', label: '練習場' },
-  { href: '/progress', label: '進度' },
-  { href: '/settings', label: '設定' }
+  { href: '/progress', label: '進度' }
 ];
 
 const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1];
@@ -25,7 +26,7 @@ export async function AppShell({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen">
       <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+        <AppWidthContainer className="flex items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
           <Link href="/" className="flex items-center gap-3 font-semibold tracking-tight">
             <Image
               src={appIconSrc}
@@ -49,6 +50,7 @@ export async function AppShell({ children }: { children: ReactNode }) {
                 {item.label}
               </Link>
             ))}
+            <SettingsNavButton />
           </nav>
           <div className="flex items-center gap-2">
             {session?.user ? (
@@ -76,8 +78,8 @@ export async function AppShell({ children }: { children: ReactNode }) {
             )}
             <ThemeToggle />
           </div>
-        </div>
-        <nav className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-4 pb-3 md:hidden">
+        </AppWidthContainer>
+        <AppWidthContainer as="nav" className="flex gap-1 overflow-x-auto px-4 pb-3 md:hidden">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -87,9 +89,12 @@ export async function AppShell({ children }: { children: ReactNode }) {
               {item.label}
             </Link>
           ))}
-        </nav>
+          <SettingsNavButton compact />
+        </AppWidthContainer>
       </header>
-      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">{children}</main>
+      <AppWidthContainer as="main" className="px-4 py-8 sm:px-6 lg:px-8">
+        {children}
+      </AppWidthContainer>
     </div>
   );
 }
