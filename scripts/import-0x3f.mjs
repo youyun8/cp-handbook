@@ -67,19 +67,37 @@ const LABEL_RATING = { 简单: 1200, 中等: 1600, 困难: 2200 };
 // 0x3F's official "如何科学刷题" roadmap (算法题单) discussion threads, attached
 // to each matching topic's reference_links. Idempotent: skipped if already present.
 const ROADMAP_LINKS = {
-  'two-pointers': { label: '靈茶山艾府：滑動視窗與雙指針題單', url: 'https://leetcode.cn/circle/discuss/0viNMK/' },
+  'two-pointers': {
+    label: '靈茶山艾府：滑動視窗與雙指針題單',
+    url: 'https://leetcode.cn/circle/discuss/0viNMK/'
+  },
   'binary-search': { label: '靈茶山艾府：二分演算法題單', url: 'https://leetcode.cn/circle/discuss/SqopEo/' },
-  'monotonic-structure': { label: '靈茶山艾府：單調棧題單', url: 'https://leetcode.cn/circle/discuss/9oZFK9/' },
+  'monotonic-structure': {
+    label: '靈茶山艾府：單調棧題單',
+    url: 'https://leetcode.cn/circle/discuss/9oZFK9/'
+  },
   'graph-traversal': { label: '靈茶山艾府：網格圖題單', url: 'https://leetcode.cn/circle/discuss/YiXPXW/' },
   'bitmask-dp': { label: '靈茶山艾府：位運算題單', url: 'https://leetcode.cn/circle/discuss/dHn9Vk/' },
   'shortest-path': { label: '靈茶山艾府：圖論演算法題單', url: 'https://leetcode.cn/circle/discuss/01LUak/' },
   'dp-fundamentals': { label: '靈茶山艾府：動態規劃題單', url: 'https://leetcode.cn/circle/discuss/tXLS3i/' },
-  'segment-tree-bit': { label: '靈茶山艾府：常用資料結構題單', url: 'https://leetcode.cn/circle/discuss/mOr1u6/' },
-  'math-number-theory': { label: '靈茶山艾府：數學演算法題單', url: 'https://leetcode.cn/circle/discuss/IYT3ss/' },
-  'greedy': { label: '靈茶山艾府：貪心與思維題單', url: 'https://leetcode.cn/circle/discuss/g6KTKL/' },
-  'tree-dp': { label: '靈茶山艾府：鏈表、二叉樹與回溯題單', url: 'https://leetcode.cn/circle/discuss/K0n2gO/' },
+  'segment-tree-bit': {
+    label: '靈茶山艾府：常用資料結構題單',
+    url: 'https://leetcode.cn/circle/discuss/mOr1u6/'
+  },
+  'math-number-theory': {
+    label: '靈茶山艾府：數學演算法題單',
+    url: 'https://leetcode.cn/circle/discuss/IYT3ss/'
+  },
+  greedy: { label: '靈茶山艾府：貪心與思維題單', url: 'https://leetcode.cn/circle/discuss/g6KTKL/' },
+  'tree-dp': {
+    label: '靈茶山艾府：鏈表、二叉樹與回溯題單',
+    url: 'https://leetcode.cn/circle/discuss/K0n2gO/'
+  },
   'string-algorithms': { label: '靈茶山艾府：字串題單', url: 'https://leetcode.cn/circle/discuss/SJFwQI/' },
-  'backtracking': { label: '靈茶山艾府：鏈表、二叉樹與回溯題單', url: 'https://leetcode.cn/circle/discuss/K0n2gO/' }
+  backtracking: {
+    label: '靈茶山艾府：鏈表、二叉樹與回溯題單',
+    url: 'https://leetcode.cn/circle/discuss/K0n2gO/'
+  }
 };
 
 async function fetchText(url) {
@@ -123,15 +141,10 @@ function parseSolutions(md) {
 async function main() {
   const problemsPath = path.join(ROOT, 'data', 'problems.json');
   const problems = JSON.parse(fs.readFileSync(problemsPath, 'utf8'));
-  const existingSlugs = new Set(
-    problems.filter((p) => p.source === 'leetcode').map((p) => p.source_id)
-  );
+  const existingSlugs = new Set(problems.filter((p) => p.source === 'leetcode').map((p) => p.source_id));
   const existingIds = new Set(problems.map((p) => p.id));
 
-  const [md, ratingsJson] = await Promise.all([
-    fetchText(SOLUTIONS_URL),
-    fetchText(RATINGS_URL)
-  ]);
+  const [md, ratingsJson] = await Promise.all([fetchText(SOLUTIONS_URL), fetchText(RATINGS_URL)]);
   const ratingBySlug = new Map(JSON.parse(ratingsJson).map((r) => [r.TitleSlug, r.Rating]));
 
   const rows = parseSolutions(md);
@@ -154,7 +167,7 @@ async function main() {
     let rating = ratingBySlug.get(row.slug);
     if (rating == null) {
       const numeric = Number(row.difficulty);
-      rating = Number.isFinite(numeric) && numeric > 0 ? numeric : LABEL_RATING[row.difficulty] ?? 1600;
+      rating = Number.isFinite(numeric) && numeric > 0 ? numeric : (LABEL_RATING[row.difficulty] ?? 1600);
     }
     rating = Math.round(rating);
 
@@ -174,9 +187,7 @@ async function main() {
       topic_id: topicId,
       problem_type: 'classic',
       tier: tierForRating(rating),
-      strategy_hints: [
-        `靈茶山艾府《如何科學刷題》${knowledgeTW}題單精選，依難度分排序練習。`
-      ],
+      strategy_hints: [`靈茶山艾府《如何科學刷題》${knowledgeTW}題單精選，依難度分排序練習。`],
       similar_problems: []
     });
   }

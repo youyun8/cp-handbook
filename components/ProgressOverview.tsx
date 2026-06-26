@@ -42,7 +42,8 @@ export function ProgressOverview({
     return {
       completed,
       total: allPracticeProblems.length,
-      percent: allPracticeProblems.length === 0 ? 0 : Math.round((completed / allPracticeProblems.length) * 100),
+      percent:
+        allPracticeProblems.length === 0 ? 0 : Math.round((completed / allPracticeProblems.length) * 100),
       coveredTopics: coveredTopicIds.size
     };
   }, [completedPracticeProblemIds, problemNotes, subtopics]);

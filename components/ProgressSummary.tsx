@@ -16,9 +16,8 @@ export function ProgressSummary({ problems, topics }: { problems: Problem[]; top
 
   const topicCount = useMemo(() => {
     const reviewed = new Set(reviewedProblemIds);
-    return new Set(
-      problems.filter((problem) => reviewed.has(problem.id)).map((problem) => problem.topic_id)
-    ).size;
+    return new Set(problems.filter((problem) => reviewed.has(problem.id)).map((problem) => problem.topic_id))
+      .size;
   }, [problems, reviewedProblemIds]);
 
   const problemById = useMemo(() => new Map(problems.map((problem) => [problem.id, problem])), [problems]);
@@ -65,7 +64,9 @@ export function ProgressSummary({ problems, topics }: { problems: Problem[]; top
               key={stat.label}
               className="rounded-2xl border border-border bg-background/50 p-4 transition-colors hover:border-primary/50"
             >
-              <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{stat.label}</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                {stat.label}
+              </p>
               <p className="mt-2 text-2xl font-bold tabular-nums">{stat.value}</p>
             </div>
           ))}

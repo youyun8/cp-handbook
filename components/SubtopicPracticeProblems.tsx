@@ -27,8 +27,7 @@ function SubtopicPracticeProblemCard({ problem }: { problem: PracticeProblem }) 
   const markPracticeProblemCompleted = useProgressStore((state) => state.markPracticeProblemCompleted);
   const unmarkPracticeProblemCompleted = useProgressStore((state) => state.unmarkPracticeProblemCompleted);
   const completed = mounted && completedPracticeProblemIds.includes(problemId);
-  const completion: CompletionStatus =
-    mounted && (completed || hasPracticeNote(note)) ? 'reviewed' : 'none';
+  const completion: CompletionStatus = mounted && (completed || hasPracticeNote(note)) ? 'reviewed' : 'none';
 
   return (
     <Card className="flex h-full flex-col overflow-hidden border-border/80 bg-card/90 shadow-sm transition hover:border-primary/40 hover:shadow-md">
@@ -75,9 +74,7 @@ function SubtopicPracticeProblemCard({ problem }: { problem: PracticeProblem }) 
             variant={completed ? 'ghost' : 'secondary'}
             size="sm"
             onClick={() =>
-              completed
-                ? unmarkPracticeProblemCompleted(problemId)
-                : markPracticeProblemCompleted(problemId)
+              completed ? unmarkPracticeProblemCompleted(problemId) : markPracticeProblemCompleted(problemId)
             }
           >
             {completed ? '取消完成' : '標記完成'}
@@ -99,10 +96,7 @@ export function SubtopicPracticeProblems({ problems }: { problems: PracticeProbl
   return (
     <div className="grid gap-4 lg:grid-cols-2">
       {problems.map((problem) => (
-        <SubtopicPracticeProblemCard
-          key={`${problem.source}-${problem.source_id}`}
-          problem={problem}
-        />
+        <SubtopicPracticeProblemCard key={`${problem.source}-${problem.source_id}`} problem={problem} />
       ))}
     </div>
   );

@@ -6,13 +6,7 @@ import type { Problem, Topic } from '@/lib/types';
 import { problemTypeLabel } from '@/lib/utils';
 import { useProgressStore } from '@/store/useProgressStore';
 
-export function PerformanceDashboard({
-  problems,
-  topics
-}: {
-  problems: Problem[];
-  topics: Topic[];
-}) {
+export function PerformanceDashboard({ problems, topics }: { problems: Problem[]; topics: Topic[] }) {
   const reviewedProblemIds = useProgressStore((state) => state.reviewedProblemIds);
   const submissions = useProgressStore((state) => state.submissions);
   const reviewEvents = useProgressStore((state) => state.reviewEvents);
@@ -133,7 +127,10 @@ export function PerformanceDashboard({
                     <p className="text-sm text-muted-foreground">{Math.round((item.rate ?? 0) * 100)}%</p>
                   </div>
                   <div className="mt-3 h-2 rounded-full bg-accent">
-                    <div className="h-2 rounded-full bg-primary" style={{ width: `${Math.round((item.rate ?? 0) * 100)}%` }} />
+                    <div
+                      className="h-2 rounded-full bg-primary"
+                      style={{ width: `${Math.round((item.rate ?? 0) * 100)}%` }}
+                    />
                   </div>
                 </div>
               ))

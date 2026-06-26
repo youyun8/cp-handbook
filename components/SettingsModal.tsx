@@ -6,13 +6,7 @@ import { SettingsPanel } from '@/components/SettingsPanel';
 import { cn } from '@/lib/utils';
 import { useMounted } from '@/lib/useMounted';
 
-export function SettingsNavButton({
-  className,
-  compact = false
-}: {
-  className?: string;
-  compact?: boolean;
-}) {
+export function SettingsNavButton({ className, compact = false }: { className?: string; compact?: boolean }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -60,18 +54,12 @@ function SettingsModal({ open, onClose }: { open: boolean; onClose: () => void }
       aria-label="設定"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
     >
-      <div
-        className="absolute inset-0 bg-background/60 backdrop-blur-md"
-        onClick={onClose}
-        aria-hidden
-      />
+      <div className="absolute inset-0 bg-background/60 backdrop-blur-md" onClick={onClose} aria-hidden />
       <div className="relative z-10 flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-3xl border border-border bg-card/95 shadow-2xl">
         <header className="flex items-start justify-between gap-3 border-b border-border px-5 py-4">
           <div>
             <p className="text-sm font-semibold text-foreground">設定</p>
-            <p className="mt-0.5 text-xs text-muted-foreground">
-              調整網站外觀與刷題連結偏好。
-            </p>
+            <p className="mt-0.5 text-xs text-muted-foreground">調整網站外觀與刷題連結偏好。</p>
           </div>
           <button
             type="button"

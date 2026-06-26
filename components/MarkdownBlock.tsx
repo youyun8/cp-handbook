@@ -158,7 +158,9 @@ function highlightCppLine(line: string) {
       continue;
     }
 
-    const operatorMatch = line.slice(index).match(/^(?:==|!=|<=|>=|\+\+|--|&&|\|\||->|::|[+\-*/%=!<>()[\]{}.,;:&|])/);
+    const operatorMatch = line
+      .slice(index)
+      .match(/^(?:==|!=|<=|>=|\+\+|--|&&|\|\||->|::|[+\-*/%=!<>()[\]{}.,;:&|])/);
     if (operatorMatch) {
       push(operatorMatch[0], 'text-slate-700 dark:text-slate-300');
       index += operatorMatch[0].length;

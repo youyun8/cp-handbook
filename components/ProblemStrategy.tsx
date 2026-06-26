@@ -69,7 +69,9 @@ export function ProblemStrategy({
             </div>
             <div className="rounded-2xl border border-border p-3">
               <p>通過數</p>
-              <p className="mt-1 font-medium text-foreground">{problem.solve_count?.toLocaleString('zh-TW') ?? '未提供'}</p>
+              <p className="mt-1 font-medium text-foreground">
+                {problem.solve_count?.toLocaleString('zh-TW') ?? '未提供'}
+              </p>
             </div>
             <div className="rounded-2xl border border-border p-3">
               <p>標籤</p>
@@ -114,8 +116,10 @@ export function ProblemStrategy({
 
           {active === 'pattern' ? (
             <div className="rounded-2xl border border-border bg-background/50 p-5 text-sm leading-7 text-muted-foreground">
-              這題歸在「{topic.title}」與「{problemTypeLabel(problem.problem_type)}」類型，重點不是直接背答案，而是先辨識
-              {topic.supplemental_patterns.map((item) => item.name).join('、')} 之間哪個變形最貼近題意，再把限制轉成可維護的狀態。
+              這題歸在「{topic.title}」與「{problemTypeLabel(problem.problem_type)}
+              」類型，重點不是直接背答案，而是先辨識
+              {topic.supplemental_patterns.map((item) => item.name).join('、')}{' '}
+              之間哪個變形最貼近題意，再把限制轉成可維護的狀態。
             </div>
           ) : null}
 
@@ -142,7 +146,11 @@ export function ProblemStrategy({
           {active === 'similar' ? (
             <div className="grid gap-3 md:grid-cols-2">
               {similarProblems.map((item) => (
-                <Link key={item.id} href={`/problems/${item.id}`} className="rounded-2xl border border-border p-4 transition hover:border-primary">
+                <Link
+                  key={item.id}
+                  href={`/problems/${item.id}`}
+                  className="rounded-2xl border border-border p-4 transition hover:border-primary"
+                >
                   <p className="font-medium">{item.title}</p>
                   <p className="mt-1 text-sm text-muted-foreground">{item.tags.join('、')}</p>
                 </Link>

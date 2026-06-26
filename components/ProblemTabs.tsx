@@ -43,7 +43,9 @@ export function ProblemTabs({ problems }: { problems: Problem[] }) {
           ))}
         </div>
       ) : (
-        <div className="rounded-2xl border border-dashed border-border p-6 text-sm text-muted-foreground">暫無題目。</div>
+        <div className="rounded-2xl border border-dashed border-border p-6 text-sm text-muted-foreground">
+          暫無題目。
+        </div>
       )}
     </div>
   );

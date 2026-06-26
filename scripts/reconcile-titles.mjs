@@ -81,20 +81,24 @@ async function titleCodeforces(id) {
     // Some valid problems are absent from the bulk problemset feed; fall back
     // to that problem's contest standings.
     const m = id.match(/^(\d+)([A-Za-z]\d*)$/);
-    if (m) { await loadCfContest(m[1]); name = map.get(id); }
+    if (m) {
+      await loadCfContest(m[1]);
+      name = map.get(id);
+    }
   }
   return name ? { title: norm(name), raw: name } : { error: 'id not found in problemset' };
 }
 
 async function titleLeetcode(slug) {
-  const body = (q) => JSON.stringify({
-    query: `query q($t:String!){question(titleSlug:$t){questionFrontendId title translatedTitle}}`,
-    variables: { t: slug },
-  });
+  const body = (q) =>
+    JSON.stringify({
+      query: `query q($t:String!){question(titleSlug:$t){questionFrontendId title translatedTitle}}`,
+      variables: { t: slug }
+    });
   const res = await fetchRetry('https://leetcode.cn/graphql/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Referer: 'https://leetcode.cn' },
-    body: body(),
+    body: body()
   });
   const json = await res.json();
   const q = json?.data?.question;
@@ -119,7 +123,7 @@ async function titleAtcoder(id) {
 
 async function titleLuogu(id) {
   const res = await fetchRetry(`https://www.luogu.com.cn/problem/${id}`, {
-    headers: { Accept: 'application/json', 'x-lentille-request': 'content-only' },
+    headers: { Accept: 'application/json', 'x-lentille-request': 'content-only' }
   });
   const json = await res.json();
   const name = json?.data?.problem?.name;
@@ -142,7 +146,7 @@ const FETCHERS = {
   leetcode: titleLeetcode,
   atcoder: titleAtcoder,
   luogu: titleLuogu,
-  cses: titleCses,
+  cses: titleCses
 };
 
 // ---- collect references -------------------------------------------------
@@ -154,13 +158,27 @@ const subtopics = JSON.parse(fs.readFileSync(subtopicsPath, 'utf8'));
 
 const refs = []; // { source, source_id, get(), set(title), where }
 for (const p of problems) {
-  refs.push({ source: p.source, source_id: p.source_id, where: `problems.json#${p.id}`,
-    get: () => p.title, set: (t) => { p.title = t; } });
+  refs.push({
+    source: p.source,
+    source_id: p.source_id,
+    where: `problems.json#${p.id}`,
+    get: () => p.title,
+    set: (t) => {
+      p.title = t;
+    }
+  });
 }
 for (const s of subtopics) {
   for (const pp of s.practice_problems || []) {
-    refs.push({ source: pp.source, source_id: pp.source_id, where: `${s.id}/${pp.source_id}`,
-      get: () => pp.title, set: (t) => { pp.title = t; } });
+    refs.push({
+      source: pp.source,
+      source_id: pp.source_id,
+      where: `${s.id}/${pp.source_id}`,
+      get: () => pp.title,
+      set: (t) => {
+        pp.title = t;
+      }
+    });
   }
 }
 
@@ -190,11 +208,23 @@ for (const ref of refs) {
   const r = await resolve(ref.source, ref.source_id);
   done++;
   if (r.error) {
-    report.errors.push({ where: ref.where, source: ref.source, source_id: ref.source_id, old: ref.get(), error: r.error });
+    report.errors.push({
+      where: ref.where,
+      source: ref.source,
+      source_id: ref.source_id,
+      old: ref.get(),
+      error: r.error
+    });
   } else {
     const old = norm(ref.get());
     if (old !== r.title) {
-      report.changed.push({ where: ref.where, source: ref.source, source_id: ref.source_id, old: ref.get(), new: r.title });
+      report.changed.push({
+        where: ref.where,
+        source: ref.source,
+        source_id: ref.source_id,
+        old: ref.get(),
+        new: r.title
+      });
       if (WRITE) ref.set(r.title);
     } else {
       report.unchanged++;
@@ -222,15 +252,19 @@ console.log(`errors       : ${report.errors.length}`);
 console.log(`report       : ${path.relative(ROOT, reportPath)}`);
 if (report.errors.length) {
   console.log('\n-- errors (likely bad / dead ids) --');
-  for (const e of report.errors) console.log(`  [${e.source} ${e.source_id}] ${e.where}: ${e.error}  (was "${e.old}")`);
+  for (const e of report.errors)
+    console.log(`  [${e.source} ${e.source_id}] ${e.where}: ${e.error}  (was "${e.old}")`);
 }
 if (!WRITE && report.changed.length) {
   console.log('\n-- first 40 proposed changes --');
-  for (const c of report.changed.slice(0, 40)) console.log(`  [${c.source} ${c.source_id}] "${c.old}" -> "${c.new}"`);
+  for (const c of report.changed.slice(0, 40))
+    console.log(`  [${c.source} ${c.source_id}] "${c.old}" -> "${c.new}"`);
 }
 
 if (CHECK && (report.changed.length || report.errors.length)) {
-  console.error(`\n✗ title drift detected: ${report.changed.length} out of sync, ${report.errors.length} unresolved id(s).`);
+  console.error(
+    `\n✗ title drift detected: ${report.changed.length} out of sync, ${report.errors.length} unresolved id(s).`
+  );
   console.error('  Run `npm run reconcile:titles:write` to realign, then review the diff.');
   process.exit(1);
 }

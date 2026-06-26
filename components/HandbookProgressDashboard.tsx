@@ -17,13 +17,7 @@ interface ActivePracticeNote {
   title: string;
 }
 
-export function HandbookProgressDashboard({
-  topics,
-  subtopics
-}: {
-  topics: Topic[];
-  subtopics: Subtopic[];
-}) {
+export function HandbookProgressDashboard({ topics, subtopics }: { topics: Topic[]; subtopics: Subtopic[] }) {
   const practiceCompletionEvents = useProgressStore((state) => state.practiceCompletionEvents);
   const problemNotes = useProgressStore((state) => state.problemNotes);
   const completedPracticeProblemIds = useProgressStore((state) => state.completedPracticeProblemIds);
@@ -298,9 +292,7 @@ function PracticeProgressRow({
   onOpenNote: () => void;
   onToggleCompleted: () => void;
 }) {
-  const explicitlyCompleted = useProgressStore((state) =>
-    state.completedPracticeProblemIds.includes(id)
-  );
+  const explicitlyCompleted = useProgressStore((state) => state.completedPracticeProblemIds.includes(id));
 
   return (
     <div className="grid gap-3 rounded-xl border border-border bg-background/55 p-3 transition hover:border-primary/35 hover:bg-background/80 md:grid-cols-[1fr_auto]">

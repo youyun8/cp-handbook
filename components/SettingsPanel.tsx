@@ -43,7 +43,7 @@ export function SettingsPanel() {
   const setContentWidth = useSettingsStore((state) => state.setContentWidth);
   const setTextSize = useSettingsStore((state) => state.setTextSize);
 
-  const currentTheme = mounted ? theme ?? 'system' : 'system';
+  const currentTheme = mounted ? (theme ?? 'system') : 'system';
 
   return (
     <div className="grid gap-5 lg:grid-cols-[1fr_0.85fr]">
