@@ -66,27 +66,29 @@ export function SubtopicHandbook({ subtopic, parentTopic }: { subtopic: Subtopic
         </LayerCallout>
       </div>
 
+      {subtopic.pitfalls && subtopic.pitfalls.length > 0 && (
+        <div id="pitfalls">
+          <LayerCallout eyebrow="陷阱" title="容易踩雷的地方" variant="pitfalls">
+            <ul className="space-y-3">
+              {subtopic.pitfalls.map((pitfall) => (
+                <li
+                  key={pitfall}
+                  className="rounded-2xl border border-rose-400/30 bg-background/45 p-3 text-sm leading-7 text-rose-900 dark:text-rose-100"
+                >
+                  <MarkdownBlock className="text-rose-900 dark:text-rose-100">{pitfall}</MarkdownBlock>
+                </li>
+              ))}
+            </ul>
+          </LayerCallout>
+        </div>
+      )}
+
       {subtopic.practice_problems && subtopic.practice_problems.length > 0 && (
         <div id="practice">
           <LayerCallout eyebrow="練習" title="子主題練習題" variant="problems">
             <SubtopicPracticeProblems problems={subtopic.practice_problems} />
           </LayerCallout>
         </div>
-      )}
-
-      {subtopic.pitfalls && subtopic.pitfalls.length > 0 && (
-        <LayerCallout eyebrow="陷阱" title="容易踩雷的地方" variant="pitfalls">
-          <ul className="space-y-3">
-            {subtopic.pitfalls.map((pitfall) => (
-              <li
-                key={pitfall}
-                className="rounded-2xl border border-rose-400/30 bg-background/45 p-3 text-sm leading-7 text-rose-900 dark:text-rose-100"
-              >
-                <MarkdownBlock className="text-rose-900 dark:text-rose-100">{pitfall}</MarkdownBlock>
-              </li>
-            ))}
-          </ul>
-        </LayerCallout>
       )}
     </article>
   );

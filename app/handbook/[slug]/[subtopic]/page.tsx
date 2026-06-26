@@ -42,7 +42,13 @@ export default async function SubtopicPage({
               id: d.title.replace(/\s+/g, '-').toLowerCase(),
               label: d.title
             })) ?? []),
-            { id: 'patterns', label: '補充套路' }
+            { id: 'patterns', label: '補充套路' },
+            ...(subtopic.pitfalls && subtopic.pitfalls.length > 0
+              ? [{ id: 'pitfalls', label: '容易踩雷的地方' }]
+              : []),
+            ...(subtopic.practice_problems && subtopic.practice_problems.length > 0
+              ? [{ id: 'practice', label: '子主題練習題' }]
+              : [])
           ]}
         />
         <div className="min-w-0 flex-1">
