@@ -3606,5 +3606,2152 @@
     "similar_problems": [
       "geo-lc-939"
     ]
+  },
+  {
+    "id": "lc0x3f-795",
+    "title": "區間子陣列個數",
+    "source": "leetcode",
+    "source_id": "number-of-subarrays-with-bounded-maximum",
+    "frontend_id": "795",
+    "rating": 1817,
+    "tags": [
+      "滑動視窗",
+      "靈茶山艾府"
+    ],
+    "topic_id": "two-pointers",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》滑動視窗題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1658",
+    "title": "將 x 減到 0 的最小運算元",
+    "source": "leetcode",
+    "source_id": "minimum-operations-to-reduce-x-to-zero",
+    "frontend_id": "1658",
+    "rating": 1817,
+    "tags": [
+      "滑動視窗",
+      "靈茶山艾府"
+    ],
+    "topic_id": "two-pointers",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》滑動視窗題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1234",
+    "title": "替換子串得到平衡字串",
+    "source": "leetcode",
+    "source_id": "replace-the-substring-for-balanced-string",
+    "frontend_id": "1234",
+    "rating": 1878,
+    "tags": [
+      "滑動視窗",
+      "靈茶山艾府"
+    ],
+    "topic_id": "two-pointers",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》滑動視窗題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1574",
+    "title": "刪除最短的子陣列使剩餘陣列有序",
+    "source": "leetcode",
+    "source_id": "shortest-subarray-to-be-removed-to-make-array-sorted",
+    "frontend_id": "1574",
+    "rating": 1932,
+    "tags": [
+      "滑動視窗",
+      "靈茶山艾府"
+    ],
+    "topic_id": "two-pointers",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》滑動視窗題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-2106",
+    "title": "摘水果",
+    "source": "leetcode",
+    "source_id": "maximum-fruits-harvested-after-at-most-k-steps",
+    "frontend_id": "2106",
+    "rating": 2062,
+    "tags": [
+      "滑動視窗",
+      "靈茶山艾府"
+    ],
+    "topic_id": "two-pointers",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》滑動視窗題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1782",
+    "title": "統計點對的數目",
+    "source": "leetcode",
+    "source_id": "count-pairs-of-nodes",
+    "frontend_id": "1782",
+    "rating": 2457,
+    "tags": [
+      "滑動視窗",
+      "靈茶山艾府"
+    ],
+    "topic_id": "two-pointers",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》滑動視窗題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-275",
+    "title": "H 指數 II",
+    "source": "leetcode",
+    "source_id": "h-index-ii",
+    "frontend_id": "275",
+    "rating": 1600,
+    "tags": [
+      "二分",
+      "靈茶山艾府"
+    ],
+    "topic_id": "binary-search",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》二分題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1901",
+    "title": "尋找峰值 II",
+    "source": "leetcode",
+    "source_id": "find-a-peak-element-ii",
+    "frontend_id": "1901",
+    "rating": 1600,
+    "tags": [
+      "二分",
+      "靈茶山艾府"
+    ],
+    "topic_id": "binary-search",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》二分題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-2594",
+    "title": "修車的最少時間",
+    "source": "leetcode",
+    "source_id": "minimum-time-to-repair-cars",
+    "frontend_id": "2594",
+    "rating": 1915,
+    "tags": [
+      "二分",
+      "靈茶山艾府"
+    ],
+    "topic_id": "binary-search",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》二分題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-2517",
+    "title": "禮盒的最大甜蜜度",
+    "source": "leetcode",
+    "source_id": "maximum-tastiness-of-candy-basket",
+    "frontend_id": "2517",
+    "rating": 2021,
+    "tags": [
+      "二分",
+      "靈茶山艾府"
+    ],
+    "topic_id": "binary-search",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》二分題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-4",
+    "title": "尋找兩個正序陣列的中位數",
+    "source": "leetcode",
+    "source_id": "median-of-two-sorted-arrays",
+    "frontend_id": "4",
+    "rating": 2200,
+    "tags": [
+      "二分",
+      "靈茶山艾府"
+    ],
+    "topic_id": "binary-search",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》二分題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-2386",
+    "title": "找出陣列的第 K 大和",
+    "source": "leetcode",
+    "source_id": "find-the-k-sum-of-an-array",
+    "frontend_id": "2386",
+    "rating": 2648,
+    "tags": [
+      "二分",
+      "靈茶山艾府"
+    ],
+    "topic_id": "binary-search",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》二分題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-2251",
+    "title": "花期內花的數目",
+    "source": "leetcode",
+    "source_id": "number-of-flowers-in-full-bloom",
+    "frontend_id": "2251",
+    "rating": 2022,
+    "tags": [
+      "差分陣列",
+      "靈茶山艾府"
+    ],
+    "topic_id": "intervals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》差分陣列題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-2132",
+    "title": "用郵票貼滿網格圖",
+    "source": "leetcode",
+    "source_id": "stamping-the-grid",
+    "frontend_id": "2132",
+    "rating": 2364,
+    "tags": [
+      "差分陣列",
+      "靈茶山艾府"
+    ],
+    "topic_id": "intervals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》差分陣列題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1019",
+    "title": "連結串列中的下一個更大節點",
+    "source": "leetcode",
+    "source_id": "next-greater-node-in-linked-list",
+    "frontend_id": "1019",
+    "rating": 1571,
+    "tags": [
+      "單調棧",
+      "靈茶山艾府"
+    ],
+    "topic_id": "monotonic-structure",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》單調棧題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1124",
+    "title": "表現良好的最長時間段",
+    "source": "leetcode",
+    "source_id": "longest-well-performing-interval",
+    "frontend_id": "1124",
+    "rating": 1908,
+    "tags": [
+      "單調棧",
+      "靈茶山艾府"
+    ],
+    "topic_id": "monotonic-structure",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》單調棧題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-2454",
+    "title": "下一個更大元素 IV",
+    "source": "leetcode",
+    "source_id": "next-greater-element-iv",
+    "frontend_id": "2454",
+    "rating": 2175,
+    "tags": [
+      "單調棧",
+      "靈茶山艾府"
+    ],
+    "topic_id": "monotonic-structure",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》單調棧題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-316",
+    "title": "去除重複字母",
+    "source": "leetcode",
+    "source_id": "remove-duplicate-letters",
+    "frontend_id": "316",
+    "rating": 2185,
+    "tags": [
+      "單調棧",
+      "靈茶山艾府"
+    ],
+    "topic_id": "monotonic-structure",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》單調棧題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-862",
+    "title": "和至少為 K 的最短子陣列",
+    "source": "leetcode",
+    "source_id": "shortest-subarray-with-sum-at-least-k",
+    "frontend_id": "862",
+    "rating": 2307,
+    "tags": [
+      "單調佇列",
+      "靈茶山艾府"
+    ],
+    "topic_id": "monotonic-structure",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》單調佇列題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-2558",
+    "title": "從數量最多的堆取走禮物",
+    "source": "leetcode",
+    "source_id": "take-gifts-from-the-richest-pile",
+    "frontend_id": "2558",
+    "rating": 1277,
+    "tags": [
+      "優先佇列（堆）",
+      "靈茶山艾府"
+    ],
+    "topic_id": "heap-priority-queue",
+    "problem_type": "classic",
+    "tier": "warmup",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》優先佇列（堆）題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-373",
+    "title": "查詢和最小的 K 對數字",
+    "source": "leetcode",
+    "source_id": "find-k-pairs-with-smallest-sums",
+    "frontend_id": "373",
+    "rating": 1600,
+    "tags": [
+      "優先佇列（堆）",
+      "靈茶山艾府"
+    ],
+    "topic_id": "heap-priority-queue",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》優先佇列（堆）題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-857",
+    "title": "僱傭 K 名工人的最低成本",
+    "source": "leetcode",
+    "source_id": "minimum-cost-to-hire-k-workers",
+    "frontend_id": "857",
+    "rating": 2260,
+    "tags": [
+      "優先佇列（堆）",
+      "靈茶山艾府"
+    ],
+    "topic_id": "heap-priority-queue",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》優先佇列（堆）題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-771",
+    "title": "寶石與石頭",
+    "source": "leetcode",
+    "source_id": "jewels-and-stones",
+    "frontend_id": "771",
+    "rating": 1165,
+    "tags": [
+      "位運算",
+      "靈茶山艾府"
+    ],
+    "topic_id": "bitmask-dp",
+    "problem_type": "classic",
+    "tier": "warmup",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》位運算題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1457",
+    "title": "二叉樹中的偽迴文路徑",
+    "source": "leetcode",
+    "source_id": "pseudo-palindromic-paths-in-a-binary-tree",
+    "frontend_id": "1457",
+    "rating": 1405,
+    "tags": [
+      "位運算",
+      "靈茶山艾府"
+    ],
+    "topic_id": "bitmask-dp",
+    "problem_type": "classic",
+    "tier": "warmup",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》位運算題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1261",
+    "title": "在受汙染的二叉樹中查詢元素",
+    "source": "leetcode",
+    "source_id": "find-elements-in-a-contaminated-binary-tree",
+    "frontend_id": "1261",
+    "rating": 1440,
+    "tags": [
+      "位運算",
+      "靈茶山艾府"
+    ],
+    "topic_id": "bitmask-dp",
+    "problem_type": "classic",
+    "tier": "warmup",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》位運算題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-137",
+    "title": "只出現一次的數字 II",
+    "source": "leetcode",
+    "source_id": "single-number-ii",
+    "frontend_id": "137",
+    "rating": 1600,
+    "tags": [
+      "位運算",
+      "靈茶山艾府"
+    ],
+    "topic_id": "bitmask-dp",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》位運算題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-260",
+    "title": "只出現一次的數字 III",
+    "source": "leetcode",
+    "source_id": "single-number-iii",
+    "frontend_id": "260",
+    "rating": 1600,
+    "tags": [
+      "位運算",
+      "靈茶山艾府"
+    ],
+    "topic_id": "bitmask-dp",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》位運算題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-421",
+    "title": "陣列中兩個數的最大異或值",
+    "source": "leetcode",
+    "source_id": "maximum-xor-of-two-numbers-in-an-array",
+    "frontend_id": "421",
+    "rating": 1600,
+    "tags": [
+      "位運算",
+      "靈茶山艾府"
+    ],
+    "topic_id": "bitmask-dp",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》位運算題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-70",
+    "title": "爬樓梯",
+    "source": "leetcode",
+    "source_id": "climbing-stairs",
+    "frontend_id": "70",
+    "rating": 1200,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "warmup",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-746",
+    "title": "使用最小花費爬樓梯",
+    "source": "leetcode",
+    "source_id": "min-cost-climbing-stairs",
+    "frontend_id": "746",
+    "rating": 1358,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "warmup",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-931",
+    "title": "下降路徑最小和",
+    "source": "leetcode",
+    "source_id": "minimum-falling-path-sum",
+    "frontend_id": "931",
+    "rating": 1573,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1155",
+    "title": "擲骰子等於目標和的方法數",
+    "source": "leetcode",
+    "source_id": "number-of-dice-rolls-with-target-sum",
+    "frontend_id": "1155",
+    "rating": 1654,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-2304",
+    "title": "網格中的最小路徑代價",
+    "source": "leetcode",
+    "source_id": "minimum-path-cost-in-a-grid",
+    "frontend_id": "2304",
+    "rating": 1658,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1262",
+    "title": "可被三整除的最大和",
+    "source": "leetcode",
+    "source_id": "greatest-sum-divisible-by-three",
+    "frontend_id": "1262",
+    "rating": 1762,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-918",
+    "title": "環形子陣列的最大和",
+    "source": "leetcode",
+    "source_id": "maximum-sum-circular-subarray",
+    "frontend_id": "918",
+    "rating": 1777,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1186",
+    "title": "刪除一次得到子陣列最大和",
+    "source": "leetcode",
+    "source_id": "maximum-subarray-sum-with-one-deletion",
+    "frontend_id": "1186",
+    "rating": 1799,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-790",
+    "title": "多米諾和托米諾平鋪",
+    "source": "leetcode",
+    "source_id": "domino-and-tromino-tiling",
+    "frontend_id": "790",
+    "rating": 1830,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1227",
+    "title": "飛機座位分配機率",
+    "source": "leetcode",
+    "source_id": "airplane-seat-assignment-probability",
+    "frontend_id": "1227",
+    "rating": 1600,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-2008",
+    "title": "計程車的最大盈利",
+    "source": "leetcode",
+    "source_id": "maximum-earnings-from-taxi",
+    "frontend_id": "2008",
+    "rating": 1872,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-823",
+    "title": "帶因子的二叉樹",
+    "source": "leetcode",
+    "source_id": "binary-trees-with-factors",
+    "frontend_id": "823",
+    "rating": 1900,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1043",
+    "title": "分隔陣列以得到最大和",
+    "source": "leetcode",
+    "source_id": "partition-array-for-maximum-sum",
+    "frontend_id": "1043",
+    "rating": 1916,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1690",
+    "title": "石子游戲 VII",
+    "source": "leetcode",
+    "source_id": "stone-game-vii",
+    "frontend_id": "1690",
+    "rating": 1951,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1696",
+    "title": "跳躍遊戲 VI",
+    "source": "leetcode",
+    "source_id": "jump-game-vi",
+    "frontend_id": "1696",
+    "rating": 1954,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1463",
+    "title": "摘櫻桃 II",
+    "source": "leetcode",
+    "source_id": "cherry-pickup-ii",
+    "frontend_id": "1463",
+    "rating": 1957,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1092",
+    "title": "最短公共超序列",
+    "source": "leetcode",
+    "source_id": "shortest-common-supersequence",
+    "frontend_id": "1092",
+    "rating": 1977,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-940",
+    "title": "不同的子序列 II",
+    "source": "leetcode",
+    "source_id": "distinct-subsequences-ii",
+    "frontend_id": "940",
+    "rating": 1985,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1223",
+    "title": "擲骰子模擬",
+    "source": "leetcode",
+    "source_id": "dice-roll-simulation",
+    "frontend_id": "1223",
+    "rating": 2008,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1105",
+    "title": "填充書架",
+    "source": "leetcode",
+    "source_id": "filling-bookcase-shelves",
+    "frontend_id": "1105",
+    "rating": 2014,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1335",
+    "title": "工作計劃的最低難度",
+    "source": "leetcode",
+    "source_id": "minimum-difficulty-of-a-job-schedule",
+    "frontend_id": "1335",
+    "rating": 2035,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1140",
+    "title": "石子游戲 II",
+    "source": "leetcode",
+    "source_id": "stone-game-ii",
+    "frontend_id": "1140",
+    "rating": 2035,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-801",
+    "title": "使序列遞增的最小交換次數",
+    "source": "leetcode",
+    "source_id": "minimum-swaps-to-make-sequences-increasing",
+    "frontend_id": "801",
+    "rating": 2066,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1976",
+    "title": "到達目的地的方案數",
+    "source": "leetcode",
+    "source_id": "number-of-ways-to-arrive-at-destination",
+    "frontend_id": "1976",
+    "rating": 2095,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1079",
+    "title": "活字印刷",
+    "source": "leetcode",
+    "source_id": "letter-tile-possibilities",
+    "frontend_id": "1079",
+    "rating": 1741,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1444",
+    "title": "切披薩的方案數",
+    "source": "leetcode",
+    "source_id": "number-of-ways-of-cutting-a-pizza",
+    "frontend_id": "1444",
+    "rating": 2127,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1691",
+    "title": "堆疊長方體的最大高度",
+    "source": "leetcode",
+    "source_id": "maximum-height-by-stacking-cuboids",
+    "frontend_id": "1691",
+    "rating": 2172,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1125",
+    "title": "最小的必要團隊",
+    "source": "leetcode",
+    "source_id": "smallest-sufficient-team",
+    "frontend_id": "1125",
+    "rating": 2251,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1997",
+    "title": "訪問完所有房間的第一天",
+    "source": "leetcode",
+    "source_id": "first-day-where-you-have-been-in-all-the-rooms",
+    "frontend_id": "1997",
+    "rating": 2260,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1617",
+    "title": "統計子樹中城市之間最大距離",
+    "source": "leetcode",
+    "source_id": "count-subtrees-with-max-distance-between-cities",
+    "frontend_id": "1617",
+    "rating": 2309,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1187",
+    "title": "使陣列嚴格遞增",
+    "source": "leetcode",
+    "source_id": "make-array-strictly-increasing",
+    "frontend_id": "1187",
+    "rating": 2316,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-2312",
+    "title": "賣木頭塊",
+    "source": "leetcode",
+    "source_id": "selling-pieces-of-wood",
+    "frontend_id": "2312",
+    "rating": 2363,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-741",
+    "title": "摘櫻桃",
+    "source": "leetcode",
+    "source_id": "cherry-pickup",
+    "frontend_id": "741",
+    "rating": 2200,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1349",
+    "title": "參加考試的最大學生數",
+    "source": "leetcode",
+    "source_id": "maximum-students-taking-exam",
+    "frontend_id": "1349",
+    "rating": 2386,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1000",
+    "title": "合併石頭的最低成本",
+    "source": "leetcode",
+    "source_id": "minimum-cost-to-merge-stones",
+    "frontend_id": "1000",
+    "rating": 2423,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1595",
+    "title": "連通兩組點的最小成本",
+    "source": "leetcode",
+    "source_id": "minimum-cost-to-connect-two-groups-of-points",
+    "frontend_id": "1595",
+    "rating": 2538,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1815",
+    "title": "得到新鮮甜甜圈的最多組數",
+    "source": "leetcode",
+    "source_id": "maximum-number-of-groups-getting-fresh-donuts",
+    "frontend_id": "1815",
+    "rating": 2559,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1883",
+    "title": "準時抵達會議現場的最小跳過休息次數",
+    "source": "leetcode",
+    "source_id": "minimum-skips-to-arrive-at-meeting-on-time",
+    "frontend_id": "1883",
+    "rating": 2588,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-2902",
+    "title": "和帶限制的子多重集合的數目",
+    "source": "leetcode",
+    "source_id": "count-of-sub-multisets-with-bounded-sum",
+    "frontend_id": "2902",
+    "rating": 2759,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-2809",
+    "title": "使陣列和小於等於 x 的最少時間",
+    "source": "leetcode",
+    "source_id": "minimum-time-to-make-array-sum-at-most-x",
+    "frontend_id": "2809",
+    "rating": 2979,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-3225",
+    "title": "網格圖操作後的最大分數",
+    "source": "leetcode",
+    "source_id": "maximum-score-from-grid-operations",
+    "frontend_id": "3225",
+    "rating": 3028,
+    "tags": [
+      "動態規劃",
+      "靈茶山艾府"
+    ],
+    "topic_id": "dp-fundamentals",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》動態規劃題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1954",
+    "title": "收集足夠蘋果的最小花園周長",
+    "source": "leetcode",
+    "source_id": "minimum-garden-perimeter-to-collect-enough-apples",
+    "frontend_id": "1954",
+    "rating": 1759,
+    "tags": [
+      "數學",
+      "靈茶山艾府"
+    ],
+    "topic_id": "math-number-theory",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》數學題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1016",
+    "title": "子串能表示從 1 到 N 數字的二進位制串",
+    "source": "leetcode",
+    "source_id": "binary-string-with-substrings-representing-1-to-n",
+    "frontend_id": "1016",
+    "rating": 1779,
+    "tags": [
+      "數學",
+      "靈茶山艾府"
+    ],
+    "topic_id": "math-number-theory",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》數學題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1015",
+    "title": "可被 K 整除的最小整數",
+    "source": "leetcode",
+    "source_id": "smallest-integer-divisible-by-k",
+    "frontend_id": "1015",
+    "rating": 1875,
+    "tags": [
+      "數學",
+      "靈茶山艾府"
+    ],
+    "topic_id": "math-number-theory",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》數學題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-754",
+    "title": "到達終點數字",
+    "source": "leetcode",
+    "source_id": "reach-a-number",
+    "frontend_id": "754",
+    "rating": 1880,
+    "tags": [
+      "數學",
+      "靈茶山艾府"
+    ],
+    "topic_id": "math-number-theory",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》數學題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1884",
+    "title": "雞蛋掉落-兩枚雞蛋",
+    "source": "leetcode",
+    "source_id": "egg-drop-with-2-eggs-and-n-floors",
+    "frontend_id": "1884",
+    "rating": 1600,
+    "tags": [
+      "數學",
+      "靈茶山艾府"
+    ],
+    "topic_id": "math-number-theory",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》數學題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1739",
+    "title": "放置盒子",
+    "source": "leetcode",
+    "source_id": "building-boxes",
+    "frontend_id": "1739",
+    "rating": 2198,
+    "tags": [
+      "數學",
+      "靈茶山艾府"
+    ],
+    "topic_id": "math-number-theory",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》數學題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-3102",
+    "title": "最小化曼哈頓距離",
+    "source": "leetcode",
+    "source_id": "minimize-manhattan-distances",
+    "frontend_id": "3102",
+    "rating": 2216,
+    "tags": [
+      "數學",
+      "靈茶山艾府"
+    ],
+    "topic_id": "math-number-theory",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》數學題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1330",
+    "title": "翻轉子陣列得到最大的陣列值",
+    "source": "leetcode",
+    "source_id": "reverse-subarray-to-maximize-array-value",
+    "frontend_id": "1330",
+    "rating": 2482,
+    "tags": [
+      "數學",
+      "靈茶山艾府"
+    ],
+    "topic_id": "math-number-theory",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》數學題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1819",
+    "title": "序列中不同最大公約數的數目",
+    "source": "leetcode",
+    "source_id": "number-of-different-subsequences-gcds",
+    "frontend_id": "1819",
+    "rating": 2540,
+    "tags": [
+      "數學",
+      "靈茶山艾府"
+    ],
+    "topic_id": "math-number-theory",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》數學題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-3139",
+    "title": "使陣列中所有元素相等的最小開銷",
+    "source": "leetcode",
+    "source_id": "minimum-cost-to-equalize-array",
+    "frontend_id": "3139",
+    "rating": 2666,
+    "tags": [
+      "數學",
+      "靈茶山艾府"
+    ],
+    "topic_id": "math-number-theory",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》數學題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-3235",
+    "title": "判斷矩形的兩個角落是否可達",
+    "source": "leetcode",
+    "source_id": "check-if-the-rectangle-corner-is-reachable",
+    "frontend_id": "3235",
+    "rating": 3774,
+    "tags": [
+      "數學",
+      "靈茶山艾府"
+    ],
+    "topic_id": "math-number-theory",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》數學題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1144",
+    "title": "遞減元素使陣列呈鋸齒狀",
+    "source": "leetcode",
+    "source_id": "decrease-elements-to-make-array-zigzag",
+    "frontend_id": "1144",
+    "rating": 1559,
+    "tags": [
+      "貪心",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》貪心題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1247",
+    "title": "交換字元使得字串相同",
+    "source": "leetcode",
+    "source_id": "minimum-swaps-to-make-strings-equal",
+    "frontend_id": "1247",
+    "rating": 1597,
+    "tags": [
+      "貪心",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》貪心題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-870",
+    "title": "優勢洗牌",
+    "source": "leetcode",
+    "source_id": "advantage-shuffle",
+    "frontend_id": "870",
+    "rating": 1648,
+    "tags": [
+      "貪心",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》貪心題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1402",
+    "title": "做菜順序",
+    "source": "leetcode",
+    "source_id": "reducing-dishes",
+    "frontend_id": "1402",
+    "rating": 1679,
+    "tags": [
+      "貪心",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》貪心題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1145",
+    "title": "二叉樹著色遊戲",
+    "source": "leetcode",
+    "source_id": "binary-tree-coloring-game",
+    "frontend_id": "1145",
+    "rating": 1741,
+    "tags": [
+      "貪心",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》貪心題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-134",
+    "title": "加油站",
+    "source": "leetcode",
+    "source_id": "gas-station",
+    "frontend_id": "134",
+    "rating": 1600,
+    "tags": [
+      "貪心",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》貪心題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1775",
+    "title": "通過最少操作次數使陣列的和相等",
+    "source": "leetcode",
+    "source_id": "equal-sum-arrays-with-minimum-number-of-operations",
+    "frontend_id": "1775",
+    "rating": 1850,
+    "tags": [
+      "貪心",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》貪心題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1616",
+    "title": "分割兩個字串得到迴文串",
+    "source": "leetcode",
+    "source_id": "split-two-strings-to-make-palindrome",
+    "frontend_id": "1616",
+    "rating": 1868,
+    "tags": [
+      "貪心",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》貪心題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1326",
+    "title": "灌溉花園的最少水龍頭數目",
+    "source": "leetcode",
+    "source_id": "minimum-number-of-taps-to-open-to-water-a-garden",
+    "frontend_id": "1326",
+    "rating": 1885,
+    "tags": [
+      "貪心",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》貪心題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1147",
+    "title": "段式迴文",
+    "source": "leetcode",
+    "source_id": "longest-chunked-palindrome-decomposition",
+    "frontend_id": "1147",
+    "rating": 1912,
+    "tags": [
+      "貪心",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》貪心題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1798",
+    "title": "你能構造出連續值的最大數目",
+    "source": "leetcode",
+    "source_id": "maximum-number-of-consecutive-values-you-can-make",
+    "frontend_id": "1798",
+    "rating": 1931,
+    "tags": [
+      "貪心",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》貪心題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1686",
+    "title": "石子游戲 VI",
+    "source": "leetcode",
+    "source_id": "stone-game-vi",
+    "frontend_id": "1686",
+    "rating": 2001,
+    "tags": [
+      "貪心",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》貪心題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-2136",
+    "title": "全部開花的最早一天",
+    "source": "leetcode",
+    "source_id": "earliest-possible-day-of-full-bloom",
+    "frontend_id": "2136",
+    "rating": 2033,
+    "tags": [
+      "貪心",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》貪心題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1040",
+    "title": "移動石子直到連續 II",
+    "source": "leetcode",
+    "source_id": "moving-stones-until-consecutive-ii",
+    "frontend_id": "1040",
+    "rating": 2456,
+    "tags": [
+      "貪心",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》貪心題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1703",
+    "title": "得到連續 K 個 1 的最少相鄰交換次數",
+    "source": "leetcode",
+    "source_id": "minimum-adjacent-swaps-for-k-consecutive-ones",
+    "frontend_id": "1703",
+    "rating": 2467,
+    "tags": [
+      "貪心",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》貪心題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1900",
+    "title": "最佳運動員的比拼回合",
+    "source": "leetcode",
+    "source_id": "the-earliest-and-latest-rounds-where-players-compete",
+    "frontend_id": "1900",
+    "rating": 2455,
+    "tags": [
+      "貪心",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》貪心題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-481",
+    "title": "神奇字串",
+    "source": "leetcode",
+    "source_id": "magical-string",
+    "frontend_id": "481",
+    "rating": 1600,
+    "tags": [
+      "腦筋急轉彎",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》腦筋急轉彎題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-895",
+    "title": "最大頻率棧",
+    "source": "leetcode",
+    "source_id": "maximum-frequency-stack",
+    "frontend_id": "895",
+    "rating": 2028,
+    "tags": [
+      "腦筋急轉彎",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》腦筋急轉彎題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1605",
+    "title": "給定行和列的和求可行矩陣",
+    "source": "leetcode",
+    "source_id": "find-valid-matrix-given-row-and-column-sums",
+    "frontend_id": "1605",
+    "rating": 1868,
+    "tags": [
+      "構造",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》構造題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1657",
+    "title": "確定兩個字串是否接近",
+    "source": "leetcode",
+    "source_id": "determine-if-two-strings-are-close",
+    "frontend_id": "1657",
+    "rating": 1530,
+    "tags": [
+      "思維題",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》思維題題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1803",
+    "title": "統計異或值在範圍內的數對有多少",
+    "source": "leetcode",
+    "source_id": "count-pairs-with-xor-in-a-range",
+    "frontend_id": "1803",
+    "rating": 2479,
+    "tags": [
+      "思維題",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》思維題題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-782",
+    "title": "變為棋盤",
+    "source": "leetcode",
+    "source_id": "transform-to-chessboard",
+    "frontend_id": "782",
+    "rating": 2430,
+    "tags": [
+      "思維題",
+      "靈茶山艾府"
+    ],
+    "topic_id": "greedy",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》思維題題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1254",
+    "title": "統計封閉島嶼的數目",
+    "source": "leetcode",
+    "source_id": "number-of-closed-islands",
+    "frontend_id": "1254",
+    "rating": 1659,
+    "tags": [
+      "網格圖",
+      "靈茶山艾府"
+    ],
+    "topic_id": "graph-traversal",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》網格圖題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-2258",
+    "title": "逃離火災",
+    "source": "leetcode",
+    "source_id": "escape-the-spreading-fire",
+    "frontend_id": "2258",
+    "rating": 2347,
+    "tags": [
+      "網格圖",
+      "靈茶山艾府"
+    ],
+    "topic_id": "graph-traversal",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》網格圖題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1376",
+    "title": "通知所有員工所需的時間",
+    "source": "leetcode",
+    "source_id": "time-needed-to-inform-all-employees",
+    "frontend_id": "1376",
+    "rating": 1561,
+    "tags": [
+      "樹",
+      "靈茶山艾府"
+    ],
+    "topic_id": "tree-dp",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》樹題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1377",
+    "title": "T 秒後青蛙的位置",
+    "source": "leetcode",
+    "source_id": "frog-position-after-t-seconds",
+    "frontend_id": "1377",
+    "rating": 1824,
+    "tags": [
+      "樹",
+      "靈茶山艾府"
+    ],
+    "topic_id": "tree-dp",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》樹題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-2003",
+    "title": "每棵子樹內缺失的最小基因值",
+    "source": "leetcode",
+    "source_id": "smallest-missing-genetic-value-in-each-subtree",
+    "frontend_id": "2003",
+    "rating": 2415,
+    "tags": [
+      "樹",
+      "靈茶山艾府"
+    ],
+    "topic_id": "tree-dp",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》樹題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-924",
+    "title": "儘量減少惡意軟體的傳播",
+    "source": "leetcode",
+    "source_id": "minimize-malware-spread",
+    "frontend_id": "924",
+    "rating": 1869,
+    "tags": [
+      "圖 DFS",
+      "靈茶山艾府"
+    ],
+    "topic_id": "graph-traversal",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》圖 DFS題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-928",
+    "title": "儘量減少惡意軟體的傳播 II",
+    "source": "leetcode",
+    "source_id": "minimize-malware-spread-ii",
+    "frontend_id": "928",
+    "rating": 1985,
+    "tags": [
+      "圖 DFS",
+      "靈茶山艾府"
+    ],
+    "topic_id": "graph-traversal",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》圖 DFS題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1824",
+    "title": "最少側跳次數",
+    "source": "leetcode",
+    "source_id": "minimum-sideway-jumps",
+    "frontend_id": "1824",
+    "rating": 1778,
+    "tags": [
+      "最短路",
+      "靈茶山艾府"
+    ],
+    "topic_id": "shortest-path",
+    "problem_type": "classic",
+    "tier": "core",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》最短路題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-1210",
+    "title": "穿過迷宮的最少移動次數",
+    "source": "leetcode",
+    "source_id": "minimum-moves-to-reach-target-with-rotations",
+    "frontend_id": "1210",
+    "rating": 2022,
+    "tags": [
+      "最短路",
+      "靈茶山艾府"
+    ],
+    "topic_id": "shortest-path",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》最短路題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-882",
+    "title": "細分圖中的可到達節點",
+    "source": "leetcode",
+    "source_id": "reachable-nodes-in-subdivided-graph",
+    "frontend_id": "882",
+    "rating": 2328,
+    "tags": [
+      "最短路",
+      "靈茶山艾府"
+    ],
+    "topic_id": "shortest-path",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》最短路題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
+  },
+  {
+    "id": "lc0x3f-2127",
+    "title": "參加會議的最多員工數",
+    "source": "leetcode",
+    "source_id": "maximum-employees-to-be-invited-to-a-meeting",
+    "frontend_id": "2127",
+    "rating": 2449,
+    "tags": [
+      "基環樹",
+      "靈茶山艾府"
+    ],
+    "topic_id": "graph-traversal",
+    "problem_type": "classic",
+    "tier": "challenge",
+    "strategy_hints": [
+      "靈茶山艾府《如何科學刷題》基環樹題單精選，依難度分排序練習。"
+    ],
+    "similar_problems": []
   }
 ]

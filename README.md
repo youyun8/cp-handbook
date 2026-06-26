@@ -161,7 +161,7 @@ npm run deploy
 data/
 ├── topics.json      # 主題資料（17 個主題）
 ├── subtopics.json   # 子主題資料（64 個子主題，每主題 3–5 個）
-└── problems.json    # 題目資料（150 題）
+└── problems.json    # 題目資料（263 題，含靈茶山艾府精選題單）
 ```
 
 ### 新增主題
@@ -173,6 +173,15 @@ data/
 在 `data/subtopics.json` 新增符合 `Subtopic` 型別的物件，`parent_id` 對應父主題的 `id`。
 
 子主題路由自動生成為 `/handbook/[parent-slug]/[subtopic-slug]`。
+
+### 匯入靈茶山艾府題單
+
+`npm run import:0x3f` 會從靈茶山艾府（0x3F）公開資料匯入分類題單：
+
+- 題單：`EndlessCheng/codeforces-go` 的 `leetcode/SOLUTIONS.md`（依知識點分類、按難度分排序）
+- 難度分：`zerotrac.github.io/leetcode_problem_rating`（0x3F 排序所依據的數值難度）
+
+標題以 opencc-js 做簡轉繁（twp），與 `reconcile:titles` 一致；匯入的題目帶有 `靈茶山艾府` 標籤可在練習場篩選，並把官方「如何科學刷題」題單連結加入對應主題。預設為 dry run，加 `-- --write` 才會寫入 `data/problems.json` 與 `data/topics.json`（依 LeetCode slug 去重，不覆寫既有題目，可重複執行）。
 
 ---
 

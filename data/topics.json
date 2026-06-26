@@ -37,6 +37,10 @@
       {
         "label": "cp-algorithms：Ternary Search",
         "url": "https://cp-algorithms.com/num_methods/ternary_search.html"
+      },
+      {
+        "label": "靈茶山艾府：二分演算法題單",
+        "url": "https://leetcode.cn/circle/discuss/SqopEo/"
       }
     ],
     "template_code": "// a: input array or sequence.\n// target: target value or remaining target to satisfy.\nint lowerBoundCustom(const vector<int>& a, int target) {\n    int left = 0, right = (int)a.size();  // Search in [left, right)\n    while (left < right) {\n        int mid = left + (right - left) / 2;  // Avoid overflow\n        if (a[mid] >= target) {\n            right = mid;  // mid can still be the first valid index\n        } else {\n            left = mid + 1;  // mid is invalid, remove it\n        }\n    }\n    return left;  // First index with a[i] >= target\n}\n\n// low: lower bound of the search range.\n// high: upper bound of the search range.\nlong long binarySearchAnswer(long long low, long long high) {\n    while (low < high) {\n        long long mid = low + (high - low) / 2;  // Candidate answer\n        if (check(mid)) {\n            high = mid;  // Feasible, try a smaller answer\n        } else {\n            low = mid + 1;  // Infeasible, need a larger answer\n        }\n    }\n    return low;  // Minimum feasible answer\n}",
@@ -126,6 +130,10 @@
       {
         "label": "OI-Wiki：最短路",
         "url": "https://oi-wiki.org/graph/shortest-path/"
+      },
+      {
+        "label": "靈茶山艾府：網格圖題單",
+        "url": "https://leetcode.cn/circle/discuss/YiXPXW/"
       }
     ],
     "template_code": "// start: starting index or node for the search.\n// graph: adjacency list representation of the graph.\nvector<int> bfs(int start, const vector<vector<int>>& graph) {\n    vector<int> dist(graph.size(), -1);  // -1 means unvisited\n    queue<int> q;\n    dist[start] = 0;  // Source distance is zero\n    q.push(start);\n    while (!q.empty()) {\n        int u = q.front();\n        q.pop();\n        for (int v : graph[u]) {\n            if (dist[v] != -1) {\n                continue;           // Each node enters queue once\n            }\n            dist[v] = dist[u] + 1;  // BFS layer increases by one\n            q.push(v);\n        }\n    }\n    return dist;\n}\n\n// u: current node or left endpoint.\n// graph: adjacency list representation of the graph.\n// seen: visited-state marker array.\nvoid dfs(int u, const vector<vector<int>>& graph, vector<int>& seen) {\n    seen[u] = 1;  // Mark before visiting neighbors\n    for (int v : graph[u]) {\n        if (!seen[v]) {\n            dfs(v, graph, seen);\n        }\n    }\n}",
@@ -297,6 +305,10 @@
       {
         "label": "靈茶山艾府：DP 題單",
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/dp.go"
+      },
+      {
+        "label": "靈茶山艾府：動態規劃題單",
+        "url": "https://leetcode.cn/circle/discuss/tXLS3i/"
       }
     ],
     "template_code": "// weight: item weights.\n// value: item values.\n// cap: capacity limit.\nint knapsack01(const vector<int>& weight, const vector<int>& value, int cap) {\n    vector<int> dp(cap + 1, 0);  // dp[c] is best value with capacity c\n    for (int i = 0; i < (int)weight.size(); ++i) {\n        for (int c = cap; c >= weight[i]; --c) {  // Reverse order prevents reusing item i\n            dp[c] = max(dp[c], dp[c - weight[i]] + value[i]);\n        }\n    }\n    return dp[cap];\n}\n\n// a: input array or sequence.\nint lisLength(const vector<int>& a) {\n    vector<int> tail;  // tail[len - 1] is the minimum ending value\n    for (int x : a) {\n        auto it = lower_bound(tail.begin(), tail.end(), x);\n        if (it == tail.end()) {\n            tail.push_back(x);\n        }\n        else {\n            *it = x;\n        }\n    }\n    return (int)tail.size();\n}",
@@ -358,6 +370,10 @@
       {
         "label": "靈茶山艾府：滑動視窗",
         "url": "https://www.bilibili.com/video/BV1hd4y1r7Gq/"
+      },
+      {
+        "label": "靈茶山艾府：滑動視窗與雙指針題單",
+        "url": "https://leetcode.cn/circle/discuss/0viNMK/"
       }
     ],
     "template_code": "// a: input array or sequence.\n// limit: maximum allowed limit for the window condition.\nint longestWindow(const vector<int>& a, int limit) {\n    int left = 0, sum = 0, ans = 0;\n    for (int right = 0; right < (int)a.size(); ++right) {\n        sum += a[right];  // Expand window by including right\n        while (sum > limit) {\n            sum -= a[left];  // Shrink until the invariant is restored\n            ++left;\n        }\n        ans = max(ans, right - left + 1);  // Window [left, right] is valid\n    }\n    return ans;\n}",
@@ -509,6 +525,10 @@
       {
         "label": "靈茶山艾府：單調棧題單",
         "url": "https://www.bilibili.com/video/BV1VN411J7S7/"
+      },
+      {
+        "label": "靈茶山艾府：單調棧題單",
+        "url": "https://leetcode.cn/circle/discuss/9oZFK9/"
       }
     ],
     "template_code": "// a: input array or sequence.\nvector<int> nextGreater(const vector<int>& a) {\n    vector<int> ans(a.size(), -1), st;\n    for (int i = 0; i < (int)a.size(); ++i) {\n        while (!st.empty() && a[st.back()] < a[i]) {\n            ans[st.back()] = i;  // Current i is the first greater element\n            st.pop_back();\n        }\n        st.push_back(i);  // Indices in stack have decreasing values\n    }\n    return ans;\n}\n\n// a: input array or sequence.\n// k: limit, count, or window size used by the algorithm.\nvector<int> slidingMax(const vector<int>& a, int k) {\n    deque<int> dq;\n    vector<int> ans;\n    for (int i = 0; i < (int)a.size(); ++i) {\n        while (!dq.empty() && dq.front() <= i - k) {\n            dq.pop_front();  // Remove expired index\n        }\n        while (!dq.empty() && a[dq.back()] <= a[i]) {\n            dq.pop_back();  // Remove dominated values\n        }\n        dq.push_back(i);\n        if (i >= k - 1) {\n            ans.push_back(a[dq.front()]);\n        }\n    }\n    return ans;\n}",
@@ -558,6 +578,10 @@
       {
         "label": "cp-algorithms：Fenwick Tree",
         "url": "https://cp-algorithms.com/data_structures/fenwick.html"
+      },
+      {
+        "label": "靈茶山艾府：常用資料結構題單",
+        "url": "https://leetcode.cn/circle/discuss/mOr1u6/"
       }
     ],
     "template_code": "struct Fenwick {\n    int n;\n    vector<long long> bit;\n    // n: number of nodes or elements.\n    Fenwick(int n) : n(n), bit(n + 1, 0) {}\n    // index: index to update or query.\n    // delta: value added to the indexed position or range.\n    void add(int index, long long delta) {\n        for (++index; index <= n; index += index & -index) {\n            bit[index] += delta;  // Update all ranges covering index\n        }\n    }\n    // index: index to update or query.\n    long long sumPrefix(int index) {\n        long long ans = 0;\n        for (++index; index > 0; index -= index & -index) {\n            ans += bit[index];  // Collect disjoint prefix blocks\n        }\n        return ans;\n    }\n    // left: left boundary or left index.\n    // right: right boundary or right index.\n    long long rangeSum(int left, int right) {\n        return sumPrefix(right) - (left ? sumPrefix(left - 1) : 0);\n    }\n};",
@@ -623,6 +647,10 @@
       {
         "label": "靈茶山艾府：最短路專題",
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/graph.go"
+      },
+      {
+        "label": "靈茶山艾府：圖論演算法題單",
+        "url": "https://leetcode.cn/circle/discuss/01LUak/"
       }
     ],
     "template_code": "// Dijkstra with min-heap\n// src: source node index.\n// g: grid or adjacency structure used by the algorithm.\nvector<long long> dijkstra(int src, const vector<vector<pair<int, int>>>& g) {\n    int n = g.size();\n    vector<long long> dist(n, LLONG_MAX);\n    priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<>> pq;\n    dist[src] = 0;\n    pq.push({0, src});\n    while (!pq.empty()) {\n        auto [d, u] = pq.top();\n        pq.pop();\n        if (d > dist[u]) {\n            continue;  // Lazy deletion\n        }\n        for (auto [v, w] : g[u]) {\n            if (dist[u] + w < dist[v]) {\n                dist[v] = dist[u] + w;\n                pq.push({dist[v], v});\n            }\n        }\n    }\n    return dist;\n}",
@@ -740,6 +768,10 @@
       {
         "label": "靈茶山艾府：樹形 DP",
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/dp.go"
+      },
+      {
+        "label": "靈茶山艾府：鏈表、二叉樹與回溯題單",
+        "url": "https://leetcode.cn/circle/discuss/K0n2gO/"
       }
     ],
     "template_code": "// Tree DP: maximum independent set\nvector<array<int, 2>> dp;  // dp[v][0/1]: max independent set in subtree rooted at v\n// u: current node or left endpoint.\n// par: parent node.\n// tree: tree adjacency list.\nvoid dfsIndep(int u, int par, const vector<vector<int>>& tree) {\n    dp[u] = {0, 1};  // Not select u: 0, select u: 1\n    for (int v : tree[u]) {\n        if (v == par) {\n            continue;\n        }\n        dfsIndep(v, u, tree);\n        dp[u][0] += max(dp[v][0], dp[v][1]);  // u not selected: child can be either\n        dp[u][1] += dp[v][0];                 // u selected: child must not be selected\n    }\n}",
@@ -805,6 +837,10 @@
       {
         "label": "靈茶山艾府：字串題單",
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/strings.go"
+      },
+      {
+        "label": "靈茶山艾府：字串題單",
+        "url": "https://leetcode.cn/circle/discuss/SJFwQI/"
       }
     ],
     "template_code": "// Trie for prefix/dictionary queries\nstruct Trie {\n    array<int, 26> ch;\n    int cnt;  // Count of words passing through this node\n    Trie() : cnt(0) {\n        ch.fill(-1);\n    }\n};\nvector<Trie> trie = {Trie()};\n// s: input string.\nvoid insert(const string& s) {\n    int cur = 0;\n    for (char c : s) {\n        int idx = c - 'a';\n        if (trie[cur].ch[idx] == -1) {\n            trie[cur].ch[idx] = trie.size();\n            trie.push_back(Trie());\n        }\n        cur = trie[cur].ch[idx];\n        trie[cur].cnt++;\n    }\n}",
@@ -877,6 +913,10 @@
       {
         "label": "靈茶山艾府：數學題單",
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/math.go"
+      },
+      {
+        "label": "靈茶山艾府：數學演算法題單",
+        "url": "https://leetcode.cn/circle/discuss/IYT3ss/"
       }
     ],
     "template_code": "// Fast power mod\n// base: base value before exponentiation.\n// exp: exponent value.\n// mod: modulus for arithmetic operations.\nlong long power(long long base, long long exp, long long mod) {\n    long long result = 1;\n    base %= mod;\n    while (exp > 0) {\n        if (exp & 1) {\n            result = result * base % mod;  // Current bit is 1\n        }\n        base = base * base % mod;\n        exp >>= 1;\n    }\n    return result;\n}\n// GCD and Extended Euclidean\n// a: input array or sequence.\n// b: second numeric input value.\nlong long gcd(long long a, long long b) {\n    return b ? gcd(b, a % b) : a;\n}\n// a: input array or sequence.\n// b: second numeric input value.\n// x: value or node being processed.\n// y: y-coordinate or output coefficient.\nlong long extGcd(long long a, long long b, long long& x, long long& y) {\n    if (!b) {\n        x = 1;\n        y = 0;\n        return a;\n    }\n    long long x1, y1, g = extGcd(b, a % b, x1, y1);\n    x = y1;\n    y = x1 - (a / b) * y1;\n    return g;\n}",
@@ -934,6 +974,10 @@
       {
         "label": "靈茶山艾府：位元 DP",
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/bits.go"
+      },
+      {
+        "label": "靈茶山艾府：位運算題單",
+        "url": "https://leetcode.cn/circle/discuss/dHn9Vk/"
       }
     ],
     "template_code": "// Enumerate all subsets of a given set S\n// S: bitmask set whose subsets are enumerated.\nvoid enumerateSubsets(int S) {\n    for (int t = S; t > 0; t = (t - 1) & S) {\n        // Process subset t of S\n        // Note: this does NOT include the empty set\n    }\n    // To include empty set, add explicit check or handle separately\n}\n// Bitmask DP skeleton\n// dp[mask] represents optimal value for subset represented by mask\nvector<int> dp(1 << n, kInf);\ndp[0] = 0;  // Base case: empty set\nfor (int mask = 0; mask < (1 << n); mask++) {\n    if (dp[mask] == kInf) {\n        continue;\n    }\n    // Try adding element i to mask\n    for (int i = 0; i < n; i++) {\n        if (mask >> i & 1) {\n            continue;  // Already in set\n        }\n        dp[mask | (1 << i)] = min(dp[mask | (1 << i)], dp[mask] + cost[i]);\n    }\n}",
@@ -1028,6 +1072,10 @@
       {
         "label": "OI-Wiki：構造",
         "url": "https://oi-wiki.org/basic/construction/"
+      },
+      {
+        "label": "靈茶山艾府：貪心與思維題單",
+        "url": "https://leetcode.cn/circle/discuss/g6KTKL/"
       }
     ],
     "template_code": "// Typical greedy skeleton: sort by a key, then make one pass taking local optima.\n// a: input array or sequence.\nint greedyBySorting(vector<vector<int>>& a) {\n    sort(a.begin(), a.end(), [](auto& x, auto& y) { return x[1] < y[1]; });\n    int taken = 0;\n    long long last = LLONG_MIN;\n    for (auto& it : a) {\n        if (it[0] > last) {\n            taken++;\n            last = it[1];\n        }\n    }\n    return taken;\n}",
@@ -1074,6 +1122,10 @@
       {
         "label": "OI-Wiki：剪枝",
         "url": "https://oi-wiki.org/search/pruning/"
+      },
+      {
+        "label": "靈茶山艾府：鏈表、二叉樹與回溯題單",
+        "url": "https://leetcode.cn/circle/discuss/K0n2gO/"
       }
     ],
     "template_code": "// Backtracking skeleton: choose -> recurse -> undo.\n// start: starting index or node for the search.\n// path: current partial solution path.\n// res: container used to store results.\n// a: input array or sequence.\nvoid backtrack(int start, vector<int>& path, vector<vector<int>>& res, const vector<int>& a) {\n    res.push_back(path);  // record (problem-specific)\n    for (int i = start; i < (int)a.size(); i++) {\n        path.push_back(a[i]);            // choose\n        backtrack(i + 1, path, res, a);  // recurse\n        path.pop_back();                 // undo\n    }\n}",
