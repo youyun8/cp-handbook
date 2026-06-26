@@ -62,10 +62,11 @@ export async function POST(req: Request) {
   }
 
   const body = await req.json();
+  const updatedAt = new Date().toISOString();
   const content = JSON.stringify({
     ...body,
     userId: session.user.id,
-    updatedAt: new Date().toISOString()
+    updatedAt
   });
 
   try {
@@ -77,9 +78,7 @@ export async function POST(req: Request) {
     const existing = gists.find((g) => g.description === `cp-handbook-progress-${session.user.id}`);
 
     const method = existing ? 'PATCH' : 'POST';
-    const url = existing
-      ? `https://api.github.com/gists/${existing.id}`
-      : 'https://api.github.com/gists';
+    const url = existing ? `https://api.github.com/gists/${existing.id}` : 'https://api.github.com/gists';
 
     const saveRes = await fetch(url, {
       method,
@@ -96,7 +95,7 @@ export async function POST(req: Request) {
     });
 
     if (!saveRes.ok) throw new Error(`GitHub API error: ${saveRes.status}`);
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, updatedAt });
   } catch (e) {
     return NextResponse.json({ error: String(e) }, { status: 500 });
   }

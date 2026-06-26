@@ -55,6 +55,7 @@ interface ProgressState {
   problemNotes: Record<string, ProblemNote>;
   completedPracticeProblemIds: string[];
   activeContest?: ActiveContestSession;
+  lastCloudSyncAt?: string;
   filters: PracticeFilters;
   setCurrentRating: (rating: number) => void;
   setFilters: (filters: Partial<PracticeFilters>) => void;
@@ -101,6 +102,7 @@ export const useProgressStore = create<ProgressState>()(
       contestSessions: [],
       problemNotes: {},
       completedPracticeProblemIds: [],
+      lastCloudSyncAt: undefined,
       filters: defaultFilters,
       setCurrentRating: (rating) => set({ currentRating: rating }),
       setFilters: (filters) => set((state) => ({ filters: { ...state.filters, ...filters } })),
@@ -203,7 +205,9 @@ export const useProgressStore = create<ProgressState>()(
           body: JSON.stringify(payload)
         });
         const json = await res.json();
-        return json.ok ? { ok: true } : { ok: false, error: json.error };
+        if (!json.ok) return { ok: false, error: json.error };
+        set({ lastCloudSyncAt: json.updatedAt ?? new Date().toISOString() });
+        return { ok: true };
       },
       loadFromCloud: async () => {
         const res = await fetch('/api/progress');
@@ -219,7 +223,8 @@ export const useProgressStore = create<ProgressState>()(
           practiceCompletionEvents: data.practiceCompletionEvents ?? [],
           contestSessions: data.contestSessions ?? [],
           problemNotes: data.problemNotes ?? {},
-          completedPracticeProblemIds: data.completedPracticeProblemIds ?? []
+          completedPracticeProblemIds: data.completedPracticeProblemIds ?? [],
+          lastCloudSyncAt: data.updatedAt ?? new Date().toISOString()
         });
         return { ok: true };
       }
