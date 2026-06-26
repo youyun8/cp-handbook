@@ -47,6 +47,7 @@ interface ProgressState {
   reviewEvents: ReviewEvent[];
   contestSessions: ContestSessionRecord[];
   problemNotes: Record<string, ProblemNote>;
+  completedPracticeProblemIds: string[];
   activeContest?: ActiveContestSession;
   filters: PracticeFilters;
   setCurrentRating: (rating: number) => void;
@@ -57,6 +58,8 @@ interface ProgressState {
     problemId: string,
     note: Partial<Pick<ProblemNote, 'solution' | 'thought' | 'language'>>
   ) => void;
+  markPracticeProblemCompleted: (problemId: string) => void;
+  unmarkPracticeProblemCompleted: (problemId: string) => void;
   startContest: (problemIds: string[], durationMinutes: number) => void;
   endContest: () => void;
   syncToCloud: () => Promise<{ ok: boolean; error?: string }>;
@@ -90,6 +93,7 @@ export const useProgressStore = create<ProgressState>()(
       reviewEvents: [],
       contestSessions: [],
       problemNotes: {},
+      completedPracticeProblemIds: [],
       filters: defaultFilters,
       setCurrentRating: (rating) => set({ currentRating: rating }),
       setFilters: (filters) => set((state) => ({ filters: { ...state.filters, ...filters } })),
@@ -133,6 +137,14 @@ export const useProgressStore = create<ProgressState>()(
             }
           }
         })),
+      markPracticeProblemCompleted: (problemId) =>
+        set((state) => ({
+          completedPracticeProblemIds: uniqueAppend(state.completedPracticeProblemIds, problemId)
+        })),
+      unmarkPracticeProblemCompleted: (problemId) =>
+        set((state) => ({
+          completedPracticeProblemIds: state.completedPracticeProblemIds.filter((id) => id !== problemId)
+        })),
       startContest: (problemIds, durationMinutes) =>
         set({
           activeContest: {
@@ -159,8 +171,11 @@ export const useProgressStore = create<ProgressState>()(
           currentRating: state.currentRating,
           reviewedProblemIds: state.reviewedProblemIds,
           coveredTopicIds: state.coveredTopicIds,
-          submissions: state.submissions.slice(0, 50), // Limit size
-          problemNotes: state.problemNotes
+          submissions: state.submissions.slice(0, 200),
+          reviewEvents: state.reviewEvents.slice(0, 200),
+          contestSessions: state.contestSessions.slice(0, 50),
+          problemNotes: state.problemNotes,
+          completedPracticeProblemIds: state.completedPracticeProblemIds
         };
         const res = await fetch('/api/progress', {
           method: 'POST',
@@ -180,7 +195,10 @@ export const useProgressStore = create<ProgressState>()(
           reviewedProblemIds: data.reviewedProblemIds ?? [],
           coveredTopicIds: data.coveredTopicIds ?? [],
           submissions: data.submissions ?? [],
-          problemNotes: data.problemNotes ?? {}
+          reviewEvents: data.reviewEvents ?? [],
+          contestSessions: data.contestSessions ?? [],
+          problemNotes: data.problemNotes ?? {},
+          completedPracticeProblemIds: data.completedPracticeProblemIds ?? []
         });
         return { ok: true };
       }

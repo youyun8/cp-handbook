@@ -14,19 +14,20 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { PracticeProblem } from '@/lib/types';
 import { useMounted } from '@/lib/useMounted';
+import { hasPracticeNote, practiceProblemId } from '@/lib/practiceProgress';
 import { useProgressStore } from '@/store/useProgressStore';
-
-function practiceProblemId(problem: PracticeProblem) {
-  return `practice:${problem.source}:${problem.source_id}`;
-}
 
 function SubtopicPracticeProblemCard({ problem }: { problem: PracticeProblem }) {
   const [showNotes, setShowNotes] = useState(false);
   const mounted = useMounted();
   const problemId = practiceProblemId(problem);
   const note = useProgressStore((state) => state.problemNotes[problemId]);
+  const completedPracticeProblemIds = useProgressStore((state) => state.completedPracticeProblemIds);
+  const markPracticeProblemCompleted = useProgressStore((state) => state.markPracticeProblemCompleted);
+  const unmarkPracticeProblemCompleted = useProgressStore((state) => state.unmarkPracticeProblemCompleted);
+  const completed = mounted && completedPracticeProblemIds.includes(problemId);
   const completion: CompletionStatus =
-    mounted && note && (note.solution.trim() || note.thought.trim()) ? 'reviewed' : 'none';
+    mounted && (completed || hasPracticeNote(note)) ? 'reviewed' : 'none';
 
   return (
     <Card className="h-full">
@@ -59,6 +60,18 @@ function SubtopicPracticeProblemCard({ problem }: { problem: PracticeProblem }) 
           </ProblemSourceLink>
           <Button type="button" variant="outline" size="sm" onClick={() => setShowNotes(true)}>
             {note ? '查看記錄' : '記錄解答'}
+          </Button>
+          <Button
+            type="button"
+            variant={completed ? 'ghost' : 'secondary'}
+            size="sm"
+            onClick={() =>
+              completed
+                ? unmarkPracticeProblemCompleted(problemId)
+                : markPracticeProblemCompleted(problemId)
+            }
+          >
+            {completed ? '取消完成' : '標記完成'}
           </Button>
         </div>
 

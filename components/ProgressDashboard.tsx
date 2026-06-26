@@ -1,19 +1,47 @@
 'use client';
 
-import { useMemo } from 'react';
+import Link from 'next/link';
+import { useMemo, useState } from 'react';
+import { ProblemNotesModal } from '@/components/ProblemNotesModal';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import type { Problem, Topic } from '@/lib/types';
+import type { PracticeProblem, Problem, Subtopic, Topic } from '@/lib/types';
+import { hasPracticeNote, practiceProblemId } from '@/lib/practiceProgress';
 import { problemTypeLabel } from '@/lib/utils';
 import { useProgressStore } from '@/store/useProgressStore';
 
-export function ProgressDashboard({ problems, topics }: { problems: Problem[]; topics: Topic[] }) {
+type HandbookFilter = 'all' | 'incomplete' | 'completed';
+
+interface ActivePracticeNote {
+  id: string;
+  title: string;
+}
+
+export function ProgressDashboard({
+  problems,
+  topics,
+  subtopics
+}: {
+  problems: Problem[];
+  topics: Topic[];
+  subtopics: Subtopic[];
+}) {
   const reviewedProblemIds = useProgressStore((state) => state.reviewedProblemIds);
   const submissions = useProgressStore((state) => state.submissions);
   const reviewEvents = useProgressStore((state) => state.reviewEvents);
   const contestSessions = useProgressStore((state) => state.contestSessions);
+  const problemNotes = useProgressStore((state) => state.problemNotes);
+  const completedPracticeProblemIds = useProgressStore((state) => state.completedPracticeProblemIds);
+  const markPracticeProblemCompleted = useProgressStore((state) => state.markPracticeProblemCompleted);
+  const unmarkPracticeProblemCompleted = useProgressStore((state) => state.unmarkPracticeProblemCompleted);
+  const [handbookFilter, setHandbookFilter] = useState<HandbookFilter>('all');
+  const [activePracticeNote, setActivePracticeNote] = useState<ActivePracticeNote | null>(null);
 
   const problemById = useMemo(() => new Map(problems.map((problem) => [problem.id, problem])), [problems]);
   const topicById = useMemo(() => new Map(topics.map((topic) => [topic.id, topic])), [topics]);
+  const completedPracticeSet = useMemo(
+    () => new Set(completedPracticeProblemIds),
+    [completedPracticeProblemIds]
+  );
 
   const coveredTopics = useMemo(
     () =>
@@ -83,6 +111,49 @@ export function ProgressDashboard({ problems, topics }: { problems: Problem[]; t
     { label: '競賽場次', value: contestSessions.length },
     { label: '提交紀錄', value: submissions.length }
   ];
+
+  const handbookPracticeBreakdown = useMemo(() => {
+    return subtopics
+      .map((subtopic) => {
+        const practiceProblems = subtopic.practice_problems ?? [];
+        const rows = practiceProblems.map((practiceProblem) => {
+          const id = practiceProblemId(practiceProblem);
+          const completed = completedPracticeSet.has(id) || hasPracticeNote(problemNotes[id]);
+          return { id, problem: practiceProblem, completed };
+        });
+        const completedCount = rows.filter((row) => row.completed).length;
+        const total = rows.length;
+        const parentTopic = topicById.get(subtopic.parent_id);
+        return {
+          subtopic,
+          parentTopic,
+          rows,
+          completedCount,
+          total,
+          percent: total === 0 ? 0 : Math.round((completedCount / total) * 100)
+        };
+      })
+      .filter((item) => item.total > 0)
+      .filter((item) => {
+        if (handbookFilter === 'completed') return item.completedCount === item.total;
+        if (handbookFilter === 'incomplete') return item.completedCount < item.total;
+        return true;
+      });
+  }, [completedPracticeSet, handbookFilter, problemNotes, subtopics, topicById]);
+
+  const handbookPracticeTotals = useMemo(() => {
+    const allPracticeProblems = subtopics.flatMap((subtopic) => subtopic.practice_problems ?? []);
+    const total = allPracticeProblems.length;
+    const completed = allPracticeProblems.filter((practiceProblem) => {
+      const id = practiceProblemId(practiceProblem);
+      return completedPracticeSet.has(id) || hasPracticeNote(problemNotes[id]);
+    }).length;
+    return {
+      total,
+      completed,
+      percent: total === 0 ? 0 : Math.round((completed / total) * 100)
+    };
+  }, [completedPracticeSet, problemNotes, subtopics]);
 
   return (
     <div className="space-y-6">
@@ -169,6 +240,100 @@ export function ProgressDashboard({ problems, topics }: { problems: Problem[]; t
       </Card>
 
       <Card>
+        <CardHeader className="gap-4">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <CardTitle>手冊練習進度</CardTitle>
+              <p className="mt-2 text-sm text-muted-foreground">
+                已完成 {handbookPracticeTotals.completed}/{handbookPracticeTotals.total} 題・
+                {handbookPracticeTotals.percent}%
+              </p>
+            </div>
+            <div className="flex rounded-xl border border-border bg-background p-1">
+              {[
+                { id: 'all', label: '全部' },
+                { id: 'incomplete', label: '未完成' },
+                { id: 'completed', label: '已完成' }
+              ].map((option) => (
+                <button
+                  key={option.id}
+                  type="button"
+                  onClick={() => setHandbookFilter(option.id as HandbookFilter)}
+                  className={
+                    handbookFilter === option.id
+                      ? 'rounded-lg bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground'
+                      : 'rounded-lg px-3 py-1.5 text-xs font-semibold text-muted-foreground transition hover:bg-accent hover:text-foreground'
+                  }
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="h-3 rounded-full bg-accent">
+            <div
+              className="h-3 rounded-full bg-primary"
+              style={{ width: `${handbookPracticeTotals.percent}%` }}
+            />
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {handbookPracticeBreakdown.length > 0 ? (
+            handbookPracticeBreakdown.map((item) => (
+              <div key={item.subtopic.id} className="rounded-2xl border border-border p-4">
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <p className="text-xs font-medium text-muted-foreground">
+                      {item.parentTopic?.title ?? '未分類主題'}
+                    </p>
+                    <h3 className="mt-1 font-semibold">{item.subtopic.title}</h3>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="rounded-full bg-accent px-3 py-1 text-xs font-semibold">
+                      {item.completedCount}/{item.total} 題・{item.percent}%
+                    </span>
+                    {item.parentTopic ? (
+                      <Link
+                        href={`/handbook/${item.parentTopic.slug}/${item.subtopic.slug}#practice`}
+                        className="rounded-xl border border-border px-3 py-2 text-xs font-semibold text-muted-foreground transition hover:bg-accent hover:text-foreground"
+                      >
+                        前往練習
+                      </Link>
+                    ) : null}
+                  </div>
+                </div>
+                <div className="mt-3 h-2 rounded-full bg-accent">
+                  <div className="h-2 rounded-full bg-primary" style={{ width: `${item.percent}%` }} />
+                </div>
+                <div className="mt-4 grid gap-2">
+                  {item.rows.map((row) => (
+                    <PracticeProgressRow
+                      key={row.id}
+                      id={row.id}
+                      problem={row.problem}
+                      completed={row.completed}
+                      onOpenNote={() =>
+                        setActivePracticeNote({ id: row.id, title: row.problem.title })
+                      }
+                      onToggleCompleted={() =>
+                        completedPracticeSet.has(row.id)
+                          ? unmarkPracticeProblemCompleted(row.id)
+                          : markPracticeProblemCompleted(row.id)
+                      }
+                    />
+                  ))}
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="rounded-2xl border border-dashed border-border p-6 text-sm text-muted-foreground">
+              目前沒有符合篩選條件的手冊練習題。
+            </p>
+          )}
+        </CardContent>
+      </Card>
+
+      <Card>
         <CardHeader>
           <CardTitle>已覆蓋主題</CardTitle>
         </CardHeader>
@@ -184,6 +349,68 @@ export function ProgressDashboard({ problems, topics }: { problems: Problem[]; t
           )}
         </CardContent>
       </Card>
+
+      <ProblemNotesModal
+        problemId={activePracticeNote?.id ?? ''}
+        title={activePracticeNote?.title}
+        open={Boolean(activePracticeNote)}
+        onClose={() => setActivePracticeNote(null)}
+      />
+    </div>
+  );
+}
+
+function PracticeProgressRow({
+  id,
+  problem,
+  completed,
+  onOpenNote,
+  onToggleCompleted
+}: {
+  id: string;
+  problem: PracticeProblem;
+  completed: boolean;
+  onOpenNote: () => void;
+  onToggleCompleted: () => void;
+}) {
+  const explicitlyCompleted = useProgressStore((state) =>
+    state.completedPracticeProblemIds.includes(id)
+  );
+
+  return (
+    <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-background/45 px-3 py-2">
+      <div className="min-w-0">
+        <p className="truncate text-sm font-medium">{problem.title}</p>
+        <p className="mt-1 text-xs text-muted-foreground">
+          {problem.source} {problem.source_id}
+          {problem.rating ? `・${problem.rating}` : ''}
+        </p>
+      </div>
+      <div className="flex items-center gap-2">
+        <span
+          className={
+            completed
+              ? 'rounded-full bg-emerald-500/15 px-2.5 py-1 text-xs font-semibold text-emerald-700 dark:text-emerald-300'
+              : 'rounded-full bg-accent px-2.5 py-1 text-xs font-semibold text-muted-foreground'
+          }
+        >
+          {completed ? '已完成' : '未完成'}
+        </span>
+        <button
+          type="button"
+          onClick={onOpenNote}
+          className="rounded-lg border border-border px-2.5 py-1.5 text-xs font-semibold text-muted-foreground transition hover:bg-accent hover:text-foreground"
+        >
+          筆記
+        </button>
+        <button
+          type="button"
+          onClick={onToggleCompleted}
+          className="rounded-lg border border-border px-2.5 py-1.5 text-xs font-semibold text-muted-foreground transition hover:bg-accent hover:text-foreground"
+        >
+          {explicitlyCompleted ? '取消' : '完成'}
+        </button>
+      </div>
     </div>
   );
 }

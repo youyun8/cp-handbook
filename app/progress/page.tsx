@@ -1,7 +1,7 @@
 import { PageTransition } from '@/components/PageTransition';
 import { ProgressDashboard } from '@/components/ProgressDashboard';
 import { CloudSync } from '@/components/CloudSync';
-import { problems, topics } from '@/lib/data';
+import { problems, subtopics, topics } from '@/lib/data';
 
 export default function ProgressPage() {
   return (
@@ -15,7 +15,7 @@ export default function ProgressPage() {
           </p>
         </div>
         <CloudSync />
-        <ProgressDashboard problems={problems} topics={topics} />
+        <ProgressDashboard problems={problems} topics={topics} subtopics={subtopics} />
       </div>
     </PageTransition>
   );

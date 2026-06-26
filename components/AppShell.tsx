@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { AppWidthContainer } from '@/components/AppWidthContainer';
+import { FloatingCloudSync } from '@/components/FloatingCloudSync';
 import { SettingsNavButton } from '@/components/SettingsModal';
 import { SignOutButton } from '@/components/SignOutButton';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -95,6 +96,7 @@ export async function AppShell({ children }: { children: ReactNode }) {
       <AppWidthContainer as="main" className="px-4 py-8 sm:px-6 lg:px-8">
         {children}
       </AppWidthContainer>
+      <FloatingCloudSync />
     </div>
   );
 }

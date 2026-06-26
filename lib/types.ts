@@ -120,5 +120,6 @@ export interface ProgressSnapshot {
   coveredTopicIds: string[];
   submissions: SubmissionLogEntry[];
   problemNotes?: Record<string, ProblemNote>;
+  completedPracticeProblemIds?: string[];
   updatedAt: string;          // ISO 8601
 }
