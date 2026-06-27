@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CODE_LANGUAGES, CodeEditor, DEFAULT_CODE_LANGUAGE } from '@/components/CodeEditor';
+import { MarkdownBlock } from '@/components/MarkdownBlock';
 import { useMounted } from '@/lib/useMounted';
 import { useProgressStore } from '@/store/useProgressStore';
 
@@ -70,6 +71,7 @@ function NotesDialogBody({
   const [solution, setSolution] = useState(note?.solution ?? '');
   const [thought, setThought] = useState(note?.thought ?? '');
   const [language, setLanguage] = useState(note?.language ?? DEFAULT_CODE_LANGUAGE);
+  const [thoughtView, setThoughtView] = useState<'edit' | 'preview'>('preview');
   const [saved, setSaved] = useState(false);
 
   function handleSave() {
@@ -138,19 +140,52 @@ function NotesDialogBody({
           />
         </div>
 
-        <label className="block space-y-2">
-          <span className="text-xs font-medium text-muted-foreground">思路</span>
-          <textarea
-            value={thought}
-            onChange={(event) => {
-              setThought(event.target.value);
-              setSaved(false);
-            }}
-            rows={4}
-            className="min-h-28 w-full resize-y rounded-2xl border border-border bg-card/70 px-3 py-2 text-sm leading-6 outline-none transition placeholder:text-muted-foreground/70 focus:border-primary focus:ring-2 focus:ring-primary/25"
-            placeholder="記錄如何建模、判斷單調性、邊界處理與下次複習提醒。"
-          />
-        </label>
+        <div className="space-y-2">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <span className="text-xs font-medium text-muted-foreground">思路（支援 Markdown）</span>
+            <div className="flex items-center gap-1 rounded-xl border border-border p-0.5">
+              {(
+                [
+                  { id: 'edit', label: '編輯' },
+                  { id: 'preview', label: '預覽' }
+                ] as const
+              ).map((option) => (
+                <button
+                  key={option.id}
+                  type="button"
+                  onClick={() => setThoughtView(option.id)}
+                  className={
+                    thoughtView === option.id
+                      ? 'rounded-lg bg-primary px-2.5 py-1 text-xs font-medium text-primary-foreground'
+                      : 'rounded-lg px-2.5 py-1 text-xs text-muted-foreground transition hover:text-foreground'
+                  }
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+          </div>
+          {thoughtView === 'edit' ? (
+            <textarea
+              value={thought}
+              onChange={(event) => {
+                setThought(event.target.value);
+                setSaved(false);
+              }}
+              rows={4}
+              className="min-h-28 w-full resize-y rounded-2xl border border-border bg-card/70 px-3 py-2 font-mono text-sm leading-6 outline-none transition placeholder:text-muted-foreground/70 focus:border-primary focus:ring-2 focus:ring-primary/25"
+              placeholder={'記錄如何建模、判斷單調性、邊界處理與下次複習提醒。\n\n支援 **粗體**、清單、行內 `code` 與 ``` 程式碼區塊。'}
+            />
+          ) : thought.trim() ? (
+            <div className="min-h-28 rounded-2xl border border-border bg-card/70 px-4 py-3">
+              <MarkdownBlock>{thought}</MarkdownBlock>
+            </div>
+          ) : (
+            <div className="flex min-h-28 items-center justify-center rounded-2xl border border-dashed border-border bg-card/40 px-4 py-3 text-sm text-muted-foreground">
+              尚無內容可預覽
+            </div>
+          )}
+        </div>
       </div>
 
       <footer className="flex flex-wrap items-center justify-between gap-3 border-t border-border px-5 py-4">
