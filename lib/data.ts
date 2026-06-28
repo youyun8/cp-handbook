@@ -1,11 +1,13 @@
 import topicsData from '@/data/topics.json';
 import problemsData from '@/data/problems.json';
 import subtopicsData from '@/data/subtopics.json';
-import type { Problem, Subtopic, Topic } from '@/lib/types';
+import contestsData from '@/data/contests.json';
+import type { Contest, Problem, Subtopic, Topic } from '@/lib/types';
 
 export const topics = topicsData as Topic[];
 export const problems = problemsData as Problem[];
 export const subtopics = subtopicsData as Subtopic[];
+export const contests = contestsData as Contest[];
 
 export const topicById = new Map(topics.map((topic) => [topic.id, topic]));
 export const problemById = new Map(problems.map((problem) => [problem.id, problem]));
