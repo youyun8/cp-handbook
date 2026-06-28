@@ -97,6 +97,23 @@ export interface Subtopic {
   practice_problems?: PracticeProblem[];
 }
 
+export interface ContestProblem {
+  id: string;
+  title: string;
+  titleSlug: string;
+  rating: number;
+  premium: boolean;
+}
+
+export interface Contest {
+  contestId: string;
+  title: string;
+  type: 'weekly' | 'biweekly';
+  number: number;
+  time: number;
+  problems: (ContestProblem | null)[];
+}
+
 // GitHub OAuth User
 export interface GitHubUser {
   id: number;

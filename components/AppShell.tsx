@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import { BarChart3, BookOpen, Dumbbell, Home } from 'lucide-react';
+import { BarChart3, BookOpen, Dices, Dumbbell, Home } from 'lucide-react';
 import { AppWidthContainer } from '@/components/AppWidthContainer';
 import { FloatingCloudSync } from '@/components/FloatingCloudSync';
 import { GithubIcon } from '@/components/icons';
@@ -15,6 +15,7 @@ const navItems = [
   { href: '/', label: '首頁', icon: Home },
   { href: '/handbook', label: '手冊', icon: BookOpen },
   { href: '/practice', label: '練習場', icon: Dumbbell },
+  { href: '/contest-picker', label: '抽題', icon: Dices },
   { href: '/progress', label: '進度', icon: BarChart3 }
 ];
 
