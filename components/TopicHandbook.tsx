@@ -1,5 +1,6 @@
 import { Accordion } from '@/components/Accordion';
 import { HandbookSidebar } from '@/components/HandbookSidebar';
+import Link from 'next/link';
 import { TopicGlyph } from '@/components/icons';
 import { LayerCallout } from '@/components/LayerCallout';
 import { MarkdownBlock } from '@/components/MarkdownBlock';
@@ -17,6 +18,8 @@ export function TopicHandbook({
   subtopics: Subtopic[];
   problems: Problem[];
 }) {
+  const topicSubtopics = subtopics.filter((subtopic) => subtopic.parent_id === topic.id);
+
   return (
     <div className="flex min-h-screen gap-6">
       <HandbookSidebar
@@ -25,6 +28,7 @@ export function TopicHandbook({
         activeTopicSlug={topic.slug}
         anchors={[
           { id: 'core', label: '核心想法' },
+          ...(topicSubtopics.length > 0 ? [{ id: 'chapters', label: '章節導讀' }] : []),
           { id: 'deepdive', label: '原理剖析' },
           { id: 'references', label: '參考連結' },
           { id: 'patterns', label: '補充套路' },
@@ -60,6 +64,27 @@ export function TopicHandbook({
             </p>
           </LayerCallout>
         </div>
+
+        {topicSubtopics.length > 0 ? (
+          <div id="chapters">
+            <LayerCallout eyebrow="章節導讀" title="按題型拆開練習路線" variant="supplemental">
+              <div className="grid gap-3 md:grid-cols-2">
+                {topicSubtopics.map((subtopic) => (
+                  <Link
+                    key={subtopic.id}
+                    href={`/handbook/${topic.slug}/${subtopic.slug}`}
+                    className="rounded-2xl border border-border bg-background/45 p-4 transition hover:border-primary hover:text-primary"
+                  >
+                    <p className="font-semibold">{subtopic.title}</p>
+                    <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted-foreground">
+                      {subtopic.description}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </LayerCallout>
+          </div>
+        ) : null}
 
         {topic.deep_dive && topic.deep_dive.length > 0 ? (
           <div id="deepdive">

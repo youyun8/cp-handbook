@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { DifficultyBadge, ProblemTypeBadge, TierBadge } from '@/components/Badges';
 import { MarkdownBlock } from '@/components/MarkdownBlock';
+import { ProblemNotesModal } from '@/components/ProblemNotesModal';
 import { ProblemSourceLink } from '@/components/ProblemSourceLink';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -31,8 +32,10 @@ export function ProblemStrategy({
   similarProblems: Problem[];
 }) {
   const [active, setActive] = useState<StrategyTab>('approach');
+  const [showNotes, setShowNotes] = useState(false);
   const markReviewed = useProgressStore((state) => state.markReviewed);
   const reviewedProblemIds = useProgressStore((state) => state.reviewedProblemIds);
+  const problemNote = useProgressStore((state) => state.problemNotes[problem.id]);
   const reviewed = reviewedProblemIds.includes(problem.id);
 
   const mistakes = useMemo(
@@ -78,9 +81,14 @@ export function ProblemStrategy({
               <p className="mt-1 font-medium text-foreground">{problem.tags.join('、')}</p>
             </div>
           </div>
-          <Button type="button" onClick={() => markReviewed(problem.id, problem.topic_id)}>
-            {reviewed ? '已標記複習' : '標記為已複習'}
-          </Button>
+          <div className="flex flex-wrap gap-2">
+            <Button type="button" onClick={() => markReviewed(problem.id, problem.topic_id)}>
+              {reviewed ? '已標記複習' : '標記為已複習'}
+            </Button>
+            <Button type="button" variant="outline" onClick={() => setShowNotes(true)}>
+              {problemNote ? '查看解答與思路' : '記錄解答與思路'}
+            </Button>
+          </div>
         </CardContent>
       </Card>
 
@@ -159,6 +167,12 @@ export function ProblemStrategy({
           ) : null}
         </CardContent>
       </Card>
+      <ProblemNotesModal
+        problemId={problem.id}
+        title={problemDisplayTitle(problem)}
+        open={showNotes}
+        onClose={() => setShowNotes(false)}
+      />
     </div>
   );
 }

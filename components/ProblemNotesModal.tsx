@@ -174,7 +174,9 @@ function NotesDialogBody({
               }}
               rows={4}
               className="min-h-28 w-full resize-y rounded-2xl border border-border bg-card/70 px-3 py-2 font-mono text-sm leading-6 outline-none transition placeholder:text-muted-foreground/70 focus:border-primary focus:ring-2 focus:ring-primary/25"
-              placeholder={'記錄如何建模、判斷單調性、邊界處理與下次複習提醒。\n\n支援 **粗體**、清單、行內 `code` 與 ``` 程式碼區塊。'}
+              placeholder={
+                '記錄如何建模、判斷單調性、邊界處理與下次複習提醒。\n\n支援 **粗體**、清單、行內 `code` 與 ``` 程式碼區塊。'
+              }
             />
           ) : thought.trim() ? (
             <div className="min-h-28 rounded-2xl border border-border bg-card/70 px-4 py-3">

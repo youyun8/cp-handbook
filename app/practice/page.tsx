@@ -1,6 +1,6 @@
 import { PageTransition } from '@/components/PageTransition';
 import { PracticeArena } from '@/components/PracticeArena';
-import { problems, topics } from '@/lib/data';
+import { contests, problems, subtopics, topics } from '@/lib/data';
 
 export default function PracticePage() {
   return (
@@ -13,7 +13,7 @@ export default function PracticePage() {
             依照分數帶、標籤、題型與完成狀態挑題，手動記錄通過、錯誤、超時或略過；目標分段練穩後，定期挑戰高一階題目建立餘裕。
           </p>
         </div>
-        <PracticeArena problems={problems} topics={topics} />
+        <PracticeArena problems={problems} topics={topics} subtopics={subtopics} contests={contests} />
       </div>
     </PageTransition>
   );

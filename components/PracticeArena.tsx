@@ -8,21 +8,50 @@ import {
   ChevronRight,
   Clock,
   ExternalLink,
+  RefreshCw,
+  Shuffle,
   SkipForward,
   X,
   type LucideIcon
 } from 'lucide-react';
 import { DifficultyBadge, ProblemTypeBadge } from '@/components/Badges';
+import { ProblemNotesModal } from '@/components/ProblemNotesModal';
 import { ProblemSourceLink } from '@/components/ProblemSourceLink';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import type { Problem, SubmissionStatus, Topic } from '@/lib/types';
-import { cn, problemTypeLabel, ratingBands, submissionStatusLabel, toneSelectedClass } from '@/lib/utils';
+import type { Contest, ContestProblem, Problem, SubmissionStatus, Subtopic, Topic } from '@/lib/types';
+import {
+  cn,
+  problemDisplayTitle,
+  problemTypeLabel,
+  ratingBands,
+  submissionStatusLabel,
+  toneSelectedClass
+} from '@/lib/utils';
+import { useSettingsStore } from '@/store/useSettingsStore';
 import { useProgressStore } from '@/store/useProgressStore';
 
 const statusOptions: SubmissionStatus[] = ['AC', 'WA', 'TLE', 'SKIP'];
 
 const PAGE_SIZE = 20;
+type ContestType = 'all' | 'weekly' | 'biweekly';
+type Position = 0 | 1 | 2 | 3;
+
+interface PickedContestProblem {
+  problem: ContestProblem;
+  contest: Contest;
+  position: Position;
+  canonicalProblem?: Problem;
+}
+
+const positionLabels: Record<Position, string> = { 0: 'Q1', 1: 'Q2', 2: 'Q3', 3: 'Q4' };
+
+const positionClass: Record<Position, string> = {
+  0: 'border-emerald-400/40 bg-emerald-500/15 text-emerald-700 dark:text-emerald-300',
+  1: 'border-blue-400/40 bg-blue-500/15 text-blue-700 dark:text-blue-300',
+  2: 'border-orange-400/40 bg-orange-500/15 text-orange-700 dark:text-orange-300',
+  3: 'border-rose-400/40 bg-rose-500/15 text-rose-700 dark:text-rose-300'
+};
 
 const statusIcon: Record<SubmissionStatus, LucideIcon> = {
   AC: Check,
@@ -38,12 +67,52 @@ const statusButtonClass: Record<SubmissionStatus, string> = {
   SKIP: 'hover:border-slate-400/60 hover:bg-slate-500/15 hover:text-slate-600 dark:hover:text-slate-300'
 };
 
-export function PracticeArena({ problems, topics }: { problems: Problem[]; topics: Topic[] }) {
+function pickRandom<T>(arr: T[], n: number): T[] {
+  const copy = [...arr];
+  const result: T[] = [];
+  for (let i = 0; i < n && copy.length > 0; i++) {
+    const idx = Math.floor(Math.random() * copy.length);
+    result.push(copy[idx]);
+    copy.splice(idx, 1);
+  }
+  return result;
+}
+
+function lcUrl(titleSlug: string, site: 'cn' | 'en') {
+  const host = site === 'en' ? 'leetcode.com' : 'leetcode.cn';
+  return `https://${host}/problems/${titleSlug}/`;
+}
+
+function contestUrl(contestId: string, site: 'cn' | 'en') {
+  const host = site === 'en' ? 'leetcode.com' : 'leetcode.cn';
+  return `https://${host}/contest/${contestId}/`;
+}
+
+export function PracticeArena({
+  problems,
+  topics,
+  subtopics,
+  contests
+}: {
+  problems: Problem[];
+  topics: Topic[];
+  subtopics: Subtopic[];
+  contests: Contest[];
+}) {
   const [problemCount, setProblemCount] = useState(5);
   const [durationMinutes, setDurationMinutes] = useState(90);
   const [page, setPage] = useState(1);
   const [filterSignatureState, setFilterSignatureState] = useState('');
+  const [topicFilter, setTopicFilter] = useState('all');
+  const [subtopicFilter, setSubtopicFilter] = useState('all');
+  const [contestType, setContestType] = useState<ContestType>('all');
+  const [contestPositions, setContestPositions] = useState<Set<Position>>(new Set([2, 3]));
+  const [contestMinRating, setContestMinRating] = useState(1600);
+  const [contestMaxRating, setContestMaxRating] = useState(2800);
+  const [contestPickCount, setContestPickCount] = useState(4);
+  const [pickedContestProblems, setPickedContestProblems] = useState<PickedContestProblem[]>([]);
   const [now, setNow] = useState(() => Date.now());
+  const leetCodeSite = useSettingsStore((state) => state.leetCodeSite);
   const currentRating = useProgressStore((state) => state.currentRating);
   const filters = useProgressStore((state) => state.filters);
   const reviewedProblemIds = useProgressStore((state) => state.reviewedProblemIds);
@@ -62,6 +131,19 @@ export function PracticeArena({ problems, topics }: { problems: Problem[]; topic
 
   const topicById = useMemo(() => new Map(topics.map((topic) => [topic.id, topic])), [topics]);
   const problemById = useMemo(() => new Map(problems.map((problem) => [problem.id, problem])), [problems]);
+  const problemBySlug = useMemo(
+    () =>
+      new Map(
+        problems
+          .filter((problem) => problem.source === 'leetcode')
+          .map((problem) => [problem.source_id, problem])
+      ),
+    [problems]
+  );
+  const visibleSubtopics = useMemo(
+    () => subtopics.filter((subtopic) => topicFilter === 'all' || subtopic.parent_id === topicFilter),
+    [subtopics, topicFilter]
+  );
   const reviewedSet = useMemo(() => new Set(reviewedProblemIds), [reviewedProblemIds]);
   const acceptedSet = useMemo(
     () =>
@@ -82,6 +164,8 @@ export function PracticeArena({ problems, topics }: { problems: Problem[]; topic
     return problems
       .filter((problem) => {
         if (filters.tag !== 'all' && !problem.tags.includes(filters.tag)) return false;
+        if (topicFilter !== 'all' && problem.topic_id !== topicFilter) return false;
+        if (subtopicFilter !== 'all' && !problem.subtopic_ids?.includes(subtopicFilter)) return false;
         if (problem.rating < filters.minRating) return false;
         if (filters.maxRating !== null && problem.rating > filters.maxRating) return false;
         if (filters.problemType !== 'all' && problem.problem_type !== filters.problemType) return false;
@@ -94,7 +178,28 @@ export function PracticeArena({ problems, topics }: { problems: Problem[]; topic
         if (filters.band === 'stretch') return (b.solve_count ?? 0) - (a.solve_count ?? 0);
         return a.rating - b.rating || (b.solve_count ?? 0) - (a.solve_count ?? 0);
       });
-  }, [acceptedSet, filters, problems, reviewedSet]);
+  }, [acceptedSet, filters, problems, reviewedSet, subtopicFilter, topicFilter]);
+
+  const contestPool = useMemo<PickedContestProblem[]>(() => {
+    const result: PickedContestProblem[] = [];
+    for (const contest of contests) {
+      if (contestType !== 'all' && contest.type !== contestType) continue;
+      for (const position of [0, 1, 2, 3] as Position[]) {
+        if (!contestPositions.has(position)) continue;
+        const problem = contest.problems[position];
+        if (!problem) continue;
+        if (problem.rating === 0) continue;
+        if (problem.rating < contestMinRating || problem.rating > contestMaxRating) continue;
+        result.push({
+          problem,
+          contest,
+          position,
+          canonicalProblem: problemBySlug.get(problem.titleSlug)
+        });
+      }
+    }
+    return result;
+  }, [contestMaxRating, contestMinRating, contestPositions, contestType, contests, problemBySlug]);
 
   const contestProblems = useMemo(() => {
     if (!activeContest) return [];
@@ -111,7 +216,7 @@ export function PracticeArena({ problems, topics }: { problems: Problem[]; topic
 
   // Snap back to the first page whenever the filter signature changes. This uses
   // React's "adjust state while rendering" pattern instead of an effect.
-  const filterSignature = `${filters.tag}|${filters.problemType}|${filters.completion}|${filters.band}|${filters.minRating}|${filters.maxRating}|${currentRating}`;
+  const filterSignature = `${filters.tag}|${filters.problemType}|${filters.completion}|${filters.band}|${filters.minRating}|${filters.maxRating}|${currentRating}|${topicFilter}|${subtopicFilter}`;
   if (filterSignature !== filterSignatureState) {
     setFilterSignatureState(filterSignature);
     setPage(1);
@@ -139,8 +244,24 @@ export function PracticeArena({ problems, topics }: { problems: Problem[]; topic
   }
 
   function beginContest() {
-    const picked = filteredProblems.slice(0, problemCount).map((problem) => problem.id);
+    const picked = pickRandom(filteredProblems, problemCount).map((problem) => problem.id);
     if (picked.length > 0) startContest(picked, durationMinutes);
+  }
+
+  function toggleContestPosition(position: Position) {
+    setContestPositions((prev) => {
+      const next = new Set(prev);
+      if (next.has(position)) {
+        if (next.size > 1) next.delete(position);
+      } else {
+        next.add(position);
+      }
+      return next;
+    });
+  }
+
+  function pickContestProblems() {
+    setPickedContestProblems(pickRandom(contestPool, contestPickCount));
   }
 
   return (
@@ -170,6 +291,39 @@ export function PracticeArena({ problems, topics }: { problems: Problem[]; topic
               {allTags.map((tag) => (
                 <option key={tag} value={tag}>
                   {tag}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="space-y-2 text-sm">
+            <span className="text-muted-foreground">主題</span>
+            <select
+              value={topicFilter}
+              onChange={(event) => {
+                setTopicFilter(event.target.value);
+                setSubtopicFilter('all');
+              }}
+              className="w-full rounded-xl border border-border bg-background px-3 py-2"
+            >
+              <option value="all">全部主題</option>
+              {topics.map((topic) => (
+                <option key={topic.id} value={topic.id}>
+                  {topic.title}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="space-y-2 text-sm">
+            <span className="text-muted-foreground">子分類／題型</span>
+            <select
+              value={subtopicFilter}
+              onChange={(event) => setSubtopicFilter(event.target.value)}
+              className="w-full rounded-xl border border-border bg-background px-3 py-2"
+            >
+              <option value="all">全部子分類</option>
+              {visibleSubtopics.map((subtopic) => (
+                <option key={subtopic.id} value={subtopic.id}>
+                  {topicById.get(subtopic.parent_id)?.title ?? '未分類'} / {subtopic.title}
                 </option>
               ))}
             </select>
@@ -309,6 +463,134 @@ export function PracticeArena({ problems, topics }: { problems: Problem[]; topic
       </Card>
 
       <Card>
+        <CardHeader>
+          <CardTitle>lc-rating 競賽抽題</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid gap-4 lg:grid-cols-4">
+            <div className="space-y-2 text-sm">
+              <span className="text-muted-foreground">比賽類型</span>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  ['all', '全部'],
+                  ['weekly', '週賽'],
+                  ['biweekly', '雙週賽']
+                ].map(([value, label]) => (
+                  <button
+                    key={value}
+                    type="button"
+                    onClick={() => setContestType(value as ContestType)}
+                    className={cn(
+                      'rounded-lg border px-3 py-1.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                      contestType === value
+                        ? 'border-primary bg-primary text-primary-foreground'
+                        : 'border-border text-muted-foreground hover:bg-accent hover:text-foreground'
+                    )}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="space-y-2 text-sm">
+              <span className="text-muted-foreground">題目位置</span>
+              <div className="flex flex-wrap gap-2">
+                {([0, 1, 2, 3] as Position[]).map((position) => (
+                  <button
+                    key={position}
+                    type="button"
+                    onClick={() => toggleContestPosition(position)}
+                    className={cn(
+                      'rounded-lg border px-3 py-1.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                      contestPositions.has(position)
+                        ? positionClass[position]
+                        : 'border-border text-muted-foreground hover:bg-accent hover:text-foreground'
+                    )}
+                  >
+                    {positionLabels[position]}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="space-y-2 text-sm">
+              <span className="text-muted-foreground">難度範圍</span>
+              <div className="flex items-center gap-2">
+                <input
+                  type="number"
+                  value={contestMinRating}
+                  onChange={(event) => setContestMinRating(Number(event.target.value))}
+                  className="w-24 rounded-lg border border-border bg-background px-2.5 py-1.5"
+                  aria-label="最低 rating"
+                />
+                <span className="text-muted-foreground">–</span>
+                <input
+                  type="number"
+                  value={contestMaxRating}
+                  onChange={(event) => setContestMaxRating(Number(event.target.value))}
+                  className="w-24 rounded-lg border border-border bg-background px-2.5 py-1.5"
+                  aria-label="最高 rating"
+                />
+              </div>
+            </div>
+            <label className="space-y-2 text-sm">
+              <span className="text-muted-foreground">抽取題數</span>
+              <input
+                type="number"
+                min={1}
+                max={10}
+                value={contestPickCount}
+                onChange={(event) =>
+                  setContestPickCount(Math.max(1, Math.min(10, Number(event.target.value))))
+                }
+                className="w-24 rounded-lg border border-border bg-background px-2.5 py-1.5"
+              />
+            </label>
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <Button onClick={pickContestProblems} disabled={contestPool.length === 0} className="gap-2">
+              <Shuffle className="h-4 w-4" aria-hidden />
+              隨機抽題（{contestPickCount} 題）
+            </Button>
+            {pickedContestProblems.length > 0 ? (
+              <Button variant="secondary" onClick={pickContestProblems} className="gap-2">
+                <RefreshCw className="h-4 w-4" aria-hidden />
+                重新抽取
+              </Button>
+            ) : null}
+            <span className="text-sm text-muted-foreground">
+              符合條件：{contestPool.length} 題（已 canonical：
+              {contestPool.filter((item) => item.canonicalProblem).length} 題）
+            </span>
+          </div>
+          {pickedContestProblems.length > 0 ? (
+            <div className="grid gap-3 md:grid-cols-2">
+              {pickedContestProblems.map((picked, index) => (
+                <ContestPickedProblemRow
+                  key={`${picked.problem.id}-${index}`}
+                  picked={picked}
+                  site={leetCodeSite}
+                  topicTitle={
+                    picked.canonicalProblem
+                      ? (topicById.get(picked.canonicalProblem.topic_id)?.title ?? '未分類')
+                      : '未分類'
+                  }
+                  onLog={(status) =>
+                    picked.canonicalProblem
+                      ? logSubmission(picked.canonicalProblem.id, status, picked.canonicalProblem.topic_id)
+                      : undefined
+                  }
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-2xl border border-dashed border-border p-6 text-sm text-muted-foreground">
+              按「隨機抽題」從 lc-rating 週賽題庫抽取題目。
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      <Card>
         <CardHeader className="flex flex-row flex-wrap items-center justify-between gap-2">
           <CardTitle>題庫結果（{filteredProblems.length} 題）</CardTitle>
           {filteredProblems.length > 0 ? (
@@ -379,6 +661,132 @@ export function PracticeArena({ problems, topics }: { problems: Problem[]; topic
   );
 }
 
+function ContestPickedProblemRow({
+  picked,
+  site,
+  topicTitle,
+  onLog
+}: {
+  picked: PickedContestProblem;
+  site: 'cn' | 'en';
+  topicTitle: string;
+  onLog: (status: SubmissionStatus) => void;
+}) {
+  const canonical = picked.canonicalProblem;
+  const [showNotes, setShowNotes] = useState(false);
+  const problemNote = useProgressStore((state) => (canonical ? state.problemNotes[canonical.id] : undefined));
+
+  return (
+    <div className="rounded-2xl border border-border bg-card/60 p-4 shadow-sm transition hover:border-primary/40 hover:shadow-card-hover">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="min-w-0">
+          <div className="mb-2 flex flex-wrap items-center gap-2">
+            <span
+              className={cn(
+                'rounded-full border px-2.5 py-1 text-xs font-medium',
+                positionClass[picked.position]
+              )}
+            >
+              {positionLabels[picked.position]}
+            </span>
+            {picked.problem.premium ? (
+              <span className="rounded-full border border-amber-400/40 bg-amber-500/15 px-2.5 py-1 text-xs font-medium text-amber-700 dark:text-amber-300">
+                Premium
+              </span>
+            ) : null}
+          </div>
+          {canonical ? (
+            <Link
+              href={`/problems/${canonical.id}`}
+              className="font-medium transition-colors hover:text-primary"
+            >
+              {canonical.frontend_id}. {canonical.title}
+            </Link>
+          ) : (
+            <a
+              href={lcUrl(picked.problem.titleSlug, site)}
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium transition-colors hover:text-primary"
+            >
+              {picked.problem.id}. {picked.problem.title}
+            </a>
+          )}
+          <p className="mt-1 text-sm text-muted-foreground">
+            {topicTitle}・
+            <a
+              href={contestUrl(picked.contest.contestId, site)}
+              target="_blank"
+              rel="noreferrer"
+              className="transition hover:text-primary"
+            >
+              {picked.contest.title}
+            </a>
+          </p>
+        </div>
+        <DifficultyBadge rating={picked.problem.rating} />
+      </div>
+      <div className="mt-3 flex flex-wrap items-center gap-2">
+        <a
+          href={lcUrl(picked.problem.titleSlug, site)}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-1 text-sm font-medium text-primary transition hover:gap-1.5"
+        >
+          <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+          打開原題
+        </a>
+        {canonical ? (
+          <span className="text-xs text-muted-foreground">・已併入手冊題庫，可記錄進度</span>
+        ) : (
+          <span className="text-xs text-muted-foreground">・尚未對應到手冊分類</span>
+        )}
+        {canonical ? (
+          <button
+            type="button"
+            onClick={() => setShowNotes(true)}
+            className="text-sm font-medium text-primary transition hover:underline"
+          >
+            {problemNote ? '查看解答與思路' : '記錄解答與思路'}
+          </button>
+        ) : null}
+      </div>
+      {canonical ? (
+        <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-border/60 pt-3">
+          <span className="text-xs text-muted-foreground">記錄結果</span>
+          {statusOptions.map((status) => {
+            const label = submissionStatusLabel(status);
+            const Icon = statusIcon[status];
+            return (
+              <button
+                key={status}
+                type="button"
+                onClick={() => onLog(status)}
+                title={label}
+                className={cn(
+                  'inline-flex h-8 items-center gap-1.5 rounded-lg border border-border bg-background/60 px-2.5 text-xs font-medium text-muted-foreground transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                  statusButtonClass[status]
+                )}
+              >
+                <Icon className="h-3.5 w-3.5" aria-hidden />
+                {label}
+              </button>
+            );
+          })}
+        </div>
+      ) : null}
+      {canonical ? (
+        <ProblemNotesModal
+          problemId={canonical.id}
+          title={problemDisplayTitle(canonical)}
+          open={showNotes}
+          onClose={() => setShowNotes(false)}
+        />
+      ) : null}
+    </div>
+  );
+}
+
 function PracticeProblemRow({
   problem,
   topicTitle,
@@ -388,6 +796,9 @@ function PracticeProblemRow({
   topicTitle: string;
   onLog: (status: SubmissionStatus) => void;
 }) {
+  const [showNotes, setShowNotes] = useState(false);
+  const problemNote = useProgressStore((state) => state.problemNotes[problem.id]);
+
   return (
     <div className="rounded-2xl border border-border bg-card/60 p-4 shadow-sm transition hover:border-primary/40 hover:shadow-card-hover">
       <div className="flex flex-wrap items-start justify-between gap-3">
@@ -413,6 +824,13 @@ function PracticeProblemRow({
         <span className="text-xs text-muted-foreground">
           ・題型：{problemTypeLabel(problem.problem_type)}
         </span>
+        <button
+          type="button"
+          onClick={() => setShowNotes(true)}
+          className="text-sm font-medium text-primary transition hover:underline"
+        >
+          {problemNote ? '查看解答與思路' : '記錄解答與思路'}
+        </button>
       </div>
       <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-border/60 pt-3">
         <span className="text-xs text-muted-foreground">記錄結果</span>
@@ -436,6 +854,12 @@ function PracticeProblemRow({
           );
         })}
       </div>
+      <ProblemNotesModal
+        problemId={problem.id}
+        title={problemDisplayTitle(problem)}
+        open={showNotes}
+        onClose={() => setShowNotes(false)}
+      />
     </div>
   );
 }

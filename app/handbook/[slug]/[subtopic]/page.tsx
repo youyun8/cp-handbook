@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { HandbookSidebar } from '@/components/HandbookSidebar';
 import { PageTransition } from '@/components/PageTransition';
 import { SubtopicHandbook } from '@/components/SubtopicHandbook';
-import { getSubtopics, getTopics } from '@/lib/data';
+import { getProblemsBySubtopic, getSubtopics, getTopics } from '@/lib/data';
 
 export function generateStaticParams() {
   const subtopics = getSubtopics();
@@ -23,6 +23,7 @@ export default async function SubtopicPage({
   const subtopics = getSubtopics();
   const topic = topics.find((t) => t.slug === slug);
   const subtopic = subtopics.find((s) => s.parent_id === topic?.id && s.slug === subtopicSlug);
+  const canonicalProblems = subtopic ? getProblemsBySubtopic(subtopic.id) : [];
 
   if (!topic || !subtopic) {
     notFound();
@@ -46,13 +47,14 @@ export default async function SubtopicPage({
             ...(subtopic.pitfalls && subtopic.pitfalls.length > 0
               ? [{ id: 'pitfalls', label: '容易踩雷的地方' }]
               : []),
-            ...(subtopic.practice_problems && subtopic.practice_problems.length > 0
+            ...(canonicalProblems.length > 0 ||
+            (subtopic.practice_problems && subtopic.practice_problems.length > 0)
               ? [{ id: 'practice', label: '子主題練習題' }]
               : [])
           ]}
         />
         <div className="min-w-0 flex-1">
-          <SubtopicHandbook subtopic={subtopic} parentTopic={topic} />
+          <SubtopicHandbook subtopic={subtopic} parentTopic={topic} problems={canonicalProblems} />
         </div>
       </div>
     </PageTransition>

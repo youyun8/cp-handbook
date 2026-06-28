@@ -21,6 +21,14 @@ export interface DeepDiveSection {
   body: string;
 }
 
+export interface StudyPlanRef {
+  plan: string;
+  plan_title: string;
+  section_id: number;
+  section_title: string;
+  section_path: string[];
+}
+
 export interface Topic {
   id: string;
   title: string;
@@ -46,6 +54,10 @@ export interface Problem {
   solve_count?: number;
   tags: string[];
   topic_id: string;
+  subtopic_ids?: string[];
+  study_plan_refs?: StudyPlanRef[];
+  origin?: 'curated' | 'lc-rating-studyplan' | 'lc-rating-contest' | '0x3f';
+  source_url?: string;
   problem_type: ProblemType;
   tier: Tier;
   strategy_hints: string[];
@@ -95,6 +107,8 @@ export interface Subtopic {
   supplemental_patterns: SupplementalPattern[];
   pitfalls?: string[];
   practice_problems?: PracticeProblem[];
+  study_plan_ref?: Omit<StudyPlanRef, 'section_path'> & { section_path?: string[] };
+  problem_ids?: string[];
 }
 
 export interface ContestProblem {

@@ -14,6 +14,8 @@
     "reconcile:titles:check": "node scripts/reconcile-titles.mjs --check",
     "reconcile:titles:write": "node scripts/reconcile-titles.mjs --write",
     "import:0x3f": "node scripts/import-0x3f.mjs",
+    "import:lc-rating": "node scripts/import-lc-rating.mjs",
+    "validate:data": "node scripts/validate-data.mjs",
     "deploy": "npm run build:static && gh-pages -d out --nojekyll"
   },
   "dependencies": {

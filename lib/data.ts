@@ -28,6 +28,33 @@ export function getProblemsByTopic(topicId: string) {
   return problems.filter((problem) => problem.topic_id === topicId);
 }
 
+export function getProblemsBySubtopic(subtopicId: string) {
+  return problems.filter((problem) => problem.subtopic_ids?.includes(subtopicId));
+}
+
+export function getProblemsByStudyPlanSection(plan: string, sectionId: number) {
+  return problems.filter((problem) =>
+    problem.study_plan_refs?.some((ref) => ref.plan === plan && ref.section_id === sectionId)
+  );
+}
+
+export function getPracticeProblemPool({
+  topicId,
+  subtopicId,
+  studyPlan
+}: {
+  topicId?: string;
+  subtopicId?: string;
+  studyPlan?: string;
+} = {}) {
+  return problems.filter((problem) => {
+    if (topicId && problem.topic_id !== topicId) return false;
+    if (subtopicId && !problem.subtopic_ids?.includes(subtopicId)) return false;
+    if (studyPlan && !problem.study_plan_refs?.some((ref) => ref.plan === studyPlan)) return false;
+    return true;
+  });
+}
+
 export function getSimilarProblems(problem: Problem) {
   return problem.similar_problems
     .map((id) => problemById.get(id))

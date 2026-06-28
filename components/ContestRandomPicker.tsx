@@ -25,7 +25,7 @@ const positionClass: Record<Position, string> = {
   0: 'border-emerald-400/40 bg-emerald-500/15 text-emerald-700 dark:text-emerald-300',
   1: 'border-blue-400/40 bg-blue-500/15 text-blue-700 dark:text-blue-300',
   2: 'border-orange-400/40 bg-orange-500/15 text-orange-700 dark:text-orange-300',
-  3: 'border-rose-400/40 bg-rose-500/15 text-rose-700 dark:text-rose-300',
+  3: 'border-rose-400/40 bg-rose-500/15 text-rose-700 dark:text-rose-300'
 };
 
 function lcUrl(titleSlug: string, site: 'cn' | 'en') {
@@ -94,7 +94,7 @@ export function ContestRandomPicker({ contests }: { contests: Contest[] }) {
   const typeOptions: { value: ContestType; label: string }[] = [
     { value: 'all', label: '全部' },
     { value: 'weekly', label: '週賽' },
-    { value: 'biweekly', label: '雙週賽' },
+    { value: 'biweekly', label: '雙週賽' }
   ];
 
   return (
@@ -197,9 +197,7 @@ export function ContestRandomPicker({ contests }: { contests: Contest[] }) {
           </Button>
         )}
         <span className="text-sm text-muted-foreground">
-          符合條件：{pool.length} 題（來自 {
-            new Set(pool.map((p) => p.contest.contestId)).size
-          } 場比賽）
+          符合條件：{pool.length} 題（來自 {new Set(pool.map((p) => p.contest.contestId)).size} 場比賽）
         </span>
       </div>
 
@@ -236,7 +234,7 @@ function PickedProblemCard({
   problem,
   contest,
   position,
-  site,
+  site
 }: {
   problem: ContestProblem;
   contest: Contest;

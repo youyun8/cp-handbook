@@ -1,10 +1,19 @@
 import { Accordion } from '@/components/Accordion';
 import { LayerCallout } from '@/components/LayerCallout';
 import { MarkdownBlock } from '@/components/MarkdownBlock';
+import { ProblemTabs } from '@/components/ProblemTabs';
 import { SubtopicPracticeProblems } from '@/components/SubtopicPracticeProblems';
-import type { Subtopic, Topic } from '@/lib/types';
+import type { Problem, Subtopic, Topic } from '@/lib/types';
 
-export function SubtopicHandbook({ subtopic, parentTopic }: { subtopic: Subtopic; parentTopic: Topic }) {
+export function SubtopicHandbook({
+  subtopic,
+  parentTopic,
+  problems = []
+}: {
+  subtopic: Subtopic;
+  parentTopic: Topic;
+  problems?: Problem[];
+}) {
   return (
     <article className="space-y-6">
       <div className="rounded-3xl border border-border bg-card/80 p-6 shadow-card">
@@ -83,13 +92,19 @@ export function SubtopicHandbook({ subtopic, parentTopic }: { subtopic: Subtopic
         </div>
       )}
 
-      {subtopic.practice_problems && subtopic.practice_problems.length > 0 && (
+      {problems.length > 0 ? (
+        <div id="practice">
+          <LayerCallout eyebrow="練習" title="子主題分級題單" variant="problems">
+            <ProblemTabs problems={problems} />
+          </LayerCallout>
+        </div>
+      ) : subtopic.practice_problems && subtopic.practice_problems.length > 0 ? (
         <div id="practice">
           <LayerCallout eyebrow="練習" title="子主題練習題" variant="problems">
             <SubtopicPracticeProblems problems={subtopic.practice_problems} />
           </LayerCallout>
         </div>
-      )}
+      ) : null}
     </article>
   );
 }

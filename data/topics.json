@@ -41,6 +41,22 @@
       {
         "label": "靈茶山艾府：二分演算法題單",
         "url": "https://leetcode.cn/circle/discuss/SqopEo/"
+      },
+      {
+        "label": "lc-rating：二分搜尋題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/binary_search.json"
+      },
+      {
+        "label": "lc-rating：動態規劃題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/dynamic_programming.json"
+      },
+      {
+        "label": "lc-rating：資料結構題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/data_structure.json"
+      },
+      {
+        "label": "lc-rating：圖論題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/graph.json"
       }
     ],
     "supplemental_patterns": [
@@ -73,6 +89,22 @@
       "⚠️ 溢位：`mid = (left + right) / 2` 在 left、right 接近 INT_MAX 時相加溢位，務必改成 `left + (right - left) / 2`。",
       "⚠️ 死循環：`while (left < right)` 中若該寫 `left = mid + 1` 卻寫成 `left = mid`，當 `right - left == 1` 時 `mid` 恆等於 `left`（如 left=0, right=1 時 mid=0），區間永不縮小而卡死。",
       "⚠️ 浮點二分：實數答案不能用 `left < right` 當終止條件（兩浮點數幾乎不會相等），要改用精度 `while (right - left > eps)` 或固定迭代次數（如 100 次）。"
+    ],
+    "children": [
+      "lc-rating-binary-search-2",
+      "lc-rating-binary-search-3",
+      "lc-rating-binary-search-5",
+      "lc-rating-binary-search-7",
+      "lc-rating-binary-search-8",
+      "lc-rating-binary-search-9",
+      "lc-rating-binary-search-10",
+      "lc-rating-binary-search-11",
+      "lc-rating-binary-search-12",
+      "lc-rating-binary-search-13",
+      "lc-rating-dynamic-programming-63",
+      "lc-rating-data-structure-43",
+      "lc-rating-data-structure-47",
+      "lc-rating-graph-21"
     ]
   },
   {
@@ -133,6 +165,14 @@
       {
         "label": "靈茶山艾府：網格圖題單",
         "url": "https://leetcode.cn/circle/discuss/YiXPXW/"
+      },
+      {
+        "label": "lc-rating：圖論題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/graph.json"
+      },
+      {
+        "label": "lc-rating：網格圖題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/grid.json"
       }
     ],
     "supplemental_patterns": [
@@ -165,6 +205,15 @@
       "⚠️ 忘記在入隊／遞迴**之前**就標記 visited：若等到出隊才標記，同一節點可能被重複入隊，最壞退化成指數爆炸。",
       "⚠️ 把 BFS 直接套到帶權圖求最短路：邊權不同時『先抵達』不等於『最短』，必須改用 Dijkstra 或 0-1 BFS。",
       "⚠️ 狀態圖的 visited 維度不足：忘了把『狀態』納入 visited（如帶鑰匙迷宮），會把不同狀態當成同一節點而漏解。"
+    ],
+    "children": [
+      "lc-rating-graph-10",
+      "lc-rating-graph-19",
+      "lc-rating-graph-20",
+      "lc-rating-graph-24",
+      "lc-rating-grid-2",
+      "lc-rating-grid-4",
+      "lc-rating-grid-6"
     ]
   },
   {
@@ -201,6 +250,22 @@
       {
         "label": "靈茶山艾府：區間合併與掃描",
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/sort.go"
+      },
+      {
+        "label": "lc-rating：貪心與思維題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/greedy.json"
+      },
+      {
+        "label": "lc-rating：資料結構題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/data_structure.json"
+      },
+      {
+        "label": "lc-rating：圖論題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/graph.json"
+      },
+      {
+        "label": "lc-rating：排序題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/sorting.json"
       }
     ],
     "supplemental_patterns": [
@@ -229,6 +294,28 @@
       "⚠️ 差分的 `r + 1` 越界：陣列要開到 `n + 2`，且下標從 1 開始，否則 `diff[r + 1]` 在 r 為末位時越界或寫到 `diff[0]` 造成錯誤。",
       "⚠️ 端點開閉混用：閉區間相接（如 `[1, 2]` 與 `[2, 3]`）算不算重疊，取決於判定寫 `<` 還是 `<=`，需依題意統一。",
       "⚠️ 區間合併忘了先排序，或誤以為要同時按 end 排序——左端排序後維護右界最大值即可。"
+    ],
+    "children": [
+      "lc-rating-greedy-15",
+      "lc-rating-greedy-16",
+      "lc-rating-greedy-17",
+      "lc-rating-greedy-18",
+      "lc-rating-greedy-19",
+      "lc-rating-greedy-20",
+      "lc-rating-greedy-26",
+      "lc-rating-data-structure-10",
+      "lc-rating-data-structure-14",
+      "lc-rating-data-structure-15",
+      "lc-rating-data-structure-16",
+      "lc-rating-data-structure-18",
+      "lc-rating-data-structure-20",
+      "lc-rating-data-structure-23",
+      "lc-rating-data-structure-24",
+      "lc-rating-data-structure-26",
+      "lc-rating-graph-7",
+      "lc-rating-sorting-2",
+      "lc-rating-sorting-3",
+      "lc-rating-sorting-4"
     ]
   },
   {
@@ -265,6 +352,10 @@
       {
         "label": "靈茶山艾府：堆與貪心",
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/heap.go"
+      },
+      {
+        "label": "lc-rating：資料結構題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/data_structure.json"
       }
     ],
     "supplemental_patterns": [
@@ -285,6 +376,33 @@
       "⚠️ `priority_queue` 沒有 `decrease-key`，Dijkstra 不能就地更新舊距離，必須用懶刪除（push 新值，pop 時比對丟棄過期條目）。",
       "⚠️ 存 `pair` 時預設先比 `first`、再比 `second`；若想按 `second` 排序必須自訂 comparator，否則排序鍵搞錯。",
       "⚠️ 忘了 `greater<>` 而誤用預設大根堆，會把『取最小』寫成『取最大』——Dijkstra 會完全錯誤。"
+    ],
+    "children": [
+      "lc-rating-data-structure-3",
+      "lc-rating-data-structure-5",
+      "lc-rating-data-structure-6",
+      "lc-rating-data-structure-7",
+      "lc-rating-data-structure-28",
+      "lc-rating-data-structure-29",
+      "lc-rating-data-structure-30",
+      "lc-rating-data-structure-31",
+      "lc-rating-data-structure-32",
+      "lc-rating-data-structure-33",
+      "lc-rating-data-structure-36",
+      "lc-rating-data-structure-37",
+      "lc-rating-data-structure-38",
+      "lc-rating-data-structure-41",
+      "lc-rating-data-structure-42",
+      "lc-rating-data-structure-44",
+      "lc-rating-data-structure-45",
+      "lc-rating-data-structure-46",
+      "lc-rating-data-structure-69",
+      "lc-rating-data-structure-71",
+      "lc-rating-data-structure-72",
+      "lc-rating-data-structure-73",
+      "lc-rating-data-structure-75",
+      "lc-rating-data-structure-77",
+      "lc-rating-data-structure-78"
     ]
   },
   {
@@ -325,6 +443,18 @@
       {
         "label": "靈茶山艾府：動態規劃題單",
         "url": "https://leetcode.cn/circle/discuss/tXLS3i/"
+      },
+      {
+        "label": "lc-rating：貪心與思維題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/greedy.json"
+      },
+      {
+        "label": "lc-rating：動態規劃題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/dynamic_programming.json"
+      },
+      {
+        "label": "lc-rating：圖論題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/graph.json"
       }
     ],
     "supplemental_patterns": [
@@ -357,6 +487,53 @@
       "⚠️ 狀態定義含糊：『以 i 結尾』與『前 i 個』語意不同，混用會導致轉移方程錯誤。",
       "⚠️ 0/1 背包用正序枚舉容量，會把同一物品重複選用，變成完全背包；要逆序。",
       "⚠️ 枚舉順序錯：區間 DP 沒有先算小區間、或一般 DP 用到尚未計算的狀態，結果是讀到初始值而非正解。"
+    ],
+    "children": [
+      "lc-rating-greedy-7",
+      "lc-rating-dynamic-programming-3",
+      "lc-rating-dynamic-programming-4",
+      "lc-rating-dynamic-programming-5",
+      "lc-rating-dynamic-programming-7",
+      "lc-rating-dynamic-programming-8",
+      "lc-rating-dynamic-programming-10",
+      "lc-rating-dynamic-programming-11",
+      "lc-rating-dynamic-programming-12",
+      "lc-rating-dynamic-programming-13",
+      "lc-rating-dynamic-programming-14",
+      "lc-rating-dynamic-programming-17",
+      "lc-rating-dynamic-programming-18",
+      "lc-rating-dynamic-programming-20",
+      "lc-rating-dynamic-programming-21",
+      "lc-rating-dynamic-programming-24",
+      "lc-rating-dynamic-programming-25",
+      "lc-rating-dynamic-programming-26",
+      "lc-rating-dynamic-programming-28",
+      "lc-rating-dynamic-programming-29",
+      "lc-rating-dynamic-programming-30",
+      "lc-rating-dynamic-programming-32",
+      "lc-rating-dynamic-programming-33",
+      "lc-rating-dynamic-programming-34",
+      "lc-rating-dynamic-programming-35",
+      "lc-rating-dynamic-programming-37",
+      "lc-rating-dynamic-programming-39",
+      "lc-rating-dynamic-programming-41",
+      "lc-rating-dynamic-programming-42",
+      "lc-rating-dynamic-programming-52",
+      "lc-rating-dynamic-programming-53",
+      "lc-rating-dynamic-programming-54",
+      "lc-rating-dynamic-programming-56",
+      "lc-rating-dynamic-programming-61",
+      "lc-rating-dynamic-programming-62",
+      "lc-rating-dynamic-programming-64",
+      "lc-rating-dynamic-programming-71",
+      "lc-rating-dynamic-programming-72",
+      "lc-rating-dynamic-programming-73",
+      "lc-rating-dynamic-programming-74",
+      "lc-rating-dynamic-programming-75",
+      "lc-rating-dynamic-programming-76",
+      "lc-rating-dynamic-programming-77",
+      "lc-rating-dynamic-programming-79",
+      "lc-rating-graph-9"
     ]
   },
   {
@@ -397,6 +574,14 @@
       {
         "label": "靈茶山艾府：滑動視窗與雙指針題單",
         "url": "https://leetcode.cn/circle/discuss/0viNMK/"
+      },
+      {
+        "label": "lc-rating：滑動視窗與雙指標題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/sliding_window.json"
+      },
+      {
+        "label": "lc-rating：樹、鏈結串列與回溯題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/trees.json"
       }
     ],
     "supplemental_patterns": [
@@ -417,6 +602,29 @@
       "⚠️ 用雙指針的前提是窗口單調；陣列含負數時『和 ≤ target 的最長窗口』不單調，left 縮了還可能再放鬆，不能用同向雙指針。",
       "⚠️ 『恰好 K』直接寫一個窗口很容易漏算或重算，改用 `atMost(K) - atMost(K-1)` 較穩。",
       "⚠️ 對向雙指針忘了先排序，或移動了錯誤的一側（盛水問題該動短邊卻動長邊），會錯過最優解。"
+    ],
+    "children": [
+      "lc-rating-sliding-window-2",
+      "lc-rating-sliding-window-3",
+      "lc-rating-sliding-window-4",
+      "lc-rating-sliding-window-5",
+      "lc-rating-sliding-window-7",
+      "lc-rating-sliding-window-8",
+      "lc-rating-sliding-window-10",
+      "lc-rating-sliding-window-11",
+      "lc-rating-sliding-window-12",
+      "lc-rating-sliding-window-14",
+      "lc-rating-sliding-window-16",
+      "lc-rating-sliding-window-17",
+      "lc-rating-sliding-window-18",
+      "lc-rating-sliding-window-19",
+      "lc-rating-sliding-window-21",
+      "lc-rating-sliding-window-22",
+      "lc-rating-sliding-window-23",
+      "lc-rating-sliding-window-25",
+      "lc-rating-sliding-window-27",
+      "lc-rating-trees-9",
+      "lc-rating-trees-40"
     ]
   },
   {
@@ -453,6 +661,10 @@
       {
         "label": "靈茶山艾府：並查集模板",
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/union_find.go"
+      },
+      {
+        "label": "lc-rating：資料結構題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/data_structure.json"
       }
     ],
     "supplemental_patterns": [
@@ -473,6 +685,14 @@
       "⚠️ 先 union 才 find：合併前一定要先對兩端 `find` 取得**根**，直接 `parent[a] = b` 用的是節點而非根，會破壞結構。",
       "⚠️ 帶權並查集做路徑壓縮時要**同步更新權值偏移**（`rel[x] += rel[parent[x]]`），只壓縮父指標卻不更新權值會算錯關係。",
       "⚠️ 忘記路徑壓縮或按秩合併，最壞情況樹退化成鏈，單次 find 變 O(n)。"
+    ],
+    "children": [
+      "lc-rating-data-structure-54",
+      "lc-rating-data-structure-55",
+      "lc-rating-data-structure-56",
+      "lc-rating-data-structure-57",
+      "lc-rating-data-structure-58",
+      "lc-rating-data-structure-59"
     ]
   },
   {
@@ -509,6 +729,10 @@
       {
         "label": "靈茶山艾府：樹上倍增",
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/graph_tree.go"
+      },
+      {
+        "label": "lc-rating：樹、鏈結串列與回溯題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/trees.json"
       }
     ],
     "supplemental_patterns": [
@@ -529,6 +753,10 @@
       "⚠️ `LOG` 設太小：需滿足 `2^LOG ≥ n`，否則深樹的高位祖先表不夠、跳不到位。",
       "⚠️ 階段二的同步上跳必須**由高位到低位**，且只在 `up[u][k] != up[v][k]` 時才跳，順序反了會越過 LCA。",
       "⚠️ 邊界：根節點的祖先要設成自身或哨兵（如 0），否則 `up[root][k]` 越界或指到無效節點。"
+    ],
+    "children": [
+      "lc-rating-trees-22",
+      "lc-rating-trees-39"
     ]
   },
   {
@@ -569,6 +797,26 @@
       {
         "label": "靈茶山艾府：單調棧題單",
         "url": "https://leetcode.cn/circle/discuss/9oZFK9/"
+      },
+      {
+        "label": "lc-rating：貪心與思維題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/greedy.json"
+      },
+      {
+        "label": "lc-rating：動態規劃題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/dynamic_programming.json"
+      },
+      {
+        "label": "lc-rating：資料結構題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/data_structure.json"
+      },
+      {
+        "label": "lc-rating：單調堆疊題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/monotonic_stack.json"
+      },
+      {
+        "label": "lc-rating：數學題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/math.json"
       }
     ],
     "supplemental_patterns": [
@@ -589,6 +837,20 @@
       "⚠️ 單調棧弄錯比較方向（`>` 還是 `>=`）會影響『相等元素』的歸屬，導致重複計算或漏算邊界，需依題意（找嚴格更大或不小於）決定。",
       "⚠️ 單調佇列存的是**下標**不是值，否則無法判斷隊頭是否已超出視窗範圍。",
       "⚠️ 柱狀圖忘了在末尾補一個高度 0（或遍歷到 n）強制清空棧，最後仍留在棧中的柱子不會被結算。"
+    ],
+    "children": [
+      "lc-rating-greedy-44",
+      "lc-rating-greedy-22",
+      "lc-rating-dynamic-programming-36",
+      "lc-rating-dynamic-programming-57",
+      "lc-rating-dynamic-programming-58",
+      "lc-rating-data-structure-39",
+      "lc-rating-monotonic-stack-2",
+      "lc-rating-monotonic-stack-3",
+      "lc-rating-monotonic-stack-5",
+      "lc-rating-monotonic-stack-6",
+      "lc-rating-monotonic-stack-8",
+      "lc-rating-math-25"
     ]
   },
   {
@@ -629,6 +891,14 @@
       {
         "label": "靈茶山艾府：常用資料結構題單",
         "url": "https://leetcode.cn/circle/discuss/mOr1u6/"
+      },
+      {
+        "label": "lc-rating：動態規劃題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/dynamic_programming.json"
+      },
+      {
+        "label": "lc-rating：資料結構題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/data_structure.json"
       }
     ],
     "supplemental_patterns": [
@@ -649,6 +919,16 @@
       "⚠️ 用前綴和硬撐動態修改：單點改一次就要 O(n) 重建，資料一旦會變就該換線段樹／BIT。",
       "⚠️ 懶標記忘了在進入子節點前 `pushdown`，會讀到尚未套用修改的舊值；下推與合併的順序不能顛倒。",
       "⚠️ 權值線段樹值域過大未離散化會 MLE／TLE；BIT 下標從 1 開始，`i & -i` 對 0 會死循環。"
+    ],
+    "children": [
+      "lc-rating-dynamic-programming-59",
+      "lc-rating-data-structure-61",
+      "lc-rating-data-structure-62",
+      "lc-rating-data-structure-63",
+      "lc-rating-data-structure-64",
+      "lc-rating-data-structure-65",
+      "lc-rating-data-structure-66",
+      "lc-rating-data-structure-67"
     ]
   },
   {
@@ -701,6 +981,14 @@
       {
         "label": "靈茶山艾府：圖論演算法題單",
         "url": "https://leetcode.cn/circle/discuss/01LUak/"
+      },
+      {
+        "label": "lc-rating：圖論題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/graph.json"
+      },
+      {
+        "label": "lc-rating：網格圖題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/grid.json"
       }
     ],
     "supplemental_patterns": [
@@ -723,7 +1011,15 @@
       "⚠️ Floyd 的 k 必須是最外層迴圈，i、j 可任意順序；若把 k 放在內層，前驅狀態尚未用中間節點更新，結果錯誤。"
     ],
     "children": [
-      "sp-bellman-ford"
+      "sp-bellman-ford",
+      "lc-rating-graph-5",
+      "lc-rating-graph-6",
+      "lc-rating-graph-12",
+      "lc-rating-graph-13",
+      "lc-rating-graph-14",
+      "lc-rating-graph-15",
+      "lc-rating-graph-16",
+      "lc-rating-grid-5"
     ]
   },
   {
@@ -768,6 +1064,10 @@
       {
         "label": "靈茶山艾府：圖論題單",
         "url": "https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/graph.go"
+      },
+      {
+        "label": "lc-rating：圖論題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/graph.json"
       }
     ],
     "supplemental_patterns": [
@@ -784,6 +1084,9 @@
       "⚠️ Kruskal 需要先排序邊，忘了排序就直接加邊會得到錯誤結果。",
       "⚠️ 圖不連通時 MST 不存在，需要檢查最終加入的邊數是否恰好為 n-1。",
       "⚠️ 邊權可能相等，Kruskal 的正確性不依賴邊權唯一，任意同權邊的選擇都能得到一個合法的 MST。"
+    ],
+    "children": [
+      "lc-rating-graph-17"
     ]
   },
   {
@@ -828,6 +1131,14 @@
       {
         "label": "靈茶山艾府：鏈表、二叉樹與回溯題單",
         "url": "https://leetcode.cn/circle/discuss/K0n2gO/"
+      },
+      {
+        "label": "lc-rating：動態規劃題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/dynamic_programming.json"
+      },
+      {
+        "label": "lc-rating：樹、鏈結串列與回溯題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/trees.json"
       }
     ],
     "supplemental_patterns": [
@@ -848,6 +1159,50 @@
       "⚠️ 樹形 DP 必須指定根（一般選 0 或 1），並在 DFS 時傳入父節點避免回頭走，否則無限遞迴。",
       "⚠️ 換根 DP 中，傳回給子節點的值不能包含子節點自身的貢獻，需要區分「最大」和「次大」子節點的情況。",
       "⚠️ 樹上背包的枚舉順序：對子節點做背包合併時，外層枚舉已合併的大小，內層枚舉新加入子樹的大小，避免重複計算。"
+    ],
+    "children": [
+      "lc-rating-dynamic-programming-66",
+      "lc-rating-dynamic-programming-67",
+      "lc-rating-dynamic-programming-68",
+      "lc-rating-dynamic-programming-69",
+      "lc-rating-dynamic-programming-70",
+      "lc-rating-trees-3",
+      "lc-rating-trees-4",
+      "lc-rating-trees-5",
+      "lc-rating-trees-6",
+      "lc-rating-trees-7",
+      "lc-rating-trees-8",
+      "lc-rating-trees-10",
+      "lc-rating-trees-11",
+      "lc-rating-trees-12",
+      "lc-rating-trees-13",
+      "lc-rating-trees-15",
+      "lc-rating-trees-16",
+      "lc-rating-trees-17",
+      "lc-rating-trees-18",
+      "lc-rating-trees-19",
+      "lc-rating-trees-20",
+      "lc-rating-trees-21",
+      "lc-rating-trees-23",
+      "lc-rating-trees-24",
+      "lc-rating-trees-25",
+      "lc-rating-trees-26",
+      "lc-rating-trees-27",
+      "lc-rating-trees-28",
+      "lc-rating-trees-29",
+      "lc-rating-trees-30",
+      "lc-rating-trees-32",
+      "lc-rating-trees-33",
+      "lc-rating-trees-34",
+      "lc-rating-trees-35",
+      "lc-rating-trees-36",
+      "lc-rating-trees-37",
+      "lc-rating-trees-38",
+      "lc-rating-trees-55",
+      "lc-rating-trees-41",
+      "lc-rating-trees-42",
+      "lc-rating-trees-43",
+      "lc-rating-trees-54"
     ]
   },
   {
@@ -900,6 +1255,22 @@
       {
         "label": "靈茶山艾府：字串題單",
         "url": "https://leetcode.cn/circle/discuss/SJFwQI/"
+      },
+      {
+        "label": "lc-rating：動態規劃題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/dynamic_programming.json"
+      },
+      {
+        "label": "lc-rating：資料結構題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/data_structure.json"
+      },
+      {
+        "label": "lc-rating：滑動視窗與雙指標題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/sliding_window.json"
+      },
+      {
+        "label": "lc-rating：字串題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/string.json"
       }
     ],
     "supplemental_patterns": [
@@ -926,7 +1297,26 @@
       "string-z",
       "string-hashing",
       "string-trie",
-      "string-suffix-array"
+      "string-suffix-array",
+      "lc-rating-dynamic-programming-60",
+      "lc-rating-data-structure-12",
+      "lc-rating-data-structure-19",
+      "lc-rating-data-structure-49",
+      "lc-rating-data-structure-50",
+      "lc-rating-data-structure-51",
+      "lc-rating-data-structure-52",
+      "lc-rating-sliding-window-13",
+      "lc-rating-string-4",
+      "lc-rating-string-6",
+      "lc-rating-string-7",
+      "lc-rating-string-9",
+      "lc-rating-string-10",
+      "lc-rating-string-12",
+      "lc-rating-string-14",
+      "lc-rating-string-17",
+      "lc-rating-string-19",
+      "lc-rating-string-21",
+      "lc-rating-string-23"
     ]
   },
   {
@@ -979,6 +1369,14 @@
       {
         "label": "靈茶山艾府：數學演算法題單",
         "url": "https://leetcode.cn/circle/discuss/IYT3ss/"
+      },
+      {
+        "label": "lc-rating：貪心與思維題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/greedy.json"
+      },
+      {
+        "label": "lc-rating：數學題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/math.json"
       }
     ],
     "supplemental_patterns": [
@@ -999,6 +1397,40 @@
       "⚠️ 快速冪中 base 要先對 mod 取模（`base %= mod`），否則 base × base 可能溢位 long long。",
       "⚠️ 組合數 C(n,k) 中 n < 0 或 k > n 時應返回 0，沒有邊界判斷會導致陣列越界。",
       "⚠️ 取模後不能直接做除法：`(a/b) % p ≠ (a%p) / (b%p)`，必須乘以 b 的模逆元。"
+    ],
+    "children": [
+      "lc-rating-greedy-31",
+      "lc-rating-math-2",
+      "lc-rating-math-3",
+      "lc-rating-math-4",
+      "lc-rating-math-5",
+      "lc-rating-math-6",
+      "lc-rating-math-7",
+      "lc-rating-math-8",
+      "lc-rating-math-9",
+      "lc-rating-math-10",
+      "lc-rating-math-11",
+      "lc-rating-math-12",
+      "lc-rating-math-13",
+      "lc-rating-math-14",
+      "lc-rating-math-16",
+      "lc-rating-math-18",
+      "lc-rating-math-19",
+      "lc-rating-math-20",
+      "lc-rating-math-21",
+      "lc-rating-math-22",
+      "lc-rating-math-23",
+      "lc-rating-math-24",
+      "lc-rating-math-26",
+      "lc-rating-math-27",
+      "lc-rating-math-28",
+      "lc-rating-math-29",
+      "lc-rating-math-30",
+      "lc-rating-math-31",
+      "lc-rating-math-32",
+      "lc-rating-math-33",
+      "lc-rating-math-34",
+      "lc-rating-math-35"
     ]
   },
   {
@@ -1043,6 +1475,14 @@
       {
         "label": "靈茶山艾府：位運算題單",
         "url": "https://leetcode.cn/circle/discuss/dHn9Vk/"
+      },
+      {
+        "label": "lc-rating：動態規劃題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/dynamic_programming.json"
+      },
+      {
+        "label": "lc-rating：位元運算題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/bitwise_operations.json"
       }
     ],
     "supplemental_patterns": [
@@ -1059,6 +1499,26 @@
       "⚠️ `1 << i` 在 i ≥ 31 時整數溢位，需改用 `1LL << i` 或 `(long long)1 << i`。",
       "⚠️ 枚舉子集 `for (int t=S; t>0; t=(t-1)&S)` 不包含空集（t=0 時不進入迴圈），若需要空集需另行處理。",
       "⚠️ SOS DP 中外層迴圈是「枚舉位元 i」而非「枚舉集合 S」，順序不能對調，否則每個位元的貢獻會被重複累加。"
+    ],
+    "children": [
+      "lc-rating-dynamic-programming-46",
+      "lc-rating-dynamic-programming-48",
+      "lc-rating-dynamic-programming-49",
+      "lc-rating-dynamic-programming-50",
+      "lc-rating-bitwise-operations-16",
+      "lc-rating-bitwise-operations-3",
+      "lc-rating-bitwise-operations-4",
+      "lc-rating-bitwise-operations-5",
+      "lc-rating-bitwise-operations-17",
+      "lc-rating-bitwise-operations-7",
+      "lc-rating-bitwise-operations-8",
+      "lc-rating-bitwise-operations-18",
+      "lc-rating-bitwise-operations-10",
+      "lc-rating-bitwise-operations-11",
+      "lc-rating-bitwise-operations-12",
+      "lc-rating-bitwise-operations-13",
+      "lc-rating-bitwise-operations-14",
+      "lc-rating-bitwise-operations-15"
     ]
   },
   {
@@ -1155,6 +1615,10 @@
       {
         "label": "靈茶山艾府：貪心與思維題單",
         "url": "https://leetcode.cn/circle/discuss/g6KTKL/"
+      },
+      {
+        "label": "lc-rating：貪心與思維題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/greedy.json"
       }
     ],
     "supplemental_patterns": [
@@ -1172,7 +1636,34 @@
       "⚠️ 排序關鍵字選錯會讓整個貪心失效，務必先想清楚「當下最優」的定義。",
       "⚠️ 若局部最優無法保證全域，應改用 DP 而非硬湊貪心。"
     ],
-    "children": []
+    "children": [
+      "lc-rating-greedy-2",
+      "lc-rating-greedy-4",
+      "lc-rating-greedy-5",
+      "lc-rating-greedy-6",
+      "lc-rating-greedy-8",
+      "lc-rating-greedy-43",
+      "lc-rating-greedy-11",
+      "lc-rating-greedy-12",
+      "lc-rating-greedy-14",
+      "lc-rating-greedy-23",
+      "lc-rating-greedy-24",
+      "lc-rating-greedy-25",
+      "lc-rating-greedy-28",
+      "lc-rating-greedy-29",
+      "lc-rating-greedy-30",
+      "lc-rating-greedy-32",
+      "lc-rating-greedy-33",
+      "lc-rating-greedy-34",
+      "lc-rating-greedy-45",
+      "lc-rating-greedy-36",
+      "lc-rating-greedy-37",
+      "lc-rating-greedy-38",
+      "lc-rating-greedy-39",
+      "lc-rating-greedy-40",
+      "lc-rating-greedy-41",
+      "lc-rating-greedy-42"
+    ]
   },
   {
     "id": "backtracking",
@@ -1208,6 +1699,22 @@
       {
         "label": "靈茶山艾府：鏈表、二叉樹與回溯題單",
         "url": "https://leetcode.cn/circle/discuss/K0n2gO/"
+      },
+      {
+        "label": "lc-rating：動態規劃題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/dynamic_programming.json"
+      },
+      {
+        "label": "lc-rating：圖論題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/graph.json"
+      },
+      {
+        "label": "lc-rating：數學題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/math.json"
+      },
+      {
+        "label": "lc-rating：樹、鏈結串列與回溯題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/trees.json"
       }
     ],
     "supplemental_patterns": [
@@ -1225,7 +1732,22 @@
       "⚠️ 去重前要先排序，且判斷條件 `!used[i-1]`（同層）與 `used[i-1]`（同路徑）意義不同，別寫反。",
       "⚠️ 記錄答案時要存路徑「副本」（值拷貝），存引用會在回溯後被改掉。"
     ],
-    "children": []
+    "children": [
+      "lc-rating-dynamic-programming-44",
+      "lc-rating-dynamic-programming-45",
+      "lc-rating-dynamic-programming-47",
+      "lc-rating-graph-2",
+      "lc-rating-graph-4",
+      "lc-rating-math-15",
+      "lc-rating-trees-45",
+      "lc-rating-trees-46",
+      "lc-rating-trees-47",
+      "lc-rating-trees-48",
+      "lc-rating-trees-49",
+      "lc-rating-trees-50",
+      "lc-rating-trees-51",
+      "lc-rating-trees-52"
+    ]
   },
   {
     "id": "network-flow",
@@ -1257,6 +1779,10 @@
       {
         "label": "OI-Wiki：最大流",
         "url": "https://oi-wiki.org/graph/flow/max-flow/"
+      },
+      {
+        "label": "lc-rating：圖論題單",
+        "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/graph.json"
       }
     ],
     "supplemental_patterns": [
@@ -1274,6 +1800,9 @@
       "⚠️ 當前弧優化 `it[]` 每輪 BFS 後要重置為 0，否則漏增廣。",
       "⚠️ 容量與流量可能很大，用 `long long`；建模時別把「最大化」誤接成最小割方向。"
     ],
-    "children": []
+    "children": [
+      "lc-rating-graph-25",
+      "lc-rating-graph-23"
+    ]
   }
 ]
