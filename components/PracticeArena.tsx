@@ -8,9 +8,12 @@ import {
   ChevronRight,
   Clock,
   ExternalLink,
+  ListChecks,
   RefreshCw,
   Shuffle,
   SkipForward,
+  Swords,
+  Trophy,
   X,
   type LucideIcon
 } from 'lucide-react';
@@ -36,6 +39,7 @@ const statusOptions: SubmissionStatus[] = ['AC', 'WA', 'TLE', 'SKIP'];
 const PAGE_SIZE = 20;
 type ContestType = 'all' | 'weekly' | 'biweekly';
 type Position = 0 | 1 | 2 | 3;
+type ActiveTab = 'problems' | 'contest' | 'lc-contest';
 
 interface PickedContestProblem {
   problem: ContestProblem;
@@ -99,6 +103,7 @@ export function PracticeArena({
   subtopics: Subtopic[];
   contests: Contest[];
 }) {
+  const [activeTab, setActiveTab] = useState<ActiveTab>('problems');
   const [problemCount, setProblemCount] = useState(5);
   const [durationMinutes, setDurationMinutes] = useState(90);
   const [page, setPage] = useState(1);
@@ -214,8 +219,6 @@ export function PracticeArena({
     [filteredProblems, currentPage]
   );
 
-  // Snap back to the first page whenever the filter signature changes. This uses
-  // React's "adjust state while rendering" pattern instead of an effect.
   const filterSignature = `${filters.tag}|${filters.problemType}|${filters.completion}|${filters.band}|${filters.minRating}|${filters.maxRating}|${currentRating}|${topicFilter}|${subtopicFilter}`;
   if (filterSignature !== filterSignatureState) {
     setFilterSignatureState(filterSignature);
@@ -229,6 +232,13 @@ export function PracticeArena({
     const minutes = Math.floor(remaining / 60_000);
     const seconds = Math.floor((remaining % 60_000) / 1000);
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  }, [activeContest, now]);
+
+  const isContestActive = activeContest !== null;
+  const isContestExpired = useMemo(() => {
+    if (!activeContest) return false;
+    const endTime = new Date(activeContest.startedAt).getTime() + activeContest.durationMinutes * 60_000;
+    return Date.now() >= endTime;
   }, [activeContest, now]);
 
   function applyBand(bandId: typeof filters.band) {
@@ -264,8 +274,30 @@ export function PracticeArena({
     setPickedContestProblems(pickRandom(contestPool, contestPickCount));
   }
 
+  const tabs: { id: ActiveTab; label: string; icon: LucideIcon; description: string }[] = [
+    {
+      id: 'problems',
+      label: '題庫練習',
+      icon: ListChecks,
+      description: '依照分段篩選題目，記錄提交結果'
+    },
+    {
+      id: 'contest',
+      label: '虛擬競賽',
+      icon: Swords,
+      description: '從篩選結果抽題模擬比賽計時'
+    },
+    {
+      id: 'lc-contest',
+      label: '競賽抽題',
+      icon: Trophy,
+      description: '從 LeetCode 週賽 / 雙週賽抽取題目'
+    }
+  ];
+
   return (
     <div className="space-y-6">
+      {/* ── Filter card: always visible ─────────────────────────────────── */}
       <Card>
         <CardHeader>
           <CardTitle>練習篩選器</CardTitle>
@@ -314,7 +346,7 @@ export function PracticeArena({
             </select>
           </label>
           <label className="space-y-2 text-sm">
-            <span className="text-muted-foreground">子分類／題型</span>
+            <span className="text-muted-foreground">子分類</span>
             <select
               value={subtopicFilter}
               onChange={(event) => setSubtopicFilter(event.target.value)}
@@ -380,7 +412,7 @@ export function PracticeArena({
               />
             </div>
           </div>
-          <div className="space-y-2 text-sm lg:col-span-2">
+          <div className="space-y-2 text-sm lg:col-span-4">
             <span className="text-muted-foreground">分段預設</span>
             <div className="flex flex-wrap gap-2">
               {bands.map((band) => (
@@ -404,50 +436,46 @@ export function PracticeArena({
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>虛擬競賽模式</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid gap-3 sm:grid-cols-3">
-            <label className="space-y-2 text-sm">
-              <span className="text-muted-foreground">題目數量</span>
-              <input
-                type="number"
-                min={1}
-                value={problemCount}
-                onChange={(event) => setProblemCount(Number(event.target.value))}
-                className="w-full rounded-xl border border-border bg-background px-3 py-2"
-              />
-            </label>
-            <label className="space-y-2 text-sm">
-              <span className="text-muted-foreground">計時分鐘</span>
-              <input
-                type="number"
-                min={10}
-                value={durationMinutes}
-                onChange={(event) => setDurationMinutes(Number(event.target.value))}
-                className="w-full rounded-xl border border-border bg-background px-3 py-2"
-              />
-            </label>
-            <div className="flex items-end gap-2">
-              <Button type="button" onClick={beginContest} disabled={filteredProblems.length === 0}>
-                開始模擬賽
-              </Button>
-              {activeContest ? (
-                <Button type="button" variant="secondary" onClick={endContest}>
-                  結束
-                </Button>
+      {/* ── Tab navigation ───────────────────────────────────────────────── */}
+      <div className="flex flex-wrap gap-2 rounded-2xl border border-border bg-muted/40 p-1.5">
+        {tabs.map((tab) => {
+          const Icon = tab.icon;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setActiveTab(tab.id)}
+              className={cn(
+                'flex flex-1 items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                activeTab === tab.id
+                  ? 'bg-background text-foreground shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground'
+              )}
+            >
+              <Icon className="h-4 w-4 shrink-0" aria-hidden />
+              <span>{tab.label}</span>
+              {tab.id === 'contest' && isContestActive && !isContestExpired && (
+                <span className="ml-1 inline-block h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* ── Tab: 題庫練習 ────────────────────────────────────────────────── */}
+      {activeTab === 'problems' && (
+        <>
+          <Card>
+            <CardHeader className="flex flex-row flex-wrap items-center justify-between gap-2">
+              <CardTitle>題庫結果（{filteredProblems.length} 題）</CardTitle>
+              {filteredProblems.length > 0 ? (
+                <span className="text-sm text-muted-foreground">
+                  第 {currentPage} / {totalPages} 頁
+                </span>
               ) : null}
-            </div>
-          </div>
-          <div className="rounded-2xl border border-border bg-background/50 p-4">
-            <p className="text-sm text-muted-foreground">剩餘時間</p>
-            <p className="mt-1 text-3xl font-semibold tabular-nums">{remainingText}</p>
-          </div>
-          {contestProblems.length > 0 ? (
-            <div className="grid gap-3 md:grid-cols-2">
-              {contestProblems.map((problem) => (
+            </CardHeader>
+            <CardContent className="grid gap-3">
+              {pagedProblems.map((problem) => (
                 <PracticeProblemRow
                   key={problem.id}
                   problem={problem}
@@ -455,208 +483,304 @@ export function PracticeArena({
                   onLog={(status) => logSubmission(problem.id, status, problem.topic_id)}
                 />
               ))}
-            </div>
-          ) : (
-            <p className="text-sm text-muted-foreground">尚未選取競賽題目。</p>
-          )}
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>lc-rating 競賽抽題</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid gap-4 lg:grid-cols-4">
-            <div className="space-y-2 text-sm">
-              <span className="text-muted-foreground">比賽類型</span>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  ['all', '全部'],
-                  ['weekly', '週賽'],
-                  ['biweekly', '雙週賽']
-                ].map(([value, label]) => (
-                  <button
-                    key={value}
-                    type="button"
-                    onClick={() => setContestType(value as ContestType)}
-                    className={cn(
-                      'rounded-lg border px-3 py-1.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-                      contestType === value
-                        ? 'border-primary bg-primary text-primary-foreground'
-                        : 'border-border text-muted-foreground hover:bg-accent hover:text-foreground'
-                    )}
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div className="space-y-2 text-sm">
-              <span className="text-muted-foreground">題目位置</span>
-              <div className="flex flex-wrap gap-2">
-                {([0, 1, 2, 3] as Position[]).map((position) => (
-                  <button
-                    key={position}
-                    type="button"
-                    onClick={() => toggleContestPosition(position)}
-                    className={cn(
-                      'rounded-lg border px-3 py-1.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-                      contestPositions.has(position)
-                        ? positionClass[position]
-                        : 'border-border text-muted-foreground hover:bg-accent hover:text-foreground'
-                    )}
-                  >
-                    {positionLabels[position]}
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div className="space-y-2 text-sm">
-              <span className="text-muted-foreground">難度範圍</span>
-              <div className="flex items-center gap-2">
-                <input
-                  type="number"
-                  value={contestMinRating}
-                  onChange={(event) => setContestMinRating(Number(event.target.value))}
-                  className="w-24 rounded-lg border border-border bg-background px-2.5 py-1.5"
-                  aria-label="最低 rating"
-                />
-                <span className="text-muted-foreground">–</span>
-                <input
-                  type="number"
-                  value={contestMaxRating}
-                  onChange={(event) => setContestMaxRating(Number(event.target.value))}
-                  className="w-24 rounded-lg border border-border bg-background px-2.5 py-1.5"
-                  aria-label="最高 rating"
-                />
-              </div>
-            </div>
-            <label className="space-y-2 text-sm">
-              <span className="text-muted-foreground">抽取題數</span>
-              <input
-                type="number"
-                min={1}
-                max={10}
-                value={contestPickCount}
-                onChange={(event) =>
-                  setContestPickCount(Math.max(1, Math.min(10, Number(event.target.value))))
-                }
-                className="w-24 rounded-lg border border-border bg-background px-2.5 py-1.5"
-              />
-            </label>
-          </div>
-          <div className="flex flex-wrap items-center gap-3">
-            <Button onClick={pickContestProblems} disabled={contestPool.length === 0} className="gap-2">
-              <Shuffle className="h-4 w-4" aria-hidden />
-              隨機抽題（{contestPickCount} 題）
-            </Button>
-            {pickedContestProblems.length > 0 ? (
-              <Button variant="secondary" onClick={pickContestProblems} className="gap-2">
-                <RefreshCw className="h-4 w-4" aria-hidden />
-                重新抽取
-              </Button>
-            ) : null}
-            <span className="text-sm text-muted-foreground">
-              符合條件：{contestPool.length} 題（已 canonical：
-              {contestPool.filter((item) => item.canonicalProblem).length} 題）
-            </span>
-          </div>
-          {pickedContestProblems.length > 0 ? (
-            <div className="grid gap-3 md:grid-cols-2">
-              {pickedContestProblems.map((picked, index) => (
-                <ContestPickedProblemRow
-                  key={`${picked.problem.id}-${index}`}
-                  picked={picked}
-                  site={leetCodeSite}
-                  topicTitle={
-                    picked.canonicalProblem
-                      ? (topicById.get(picked.canonicalProblem.topic_id)?.title ?? '未分類')
-                      : '未分類'
-                  }
-                  onLog={(status) =>
-                    picked.canonicalProblem
-                      ? logSubmission(picked.canonicalProblem.id, status, picked.canonicalProblem.topic_id)
-                      : undefined
-                  }
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="rounded-2xl border border-dashed border-border p-6 text-sm text-muted-foreground">
-              按「隨機抽題」從 lc-rating 週賽題庫抽取題目。
-            </div>
-          )}
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader className="flex flex-row flex-wrap items-center justify-between gap-2">
-          <CardTitle>題庫結果（{filteredProblems.length} 題）</CardTitle>
-          {filteredProblems.length > 0 ? (
-            <span className="text-sm text-muted-foreground">
-              第 {currentPage} / {totalPages} 頁
-            </span>
-          ) : null}
-        </CardHeader>
-        <CardContent className="grid gap-3">
-          {pagedProblems.map((problem) => (
-            <PracticeProblemRow
-              key={problem.id}
-              problem={problem}
-              topicTitle={topicById.get(problem.topic_id)?.title ?? '未分類'}
-              onLog={(status) => logSubmission(problem.id, status, problem.topic_id)}
-            />
-          ))}
-          {filteredProblems.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-border p-6 text-sm text-muted-foreground">
-              目前篩選條件沒有符合的題目。
-            </div>
-          ) : null}
-          {totalPages > 1 ? (
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              total={filteredProblems.length}
-              pageSize={PAGE_SIZE}
-              onChange={setPage}
-            />
-          ) : null}
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>提交紀錄</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          {submissions.length > 0 ? (
-            submissions.slice(0, 12).map((submission) => {
-              const problem = problemById.get(submission.problemId);
-              return (
-                <div
-                  key={submission.id}
-                  className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border p-4"
-                >
-                  <div>
-                    <p className="font-medium">{problem?.title ?? '未知題目'}</p>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      {new Date(submission.createdAt).toLocaleString('zh-TW')}
-                    </p>
-                  </div>
-                  <span className="rounded-full border border-border bg-accent px-3 py-1 text-sm">
-                    {submissionStatusLabel(submission.status)}
-                  </span>
+              {filteredProblems.length === 0 ? (
+                <div className="rounded-2xl border border-dashed border-border p-6 text-sm text-muted-foreground">
+                  目前篩選條件沒有符合的題目。
                 </div>
-              );
-            })
-          ) : (
-            <p className="rounded-2xl border border-dashed border-border p-6 text-sm text-muted-foreground">
-              尚未記錄任何提交結果。
+              ) : null}
+              {totalPages > 1 ? (
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  total={filteredProblems.length}
+                  pageSize={PAGE_SIZE}
+                  onChange={setPage}
+                />
+              ) : null}
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>提交紀錄</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {submissions.length > 0 ? (
+                submissions.slice(0, 12).map((submission) => {
+                  const problem = problemById.get(submission.problemId);
+                  return (
+                    <div
+                      key={submission.id}
+                      className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border p-4"
+                    >
+                      <div>
+                        <p className="font-medium">{problem?.title ?? '未知題目'}</p>
+                        <p className="mt-1 text-sm text-muted-foreground">
+                          {new Date(submission.createdAt).toLocaleString('zh-TW')}
+                        </p>
+                      </div>
+                      <span className="rounded-full border border-border bg-accent px-3 py-1 text-sm">
+                        {submissionStatusLabel(submission.status)}
+                      </span>
+                    </div>
+                  );
+                })
+              ) : (
+                <p className="rounded-2xl border border-dashed border-border p-6 text-sm text-muted-foreground">
+                  尚未記錄任何提交結果。
+                </p>
+              )}
+            </CardContent>
+          </Card>
+        </>
+      )}
+
+      {/* ── Tab: 虛擬競賽 ────────────────────────────────────────────────── */}
+      {activeTab === 'contest' && (
+        <Card>
+          <CardHeader>
+            <CardTitle>虛擬競賽模式</CardTitle>
+            <p className="text-sm text-muted-foreground">
+              從上方篩選器的結果中隨機抽取題目，設定時間後開始模擬競賽。
             </p>
-          )}
-        </CardContent>
-      </Card>
+          </CardHeader>
+          <CardContent className="space-y-5">
+            {/* Settings row */}
+            <div className="grid gap-3 sm:grid-cols-3">
+              <label className="space-y-2 text-sm">
+                <span className="text-muted-foreground">題目數量</span>
+                <input
+                  type="number"
+                  min={1}
+                  value={problemCount}
+                  onChange={(event) => setProblemCount(Number(event.target.value))}
+                  className="w-full rounded-xl border border-border bg-background px-3 py-2"
+                />
+              </label>
+              <label className="space-y-2 text-sm">
+                <span className="text-muted-foreground">計時分鐘</span>
+                <input
+                  type="number"
+                  min={10}
+                  value={durationMinutes}
+                  onChange={(event) => setDurationMinutes(Number(event.target.value))}
+                  className="w-full rounded-xl border border-border bg-background px-3 py-2"
+                />
+              </label>
+              <div className="flex items-end gap-2">
+                <Button
+                  type="button"
+                  onClick={beginContest}
+                  disabled={filteredProblems.length === 0 || isContestActive}
+                >
+                  開始模擬賽
+                </Button>
+                {isContestActive ? (
+                  <Button type="button" variant="secondary" onClick={endContest}>
+                    結束競賽
+                  </Button>
+                ) : null}
+              </div>
+            </div>
+
+            {filteredProblems.length === 0 && (
+              <p className="text-sm text-amber-600 dark:text-amber-400">
+                ⚠ 目前篩選結果為空，請調整上方篩選器後再開始。
+              </p>
+            )}
+
+            {/* Timer */}
+            <div
+              className={cn(
+                'rounded-2xl border p-4',
+                isContestActive && !isContestExpired
+                  ? 'border-emerald-400/40 bg-emerald-500/10'
+                  : isContestExpired
+                    ? 'border-rose-400/40 bg-rose-500/10'
+                    : 'border-border bg-background/50'
+              )}
+            >
+              <p className="text-sm text-muted-foreground">
+                {isContestExpired ? '時間到' : '剩餘時間'}
+              </p>
+              <p className="mt-1 text-3xl font-semibold tabular-nums">
+                {isContestExpired ? '00:00' : remainingText}
+              </p>
+            </div>
+
+            {/* Contest problem list */}
+            {contestProblems.length > 0 ? (
+              <div className="grid gap-3 md:grid-cols-2">
+                {contestProblems.map((problem) => (
+                  <PracticeProblemRow
+                    key={problem.id}
+                    problem={problem}
+                    topicTitle={topicById.get(problem.topic_id)?.title ?? '未分類'}
+                    onLog={(status) => logSubmission(problem.id, status, problem.topic_id)}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="rounded-2xl border border-dashed border-border p-8 text-center text-sm text-muted-foreground">
+                按「開始模擬賽」後，競賽題目會顯示在這裡。
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
+
+      {/* ── Tab: 競賽抽題 ────────────────────────────────────────────────── */}
+      {activeTab === 'lc-contest' && (
+        <Card>
+          <CardHeader>
+            <CardTitle>LeetCode 競賽抽題</CardTitle>
+            <p className="text-sm text-muted-foreground">
+              從 LeetCode 週賽 / 雙週賽題庫依難度隨機抽取題目，不受上方篩選器限制。
+            </p>
+          </CardHeader>
+          <CardContent className="space-y-5">
+            {/* Filters */}
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="space-y-2 text-sm">
+                <span className="text-muted-foreground">比賽類型</span>
+                <div className="flex flex-wrap gap-2">
+                  {([['all', '全部'], ['weekly', '週賽'], ['biweekly', '雙週賽']] as const).map(
+                    ([value, label]) => (
+                      <button
+                        key={value}
+                        type="button"
+                        onClick={() => setContestType(value as ContestType)}
+                        className={cn(
+                          'rounded-lg border px-3 py-1.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                          contestType === value
+                            ? 'border-primary bg-primary text-primary-foreground'
+                            : 'border-border text-muted-foreground hover:bg-accent hover:text-foreground'
+                        )}
+                      >
+                        {label}
+                      </button>
+                    )
+                  )}
+                </div>
+              </div>
+
+              <div className="space-y-2 text-sm">
+                <span className="text-muted-foreground">題目位置</span>
+                <div className="flex flex-wrap gap-2">
+                  {([0, 1, 2, 3] as Position[]).map((position) => (
+                    <button
+                      key={position}
+                      type="button"
+                      onClick={() => toggleContestPosition(position)}
+                      className={cn(
+                        'rounded-lg border px-3 py-1.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                        contestPositions.has(position)
+                          ? positionClass[position]
+                          : 'border-border text-muted-foreground hover:bg-accent hover:text-foreground'
+                      )}
+                    >
+                      {positionLabels[position]}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-2 text-sm">
+                <span className="text-muted-foreground">難度範圍</span>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="number"
+                    value={contestMinRating}
+                    onChange={(event) => setContestMinRating(Number(event.target.value))}
+                    className="w-24 rounded-lg border border-border bg-background px-2.5 py-1.5"
+                    aria-label="最低 rating"
+                  />
+                  <span className="text-muted-foreground">–</span>
+                  <input
+                    type="number"
+                    value={contestMaxRating}
+                    onChange={(event) => setContestMaxRating(Number(event.target.value))}
+                    className="w-24 rounded-lg border border-border bg-background px-2.5 py-1.5"
+                    aria-label="最高 rating"
+                  />
+                </div>
+              </div>
+
+              <label className="space-y-2 text-sm">
+                <span className="text-muted-foreground">抽取題數</span>
+                <input
+                  type="number"
+                  min={1}
+                  max={10}
+                  value={contestPickCount}
+                  onChange={(event) =>
+                    setContestPickCount(Math.max(1, Math.min(10, Number(event.target.value))))
+                  }
+                  className="w-24 rounded-lg border border-border bg-background px-2.5 py-1.5"
+                />
+              </label>
+            </div>
+
+            {/* Action row */}
+            <div className="flex flex-wrap items-center gap-3">
+              <Button
+                onClick={pickContestProblems}
+                disabled={contestPool.length === 0}
+                className="gap-2"
+              >
+                <Shuffle className="h-4 w-4" aria-hidden />
+                隨機抽題（{contestPickCount} 題）
+              </Button>
+              {pickedContestProblems.length > 0 ? (
+                <Button variant="secondary" onClick={pickContestProblems} className="gap-2">
+                  <RefreshCw className="h-4 w-4" aria-hidden />
+                  重新抽取
+                </Button>
+              ) : null}
+              <span className="text-sm text-muted-foreground">
+                符合條件：{contestPool.length} 題（來自{' '}
+                {new Set(contestPool.map((p) => p.contest.contestId)).size} 場比賽）
+              </span>
+            </div>
+
+            {/* Picked problems */}
+            {contestPool.length === 0 && (
+              <div className="rounded-2xl border border-dashed border-border p-8 text-center text-sm text-muted-foreground">
+                目前篩選條件沒有符合的題目，請調整難度範圍或題目位置。
+              </div>
+            )}
+            {pickedContestProblems.length > 0 ? (
+              <div className="grid gap-3 md:grid-cols-2">
+                {pickedContestProblems.map((picked, index) => (
+                  <ContestPickedProblemRow
+                    key={`${picked.problem.id}-${index}`}
+                    picked={picked}
+                    site={leetCodeSite}
+                    topicTitle={
+                      picked.canonicalProblem
+                        ? (topicById.get(picked.canonicalProblem.topic_id)?.title ?? '未分類')
+                        : '未分類'
+                    }
+                    onLog={(status) =>
+                      picked.canonicalProblem
+                        ? logSubmission(
+                            picked.canonicalProblem.id,
+                            status,
+                            picked.canonicalProblem.topic_id
+                          )
+                        : undefined
+                    }
+                  />
+                ))}
+              </div>
+            ) : contestPool.length > 0 ? (
+              <div className="rounded-2xl border border-dashed border-border p-8 text-center text-sm text-muted-foreground">
+                按「隨機抽題」從 LeetCode 週賽題庫抽取題目。
+              </div>
+            ) : null}
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }
@@ -737,7 +861,7 @@ function ContestPickedProblemRow({
           打開原題
         </a>
         {canonical ? (
-          <span className="text-xs text-muted-foreground">・已併入手冊題庫，可記錄進度</span>
+          <span className="text-xs text-muted-foreground">・已併入手冊，可記錄進度</span>
         ) : (
           <span className="text-xs text-muted-foreground">・尚未對應到手冊分類</span>
         )}
@@ -932,7 +1056,6 @@ function Pagination({
   );
 }
 
-// Build a compact page list with ellipsis gaps, e.g. [1, null, 4, 5, 6, null, 12].
 function pageRange(current: number, total: number): (number | null)[] {
   if (total <= 7) {
     return Array.from({ length: total }, (_, i) => i + 1);
