@@ -32,7 +32,11 @@ export function sourceProblemIdLabel(
 
 export function problemDisplayTitle(problem: Pick<Problem, 'source' | 'title'> & { frontend_id?: string }) {
   if (problem.source === 'leetcode' && problem.frontend_id) {
-    return `${problem.frontend_id}. ${problem.title}`;
+    const prefix = `${problem.frontend_id}. `;
+    if (problem.title.startsWith(prefix)) {
+      return problem.title;
+    }
+    return `${prefix}${problem.title}`;
   }
 
   return problem.title;
