@@ -13,3 +13,7 @@ pnpm-debug.log*
 # Local scratch / tooling output (not part of the app)
 .codex/
 .subtopic-gen/
+
+# Python bytecode cache (from data-gen scripts)
+__pycache__/
+*.pyc
