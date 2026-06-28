@@ -294,20 +294,12 @@ function FloatingCloudSyncAuthed({
           </div>
 
           {isLoggedIn ? (
-            <div className="mt-4 grid grid-cols-2 gap-2">
-              <button
-                type="button"
-                onClick={() => runManualSync('load')}
-                disabled={isBusy}
-                className="rounded-xl border border-border px-3 py-2 text-sm font-semibold transition hover:bg-accent disabled:opacity-50"
-              >
-                {busyManual === 'load' ? '載入中…' : '從雲端載入'}
-              </button>
+            <div className="mt-4">
               <button
                 type="button"
                 onClick={() => runManualSync('save')}
                 disabled={isBusy}
-                className="rounded-xl bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90 disabled:opacity-50"
+                className="w-full rounded-xl bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90 disabled:opacity-50"
               >
                 {busyManual === 'save' ? '同步中…' : '立即同步'}
               </button>
