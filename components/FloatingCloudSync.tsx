@@ -41,6 +41,27 @@ function formatSyncTime(value?: string) {
   }).format(date);
 }
 
+function formatSyncTimeCompact(value?: string): string | null {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  const now = new Date();
+  const isToday =
+    date.getFullYear() === now.getFullYear() &&
+    date.getMonth() === now.getMonth() &&
+    date.getDate() === now.getDate();
+  if (isToday) {
+    return new Intl.DateTimeFormat('zh-TW', { hour: '2-digit', minute: '2-digit', hour12: false }).format(date);
+  }
+  return new Intl.DateTimeFormat('zh-TW', {
+    month: 'numeric',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  }).format(date);
+}
+
 export function FloatingCloudSync() {
   const [open, setOpen] = useState(false);
 
@@ -315,20 +336,29 @@ function FloatingCloudSyncAuthed({
         </div>
       )}
 
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-label="開啟雲端同步"
-        className="relative flex h-14 w-14 items-center justify-center rounded-full border border-border bg-primary text-primary-foreground shadow-glow transition hover:-translate-y-0.5 hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-      >
-        <Cloud className="h-6 w-6" aria-hidden />
-        {dotClass && (
-          <span
-            className={`absolute right-0.5 top-0.5 h-3.5 w-3.5 rounded-full border-2 border-primary ${dotClass}`}
-            aria-hidden
-          />
+      <div className="flex flex-col items-center gap-1">
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-label="開啟雲端同步"
+          className="relative flex h-14 w-14 items-center justify-center rounded-full border border-border bg-primary text-primary-foreground shadow-glow transition hover:-translate-y-0.5 hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        >
+          <Cloud className="h-6 w-6" aria-hidden />
+          {dotClass && (
+            <span
+              className={`absolute right-0.5 top-0.5 h-3.5 w-3.5 rounded-full border-2 border-primary ${dotClass}`}
+              aria-hidden
+            />
+          )}
+        </button>
+        {isLoggedIn && (
+          <span className="text-[10px] leading-none text-muted-foreground/60 select-none">
+            {autoSyncStatus === 'syncing'
+              ? '同步中…'
+              : formatSyncTimeCompact(lastCloudSyncAt) ?? '未同步'}
+          </span>
         )}
-      </button>
+      </div>
     </div>
   );
 }
