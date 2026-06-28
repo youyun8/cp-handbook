@@ -91,20 +91,13 @@
       "⚠️ 浮點二分：實數答案不能用 `left < right` 當終止條件（兩浮點數幾乎不會相等），要改用精度 `while (right - left > eps)` 或固定迭代次數（如 100 次）。"
     ],
     "children": [
-      "lc-rating-binary-search-2",
-      "lc-rating-binary-search-3",
-      "lc-rating-binary-search-5",
-      "lc-rating-binary-search-7",
-      "lc-rating-binary-search-8",
-      "lc-rating-binary-search-9",
-      "lc-rating-binary-search-10",
-      "lc-rating-binary-search-11",
-      "lc-rating-binary-search-12",
-      "lc-rating-binary-search-13",
-      "lc-rating-dynamic-programming-63",
-      "lc-rating-data-structure-43",
-      "lc-rating-data-structure-47",
-      "lc-rating-graph-21"
+      "bs-binary-answer",
+      "bs-rotated-peak",
+      "bs-ternary-search",
+      "bs-kth-smallest",
+      "bs-minmax",
+      "bs-foundation",
+      "bs-wqs"
     ]
   },
   {
@@ -207,13 +200,14 @@
       "⚠️ 狀態圖的 visited 維度不足：忘了把『狀態』納入 visited（如帶鑰匙迷宮），會把不同狀態當成同一節點而漏解。"
     ],
     "children": [
-      "lc-rating-graph-10",
-      "lc-rating-graph-19",
-      "lc-rating-graph-20",
-      "lc-rating-graph-24",
-      "lc-rating-grid-2",
-      "lc-rating-grid-4",
-      "lc-rating-grid-6"
+      "gt-bfs",
+      "gt-dfs-cc",
+      "gt-topo-sort",
+      "gt-bipartite",
+      "gt-grid",
+      "gt-functional-graph",
+      "gt-euler",
+      "gt-scc"
     ]
   },
   {
@@ -296,26 +290,13 @@
       "⚠️ 區間合併忘了先排序，或誤以為要同時按 end 排序——左端排序後維護右界最大值即可。"
     ],
     "children": [
-      "lc-rating-greedy-15",
-      "lc-rating-greedy-16",
-      "lc-rating-greedy-17",
-      "lc-rating-greedy-18",
-      "lc-rating-greedy-19",
-      "lc-rating-greedy-20",
-      "lc-rating-greedy-26",
-      "lc-rating-data-structure-10",
-      "lc-rating-data-structure-14",
-      "lc-rating-data-structure-15",
-      "lc-rating-data-structure-16",
-      "lc-rating-data-structure-18",
-      "lc-rating-data-structure-20",
-      "lc-rating-data-structure-23",
-      "lc-rating-data-structure-24",
-      "lc-rating-data-structure-26",
-      "lc-rating-graph-7",
-      "lc-rating-sorting-2",
-      "lc-rating-sorting-3",
-      "lc-rating-sorting-4"
+      "iv-merge",
+      "iv-scheduling",
+      "iv-difference",
+      "iv-sweep-line",
+      "iv-prefix-sum",
+      "iv-enumerate-right",
+      "iv-counting-sort"
     ]
   },
   {
@@ -378,31 +359,14 @@
       "⚠️ 忘了 `greater<>` 而誤用預設大根堆，會把『取最小』寫成『取最大』——Dijkstra 會完全錯誤。"
     ],
     "children": [
-      "lc-rating-data-structure-3",
-      "lc-rating-data-structure-5",
-      "lc-rating-data-structure-6",
-      "lc-rating-data-structure-7",
-      "lc-rating-data-structure-28",
-      "lc-rating-data-structure-29",
-      "lc-rating-data-structure-30",
-      "lc-rating-data-structure-31",
-      "lc-rating-data-structure-32",
-      "lc-rating-data-structure-33",
-      "lc-rating-data-structure-36",
-      "lc-rating-data-structure-37",
-      "lc-rating-data-structure-38",
-      "lc-rating-data-structure-41",
-      "lc-rating-data-structure-42",
-      "lc-rating-data-structure-44",
-      "lc-rating-data-structure-45",
-      "lc-rating-data-structure-46",
-      "lc-rating-data-structure-69",
-      "lc-rating-data-structure-71",
-      "lc-rating-data-structure-72",
-      "lc-rating-data-structure-73",
-      "lc-rating-data-structure-75",
-      "lc-rating-data-structure-77",
-      "lc-rating-data-structure-78"
+      "hp-binary-heap",
+      "hp-top-k",
+      "hp-median-two-heaps",
+      "hp-lazy-deletion",
+      "ds-stack",
+      "ds-queue",
+      "hp-regret",
+      "hp-advanced"
     ]
   },
   {
@@ -489,51 +453,19 @@
       "⚠️ 枚舉順序錯：區間 DP 沒有先算小區間、或一般 DP 用到尚未計算的狀態，結果是讀到初始值而非正解。"
     ],
     "children": [
-      "lc-rating-greedy-7",
-      "lc-rating-dynamic-programming-3",
-      "lc-rating-dynamic-programming-4",
-      "lc-rating-dynamic-programming-5",
-      "lc-rating-dynamic-programming-7",
-      "lc-rating-dynamic-programming-8",
-      "lc-rating-dynamic-programming-10",
-      "lc-rating-dynamic-programming-11",
-      "lc-rating-dynamic-programming-12",
-      "lc-rating-dynamic-programming-13",
-      "lc-rating-dynamic-programming-14",
-      "lc-rating-dynamic-programming-17",
-      "lc-rating-dynamic-programming-18",
-      "lc-rating-dynamic-programming-20",
-      "lc-rating-dynamic-programming-21",
-      "lc-rating-dynamic-programming-24",
-      "lc-rating-dynamic-programming-25",
-      "lc-rating-dynamic-programming-26",
-      "lc-rating-dynamic-programming-28",
-      "lc-rating-dynamic-programming-29",
-      "lc-rating-dynamic-programming-30",
-      "lc-rating-dynamic-programming-32",
-      "lc-rating-dynamic-programming-33",
-      "lc-rating-dynamic-programming-34",
-      "lc-rating-dynamic-programming-35",
-      "lc-rating-dynamic-programming-37",
-      "lc-rating-dynamic-programming-39",
-      "lc-rating-dynamic-programming-41",
-      "lc-rating-dynamic-programming-42",
-      "lc-rating-dynamic-programming-52",
-      "lc-rating-dynamic-programming-53",
-      "lc-rating-dynamic-programming-54",
-      "lc-rating-dynamic-programming-56",
-      "lc-rating-dynamic-programming-61",
-      "lc-rating-dynamic-programming-62",
-      "lc-rating-dynamic-programming-64",
-      "lc-rating-dynamic-programming-71",
-      "lc-rating-dynamic-programming-72",
-      "lc-rating-dynamic-programming-73",
-      "lc-rating-dynamic-programming-74",
-      "lc-rating-dynamic-programming-75",
-      "lc-rating-dynamic-programming-76",
-      "lc-rating-dynamic-programming-77",
-      "lc-rating-dynamic-programming-79",
-      "lc-rating-graph-9"
+      "dp-linear",
+      "dp-subsequence",
+      "dp-prefix-suffix",
+      "dp-knapsack",
+      "dp-interval",
+      "dp-memoization",
+      "dp-partition",
+      "dp-state-machine",
+      "dp-digit",
+      "dp-game",
+      "dp-prob-exp",
+      "dp-grid",
+      "dp-optimization"
     ]
   },
   {
@@ -604,27 +536,12 @@
       "⚠️ 對向雙指針忘了先排序，或移動了錯誤的一側（盛水問題該動短邊卻動長邊），會錯過最優解。"
     ],
     "children": [
-      "lc-rating-sliding-window-2",
-      "lc-rating-sliding-window-3",
-      "lc-rating-sliding-window-4",
-      "lc-rating-sliding-window-5",
-      "lc-rating-sliding-window-7",
-      "lc-rating-sliding-window-8",
-      "lc-rating-sliding-window-10",
-      "lc-rating-sliding-window-11",
-      "lc-rating-sliding-window-12",
-      "lc-rating-sliding-window-14",
-      "lc-rating-sliding-window-16",
-      "lc-rating-sliding-window-17",
-      "lc-rating-sliding-window-18",
-      "lc-rating-sliding-window-19",
-      "lc-rating-sliding-window-21",
-      "lc-rating-sliding-window-22",
-      "lc-rating-sliding-window-23",
-      "lc-rating-sliding-window-25",
-      "lc-rating-sliding-window-27",
-      "lc-rating-trees-9",
-      "lc-rating-trees-40"
+      "tp-opposite",
+      "tp-sliding-window",
+      "tp-fast-slow",
+      "tp-fixed-window",
+      "tp-two-sequence",
+      "tp-grouping-loop"
     ]
   },
   {
@@ -687,12 +604,9 @@
       "⚠️ 忘記路徑壓縮或按秩合併，最壞情況樹退化成鏈，單次 find 變 O(n)。"
     ],
     "children": [
-      "lc-rating-data-structure-54",
-      "lc-rating-data-structure-55",
-      "lc-rating-data-structure-56",
-      "lc-rating-data-structure-57",
-      "lc-rating-data-structure-58",
-      "lc-rating-data-structure-59"
+      "dsu-basic",
+      "dsu-weighted",
+      "dsu-extended"
     ]
   },
   {
@@ -755,8 +669,9 @@
       "⚠️ 邊界：根節點的祖先要設成自身或哨兵（如 0），否則 `up[root][k]` 越界或指到無效節點。"
     ],
     "children": [
-      "lc-rating-trees-22",
-      "lc-rating-trees-39"
+      "bl-lca",
+      "bl-kth-ancestor",
+      "bl-tarjan-lca"
     ]
   },
   {
@@ -839,18 +754,12 @@
       "⚠️ 柱狀圖忘了在末尾補一個高度 0（或遍歷到 n）強制清空棧，最後仍留在棧中的柱子不會被結算。"
     ],
     "children": [
-      "lc-rating-greedy-44",
-      "lc-rating-greedy-22",
-      "lc-rating-dynamic-programming-36",
-      "lc-rating-dynamic-programming-57",
-      "lc-rating-dynamic-programming-58",
-      "lc-rating-data-structure-39",
-      "lc-rating-monotonic-stack-2",
-      "lc-rating-monotonic-stack-3",
-      "lc-rating-monotonic-stack-5",
-      "lc-rating-monotonic-stack-6",
-      "lc-rating-monotonic-stack-8",
-      "lc-rating-math-25"
+      "ms-stack",
+      "ms-queue",
+      "ms-queue-dp",
+      "ms-histogram",
+      "ms-contribution",
+      "ms-lexicographic"
     ]
   },
   {
@@ -921,14 +830,11 @@
       "⚠️ 權值線段樹值域過大未離散化會 MLE／TLE；BIT 下標從 1 開始，`i & -i` 對 0 會死循環。"
     ],
     "children": [
-      "lc-rating-dynamic-programming-59",
-      "lc-rating-data-structure-61",
-      "lc-rating-data-structure-62",
-      "lc-rating-data-structure-63",
-      "lc-rating-data-structure-64",
-      "lc-rating-data-structure-65",
-      "lc-rating-data-structure-66",
-      "lc-rating-data-structure-67"
+      "st-fenwick",
+      "st-segment-tree",
+      "st-lazy",
+      "st-inversions",
+      "st-advanced"
     ]
   },
   {
@@ -1012,14 +918,9 @@
     ],
     "children": [
       "sp-bellman-ford",
-      "lc-rating-graph-5",
-      "lc-rating-graph-6",
-      "lc-rating-graph-12",
-      "lc-rating-graph-13",
-      "lc-rating-graph-14",
-      "lc-rating-graph-15",
-      "lc-rating-graph-16",
-      "lc-rating-grid-5"
+      "sp-dijkstra",
+      "sp-floyd",
+      "sp-01bfs"
     ]
   },
   {
@@ -1086,7 +987,130 @@
       "⚠️ 邊權可能相等，Kruskal 的正確性不依賴邊權唯一，任意同權邊的選擇都能得到一個合法的 MST。"
     ],
     "children": [
-      "lc-rating-graph-17"
+      "mst-kruskal",
+      "mst-prim",
+      "mst-second"
+    ]
+  },
+  {
+    "id": "linked-list",
+    "title": "鏈結串列（Linked List）",
+    "slug": "linked-list",
+    "description": "用節點與指標串起的線性結構，擅長 O(1) 插入／刪除，靠指標技巧處理遍歷、反轉與環。",
+    "motivation": "陣列能 O(1) 隨機存取，但在中間插入或刪除要搬移 O(n) 個元素。當資料會頻繁在任意位置增刪、且我們只需要循序存取時，這個搬移成本就難以承受。\n\n鏈結串列把「順序」交給指標而非連續記憶體：每個節點存值與 `next`（雙向再加 `prev`）。插入／刪除只要改幾個指標，O(1) 完成；代價是失去隨機存取、且所有操作都圍繞「指標不要斷、不要漏」這件事。競賽與面試裡，鏈結串列題的難點幾乎都在指標的邊界處理，而非演算法本身。",
+    "core_idea": "鏈結串列的所有技巧都圍繞兩個工具：**啞節點（dummy head）** 與 **多指標協同**。\n\n- **啞節點消除頭部特判**：在真正的頭前面接一個假節點 `dummy`，回傳 `dummy->next`。這樣「刪除頭節點」「在頭部插入」就和中間節點完全一致，省掉一堆 `if (head == null)`。\n- **快慢指標定位與判環**：`slow` 一次一步、`fast` 一次兩步。`fast` 到尾時 `slow` 在中點；若有環，兩者必在環內相遇（Floyd 判圈）。\n- **前後指標一次性反轉**：維護 `prev / cur / next` 三個指標逐節點翻轉 `next`，一趟 O(n) 完成反轉。\n\n關鍵心法：改指標前先把要用到的後繼存起來，否則一旦 `cur->next` 被改寫就再也找不回原本的下一個節點。",
+    "complexity": "遍歷／反轉／判環皆為時間 O(n)、空間 O(1)；以指標增刪單點為 O(1)。",
+    "deep_dive": [
+      {
+        "title": "啞節點：讓頭尾與中間一視同仁",
+        "body": "處理「刪除節點」「在某位置插入」「合併兩串列」時，頭節點往往要特判。引入 dummy 後，頭節點不再特殊。\n\n```cpp\nListNode* removeElements(ListNode* head, int val) {\n    ListNode dummy(0, head);\n    ListNode* cur = &dummy;\n    while (cur->next) {\n        if (cur->next->val == val) {\n            cur->next = cur->next->next; // 跳過待刪節點\n        } else {\n            cur = cur->next;\n        }\n    }\n    return dummy.next;\n}\n```\n\n刪除的核心是「用前驅節點繞過目標」：`cur->next = cur->next->next`。因為要拿到前驅，迴圈才以 `cur->next` 為判斷對象而非 `cur`。"
+      },
+      {
+        "title": "反轉：prev / cur / next 三指標",
+        "body": "反轉是鏈結串列最常考的子程序，務必背到能不假思索寫出。\n\n```cpp\nListNode* reverseList(ListNode* head) {\n    ListNode* prev = nullptr;\n    ListNode* cur = head;\n    while (cur) {\n        ListNode* nxt = cur->next; // 先存後繼\n        cur->next = prev;          // 翻轉指向\n        prev = cur;                // 整體右移\n        cur = nxt;\n    }\n    return prev; // 新的頭\n}\n```\n\n「反轉前 k 個」「每 k 個一組反轉」都是它的變體：先用啞節點框住要反轉的區段，反轉後再把區段兩端接回主串列。"
+      },
+      {
+        "title": "快慢指標：找中點、判環、找環入口",
+        "body": "快慢指標是 O(1) 空間解決「中點」「判環」「倒數第 k 個」的統一工具。\n\n```cpp\nListNode* detectCycle(ListNode* head) {\n    ListNode *slow = head, *fast = head;\n    while (fast && fast->next) {\n        slow = slow->next;\n        fast = fast->next->next;\n        if (slow == fast) {              // 相遇 → 有環\n            ListNode* p = head;\n            while (p != slow) { p = p->next; slow = slow->next; }\n            return p;                     // 環入口\n        }\n    }\n    return nullptr;\n}\n```\n\n相遇後，從頭與相遇點各派一個指標同速前進，再次相遇處即環入口（由 Floyd 判圈的距離等式推得）。找中點時只需讓 `fast` 走到尾，`slow` 即落在中點。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：鏈結串列",
+        "url": "https://oi-wiki.org/ds/linked-list/"
+      },
+      {
+        "label": "LeetCode：鏈結串列題集",
+        "url": "https://leetcode.cn/tag/linked-list/problemset/"
+      }
+    ],
+    "supplemental_patterns": [
+      {
+        "name": "快慢指標（環／中點）",
+        "description": "**何時用**：要在 O(1) 空間判環、找環入口、找中點或倒數第 k 個節點。\n**核心做法**：`fast` 兩步、`slow` 一步；相遇即有環，相遇後重置一指標到頭同速走可定位環入口。\n**複雜度**：時間 O(n)、空間 O(1)。"
+      },
+      {
+        "name": "啞節點 + 前驅操作",
+        "description": "**何時用**：刪除／插入可能涉及頭節點，或要回傳新頭。\n**核心做法**：接一個 dummy 在頭前，所有操作都透過「前驅節點」改 `next`，最後回傳 `dummy.next`。\n**複雜度**：時間 O(n)、空間 O(1)。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 改 `cur->next` 之前一定要先把原後繼存進暫存變數，否則節點會「斷鏈」遺失。",
+      "⚠️ 快慢指標的迴圈條件要寫 `fast && fast->next`，少一個就會對空指標解參考。",
+      "⚠️ 反轉或重接區段後，記得把斷開的尾節點 `next` 設為 `nullptr`，否則可能形成意外環。"
+    ],
+    "children": [
+      "ll-traverse",
+      "ll-delete",
+      "ll-insert",
+      "ll-reverse",
+      "ll-prev-next",
+      "ll-fast-slow",
+      "ll-merge",
+      "ll-divide",
+      "ll-misc"
+    ]
+  },
+  {
+    "id": "binary-tree",
+    "title": "二元樹（Binary Tree）",
+    "slug": "binary-tree",
+    "description": "以遞迴定義的階層結構，靠 DFS（前／中／後序）與 BFS（層序）拆解，BST 再額外維護有序性。",
+    "motivation": "很多問題本身就是階層的：表達式、檔案系統、決策過程、區間切分。二元樹用「每個節點至多兩個孩子」這個最簡單的遞迴結構，把這類問題的子結構顯式地表達出來。\n\n二元樹題目的核心難點不在資料結構，而在於**想清楚資訊在遞迴中的流向**：是父層把資訊往下帶（自頂向下），還是子層把答案往上回傳（自底向上）。選錯方向，程式碼就會又長又難寫。",
+    "core_idea": "二元樹的所有遍歷都是同一個 DFS 框架在「處理節點」這一步擺放的位置不同，外加一個用佇列的層序 BFS。\n\n- **自頂向下（前序）**：父節點把已知資訊當參數傳給子節點，常用於「路徑」「深度」類問題。\n- **自底向上（後序）**：先遞迴左右子樹拿到子問題答案，再合併出當前答案並回傳，常用於「高度」「直徑」「子樹聚合」。\n- **層序（BFS）**：用佇列一層一層展開，天然處理「每層」「最右節點」「之字形」類問題。\n- **BST 的額外不變式**：左子樹全部 < 根 < 右子樹全部，因此 BST 的**中序遍歷遞增**，這條性質是幾乎所有 BST 題的鑰匙。",
+    "complexity": "DFS／BFS 遍歷時間 O(n)、空間 O(h)（h 為樹高，遞迴堆疊或佇列）；平衡時 h = O(log n)，退化時 h = O(n)。",
+    "deep_dive": [
+      {
+        "title": "一套 DFS 框架，三種遍歷次序",
+        "body": "前／中／後序的差別只是「處理當前節點」相對於遞迴左右孩子的位置。\n\n```cpp\nvoid dfs(TreeNode* node) {\n    if (!node) return;\n    // 前序：visit(node);\n    dfs(node->left);\n    // 中序：visit(node);  // BST → 遞增序列\n    dfs(node->right);\n    // 後序：visit(node);  // 子樹資訊都已就緒\n}\n```\n\n判斷該用哪一種：問題若需要「先用父層資訊」走前序；若需要「先得到子樹答案再合併」走後序；BST 求第 k 小、驗證合法性走中序。"
+      },
+      {
+        "title": "自底向上 DFS：用回傳值聚合子樹",
+        "body": "許多「全域最優」問題（最大路徑和、直徑、最近公共祖先）用後序一趟解決：遞迴回傳「以當前節點為端點」的局部量，同時用全域變數更新「跨過當前節點」的答案。\n\n```cpp\nint best = INT_MIN;\nint gain(TreeNode* node) {        // 回傳：從 node 向下延伸的最大鏈和\n    if (!node) return 0;\n    int l = max(gain(node->left), 0);\n    int r = max(gain(node->right), 0);\n    best = max(best, node->val + l + r); // 跨過 node 的路徑\n    return node->val + max(l, r);        // 只能選一邊往上接\n}\n```\n\n關鍵在於區分兩種量：**回傳給父層的**（只能單邊延伸）與**用來更新答案的**（可左右合併）。直徑題把 `node->val` 換成邊數 1 即可。"
+      },
+      {
+        "title": "層序 BFS 與 BST 中序",
+        "body": "BFS 用佇列逐層展開，常見需求是「按層分組」「找每層最右」。\n\n```cpp\nvector<vector<int>> levelOrder(TreeNode* root) {\n    vector<vector<int>> res;\n    if (!root) return res;\n    queue<TreeNode*> q; q.push(root);\n    while (!q.empty()) {\n        int sz = q.size();\n        vector<int> level;\n        for (int i = 0; i < sz; i++) {\n            TreeNode* x = q.front(); q.pop();\n            level.push_back(x->val);\n            if (x->left) q.push(x->left);\n            if (x->right) q.push(x->right);\n        }\n        res.push_back(level);\n    }\n    return res;\n}\n```\n\n迴圈開頭固定 `sz = q.size()`，就能精準切分「這一層有哪些節點」。對 BST，把上面 DFS 框架的 visit 放在中序位置，得到的序列必然遞增，可用來驗證合法性或找第 k 小。"
+      }
+    ],
+    "reference_links": [
+      {
+        "label": "OI-Wiki：二元樹基礎",
+        "url": "https://oi-wiki.org/ds/binary-tree/"
+      },
+      {
+        "label": "OI-Wiki：二元搜尋樹",
+        "url": "https://oi-wiki.org/ds/bst/"
+      },
+      {
+        "label": "LeetCode：二元樹題集",
+        "url": "https://leetcode.cn/tag/binary-tree/problemset/"
+      }
+    ],
+    "supplemental_patterns": [
+      {
+        "name": "自底向上回傳 + 全域更新",
+        "description": "**何時用**：求直徑、最大路徑和、最近公共祖先等「跨節點」的全域最優。\n**核心做法**：後序遞迴回傳「單邊延伸量」給父層，另用全域變數記錄「左右合併量」。\n**複雜度**：時間 O(n)、空間 O(h)。"
+      },
+      {
+        "name": "BST 中序有序性",
+        "description": "**何時用**：驗證 BST、求第 k 小／大、找最接近值、區間計數。\n**核心做法**：中序遍歷得到遞增序列；可在遍歷中維護前驅、計數提前剪枝。\n**複雜度**：時間 O(n)、空間 O(h)。"
+      }
+    ],
+    "pitfalls": [
+      "⚠️ 遞迴一定要先處理 `node == nullptr` 的邊界，否則會對空節點解參考。",
+      "⚠️ 自底向上題要分清「回傳給父層的量（只能單邊）」與「更新答案的量（可雙邊合併）」，混用會算錯。",
+      "⚠️ 驗證 BST 不能只比較父子，要傳遞 (min, max) 範圍或用中序遞增性，否則跨層違規會漏判。"
+    ],
+    "children": [
+      "btree-traverse",
+      "btree-topdown",
+      "btree-bottomup",
+      "btree-bst",
+      "btree-construct",
+      "btree-bfs",
+      "btree-nary",
+      "btree-misc"
     ]
   },
   {
@@ -1161,48 +1185,12 @@
       "⚠️ 樹上背包的枚舉順序：對子節點做背包合併時，外層枚舉已合併的大小，內層枚舉新加入子樹的大小，避免重複計算。"
     ],
     "children": [
-      "lc-rating-dynamic-programming-66",
-      "lc-rating-dynamic-programming-67",
-      "lc-rating-dynamic-programming-68",
-      "lc-rating-dynamic-programming-69",
-      "lc-rating-dynamic-programming-70",
-      "lc-rating-trees-3",
-      "lc-rating-trees-4",
-      "lc-rating-trees-5",
-      "lc-rating-trees-6",
-      "lc-rating-trees-7",
-      "lc-rating-trees-8",
-      "lc-rating-trees-10",
-      "lc-rating-trees-11",
-      "lc-rating-trees-12",
-      "lc-rating-trees-13",
-      "lc-rating-trees-15",
-      "lc-rating-trees-16",
-      "lc-rating-trees-17",
-      "lc-rating-trees-18",
-      "lc-rating-trees-19",
-      "lc-rating-trees-20",
-      "lc-rating-trees-21",
-      "lc-rating-trees-23",
-      "lc-rating-trees-24",
-      "lc-rating-trees-25",
-      "lc-rating-trees-26",
-      "lc-rating-trees-27",
-      "lc-rating-trees-28",
-      "lc-rating-trees-29",
-      "lc-rating-trees-30",
-      "lc-rating-trees-32",
-      "lc-rating-trees-33",
-      "lc-rating-trees-34",
-      "lc-rating-trees-35",
-      "lc-rating-trees-36",
-      "lc-rating-trees-37",
-      "lc-rating-trees-38",
-      "lc-rating-trees-55",
-      "lc-rating-trees-41",
-      "lc-rating-trees-42",
-      "lc-rating-trees-43",
-      "lc-rating-trees-54"
+      "td-independent-set",
+      "td-rerooting",
+      "td-diameter",
+      "td-tree-knapsack",
+      "td-dominating-set",
+      "td-advanced"
     ]
   },
   {
@@ -1298,25 +1286,11 @@
       "string-hashing",
       "string-trie",
       "string-suffix-array",
-      "lc-rating-dynamic-programming-60",
-      "lc-rating-data-structure-12",
-      "lc-rating-data-structure-19",
-      "lc-rating-data-structure-49",
-      "lc-rating-data-structure-50",
-      "lc-rating-data-structure-51",
-      "lc-rating-data-structure-52",
-      "lc-rating-sliding-window-13",
-      "lc-rating-string-4",
-      "lc-rating-string-6",
-      "lc-rating-string-7",
-      "lc-rating-string-9",
-      "lc-rating-string-10",
-      "lc-rating-string-12",
-      "lc-rating-string-14",
-      "lc-rating-string-17",
-      "lc-rating-string-19",
-      "lc-rating-string-21",
-      "lc-rating-string-23"
+      "string-manacher",
+      "string-aho-corasick",
+      "string-subseq-automaton",
+      "string-min-rotation",
+      "string-01trie"
     ]
   },
   {
@@ -1399,38 +1373,16 @@
       "⚠️ 取模後不能直接做除法：`(a/b) % p ≠ (a%p) / (b%p)`，必須乘以 b 的模逆元。"
     ],
     "children": [
-      "lc-rating-greedy-31",
-      "lc-rating-math-2",
-      "lc-rating-math-3",
-      "lc-rating-math-4",
-      "lc-rating-math-5",
-      "lc-rating-math-6",
-      "lc-rating-math-7",
-      "lc-rating-math-8",
-      "lc-rating-math-9",
-      "lc-rating-math-10",
-      "lc-rating-math-11",
-      "lc-rating-math-12",
-      "lc-rating-math-13",
-      "lc-rating-math-14",
-      "lc-rating-math-16",
-      "lc-rating-math-18",
-      "lc-rating-math-19",
-      "lc-rating-math-20",
-      "lc-rating-math-21",
-      "lc-rating-math-22",
-      "lc-rating-math-23",
-      "lc-rating-math-24",
-      "lc-rating-math-26",
-      "lc-rating-math-27",
-      "lc-rating-math-28",
-      "lc-rating-math-29",
-      "lc-rating-math-30",
-      "lc-rating-math-31",
-      "lc-rating-math-32",
-      "lc-rating-math-33",
-      "lc-rating-math-34",
-      "lc-rating-math-35"
+      "mt-sieve",
+      "mt-gcd-exgcd",
+      "mt-fast-pow",
+      "mt-inverse-comb",
+      "mt-crt",
+      "mt-combinatorics",
+      "mt-counting",
+      "mt-game-sg",
+      "mt-factor",
+      "mt-advanced"
     ]
   },
   {
@@ -1501,24 +1453,13 @@
       "⚠️ SOS DP 中外層迴圈是「枚舉位元 i」而非「枚舉集合 S」，順序不能對調，否則每個位元的貢獻會被重複累加。"
     ],
     "children": [
-      "lc-rating-dynamic-programming-46",
-      "lc-rating-dynamic-programming-48",
-      "lc-rating-dynamic-programming-49",
-      "lc-rating-dynamic-programming-50",
-      "lc-rating-bitwise-operations-16",
-      "lc-rating-bitwise-operations-3",
-      "lc-rating-bitwise-operations-4",
-      "lc-rating-bitwise-operations-5",
-      "lc-rating-bitwise-operations-17",
-      "lc-rating-bitwise-operations-7",
-      "lc-rating-bitwise-operations-8",
-      "lc-rating-bitwise-operations-18",
-      "lc-rating-bitwise-operations-10",
-      "lc-rating-bitwise-operations-11",
-      "lc-rating-bitwise-operations-12",
-      "lc-rating-bitwise-operations-13",
-      "lc-rating-bitwise-operations-14",
-      "lc-rating-bitwise-operations-15"
+      "bm-bit-tricks",
+      "bm-tsp",
+      "bm-sos",
+      "bm-bit-basics",
+      "bm-bit-greedy",
+      "bm-profile",
+      "bm-linear-basis"
     ]
   },
   {
@@ -1579,6 +1520,12 @@
       "⚠️ 整數座標可以用 `long long` 避免浮點誤差，優先使用整數版本的叉積；實數幾何必要時加 eps。",
       "⚠️ 凸包中 `cross <= 0` 會移除共線點；若題目要求保留共線點（如統計邊界上的整點），改成 `cross < 0`。",
       "⚠️ 旋轉卡殼要在凸包（而非原始點集）上執行，且凸包點需要按逆時針（或順時針）排列。"
+    ],
+    "children": [
+      "cg-vector",
+      "cg-convex-hull",
+      "cg-segment-intersection",
+      "cg-closest-pair"
     ]
   },
   {
@@ -1637,32 +1584,14 @@
       "⚠️ 若局部最優無法保證全域，應改用 DP 而非硬湊貪心。"
     ],
     "children": [
-      "lc-rating-greedy-2",
-      "lc-rating-greedy-4",
-      "lc-rating-greedy-5",
-      "lc-rating-greedy-6",
-      "lc-rating-greedy-8",
-      "lc-rating-greedy-43",
-      "lc-rating-greedy-11",
-      "lc-rating-greedy-12",
-      "lc-rating-greedy-14",
-      "lc-rating-greedy-23",
-      "lc-rating-greedy-24",
-      "lc-rating-greedy-25",
-      "lc-rating-greedy-28",
-      "lc-rating-greedy-29",
-      "lc-rating-greedy-30",
-      "lc-rating-greedy-32",
-      "lc-rating-greedy-33",
-      "lc-rating-greedy-34",
-      "lc-rating-greedy-45",
-      "lc-rating-greedy-36",
-      "lc-rating-greedy-37",
-      "lc-rating-greedy-38",
-      "lc-rating-greedy-39",
-      "lc-rating-greedy-40",
-      "lc-rating-greedy-41",
-      "lc-rating-greedy-42"
+      "gr-exchange",
+      "gr-extremes",
+      "gr-regret",
+      "gr-lexicographic",
+      "gr-construct",
+      "gr-reverse",
+      "gr-casework",
+      "gr-thinking"
     ]
   },
   {
@@ -1733,20 +1662,12 @@
       "⚠️ 記錄答案時要存路徑「副本」（值拷貝），存引用會在回溯後被改掉。"
     ],
     "children": [
-      "lc-rating-dynamic-programming-44",
-      "lc-rating-dynamic-programming-45",
-      "lc-rating-dynamic-programming-47",
-      "lc-rating-graph-2",
-      "lc-rating-graph-4",
-      "lc-rating-math-15",
-      "lc-rating-trees-45",
-      "lc-rating-trees-46",
-      "lc-rating-trees-47",
-      "lc-rating-trees-48",
-      "lc-rating-trees-49",
-      "lc-rating-trees-50",
-      "lc-rating-trees-51",
-      "lc-rating-trees-52"
+      "bt-subsets",
+      "bt-permutations",
+      "bt-combinations",
+      "bt-pruning",
+      "bt-partition",
+      "bt-meet-in-middle"
     ]
   },
   {
@@ -1801,8 +1722,9 @@
       "⚠️ 容量與流量可能很大，用 `long long`；建模時別把「最大化」誤接成最小割方向。"
     ],
     "children": [
-      "lc-rating-graph-25",
-      "lc-rating-graph-23"
+      "nf-maxflow",
+      "nf-mincut",
+      "nf-bipartite-matching"
     ]
   }
 ]
