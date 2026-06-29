@@ -191,7 +191,7 @@
       },
       {
         "name": "Dijkstra 最短路",
-        "description": "**何時用**：邊權非負的單源最短路。\n**核心做法**：最小堆維護 `(dist, node)`，每次 pop 出距離最小的節點進行鬆弛；用懶刪除跳過過期節點。\n**複雜度**：O((V+E) log V)（二元堆）。\n⚠️ 負邊不能用 Dijkstra，需改用 Bellman-Ford 或 SPFA。"
+        "description": "**何時用**：邊權非負的單源最短路。\n**核心做法**：min-heap 維護 `(dist, node)`，每次 pop 出距離最小的節點進行鬆弛；用懶刪除跳過過期節點。\n**複雜度**：O((V+E) log V)（二元堆）。\n⚠️ 負邊不能用 Dijkstra，需改用 Bellman-Ford 或 SPFA。"
       }
     ],
     "pitfalls": [
@@ -269,11 +269,11 @@
       },
       {
         "name": "會議室問題（最多同時重疊）",
-        "description": "**何時用**：求最多有幾個區間同時重疊（最少會議室數）。\n**核心做法**：按 start 排序，用最小堆存放進行中會議的結束時間；處理新會議時若堆頂結束時間 ≤ 新 start，pop 再 push（複用一間），否則直接 push（新增一間）；堆的最大尺寸即答案。這等同於把端點拆成事件後做掃描。\n**複雜度**：O(n log n)。"
+        "description": "**何時用**：求最多有幾個區間同時重疊（最少會議室數）。\n**核心做法**：按 start 排序，用 min-heap 存放進行中會議的結束時間；處理新會議時若堆頂結束時間 ≤ 新 start，pop 再 push（複用一間），否則直接 push（新增一間）；堆的最大尺寸即答案。這等同於把端點拆成事件後做掃描。\n**複雜度**：O(n log n)。"
       },
       {
         "name": "覆蓋 K 個清單的最小區間",
-        "description": "**何時用**：給 k 個各自有序的清單，求一個最小區間使其至少各含一個元素。\n**核心做法**：把每個清單的當前最小值放進最小堆（多路合併），維護目前堆中最大值；每次取出最小值更新答案區間 `[min, max]`，再從它所屬清單補入下一個——本質是堆 + 滑動視窗思維。\n**複雜度**：O(N log k)，N 為元素總數。"
+        "description": "**何時用**：給 k 個各自有序的清單，求一個最小區間使其至少各含一個元素。\n**核心做法**：把每個清單的當前最小值放進 min-heap（多路合併），維護目前堆中最大值；每次取出最小值更新答案區間 `[min, max]`，再從它所屬清單補入下一個——本質是堆 + 滑動視窗思維。\n**複雜度**：O(N log k)，N 為元素總數。"
       },
       {
         "name": "按 end 排序貪心（最少移除）",
@@ -301,16 +301,16 @@
   },
   {
     "id": "heap-priority-queue",
-    "title": "堆積／優先佇列",
+    "title": "heap／優先佇列",
     "slug": "heap-priority-queue",
     "description": "維護動態集合中的最大值或最小值，支援即時取出最佳候選。",
     "motivation": "很多貪心、排程、資料流問題需要『反覆取出目前最小／最大的元素，同時還會不斷插入新元素』。若每次都重新排序是 O(n log n)、每次線性掃描找極值是 O(n)，在動態插入下都太慢。難點在於：集合一直在變，我們卻只關心『當前的極值』與『動態維護它』。\n\n堆（heap）正是為此而生——push/pop 都只要 O(log n)，取極值 O(1)。",
-    "core_idea": "堆適合反覆取出當前最小或最大元素，常見於排程、貪心、最短路（Dijkstra／Prim）與資料流中位數。\n\n- **為什麼需要堆？** 完整排序一次是 O(n log n)，但很多題目只需要 top-k 或要邊插入邊取極值；堆用 O(log n) 的 push/pop 支援動態操作，比每次重排序划算得多。\n- **C++ 語法提醒**：`priority_queue<int>` 預設是**大根堆**（最大值在頂）。要小根堆需寫 `priority_queue<int, vector<int>, greater<int>>`，否則容易把 Dijkstra 寫反。\n\n當元素會失效又無法直接刪除時，常搭配『懶刪除』；下面的過程剖析與補充套路會展開多路合併、貪心排程與懶刪除三種用法。",
+    "core_idea": "堆適合反覆取出當前最小或最大元素，常見於排程、貪心、最短路（Dijkstra／Prim）與資料流中位數。\n\n- **為什麼需要堆？** 完整排序一次是 O(n log n)，但很多題目只需要 top-k 或要邊插入邊取極值；堆用 O(log n) 的 push/pop 支援動態操作，比每次重排序划算得多。\n- **C++ 語法提醒**：`priority_queue<int>` 預設是**max-heap**（最大值在頂）。要 min-heap 需寫 `priority_queue<int, vector<int>, greater<int>>`，否則容易把 Dijkstra 寫反。\n\n當元素會失效又無法直接刪除時，常搭配『懶刪除』；下面的過程剖析與補充套路會展開多路合併、貪心排程與懶刪除三種用法。",
     "complexity": "每次 push 或 pop 為 O(log n)，查詢堆頂為 O(1)，空間複雜度 O(n)。",
     "deep_dive": [
       {
         "title": "堆的不變式與 C++ 優先佇列方向",
-        "body": "堆只保證堆頂是目前最大或最小元素，不保證整體有序。這正是它比排序更適合動態場景的原因：每次只需要知道下一個最優候選，而不需要維護完整排序。\n\nC++ 的 `priority_queue<int>` 預設是大根堆，堆頂最大；若要小根堆，要把比較器反過來：\n\n```cpp\npriority_queue<int> max_heap;\npriority_queue<int, vector<int>, greater<int>> min_heap;\npriority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;\n```\n\n`pair` 會先比第一維，再比第二維，所以 Dijkstra 常放 `{dist, node}`。堆的不變式是：每次 `top()` 都是目前容器中的最小距離候選。只要每次彈出堆頂後再產生新的候選，演算法就能用局部最小推進整體流程。單次 `push` / `pop` 是 O(log n)，取堆頂 O(1)。"
+        "body": "堆只保證堆頂是目前最大或最小元素，不保證整體有序。這正是它比排序更適合動態場景的原因：每次只需要知道下一個最優候選，而不需要維護完整排序。\n\nC++ 的 `priority_queue<int>` 預設是 max-heap，堆頂最大；若要 min-heap，要把比較器反過來：\n\n```cpp\npriority_queue<int> max_heap;\npriority_queue<int, vector<int>, greater<int>> min_heap;\npriority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;\n```\n\n`pair` 會先比第一維，再比第二維，所以 Dijkstra 常放 `{dist, node}`。堆的不變式是：每次 `top()` 都是目前容器中的最小距離候選。只要每次彈出堆頂後再產生新的候選，演算法就能用局部最小推進整體流程。單次 `push` / `pop` 是 O(log n)，取堆頂 O(1)。"
       },
       {
         "title": "懶刪除：不用刪舊值也能保持正確",
@@ -356,7 +356,7 @@
     "pitfalls": [
       "⚠️ `priority_queue` 沒有 `decrease-key`，Dijkstra 不能就地更新舊距離，必須用懶刪除（push 新值，pop 時比對丟棄過期條目）。",
       "⚠️ 存 `pair` 時預設先比 `first`、再比 `second`；若想按 `second` 排序必須自訂 comparator，否則排序鍵搞錯。",
-      "⚠️ 忘了 `greater<>` 而誤用預設大根堆，會把『取最小』寫成『取最大』——Dijkstra 會完全錯誤。"
+      "⚠️ 忘了 `greater<>` 而誤用預設 max-heap，會把『取最小』寫成『取最大』——Dijkstra 會完全錯誤。"
     ],
     "children": [
       "hp-binary-heap",
@@ -929,7 +929,7 @@
     "slug": "minimum-spanning-tree",
     "description": "在帶權無向連通圖中找邊權總和最小的生成樹，掌握 Kruskal 與 Prim 兩種策略。",
     "motivation": "連通所有節點的網路設計（如電纜鋪設、道路規劃）希望總成本最小。暴力枚舉所有生成樹是指數級；難點在於如何貪心地「每次加邊都不後悔」。",
-    "core_idea": "MST 的兩個核心定理：\n\n- **切割性質（Cut Property）**：對任意切割，跨越切割的最小邊一定在某個 MST 中。\n- **環性質（Cycle Property）**：任意環上的最大邊不屬於任何 MST。\n\n**Kruskal**：按邊權從小到大排序，逐條用 DSU 判斷加入是否成環，不成環則加入。基於切割性質。\n\n**Prim**：從任意節點出發，每次貪心選距離當前樹最近的節點加入，用最小堆維護候選邊。思路類似 Dijkstra。",
+    "core_idea": "MST 的兩個核心定理：\n\n- **切割性質（Cut Property）**：對任意切割，跨越切割的最小邊一定在某個 MST 中。\n- **環性質（Cycle Property）**：任意環上的最大邊不屬於任何 MST。\n\n**Kruskal**：按邊權從小到大排序，逐條用 DSU 判斷加入是否成環，不成環則加入。基於切割性質。\n\n**Prim**：從任意節點出發，每次貪心選距離當前樹最近的節點加入，用 min-heap 維護候選邊。思路類似 Dijkstra。",
     "complexity": "Kruskal O(E log E)；Prim（二元堆）O((V+E) log V)；稠密圖 Prim 可用 O(V²) 實作。",
     "deep_dive": [
       {

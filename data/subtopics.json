@@ -3775,7 +3775,7 @@
       },
       {
         "title": "0-1 BFS（Deque BFS）",
-        "body": "```cpp\n// 0-1 BFS: edges have weight 0 or 1 only\n// g[u] = {(v, w)} where w is 0 or 1\n// src: source node index.\n// n: number of nodes or elements.\n// g: grid or adjacency structure used by the algorithm.\nvector<int> bfs01(int src, int n, const vector<vector<pair<int, int>>>& g) {\n    vector<int> dist(n, INT_MAX);\n    deque<int> dq;\n    dist[src] = 0;\n    dq.push_back(src);\n    while (!dq.empty()) {\n        int u = dq.front();\n        dq.pop_front();\n        for (auto [v, w] : g[u]) {\n            if (dist[u] + w < dist[v]) {\n                dist[v] = dist[u] + w;\n                if (w == 0) {\n                    dq.push_front(v);  // Same layer: push to front\n                }\n                else {\n                    dq.push_back(v);  // Next layer:  push to back\n                }\n            }\n        }\n    }\n    return dist;\n}\n```\n邊權 0 的鄰居從**前端**插入確保先被處理（當前層）；邊權 1 的鄰居從**後端**插入（下一層）。deque 中元素的距離始終非遞減，等效於最小堆但每次操作為 O(1)，整體 O(n + m)。"
+        "body": "```cpp\n// 0-1 BFS: edges have weight 0 or 1 only\n// g[u] = {(v, w)} where w is 0 or 1\n// src: source node index.\n// n: number of nodes or elements.\n// g: grid or adjacency structure used by the algorithm.\nvector<int> bfs01(int src, int n, const vector<vector<pair<int, int>>>& g) {\n    vector<int> dist(n, INT_MAX);\n    deque<int> dq;\n    dist[src] = 0;\n    dq.push_back(src);\n    while (!dq.empty()) {\n        int u = dq.front();\n        dq.pop_front();\n        for (auto [v, w] : g[u]) {\n            if (dist[u] + w < dist[v]) {\n                dist[v] = dist[u] + w;\n                if (w == 0) {\n                    dq.push_front(v);  // Same layer: push to front\n                }\n                else {\n                    dq.push_back(v);  // Next layer:  push to back\n                }\n            }\n        }\n    }\n    return dist;\n}\n```\n邊權 0 的鄰居從**前端**插入確保先被處理（當前層）；邊權 1 的鄰居從**後端**插入（下一層）。deque 中元素的距離始終非遞減，等效於 min-heap 但每次操作為 O(1)，整體 O(n + m)。"
       }
     ],
     "reference_links": [
@@ -4057,12 +4057,12 @@
     "title": "拓撲排序",
     "slug": "topological-sort",
     "description": "對有向無環圖（DAG）找出符合所有依賴關係的線性節點排列，常用 Kahn 算法（BFS）或 DFS 後序完成。",
-    "core_idea": "拓撲排序要求對每條有向邊 (u → v)，u 必須出現在 v 之前。**Kahn 算法**維護入度為 0 的節點佇列：每次取出一個入度為 0 的節點加入結果序列，並將其出邊鄰居的入度各減 1，若降至 0 則入隊。若最終結果包含所有 n 個節點，圖為 DAG；否則存在有向環，無合法拓撲序。\n\n**DFS 後序**：DFS 遞迴搜尋時，節點在**所有後繼節點都訪問完畢後**才被推入結果堆疊，最後反轉即為拓撲序。DFS 法可自然偵測有向環（灰色節點被再次訪問）。\n\n兩者複雜度相同，但 Kahn 算法輸出字典序最小拓撲序更直接（改用最小堆），DFS 法則方便遞迴 DP 的計算順序推導。",
+    "core_idea": "拓撲排序要求對每條有向邊 (u → v)，u 必須出現在 v 之前。**Kahn 算法**維護入度為 0 的節點佇列：每次取出一個入度為 0 的節點加入結果序列，並將其出邊鄰居的入度各減 1，若降至 0 則入隊。若最終結果包含所有 n 個節點，圖為 DAG；否則存在有向環，無合法拓撲序。\n\n**DFS 後序**：DFS 遞迴搜尋時，節點在**所有後繼節點都訪問完畢後**才被推入結果堆疊，最後反轉即為拓撲序。DFS 法可自然偵測有向環（灰色節點被再次訪問）。\n\n兩者複雜度相同，但 Kahn 算法輸出字典序最小拓撲序更直接（改用 min-heap），DFS 法則方便遞迴 DP 的計算順序推導。",
     "complexity": "時間 O(n + m)，空間 O(n + m)。",
     "deep_dive": [
       {
         "title": "Kahn 算法（BFS 拓撲）",
-        "body": "```cpp\n// Kahn's topological sort; returns empty vector if cycle exists\n// n: number of nodes or elements.\n// g: grid or adjacency structure used by the algorithm.\nvector<int> kahnTopoSort(int n, const vector<vector<int>>& g) {\n    vector<int> indegree(n, 0);\n    for (int u = 0; u < n; u++) {\n        for (int v : g[u]) {\n            indegree[v]++;\n        }\n    }\n    queue<int> q;\n    for (int i = 0; i < n; i++) {\n        if (indegree[i] == 0) {\n            q.push(i);\n        }\n    }\n\n    vector<int> order;\n    while (!q.empty()) {\n        int u = q.front();\n        q.pop();\n        order.push_back(u);\n        for (int v : g[u]) {\n            if (--indegree[v] == 0) {\n                q.push(v);\n            }\n        }\n    }\n    return order;  // order.size() < n means cycle detected\n}\n```\n若需輸出**字典序最小**的拓撲序，將 `queue` 改為 `priority_queue<int, vector<int>, greater<int>>`（最小堆），每次取出入度 0 中編號最小的節點，時間複雜度增加為 O((n + m) log n)。"
+        "body": "```cpp\n// Kahn's topological sort; returns empty vector if cycle exists\n// n: number of nodes or elements.\n// g: grid or adjacency structure used by the algorithm.\nvector<int> kahnTopoSort(int n, const vector<vector<int>>& g) {\n    vector<int> indegree(n, 0);\n    for (int u = 0; u < n; u++) {\n        for (int v : g[u]) {\n            indegree[v]++;\n        }\n    }\n    queue<int> q;\n    for (int i = 0; i < n; i++) {\n        if (indegree[i] == 0) {\n            q.push(i);\n        }\n    }\n\n    vector<int> order;\n    while (!q.empty()) {\n        int u = q.front();\n        q.pop();\n        order.push_back(u);\n        for (int v : g[u]) {\n            if (--indegree[v] == 0) {\n                q.push(v);\n            }\n        }\n    }\n    return order;  // order.size() < n means cycle detected\n}\n```\n若需輸出**字典序最小**的拓撲序，將 `queue` 改為 `priority_queue<int, vector<int>, greater<int>>`（min-heap），每次取出入度 0 中編號最小的節點，時間複雜度增加為 O((n + m) log n)。"
       },
       {
         "title": "DFS 後序拓撲與有向環偵測",
@@ -4322,10 +4322,10 @@
   {
     "id": "hp-binary-heap",
     "parent_id": "heap-priority-queue",
-    "title": "二元堆積原理與實作",
+    "title": "二元 heap 原理與實作",
     "slug": "binary-heap",
-    "description": "二元堆積把完全二元樹壓成 1-indexed 陣列，透過 `siftUp`／`siftDown` 維持堆序，讓插入與取出最大值都能在 O(log n) 完成。",
-    "core_idea": "二元堆積的本體是一棵 **完全二元樹**，因此可以直接塞進 `1` 起始的陣列：`parent(i)=i/2`、`left(i)=2*i`、`right(i)=2*i+1`。對 **大根堆** 而言，我們維持 `heap[parent] >= heap[child]`，所以根節點永遠是目前最大值；這也是 `top()` 能做到 O(1) 的根本原因。\n\n插入時先把新值放到陣列尾端，也就是完全二元樹的下一個空位，接著做 `siftUp`：只要它比父節點更大，就一路交換往上冒。刪除最大值時則把根與最後一個元素交換、刪掉尾端，再從根做 `siftDown`：若目前節點比兩個孩子中的較大者還小，就和那個孩子交換直到堆序恢復。**為什麼是 O(log n)**？因為每次只沿著一條樹高方向移動，而完全二元樹高度就是 `floor(log2 n)`。\n\n若一開始就有整個陣列，不要逐個 `push` 來建堆；更快的做法是 **Floyd 建堆**：先把值依序放進陣列，再從 `n/2` 反向對每個內部節點做 `siftDown`。葉節點本來就已經滿足堆序，真正需要整理的是上層節點；所有節點高度總和加起來只會是 O(n)，所以整體建堆是 `O(n)` 而不是 `O(n log n)`。",
+    "description": "二元 heap 把完全二元樹壓成 1-indexed 陣列，透過 `siftUp`／`siftDown` 維持堆序，讓插入與取出最大值都能在 O(log n) 完成。",
+    "core_idea": "二元 heap 的本體是一棵 **完全二元樹**，因此可以直接塞進 `1` 起始的陣列：`parent(i)=i/2`、`left(i)=2*i`、`right(i)=2*i+1`。對 **max-heap** 而言，我們維持 `heap[parent] >= heap[child]`，所以根節點永遠是目前最大值；這也是 `top()` 能做到 O(1) 的根本原因。\n\n插入時先把新值放到陣列尾端，也就是完全二元樹的下一個空位，接著做 `siftUp`：只要它比父節點更大，就一路交換往上冒。刪除最大值時則把根與最後一個元素交換、刪掉尾端，再從根做 `siftDown`：若目前節點比兩個孩子中的較大者還小，就和那個孩子交換直到堆序恢復。**為什麼是 O(log n)**？因為每次只沿著一條樹高方向移動，而完全二元樹高度就是 `floor(log2 n)`。\n\n若一開始就有整個陣列，不要逐個 `push` 來建堆；更快的做法是 **Floyd 建堆**：先把值依序放進陣列，再從 `n/2` 反向對每個內部節點做 `siftDown`。葉節點本來就已經滿足堆序，真正需要整理的是上層節點；所有節點高度總和加起來只會是 O(n)，所以整體建堆是 `O(n)` 而不是 `O(n log n)`。",
     "complexity": "插入 O(log n)，取出最大值 O(log n)，建堆 O(n)，查詢最大值 O(1)，空間 O(n)。",
     "deep_dive": [
       {
@@ -4339,23 +4339,23 @@
     ],
     "reference_links": [
       {
-        "label": "OI-Wiki：二元堆積原理與實作",
+        "label": "OI-Wiki：二元 heap 原理與實作",
         "url": "https://oi-wiki.org/ds/binary-heap/"
       }
     ],
     "supplemental_patterns": [
       {
         "name": "多路合併（k-way merge）",
-        "description": "**觸發**：有 `k` 個已排序陣列或鏈表，要持續取出全域最小值。\n**做法**：改用小根堆存每一路目前的表頭 `(value, which, idx)`，每次彈出最小值後再把同一路下一個元素推回堆中，總時間 O(總元素數 log k)。"
+        "description": "**觸發**：有 `k` 個已排序陣列或鏈表，要持續取出全域最小值。\n**做法**：改用 min-heap 存每一路目前的表頭 `(value, which, idx)`，每次彈出最小值後再把同一路下一個元素推回堆中，總時間 O(總元素數 log k)。"
       },
       {
         "name": "優先佇列加速 Dijkstra",
-        "description": "**觸發**：圖上邊權非負，要反覆取出目前距離最小的節點。\n**做法**：用 `priority_queue<pair<long long,int>, vector<pair<long long,int>>, greater<pair<long long,int>>>` 當小根堆，存 `(dist, node)`；鬆弛成功就推入新距離，搭配 `if (d != dist[u]) continue;` 跳過舊狀態。"
+        "description": "**觸發**：圖上邊權非負，要反覆取出目前距離最小的節點。\n**做法**：用 `priority_queue<pair<long long,int>, vector<pair<long long,int>>, greater<pair<long long,int>>>` 當 min-heap，存 `(dist, node)`；鬆弛成功就推入新距離，搭配 `if (d != dist[u]) continue;` 跳過舊狀態。"
       }
     ],
     "pitfalls": [
       "⚠️ 1-indexed 陣列時，父節點是 `i/2`、孩子是 `2i` 與 `2i+1`；若改成 0-indexed，公式會全部不同。",
-      "⚠️ C++ 的 `priority_queue` 預設是大根堆；若要小根堆，必須改用 `greater<int>` 當比較器。",
+      "⚠️ C++ 的 `priority_queue` 預設是 max-heap；若要 min-heap，必須改用 `greater<int>` 當比較器。",
       "⚠️ `buildHeap` 應該從 `n/2` 開始往前做 `siftDown`，不是從 `n` 開始，因為葉節點根本不需要下沉。",
       "⚠️ `pop` 時必須先交換 `heap[1]` 與 `heap[heapSize]` 再遞減 `heapSize`，順序寫反很容易把最後一個元素遺失。"
     ],
@@ -4503,17 +4503,17 @@
     "parent_id": "heap-priority-queue",
     "title": "Top-K 與第 K 大",
     "slug": "top-k",
-    "description": "維護大小為 `K` 的小根堆可在資料流中持續保留前 `K` 大元素，而堆頂就代表目前的第 `K` 大。",
-    "core_idea": "若資料是一個長度 `n` 的串流，想保住目前最大的 `K` 個元素，最自然的狀態就是一個大小固定為 `K` 的 **小根堆**。堆裡裝的就是「目前入選前 `K` 大」的候選，而 `pq.top()` 恰好是這些候選中最小的那個，也就是當前的第 `K` 大。新元素進來時，如果它不比堆頂大，代表它連門檻都沒過，可以直接丟掉；若它更大，就把堆頂踢掉再放入新值。\n\n這樣每個元素最多做一次 `push` 和一次 `pop`，所以總成本是 **O(n log K)**，比把全部元素都放進大根堆後再取 `K` 次更省。若資料是靜態陣列，不需要動態維護順序，也可以用 `nth_element` 在平均 `O(n)` 找到第 `K` 大；但它不保證前 `K` 大內部有序，也不適合邊讀邊更新的情境。**為什麼要用小根堆**？因為我們真正想快速知道的，是目前入選集合裡最弱的那個門檻值。",
+    "description": "維護大小為 `K` 的 min-heap 可在資料流中持續保留前 `K` 大元素，而堆頂就代表目前的第 `K` 大。",
+    "core_idea": "若資料是一個長度 `n` 的串流，想保住目前最大的 `K` 個元素，最自然的狀態就是一個大小固定為 `K` 的 **min-heap**。堆裡裝的就是「目前入選前 `K` 大」的候選，而 `pq.top()` 恰好是這些候選中最小的那個，也就是當前的第 `K` 大。新元素進來時，如果它不比堆頂大，代表它連門檻都沒過，可以直接丟掉；若它更大，就把堆頂踢掉再放入新值。\n\n這樣每個元素最多做一次 `push` 和一次 `pop`，所以總成本是 **O(n log K)**，比把全部元素都放進 max-heap 後再取 `K` 次更省。若資料是靜態陣列，不需要動態維護順序，也可以用 `nth_element` 在平均 `O(n)` 找到第 `K` 大；但它不保證前 `K` 大內部有序，也不適合邊讀邊更新的情境。**為什麼要用 min-heap**？因為我們真正想快速知道的，是目前入選集合裡最弱的那個門檻值。",
     "complexity": "串流中 Top-K：O(n log K)；靜態第 K 大（nth_element）：平均 O(n)；空間 O(K)。",
     "deep_dive": [
       {
-        "title": "小根堆維護前 K 大",
+        "title": "min-heap 維護前 K 大",
         "body": "```cpp\n// a: input array or sequence.\n// k: limit, count, or window size used by the algorithm.\nvector<int> topK(const vector<int>& a, int k) {\n    if (k <= 0) {\n        return {};\n    }\n    priority_queue<int, vector<int>, greater<int>> pq;\n    for (int x : a) {\n        if ((int)pq.size() < k) {\n            pq.push(x);\n        } else if (x > pq.top()) {\n            pq.pop();\n            pq.push(x);\n        }\n    }\n\n    vector<int> result;\n    while (!pq.empty()) {\n        result.push_back(pq.top());\n        pq.pop();\n    }\n    sort(result.rbegin(), result.rend());\n    return result;\n}\n\n// a: input array or sequence.\n// k: limit, count, or window size used by the algorithm.\nint kthLargest(const vector<int>& a, int k) {\n    if (k <= 0) {\n        return INT_MIN;\n    }\n    priority_queue<int, vector<int>, greater<int>> pq;\n    for (int x : a) {\n        if ((int)pq.size() < k) {\n            pq.push(x);\n        } else if (x > pq.top()) {\n            pq.pop();\n            pq.push(x);\n        }\n    }\n    return (int)pq.size() == k ? pq.top() : INT_MIN;\n}\n```\n`pq` 始終只保留目前最強的 `k` 個元素，所以堆頂就是這批元素裡最小者，也就是第 `k` 大。若最後還想把答案列出來，可以把堆內容取出後再排序；若只要第 `k` 大，直接讀 `pq.top()` 即可。"
       },
       {
         "title": "動態資料流的第 K 大",
-        "body": "```cpp\nclass KthLargest {\n   private:\n    int k;\n    priority_queue<int, vector<int>, greater<int>> pq;\n\n   public:\n    // k_: requested order/statistic or limit.\n    // initial_values: input or working vector used by the algorithm.\n    KthLargest(int k_, const vector<int>& initial_values) : k(k_) {\n        for (int x : initial_values) {\n            add(x);\n        }\n    }\n\n    // val: value being inserted, queried, or compared.\n    int add(int val) {\n        if (k <= 0) {\n            return INT_MIN;\n        }\n        if ((int)pq.size() < k) {\n            pq.push(val);\n        } else if (val > pq.top()) {\n            pq.pop();\n            pq.push(val);\n        }\n        return (int)pq.size() == k ? pq.top() : INT_MIN;\n    }\n};\n```\n這個類別把「維護大小為 `k` 的小根堆」封裝成資料流介面。當目前總元素還不到 `k` 個時，這裡用 `INT_MIN` 當作尚未形成第 `k` 大的哨兵；實戰中也可以改成回傳 `optional<int>`，或另外提供 `ready()` 之類的狀態判斷。"
+        "body": "```cpp\nclass KthLargest {\n   private:\n    int k;\n    priority_queue<int, vector<int>, greater<int>> pq;\n\n   public:\n    // k_: requested order/statistic or limit.\n    // initial_values: input or working vector used by the algorithm.\n    KthLargest(int k_, const vector<int>& initial_values) : k(k_) {\n        for (int x : initial_values) {\n            add(x);\n        }\n    }\n\n    // val: value being inserted, queried, or compared.\n    int add(int val) {\n        if (k <= 0) {\n            return INT_MIN;\n        }\n        if ((int)pq.size() < k) {\n            pq.push(val);\n        } else if (val > pq.top()) {\n            pq.pop();\n            pq.push(val);\n        }\n        return (int)pq.size() == k ? pq.top() : INT_MIN;\n    }\n};\n```\n這個類別把「維護大小為 `k` 的 min-heap」封裝成資料流介面。當目前總元素還不到 `k` 個時，這裡用 `INT_MIN` 當作尚未形成第 `k` 大的哨兵；實戰中也可以改成回傳 `optional<int>`，或另外提供 `ready()` 之類的狀態判斷。"
       }
     ],
     "reference_links": [
@@ -4533,7 +4533,7 @@
       }
     ],
     "pitfalls": [
-      "⚠️ 找前 K 大要用小根堆，找前 K 小才用大根堆，方向很容易弄反。",
+      "⚠️ 找前 K 大要用 min-heap，找前 K 小才用 max-heap，方向很容易弄反。",
       "⚠️ 在把堆頂當成第 K 大之前，必須先確認 `pq.size() >= k`，否則讀到的只會是目前元素中的最小值。",
       "⚠️ `nth_element` 的平均複雜度是 O(n)，但最壞情況仍可能退化成 O(n²)。",
       "⚠️ C++ 的 `priority_queue` 不支援任意位置刪除；若題目還需要刪除中間元素，通常要改用 `multiset` 或延遲刪除。"
@@ -4628,7 +4628,7 @@
     "parent_id": "heap-priority-queue",
     "title": "對頂堆求中位數",
     "slug": "median-two-heaps",
-    "description": "對頂堆把較小的一半放進大根堆、較大的一半放進小根堆，能在動態插入下維持 O(log n) 更新與 O(1) 中位數查詢。",
+    "description": "對頂堆把較小的一半放進 max-heap、較大的一半放進 min-heap，能在動態插入下維持 O(log n) 更新與 O(1) 中位數查詢。",
     "core_idea": "對頂堆把資料切成兩半：`maxHeap` 保存 **較小的一半**，堆頂是左半邊最大值；`minHeap` 保存 **較大的一半**，堆頂是右半邊最小值。只要維持 `maxHeap` 中所有元素都 `<=` `minHeap` 中所有元素，中位數就一定落在兩個堆頂之間，而不需要真的把整體排序。\n\n另一個關鍵是不變量是大小差不能超過 `1`。常見做法是讓 `maxHeap` 至少和 `minHeap` 一樣大，於是元素總數為奇數時，中位數就是 `maxHeap.top()`；元素總數為偶數時，中位數則是兩個堆頂的平均。插入時先根據大小關係決定放哪一邊，再視情況交換頂點或搬移一個元素，確保 **順序不變量** 與 **大小不變量** 都成立。\n\n每次插入至多做常數次 `push`／`pop`，而單次堆操作是 `O(log n)`，所以更新成本仍是 `O(log n)`。這個想法也能推廣到動態第 `K` 大或百分位數：本質上都是維護「左半邊應該保留多少元素」這個目標比例。",
     "complexity": "插入 O(log n)，查詢中位數 O(1)，空間 O(n)。",
     "deep_dive": [
@@ -6215,8 +6215,8 @@
     "parent_id": "minimum-spanning-tree",
     "title": "Prim",
     "slug": "prim",
-    "description": "從任意起點出發，每次貪心選取距離當前樹最近的節點加入，用最小堆維護候選邊，適合稠密圖或鄰接矩陣表示。",
-    "core_idea": "Prim 算法以**節點為中心**逐步擴張 MST：初始時樹只含起點，每一步從「所有跨越當前樹與未加入節點之間的邊」中選出最小的，將對應節點加入樹。這同樣基於**切割性質**——每次加入的邊是跨越「已在樹中的節點集合」與「剩餘節點集合」的最小邊，必屬於某個 MST。\n\nPrim 的思路與 **Dijkstra** 高度類似：維護 `key[v]` 表示節點 v 加入樹的最小代價（連接 v 到樹的最小邊權），用最小堆取出當前 key 最小的未加入節點。核心差異在於鬆弛邏輯：Dijkstra 更新「從源點出發的累積路徑長」，Prim 更新「連接到樹的單條邊邊權」。\n\n**堆優化 Prim** 複雜度 O((V + E) log V)，適合稀疏圖；**鄰接矩陣 O(V²) Prim** 不使用堆，適合稠密圖（E 接近 V²，V ≤ 3000 時常為競賽首選）。",
+    "description": "從任意起點出發，每次貪心選取距離當前樹最近的節點加入，用 min-heap 維護候選邊，適合稠密圖或鄰接矩陣表示。",
+    "core_idea": "Prim 算法以**節點為中心**逐步擴張 MST：初始時樹只含起點，每一步從「所有跨越當前樹與未加入節點之間的邊」中選出最小的，將對應節點加入樹。這同樣基於**切割性質**——每次加入的邊是跨越「已在樹中的節點集合」與「剩餘節點集合」的最小邊，必屬於某個 MST。\n\nPrim 的思路與 **Dijkstra** 高度類似：維護 `key[v]` 表示節點 v 加入樹的最小代價（連接 v 到樹的最小邊權），用 min-heap 取出當前 key 最小的未加入節點。核心差異在於鬆弛邏輯：Dijkstra 更新「從源點出發的累積路徑長」，Prim 更新「連接到樹的單條邊邊權」。\n\n**堆優化 Prim** 複雜度 O((V + E) log V)，適合稀疏圖；**鄰接矩陣 O(V²) Prim** 不使用堆，適合稠密圖（E 接近 V²，V ≤ 3000 時常為競賽首選）。",
     "complexity": "堆優化版 O((V + E) log V)；稠密圖矩陣版 O(V²)；空間 O(V + E)。",
     "deep_dive": [
       {
@@ -6245,7 +6245,7 @@
       },
       {
         "name": "最大生成樹（Prim 版）",
-        "description": "**觸發**：求邊權總和最大的生成樹（如最大連通可靠度）。\n**做法**：將 `key[]` 初始為 `-INF`，優先佇列改為最大堆（或存負數後用最小堆），更新條件改為 `w > key[v]`，每次取 key 最大的節點加入樹。"
+        "description": "**觸發**：求邊權總和最大的生成樹（如最大連通可靠度）。\n**做法**：將 `key[]` 初始為 `-INF`，優先佇列改為 max-heap（或存負數後用 min-heap），更新條件改為 `w > key[v]`，每次取 key 最大的節點加入樹。"
       }
     ],
     "pitfalls": [
@@ -7535,8 +7535,8 @@
     "parent_id": "shortest-path",
     "title": "Dijkstra（堆優化）",
     "slug": "dijkstra",
-    "description": "使用最小堆貪心選取距離最小的未確定節點，在非負權圖上高效求單源最短路，時間複雜度 O((V+E) log V)。",
-    "core_idea": "Dijkstra 的核心是「**貪心選最小**」：維護一個 `dist[]` 陣列，初始 `dist[src]=0`，其餘為 ∞。每次從優先佇列（最小堆）取出 dist 最小的節點 u，並對所有鄰邊嘗試**鬆弛（Relaxation）**：若 `dist[u] + w < dist[v]` 則更新 `dist[v]` 並將 `(dist[v], v)` 推入堆。\n\n正確性依賴**邊權非負**：節點 u 首次出堆時，`dist[u]` 已是最終最短路值——因為任何繞過 u 的後續路徑都會加上非負邊，只會更長，無法再縮短 u 的距離。\n\n堆優化使用**懶惰刪除（Lazy Deletion）**：不主動從堆移除過時項目，取出時若 `d > dist[u]` 則直接跳過。每條邊最多插入堆一次，總操作數 O(E log E)，而 E ≤ V²，故等價於 O(E log V)。",
+    "description": "使用 min-heap 貪心選取距離最小的未確定節點，在非負權圖上高效求單源最短路，時間複雜度 O((V+E) log V)。",
+    "core_idea": "Dijkstra 的核心是「**貪心選最小**」：維護一個 `dist[]` 陣列，初始 `dist[src]=0`，其餘為 ∞。每次從優先佇列（min-heap）取出 dist 最小的節點 u，並對所有鄰邊嘗試**鬆弛（Relaxation）**：若 `dist[u] + w < dist[v]` 則更新 `dist[v]` 並將 `(dist[v], v)` 推入堆。\n\n正確性依賴**邊權非負**：節點 u 首次出堆時，`dist[u]` 已是最終最短路值——因為任何繞過 u 的後續路徑都會加上非負邊，只會更長，無法再縮短 u 的距離。\n\n堆優化使用**懶惰刪除（Lazy Deletion）**：不主動從堆移除過時項目，取出時若 `d > dist[u]` 則直接跳過。每條邊最多插入堆一次，總操作數 O(E log E)，而 E ≤ V²，故等價於 O(E log V)。",
     "complexity": "時間 O((V + E) log V)，空間 O(V + E)（鄰接表 + 堆）。",
     "deep_dive": [
       {
@@ -15356,16 +15356,16 @@
     "title": "反悔堆（反悔貪心）",
     "slug": "hp-regret",
     "description": "反悔堆（反悔貪心）：先照貪心做選擇，之後用堆撤銷代價最差的舊決策，換取更優的新選擇。",
-    "core_idea": "有些貪心問題「當下最優」不一定全域最優，但允許我們事後反悔。反悔堆讓我們在掃描時先做出選擇，並把每個選擇的「代價」丟進堆；當資源不足或出現更好的機會時，從堆中彈出最差的舊選擇來補救。\n\n- **何時觸發**：「最多做 k 件事使收益最大」「能量/時間有限下盡量多完成」「截止期限排程」這類問題，且決策可被替換。\n- **兩種典型**：(1) 用最小堆維護已選收益，新元素更大就替換最小者；(2) 截止期限排程：按時間掃描，超出容量時丟掉耗時最大的已選任務。\n- **直覺**：把貪心的「不可逆」變成「可反悔」，堆負責 O(log n) 找出最該被替換的決策。",
+    "core_idea": "有些貪心問題「當下最優」不一定全域最優，但允許我們事後反悔。反悔堆讓我們在掃描時先做出選擇，並把每個選擇的「代價」丟進堆；當資源不足或出現更好的機會時，從堆中彈出最差的舊選擇來補救。\n\n- **何時觸發**：「最多做 k 件事使收益最大」「能量/時間有限下盡量多完成」「截止期限排程」這類問題，且決策可被替換。\n- **兩種典型**：(1) 用 min-heap 維護已選收益，新元素更大就替換最小者；(2) 截止期限排程：按時間掃描，超出容量時丟掉耗時最大的已選任務。\n- **直覺**：把貪心的「不可逆」變成「可反悔」，堆負責 O(log n) 找出最該被替換的決策。",
     "complexity": "每個元素至多入堆、出堆各一次，整體 O(n log n)、空間 O(n)。",
     "deep_dive": [
       {
         "title": "截止期限排程（IOI Sequence 經典）",
-        "body": "任務有截止時間 `d` 與耗時 `t`，按 `d` 排序後逐一加入；若當前總耗時超過 `d`，就反悔掉「耗時最大」的已選任務。\n\n```cpp\nsort(jobs.begin(), jobs.end()); // 按 deadline 升序\npriority_queue<int> pq;          // 大根堆，存已選任務耗時\nlong long cur = 0;\nfor (auto [d, t] : jobs) {\n    cur += t; pq.push(t);\n    if (cur > d) {               // 來不及 → 反悔最耗時的一個\n        cur -= pq.top(); pq.pop();\n    }\n}\n// pq.size() 即最多可完成任務數\n```\n\n關鍵：按截止時間排序保證「考慮到某任務時，之前的都可用」，而反悔最大耗時者一定不會讓可行解變差。"
+        "body": "任務有截止時間 `d` 與耗時 `t`，按 `d` 排序後逐一加入；若當前總耗時超過 `d`，就反悔掉「耗時最大」的已選任務。\n\n```cpp\nsort(jobs.begin(), jobs.end()); // 按 deadline 升序\npriority_queue<int> pq;          // max-heap，存已選任務耗時\nlong long cur = 0;\nfor (auto [d, t] : jobs) {\n    cur += t; pq.push(t);\n    if (cur > d) {               // 來不及 → 反悔最耗時的一個\n        cur -= pq.top(); pq.pop();\n    }\n}\n// pq.size() 即最多可完成任務數\n```\n\n關鍵：按截止時間排序保證「考慮到某任務時，之前的都可用」，而反悔最大耗時者一定不會讓可行解變差。"
       },
       {
         "title": "收益替換型反悔",
-        "body": "另一類是「最多選 k 個、可替換」：維護已選的最小堆，新元素若大於堆頂則替換。\n\n```cpp\npriority_queue<int, vector<int>, greater<int>> pq; // 小根堆\nfor (int x : vals) {\n    if ((int)pq.size() < k) pq.push(x);\n    else if (x > pq.top()) { pq.pop(); pq.push(x); }\n}\n```\n\n更複雜的版本（如「IPO」「最大化路徑收益」）會把「解鎖條件」與「收益」分離：先用一個堆按條件釋放可選項，再用另一個堆挑最大收益，必要時反悔。"
+        "body": "另一類是「最多選 k 個、可替換」：維護已選的 min-heap，新元素若大於堆頂則替換。\n\n```cpp\npriority_queue<int, vector<int>, greater<int>> pq; // min-heap\nfor (int x : vals) {\n    if ((int)pq.size() < k) pq.push(x);\n    else if (x > pq.top()) { pq.pop(); pq.push(x); }\n}\n```\n\n更複雜的版本（如「IPO」「最大化路徑收益」）會把「解鎖條件」與「收益」分離：先用一個堆按條件釋放可選項，再用另一個堆挑最大收益，必要時反悔。"
       }
     ],
     "reference_links": [
@@ -15380,18 +15380,18 @@
     ],
     "supplemental_patterns": [
       {
-        "name": "截止期限 + 大根堆反悔",
+        "name": "截止期限 + max-heap 反悔",
         "description": "**何時用**：帶 deadline 的排程、超容量需丟棄。\n**核心做法**：按 deadline 掃描，超限時彈出耗時最大者。\n**複雜度**：O(n log n)。"
       },
       {
-        "name": "小根堆收益替換",
-        "description": "**何時用**：最多選 k 個、可替換已選。\n**核心做法**：維護已選最小堆，新值更大則替換堆頂。\n**複雜度**：O(n log k)。"
+        "name": "min-heap 收益替換",
+        "description": "**何時用**：最多選 k 個、可替換已選。\n**核心做法**：維護已選 min-heap，新值更大則替換堆頂。\n**複雜度**：O(n log k)。"
       }
     ],
     "pitfalls": [
       "⚠️ 反悔的前提是「決策可被撤銷且不破壞已處理部分的合法性」，先確認問題具此性質。",
       "⚠️ 排序鍵要選對（多為 deadline 或解鎖條件），排錯順序會讓反悔失去正確性保證。",
-      "⚠️ 注意大根堆／小根堆方向：反悔要彈出「最該替換」的那個，方向相反就全錯。"
+      "⚠️ 注意 max-heap／min-heap 方向：反悔要彈出「最該替換」的那個，方向相反就全錯。"
     ],
     "practice_problems": [],
     "study_plan_ref": {
@@ -16288,7 +16288,7 @@
     "title": "合併鏈結串列",
     "slug": "ll-merge",
     "description": "合併鏈結串列：用啞節點逐節點接入較小者，是合併兩有序鏈、合併 k 個鏈、串列歸併排序的核心。",
-    "core_idea": "合併兩個有序串列就是不斷比較兩鏈頭、把較小者接到結果尾巴。啞節點讓「結果頭」的處理變乾淨。\n\n- **何時觸發**：合併兩/多個有序串列、串列歸併排序的合併步、交錯重組。\n- **k 個合併**：用最小堆每次取出最小頭，或兩兩分治合併。",
+    "core_idea": "合併兩個有序串列就是不斷比較兩鏈頭、把較小者接到結果尾巴。啞節點讓「結果頭」的處理變乾淨。\n\n- **何時觸發**：合併兩/多個有序串列、串列歸併排序的合併步、交錯重組。\n- **k 個合併**：用 min-heap 每次取出最小頭，或兩兩分治合併。",
     "complexity": "兩鏈合併 O(n+m)；k 鏈用堆 O(N log k)，N 為總節點數。",
     "deep_dive": [
       {
@@ -16312,7 +16312,7 @@
         "description": "**何時用**：合併兩有序鏈。\n**核心做法**：比較兩頭，較小者接 tail。\n**複雜度**：O(n+m)。"
       },
       {
-        "name": "最小堆合併 k 鏈",
+        "name": "min-heap 合併 k 鏈",
         "description": "**何時用**：合併 k 個有序鏈。\n**核心做法**：堆維護 k 個頭，逐次取最小。\n**複雜度**：O(N log k)。"
       }
     ],
