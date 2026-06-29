@@ -174,6 +174,14 @@ function highlightCppLine(line: string) {
   return tokens;
 }
 
+// Treat a run of three or more quote characters as a code fence. Many people
+// reach for ''' (Python-style triple quotes) instead of ```, and on macOS/iOS
+// straight quotes are auto-corrected to curly ‘ ’ — normalize all of those to
+// real Markdown fences before parsing.
+function normalizeCodeFences(text: string) {
+  return text.replace(/['‘’]{3,}/g, '```');
+}
+
 export function MarkdownBlock({ children, className }: { children: string; className?: string }) {
   return (
     <ReactMarkdown
@@ -206,8 +214,13 @@ export function MarkdownBlock({ children, className }: { children: string; class
           </a>
         ),
         hr: () => <hr className="border-border" />,
-        ul: ({ children: listChildren }) => <ul className="space-y-2">{listChildren}</ul>,
-        li: ({ children: itemChildren }) => <li>・{itemChildren}</li>,
+        ul: ({ children: listChildren }) => (
+          <ul className="list-inside list-['・'] space-y-2">{listChildren}</ul>
+        ),
+        ol: ({ children: listChildren }) => (
+          <ol className="list-inside list-decimal space-y-2">{listChildren}</ol>
+        ),
+        li: ({ children: itemChildren }) => <li>{itemChildren}</li>,
         code: ({ children: codeChildren, className: codeClassName }) => {
           if (codeClassName) {
             return <HighlightedCode className={codeClassName}>{String(codeChildren)}</HighlightedCode>;
@@ -226,7 +239,7 @@ export function MarkdownBlock({ children, className }: { children: string; class
         )
       }}
     >
-      {children}
+      {normalizeCodeFences(children)}
     </ReactMarkdown>
   );
 }
