@@ -174,12 +174,28 @@ function highlightCppLine(line: string) {
   return tokens;
 }
 
-// Treat a run of three or more quote characters as a code fence. Many people
-// reach for ''' (Python-style triple quotes) instead of ```, and on macOS/iOS
-// straight quotes are auto-corrected to curly ‘ ’ — normalize all of those to
-// real Markdown fences before parsing.
+// iPhone/iPad keyboards can't easily type backticks, so notes use quotes as a
+// stand-in: a single quote means inline `code` and three quotes mean a ```
+// fence. Straight quotes also get auto-corrected to curly ‘ ’, so all of '‘’
+// are accepted. Convert these to real Markdown backticks before parsing.
 function normalizeCodeFences(text: string) {
-  return text.replace(/['‘’]{3,}/g, '```');
+  // Three or more quotes in a row become a fence first, so the per-quote pass
+  // below never sees them.
+  const withFences = text.replace(/['‘’]{3,}/g, '```');
+
+  // Only rewrite quotes outside fenced blocks, so quotes that are part of the
+  // code itself (e.g. a C++ char literal 'a' or a string) survive untouched.
+  return withFences
+    .split(/(```[\s\S]*?```)/)
+    .map((segment, index) => {
+      // Odd segments are the captured ``` … ``` blocks — leave them as-is.
+      if (index % 2 === 1) return segment;
+      // Treat a quote as an inline-code delimiter only on a boundary: skip it
+      // when wedged between ASCII letters/digits so English apostrophes (it's,
+      // don't) stay as text, while quotes next to CJK or spaces still convert.
+      return segment.replace(/(?<![A-Za-z0-9])['‘’]|['‘’](?![A-Za-z0-9])/g, '`');
+    })
+    .join('');
 }
 
 export function MarkdownBlock({ children, className }: { children: string; className?: string }) {
