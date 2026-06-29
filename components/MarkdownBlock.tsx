@@ -181,6 +181,31 @@ export function MarkdownBlock({ children, className }: { children: string; class
       className={cn('space-y-3 text-sm leading-7', className)}
       components={{
         p: ({ children: paragraphChildren }) => <p>{paragraphChildren}</p>,
+        h1: ({ children: headingChildren }) => (
+          <h1 className="text-lg font-semibold text-foreground">{headingChildren}</h1>
+        ),
+        h2: ({ children: headingChildren }) => (
+          <h2 className="text-base font-semibold text-foreground">{headingChildren}</h2>
+        ),
+        h3: ({ children: headingChildren }) => (
+          <h3 className="text-sm font-semibold text-foreground">{headingChildren}</h3>
+        ),
+        blockquote: ({ children: quoteChildren }) => (
+          <blockquote className="space-y-3 border-l-4 border-primary/40 pl-4 text-muted-foreground italic">
+            {quoteChildren}
+          </blockquote>
+        ),
+        a: ({ children: linkChildren, href }) => (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-primary underline underline-offset-2"
+          >
+            {linkChildren}
+          </a>
+        ),
+        hr: () => <hr className="border-border" />,
         ul: ({ children: listChildren }) => <ul className="space-y-2">{listChildren}</ul>,
         li: ({ children: itemChildren }) => <li>・{itemChildren}</li>,
         code: ({ children: codeChildren, className: codeClassName }) => {
