@@ -1,11 +1,16 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { PanelLeft, PanelLeftClose } from 'lucide-react';
 import { TopicGlyph } from '@/components/icons';
 import type { Subtopic, Topic } from '@/lib/types';
 import { cn } from '@/lib/utils';
+
+const SIDEBAR_WIDTH_KEY = 'sidebar-width';
+const MIN_WIDTH = 180;
+const MAX_WIDTH = 480;
+const DEFAULT_WIDTH = 256;
 
 interface HandbookSidebarProps {
   topics: Topic[];
@@ -23,9 +28,61 @@ export function HandbookSidebar({
   anchors = []
 }: HandbookSidebarProps) {
   const [collapsed, setCollapsed] = useState(false);
+  const [width, setWidth] = useState<number>(() => {
+    if (typeof window === 'undefined') return DEFAULT_WIDTH;
+    const saved = localStorage.getItem(SIDEBAR_WIDTH_KEY);
+    const parsed = saved ? parseInt(saved, 10) : NaN;
+    return !isNaN(parsed) && parsed >= MIN_WIDTH && parsed <= MAX_WIDTH
+      ? parsed
+      : DEFAULT_WIDTH;
+  });
+
+  const dragging = useRef(false);
+  const startX = useRef(0);
+  const startWidth = useRef(0);
+
+  const onMouseMove = useCallback((e: MouseEvent) => {
+    if (!dragging.current) return;
+    const delta = e.clientX - startX.current;
+    const next = Math.min(MAX_WIDTH, Math.max(MIN_WIDTH, startWidth.current + delta));
+    setWidth(next);
+  }, []);
+
+  const onMouseUp = useCallback(() => {
+    if (!dragging.current) return;
+    dragging.current = false;
+    document.body.style.cursor = '';
+    document.body.style.userSelect = '';
+    // Persist final width
+    setWidth((w) => {
+      localStorage.setItem(SIDEBAR_WIDTH_KEY, String(w));
+      return w;
+    });
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
+    };
+  }, [onMouseMove, onMouseUp]);
+
+  const onResizeMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    dragging.current = true;
+    startX.current = e.clientX;
+    startWidth.current = width;
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+  };
 
   return (
-    <aside className={cn('transition-all duration-200', collapsed ? 'w-10' : 'w-64 lg:w-72')}>
+    <aside
+      className={cn('relative shrink-0 transition-[width] duration-100', collapsed ? 'w-10' : '')}
+      style={collapsed ? undefined : { width }}
+    >
       {/* Collapse toggle */}
       <button
         onClick={() => setCollapsed(!collapsed)}
@@ -108,6 +165,17 @@ export function HandbookSidebar({
               </nav>
             </div>
           )}
+        </div>
+      )}
+
+      {/* Drag-to-resize handle — visible on hover */}
+      {!collapsed && (
+        <div
+          onMouseDown={onResizeMouseDown}
+          title="拖曳調整側欄寬度"
+          className="absolute inset-y-0 right-0 z-10 flex w-2 cursor-col-resize items-center justify-center opacity-0 transition-opacity hover:opacity-100"
+        >
+          <div className="h-12 w-0.5 rounded-full bg-border" />
         </div>
       )}
     </aside>

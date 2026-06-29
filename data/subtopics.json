@@ -196,7 +196,7 @@
         "rating": 2100,
         "tier": "core",
         "tags": [
-          "Z函數",
+          "Z 函數",
           "LCP"
         ]
       },
@@ -208,7 +208,7 @@
         "rating": 1200,
         "tier": "warmup",
         "tags": [
-          "Z函數",
+          "Z 函數",
           "字串匹配"
         ]
       },
@@ -220,7 +220,7 @@
         "rating": 1400,
         "tier": "warmup",
         "tags": [
-          "Z函數",
+          "Z 函數",
           "週期"
         ]
       },
@@ -232,7 +232,7 @@
         "rating": 1900,
         "tier": "core",
         "tags": [
-          "Z函數",
+          "Z 函數",
           "前後綴"
         ]
       },
@@ -244,7 +244,7 @@
         "rating": 2000,
         "tier": "advanced",
         "tags": [
-          "Z函數",
+          "Z 函數",
           "反轉"
         ]
       },
@@ -256,7 +256,7 @@
         "rating": 2200,
         "tier": "advanced",
         "tags": [
-          "Z函數",
+          "Z 函數",
           "二分搜尋",
           "Rabin-Karp"
         ]
@@ -489,7 +489,7 @@
         "tier": "advanced",
         "tags": [
           "Trie",
-          "雙重Trie"
+          "雙重 Trie"
         ]
       },
       {
@@ -525,7 +525,7 @@
         "tier": "advanced",
         "tags": [
           "Trie",
-          "AC自動機"
+          "AC 自動機"
         ]
       }
     ],
@@ -891,7 +891,7 @@
         "tier": "advanced",
         "tags": [
           "LCA",
-          "樹上DP"
+          "樹上 DP"
         ]
       },
       {
@@ -1014,7 +1014,7 @@
         "tier": "advanced",
         "tags": [
           "樹",
-          "換根DP"
+          "換根 DP"
         ]
       },
       {
@@ -1616,7 +1616,7 @@
         ]
       },
       {
-        "title": "位1的個數",
+        "title": "位1 的個數",
         "source": "leetcode",
         "source_id": "number-of-1-bits",
         "frontend_id": "191",
@@ -1628,7 +1628,7 @@
         ]
       },
       {
-        "title": "2的冪",
+        "title": "2 的冪",
         "source": "leetcode",
         "source_id": "power-of-four",
         "frontend_id": "342",
@@ -1768,7 +1768,7 @@
         "rating": 1800,
         "tier": "advanced",
         "tags": [
-          "狀壓DP",
+          "狀壓 DP",
           "博弈"
         ]
       },
@@ -1780,7 +1780,7 @@
         "rating": 2000,
         "tier": "advanced",
         "tags": [
-          "狀壓DP",
+          "狀壓 DP",
           "分配問題"
         ]
       },
@@ -1792,7 +1792,7 @@
         "rating": 2100,
         "tier": "advanced",
         "tags": [
-          "狀壓DP",
+          "狀壓 DP",
           "組合"
         ]
       },
@@ -1804,7 +1804,7 @@
         "rating": 2000,
         "tier": "advanced",
         "tags": [
-          "狀壓DP",
+          "狀壓 DP",
           "匹配"
         ]
       },
@@ -1816,7 +1816,7 @@
         "rating": 2000,
         "tier": "advanced",
         "tags": [
-          "狀壓DP",
+          "狀壓 DP",
           "集合覆蓋"
         ]
       },
@@ -1828,7 +1828,7 @@
         "rating": 2000,
         "tier": "advanced",
         "tags": [
-          "狀壓DP",
+          "狀壓 DP",
           "區間"
         ]
       }
@@ -3136,7 +3136,7 @@
         "rating": 1600,
         "tier": "core",
         "tags": [
-          "區間DP",
+          "區間 DP",
           "回文"
         ]
       },
@@ -3160,7 +3160,7 @@
         "rating": 1900,
         "tier": "advanced",
         "tags": [
-          "區間DP"
+          "區間 DP"
         ]
       },
       {
@@ -3171,7 +3171,7 @@
         "rating": 2100,
         "tier": "advanced",
         "tags": [
-          "區間DP"
+          "區間 DP"
         ]
       },
       {
@@ -3182,7 +3182,7 @@
         "rating": 1800,
         "tier": "core",
         "tags": [
-          "區間DP",
+          "區間 DP",
           "博弈"
         ]
       },
@@ -3194,7 +3194,7 @@
         "rating": 1900,
         "tier": "advanced",
         "tags": [
-          "區間DP"
+          "區間 DP"
         ]
       }
     ],
@@ -3799,7 +3799,7 @@
       }
     ],
     "pitfalls": [
-      "⚠️ 應在**enqueue 時**（而非 dequeue 時）標記 `dist[v]`，否則同一節點可能多次 enqueue，複雜度退化為 O(nm)。",
+      "⚠️ 應在 **enqueue 時**（而非 dequeue 時）標記 `dist[v]`，否則同一節點可能多次 enqueue，複雜度退化為 O(nm)。",
       "⚠️ 多源 BFS 必須**同時**把所有源點初始化並一起 enqueue；若分批執行會破壞最短距離的保證。",
       "⚠️ 0-1 BFS 的 deque 中同一節點可能出現多次；dequeue 後若距離已被更新為更短值，舊項會被 `if (dist[u] + w < dist[v])` 自然過濾，無需額外標記。",
       "⚠️ BFS 只保證無權圖（邊權均等）的最短路；邊權不同時需改用 Dijkstra 或 Bellman-Ford。"
@@ -4547,7 +4547,7 @@
         "rating": 1500,
         "tier": "warmup",
         "tags": [
-          "第K大",
+          "第 K 大",
           "堆"
         ]
       },
@@ -4583,7 +4583,7 @@
         "rating": 1400,
         "tier": "warmup",
         "tags": [
-          "第K大",
+          "第 K 大",
           "堆"
         ]
       },
@@ -4967,7 +4967,7 @@
         ]
       },
       {
-        "title": "最多的事件數II",
+        "title": "最多的事件數 II",
         "source": "leetcode",
         "source_id": "maximum-number-of-events-that-can-be-attended-ii",
         "frontend_id": "1751",
@@ -6449,7 +6449,7 @@
   {
     "id": "ms-stack",
     "parent_id": "monotonic-structure",
-    "title": "monotonic stack",
+    "title": "Monotonic Stack",
     "slug": "monotonic-stack",
     "description": "維護單調遞增或遞減的 stack，O(n) 求解「下一個更大／更小值」與子陣列貢獻計數問題。",
     "core_idea": "monotonic stack 的關鍵不是「把元素排整齊」，而是用 stack 保存**尚未被答案結算**的候選下標。以「下一個更大值」為例，若 stack 內維持值遞減，掃到新元素 `a[i]` 時，只要 `a[i] > a[st.top()]`，就代表 stack top `j` 的右側第一個更大值已經出現，而且必定就是 `i`：因為在 `j` 與 `i` 之間若曾出現更大的元素，`j` 早就會先被彈出。此時 `a[i]` 又比 `a[j]` 更大且更靠右，`a[j]` 對之後任何位置都不可能再成為「更大值」答案，因此可直接彈出。每個下標只會 push 一次、pop 一次，總成本自然是 **O(n)**。\n\nmonotonic stack 也能做**子陣列貢獻計數**：與其直接枚舉所有子陣列，不如反過來問每個 `a[i]` 會成為多少個子陣列的最小值。若 `L[i]` 是左側最近的**嚴格更小**位置，`R[i]` 是右側最近的**小於等於**位置，那麼起點可選 `i-L[i]` 種、終點可選 `R[i]-i` 種，貢獻就是 `a[i] × (i-L[i]) × (R[i]-i)`。一側用嚴格比較、另一側用非嚴格比較的**不對稱邊界**，本質上是在替相等元素指定唯一代表，避免同一個子陣列被重複計數。",
@@ -6605,7 +6605,7 @@
   {
     "id": "ms-queue",
     "parent_id": "monotonic-structure",
-    "title": "monotonic queue",
+    "title": "Monotonic Queue",
     "slug": "monotonic-queue",
     "description": "以 deque 維護當前視窗的候選集合，O(n) 解決定長滑動視窗最大/最小值問題。",
     "core_idea": "monotonic queue 的本質是把當前視窗中「還可能成為極值」的下標保留下來，其他候選一旦被更新元素**支配**就永久刪除。對滑動視窗最大值來說，deque 內下標對應的值維持遞減，因此 queue front 一定是目前最大值的位置。每往右走一步，先把 `<= i-k` 的過期下標從 queue front 彈掉；再把 queue back 所有 `a[back] <= a[i]` 的下標彈掉，因為 `a[i]` 至少一樣大且更新，之後只要兩者同時留在視窗內，舊下標永遠不可能比 `i` 更適合當最大值。每個下標至多進 deque 一次、出 deque 一次，所以總時間是 **O(n)**。\n\n對滑動視窗最小值只要把比較方向全部反過來：維護值遞增的 deque，queue front 就是最小值。這個「只保留未被支配候選」的想法也能同時維護 `max` 與 `min`，例如 deque 搭配雙指標，動態維持條件 `max - min <= limit` 的最長合法區間。",
@@ -6733,7 +6733,7 @@
   {
     "id": "ms-queue-dp",
     "parent_id": "monotonic-structure",
-    "title": "monotonic queue 優化 DP",
+    "title": "Monotonic Queue 優化 DP",
     "slug": "monotonic-queue-dp",
     "description": "當 DP 轉移為固定長度區間的最小/最大值時，以 monotonic queue 把轉移從 O(k) 降至均攤 O(1)。",
     "core_idea": "monotonic queue 優化 DP 適合轉移長得像 `dp[i] = cost(i) + min_{j in [i-k, i-1]} dp[j]`（或 `max`）的情況。因為 `cost(i)` 與 `j` 無關，真正困難的部分只剩「固定長度滑動視窗中的最小／最大 `dp[j]`」。這正好是 monotonic queue 最擅長的問題：queue front 永遠保存當前合法區間的最佳前驅，因此每個 `i` 都能在均攤 `O(1)` 內完成轉移，整體從每次枚舉 `k` 個前驅的 `O(nk)` 降到 **O(n)**。\n\n它能成立的前提是：合法前驅集合必須隨 `i` 單調滑動，也就是左右邊界都只往前移，才能用「過期彈出 + 新狀態 enqueue」維護。如果轉移變成 `dp[j] + g(j, i)`，而 `g` 裡有 `j` 與 `i` 的交互項（例如斜率、乘法），那就不是單純視窗極值，通常要改用 **Convex Hull Trick** 或其他更高階最佳化。\n\n實作上最容易錯的是**讀取順序**：先用 dequequeue front 計算 `dp[i]`，再把 `i` 自己插入 deque。否則 `dp[i]` 可能會拿到自己當前驅，等於把「至少往前跳一步」的限制偷偷破壞掉。",
@@ -6896,7 +6896,7 @@
     ],
     "pitfalls": [
       "⚠️ 尾端的哨兵高度 `0` 是為了把 stack 內剩餘柱子一次清空；即使 `i = n`，寬度公式 `i-left-1` 依然完全正確。",
-      "⚠️ 柱子被彈出後，它的左邊界是**新的**stack top，不是剛剛被彈出的自己；這是最常見的寬度 邊界偏一錯誤。",
+      "⚠️ 柱子被彈出後，它的左邊界是**新的 **stack top，不是剛剛被彈出的自己；這是最常見的寬度 邊界偏一錯誤。",
       "⚠️ 對等高柱子使用 `>` 時，通常由最後一根等高柱子負責較大的矩形；這種代表者差異不影響最大值，但比較式改成 `>=` 後行為會不同。",
       "⚠️ 二維最大全 1 矩形裡，`matrix[r][c] == 0` 時必須把 `h[c]` 直接重設成 `0`；高度表示的是「往上連續多少個 1」，不能累加穿牆。"
     ],
@@ -7821,7 +7821,7 @@
     "title": "0-1 BFS",
     "slug": "zero-one-bfs",
     "description": "當圖的邊權只有 0 或 1 時，使用 deque（deque）代替 priority queue，以 O(V+E) 求最短路。",
-    "core_idea": "0-1 BFS 是 Dijkstra 的特化版：當邊權只有 0 或 1 時，不需要 O(log V) 的堆，改用**deque（deque）**即可維持「queue 頭部距離最小」的性質。\n\n規則：鬆弛一條**邊權 0**的邊時，新節點距離與當前節點相同，推入**queue 前端（push_front）**；鬆弛**邊權 1**的邊時，距離加 1，推入**queue 後端（push_back）**。如此 deque 始終保持：前端是距離最小的節點，整體距離非嚴格遞減，行為等同於桶式 Dijkstra（Dial's Algorithm 的 0-1 特例）。\n\n整個過程每個節點最多被有效處理一次，每條邊只被掃描一次，複雜度為 **O(V + E)**，比堆優化 Dijkstra 快一個 log 因子。",
+    "core_idea": "0-1 BFS 是 Dijkstra 的特化版：當邊權只有 0 或 1 時，不需要 O(log V) 的堆，改用 **deque（deque）**即可維持「queue 頭部距離最小」的性質。\n\n規則：鬆弛一條**邊權 0**的邊時，新節點距離與當前節點相同，推入 **queue 前端（push_front）**；鬆弛**邊權 1**的邊時，距離加 1，推入 **queue 後端（push_back）**。如此 deque 始終保持：前端是距離最小的節點，整體距離非嚴格遞減，行為等同於桶式 Dijkstra（Dial's Algorithm 的 0-1 特例）。\n\n整個過程每個節點最多被有效處理一次，每條邊只被掃描一次，複雜度為 **O(V + E)**，比堆優化 Dijkstra 快一個 log 因子。",
     "complexity": "時間 O(V + E)，空間 O(V + E)（鄰接表 + deque）。",
     "deep_dive": [
       {
@@ -7869,7 +7869,7 @@
         "tier": "core",
         "tags": [
           "0-1 BFS",
-          "多源BFS"
+          "多源 BFS"
         ]
       },
       {
@@ -7992,7 +7992,7 @@
         "rating": 1700,
         "tier": "core",
         "tags": [
-          "樹上DP",
+          "樹上 DP",
           "最大獨立集"
         ]
       },
@@ -8130,7 +8130,7 @@
         "rating": 2000,
         "tier": "advanced",
         "tags": [
-          "換根DP",
+          "換根 DP",
           "樹"
         ]
       },
@@ -8142,7 +8142,7 @@
         "rating": 1700,
         "tier": "core",
         "tags": [
-          "換根DP",
+          "換根 DP",
           "拓撲"
         ]
       },
@@ -8154,7 +8154,7 @@
         "rating": 1900,
         "tier": "advanced",
         "tags": [
-          "換根DP",
+          "換根 DP",
           "DFS"
         ]
       },
@@ -8190,7 +8190,7 @@
         "rating": 2000,
         "tier": "advanced",
         "tags": [
-          "換根DP",
+          "換根 DP",
           "樹"
         ]
       }
@@ -9494,7 +9494,7 @@
         "rating": 1700,
         "tier": "core",
         "tags": [
-          "第K小",
+          "第 K 小",
           "二分搜尋"
         ]
       },
@@ -9506,7 +9506,7 @@
         "rating": 2000,
         "tier": "advanced",
         "tags": [
-          "第K小",
+          "第 K 小",
           "雙指針"
         ]
       },
@@ -9518,7 +9518,7 @@
         "rating": 1600,
         "tier": "core",
         "tags": [
-          "第K小",
+          "第 K 小",
           "堆"
         ]
       },
@@ -9530,7 +9530,7 @@
         "rating": 1500,
         "tier": "warmup",
         "tags": [
-          "第K大",
+          "第 K 大",
           "快速選擇"
         ]
       },
@@ -9542,7 +9542,7 @@
         "rating": 1500,
         "tier": "core",
         "tags": [
-          "第K近",
+          "第 K 近",
           "二分搜尋"
         ]
       },
@@ -9554,7 +9554,7 @@
         "rating": 1700,
         "tier": "core",
         "tags": [
-          "第K個",
+          "第 K 個",
           "堆"
         ]
       }
@@ -10200,7 +10200,7 @@
   {
     "id": "ms-lexicographic",
     "parent_id": "monotonic-structure",
-    "title": "monotonic stack 求最小字典序",
+    "title": "Monotonic Stack 求最小字典序",
     "slug": "lexicographic",
     "description": "在保留限制下用 monotonic stack 貪心刪除較大前導元素，得到字典序最小的結果。",
     "core_idea": "「移除 k 位使數字最小」「不重複字元的字典序最小子序列」這類問題，核心貪心是：**從左到右維護一個 stack，當新元素比 stack top 小且仍允許刪除時，就把 stack top 彈掉**。因為高位（靠左）變小對字典序的影響遠大於低位，所以遇到「前面大、後面小」就該把前面的大元素刪掉。\n\nmonotonic stack 天然支援這個「能刪就刪」的貪心，並用額外條件（剩餘可刪次數、後面是否還會出現、是否已在 stack 中）約束何時停止。寫對停止條件，就能在 O(n) 內構造出字典序最小（或最大）的答案。",
@@ -10772,7 +10772,7 @@
         ]
       },
       {
-        "title": "位1的個數",
+        "title": "位1 的個數",
         "source": "leetcode",
         "source_id": "number-of-1-bits",
         "frontend_id": "191",
@@ -10783,7 +10783,7 @@
         ]
       },
       {
-        "title": "2的冪",
+        "title": "2 的冪",
         "source": "leetcode",
         "source_id": "power-of-two",
         "frontend_id": "231",
@@ -11338,7 +11338,7 @@
         "tier": "warmup",
         "tags": [
           "Nim",
-          "SG函數"
+          "SG 函數"
         ]
       },
       {
@@ -11350,7 +11350,7 @@
         "tier": "core",
         "tags": [
           "博弈論",
-          "SG函數"
+          "SG 函數"
         ]
       },
       {
@@ -11362,7 +11362,7 @@
         "tier": "advanced",
         "tags": [
           "博弈論",
-          "區間DP"
+          "區間 DP"
         ]
       },
       {
@@ -11374,7 +11374,7 @@
         "tier": "advanced",
         "tags": [
           "博弈論",
-          "狀壓DP"
+          "狀壓 DP"
         ]
       },
       {
@@ -11386,7 +11386,7 @@
         "tier": "core",
         "tags": [
           "博弈論",
-          "區間DP"
+          "區間 DP"
         ]
       },
       {
@@ -11626,7 +11626,7 @@
         "rating": 1900,
         "tier": "advanced",
         "tags": [
-          "AC自動機",
+          "AC 自動機",
           "Trie"
         ]
       },
@@ -12243,7 +12243,7 @@
         "rating": 1800,
         "tier": "core",
         "tags": [
-          "數位DP"
+          "數位 DP"
         ]
       },
       {
@@ -12254,7 +12254,7 @@
         "rating": 1400,
         "tier": "warmup",
         "tags": [
-          "數位DP",
+          "數位 DP",
           "排列"
         ]
       },
@@ -12266,7 +12266,7 @@
         "rating": 2000,
         "tier": "advanced",
         "tags": [
-          "數位DP",
+          "數位 DP",
           "排列"
         ]
       },
@@ -12278,7 +12278,7 @@
         "rating": 1800,
         "tier": "core",
         "tags": [
-          "數位DP",
+          "數位 DP",
           "組合"
         ]
       },
@@ -12290,7 +12290,7 @@
         "rating": 1500,
         "tier": "core",
         "tags": [
-          "數位DP",
+          "數位 DP",
           "枚舉"
         ]
       },
@@ -12302,7 +12302,7 @@
         "rating": 1800,
         "tier": "core",
         "tags": [
-          "數位DP"
+          "數位 DP"
         ]
       }
     ],
@@ -12390,7 +12390,7 @@
         "rating": 1800,
         "tier": "core",
         "tags": [
-          "博弈DP",
+          "博弈 DP",
           "區間"
         ]
       },
@@ -12402,7 +12402,7 @@
         "rating": 1700,
         "tier": "core",
         "tags": [
-          "博弈DP",
+          "博弈 DP",
           "區間"
         ]
       },
@@ -12414,7 +12414,7 @@
         "rating": 1900,
         "tier": "advanced",
         "tags": [
-          "博弈DP",
+          "博弈 DP",
           "區間"
         ]
       },
@@ -12426,7 +12426,7 @@
         "rating": 1800,
         "tier": "advanced",
         "tags": [
-          "博弈DP",
+          "博弈 DP",
           "狀壓"
         ]
       },
@@ -12438,7 +12438,7 @@
         "rating": 1700,
         "tier": "core",
         "tags": [
-          "博弈DP",
+          "博弈 DP",
           "區間"
         ]
       },
@@ -12523,7 +12523,7 @@
         "rating": 1700,
         "tier": "core",
         "tags": [
-          "概率DP",
+          "概率 DP",
           "滑動視窗"
         ]
       },
@@ -12535,7 +12535,7 @@
         "rating": 1700,
         "tier": "core",
         "tags": [
-          "概率DP",
+          "概率 DP",
           "背包"
         ]
       },
@@ -12571,7 +12571,7 @@
         "rating": 1700,
         "tier": "core",
         "tags": [
-          "概率DP",
+          "概率 DP",
           "記憶化"
         ]
       },
@@ -14526,7 +14526,7 @@
     "parent_id": "network-flow",
     "title": "二分圖匹配",
     "slug": "bipartite-matching",
-    "description": "用匈牙利算法（增廣路）或最大流求最大匹配，並由König定理連結最小點覆蓋。",
+    "description": "用匈牙利算法（增廣路）或最大流求最大匹配，並由 König 定理連結最小點覆蓋。",
     "core_idea": "二分圖最大匹配：左右兩部、邊只連跨部，求最多的兩兩配對。兩種解法：(1) **匈牙利算法**——對每個左點找**增廣路**（交替未匹配／已匹配邊，末端是未匹配右點），找到就沿路翻轉使匹配數 +1；(2) **轉最大流**——源連左部容量 1、右部連匯容量 1、匹配邊容量 1，最大流即最大匹配。\n\n二分圖匹配是建模利器，靠幾條經典定理擴展：**König 定理**（最大匹配 = 最小點覆蓋）、**最大獨立集 = 點數 − 最大匹配**、**最小路徑覆蓋（DAG）= 點數 − 拆點後最大匹配**。認出問題的二分結構並套對定理，往往比直接想算法更重要。",
     "complexity": "匈牙利 O(V·E)；轉 Dinic O(E√V)（單位容量），適合稠密或大圖。",
     "deep_dive": [
@@ -14610,7 +14610,7 @@
         "tier": "advanced",
         "tags": [
           "二分圖匹配",
-          "狀壓DP"
+          "狀壓 DP"
         ]
       },
       {
@@ -14686,7 +14686,7 @@
     "practice_problems": [],
     "study_plan_ref": {
       "plan": "binary_search",
-      "plan_title": "二分搜尋（二分答案/最小化最大值/最大化最小值/第K小）",
+      "plan_title": "二分搜尋（二分答案/最小化最大值/最大化最小值/第 K 小）",
       "section_id": 3,
       "section_title": ". 進階",
       "section_path": [
@@ -15158,7 +15158,7 @@
   {
     "id": "ds-stack",
     "parent_id": "heap-priority-queue",
-    "title": "stack（Stack）應用",
+    "title": "Stack 應用",
     "slug": "ds-stack",
     "description": "後進先出（LIFO）的線性結構，是括號匹配、表達式求值、最近相關元素等問題的核心工具。",
     "core_idea": "stack 的價值在於「最近、未被抵銷的元素」這個語意：每當新元素能與 stack top 配對或抵銷，就彈出處理，否則壓入等待。\n\n- **何時觸發**：題目出現「最近的左括號」「上一個未匹配元素」「巢狀結構」「能消去相鄰對」這類描述。\n- **括號／表達式**：用 stack 記住尚未閉合的層級或運算子，遇到閉合符或更低優先級時結算。\n- **鄰項消除**：把「相鄰相同就消去」「碰撞抵銷」建模成壓入/彈出，stack bottom 到 stack top 即為最終殘留序列。",
@@ -15279,7 +15279,7 @@
   {
     "id": "ds-queue",
     "parent_id": "heap-priority-queue",
-    "title": "queue 與 deque",
+    "title": "Queue 與 Deque",
     "slug": "ds-queue",
     "description": "先進先出（FIFO）的 queue 與兩端皆可進出的 deque（deque），是 BFS、滑動視窗與設計題的基礎容器。",
     "core_idea": "queue 維護「先來先服務」的順序，deque 則允許兩端 O(1) 增刪，能同時模擬 stack 與 queue。\n\n- **何時觸發**：BFS 逐層擴展、需要按到達順序處理、或設計類題（最近請求計數、circular queue、滑動視窗最值）。\n- **deque 的威力**：兩端皆可操作，是 monotonic queue、回文判定、雙向擴展的底層結構。\n- **設計題**：用陣列 + 頭尾指標實作 circular queue，避免搬移；或用兩個 stack 攤還實作 queue。",

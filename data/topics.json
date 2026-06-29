@@ -301,11 +301,11 @@
   },
   {
     "id": "heap-priority-queue",
-    "title": "heap／priority queue",
+    "title": "Heap／Priority Queue",
     "slug": "heap-priority-queue",
     "description": "維護動態集合中的最大值或最小值，支援即時取出最佳候選。",
     "motivation": "很多貪心、排程、資料流問題需要『反覆取出目前最小／最大的元素，同時還會不斷插入新元素』。若每次都重新排序是 O(n log n)、每次線性掃描找極值是 O(n)，在動態插入下都太慢。難點在於：集合一直在變，我們卻只關心『當前的極值』與『動態維護它』。\n\n堆（heap）正是為此而生——push/pop 都只要 O(log n)，取極值 O(1)。",
-    "core_idea": "堆適合反覆取出當前最小或最大元素，常見於排程、貪心、最短路（Dijkstra／Prim）與資料流中位數。\n\n- **為什麼需要堆？** 完整排序一次是 O(n log n)，但很多題目只需要 top-k 或要邊插入邊取極值；堆用 O(log n) 的 push/pop 支援動態操作，比每次重排序划算得多。\n- **C++ 語法提醒**：`priority_queue<int>` 預設是**max-heap**（最大值在頂）。要 min-heap 需寫 `priority_queue<int, vector<int>, greater<int>>`，否則容易把 Dijkstra 寫反。\n\n當元素會失效又無法直接刪除時，常搭配『懶刪除』；下面的過程剖析與補充套路會展開多路合併、貪心排程與懶刪除三種用法。",
+    "core_idea": "堆適合反覆取出當前最小或最大元素，常見於排程、貪心、最短路（Dijkstra／Prim）與資料流中位數。\n\n- **為什麼需要堆？** 完整排序一次是 O(n log n)，但很多題目只需要 top-k 或要邊插入邊取極值；堆用 O(log n) 的 push/pop 支援動態操作，比每次重排序划算得多。\n- **C++ 語法提醒**：`priority_queue<int>` 預設是 **max-heap**（最大值在頂）。要 min-heap 需寫 `priority_queue<int, vector<int>, greater<int>>`，否則容易把 Dijkstra 寫反。\n\n當元素會失效又無法直接刪除時，常搭配『懶刪除』；下面的過程剖析與補充套路會展開多路合併、貪心排程與懶刪除三種用法。",
     "complexity": "每次 push 或 pop 為 O(log n)，查詢堆頂為 O(1)，空間複雜度 O(n)。",
     "deep_dive": [
       {
@@ -676,7 +676,7 @@
   },
   {
     "id": "monotonic-structure",
-    "title": "monotonic stack／monotonic queue",
+    "title": "Monotonic Stack／Monotonic Queue",
     "slug": "monotonic-stack-queue",
     "description": "維護單調候選集合，快速找到下一個更大值或滑動視窗極值。",
     "motivation": "『對每個元素，找它右邊第一個比它大的數』這類問題，暴力對每個元素往後掃是 O(n²)；滑動視窗最大值若每次重算也是 O(nk)。難點在於：大量比較其實是重複的——一個被更大元素擋住的小元素，永遠不可能成為後面元素的答案，卻一再被檢查。\n\nmonotonic stack／monotonic queue 的核心，就是即時丟掉這些『永遠不可能成為答案』的候選，讓每個元素最多進出結構一次，達到 O(n)。",
