@@ -600,9 +600,7 @@ export function PracticeArena({
                     : 'border-border bg-background/50'
               )}
             >
-              <p className="text-sm text-muted-foreground">
-                {isContestExpired ? '時間到' : '剩餘時間'}
-              </p>
+              <p className="text-sm text-muted-foreground">{isContestExpired ? '時間到' : '剩餘時間'}</p>
               <p className="mt-1 text-3xl font-semibold tabular-nums">
                 {isContestExpired ? '00:00' : remainingText}
               </p>
@@ -644,23 +642,27 @@ export function PracticeArena({
               <div className="space-y-2 text-sm">
                 <span className="text-muted-foreground">比賽類型</span>
                 <div className="flex flex-wrap gap-2">
-                  {([['all', '全部'], ['weekly', '週賽'], ['biweekly', '雙週賽']] as const).map(
-                    ([value, label]) => (
-                      <button
-                        key={value}
-                        type="button"
-                        onClick={() => setContestType(value as ContestType)}
-                        className={cn(
-                          'rounded-lg border px-3 py-1.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-                          contestType === value
-                            ? 'border-primary bg-primary text-primary-foreground'
-                            : 'border-border text-muted-foreground hover:bg-accent hover:text-foreground'
-                        )}
-                      >
-                        {label}
-                      </button>
-                    )
-                  )}
+                  {(
+                    [
+                      ['all', '全部'],
+                      ['weekly', '週賽'],
+                      ['biweekly', '雙週賽']
+                    ] as const
+                  ).map(([value, label]) => (
+                    <button
+                      key={value}
+                      type="button"
+                      onClick={() => setContestType(value as ContestType)}
+                      className={cn(
+                        'rounded-lg border px-3 py-1.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                        contestType === value
+                          ? 'border-primary bg-primary text-primary-foreground'
+                          : 'border-border text-muted-foreground hover:bg-accent hover:text-foreground'
+                      )}
+                    >
+                      {label}
+                    </button>
+                  ))}
                 </div>
               </div>
 
@@ -723,11 +725,7 @@ export function PracticeArena({
 
             {/* Action row */}
             <div className="flex flex-wrap items-center gap-3">
-              <Button
-                onClick={pickContestProblems}
-                disabled={contestPool.length === 0}
-                className="gap-2"
-              >
+              <Button onClick={pickContestProblems} disabled={contestPool.length === 0} className="gap-2">
                 <Shuffle className="h-4 w-4" aria-hidden />
                 隨機抽題（{contestPickCount} 題）
               </Button>
@@ -763,11 +761,7 @@ export function PracticeArena({
                     }
                     onLog={(status) =>
                       picked.canonicalProblem
-                        ? logSubmission(
-                            picked.canonicalProblem.id,
-                            status,
-                            picked.canonicalProblem.topic_id
-                          )
+                        ? logSubmission(picked.canonicalProblem.id, status, picked.canonicalProblem.topic_id)
                         : undefined
                     }
                   />

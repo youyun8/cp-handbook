@@ -24,7 +24,7 @@ function computeDataHash(state: ReturnType<typeof useProgressStore.getState>): s
     Object.entries(state.problemNotes)
       .map(([id, n]) => `${id}:${n.updatedAt}`)
       .sort(),
-    state.completedPracticeProblemIds,
+    state.completedPracticeProblemIds
   ]);
 }
 
@@ -38,7 +38,7 @@ function formatSyncTime(value?: string) {
     day: '2-digit',
     hour: '2-digit',
     minute: '2-digit',
-    hour12: false,
+    hour12: false
   }).format(date);
 }
 
@@ -55,7 +55,7 @@ function formatSyncTimeCompact(value?: string): string | null {
     return new Intl.DateTimeFormat('zh-TW', {
       hour: '2-digit',
       minute: '2-digit',
-      hour12: false,
+      hour12: false
     }).format(date);
   }
   return new Intl.DateTimeFormat('zh-TW', {
@@ -63,7 +63,7 @@ function formatSyncTimeCompact(value?: string): string | null {
     day: 'numeric',
     hour: '2-digit',
     minute: '2-digit',
-    hour12: false,
+    hour12: false
   }).format(date);
 }
 
@@ -134,7 +134,7 @@ export function FloatingCloudSync() {
 
 function FloatingCloudSyncAuthed({
   open,
-  setOpen,
+  setOpen
 }: {
   open: boolean;
   setOpen: (open: boolean | ((v: boolean) => boolean)) => void;
@@ -255,16 +255,15 @@ function FloatingCloudSyncAuthed({
 
   // ── derived values ──────────────────────────────────────────────────────────
 
-  const dotClass =
-    !isLoggedIn
-      ? null
-      : autoSyncStatus === 'syncing'
-        ? 'bg-sky-400 animate-pulse'
-        : autoSyncStatus === 'pending'
-          ? 'bg-amber-400 animate-pulse'
-          : autoSyncStatus === 'error'
-            ? 'bg-red-500'
-            : 'bg-emerald-500';
+  const dotClass = !isLoggedIn
+    ? null
+    : autoSyncStatus === 'syncing'
+      ? 'bg-sky-400 animate-pulse'
+      : autoSyncStatus === 'pending'
+        ? 'bg-amber-400 animate-pulse'
+        : autoSyncStatus === 'error'
+          ? 'bg-red-500'
+          : 'bg-emerald-500';
 
   const statusColor =
     autoSyncStatus === 'error'
@@ -355,7 +354,6 @@ function FloatingCloudSyncAuthed({
 
       {/* ── FAB area ── */}
       <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3">
-
         {/* Panel */}
         {open && (
           <div className="w-[min(calc(100vw-2.5rem),22rem)] overflow-hidden rounded-2xl border border-border bg-card/95 shadow-2xl backdrop-blur">
@@ -383,7 +381,10 @@ function FloatingCloudSyncAuthed({
                     </p>
                     <div className="mt-0.5 flex items-center gap-1.5">
                       {dotClass && (
-                        <span className={`inline-block h-1.5 w-1.5 shrink-0 rounded-full ${dotClass}`} aria-hidden />
+                        <span
+                          className={`inline-block h-1.5 w-1.5 shrink-0 rounded-full ${dotClass}`}
+                          aria-hidden
+                        />
                       )}
                       <p className={`truncate text-xs ${statusColor}`}>{statusLabel}</p>
                     </div>
@@ -422,9 +423,7 @@ function FloatingCloudSyncAuthed({
                   {manualResult.kind !== 'idle' && (
                     <p
                       className={`text-center text-xs font-medium ${
-                        manualResult.kind === 'ok'
-                          ? 'text-emerald-600 dark:text-emerald-400'
-                          : 'text-red-500'
+                        manualResult.kind === 'ok' ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-500'
                       }`}
                     >
                       {manualResult.message}
@@ -433,7 +432,10 @@ function FloatingCloudSyncAuthed({
 
                   <button
                     type="button"
-                    onClick={() => { setOpen(false); setShowDiag(true); }}
+                    onClick={() => {
+                      setOpen(false);
+                      setShowDiag(true);
+                    }}
                     className="flex w-full items-center justify-center gap-1.5 rounded-lg py-1 text-xs text-muted-foreground/60 transition hover:text-muted-foreground"
                   >
                     <CircleHelp className="h-3.5 w-3.5" aria-hidden />
