@@ -6733,7 +6733,7 @@
   {
     "id": "ms-queue-dp",
     "parent_id": "monotonic-structure",
-    "title": "單調佇列優化 DP（Monotonic Queue）",
+    "title": "單調佇列優化 DP",
     "slug": "monotonic-queue-dp",
     "description": "當 DP 轉移為固定長度區間的最小/最大值時，以單調佇列把轉移從 O(k) 降至均攤 O(1)。",
     "core_idea": "單調佇列優化 DP 適合轉移長得像 `dp[i] = cost(i) + min_{j in [i-k, i-1]} dp[j]`（或 `max`）的情況。因為 `cost(i)` 與 `j` 無關，真正困難的部分只剩「固定長度滑動視窗中的最小／最大 `dp[j]`」。這正好是單調佇列最擅長的問題：queue front 永遠保存當前合法區間的最佳前驅，因此每個 `i` 都能在均攤 `O(1)` 內完成轉移，整體從每次枚舉 `k` 個前驅的 `O(nk)` 降到 **O(n)**。\n\n它能成立的前提是：合法前驅集合必須隨 `i` 單調滑動，也就是左右邊界都只往前移，才能用「過期彈出 + 新狀態 enqueue」維護。如果轉移變成 `dp[j] + g(j, i)`，而 `g` 裡有 `j` 與 `i` 的交互項（例如斜率、乘法），那就不是單純視窗極值，通常要改用 **Convex Hull Trick** 或其他更高階最佳化。\n\n實作上最容易錯的是**讀取順序**：先用 dequequeue front 計算 `dp[i]`，再把 `i` 自己插入 deque。否則 `dp[i]` 可能會拿到自己當前驅，等於把「至少往前跳一步」的限制偷偷破壞掉。",
@@ -10200,7 +10200,7 @@
   {
     "id": "ms-lexicographic",
     "parent_id": "monotonic-structure",
-    "title": "單調堆疊求最小字典序（Monotonic Stack）",
+    "title": "單調堆疊求最小字典序",
     "slug": "lexicographic",
     "description": "在保留限制下用單調堆疊貪心刪除較大前導元素，得到字典序最小的結果。",
     "core_idea": "「移除 k 位使數字最小」「不重複字元的字典序最小子序列」這類問題，核心貪心是：**從左到右維護一個 stack，當新元素比 stack top 小且仍允許刪除時，就把 stack top 彈掉**。因為高位（靠左）變小對字典序的影響遠大於低位，所以遇到「前面大、後面小」就該把前面的大元素刪掉。\n\n單調堆疊天然支援這個「能刪就刪」的貪心，並用額外條件（剩餘可刪次數、後面是否還會出現、是否已在 stack 中）約束何時停止。寫對停止條件，就能在 O(n) 內構造出字典序最小（或最大）的答案。",
