@@ -4524,7 +4524,7 @@
     ],
     "supplemental_patterns": [
       {
-        "name": "滑動視窗最大值（monotonic queue）",
+        "name": "滑動視窗最大值（單調佇列）",
         "description": "**觸發**：`K` 指的是序列上的連續視窗，而不是全域前 `K` 大。\n**做法**：改用單調遞減 queue 維護候選下標，保證 queue front 永遠是視窗最大值；每個元素最多進出一次，總時間 O(n)。"
       },
       {
@@ -6452,7 +6452,7 @@
     "title": "單調堆疊（Monotonic Stack）",
     "slug": "monotonic-stack",
     "description": "維護單調遞增或遞減的 stack，O(n) 求解「下一個更大／更小值」與子陣列貢獻計數問題。",
-    "core_idea": "monotonic stack 的關鍵不是「把元素排整齊」，而是用 stack 保存**尚未被答案結算**的候選下標。以「下一個更大值」為例，若 stack 內維持值遞減，掃到新元素 `a[i]` 時，只要 `a[i] > a[st.top()]`，就代表 stack top `j` 的右側第一個更大值已經出現，而且必定就是 `i`：因為在 `j` 與 `i` 之間若曾出現更大的元素，`j` 早就會先被彈出。此時 `a[i]` 又比 `a[j]` 更大且更靠右，`a[j]` 對之後任何位置都不可能再成為「更大值」答案，因此可直接彈出。每個下標只會 push 一次、pop 一次，總成本自然是 **O(n)**。\n\nmonotonic stack 也能做**子陣列貢獻計數**：與其直接枚舉所有子陣列，不如反過來問每個 `a[i]` 會成為多少個子陣列的最小值。若 `L[i]` 是左側最近的**嚴格更小**位置，`R[i]` 是右側最近的**小於等於**位置，那麼起點可選 `i-L[i]` 種、終點可選 `R[i]-i` 種，貢獻就是 `a[i] × (i-L[i]) × (R[i]-i)`。一側用嚴格比較、另一側用非嚴格比較的**不對稱邊界**，本質上是在替相等元素指定唯一代表，避免同一個子陣列被重複計數。",
+    "core_idea": "單調堆疊的關鍵不是「把元素排整齊」，而是用 stack 保存**尚未被答案結算**的候選下標。以「下一個更大值」為例，若 stack 內維持值遞減，掃到新元素 `a[i]` 時，只要 `a[i] > a[st.top()]`，就代表 stack top `j` 的右側第一個更大值已經出現，而且必定就是 `i`：因為在 `j` 與 `i` 之間若曾出現更大的元素，`j` 早就會先被彈出。此時 `a[i]` 又比 `a[j]` 更大且更靠右，`a[j]` 對之後任何位置都不可能再成為「更大值」答案，因此可直接彈出。每個下標只會 push 一次、pop 一次，總成本自然是 **O(n)**。\n\n單調堆疊也能做**子陣列貢獻計數**：與其直接枚舉所有子陣列，不如反過來問每個 `a[i]` 會成為多少個子陣列的最小值。若 `L[i]` 是左側最近的**嚴格更小**位置，`R[i]` 是右側最近的**小於等於**位置，那麼起點可選 `i-L[i]` 種、終點可選 `R[i]-i` 種，貢獻就是 `a[i] × (i-L[i]) × (R[i]-i)`。一側用嚴格比較、另一側用非嚴格比較的**不對稱邊界**，本質上是在替相等元素指定唯一代表，避免同一個子陣列被重複計數。",
     "complexity": "時間 O(n)，空間 O(n)（stack 的最大深度）。",
     "deep_dive": [
       {
@@ -6461,12 +6461,12 @@
       },
       {
         "title": "子陣列最小值之和（貢獻計數）",
-        "body": "```cpp\nconst int kMod = 1'000'000'007;\n\n// a: input array or sequence.\nlong long sumSubarrayMins(const vector<int>& a) {\n    int n = (int)a.size();\n    vector<long long> left(n), right(n);\n    stack<int> st;\n\n    for (int i = 0; i < n; i++) {\n        while (!st.empty() && a[st.top()] >= a[i]) {\n            st.pop();\n        }\n        int prev = st.empty() ? -1 : st.top();\n        left[i] = i - prev;\n        st.push(i);\n    }\n\n    while (!st.empty()) {\n        st.pop();\n    }\n\n    for (int i = n - 1; i >= 0; i--) {\n        while (!st.empty() && a[st.top()] > a[i]) {\n            st.pop();\n        }\n        int next = st.empty() ? n : st.top();\n        right[i] = next - i;\n        st.push(i);\n    }\n\n    long long ans = 0;\n    for (int i = 0; i < n; i++) {\n        long long contrib = 1LL * a[i] * left[i] % kMod * right[i] % kMod;\n        ans = (ans + contrib) % kMod;\n    }\n    return ans;\n}\n```\n這裡的 `left[i]` 與 `right[i]` 不是邊界下標，而是「可以往左／往右延伸的選擇數」。左邊找**嚴格更小**、右邊找**小於等於**，會把含有多個相同最小值的子陣列唯一地分配給其中一個位置，避免重複計數。把每個 `a[i]` 的貢獻 `a[i] * left[i] * right[i]` 相加，就等價於把所有子陣列都數過一遍，但只需要兩次 monotonic stack 掃描。"
+        "body": "```cpp\nconst int kMod = 1'000'000'007;\n\n// a: input array or sequence.\nlong long sumSubarrayMins(const vector<int>& a) {\n    int n = (int)a.size();\n    vector<long long> left(n), right(n);\n    stack<int> st;\n\n    for (int i = 0; i < n; i++) {\n        while (!st.empty() && a[st.top()] >= a[i]) {\n            st.pop();\n        }\n        int prev = st.empty() ? -1 : st.top();\n        left[i] = i - prev;\n        st.push(i);\n    }\n\n    while (!st.empty()) {\n        st.pop();\n    }\n\n    for (int i = n - 1; i >= 0; i--) {\n        while (!st.empty() && a[st.top()] > a[i]) {\n            st.pop();\n        }\n        int next = st.empty() ? n : st.top();\n        right[i] = next - i;\n        st.push(i);\n    }\n\n    long long ans = 0;\n    for (int i = 0; i < n; i++) {\n        long long contrib = 1LL * a[i] * left[i] % kMod * right[i] % kMod;\n        ans = (ans + contrib) % kMod;\n    }\n    return ans;\n}\n```\n這裡的 `left[i]` 與 `right[i]` 不是邊界下標，而是「可以往左／往右延伸的選擇數」。左邊找**嚴格更小**、右邊找**小於等於**，會把含有多個相同最小值的子陣列唯一地分配給其中一個位置，避免重複計數。把每個 `a[i]` 的貢獻 `a[i] * left[i] * right[i]` 相加，就等價於把所有子陣列都數過一遍，但只需要兩次單調堆疊掃描。"
       }
     ],
     "reference_links": [
       {
-        "label": "OI-Wiki：monotonic stack",
+        "label": "OI-Wiki：單調堆疊",
         "url": "https://oi-wiki.org/ds/monotonous-stack/"
       },
       {
@@ -6499,7 +6499,7 @@
         "rating": 1500,
         "tier": "core",
         "tags": [
-          "monotonic stack",
+          "單調堆疊",
           "貪心"
         ]
       },
@@ -6511,7 +6511,7 @@
         "rating": 1300,
         "tier": "warmup",
         "tags": [
-          "monotonic stack",
+          "單調堆疊",
           "哈希"
         ]
       },
@@ -6523,7 +6523,7 @@
         "rating": 1500,
         "tier": "core",
         "tags": [
-          "monotonic stack",
+          "單調堆疊",
           "循環"
         ]
       },
@@ -6535,7 +6535,7 @@
         "rating": 1800,
         "tier": "advanced",
         "tags": [
-          "monotonic stack",
+          "單調堆疊",
           "雙指針"
         ]
       },
@@ -6547,7 +6547,7 @@
         "rating": 1900,
         "tier": "advanced",
         "tags": [
-          "monotonic stack",
+          "單調堆疊",
           "DP"
         ]
       },
@@ -6559,7 +6559,7 @@
         "rating": 1900,
         "tier": "advanced",
         "tags": [
-          "monotonic stack",
+          "單調堆疊",
           "貢獻法"
         ]
       }
@@ -6608,7 +6608,7 @@
     "title": "單調佇列（Monotonic Queue）",
     "slug": "monotonic-queue",
     "description": "以 deque 維護當前視窗的候選集合，O(n) 解決定長滑動視窗最大/最小值問題。",
-    "core_idea": "monotonic queue 的本質是把當前視窗中「還可能成為極值」的下標保留下來，其他候選一旦被更新元素**支配**就永久刪除。對滑動視窗最大值來說，deque 內下標對應的值維持遞減，因此 queue front 一定是目前最大值的位置。每往右走一步，先把 `<= i-k` 的過期下標從 queue front 彈掉；再把 queue back 所有 `a[back] <= a[i]` 的下標彈掉，因為 `a[i]` 至少一樣大且更新，之後只要兩者同時留在視窗內，舊下標永遠不可能比 `i` 更適合當最大值。每個下標至多進 deque 一次、出 deque 一次，所以總時間是 **O(n)**。\n\n對滑動視窗最小值只要把比較方向全部反過來：維護值遞增的 deque，queue front 就是最小值。這個「只保留未被支配候選」的想法也能同時維護 `max` 與 `min`，例如 deque 搭配雙指標，動態維持條件 `max - min <= limit` 的最長合法區間。",
+    "core_idea": "單調佇列的本質是把當前視窗中「還可能成為極值」的下標保留下來，其他候選一旦被更新元素**支配**就永久刪除。對滑動視窗最大值來說，deque 內下標對應的值維持遞減，因此 queue front 一定是目前最大值的位置。每往右走一步，先把 `<= i-k` 的過期下標從 queue front 彈掉；再把 queue back 所有 `a[back] <= a[i]` 的下標彈掉，因為 `a[i]` 至少一樣大且更新，之後只要兩者同時留在視窗內，舊下標永遠不可能比 `i` 更適合當最大值。每個下標至多進 deque 一次、出 deque 一次，所以總時間是 **O(n)**。\n\n對滑動視窗最小值只要把比較方向全部反過來：維護值遞增的 deque，queue front 就是最小值。這個「只保留未被支配候選」的想法也能同時維護 `max` 與 `min`，例如 deque 搭配雙指標，動態維持條件 `max - min <= limit` 的最長合法區間。",
     "complexity": "時間 O(n)，空間 O(k)（queue 最多儲存 k 個下標）。",
     "deep_dive": [
       {
@@ -6622,7 +6622,7 @@
     ],
     "reference_links": [
       {
-        "label": "OI-Wiki：monotonic queue",
+        "label": "OI-Wiki：單調佇列",
         "url": "https://oi-wiki.org/ds/monotonous-queue/"
       },
       {
@@ -6633,11 +6633,11 @@
     "supplemental_patterns": [
       {
         "name": "多維滑動視窗（矩陣）",
-        "description": "**觸發**：要在矩陣中求每個 `k×k` 視窗的最大值或最小值。\n**做法**：先對每一列做一次長度 `k` 的 monotonic queue，得到列方向結果；再對每一欄做一次相同操作。兩次一維處理即可完成二維滑動視窗，總時間仍是線性的 `O(n^2)` 等級。"
+        "description": "**觸發**：要在矩陣中求每個 `k×k` 視窗的最大值或最小值。\n**做法**：先對每一列做一次長度 `k` 的單調佇列，得到列方向結果；再對每一欄做一次相同操作。兩次一維處理即可完成二維滑動視窗，總時間仍是線性的 `O(n^2)` 等級。"
       },
       {
         "name": "最大最小差 ≤ limit 最長子陣列",
-        "description": "**觸發**：題目要找區間內 `max - min <= limit` 的最長子陣列。\n**做法**：同時維護最大值 queue 與最小值 queue，右端點持續擴張；若差值超標，就移動左端點並在兩個 deque 中刪掉過期下標。整體是雙指標加雙 monotonic queue。"
+        "description": "**觸發**：題目要找區間內 `max - min <= limit` 的最長子陣列。\n**做法**：同時維護最大值 queue 與最小值 queue，右端點持續擴張；若差值超標，就移動左端點並在兩個 deque 中刪掉過期下標。整體是雙指標加雙單調佇列。"
       }
     ],
     "pitfalls": [
@@ -6654,7 +6654,7 @@
         "rating": 1700,
         "tier": "core",
         "tags": [
-          "monotonic queue",
+          "單調佇列",
           "滑動窗口"
         ]
       },
@@ -6666,7 +6666,7 @@
         "rating": 1900,
         "tier": "advanced",
         "tags": [
-          "monotonic queue",
+          "單調佇列",
           "前綴和"
         ]
       },
@@ -6678,7 +6678,7 @@
         "rating": 1600,
         "tier": "core",
         "tags": [
-          "monotonic queue",
+          "單調佇列",
           "貪心"
         ]
       },
@@ -6733,10 +6733,10 @@
   {
     "id": "ms-queue-dp",
     "parent_id": "monotonic-structure",
-    "title": "Monotonic Queue 優化 DP",
+    "title": "單調佇列優化 DP（Monotonic Queue）",
     "slug": "monotonic-queue-dp",
-    "description": "當 DP 轉移為固定長度區間的最小/最大值時，以 monotonic queue 把轉移從 O(k) 降至均攤 O(1)。",
-    "core_idea": "monotonic queue 優化 DP 適合轉移長得像 `dp[i] = cost(i) + min_{j in [i-k, i-1]} dp[j]`（或 `max`）的情況。因為 `cost(i)` 與 `j` 無關，真正困難的部分只剩「固定長度滑動視窗中的最小／最大 `dp[j]`」。這正好是 monotonic queue 最擅長的問題：queue front 永遠保存當前合法區間的最佳前驅，因此每個 `i` 都能在均攤 `O(1)` 內完成轉移，整體從每次枚舉 `k` 個前驅的 `O(nk)` 降到 **O(n)**。\n\n它能成立的前提是：合法前驅集合必須隨 `i` 單調滑動，也就是左右邊界都只往前移，才能用「過期彈出 + 新狀態 enqueue」維護。如果轉移變成 `dp[j] + g(j, i)`，而 `g` 裡有 `j` 與 `i` 的交互項（例如斜率、乘法），那就不是單純視窗極值，通常要改用 **Convex Hull Trick** 或其他更高階最佳化。\n\n實作上最容易錯的是**讀取順序**：先用 dequequeue front 計算 `dp[i]`，再把 `i` 自己插入 deque。否則 `dp[i]` 可能會拿到自己當前驅，等於把「至少往前跳一步」的限制偷偷破壞掉。",
+    "description": "當 DP 轉移為固定長度區間的最小/最大值時，以單調佇列把轉移從 O(k) 降至均攤 O(1)。",
+    "core_idea": "單調佇列優化 DP 適合轉移長得像 `dp[i] = cost(i) + min_{j in [i-k, i-1]} dp[j]`（或 `max`）的情況。因為 `cost(i)` 與 `j` 無關，真正困難的部分只剩「固定長度滑動視窗中的最小／最大 `dp[j]`」。這正好是單調佇列最擅長的問題：queue front 永遠保存當前合法區間的最佳前驅，因此每個 `i` 都能在均攤 `O(1)` 內完成轉移，整體從每次枚舉 `k` 個前驅的 `O(nk)` 降到 **O(n)**。\n\n它能成立的前提是：合法前驅集合必須隨 `i` 單調滑動，也就是左右邊界都只往前移，才能用「過期彈出 + 新狀態 enqueue」維護。如果轉移變成 `dp[j] + g(j, i)`，而 `g` 裡有 `j` 與 `i` 的交互項（例如斜率、乘法），那就不是單純視窗極值，通常要改用 **Convex Hull Trick** 或其他更高階最佳化。\n\n實作上最容易錯的是**讀取順序**：先用 dequequeue front 計算 `dp[i]`，再把 `i` 自己插入 deque。否則 `dp[i]` 可能會拿到自己當前驅，等於把「至少往前跳一步」的限制偷偷破壞掉。",
     "complexity": "時間 O(n)，空間 O(n)（DP 陣列）+ O(k)（queue）。",
     "deep_dive": [
       {
@@ -6744,13 +6744,13 @@
         "body": "```cpp\n// cost: current accumulated cost.\n// k: limit, count, or window size used by the algorithm.\nvector<long long> windowDP(const vector<int>& cost, int k) {\n    int n = (int)cost.size();\n    const long long kInf = (1LL << 60);\n    vector<long long> dp(n, kInf);\n    if (n == 0) {\n        return dp;\n    }\n\n    dp[0] = 0;\n    if (k <= 0) {\n        return dp;\n    }\n\n    deque<int> dq;\n    dq.push_back(0);\n    for (int i = 1; i < n; i++) {\n        while (!dq.empty() && dq.front() < i - k) {\n            dq.pop_front();\n        }\n\n        if (!dq.empty()) {\n            dp[i] = dp[dq.front()] + cost[i];\n        }\n\n        while (!dq.empty() && dp[dq.back()] >= dp[i]) {\n            dq.pop_back();\n        }\n        if (dp[i] < kInf) {\n            dq.push_back(i);\n        }\n    }\n    return dp;\n}\n```\ndeque 內的下標依 `dp` 值遞增，所以 queue front 永遠是當前視窗最小 `dp[j]`。注意順序必須是：先刪過期、再**讀 queue front 算 `dp[i]`**、最後才把 `i` 放進 deque；這樣才能保證 `dp[i]` 只來自舊狀態，而不會誤用自己。若某個位置不可達，讓它維持 `INF` 並且不要入 deque 即可。"
       },
       {
-        "title": "多重背包 monotonic queue 優化",
+        "title": "多重背包單調佇列優化",
         "body": "```cpp\nstruct Item {\n    int weight, value, count;\n};\n\n// cap: capacity limit.\n// items: items considered by the algorithm.\nvector<long long> multipleKnapsack(int cap, const vector<Item>& items) {\n    const long long kNeg = -(1LL << 60);\n    vector<long long> dp(cap + 1, kNeg);\n    dp[0] = 0;\n\n    for (const Item& item : items) {\n        vector<long long> old = dp;\n        for (int r = 0; r < item.weight && r <= cap; r++) {\n            deque<pair<int, long long>> dq;  // (t, adjusted value)\n            for (int t = 0, j = r; j <= cap; t++, j += item.weight) {\n                while (!dq.empty() && dq.front().first < t - item.count) {\n                    dq.pop_front();\n                }\n\n                if (old[j] != kNeg) {\n                    long long adjusted = old[j] - 1LL * t * item.value;\n                    while (!dq.empty() && dq.back().second <= adjusted) {\n                        dq.pop_back();\n                    }\n                    dq.push_back({t, adjusted});\n                }\n\n                dp[j] = dq.empty() ? kNeg : dq.front().second + 1LL * t * item.value;\n            }\n        }\n    }\n    return dp;\n}\n```\n對固定餘數 `r = j mod w` 而言，所有容量 `j = r + t*w` 會形成一條一維序列。把轉移改寫成 `old[r+s*w] + (t-s)*value = (old[r+s*w] - s*value) + t*value` 之後，只要維護最近 `count+1` 個 `adjusted` 值的最大值即可，這正是一個滑動視窗最大值。這裡可以**先入 deque 再取答案**，因為放進去的是上一層快照 `old[j]`，不是本輪剛算出的 `dp[j]`，不會形成自我轉移。"
       }
     ],
     "reference_links": [
       {
-        "label": "OI-Wiki：monotonic queue 優化 DP",
+        "label": "OI-Wiki：單調佇列優化 DP",
         "url": "https://oi-wiki.org/dp/opt/monotonous-queue-stack/"
       }
     ],
@@ -6761,12 +6761,12 @@
       },
       {
         "name": "環形 DP",
-        "description": "**觸發**：合法前驅視窗可能跨過序列尾端與開頭，例如環上固定距離限制。\n**做法**：可把序列複製一份展平成長度 `2n` 的線性陣列，或用模數下標明確計算視窗左右界，再照樣維護 monotonic queue。"
+        "description": "**觸發**：合法前驅視窗可能跨過序列尾端與開頭，例如環上固定距離限制。\n**做法**：可把序列複製一份展平成長度 `2n` 的線性陣列，或用模數下標明確計算視窗左右界，再照樣維護單調佇列。"
       }
     ],
     "pitfalls": [
       "⚠️ 一般滑動視窗 DP 必須先讀 dequequeue front 算 `dp[i]`，再把 `i` 插入；順序反了就可能讓 `dp[i]` 從自己轉移。",
-      "⚠️ 只有在合法前驅集合會隨 `i` 單調滑動時才適用；若可行 `j` 不是一段連續視窗，就不能直接套 monotonic queue。",
+      "⚠️ 只有在合法前驅集合會隨 `i` 單調滑動時才適用；若可行 `j` 不是一段連續視窗，就不能直接套單調佇列。",
       "⚠️ 多重背包的調整值要寫成 `dp[r+t*w] - t*v`；正負號一旦寫反，deque 維護的就不是同一個轉移式，答案會整體偏掉。"
     ],
     "practice_problems": [
@@ -6778,7 +6778,7 @@
         "rating": 1700,
         "tier": "core",
         "tags": [
-          "monotonic queue 優化",
+          "單調佇列優化",
           "滑動窗口"
         ]
       },
@@ -6790,7 +6790,7 @@
         "rating": 1900,
         "tier": "advanced",
         "tags": [
-          "monotonic queue 優化",
+          "單調佇列優化",
           "前綴和"
         ]
       },
@@ -6802,7 +6802,7 @@
         "rating": 1500,
         "tier": "core",
         "tags": [
-          "monotonic queue 優化",
+          "單調佇列優化",
           "哈希"
         ]
       },
@@ -6814,7 +6814,7 @@
         "rating": 1800,
         "tier": "core",
         "tags": [
-          "monotonic queue 優化",
+          "單調佇列優化",
           "設計"
         ]
       },
@@ -6826,7 +6826,7 @@
         "rating": 1600,
         "tier": "core",
         "tags": [
-          "monotonic queue 優化",
+          "單調佇列優化",
           "二分搜尋"
         ]
       },
@@ -6838,7 +6838,7 @@
         "rating": 1900,
         "tier": "advanced",
         "tags": [
-          "monotonic queue 優化",
+          "單調佇列優化",
           "DP"
         ]
       }
@@ -6865,7 +6865,7 @@
     "parent_id": "monotonic-structure",
     "title": "直方圖最大矩形",
     "slug": "largest-rectangle-histogram",
-    "description": "以 monotonic stack O(n) 求直方圖中面積最大的矩形，可推廣至二維最大全 1 矩形。",
+    "description": "以單調堆疊 O(n) 求直方圖中面積最大的矩形，可推廣至二維最大全 1 矩形。",
     "core_idea": "把每根柱子 `h[i]` 想成矩形的**限制高度**：若想讓高度固定為 `h[i]`，矩形只能向左延伸到第一個更短柱子之後，向右延伸到第一個更短柱子之前。因此只要知道 `L[i]` = 左側最近嚴格更小、`R[i]` = 右側最近小於等於的位置，寬度就是 `R[i]-L[i]-1`，面積是 `h[i] * (R[i]-L[i]-1)`。問題於是變成：如何在 `O(n)` 內找完每根柱子的左右邊界。\n\n單調遞增 stack 剛好能在**彈出時結算**答案。掃到新柱 `h[i]` 時，若 `h[i]` 比 stack top `h[j]` 更矮，代表 `i` 已經是 `j` 右邊第一個更短的位置；而 `j` 被彈出後的新 stack top，就是 `j` 左邊最近仍比它矮的柱子。換句話說，`j` 的左右邊界在這一刻同時確定，可以立刻計算 `h[j]` 作為最短板的最大矩形。每個下標只會進 stack 與 pop 各一次，所以總成本仍是 **O(n)**。\n\n在尾端補一個高度 `0` 的**哨兵**，就能把所有尚未結算的柱子一次沖掉，不必額外再寫一段清空 stack 的迴圈。對相同高度使用 `>` 而不是 `>=` 時，會讓最後出現的等高柱子負責較寬的矩形；雖然代表者不同，但最大面積仍然正確。",
     "complexity": "時間 O(n)，空間 O(n)（stack）。",
     "deep_dive": [
@@ -6891,7 +6891,7 @@
       },
       {
         "name": "貢獻計數求所有子矩形面積之和",
-        "description": "**觸發**：題目不是問最大矩形，而是要把某類子矩形的面積全部加總。\n**做法**：可固定左右邊界後把問題化成高度陣列，再用 monotonic stack 統計每個高度作為最短板時的貢獻。雖然公式更複雜，但核心仍是「最近更小邊界決定可延伸寬度」。"
+        "description": "**觸發**：題目不是問最大矩形，而是要把某類子矩形的面積全部加總。\n**做法**：可固定左右邊界後把問題化成高度陣列，再用單調堆疊統計每個高度作為最短板時的貢獻。雖然公式更複雜，但核心仍是「最近更小邊界決定可延伸寬度」。"
       }
     ],
     "pitfalls": [
@@ -6909,7 +6909,7 @@
         "rating": 1800,
         "tier": "advanced",
         "tags": [
-          "monotonic stack",
+          "單調堆疊",
           "直方圖"
         ]
       },
@@ -6921,7 +6921,7 @@
         "rating": 1900,
         "tier": "advanced",
         "tags": [
-          "monotonic stack",
+          "單調堆疊",
           "直方圖"
         ]
       },
@@ -6933,7 +6933,7 @@
         "rating": 1800,
         "tier": "advanced",
         "tags": [
-          "monotonic stack",
+          "單調堆疊",
           "雙指針"
         ]
       },
@@ -6945,7 +6945,7 @@
         "rating": 1900,
         "tier": "advanced",
         "tags": [
-          "monotonic stack",
+          "單調堆疊",
           "貢獻法"
         ]
       },
@@ -6957,7 +6957,7 @@
         "rating": 1500,
         "tier": "core",
         "tags": [
-          "monotonic stack"
+          "單調堆疊"
         ]
       },
       {
@@ -6968,7 +6968,7 @@
         "rating": 1500,
         "tier": "core",
         "tags": [
-          "monotonic stack"
+          "單調堆疊"
         ]
       }
     ],
@@ -8665,7 +8665,7 @@
       }
     ],
     "pitfalls": [
-      "⚠️ 滑動視窗要求窗口狀態對 right 移動具單調性；若陣列包含負數且目標是「和 ≤ limit 的最短子陣列」，left 可能需要回頭，此時應改用前綴和加 monotonic queue。",
+      "⚠️ 滑動視窗要求窗口狀態對 right 移動具單調性；若陣列包含負數且目標是「和 ≤ limit 的最短子陣列」，left 可能需要回頭，此時應改用前綴和加單調佇列。",
       "⚠️ 求「最短」視窗時，while 條件是「視窗仍合法則持續收縮」，與求「最長」的 while（不合法則收縮）邏輯相反，寫錯方向會讓視窗在合法狀態下停止收縮，得到錯誤結果。",
       "⚠️ `atMost(K) - atMost(K-1)` 中呼叫 `atMost(-1)` 需做邊界保護（直接返回 0），且 `atMost(0)` 也需正確處理（只允許空視窗，返回 0）。",
       "⚠️ 以 `freq.size()` 計算不同值個數時，刪除頻次須在歸零後立即 `erase`，否則鍵仍存在於 map 中，導致不同值計數偏高，窗口收縮邏輯錯誤。"
@@ -9874,7 +9874,7 @@
         "tier": "core",
         "tags": [
           "前綴和",
-          "monotonic stack"
+          "單調堆疊"
         ]
       }
     ],
@@ -10071,15 +10071,15 @@
   {
     "id": "ms-contribution",
     "parent_id": "monotonic-structure",
-    "title": "貢獻法（monotonic stack 算區間貢獻）",
+    "title": "貢獻法（單調堆疊算區間貢獻）",
     "slug": "contribution",
-    "description": "改成「每個元素作為最小／最大值的次數」累加總貢獻，用 monotonic stack 求每元素的管轄區間。",
-    "core_idea": "面對「所有子陣列的最小值之和」「所有子陣列極差之和」這類**對全部子陣列求和**的問題，逐一枚舉子陣列是 O(n²)。貢獻法反過來想：**固定某元素 `a[i]`，它在多少個子陣列裡是最小值？** 把每個元素的「身分次數 × 數值」加總就是答案。\n\n求 `a[i]` 作為最小值的管轄範圍，就是找它**左邊第一個更小**、**右邊第一個更小**的位置 `L`、`R`，則含 `a[i]` 且 `a[i]` 為最小的子陣列數 = `(i-L) × (R-i)`。這正是 monotonic stack 的拿手好戲。處理相等元素時，一邊取嚴格、一邊取非嚴格以避免重複計數。",
-    "complexity": "時間 O(n)（monotonic stack 求左右邊界），空間 O(n)。",
+    "description": "改成「每個元素作為最小／最大值的次數」累加總貢獻，用單調堆疊求每元素的管轄區間。",
+    "core_idea": "面對「所有子陣列的最小值之和」「所有子陣列極差之和」這類**對全部子陣列求和**的問題，逐一枚舉子陣列是 O(n²)。貢獻法反過來想：**固定某元素 `a[i]`，它在多少個子陣列裡是最小值？** 把每個元素的「身分次數 × 數值」加總就是答案。\n\n求 `a[i]` 作為最小值的管轄範圍，就是找它**左邊第一個更小**、**右邊第一個更小**的位置 `L`、`R`，則含 `a[i]` 且 `a[i]` 為最小的子陣列數 = `(i-L) × (R-i)`。這正是單調堆疊的拿手好戲。處理相等元素時，一邊取嚴格、一邊取非嚴格以避免重複計數。",
+    "complexity": "時間 O(n)（單調堆疊求左右邊界），空間 O(n)。",
     "deep_dive": [
       {
         "title": "所有子陣列最小值之和",
-        "body": "用 monotonic stack 求每個元素左右第一個更小者，左邊嚴格、右邊非嚴格避免重複：\n\n```cpp\nconst long long kMod = 1e9 + 7;\n// a: input array or sequence.\nint sumSubarrayMins(vector<int>& a) {\n    int n = a.size();\n    vector<int> L(n), R(n);  // boundaries where a[i] is the strict min\n    stack<int> st;\n    for (int i = 0; i < n; i++) {  // left: first index with a[left] < a[i]\n        while (!st.empty() && a[st.top()] >= a[i]) {\n            st.pop();\n        }\n        L[i] = st.empty() ? -1 : st.top();\n        st.push(i);\n    }\n    while (!st.empty()) {\n        st.pop();\n    }\n    for (int i = n - 1; i >= 0; i--) {  // right: first index with a[right] < a[i]\n        while (!st.empty() && a[st.top()] > a[i]) {\n            st.pop();\n        }\n        R[i] = st.empty() ? n : st.top();\n        st.push(i);\n    }\n    long long ans = 0;\n    for (int i = 0; i < n; i++) {\n        ans = (ans + 1LL * a[i] * (i - L[i]) % kMod * (R[i] - i)) % kMod;\n    }\n    return ans;\n}\n```\n\n左用 `>=`（嚴格更小才停）、右用 `>`（遇相等不停），保證每個子陣列的最小值唯一歸給最左邊那個，避免重算。"
+        "body": "用單調堆疊求每個元素左右第一個更小者，左邊嚴格、右邊非嚴格避免重複：\n\n```cpp\nconst long long kMod = 1e9 + 7;\n// a: input array or sequence.\nint sumSubarrayMins(vector<int>& a) {\n    int n = a.size();\n    vector<int> L(n), R(n);  // boundaries where a[i] is the strict min\n    stack<int> st;\n    for (int i = 0; i < n; i++) {  // left: first index with a[left] < a[i]\n        while (!st.empty() && a[st.top()] >= a[i]) {\n            st.pop();\n        }\n        L[i] = st.empty() ? -1 : st.top();\n        st.push(i);\n    }\n    while (!st.empty()) {\n        st.pop();\n    }\n    for (int i = n - 1; i >= 0; i--) {  // right: first index with a[right] < a[i]\n        while (!st.empty() && a[st.top()] > a[i]) {\n            st.pop();\n        }\n        R[i] = st.empty() ? n : st.top();\n        st.push(i);\n    }\n    long long ans = 0;\n    for (int i = 0; i < n; i++) {\n        ans = (ans + 1LL * a[i] * (i - L[i]) % kMod * (R[i] - i)) % kMod;\n    }\n    return ans;\n}\n```\n\n左用 `>=`（嚴格更小才停）、右用 `>`（遇相等不停），保證每個子陣列的最小值唯一歸給最左邊那個，避免重算。"
       },
       {
         "title": "極差之和 = 最大值之和 − 最小值之和",
@@ -10088,7 +10088,7 @@
     ],
     "reference_links": [
       {
-        "label": "OI-Wiki：monotonic stack",
+        "label": "OI-Wiki：單調堆疊",
         "url": "https://oi-wiki.org/ds/monotonous-stack/"
       },
       {
@@ -10121,7 +10121,7 @@
         "tier": "advanced",
         "tags": [
           "貢獻法",
-          "monotonic stack"
+          "單調堆疊"
         ]
       },
       {
@@ -10133,7 +10133,7 @@
         "tier": "core",
         "tags": [
           "貢獻法",
-          "monotonic stack"
+          "單調堆疊"
         ]
       },
       {
@@ -10157,7 +10157,7 @@
         "tier": "advanced",
         "tags": [
           "貢獻法",
-          "monotonic stack"
+          "單調堆疊"
         ]
       },
       {
@@ -10200,10 +10200,10 @@
   {
     "id": "ms-lexicographic",
     "parent_id": "monotonic-structure",
-    "title": "Monotonic Stack 求最小字典序",
+    "title": "單調堆疊求最小字典序（Monotonic Stack）",
     "slug": "lexicographic",
-    "description": "在保留限制下用 monotonic stack 貪心刪除較大前導元素，得到字典序最小的結果。",
-    "core_idea": "「移除 k 位使數字最小」「不重複字元的字典序最小子序列」這類問題，核心貪心是：**從左到右維護一個 stack，當新元素比 stack top 小且仍允許刪除時，就把 stack top 彈掉**。因為高位（靠左）變小對字典序的影響遠大於低位，所以遇到「前面大、後面小」就該把前面的大元素刪掉。\n\nmonotonic stack 天然支援這個「能刪就刪」的貪心，並用額外條件（剩餘可刪次數、後面是否還會出現、是否已在 stack 中）約束何時停止。寫對停止條件，就能在 O(n) 內構造出字典序最小（或最大）的答案。",
+    "description": "在保留限制下用單調堆疊貪心刪除較大前導元素，得到字典序最小的結果。",
+    "core_idea": "「移除 k 位使數字最小」「不重複字元的字典序最小子序列」這類問題，核心貪心是：**從左到右維護一個 stack，當新元素比 stack top 小且仍允許刪除時，就把 stack top 彈掉**。因為高位（靠左）變小對字典序的影響遠大於低位，所以遇到「前面大、後面小」就該把前面的大元素刪掉。\n\n單調堆疊天然支援這個「能刪就刪」的貪心，並用額外條件（剩餘可刪次數、後面是否還會出現、是否已在 stack 中）約束何時停止。寫對停止條件，就能在 O(n) 內構造出字典序最小（或最大）的答案。",
     "complexity": "時間 O(n)（每元素進 pop 各一次），空間 O(n)。",
     "deep_dive": [
       {
@@ -10217,11 +10217,11 @@
     ],
     "reference_links": [
       {
-        "label": "OI-Wiki：monotonic stack",
+        "label": "OI-Wiki：單調堆疊",
         "url": "https://oi-wiki.org/ds/monotonous-stack/"
       },
       {
-        "label": "靈茶山艾府：monotonic stack 與字典序",
+        "label": "靈茶山艾府：單調堆疊與字典序",
         "url": "https://leetcode.cn/circle/discuss/9oZFK9/"
       }
     ],
@@ -10232,7 +10232,7 @@
       },
       {
         "name": "帶保留下界的拼接最大數",
-        "description": "**觸發**：從多個陣列各取若干、拼接成最大數。\n**做法**：對每段用 monotonic stack 取「長度固定下字典序最大子序列」，再用歸併比較拼接。"
+        "description": "**觸發**：從多個陣列各取若干、拼接成最大數。\n**做法**：對每段用單調堆疊取「長度固定下字典序最大子序列」，再用歸併比較拼接。"
       }
     ],
     "pitfalls": [
@@ -10250,7 +10250,7 @@
         "tier": "core",
         "tags": [
           "字典序",
-          "monotonic stack"
+          "單調堆疊"
         ]
       },
       {
@@ -10274,11 +10274,11 @@
         "tier": "core",
         "tags": [
           "字典序",
-          "monotonic stack"
+          "單調堆疊"
         ]
       },
       {
-        "title": "monotonic stack 最小字典序",
+        "title": "單調堆疊最小字典序",
         "source": "leetcode",
         "source_id": "smallest-subsequence-of-distinct-characters",
         "frontend_id": "1081",
@@ -10298,7 +10298,7 @@
         "tier": "core",
         "tags": [
           "字典序",
-          "monotonic stack"
+          "單調堆疊"
         ]
       },
       {
@@ -13063,7 +13063,7 @@
     "title": "字典序貪心",
     "slug": "lexicographic-greedy",
     "description": "逐位決定字元並貪心取「在可行前提下最小（或最大）」的選擇，前提是後續仍有合法解。",
-    "core_idea": "求「字典序最小／最大」的結果時，貪心地**逐位確定**：在每一位都嘗試放最小（求最小）的字元，前提是**剩下的位仍能湊出合法解**。因為高位對字典序的影響壓倒低位，所以只要保證可行，當前位取最小一定不會更差。\n\n關鍵在「可行性檢查」——放了這個字元後，剩餘資源／約束是否還能完成。常見做法是預處理後綴資訊（後面還剩多少某字元、後綴是否可達），或用 monotonic stack 在掃描中維護「能刪就刪」。寫對可行性判斷，字典序貪心就能在線性或近線性時間構造最優串。",
+    "core_idea": "求「字典序最小／最大」的結果時，貪心地**逐位確定**：在每一位都嘗試放最小（求最小）的字元，前提是**剩下的位仍能湊出合法解**。因為高位對字典序的影響壓倒低位，所以只要保證可行，當前位取最小一定不會更差。\n\n關鍵在「可行性檢查」——放了這個字元後，剩餘資源／約束是否還能完成。常見做法是預處理後綴資訊（後面還剩多少某字元、後綴是否可達），或用單調堆疊在掃描中維護「能刪就刪」。寫對可行性判斷，字典序貪心就能在線性或近線性時間構造最優串。",
     "complexity": "多為 O(n) 或 O(n·|Σ|)（每位嘗試字元集並做 O(1) 可行性判斷）。",
     "deep_dive": [
       {
@@ -13071,8 +13071,8 @@
         "body": "在保留每種字元至少需求量下，貪心組出字典序最小結果（示意：從計數構造最小排列且滿足某約束）：\n\n```cpp\n// Build the lexicographically smallest string using counts cnt[26].\n// Place the smallest usable char whose use still leaves a feasible suffix.\n// cnt: counts or frequency table.\n// total: total number of positions or elements to construct.\n// feasible: predicate that checks whether the remaining state can still be completed.\nstring smallestFromCounts(int cnt[26], int total, function<bool(int, int*)> feasible) {\n    string res;\n    for (int pos = 0; pos < total; pos++) {\n        for (int c = 0; c < 26; c++) {\n            if (!cnt[c]) {\n                continue;\n            }\n            cnt[c]--;\n            if (feasible(pos + 1, cnt)) {\n                res += char('a' + c);\n                break;\n            }          // keep choice\n            cnt[c]++;  // revert, try next char\n        }\n    }\n    return res;\n}\n```\n\n每位從最小字元開始試，`feasible` 確認用掉它後剩餘仍可完成；不可行就還原計數換下一個字元。"
       },
       {
-        "title": "monotonic stack 版字典序貪心",
-        "body": "「能刪就刪」型字典序最小（如移除 k 位）用 monotonic stack 最直接：\n\n```cpp\n// s: input string.\n// k: limit, count, or window size used by the algorithm.\nstring smallestAfterRemoveK(const string& s, int k) {\n    string st;\n    for (char c : s) {\n        while (!st.empty() && k > 0 && st.back() > c) {\n            st.pop_back();\n            k--;\n        }\n        st.push_back(c);  // greedily keep small prefix\n    }\n    st.resize(st.size() - k);  // remove leftover from tail\n    return st;\n}\n```\n\n當 stack top 比當前字元大且還能刪，就彈掉它讓高位變小——這正是「逐位取最小且保證可行」在 stack 上的實現。"
+        "title": "單調堆疊版字典序貪心",
+        "body": "「能刪就刪」型字典序最小（如移除 k 位）用單調堆疊最直接：\n\n```cpp\n// s: input string.\n// k: limit, count, or window size used by the algorithm.\nstring smallestAfterRemoveK(const string& s, int k) {\n    string st;\n    for (char c : s) {\n        while (!st.empty() && k > 0 && st.back() > c) {\n            st.pop_back();\n            k--;\n        }\n        st.push_back(c);  // greedily keep small prefix\n    }\n    st.resize(st.size() - k);  // remove leftover from tail\n    return st;\n}\n```\n\n當 stack top 比當前字元大且還能刪，就彈掉它讓高位變小——這正是「逐位取最小且保證可行」在 stack 上的實現。"
       }
     ],
     "reference_links": [
@@ -13081,14 +13081,14 @@
         "url": "https://oi-wiki.org/basic/greedy/"
       },
       {
-        "label": "OI-Wiki：monotonic stack",
+        "label": "OI-Wiki：單調堆疊",
         "url": "https://oi-wiki.org/ds/monotonous-stack/"
       }
     ],
     "supplemental_patterns": [
       {
         "name": "字典序最大",
-        "description": "**觸發**：要求結果字典序最大。\n**做法**：逐位取最大可行字元；monotonic stack 版把比較反向（stack top 較小才彈）。"
+        "description": "**觸發**：要求結果字典序最大。\n**做法**：逐位取最大可行字元；單調堆疊版把比較反向（stack top 較小才彈）。"
       },
       {
         "name": "後綴可行性預處理",
@@ -13098,7 +13098,7 @@
     "pitfalls": [
       "⚠️ 取最小前必須確認「剩餘仍可完成」，否則貪心會走進死路。",
       "⚠️ 嘗試失敗要正確還原狀態（計數、標記），否則污染後續決策。",
-      "⚠️ monotonic stack 版掃完別忘了處理剩餘刪除額度與前導零等收尾。"
+      "⚠️ 單調堆疊版掃完別忘了處理剩餘刪除額度與前導零等收尾。"
     ],
     "practice_problems": [
       {
@@ -13126,7 +13126,7 @@
         ]
       },
       {
-        "title": "monotonic stack 最小字典序",
+        "title": "單調堆疊最小字典序",
         "source": "leetcode",
         "source_id": "smallest-subsequence-of-distinct-characters",
         "frontend_id": "1081",
@@ -15282,7 +15282,7 @@
     "title": "Queue 與 Deque",
     "slug": "ds-queue",
     "description": "先進先出（FIFO）的 queue 與兩端皆可進出的 deque（deque），是 BFS、滑動視窗與設計題的基礎容器。",
-    "core_idea": "queue 維護「先來先服務」的順序，deque 則允許兩端 O(1) 增刪，能同時模擬 stack 與 queue。\n\n- **何時觸發**：BFS 逐層擴展、需要按到達順序處理、或設計類題（最近請求計數、circular queue、滑動視窗最值）。\n- **deque 的威力**：兩端皆可操作，是 monotonic queue、回文判定、雙向擴展的底層結構。\n- **設計題**：用陣列 + 頭尾指標實作 circular queue，避免搬移；或用兩個 stack 攤還實作 queue。",
+    "core_idea": "queue 維護「先來先服務」的順序，deque 則允許兩端 O(1) 增刪，能同時模擬 stack 與 queue。\n\n- **何時觸發**：BFS 逐層擴展、需要按到達順序處理、或設計類題（最近請求計數、circular queue、滑動視窗最值）。\n- **deque 的威力**：兩端皆可操作，是單調佇列、回文判定、雙向擴展的底層結構。\n- **設計題**：用陣列 + 頭尾指標實作 circular queue，避免搬移；或用兩個 stack 攤還實作 queue。",
     "complexity": "enqueue／dequeue／兩端操作皆 O(1)，空間 O(n)。",
     "deep_dive": [
       {
@@ -15311,7 +15311,7 @@
       },
       {
         "name": "deque 雙端擴展",
-        "description": "**何時用**：需要從兩端取/放（monotonic queue、回文、雙向 BFS）。\n**核心做法**：用 `std::deque` 在 front/back 同時 O(1) 操作。\n**複雜度**：O(1) 每操作。"
+        "description": "**何時用**：需要從兩端取/放（單調佇列、回文、雙向 BFS）。\n**核心做法**：用 `std::deque` 在 front/back 同時 O(1) 操作。\n**複雜度**：O(1) 每操作。"
       }
     ],
     "pitfalls": [

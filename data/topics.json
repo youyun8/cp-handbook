@@ -679,38 +679,38 @@
     "title": "單調堆疊／單調佇列（Monotonic Stack／Queue）",
     "slug": "monotonic-stack-queue",
     "description": "維護單調候選集合，快速找到下一個更大值或滑動視窗極值。",
-    "motivation": "『對每個元素，找它右邊第一個比它大的數』這類問題，暴力對每個元素往後掃是 O(n²)；滑動視窗最大值若每次重算也是 O(nk)。難點在於：大量比較其實是重複的——一個被更大元素擋住的小元素，永遠不可能成為後面元素的答案，卻一再被檢查。\n\nmonotonic stack／monotonic queue 的核心，就是即時丟掉這些『永遠不可能成為答案』的候選，讓每個元素最多進出結構一次，達到 O(n)。",
-    "core_idea": "單調結構會主動刪除『永遠不可能成為答案』的候選。\n\n- **monotonic stack 解決什麼？** 對每個元素找『下一個（或上一個）更大／更小值』。核心直覺：當新元素比 stack top 大時，stack top 這個較小值被新元素『擋住』，它對後續元素而言永遠輪不到，於是直接彈出並結算——每個元素 push、pop 各一次，總計 O(n)。\n- **monotonic queue vs 滑動視窗最大值**：monotonic queue 存的是**下標**，queue front 永遠是當前視窗最大值的下標。每步先從 queue front 彈掉超出視窗範圍的下標，再從 queue back 彈掉所有比新元素小的下標（它們被新元素支配、不可能再當最大值），保證 queue 值單調遞減。\n\n下面看『push 記錄、pop 計算』的執行順序，以及柱狀圖最大矩形與貢獻計數兩個套路。",
+    "motivation": "『對每個元素，找它右邊第一個比它大的數』這類問題，暴力對每個元素往後掃是 O(n²)；滑動視窗最大值若每次重算也是 O(nk)。難點在於：大量比較其實是重複的——一個被更大元素擋住的小元素，永遠不可能成為後面元素的答案，卻一再被檢查。\n\n單調堆疊／單調佇列的核心，就是即時丟掉這些『永遠不可能成為答案』的候選，讓每個元素最多進出結構一次，達到 O(n)。",
+    "core_idea": "單調結構會主動刪除『永遠不可能成為答案』的候選。\n\n- **單調堆疊解決什麼？** 對每個元素找『下一個（或上一個）更大／更小值』。核心直覺：當新元素比 stack top 大時，stack top 這個較小值被新元素『擋住』，它對後續元素而言永遠輪不到，於是直接彈出並結算——每個元素 push、pop 各一次，總計 O(n)。\n- **單調佇列 vs 滑動視窗最大值**：單調佇列存的是**下標**，queue front 永遠是當前視窗最大值的下標。每步先從 queue front 彈掉超出視窗範圍的下標，再從 queue back 彈掉所有比新元素小的下標（它們被新元素支配、不可能再當最大值），保證 queue 值單調遞減。\n\n下面看『push 記錄、pop 計算』的執行順序，以及柱狀圖最大矩形與貢獻計數兩個套路。",
     "complexity": "時間複雜度 O(n)，空間複雜度 O(n) 或 O(k)。",
     "deep_dive": [
       {
-        "title": "monotonic stack：被新元素支配的候選可以立刻結算",
-        "body": "monotonic stack 的核心是刪除「未來不可能再成為答案」的候選。以找下一個更大元素為例，stack 內存下標，並維持對應值遞減。當新值 `a[i]` 比 stack top 大，stack top 的下一個更大值就已經確定是 i。\n\n```cpp\nvector<int> nextGreater(n, -1), st;\nfor (int i = 0; i < n; ++i) {\n    while (!st.empty() && a[st.back()] < a[i]) {\n        nextGreater[st.back()] = i;\n        st.pop_back();\n    }\n    st.push_back(i);\n}\n```\n\n不變式是：stack 中下標由左到右遞增，對應值保持遞減。每個元素只 push 一次、pop 一次，所以總複雜度 O(n)。若要找「下一個更小」，比較符號反過來；若要處理循環陣列，通常跑兩輪並用 `i % n`。"
+        "title": "單調堆疊：被新元素支配的候選可以立刻結算",
+        "body": "單調堆疊的核心是刪除「未來不可能再成為答案」的候選。以找下一個更大元素為例，stack 內存下標，並維持對應值遞減。當新值 `a[i]` 比 stack top 大，stack top 的下一個更大值就已經確定是 i。\n\n```cpp\nvector<int> nextGreater(n, -1), st;\nfor (int i = 0; i < n; ++i) {\n    while (!st.empty() && a[st.back()] < a[i]) {\n        nextGreater[st.back()] = i;\n        st.pop_back();\n    }\n    st.push_back(i);\n}\n```\n\n不變式是：stack 中下標由左到右遞增，對應值保持遞減。每個元素只 push 一次、pop 一次，所以總複雜度 O(n)。若要找「下一個更小」，比較符號反過來；若要處理循環陣列，通常跑兩輪並用 `i % n`。"
       },
       {
         "title": "柱狀圖最大矩形：pop 時計算貢獻",
         "body": "柱狀圖最大矩形要求每根柱子作為最低高度時能向左右延伸多遠。單調遞增 stack 能在柱子被彈出時，同時知道它的右邊第一個更矮位置與左邊第一個更矮位置。\n\n```cpp\nvector<int> st;\nlong long ans = 0;\nfor (int i = 0; i <= n; ++i) {\n    int h = (i == n ? 0 : height[i]);\n    while (!st.empty() && height[st.back()] > h) {\n        int mid = st.back();\n        st.pop_back();\n        int left = st.empty() ? -1 : st.back();\n        ans = max(ans, 1LL * height[mid] * (i - left - 1));\n    }\n    st.push_back(i);\n}\n```\n\n彈出 `mid` 的瞬間，右邊界就是目前位置 i，左邊界是彈出後的新 stack top。末尾補高度 0 是為了強制清空所有剩餘柱子。面積計算一定在 pop 時做，因為只有那一刻左右邊界都已確定。"
       },
       {
-        "title": "monotonic queue：滑動視窗最大值的候選集合",
-        "body": "monotonic queue 和 monotonic stack 不同，它要同時處理「過期」與「支配」。滑動視窗最大值中，queue 存下標，queue front 永遠是目前窗口最大值。\n\n```cpp\ndeque<int> dq;\nfor (int i = 0; i < n; ++i) {\n    while (!dq.empty() && dq.front() <= i - k) dq.pop_front();\n    while (!dq.empty() && a[dq.back()] <= a[i]) dq.pop_back();\n    dq.push_back(i);\n    if (i >= k - 1) answer.push_back(a[dq.front()]);\n}\n```\n\n第一個 while 移除已經不在 `[i-k+1, i]` 的下標；第二個 while 移除比新元素小或相等的候選，因為它們更舊且不更大，未來不可能當最大值。若題目需要保留較早的相等元素，就把 `<=` 改成 `<`。"
+        "title": "單調佇列：滑動視窗最大值的候選集合",
+        "body": "單調佇列和單調堆疊不同，它要同時處理「過期」與「支配」。滑動視窗最大值中，queue 存下標，queue front 永遠是目前窗口最大值。\n\n```cpp\ndeque<int> dq;\nfor (int i = 0; i < n; ++i) {\n    while (!dq.empty() && dq.front() <= i - k) dq.pop_front();\n    while (!dq.empty() && a[dq.back()] <= a[i]) dq.pop_back();\n    dq.push_back(i);\n    if (i >= k - 1) answer.push_back(a[dq.front()]);\n}\n```\n\n第一個 while 移除已經不在 `[i-k+1, i]` 的下標；第二個 while 移除比新元素小或相等的候選，因為它們更舊且不更大，未來不可能當最大值。若題目需要保留較早的相等元素，就把 `<=` 改成 `<`。"
       }
     ],
     "reference_links": [
       {
-        "label": "OI-Wiki：monotonic stack",
+        "label": "OI-Wiki：單調堆疊",
         "url": "https://oi-wiki.org/ds/monotonous-stack/"
       },
       {
-        "label": "OI-Wiki：monotonic queue",
+        "label": "OI-Wiki：單調佇列",
         "url": "https://oi-wiki.org/ds/monotonous-queue/"
       },
       {
-        "label": "靈茶山艾府：monotonic stack 題單",
+        "label": "靈茶山艾府：單調堆疊題單",
         "url": "https://www.bilibili.com/video/BV1VN411J7S7/"
       },
       {
-        "label": "靈茶山艾府：monotonic stack 題單",
+        "label": "靈茶山艾府：單調堆疊題單",
         "url": "https://leetcode.cn/circle/discuss/9oZFK9/"
       },
       {
@@ -726,7 +726,7 @@
         "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/data_structure.json"
       },
       {
-        "label": "lc-rating：monotonic stack 題單",
+        "label": "lc-rating：單調堆疊題單",
         "url": "https://raw.githubusercontent.com/youyun8/lc-rating/main/apps/web/public/studyplan/monotonic_stack.json"
       },
       {
@@ -741,16 +741,16 @@
       },
       {
         "name": "貢獻計數",
-        "description": "**何時用**：要對所有子陣列求『以某元素為最大／最小值』的統計（如所有子陣列最小值之和）。\n**核心做法**：用 monotonic stack 求每個 `a[k]` 作為極值時能向左、向右延伸的邊界 `(L, R)`，則它作為極值的子陣列個數 = 左可選 × 右可選，直接相乘累加貢獻。\n**複雜度**：O(n)。"
+        "description": "**何時用**：要對所有子陣列求『以某元素為最大／最小值』的統計（如所有子陣列最小值之和）。\n**核心做法**：用單調堆疊求每個 `a[k]` 作為極值時能向左、向右延伸的邊界 `(L, R)`，則它作為極值的子陣列個數 = 左可選 × 右可選，直接相乘累加貢獻。\n**複雜度**：O(n)。"
       },
       {
         "name": "滑動視窗最大值",
-        "description": "**何時用**：長度固定 k 的視窗滑動，求每個視窗的最大（或最小）值。\n**核心做法**：monotonic queue 存下標、值遞減；每步先從 queue front 移除超出視窗的下標，再從 queue back 移除比新元素小的下標，queue front 即當前視窗最大值。\n**複雜度**：O(n)，每個下標進 dequeue 各一次。"
+        "description": "**何時用**：長度固定 k 的視窗滑動，求每個視窗的最大（或最小）值。\n**核心做法**：單調佇列存下標、值遞減；每步先從 queue front 移除超出視窗的下標，再從 queue back 移除比新元素小的下標，queue front 即當前視窗最大值。\n**複雜度**：O(n)，每個下標進 dequeue 各一次。"
       }
     ],
     "pitfalls": [
-      "⚠️ monotonic stack 弄錯比較方向（`>` 還是 `>=`）會影響『相等元素』的歸屬，導致重複計算或漏算邊界，需依題意（找嚴格更大或不小於）決定。",
-      "⚠️ monotonic queue 存的是**下標**不是值，否則無法判斷 queue front 是否已超出視窗範圍。",
+      "⚠️ 單調堆疊弄錯比較方向（`>` 還是 `>=`）會影響『相等元素』的歸屬，導致重複計算或漏算邊界，需依題意（找嚴格更大或不小於）決定。",
+      "⚠️ 單調佇列存的是**下標**不是值，否則無法判斷 queue front 是否已超出視窗範圍。",
       "⚠️ 柱狀圖忘了在末尾補一個高度 0（或遍歷到 n）強制清空 stack，最後仍留在 stack 中的柱子不會被結算。"
     ],
     "children": [
