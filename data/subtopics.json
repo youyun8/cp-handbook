@@ -6449,7 +6449,7 @@
   {
     "id": "ms-stack",
     "parent_id": "monotonic-structure",
-    "title": "Monotonic Stack",
+    "title": "單調堆疊（Monotonic Stack）",
     "slug": "monotonic-stack",
     "description": "維護單調遞增或遞減的 stack，O(n) 求解「下一個更大／更小值」與子陣列貢獻計數問題。",
     "core_idea": "monotonic stack 的關鍵不是「把元素排整齊」，而是用 stack 保存**尚未被答案結算**的候選下標。以「下一個更大值」為例，若 stack 內維持值遞減，掃到新元素 `a[i]` 時，只要 `a[i] > a[st.top()]`，就代表 stack top `j` 的右側第一個更大值已經出現，而且必定就是 `i`：因為在 `j` 與 `i` 之間若曾出現更大的元素，`j` 早就會先被彈出。此時 `a[i]` 又比 `a[j]` 更大且更靠右，`a[j]` 對之後任何位置都不可能再成為「更大值」答案，因此可直接彈出。每個下標只會 push 一次、pop 一次，總成本自然是 **O(n)**。\n\nmonotonic stack 也能做**子陣列貢獻計數**：與其直接枚舉所有子陣列，不如反過來問每個 `a[i]` 會成為多少個子陣列的最小值。若 `L[i]` 是左側最近的**嚴格更小**位置，`R[i]` 是右側最近的**小於等於**位置，那麼起點可選 `i-L[i]` 種、終點可選 `R[i]-i` 種，貢獻就是 `a[i] × (i-L[i]) × (R[i]-i)`。一側用嚴格比較、另一側用非嚴格比較的**不對稱邊界**，本質上是在替相等元素指定唯一代表，避免同一個子陣列被重複計數。",
@@ -6605,7 +6605,7 @@
   {
     "id": "ms-queue",
     "parent_id": "monotonic-structure",
-    "title": "Monotonic Queue",
+    "title": "單調佇列（Monotonic Queue）",
     "slug": "monotonic-queue",
     "description": "以 deque 維護當前視窗的候選集合，O(n) 解決定長滑動視窗最大/最小值問題。",
     "core_idea": "monotonic queue 的本質是把當前視窗中「還可能成為極值」的下標保留下來，其他候選一旦被更新元素**支配**就永久刪除。對滑動視窗最大值來說，deque 內下標對應的值維持遞減，因此 queue front 一定是目前最大值的位置。每往右走一步，先把 `<= i-k` 的過期下標從 queue front 彈掉；再把 queue back 所有 `a[back] <= a[i]` 的下標彈掉，因為 `a[i]` 至少一樣大且更新，之後只要兩者同時留在視窗內，舊下標永遠不可能比 `i` 更適合當最大值。每個下標至多進 deque 一次、出 deque 一次，所以總時間是 **O(n)**。\n\n對滑動視窗最小值只要把比較方向全部反過來：維護值遞增的 deque，queue front 就是最小值。這個「只保留未被支配候選」的想法也能同時維護 `max` 與 `min`，例如 deque 搭配雙指標，動態維持條件 `max - min <= limit` 的最長合法區間。",
