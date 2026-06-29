@@ -702,8 +702,8 @@
     "parent_id": "shortest-path",
     "title": "Bellman-Ford 與 SPFA",
     "slug": "bellman-ford",
-    "description": "能處理負邊的最短路算法，以及其佇列優化版本 SPFA，並用於偵測負環。",
-    "core_idea": "Bellman-Ford 對所有邊做 V-1 輪鬆弛：每輪掃描每條邊 (u,v,w)，若 `dist[u] + w < dist[v]` 則更新。正確性依據：最短路最多經過 V-1 條邊（無負環時），故 V-1 輪後所有可達節點的 dist 已收斂。第 V 輪若仍能鬆弛，說明存在負環。\n\n**SPFA（Shortest Path Faster Algorithm）**：用佇列維護「剛被鬆弛過的節點」，只從這些節點出發再次鬆弛鄰居，避免冗餘掃描。平均快很多，但最壞仍 O(VE)。",
+    "description": "能處理負邊的最短路算法，以及其 queue 優化版本 SPFA，並用於偵測負環。",
+    "core_idea": "Bellman-Ford 對所有邊做 V-1 輪鬆弛：每輪掃描每條邊 (u,v,w)，若 `dist[u] + w < dist[v]` 則更新。正確性依據：最短路最多經過 V-1 條邊（無負環時），故 V-1 輪後所有可達節點的 dist 已收斂。第 V 輪若仍能鬆弛，說明存在負環。\n\n**SPFA（Shortest Path Faster Algorithm）**：用 queue 維護「剛被鬆弛過的節點」，只從這些節點出發再次鬆弛鄰居，避免冗餘掃描。平均快很多，但最壞仍 O(VE)。",
     "complexity": "Bellman-Ford O(VE)；SPFA 平均 O(E)，最壞 O(VE)。",
     "deep_dive": [
       {
@@ -1074,7 +1074,7 @@
     "title": "Tarjan 離線 LCA",
     "slug": "tarjan-offline-lca",
     "description": "以 DFS 三色標記配合並查集離線批量回答所有 LCA 查詢，整體時間 O((n+q)α(n))。",
-    "core_idea": "Tarjan 離線 LCA 讓 **DFS 狀態** 與 **並查集代表元** 一起工作。`color = 0/1/2` 分別表示未訪問、仍在遞迴堆疊中、整棵子樹已處理完。當 DFS 從子節點 `u` 回到父節點 `v` 時，用 `par[find(u)] = v` 把整個已完成的子樹集合併到 `v`，於是這個集合的代表元就變成目前最靠近根、且仍能代表這塊完成區域的祖先。\n\n為什麼 `find(x)` 會回到 LCA？當 DFS 走到 `v` 並處理查詢 `(v, x)` 時，若 `x` 已是 `color[x] = 2`，表示 `x` 那側的子樹早已完整回溯。此時 `find(x)` 會一路壓縮到「`x` 路徑上最後一個已被提升成代表元、且仍與 `v` 共享 DFS 祖先鏈」的節點，這正是 **最近公共祖先**；若再往上，就會離開兩者最靠近的共同交會點。\n\n每個查詢都要同時掛在 `u`、`v` 兩端，因為答案會在 **第二個完成的端點** 出現時被算出：第一個端點遇到對方時，另一側可能還沒做完整個子樹，`find` 尚未收斂到正確祖先。整體上每條樹邊只合併一次、每個查詢只被檢查常數次，所以總時間是 `O((n + q) · α(n))`；相較於 **倍增 LCA** 的 `O(n log n + q log n)`，Tarjan 常數更小，但前提是所有查詢都必須事先知道。",
+    "core_idea": "Tarjan 離線 LCA 讓 **DFS 狀態** 與 **並查集代表元** 一起工作。`color = 0/1/2` 分別表示未訪問、仍在 recursion stack 中、整棵子樹已處理完。當 DFS 從子節點 `u` 回到父節點 `v` 時，用 `par[find(u)] = v` 把整個已完成的子樹集合併到 `v`，於是這個集合的代表元就變成目前最靠近根、且仍能代表這塊完成區域的祖先。\n\n為什麼 `find(x)` 會回到 LCA？當 DFS 走到 `v` 並處理查詢 `(v, x)` 時，若 `x` 已是 `color[x] = 2`，表示 `x` 那側的子樹早已完整回溯。此時 `find(x)` 會一路壓縮到「`x` 路徑上最後一個已被提升成代表元、且仍與 `v` 共享 DFS 祖先鏈」的節點，這正是 **最近公共祖先**；若再往上，就會離開兩者最靠近的共同交會點。\n\n每個查詢都要同時掛在 `u`、`v` 兩端，因為答案會在 **第二個完成的端點** 出現時被算出：第一個端點遇到對方時，另一側可能還沒做完整個子樹，`find` 尚未收斂到正確祖先。整體上每條樹邊只合併一次、每個查詢只被檢查常數次，所以總時間是 `O((n + q) · α(n))`；相較於 **倍增 LCA** 的 `O(n log n + q log n)`，Tarjan 常數更小，但前提是所有查詢都必須事先知道。",
     "complexity": "時間 O((n + q) · α(n))，空間 O(n + q)。",
     "deep_dive": [
       {
@@ -2161,7 +2161,7 @@
     "title": "凸包",
     "slug": "convex-hull",
     "description": "用 Andrew's Monotone Chain 在 O(n log n) 內求點集的凸包，是計算幾何最常見的預處理步驟。",
-    "core_idea": "凸包是包住所有點的最小凸多邊形。**Andrew's Monotone Chain** 的關鍵直覺：先把點**按 x（再按 y）排序**，凸包邊界自然拆成「下凸包」與「上凸包」兩條單調鏈。\n\n由左到右掃描建下凸包：維護一個棧，每加入新點就檢查棧頂兩點與新點的轉向，若**不是持續左轉**（`cross <= 0`）就把棧頂彈掉，保證鏈一路逆時針。再由右到左同理建上凸包，兩段接起來就是完整凸包。\n\n**為何能 O(n log n)？** 排序是 O(n log n)；建鏈時每個點最多入棧、出棧各一次，是 O(n)。判斷「該不該彈出」全靠叉積符號，整數運算精確無誤差。",
+    "core_idea": "凸包是包住所有點的最小凸多邊形。**Andrew's Monotone Chain** 的關鍵直覺：先把點**按 x（再按 y）排序**，凸包邊界自然拆成「下凸包」與「上凸包」兩條單調鏈。\n\n由左到右掃描建下凸包：維護一個 stack，每加入新點就檢查 stack top 兩點與新點的轉向，若**不是持續左轉**（`cross <= 0`）就把 stack top 彈掉，保證鏈一路逆時針。再由右到左同理建上凸包，兩段接起來就是完整凸包。\n\n**為何能 O(n log n)？** 排序是 O(n log n)；建鏈時每個點最多 push、pop 各一次，是 O(n)。判斷「該不該彈出」全靠叉積符號，整數運算精確無誤差。",
     "complexity": "排序 O(n log n)，建鏈 O(n)，總計 O(n log n)，空間 O(n)。",
     "deep_dive": [
       {
@@ -2196,7 +2196,7 @@
     "pitfalls": [
       "⚠️ 邊上共線點要保留還是丟棄，取決於 `cross` 比較用 `< 0` 還是 `<= 0`，依題意選擇，否則共線測資會出錯。",
       "⚠️ 點數 `n < 3`（含全部共線、重複點）需特判，否則建鏈會越界或回傳退化結果。",
-      "⚠️ 記得先去除重複點（`unique`），重複點會讓叉積為 0 而干擾彈棧判斷。",
+      "⚠️ 記得先去除重複點（`unique`），重複點會讓叉積為 0 而干擾 pop 判斷。",
       "⚠️ 叉積用 `long long`，座標相減後相乘在 1e9 座標下可達 1e18，`int` 會溢位。"
     ],
     "practice_problems": [
@@ -2771,7 +2771,7 @@
     "title": "子序列／子陣列 DP",
     "slug": "dp-subsequence",
     "description": "在序列上以「以 i 結尾」為狀態，計數或最優化合法子序列、子陣列（含不相交區間選取）。",
-    "core_idea": "這類 DP 以「以位置 i 結尾的最優/方案數」為狀態，轉移自更早的合法位置。\n\n- **何時觸發**：求合法子序列的計數/最值、子陣列滿足條件的最優、選取不相交區間使收益最大。\n- **子序列 vs 子陣列**：子序列可跳著選（轉移自所有更早合法 j）；子陣列必須連續（轉移多半只看 i-1）。\n- **加速**：若轉移要對一段 j 取最值/求和，常配合前綴和、單調隊列或樹狀陣列優化。",
+    "core_idea": "這類 DP 以「以位置 i 結尾的最優/方案數」為狀態，轉移自更早的合法位置。\n\n- **何時觸發**：求合法子序列的計數/最值、子陣列滿足條件的最優、選取不相交區間使收益最大。\n- **子序列 vs 子陣列**：子序列可跳著選（轉移自所有更早合法 j）；子陣列必須連續（轉移多半只看 i-1）。\n- **加速**：若轉移要對一段 j 取最值/求和，常配合前綴和、單調 queue 或樹狀陣列優化。",
     "complexity": "樸素 O(n^2)，配合資料結構優化可達 O(n log n)。",
     "deep_dive": [
       {
@@ -2971,7 +2971,7 @@
     ],
     "pitfalls": [
       "⚠️ 0/1 背包忘記將內層迴圈改為逆序，導致同一件物品被多次選取，實際上退化成完全背包。",
-      "⚠️ 多重背包直接展開成 c 個相同物品再做 0/1 背包，若 c 高達 10⁶ 會 TLE；必須使用二進位分組（O(log C) 組）或單調隊列優化（O(nW)）。",
+      "⚠️ 多重背包直接展開成 c 個相同物品再做 0/1 背包，若 c 高達 10⁶ 會 TLE；必須使用二進位分組（O(log C) 組）或單調 queue 優化（O(nW)）。",
       "⚠️ 「恰好裝滿」與「至多裝滿」初始化不同：前者除 `dp[0]=0` 外均為 `-INF`，後者全部為 0；混淆後答案可能偏大或出現非法值。",
       "⚠️ 物品價值之和可能超過 `int` 範圍，若 n 和 v[i] 均較大應改用 `long long`；比較時也要注意 `-INF` 加正值的溢位問題。"
     ],
@@ -3265,7 +3265,7 @@
     ],
     "pitfalls": [
       "⚠️ 哨兵值 `-1` 若與合法答案重疊（DP 值域含負數），會誤判為「已計算」；應改用不在值域內的哨兵，或改用獨立的 `visited[]` 陣列。",
-      "⚠️ 遞迴深度過深（序列長度達 10⁵ 等）會導致系統棧溢位（stack overflow）；此時改用迭代 DP 或手動模擬棧。",
+      "⚠️ 遞迴深度過深（序列長度達 10⁵ 等）會導致系統 stack overflow（stack overflow）；此時改用迭代 DP 或手動模擬 stack。",
       "⚠️ 多測試資料時必須在每個測試案例前重置 memo（`fill` 或 `assign`），否則前一筆的快取值會污染後續答案。",
       "⚠️ 記憶化搜尋只適用於**有向無環圖（DAG）**上的轉移；若狀態轉移存在環（如無記憶遞迴），會導致無限遞迴或錯誤的快取覆蓋，需先拓撲排序或改用迭代 DP。"
     ],
@@ -3356,7 +3356,7 @@
     "deep_dive": [
       {
         "title": "路徑壓縮：遞迴與迭代兩種寫法",
-        "body": "下面把最常見的遞迴版與不會吃堆疊的迭代版放在一起比較：\n\n```cpp\nstruct DsuFindDemo {\n    vector<int> par;\n\n    // n: number of nodes or elements.\n    explicit DsuFindDemo(int n) : par(n + 1) {\n        iota(par.begin(), par.end(), 0);\n    }\n\n    // x: value or node being processed.\n    int findRec(int x) {\n        if (par[x] == x) {\n            return x;\n        }\n        return par[x] = findRec(par[x]);\n    }\n\n    // x: value, node, or output coefficient used by the function.\n    int findIter(int x) {\n        int root = x;\n        while (par[root] != root) {\n            root = par[root];\n        }\n        while (par[x] != x) {\n            int parent = par[x];\n            par[x] = root;\n            x = parent;\n        }\n        return root;\n    }\n};\n```\n\n遞迴版最精簡，`return par[x] = findRec(par[x]);` 直接在回傳路上完成壓縮；但若一開始樹非常深，仍有堆疊溢位風險。迭代版採兩段式：先一路找到根，再回頭把整條路徑改指向根，因此不依賴遞迴深度，在資料範圍很大時更穩定。"
+        "body": "下面把最常見的遞迴版與不會吃 stack 的迭代版放在一起比較：\n\n```cpp\nstruct DsuFindDemo {\n    vector<int> par;\n\n    // n: number of nodes or elements.\n    explicit DsuFindDemo(int n) : par(n + 1) {\n        iota(par.begin(), par.end(), 0);\n    }\n\n    // x: value or node being processed.\n    int findRec(int x) {\n        if (par[x] == x) {\n            return x;\n        }\n        return par[x] = findRec(par[x]);\n    }\n\n    // x: value, node, or output coefficient used by the function.\n    int findIter(int x) {\n        int root = x;\n        while (par[root] != root) {\n            root = par[root];\n        }\n        while (par[x] != x) {\n            int parent = par[x];\n            par[x] = root;\n            x = parent;\n        }\n        return root;\n    }\n};\n```\n\n遞迴版最精簡，`return par[x] = findRec(par[x]);` 直接在回傳路上完成壓縮；但若一開始樹非常深，仍有 stack overflow 風險。迭代版採兩段式：先一路找到根，再回頭把整條路徑改指向根，因此不依賴遞迴深度，在資料範圍很大時更穩定。"
       },
       {
         "title": "按秩合併與按大小合併",
@@ -3765,13 +3765,13 @@
     "parent_id": "graph-traversal",
     "title": "BFS 廣度優先（含多源與 0-1 BFS）",
     "slug": "bfs",
-    "description": "利用 FIFO 佇列按層擴展節點，在無權圖中求單源最短距離，並可延伸為多源 BFS 與 0-1 BFS。",
-    "core_idea": "BFS 的正確性依賴「FIFO 佇列保證同層優先」：從起點出發，所有距離為 1 的節點先於距離為 2 的節點入隊，因此任何節點**第一次被訪問的時刻即為最短距離**。只要所有邊權相同（通常為 1），這個性質嚴格成立；一旦邊權不均勻，先到達不代表最短，必須改用 Dijkstra。\n\n**多源 BFS**：把所有起點同時以距離 0 壓入佇列，等效於加入一個虛擬超級源點並對所有起點連零權邊。常用場景：「每個格子距最近障礙物的距離」、「地圖上距最近城市的距離」。\n\n**0-1 BFS**：邊權只有 0 或 1 時，用 `deque` 取代 `queue`：邊權 0 的鄰居從**前端**（`push_front`）插入，邊權 1 的鄰居從**後端**（`push_back`）插入，使 deque 保持非遞減有序，等效於線性時間 Dijkstra。",
+    "description": "利用 FIFO queue 按層擴展節點，在無權圖中求單源最短距離，並可延伸為多源 BFS 與 0-1 BFS。",
+    "core_idea": "BFS 的正確性依賴「FIFO queue 保證同層優先」：從起點出發，所有距離為 1 的節點先於距離為 2 的節點 enqueue，因此任何節點**第一次被訪問的時刻即為最短距離**。只要所有邊權相同（通常為 1），這個性質嚴格成立；一旦邊權不均勻，先到達不代表最短，必須改用 Dijkstra。\n\n**多源 BFS**：把所有起點同時以距離 0 壓 enqueue，等效於加入一個虛擬超級源點並對所有起點連零權邊。常用場景：「每個格子距最近障礙物的距離」、「地圖上距最近城市的距離」。\n\n**0-1 BFS**：邊權只有 0 或 1 時，用 `deque` 取代 `queue`：邊權 0 的鄰居從**前端**（`push_front`）插入，邊權 1 的鄰居從**後端**（`push_back`）插入，使 deque 保持非遞減有序，等效於線性時間 Dijkstra。",
     "complexity": "時間 O(n + m)，空間 O(n + m)；0-1 BFS 同為 O(n + m)，常數更小。",
     "deep_dive": [
       {
         "title": "標準 BFS 與多源 BFS",
-        "body": "```cpp\n// Standard BFS: single source shortest distance on unweighted graph\n// src: source node index.\n// n: number of nodes or elements.\n// g: grid or adjacency structure used by the algorithm.\nvector<int> bfs(int src, int n, const vector<vector<int>>& g) {\n    vector<int> dist(n, -1);\n    queue<int> q;\n    dist[src] = 0;\n    q.push(src);\n    while (!q.empty()) {\n        int u = q.front();\n        q.pop();\n        for (int v : g[u]) {\n            if (dist[v] == -1) {\n                dist[v] = dist[u] + 1;\n                q.push(v);\n            }\n        }\n    }\n    return dist;\n}\n\n// Multi-source BFS: distance to nearest source for each node\n// sources: input or working vector used by the algorithm.\n// n: number of nodes or elements.\n// g: grid or adjacency structure used by the algorithm.\nvector<int> multiBfs(const vector<int>& sources, int n, const vector<vector<int>>& g) {\n    vector<int> dist(n, -1);\n    queue<int> q;\n    for (int s : sources) {\n        dist[s] = 0;\n        q.push(s);\n    }  // All sources enqueued at once\n    while (!q.empty()) {\n        int u = q.front();\n        q.pop();\n        for (int v : g[u]) {\n            if (dist[v] == -1) {\n                dist[v] = dist[u] + 1;\n                q.push(v);\n            }\n        }\n    }\n    return dist;\n}\n```\n多源 BFS 的關鍵在於把所有源點**同時**放入佇列並設距離為 0，此後展開與單源完全相同。等效於加入一個超級源點 S，對每個源點 s 連一條邊權為 0 的邊 S→s。"
+        "body": "```cpp\n// Standard BFS: single source shortest distance on unweighted graph\n// src: source node index.\n// n: number of nodes or elements.\n// g: grid or adjacency structure used by the algorithm.\nvector<int> bfs(int src, int n, const vector<vector<int>>& g) {\n    vector<int> dist(n, -1);\n    queue<int> q;\n    dist[src] = 0;\n    q.push(src);\n    while (!q.empty()) {\n        int u = q.front();\n        q.pop();\n        for (int v : g[u]) {\n            if (dist[v] == -1) {\n                dist[v] = dist[u] + 1;\n                q.push(v);\n            }\n        }\n    }\n    return dist;\n}\n\n// Multi-source BFS: distance to nearest source for each node\n// sources: input or working vector used by the algorithm.\n// n: number of nodes or elements.\n// g: grid or adjacency structure used by the algorithm.\nvector<int> multiBfs(const vector<int>& sources, int n, const vector<vector<int>>& g) {\n    vector<int> dist(n, -1);\n    queue<int> q;\n    for (int s : sources) {\n        dist[s] = 0;\n        q.push(s);\n    }  // All sources enqueued at once\n    while (!q.empty()) {\n        int u = q.front();\n        q.pop();\n        for (int v : g[u]) {\n            if (dist[v] == -1) {\n                dist[v] = dist[u] + 1;\n                q.push(v);\n            }\n        }\n    }\n    return dist;\n}\n```\n多源 BFS 的關鍵在於把所有源點**同時**放 enqueue 並設距離為 0，此後展開與單源完全相同。等效於加入一個超級源點 S，對每個源點 s 連一條邊權為 0 的邊 S→s。"
       },
       {
         "title": "0-1 BFS（Deque BFS）",
@@ -3791,7 +3791,7 @@
     "supplemental_patterns": [
       {
         "name": "多源 BFS 最近距離",
-        "description": "**觸發**：圖或網格中有多個「特殊起點」，求每個節點距最近起點的距離。\n**做法**：將所有特殊起點同時以距離 0 入隊，後續 BFS 展開與單源完全相同。常見應用：地圖格子距最近城市／障礙物的距離。"
+        "description": "**觸發**：圖或網格中有多個「特殊起點」，求每個節點距最近起點的距離。\n**做法**：將所有特殊起點同時以距離 0 enqueue，後續 BFS 展開與單源完全相同。常見應用：地圖格子距最近城市／障礙物的距離。"
       },
       {
         "name": "0-1 BFS 替代 Dijkstra",
@@ -3799,9 +3799,9 @@
       }
     ],
     "pitfalls": [
-      "⚠️ 應在**入隊時**（而非出隊時）標記 `dist[v]`，否則同一節點可能多次入隊，複雜度退化為 O(nm)。",
-      "⚠️ 多源 BFS 必須**同時**把所有源點初始化並一起入隊；若分批執行會破壞最短距離的保證。",
-      "⚠️ 0-1 BFS 的 deque 中同一節點可能出現多次；出隊後若距離已被更新為更短值，舊項會被 `if (dist[u] + w < dist[v])` 自然過濾，無需額外標記。",
+      "⚠️ 應在**enqueue 時**（而非 dequeue 時）標記 `dist[v]`，否則同一節點可能多次 enqueue，複雜度退化為 O(nm)。",
+      "⚠️ 多源 BFS 必須**同時**把所有源點初始化並一起 enqueue；若分批執行會破壞最短距離的保證。",
+      "⚠️ 0-1 BFS 的 deque 中同一節點可能出現多次；dequeue 後若距離已被更新為更短值，舊項會被 `if (dist[u] + w < dist[v])` 自然過濾，無需額外標記。",
       "⚠️ BFS 只保證無權圖（邊權均等）的最短路；邊權不同時需改用 Dijkstra 或 Bellman-Ford。"
     ],
     "practice_problems": [
@@ -3907,7 +3907,7 @@
     "slug": "dfs-connected-components",
     "description": "用遞迴或迭代深度優先搜尋遍歷圖，識別連通分量，並記錄 DFS 進出時間戳作為進階應用的基礎。",
     "core_idea": "DFS 從起點沿未訪問的鄰居一路深入，直至沒有未訪問鄰居才回溯，形成一棵 **DFS 樹**。進入節點的時刻稱為 `tin`（entry time），離開時刻稱為 `tout`（exit time），合稱 **DFS 時間戳**，是樹鏈剖分、LCA、橋與割點的基礎工具。\n\n在**無向圖**中，DFS 只產生**樹邊**與**後向邊**（通往祖先的邊）；出現後向邊（非父子邊）代表圖中存在環。在**有向圖**中，邊分為樹邊、前向邊、後向邊、橫向邊，後向邊的存在等價於有向環（即非 DAG）。\n\n**連通分量**：對所有未訪問節點依序發起 DFS，每次發起對應一個連通分量。有向圖的**強連通分量**（SCC）需 Kosaraju 或 Tarjan 算法，不能直接用此法計數。",
-    "complexity": "時間 O(n + m)，空間 O(n + m)（含遞迴堆疊深度 O(n)）。",
+    "complexity": "時間 O(n + m)，空間 O(n + m)（含 recursion stack 深度 O(n)）。",
     "deep_dive": [
       {
         "title": "DFS 與時間戳",
@@ -3915,7 +3915,7 @@
       },
       {
         "title": "連通分量計數（迭代 DFS）",
-        "body": "```cpp\n// Iterative DFS to avoid stack overflow on long-chain graphs\n// n: number of nodes or elements.\n// g: grid or adjacency structure used by the algorithm.\nint countComponents(int n, const vector<vector<int>>& g) {\n    vector<bool> visited(n, false);\n    int count = 0;\n    for (int i = 0; i < n; i++) {\n        if (visited[i]) {\n            continue;\n        }\n        count++;  // New connected component\n        stack<int> st;\n        st.push(i);\n        visited[i] = true;\n        while (!st.empty()) {\n            int u = st.top();\n            st.pop();\n            for (int v : g[u]) {\n                if (!visited[v]) {\n                    visited[v] = true;\n                    st.push(v);\n                }\n            }\n        }\n    }\n    return count;\n}\n```\n迭代 DFS 用顯式 `stack` 替代系統遞迴堆疊，避免深鏈圖（如長鏈 n = 10⁵）導致的堆疊溢出。每次進入外層 `for` 迴圈發現未訪問節點，即開啟一個新的連通分量。"
+        "body": "```cpp\n// Iterative DFS to avoid stack overflow on long-chain graphs\n// n: number of nodes or elements.\n// g: grid or adjacency structure used by the algorithm.\nint countComponents(int n, const vector<vector<int>>& g) {\n    vector<bool> visited(n, false);\n    int count = 0;\n    for (int i = 0; i < n; i++) {\n        if (visited[i]) {\n            continue;\n        }\n        count++;  // New connected component\n        stack<int> st;\n        st.push(i);\n        visited[i] = true;\n        while (!st.empty()) {\n            int u = st.top();\n            st.pop();\n            for (int v : g[u]) {\n                if (!visited[v]) {\n                    visited[v] = true;\n                    st.push(v);\n                }\n            }\n        }\n    }\n    return count;\n}\n```\n迭代 DFS 用顯式 `stack` 替代系統 recursion stack，避免深鏈圖（如長鏈 n = 10⁵）導致的 stack overflow。每次進入外層 `for` 迴圈發現未訪問節點，即開啟一個新的連通分量。"
       }
     ],
     "reference_links": [
@@ -3939,7 +3939,7 @@
       }
     ],
     "pitfalls": [
-      "⚠️ 在稠密圖或深鏈圖（n = 10⁵ 的長鏈）上使用**遞迴 DFS** 會觸發堆疊溢出（Stack Overflow）；競賽中應改用迭代 DFS 或在程式開頭手動擴大堆疊大小。",
+      "⚠️ 在稠密圖或深鏈圖（n = 10⁵ 的長鏈）上使用**遞迴 DFS** 會觸發 stack overflow（Stack Overflow）；競賽中應改用迭代 DFS 或在程式開頭手動擴大 stack 大小。",
       "⚠️ 有向圖的**強連通分量**（SCC）不能用無向圖的簡單 DFS 計數法；兩個互相可達的節點才屬於同一 SCC，必須使用 Kosaraju 或 Tarjan。",
       "⚠️ 無向圖 DFS 跳過父節點時，若圖有**重邊**（兩節點間有多條邊），單純比較節點編號會誤跳合法後向邊；應傳入邊的索引（edge index）而非父節點編號。"
     ],
@@ -4057,7 +4057,7 @@
     "title": "拓撲排序",
     "slug": "topological-sort",
     "description": "對有向無環圖（DAG）找出符合所有依賴關係的線性節點排列，常用 Kahn 算法（BFS）或 DFS 後序完成。",
-    "core_idea": "拓撲排序要求對每條有向邊 (u → v)，u 必須出現在 v 之前。**Kahn 算法**維護入度為 0 的節點佇列：每次取出一個入度為 0 的節點加入結果序列，並將其出邊鄰居的入度各減 1，若降至 0 則入隊。若最終結果包含所有 n 個節點，圖為 DAG；否則存在有向環，無合法拓撲序。\n\n**DFS 後序**：DFS 遞迴搜尋時，節點在**所有後繼節點都訪問完畢後**才被推入結果堆疊，最後反轉即為拓撲序。DFS 法可自然偵測有向環（灰色節點被再次訪問）。\n\n兩者複雜度相同，但 Kahn 算法輸出字典序最小拓撲序更直接（改用 min-heap），DFS 法則方便遞迴 DP 的計算順序推導。",
+    "core_idea": "拓撲排序要求對每條有向邊 (u → v)，u 必須出現在 v 之前。**Kahn 算法**維護入度為 0 的節點 queue：每次取出一個入度為 0 的節點加入結果序列，並將其出邊鄰居的入度各減 1，若降至 0 則 enqueue。若最終結果包含所有 n 個節點，圖為 DAG；否則存在有向環，無合法拓撲序。\n\n**DFS 後序**：DFS 遞迴搜尋時，節點在**所有後繼節點都訪問完畢後**才被推入結果 stack，最後反轉即為拓撲序。DFS 法可自然偵測有向環（灰色節點被再次訪問）。\n\n兩者複雜度相同，但 Kahn 算法輸出字典序最小拓撲序更直接（改用 min-heap），DFS 法則方便遞迴 DP 的計算順序推導。",
     "complexity": "時間 O(n + m)，空間 O(n + m)。",
     "deep_dive": [
       {
@@ -4086,13 +4086,13 @@
       },
       {
         "name": "字典序最小拓撲序",
-        "description": "**觸發**：在所有合法拓撲排序中，輸出節點編號字典序最小的一個。\n**做法**：Kahn 算法中將 `queue` 換成最小優先佇列（小頂堆），每次取出入度 0 中編號最小的節點。時間複雜度 O((n + m) log n)。"
+        "description": "**觸發**：在所有合法拓撲排序中，輸出節點編號字典序最小的一個。\n**做法**：Kahn 算法中將 `queue` 換成最小 priority queue（小頂堆），每次取出入度 0 中編號最小的節點。時間複雜度 O((n + m) log n)。"
       }
     ],
     "pitfalls": [
       "⚠️ Kahn 算法結束後若 `order.size() < n`，代表圖中有**有向環**，不存在合法拓撲序；必須特判此情況，不能直接使用不完整的 `order`。",
       "⚠️ DFS 後序法需用**三色標記**（未訪問 / 訪問中 / 已完成）；若只用布林 `visited`，無法區分「正在遞迴中」與「已完全訪問」，無法偵測有向環。",
-      "⚠️ 拓撲序**不唯一**；若題目要求特定順序（如字典序最小），需額外使用優先佇列；普通 BFS/DFS 的輸出順序取決於鄰接表順序，是不確定的。"
+      "⚠️ 拓撲序**不唯一**；若題目要求特定順序（如字典序最小），需額外使用 priority queue；普通 BFS/DFS 的輸出順序取決於鄰接表順序，是不確定的。"
     ],
     "practice_problems": [
       {
@@ -4201,7 +4201,7 @@
     "title": "二分圖染色判定",
     "slug": "bipartite-coloring",
     "description": "以 BFS 或 DFS 對無向圖進行 2-色染色，判定是否為二分圖；不存在合法 2-染色等價於圖中存在奇數環。",
-    "core_idea": "二分圖等價於**不含奇數長度環**的無向圖。染色法從任意節點出發，將相鄰節點染上相反顏色；若擴展過程中發現鄰居與自己同色，必然存在奇數環，圖不是二分圖。\n\n實作上用 BFS（或 DFS）遍歷，維護 `color[]` 陣列初始為 −1（未染色）：每次遇到未染色節點時染色並入隊，遇到已染色且與自己**同色**的鄰居時返回 `false`。圖可能不連通，需對每個連通分量各自執行一次。\n\n**應用**：二分圖判定是二分圖最大匹配（匈牙利算法 / Hopcroft-Karp）與 König 定理（最小頂點覆蓋 = 最大匹配）的前置步驟，也常用於判斷問題是否具有「兩組對立關係」的結構。",
+    "core_idea": "二分圖等價於**不含奇數長度環**的無向圖。染色法從任意節點出發，將相鄰節點染上相反顏色；若擴展過程中發現鄰居與自己同色，必然存在奇數環，圖不是二分圖。\n\n實作上用 BFS（或 DFS）遍歷，維護 `color[]` 陣列初始為 −1（未染色）：每次遇到未染色節點時染色並 enqueue，遇到已染色且與自己**同色**的鄰居時返回 `false`。圖可能不連通，需對每個連通分量各自執行一次。\n\n**應用**：二分圖判定是二分圖最大匹配（匈牙利算法 / Hopcroft-Karp）與 König 定理（最小頂點覆蓋 = 最大匹配）的前置步驟，也常用於判斷問題是否具有「兩組對立關係」的結構。",
     "complexity": "時間 O(n + m)，空間 O(n + m)。",
     "deep_dive": [
       {
@@ -4349,7 +4349,7 @@
         "description": "**觸發**：有 `k` 個已排序陣列或鏈表，要持續取出全域最小值。\n**做法**：改用 min-heap 存每一路目前的表頭 `(value, which, idx)`，每次彈出最小值後再把同一路下一個元素推回堆中，總時間 O(總元素數 log k)。"
       },
       {
-        "name": "優先佇列加速 Dijkstra",
+        "name": "priority queue 加速 Dijkstra",
         "description": "**觸發**：圖上邊權非負，要反覆取出目前距離最小的節點。\n**做法**：用 `priority_queue<pair<long long,int>, vector<pair<long long,int>>, greater<pair<long long,int>>>` 當 min-heap，存 `(dist, node)`；鬆弛成功就推入新距離，搭配 `if (d != dist[u]) continue;` 跳過舊狀態。"
       }
     ],
@@ -4428,7 +4428,7 @@
         "rating": 1200,
         "tier": "warmup",
         "tags": [
-          "隊列",
+          "queue",
           "設計"
         ]
       }
@@ -4524,8 +4524,8 @@
     ],
     "supplemental_patterns": [
       {
-        "name": "滑動視窗最大值（單調佇列）",
-        "description": "**觸發**：`K` 指的是序列上的連續視窗，而不是全域前 `K` 大。\n**做法**：改用單調遞減佇列維護候選下標，保證隊首永遠是視窗最大值；每個元素最多進出一次，總時間 O(n)。"
+        "name": "滑動視窗最大值（monotonic queue）",
+        "description": "**觸發**：`K` 指的是序列上的連續視窗，而不是全域前 `K` 大。\n**做法**：改用單調遞減 queue 維護候選下標，保證 queue front 永遠是視窗最大值；每個元素最多進出一次，總時間 O(n)。"
       },
       {
         "name": "第 K 小（nth_element）",
@@ -4780,7 +4780,7 @@
       },
       {
         "name": "貪心排程 + 懶刪除",
-        "description": "**觸發**：任務按照優先權排入佇列，但中途可能被取消或失效。\n**做法**：取消時只在 `toDelete` 記錄該任務鍵值，真正取下一個任務時再一路清掉已失效的堆頂；這樣不需要為了刪除任意元素改用更重的資料結構。"
+        "description": "**觸發**：任務按照優先權排 enqueue，但中途可能被取消或失效。\n**做法**：取消時只在 `toDelete` 記錄該任務鍵值，真正取下一個任務時再一路清掉已失效的堆頂；這樣不需要為了刪除任意元素改用更重的資料結構。"
       }
     ],
     "pitfalls": [
@@ -5015,7 +5015,7 @@
     "title": "區間調度貪心",
     "slug": "interval-scheduling",
     "description": "按最早結束時間貪心選取，在互不重疊的前提下最大化選出的區間數，是區間貪心的經典基礎。",
-    "core_idea": "**區間調度問題**：給定 n 個區間，選出最多個**互不重疊**的區間。貪心策略：**每次選結束時間最早的合法區間**，這能讓後面的時間窗口盡量大，給後續區間更多機會。\n\n**正確性直覺（交換論證）**：假設最優解不包含我們貪心選的第一個區間 A（最早結束），卻包含另一個區間 B（結束更晚或相同）。把 B 換成 A，不會讓後續區間變得更難選（A 結束更早或同時），所以換後答案不變差——可以無限次套用此論證，每步都把最優解「換」成貪心解，證明貪心與最優解一樣好。\n\n**延伸問題**：\n- **最少機器數（Minimum Machines）= 最大重疊數**：用差分或優先佇列求某時刻最多幾個區間同時活躍。\n- **最少箭數（Minimum Arrows）**：同一題的等價形式，也按結束點排序。",
+    "core_idea": "**區間調度問題**：給定 n 個區間，選出最多個**互不重疊**的區間。貪心策略：**每次選結束時間最早的合法區間**，這能讓後面的時間窗口盡量大，給後續區間更多機會。\n\n**正確性直覺（交換論證）**：假設最優解不包含我們貪心選的第一個區間 A（最早結束），卻包含另一個區間 B（結束更晚或相同）。把 B 換成 A，不會讓後續區間變得更難選（A 結束更早或同時），所以換後答案不變差——可以無限次套用此論證，每步都把最優解「換」成貪心解，證明貪心與最優解一樣好。\n\n**延伸問題**：\n- **最少機器數（Minimum Machines）= 最大重疊數**：用差分或 priority queue 求某時刻最多幾個區間同時活躍。\n- **最少箭數（Minimum Arrows）**：同一題的等價形式，也按結束點排序。",
     "complexity": "排序 O(n log n)，選取 O(n)，空間 O(1)（原地選取）。",
     "deep_dive": [
       {
@@ -6245,7 +6245,7 @@
       },
       {
         "name": "最大生成樹（Prim 版）",
-        "description": "**觸發**：求邊權總和最大的生成樹（如最大連通可靠度）。\n**做法**：將 `key[]` 初始為 `-INF`，優先佇列改為 max-heap（或存負數後用 min-heap），更新條件改為 `w > key[v]`，每次取 key 最大的節點加入樹。"
+        "description": "**觸發**：求邊權總和最大的生成樹（如最大連通可靠度）。\n**做法**：將 `key[]` 初始為 `-INF`，priority queue 改為 max-heap（或存負數後用 min-heap），更新條件改為 `w > key[v]`，每次取 key 最大的節點加入樹。"
       }
     ],
     "pitfalls": [
@@ -6449,24 +6449,24 @@
   {
     "id": "ms-stack",
     "parent_id": "monotonic-structure",
-    "title": "單調棧",
+    "title": "monotonic stack",
     "slug": "monotonic-stack",
-    "description": "維護單調遞增或遞減的棧，O(n) 求解「下一個更大／更小值」與子陣列貢獻計數問題。",
-    "core_idea": "單調棧的關鍵不是「把元素排整齊」，而是用棧保存**尚未被答案結算**的候選下標。以「下一個更大值」為例，若棧內維持值遞減，掃到新元素 `a[i]` 時，只要 `a[i] > a[st.top()]`，就代表棧頂 `j` 的右側第一個更大值已經出現，而且必定就是 `i`：因為在 `j` 與 `i` 之間若曾出現更大的元素，`j` 早就會先被彈出。此時 `a[i]` 又比 `a[j]` 更大且更靠右，`a[j]` 對之後任何位置都不可能再成為「更大值」答案，因此可直接彈出。每個下標只會入棧一次、出棧一次，總成本自然是 **O(n)**。\n\n單調棧也能做**子陣列貢獻計數**：與其直接枚舉所有子陣列，不如反過來問每個 `a[i]` 會成為多少個子陣列的最小值。若 `L[i]` 是左側最近的**嚴格更小**位置，`R[i]` 是右側最近的**小於等於**位置，那麼起點可選 `i-L[i]` 種、終點可選 `R[i]-i` 種，貢獻就是 `a[i] × (i-L[i]) × (R[i]-i)`。一側用嚴格比較、另一側用非嚴格比較的**不對稱邊界**，本質上是在替相等元素指定唯一代表，避免同一個子陣列被重複計數。",
-    "complexity": "時間 O(n)，空間 O(n)（棧的最大深度）。",
+    "description": "維護單調遞增或遞減的 stack，O(n) 求解「下一個更大／更小值」與子陣列貢獻計數問題。",
+    "core_idea": "monotonic stack 的關鍵不是「把元素排整齊」，而是用 stack 保存**尚未被答案結算**的候選下標。以「下一個更大值」為例，若 stack 內維持值遞減，掃到新元素 `a[i]` 時，只要 `a[i] > a[st.top()]`，就代表 stack top `j` 的右側第一個更大值已經出現，而且必定就是 `i`：因為在 `j` 與 `i` 之間若曾出現更大的元素，`j` 早就會先被彈出。此時 `a[i]` 又比 `a[j]` 更大且更靠右，`a[j]` 對之後任何位置都不可能再成為「更大值」答案，因此可直接彈出。每個下標只會 push 一次、pop 一次，總成本自然是 **O(n)**。\n\nmonotonic stack 也能做**子陣列貢獻計數**：與其直接枚舉所有子陣列，不如反過來問每個 `a[i]` 會成為多少個子陣列的最小值。若 `L[i]` 是左側最近的**嚴格更小**位置，`R[i]` 是右側最近的**小於等於**位置，那麼起點可選 `i-L[i]` 種、終點可選 `R[i]-i` 種，貢獻就是 `a[i] × (i-L[i]) × (R[i]-i)`。一側用嚴格比較、另一側用非嚴格比較的**不對稱邊界**，本質上是在替相等元素指定唯一代表，避免同一個子陣列被重複計數。",
+    "complexity": "時間 O(n)，空間 O(n)（stack 的最大深度）。",
     "deep_dive": [
       {
         "title": "下一個更大值（NGE）",
-        "body": "```cpp\n// a: input array or sequence.\nvector<int> nextGreater(const vector<int>& a) {\n    int n = (int)a.size();\n    vector<int> nge(n, n);\n    stack<int> st;  // Indices with decreasing values\n    for (int i = 0; i < n; i++) {\n        while (!st.empty() && a[i] > a[st.top()]) {\n            nge[st.top()] = i;\n            st.pop();\n        }\n        st.push(i);\n    }\n    return nge;\n}\n\nvector<int> prevGreater(const vector<int>& a) {\n    int n = (int)a.size();\n    vector<int> pge(n, -1);\n    stack<int> st;  // Indices with decreasing values\n    for (int i = 0; i < n; i++) {\n        while (!st.empty() && a[st.top()] <= a[i]) {\n            st.pop();\n        }\n        if (!st.empty()) {\n            pge[i] = st.top();\n        }\n        st.push(i);\n    }\n    return pge;\n}\n```\n`nextGreater` 用的是**遞減棧**：當 `a[i]` 比棧頂大時，被彈出的下標就在這一刻找到最近右側更大值。`prevGreater` 則是對稱寫法：先把所有 `<= a[i]` 的舊候選移除，留下的棧頂就是最近左側更大值。若題目改成「下一個更大或相等值」，只要把 `a[i] > a[st.top()]` 改成 `a[i] >= a[st.top()]`；嚴格與非嚴格比較的差異，決定了相等元素究竟要現在結算，還是保留給更後面的代表。"
+        "body": "```cpp\n// a: input array or sequence.\nvector<int> nextGreater(const vector<int>& a) {\n    int n = (int)a.size();\n    vector<int> nge(n, n);\n    stack<int> st;  // Indices with decreasing values\n    for (int i = 0; i < n; i++) {\n        while (!st.empty() && a[i] > a[st.top()]) {\n            nge[st.top()] = i;\n            st.pop();\n        }\n        st.push(i);\n    }\n    return nge;\n}\n\nvector<int> prevGreater(const vector<int>& a) {\n    int n = (int)a.size();\n    vector<int> pge(n, -1);\n    stack<int> st;  // Indices with decreasing values\n    for (int i = 0; i < n; i++) {\n        while (!st.empty() && a[st.top()] <= a[i]) {\n            st.pop();\n        }\n        if (!st.empty()) {\n            pge[i] = st.top();\n        }\n        st.push(i);\n    }\n    return pge;\n}\n```\n`nextGreater` 用的是**遞減 stack**：當 `a[i]` 比 stack top 大時，被彈出的下標就在這一刻找到最近右側更大值。`prevGreater` 則是對稱寫法：先把所有 `<= a[i]` 的舊候選移除，留下的 stack top 就是最近左側更大值。若題目改成「下一個更大或相等值」，只要把 `a[i] > a[st.top()]` 改成 `a[i] >= a[st.top()]`；嚴格與非嚴格比較的差異，決定了相等元素究竟要現在結算，還是保留給更後面的代表。"
       },
       {
         "title": "子陣列最小值之和（貢獻計數）",
-        "body": "```cpp\nconst int kMod = 1'000'000'007;\n\n// a: input array or sequence.\nlong long sumSubarrayMins(const vector<int>& a) {\n    int n = (int)a.size();\n    vector<long long> left(n), right(n);\n    stack<int> st;\n\n    for (int i = 0; i < n; i++) {\n        while (!st.empty() && a[st.top()] >= a[i]) {\n            st.pop();\n        }\n        int prev = st.empty() ? -1 : st.top();\n        left[i] = i - prev;\n        st.push(i);\n    }\n\n    while (!st.empty()) {\n        st.pop();\n    }\n\n    for (int i = n - 1; i >= 0; i--) {\n        while (!st.empty() && a[st.top()] > a[i]) {\n            st.pop();\n        }\n        int next = st.empty() ? n : st.top();\n        right[i] = next - i;\n        st.push(i);\n    }\n\n    long long ans = 0;\n    for (int i = 0; i < n; i++) {\n        long long contrib = 1LL * a[i] * left[i] % kMod * right[i] % kMod;\n        ans = (ans + contrib) % kMod;\n    }\n    return ans;\n}\n```\n這裡的 `left[i]` 與 `right[i]` 不是邊界下標，而是「可以往左／往右延伸的選擇數」。左邊找**嚴格更小**、右邊找**小於等於**，會把含有多個相同最小值的子陣列唯一地分配給其中一個位置，避免重複計數。把每個 `a[i]` 的貢獻 `a[i] * left[i] * right[i]` 相加，就等價於把所有子陣列都數過一遍，但只需要兩次單調棧掃描。"
+        "body": "```cpp\nconst int kMod = 1'000'000'007;\n\n// a: input array or sequence.\nlong long sumSubarrayMins(const vector<int>& a) {\n    int n = (int)a.size();\n    vector<long long> left(n), right(n);\n    stack<int> st;\n\n    for (int i = 0; i < n; i++) {\n        while (!st.empty() && a[st.top()] >= a[i]) {\n            st.pop();\n        }\n        int prev = st.empty() ? -1 : st.top();\n        left[i] = i - prev;\n        st.push(i);\n    }\n\n    while (!st.empty()) {\n        st.pop();\n    }\n\n    for (int i = n - 1; i >= 0; i--) {\n        while (!st.empty() && a[st.top()] > a[i]) {\n            st.pop();\n        }\n        int next = st.empty() ? n : st.top();\n        right[i] = next - i;\n        st.push(i);\n    }\n\n    long long ans = 0;\n    for (int i = 0; i < n; i++) {\n        long long contrib = 1LL * a[i] * left[i] % kMod * right[i] % kMod;\n        ans = (ans + contrib) % kMod;\n    }\n    return ans;\n}\n```\n這裡的 `left[i]` 與 `right[i]` 不是邊界下標，而是「可以往左／往右延伸的選擇數」。左邊找**嚴格更小**、右邊找**小於等於**，會把含有多個相同最小值的子陣列唯一地分配給其中一個位置，避免重複計數。把每個 `a[i]` 的貢獻 `a[i] * left[i] * right[i]` 相加，就等價於把所有子陣列都數過一遍，但只需要兩次 monotonic stack 掃描。"
       }
     ],
     "reference_links": [
       {
-        "label": "OI-Wiki：單調棧",
+        "label": "OI-Wiki：monotonic stack",
         "url": "https://oi-wiki.org/ds/monotonous-stack/"
       },
       {
@@ -6477,18 +6477,18 @@
     "supplemental_patterns": [
       {
         "name": "前一個更大值（向左看）",
-        "description": "**觸發**：題目要找每個位置左側最近的更大值，或把它當成左邊界資訊使用。\n**做法**：沿陣列由左到右掃描，先彈掉所有 `<= a[i]` 的下標，再讀取棧頂作為最近左側更大值；直方圖、最大矩形等題目常把這種左邊界資訊拿來算寬度。"
+        "description": "**觸發**：題目要找每個位置左側最近的更大值，或把它當成左邊界資訊使用。\n**做法**：沿陣列由左到右掃描，先彈掉所有 `<= a[i]` 的下標，再讀取 stack top 作為最近左側更大值；直方圖、最大矩形等題目常把這種左邊界資訊拿來算寬度。"
       },
       {
         "name": "子陣列最大值之和",
-        "description": "**觸發**：題目從最小值貢獻改成最大值貢獻，例如求所有子陣列最大值總和。\n**做法**：把比較方向全部反過來，改用對應的遞增／遞減棧求最近更大邊界，並同樣在一側用嚴格比較、另一側用非嚴格比較，避免相等元素重複計數。"
+        "description": "**觸發**：題目從最小值貢獻改成最大值貢獻，例如求所有子陣列最大值總和。\n**做法**：把比較方向全部反過來，改用對應的遞增／遞減 stack 求最近更大邊界，並同樣在一側用嚴格比較、另一側用非嚴格比較，避免相等元素重複計數。"
       }
     ],
     "pitfalls": [
       "⚠️ 相等元素的邊界要一側嚴格、一側非嚴格；兩側都用同一種比較，子陣列貢獻很容易重複計數或漏算。",
-      "⚠️ 棧裡通常存的是下標不是值，真正比較時要寫成 `a[st.top()]`，否則之後沒辦法回填答案位置。",
-      "⚠️ 主迴圈結束後，仍留在棧裡的元素代表「沒有找到下一個更大值」；答案陣列要先初始化成 `n` 或 `-1` 之類的預設值。",
-      "⚠️ `next` 與 `prev` 問題的掃描方向常被搞反；先想清楚你要在『遇到新元素時結算舊元素』，還是『用目前棧頂回答當前元素』。"
+      "⚠️ stack 裡通常存的是下標不是值，真正比較時要寫成 `a[st.top()]`，否則之後沒辦法回填答案位置。",
+      "⚠️ 主迴圈結束後，仍留在 stack 裡的元素代表「沒有找到下一個更大值」；答案陣列要先初始化成 `n` 或 `-1` 之類的預設值。",
+      "⚠️ `next` 與 `prev` 問題的掃描方向常被搞反；先想清楚你要在『遇到新元素時結算舊元素』，還是『用目前 stack top 回答當前元素』。"
     ],
     "practice_problems": [
       {
@@ -6499,7 +6499,7 @@
         "rating": 1500,
         "tier": "core",
         "tags": [
-          "單調棧",
+          "monotonic stack",
           "貪心"
         ]
       },
@@ -6511,7 +6511,7 @@
         "rating": 1300,
         "tier": "warmup",
         "tags": [
-          "單調棧",
+          "monotonic stack",
           "哈希"
         ]
       },
@@ -6523,7 +6523,7 @@
         "rating": 1500,
         "tier": "core",
         "tags": [
-          "單調棧",
+          "monotonic stack",
           "循環"
         ]
       },
@@ -6535,7 +6535,7 @@
         "rating": 1800,
         "tier": "advanced",
         "tags": [
-          "單調棧",
+          "monotonic stack",
           "雙指針"
         ]
       },
@@ -6547,7 +6547,7 @@
         "rating": 1900,
         "tier": "advanced",
         "tags": [
-          "單調棧",
+          "monotonic stack",
           "DP"
         ]
       },
@@ -6559,7 +6559,7 @@
         "rating": 1900,
         "tier": "advanced",
         "tags": [
-          "單調棧",
+          "monotonic stack",
           "貢獻法"
         ]
       }
@@ -6605,24 +6605,24 @@
   {
     "id": "ms-queue",
     "parent_id": "monotonic-structure",
-    "title": "單調佇列",
+    "title": "monotonic queue",
     "slug": "monotonic-queue",
-    "description": "以雙端佇列維護當前視窗的候選集合，O(n) 解決定長滑動視窗最大/最小值問題。",
-    "core_idea": "單調佇列的本質是把當前視窗中「還可能成為極值」的下標保留下來，其他候選一旦被更新元素**支配**就永久刪除。對滑動視窗最大值來說，雙端佇列內下標對應的值維持遞減，因此隊頭一定是目前最大值的位置。每往右走一步，先把 `<= i-k` 的過期下標從隊頭彈掉；再把隊尾所有 `a[back] <= a[i]` 的下標彈掉，因為 `a[i]` 至少一樣大且更新，之後只要兩者同時留在視窗內，舊下標永遠不可能比 `i` 更適合當最大值。每個下標至多進雙端佇列一次、出雙端佇列一次，所以總時間是 **O(n)**。\n\n對滑動視窗最小值只要把比較方向全部反過來：維護值遞增的雙端佇列，隊頭就是最小值。這個「只保留未被支配候選」的想法也能同時維護 `max` 與 `min`，例如雙端佇列搭配雙指標，動態維持條件 `max - min <= limit` 的最長合法區間。",
-    "complexity": "時間 O(n)，空間 O(k)（佇列最多儲存 k 個下標）。",
+    "description": "以 deque 維護當前視窗的候選集合，O(n) 解決定長滑動視窗最大/最小值問題。",
+    "core_idea": "monotonic queue 的本質是把當前視窗中「還可能成為極值」的下標保留下來，其他候選一旦被更新元素**支配**就永久刪除。對滑動視窗最大值來說，deque 內下標對應的值維持遞減，因此 queue front 一定是目前最大值的位置。每往右走一步，先把 `<= i-k` 的過期下標從 queue front 彈掉；再把 queue back 所有 `a[back] <= a[i]` 的下標彈掉，因為 `a[i]` 至少一樣大且更新，之後只要兩者同時留在視窗內，舊下標永遠不可能比 `i` 更適合當最大值。每個下標至多進 deque 一次、出 deque 一次，所以總時間是 **O(n)**。\n\n對滑動視窗最小值只要把比較方向全部反過來：維護值遞增的 deque，queue front 就是最小值。這個「只保留未被支配候選」的想法也能同時維護 `max` 與 `min`，例如 deque 搭配雙指標，動態維持條件 `max - min <= limit` 的最長合法區間。",
+    "complexity": "時間 O(n)，空間 O(k)（queue 最多儲存 k 個下標）。",
     "deep_dive": [
       {
         "title": "滑動視窗最大值",
-        "body": "```cpp\n// a: input array or sequence.\n// k: limit, count, or window size used by the algorithm.\nvector<int> slidingMax(const vector<int>& a, int k) {\n    int n = (int)a.size();\n    if (k <= 0 || k > n) {\n        return {};\n    }\n\n    deque<int> dq;  // Indices with decreasing values\n    vector<int> ans;\n    for (int i = 0; i < n; i++) {\n        while (!dq.empty() && dq.front() <= i - k) {\n            dq.pop_front();\n        }\n        while (!dq.empty() && a[dq.back()] <= a[i]) {\n            dq.pop_back();\n        }\n        dq.push_back(i);\n        if (i >= k - 1) {\n            ans.push_back(a[dq.front()]);\n        }\n    }\n    return ans;\n}\n```\n兩個 `while` 各自處理不同邏輯：前者刪掉**過期**下標，後者刪掉被新元素**支配**的候選。當 `i >= k-1` 時，視窗才第一次完整，此後每次答案都直接是 `a[dq.front()]`。因為雙端佇列裡只保留可能成為未來答案的下標，所以不需要重新掃描整個視窗。"
+        "body": "```cpp\n// a: input array or sequence.\n// k: limit, count, or window size used by the algorithm.\nvector<int> slidingMax(const vector<int>& a, int k) {\n    int n = (int)a.size();\n    if (k <= 0 || k > n) {\n        return {};\n    }\n\n    deque<int> dq;  // Indices with decreasing values\n    vector<int> ans;\n    for (int i = 0; i < n; i++) {\n        while (!dq.empty() && dq.front() <= i - k) {\n            dq.pop_front();\n        }\n        while (!dq.empty() && a[dq.back()] <= a[i]) {\n            dq.pop_back();\n        }\n        dq.push_back(i);\n        if (i >= k - 1) {\n            ans.push_back(a[dq.front()]);\n        }\n    }\n    return ans;\n}\n```\n兩個 `while` 各自處理不同邏輯：前者刪掉**過期**下標，後者刪掉被新元素**支配**的候選。當 `i >= k-1` 時，視窗才第一次完整，此後每次答案都直接是 `a[dq.front()]`。因為 deque 裡只保留可能成為未來答案的下標，所以不需要重新掃描整個視窗。"
       },
       {
-        "title": "滑動視窗最小值與雙佇列應用",
-        "body": "```cpp\n// a: input array or sequence.\n// k: limit, count, or window size used by the algorithm.\nvector<int> slidingMin(const vector<int>& a, int k) {\n    int n = (int)a.size();\n    if (k <= 0 || k > n) {\n        return {};\n    }\n\n    deque<int> dq;  // Indices with increasing values\n    vector<int> ans;\n    for (int i = 0; i < n; i++) {\n        while (!dq.empty() && dq.front() <= i - k) {\n            dq.pop_front();\n        }\n        while (!dq.empty() && a[dq.back()] >= a[i]) {\n            dq.pop_back();\n        }\n        dq.push_back(i);\n        if (i >= k - 1) {\n            ans.push_back(a[dq.front()]);\n        }\n    }\n    return ans;\n}\n\n// a: input array or sequence.\n// limit: maximum allowed limit for the window condition.\nint longestStableSubarray(const vector<int>& a, int limit) {\n    deque<int> maxdq, mindq;\n    int ans = 0, left = 0;\n    for (int right = 0; right < (int)a.size(); right++) {\n        while (!maxdq.empty() && a[maxdq.back()] <= a[right]) {\n            maxdq.pop_back();\n        }\n        while (!mindq.empty() && a[mindq.back()] >= a[right]) {\n            mindq.pop_back();\n        }\n        maxdq.push_back(right);\n        mindq.push_back(right);\n\n        while (!maxdq.empty() && !mindq.empty() &&\n               1LL * a[maxdq.front()] - a[mindq.front()] > limit) {\n            if (maxdq.front() == left) {\n                maxdq.pop_front();\n            }\n            if (mindq.front() == left) {\n                mindq.pop_front();\n            }\n            left++;\n        }\n        ans = max(ans, right - left + 1);\n    }\n    return ans;\n}\n```\n`slidingMin` 只是把最大值版本的不等號全部反過來。進一步地，若同時維護一個最大值雙端佇列與一個最小值雙端佇列，就能在雙指標移動時即時知道目前區間的 `max` 與 `min`；只要 `max - min` 超過限制，就把左端點右移直到重新合法。這是把「固定長度視窗」延伸到「可伸縮合法區間」的經典用法。"
+        "title": "滑動視窗最小值與雙 queue 應用",
+        "body": "```cpp\n// a: input array or sequence.\n// k: limit, count, or window size used by the algorithm.\nvector<int> slidingMin(const vector<int>& a, int k) {\n    int n = (int)a.size();\n    if (k <= 0 || k > n) {\n        return {};\n    }\n\n    deque<int> dq;  // Indices with increasing values\n    vector<int> ans;\n    for (int i = 0; i < n; i++) {\n        while (!dq.empty() && dq.front() <= i - k) {\n            dq.pop_front();\n        }\n        while (!dq.empty() && a[dq.back()] >= a[i]) {\n            dq.pop_back();\n        }\n        dq.push_back(i);\n        if (i >= k - 1) {\n            ans.push_back(a[dq.front()]);\n        }\n    }\n    return ans;\n}\n\n// a: input array or sequence.\n// limit: maximum allowed limit for the window condition.\nint longestStableSubarray(const vector<int>& a, int limit) {\n    deque<int> maxdq, mindq;\n    int ans = 0, left = 0;\n    for (int right = 0; right < (int)a.size(); right++) {\n        while (!maxdq.empty() && a[maxdq.back()] <= a[right]) {\n            maxdq.pop_back();\n        }\n        while (!mindq.empty() && a[mindq.back()] >= a[right]) {\n            mindq.pop_back();\n        }\n        maxdq.push_back(right);\n        mindq.push_back(right);\n\n        while (!maxdq.empty() && !mindq.empty() &&\n               1LL * a[maxdq.front()] - a[mindq.front()] > limit) {\n            if (maxdq.front() == left) {\n                maxdq.pop_front();\n            }\n            if (mindq.front() == left) {\n                mindq.pop_front();\n            }\n            left++;\n        }\n        ans = max(ans, right - left + 1);\n    }\n    return ans;\n}\n```\n`slidingMin` 只是把最大值版本的不等號全部反過來。進一步地，若同時維護一個最大值 deque 與一個最小值 deque，就能在雙指標移動時即時知道目前區間的 `max` 與 `min`；只要 `max - min` 超過限制，就把左端點右移直到重新合法。這是把「固定長度視窗」延伸到「可伸縮合法區間」的經典用法。"
       }
     ],
     "reference_links": [
       {
-        "label": "OI-Wiki：單調佇列",
+        "label": "OI-Wiki：monotonic queue",
         "url": "https://oi-wiki.org/ds/monotonous-queue/"
       },
       {
@@ -6633,16 +6633,16 @@
     "supplemental_patterns": [
       {
         "name": "多維滑動視窗（矩陣）",
-        "description": "**觸發**：要在矩陣中求每個 `k×k` 視窗的最大值或最小值。\n**做法**：先對每一列做一次長度 `k` 的單調佇列，得到列方向結果；再對每一欄做一次相同操作。兩次一維處理即可完成二維滑動視窗，總時間仍是線性的 `O(n^2)` 等級。"
+        "description": "**觸發**：要在矩陣中求每個 `k×k` 視窗的最大值或最小值。\n**做法**：先對每一列做一次長度 `k` 的 monotonic queue，得到列方向結果；再對每一欄做一次相同操作。兩次一維處理即可完成二維滑動視窗，總時間仍是線性的 `O(n^2)` 等級。"
       },
       {
         "name": "最大最小差 ≤ limit 最長子陣列",
-        "description": "**觸發**：題目要找區間內 `max - min <= limit` 的最長子陣列。\n**做法**：同時維護最大值佇列與最小值佇列，右端點持續擴張；若差值超標，就移動左端點並在兩個雙端佇列中刪掉過期下標。整體是雙指標加雙單調佇列。"
+        "description": "**觸發**：題目要找區間內 `max - min <= limit` 的最長子陣列。\n**做法**：同時維護最大值 queue 與最小值 queue，右端點持續擴張；若差值超標，就移動左端點並在兩個 deque 中刪掉過期下標。整體是雙指標加雙 monotonic queue。"
       }
     ],
     "pitfalls": [
       "⚠️ 過期判斷寫成 `dq.front() <= i-k` 最直觀；雖然與 `dq.front() < i-k+1` 等價，但前者更不容易在邊界上搞錯。",
-      "⚠️ 雙端佇列裡存的是下標不是值，比較時要寫 `a[dq.back()]`，否則你無法同時處理過期檢查與大小比較。",
+      "⚠️ deque 裡存的是下標不是值，比較時要寫 `a[dq.back()]`，否則你無法同時處理過期檢查與大小比較。",
       "⚠️ 只有當 `i >= k-1` 時視窗才完整；太早輸出答案會把長度不足 `k` 的前綴也算進去。"
     ],
     "practice_problems": [
@@ -6654,7 +6654,7 @@
         "rating": 1700,
         "tier": "core",
         "tags": [
-          "單調佇列",
+          "monotonic queue",
           "滑動窗口"
         ]
       },
@@ -6666,19 +6666,19 @@
         "rating": 1900,
         "tier": "advanced",
         "tags": [
-          "單調佇列",
+          "monotonic queue",
           "前綴和"
         ]
       },
       {
-        "title": "隊列重組",
+        "title": "queue 重組",
         "source": "leetcode",
         "source_id": "reconstruct-queue",
         "frontend_id": "406",
         "rating": 1600,
         "tier": "core",
         "tags": [
-          "單調佇列",
+          "monotonic queue",
           "貪心"
         ]
       },
@@ -6690,19 +6690,19 @@
         "rating": 1200,
         "tier": "warmup",
         "tags": [
-          "隊列",
+          "queue",
           "設計"
         ]
       },
       {
-        "title": "設計循環隊列",
+        "title": "設計循環 queue",
         "source": "leetcode",
         "source_id": "design-circular-queue",
         "frontend_id": "622",
         "rating": 1400,
         "tier": "warmup",
         "tags": [
-          "隊列",
+          "queue",
           "設計"
         ]
       },
@@ -6714,7 +6714,7 @@
         "rating": 1900,
         "tier": "advanced",
         "tags": [
-          "隊列",
+          "queue",
           "雙堆"
         ]
       }
@@ -6733,24 +6733,24 @@
   {
     "id": "ms-queue-dp",
     "parent_id": "monotonic-structure",
-    "title": "單調佇列優化 DP",
+    "title": "monotonic queue 優化 DP",
     "slug": "monotonic-queue-dp",
-    "description": "當 DP 轉移為固定長度區間的最小/最大值時，以單調佇列把轉移從 O(k) 降至均攤 O(1)。",
-    "core_idea": "單調佇列優化 DP 適合轉移長得像 `dp[i] = cost(i) + min_{j in [i-k, i-1]} dp[j]`（或 `max`）的情況。因為 `cost(i)` 與 `j` 無關，真正困難的部分只剩「固定長度滑動視窗中的最小／最大 `dp[j]`」。這正好是單調佇列最擅長的問題：隊頭永遠保存當前合法區間的最佳前驅，因此每個 `i` 都能在均攤 `O(1)` 內完成轉移，整體從每次枚舉 `k` 個前驅的 `O(nk)` 降到 **O(n)**。\n\n它能成立的前提是：合法前驅集合必須隨 `i` 單調滑動，也就是左右邊界都只往前移，才能用「過期彈出 + 新狀態入隊」維護。如果轉移變成 `dp[j] + g(j, i)`，而 `g` 裡有 `j` 與 `i` 的交互項（例如斜率、乘法），那就不是單純視窗極值，通常要改用 **Convex Hull Trick** 或其他更高階最佳化。\n\n實作上最容易錯的是**讀取順序**：先用雙端佇列隊頭計算 `dp[i]`，再把 `i` 自己插入雙端佇列。否則 `dp[i]` 可能會拿到自己當前驅，等於把「至少往前跳一步」的限制偷偷破壞掉。",
-    "complexity": "時間 O(n)，空間 O(n)（DP 陣列）+ O(k)（佇列）。",
+    "description": "當 DP 轉移為固定長度區間的最小/最大值時，以 monotonic queue 把轉移從 O(k) 降至均攤 O(1)。",
+    "core_idea": "monotonic queue 優化 DP 適合轉移長得像 `dp[i] = cost(i) + min_{j in [i-k, i-1]} dp[j]`（或 `max`）的情況。因為 `cost(i)` 與 `j` 無關，真正困難的部分只剩「固定長度滑動視窗中的最小／最大 `dp[j]`」。這正好是 monotonic queue 最擅長的問題：queue front 永遠保存當前合法區間的最佳前驅，因此每個 `i` 都能在均攤 `O(1)` 內完成轉移，整體從每次枚舉 `k` 個前驅的 `O(nk)` 降到 **O(n)**。\n\n它能成立的前提是：合法前驅集合必須隨 `i` 單調滑動，也就是左右邊界都只往前移，才能用「過期彈出 + 新狀態 enqueue」維護。如果轉移變成 `dp[j] + g(j, i)`，而 `g` 裡有 `j` 與 `i` 的交互項（例如斜率、乘法），那就不是單純視窗極值，通常要改用 **Convex Hull Trick** 或其他更高階最佳化。\n\n實作上最容易錯的是**讀取順序**：先用 dequequeue front 計算 `dp[i]`，再把 `i` 自己插入 deque。否則 `dp[i]` 可能會拿到自己當前驅，等於把「至少往前跳一步」的限制偷偷破壞掉。",
+    "complexity": "時間 O(n)，空間 O(n)（DP 陣列）+ O(k)（queue）。",
     "deep_dive": [
       {
         "title": "滑動視窗 DP（固定跳躍長度限制）",
-        "body": "```cpp\n// cost: current accumulated cost.\n// k: limit, count, or window size used by the algorithm.\nvector<long long> windowDP(const vector<int>& cost, int k) {\n    int n = (int)cost.size();\n    const long long kInf = (1LL << 60);\n    vector<long long> dp(n, kInf);\n    if (n == 0) {\n        return dp;\n    }\n\n    dp[0] = 0;\n    if (k <= 0) {\n        return dp;\n    }\n\n    deque<int> dq;\n    dq.push_back(0);\n    for (int i = 1; i < n; i++) {\n        while (!dq.empty() && dq.front() < i - k) {\n            dq.pop_front();\n        }\n\n        if (!dq.empty()) {\n            dp[i] = dp[dq.front()] + cost[i];\n        }\n\n        while (!dq.empty() && dp[dq.back()] >= dp[i]) {\n            dq.pop_back();\n        }\n        if (dp[i] < kInf) {\n            dq.push_back(i);\n        }\n    }\n    return dp;\n}\n```\n雙端佇列內的下標依 `dp` 值遞增，所以隊頭永遠是當前視窗最小 `dp[j]`。注意順序必須是：先刪過期、再**讀隊頭算 `dp[i]`**、最後才把 `i` 放進雙端佇列；這樣才能保證 `dp[i]` 只來自舊狀態，而不會誤用自己。若某個位置不可達，讓它維持 `INF` 並且不要入雙端佇列 即可。"
+        "body": "```cpp\n// cost: current accumulated cost.\n// k: limit, count, or window size used by the algorithm.\nvector<long long> windowDP(const vector<int>& cost, int k) {\n    int n = (int)cost.size();\n    const long long kInf = (1LL << 60);\n    vector<long long> dp(n, kInf);\n    if (n == 0) {\n        return dp;\n    }\n\n    dp[0] = 0;\n    if (k <= 0) {\n        return dp;\n    }\n\n    deque<int> dq;\n    dq.push_back(0);\n    for (int i = 1; i < n; i++) {\n        while (!dq.empty() && dq.front() < i - k) {\n            dq.pop_front();\n        }\n\n        if (!dq.empty()) {\n            dp[i] = dp[dq.front()] + cost[i];\n        }\n\n        while (!dq.empty() && dp[dq.back()] >= dp[i]) {\n            dq.pop_back();\n        }\n        if (dp[i] < kInf) {\n            dq.push_back(i);\n        }\n    }\n    return dp;\n}\n```\ndeque 內的下標依 `dp` 值遞增，所以 queue front 永遠是當前視窗最小 `dp[j]`。注意順序必須是：先刪過期、再**讀 queue front 算 `dp[i]`**、最後才把 `i` 放進 deque；這樣才能保證 `dp[i]` 只來自舊狀態，而不會誤用自己。若某個位置不可達，讓它維持 `INF` 並且不要入 deque 即可。"
       },
       {
-        "title": "多重背包單調佇列優化",
-        "body": "```cpp\nstruct Item {\n    int weight, value, count;\n};\n\n// cap: capacity limit.\n// items: items considered by the algorithm.\nvector<long long> multipleKnapsack(int cap, const vector<Item>& items) {\n    const long long kNeg = -(1LL << 60);\n    vector<long long> dp(cap + 1, kNeg);\n    dp[0] = 0;\n\n    for (const Item& item : items) {\n        vector<long long> old = dp;\n        for (int r = 0; r < item.weight && r <= cap; r++) {\n            deque<pair<int, long long>> dq;  // (t, adjusted value)\n            for (int t = 0, j = r; j <= cap; t++, j += item.weight) {\n                while (!dq.empty() && dq.front().first < t - item.count) {\n                    dq.pop_front();\n                }\n\n                if (old[j] != kNeg) {\n                    long long adjusted = old[j] - 1LL * t * item.value;\n                    while (!dq.empty() && dq.back().second <= adjusted) {\n                        dq.pop_back();\n                    }\n                    dq.push_back({t, adjusted});\n                }\n\n                dp[j] = dq.empty() ? kNeg : dq.front().second + 1LL * t * item.value;\n            }\n        }\n    }\n    return dp;\n}\n```\n對固定餘數 `r = j mod w` 而言，所有容量 `j = r + t*w` 會形成一條一維序列。把轉移改寫成 `old[r+s*w] + (t-s)*value = (old[r+s*w] - s*value) + t*value` 之後，只要維護最近 `count+1` 個 `adjusted` 值的最大值即可，這正是一個滑動視窗最大值。這裡可以**先入雙端佇列再取答案**，因為放進去的是上一層快照 `old[j]`，不是本輪剛算出的 `dp[j]`，不會形成自我轉移。"
+        "title": "多重背包 monotonic queue 優化",
+        "body": "```cpp\nstruct Item {\n    int weight, value, count;\n};\n\n// cap: capacity limit.\n// items: items considered by the algorithm.\nvector<long long> multipleKnapsack(int cap, const vector<Item>& items) {\n    const long long kNeg = -(1LL << 60);\n    vector<long long> dp(cap + 1, kNeg);\n    dp[0] = 0;\n\n    for (const Item& item : items) {\n        vector<long long> old = dp;\n        for (int r = 0; r < item.weight && r <= cap; r++) {\n            deque<pair<int, long long>> dq;  // (t, adjusted value)\n            for (int t = 0, j = r; j <= cap; t++, j += item.weight) {\n                while (!dq.empty() && dq.front().first < t - item.count) {\n                    dq.pop_front();\n                }\n\n                if (old[j] != kNeg) {\n                    long long adjusted = old[j] - 1LL * t * item.value;\n                    while (!dq.empty() && dq.back().second <= adjusted) {\n                        dq.pop_back();\n                    }\n                    dq.push_back({t, adjusted});\n                }\n\n                dp[j] = dq.empty() ? kNeg : dq.front().second + 1LL * t * item.value;\n            }\n        }\n    }\n    return dp;\n}\n```\n對固定餘數 `r = j mod w` 而言，所有容量 `j = r + t*w` 會形成一條一維序列。把轉移改寫成 `old[r+s*w] + (t-s)*value = (old[r+s*w] - s*value) + t*value` 之後，只要維護最近 `count+1` 個 `adjusted` 值的最大值即可，這正是一個滑動視窗最大值。這裡可以**先入 deque 再取答案**，因為放進去的是上一層快照 `old[j]`，不是本輪剛算出的 `dp[j]`，不會形成自我轉移。"
       }
     ],
     "reference_links": [
       {
-        "label": "OI-Wiki：單調佇列優化 DP",
+        "label": "OI-Wiki：monotonic queue 優化 DP",
         "url": "https://oi-wiki.org/dp/opt/monotonous-queue-stack/"
       }
     ],
@@ -6761,13 +6761,13 @@
       },
       {
         "name": "環形 DP",
-        "description": "**觸發**：合法前驅視窗可能跨過序列尾端與開頭，例如環上固定距離限制。\n**做法**：可把序列複製一份展平成長度 `2n` 的線性陣列，或用模數下標明確計算視窗左右界，再照樣維護單調佇列。"
+        "description": "**觸發**：合法前驅視窗可能跨過序列尾端與開頭，例如環上固定距離限制。\n**做法**：可把序列複製一份展平成長度 `2n` 的線性陣列，或用模數下標明確計算視窗左右界，再照樣維護 monotonic queue。"
       }
     ],
     "pitfalls": [
-      "⚠️ 一般滑動視窗 DP 必須先讀雙端佇列隊頭算 `dp[i]`，再把 `i` 插入；順序反了就可能讓 `dp[i]` 從自己轉移。",
-      "⚠️ 只有在合法前驅集合會隨 `i` 單調滑動時才適用；若可行 `j` 不是一段連續視窗，就不能直接套單調佇列。",
-      "⚠️ 多重背包的調整值要寫成 `dp[r+t*w] - t*v`；正負號一旦寫反，雙端佇列維護的就不是同一個轉移式，答案會整體偏掉。"
+      "⚠️ 一般滑動視窗 DP 必須先讀 dequequeue front 算 `dp[i]`，再把 `i` 插入；順序反了就可能讓 `dp[i]` 從自己轉移。",
+      "⚠️ 只有在合法前驅集合會隨 `i` 單調滑動時才適用；若可行 `j` 不是一段連續視窗，就不能直接套 monotonic queue。",
+      "⚠️ 多重背包的調整值要寫成 `dp[r+t*w] - t*v`；正負號一旦寫反，deque 維護的就不是同一個轉移式，答案會整體偏掉。"
     ],
     "practice_problems": [
       {
@@ -6778,7 +6778,7 @@
         "rating": 1700,
         "tier": "core",
         "tags": [
-          "單調佇列優化",
+          "monotonic queue 優化",
           "滑動窗口"
         ]
       },
@@ -6790,7 +6790,7 @@
         "rating": 1900,
         "tier": "advanced",
         "tags": [
-          "單調佇列優化",
+          "monotonic queue 優化",
           "前綴和"
         ]
       },
@@ -6802,7 +6802,7 @@
         "rating": 1500,
         "tier": "core",
         "tags": [
-          "單調佇列優化",
+          "monotonic queue 優化",
           "哈希"
         ]
       },
@@ -6814,7 +6814,7 @@
         "rating": 1800,
         "tier": "core",
         "tags": [
-          "單調佇列優化",
+          "monotonic queue 優化",
           "設計"
         ]
       },
@@ -6826,7 +6826,7 @@
         "rating": 1600,
         "tier": "core",
         "tags": [
-          "單調佇列優化",
+          "monotonic queue 優化",
           "二分搜尋"
         ]
       },
@@ -6838,7 +6838,7 @@
         "rating": 1900,
         "tier": "advanced",
         "tags": [
-          "單調佇列優化",
+          "monotonic queue 優化",
           "DP"
         ]
       }
@@ -6865,13 +6865,13 @@
     "parent_id": "monotonic-structure",
     "title": "直方圖最大矩形",
     "slug": "largest-rectangle-histogram",
-    "description": "以單調棧 O(n) 求直方圖中面積最大的矩形，可推廣至二維最大全 1 矩形。",
-    "core_idea": "把每根柱子 `h[i]` 想成矩形的**限制高度**：若想讓高度固定為 `h[i]`，矩形只能向左延伸到第一個更短柱子之後，向右延伸到第一個更短柱子之前。因此只要知道 `L[i]` = 左側最近嚴格更小、`R[i]` = 右側最近小於等於的位置，寬度就是 `R[i]-L[i]-1`，面積是 `h[i] * (R[i]-L[i]-1)`。問題於是變成：如何在 `O(n)` 內找完每根柱子的左右邊界。\n\n單調遞增棧剛好能在**彈出時結算**答案。掃到新柱 `h[i]` 時，若 `h[i]` 比棧頂 `h[j]` 更矮，代表 `i` 已經是 `j` 右邊第一個更短的位置；而 `j` 被彈出後的新棧頂，就是 `j` 左邊最近仍比它矮的柱子。換句話說，`j` 的左右邊界在這一刻同時確定，可以立刻計算 `h[j]` 作為最短板的最大矩形。每個下標只會進棧與出棧各一次，所以總成本仍是 **O(n)**。\n\n在尾端補一個高度 `0` 的**哨兵**，就能把所有尚未結算的柱子一次沖掉，不必額外再寫一段清空棧的迴圈。對相同高度使用 `>` 而不是 `>=` 時，會讓最後出現的等高柱子負責較寬的矩形；雖然代表者不同，但最大面積仍然正確。",
-    "complexity": "時間 O(n)，空間 O(n)（棧）。",
+    "description": "以 monotonic stack O(n) 求直方圖中面積最大的矩形，可推廣至二維最大全 1 矩形。",
+    "core_idea": "把每根柱子 `h[i]` 想成矩形的**限制高度**：若想讓高度固定為 `h[i]`，矩形只能向左延伸到第一個更短柱子之後，向右延伸到第一個更短柱子之前。因此只要知道 `L[i]` = 左側最近嚴格更小、`R[i]` = 右側最近小於等於的位置，寬度就是 `R[i]-L[i]-1`，面積是 `h[i] * (R[i]-L[i]-1)`。問題於是變成：如何在 `O(n)` 內找完每根柱子的左右邊界。\n\n單調遞增 stack 剛好能在**彈出時結算**答案。掃到新柱 `h[i]` 時，若 `h[i]` 比 stack top `h[j]` 更矮，代表 `i` 已經是 `j` 右邊第一個更短的位置；而 `j` 被彈出後的新 stack top，就是 `j` 左邊最近仍比它矮的柱子。換句話說，`j` 的左右邊界在這一刻同時確定，可以立刻計算 `h[j]` 作為最短板的最大矩形。每個下標只會進 stack 與 pop 各一次，所以總成本仍是 **O(n)**。\n\n在尾端補一個高度 `0` 的**哨兵**，就能把所有尚未結算的柱子一次沖掉，不必額外再寫一段清空 stack 的迴圈。對相同高度使用 `>` 而不是 `>=` 時，會讓最後出現的等高柱子負責較寬的矩形；雖然代表者不同，但最大面積仍然正確。",
+    "complexity": "時間 O(n)，空間 O(n)（stack）。",
     "deep_dive": [
       {
         "title": "單次掃描法（彈出時結算）",
-        "body": "```cpp\n// h: input or working vector used by the algorithm.\nint largestRectangle(const vector<int>& h) {\n    int n = (int)h.size();\n    stack<int> st;  // Indices with increasing heights\n    long long ans = 0;\n\n    for (int i = 0; i <= n; i++) {\n        int cur = (i == n ? 0 : h[i]);\n        while (!st.empty() && h[st.top()] > cur) {\n            int idx = st.top();\n            st.pop();\n            int left = st.empty() ? -1 : st.top();\n            long long width = i - left - 1;\n            ans = max(ans, 1LL * h[idx] * width);\n        }\n        if (i < n) {\n            st.push(i);\n        }\n    }\n    return (int)ans;\n}\n```\n這種寫法不需要先顯式求 `L[i]` 與 `R[i]`。當某根柱子被彈出時，`i` 就是它的右邊界，而**彈出後**的新棧頂就是左邊界，所以可以立刻算寬度 `i-left-1`。尾端哨兵 `0` 只負責把棧清空，因此通常不需要真的把索引 `n` 放進棧裡。"
+        "body": "```cpp\n// h: input or working vector used by the algorithm.\nint largestRectangle(const vector<int>& h) {\n    int n = (int)h.size();\n    stack<int> st;  // Indices with increasing heights\n    long long ans = 0;\n\n    for (int i = 0; i <= n; i++) {\n        int cur = (i == n ? 0 : h[i]);\n        while (!st.empty() && h[st.top()] > cur) {\n            int idx = st.top();\n            st.pop();\n            int left = st.empty() ? -1 : st.top();\n            long long width = i - left - 1;\n            ans = max(ans, 1LL * h[idx] * width);\n        }\n        if (i < n) {\n            st.push(i);\n        }\n    }\n    return (int)ans;\n}\n```\n這種寫法不需要先顯式求 `L[i]` 與 `R[i]`。當某根柱子被彈出時，`i` 就是它的右邊界，而**彈出後**的新 stack top 就是左邊界，所以可以立刻算寬度 `i-left-1`。尾端哨兵 `0` 只負責把 stack 清空，因此通常不需要真的把索引 `n` 放進 stack 裡。"
       },
       {
         "title": "最大全 1 矩形（二維推廣）",
@@ -6887,16 +6887,16 @@
     "supplemental_patterns": [
       {
         "name": "逐行建直方圖求最大全 1 矩形",
-        "description": "**觸發**：輸入是 0/1 矩陣，要求面積最大的全 1 子矩形。\n**做法**：逐列更新每一欄連續 1 的高度 `h[j]`，每更新完一列就跑一次直方圖最大矩形。每列只做一次棧掃描，總時間 `O(n×m)`。"
+        "description": "**觸發**：輸入是 0/1 矩陣，要求面積最大的全 1 子矩形。\n**做法**：逐列更新每一欄連續 1 的高度 `h[j]`，每更新完一列就跑一次直方圖最大矩形。每列只做一次 stack 掃描，總時間 `O(n×m)`。"
       },
       {
         "name": "貢獻計數求所有子矩形面積之和",
-        "description": "**觸發**：題目不是問最大矩形，而是要把某類子矩形的面積全部加總。\n**做法**：可固定左右邊界後把問題化成高度陣列，再用單調棧統計每個高度作為最短板時的貢獻。雖然公式更複雜，但核心仍是「最近更小邊界決定可延伸寬度」。"
+        "description": "**觸發**：題目不是問最大矩形，而是要把某類子矩形的面積全部加總。\n**做法**：可固定左右邊界後把問題化成高度陣列，再用 monotonic stack 統計每個高度作為最短板時的貢獻。雖然公式更複雜，但核心仍是「最近更小邊界決定可延伸寬度」。"
       }
     ],
     "pitfalls": [
-      "⚠️ 尾端的哨兵高度 `0` 是為了把棧內剩餘柱子一次清空；即使 `i = n`，寬度公式 `i-left-1` 依然完全正確。",
-      "⚠️ 柱子被彈出後，它的左邊界是**新的**棧頂，不是剛剛被彈出的自己；這是最常見的寬度 邊界偏一錯誤。",
+      "⚠️ 尾端的哨兵高度 `0` 是為了把 stack 內剩餘柱子一次清空；即使 `i = n`，寬度公式 `i-left-1` 依然完全正確。",
+      "⚠️ 柱子被彈出後，它的左邊界是**新的**stack top，不是剛剛被彈出的自己；這是最常見的寬度 邊界偏一錯誤。",
       "⚠️ 對等高柱子使用 `>` 時，通常由最後一根等高柱子負責較大的矩形；這種代表者差異不影響最大值，但比較式改成 `>=` 後行為會不同。",
       "⚠️ 二維最大全 1 矩形裡，`matrix[r][c] == 0` 時必須把 `h[c]` 直接重設成 `0`；高度表示的是「往上連續多少個 1」，不能累加穿牆。"
     ],
@@ -6909,7 +6909,7 @@
         "rating": 1800,
         "tier": "advanced",
         "tags": [
-          "單調棧",
+          "monotonic stack",
           "直方圖"
         ]
       },
@@ -6921,7 +6921,7 @@
         "rating": 1900,
         "tier": "advanced",
         "tags": [
-          "單調棧",
+          "monotonic stack",
           "直方圖"
         ]
       },
@@ -6933,7 +6933,7 @@
         "rating": 1800,
         "tier": "advanced",
         "tags": [
-          "單調棧",
+          "monotonic stack",
           "雙指針"
         ]
       },
@@ -6945,7 +6945,7 @@
         "rating": 1900,
         "tier": "advanced",
         "tags": [
-          "單調棧",
+          "monotonic stack",
           "貢獻法"
         ]
       },
@@ -6957,7 +6957,7 @@
         "rating": 1500,
         "tier": "core",
         "tags": [
-          "單調棧"
+          "monotonic stack"
         ]
       },
       {
@@ -6968,7 +6968,7 @@
         "rating": 1500,
         "tier": "core",
         "tags": [
-          "單調棧"
+          "monotonic stack"
         ]
       }
     ],
@@ -7536,7 +7536,7 @@
     "title": "Dijkstra（堆優化）",
     "slug": "dijkstra",
     "description": "使用 min-heap 貪心選取距離最小的未確定節點，在非負權圖上高效求單源最短路，時間複雜度 O((V+E) log V)。",
-    "core_idea": "Dijkstra 的核心是「**貪心選最小**」：維護一個 `dist[]` 陣列，初始 `dist[src]=0`，其餘為 ∞。每次從優先佇列（min-heap）取出 dist 最小的節點 u，並對所有鄰邊嘗試**鬆弛（Relaxation）**：若 `dist[u] + w < dist[v]` 則更新 `dist[v]` 並將 `(dist[v], v)` 推入堆。\n\n正確性依賴**邊權非負**：節點 u 首次出堆時，`dist[u]` 已是最終最短路值——因為任何繞過 u 的後續路徑都會加上非負邊，只會更長，無法再縮短 u 的距離。\n\n堆優化使用**懶惰刪除（Lazy Deletion）**：不主動從堆移除過時項目，取出時若 `d > dist[u]` 則直接跳過。每條邊最多插入堆一次，總操作數 O(E log E)，而 E ≤ V²，故等價於 O(E log V)。",
+    "core_idea": "Dijkstra 的核心是「**貪心選最小**」：維護一個 `dist[]` 陣列，初始 `dist[src]=0`，其餘為 ∞。每次從 priority queue（min-heap）取出 dist 最小的節點 u，並對所有鄰邊嘗試**鬆弛（Relaxation）**：若 `dist[u] + w < dist[v]` 則更新 `dist[v]` 並將 `(dist[v], v)` 推入堆。\n\n正確性依賴**邊權非負**：節點 u 首次出堆時，`dist[u]` 已是最終最短路值——因為任何繞過 u 的後續路徑都會加上非負邊，只會更長，無法再縮短 u 的距離。\n\n堆優化使用**懶惰刪除（Lazy Deletion）**：不主動從堆移除過時項目，取出時若 `d > dist[u]` 則直接跳過。每條邊最多插入堆一次，總操作數 O(E log E)，而 E ≤ V²，故等價於 O(E log V)。",
     "complexity": "時間 O((V + E) log V)，空間 O(V + E)（鄰接表 + 堆）。",
     "deep_dive": [
       {
@@ -7820,12 +7820,12 @@
     "parent_id": "shortest-path",
     "title": "0-1 BFS",
     "slug": "zero-one-bfs",
-    "description": "當圖的邊權只有 0 或 1 時，使用雙端佇列（deque）代替優先佇列，以 O(V+E) 求最短路。",
-    "core_idea": "0-1 BFS 是 Dijkstra 的特化版：當邊權只有 0 或 1 時，不需要 O(log V) 的堆，改用**雙端佇列（deque）**即可維持「佇列頭部距離最小」的性質。\n\n規則：鬆弛一條**邊權 0**的邊時，新節點距離與當前節點相同，推入**佇列前端（push_front）**；鬆弛**邊權 1**的邊時，距離加 1，推入**佇列後端（push_back）**。如此 deque 始終保持：前端是距離最小的節點，整體距離非嚴格遞減，行為等同於桶式 Dijkstra（Dial's Algorithm 的 0-1 特例）。\n\n整個過程每個節點最多被有效處理一次，每條邊只被掃描一次，複雜度為 **O(V + E)**，比堆優化 Dijkstra 快一個 log 因子。",
+    "description": "當圖的邊權只有 0 或 1 時，使用 deque（deque）代替 priority queue，以 O(V+E) 求最短路。",
+    "core_idea": "0-1 BFS 是 Dijkstra 的特化版：當邊權只有 0 或 1 時，不需要 O(log V) 的堆，改用**deque（deque）**即可維持「queue 頭部距離最小」的性質。\n\n規則：鬆弛一條**邊權 0**的邊時，新節點距離與當前節點相同，推入**queue 前端（push_front）**；鬆弛**邊權 1**的邊時，距離加 1，推入**queue 後端（push_back）**。如此 deque 始終保持：前端是距離最小的節點，整體距離非嚴格遞減，行為等同於桶式 Dijkstra（Dial's Algorithm 的 0-1 特例）。\n\n整個過程每個節點最多被有效處理一次，每條邊只被掃描一次，複雜度為 **O(V + E)**，比堆優化 Dijkstra 快一個 log 因子。",
     "complexity": "時間 O(V + E)，空間 O(V + E)（鄰接表 + deque）。",
     "deep_dive": [
       {
-        "title": "雙端佇列核心實作",
+        "title": "deque 核心實作",
         "body": "```cpp\n// 0-1 BFS: edge weights must be exactly 0 or 1\n// src: source node index.\n// n: number of nodes or elements.\n// g: grid or adjacency structure used by the algorithm.\nvector<int> bfs01(int src, int n, const vector<vector<pair<int, int>>>& g) {\n    const int kInf = 1e9;\n    vector<int> dist(n, kInf);\n    deque<int> dq;\n    dist[src] = 0;\n    dq.push_back(src);\n    while (!dq.empty()) {\n        int u = dq.front();\n        dq.pop_front();\n        for (auto [v, w] : g[u]) {\n            if (dist[u] + w < dist[v]) {\n                dist[v] = dist[u] + w;\n                if (w == 0) {\n                    dq.push_front(v);  // 0-cost: same layer, process first\n                }\n                else {\n                    dq.push_back(v);  // 1-cost: next layer, process later\n                }\n            }\n        }\n    }\n    return dist;\n}\n```\n\n與普通 BFS 的唯一差異：依邊權決定推入 deque 的前端或後端。權 0 的邊不增加距離，新節點應優先處理（推前端）；權 1 的邊類似普通 BFS 的下一層（推後端）。不需要 `visited[]` 陣列——`dist[u] + w < dist[v]` 作為更新條件，已達最優的節點不會再被更新。"
       },
       {
@@ -7846,7 +7846,7 @@
     "supplemental_patterns": [
       {
         "name": "推廣：Dial's Algorithm（桶式 BFS）",
-        "description": "**觸發**：邊權為小整數 [0..K] 時，優先佇列的 log 因子較大，想要更快的解法。\n**做法**：維護 K+1 個桶（vector 或 deque），`bucket[d % (K+1)]` 存距離為 d 的節點，鬆弛後推入對應桶。0-1 BFS 是 K=1 的特例。複雜度 O(V·K + E)。"
+        "description": "**觸發**：邊權為小整數 [0..K] 時，priority queue 的 log 因子較大，想要更快的解法。\n**做法**：維護 K+1 個桶（vector 或 deque），`bucket[d % (K+1)]` 存距離為 d 的節點，鬆弛後推入對應桶。0-1 BFS 是 K=1 的特例。複雜度 O(V·K + E)。"
       },
       {
         "name": "邊的二值化建模",
@@ -8384,7 +8384,7 @@
       "⚠️ 合併子節點時，j 的迴圈上界必須是合併前的 `sz[v]`（而非 K）；若錯用 K 作上界，複雜度退化為 O(nK²)。",
       "⚠️ `sz[v] += sz[c]` 的更新必須放在合併迴圈**之後**；若先更新再合併，j 的有效範圍會包含 c 的節點，導致雙重計算。",
       "⚠️ 恰好選 k 個節點時，未到達的狀態應初始化為 `-INF`（不可達），不能用 0；否則「選 0 個節點的子樹」會污染「恰好選 k 個」的結果。",
-      "⚠️ 鏈狀樹（即退化成一條路徑的樹）遞迴深度為 O(n)，n 較大時可能棧溢位，必要時改用迭代後序遍歷或在程式開頭調大棧空間。"
+      "⚠️ 鏈狀樹（即退化成一條路徑的樹）遞迴深度為 O(n)，n 較大時可能 stack overflow，必要時改用迭代後序遍歷或在程式開頭調大 stack 空間。"
     ],
     "practice_problems": [
       {
@@ -8657,7 +8657,7 @@
     "supplemental_patterns": [
       {
         "name": "固定長度滑動視窗",
-        "description": "**觸發**：題目明確給出視窗大小 k，求每個大小為 k 的窗口的最大值、和或其他統計值。\n**做法**：`right >= k - 1` 時同步移除左端元素（`left = right - k + 1`），不需 while 判斷。求窗口最大值需搭配**單調遞減雙端佇列**（deque）維護，佇列頭即為當前最大，O(n) 時間。"
+        "description": "**觸發**：題目明確給出視窗大小 k，求每個大小為 k 的窗口的最大值、和或其他統計值。\n**做法**：`right >= k - 1` 時同步移除左端元素（`left = right - k + 1`），不需 while 判斷。求窗口最大值需搭配**單調遞減 deque**（deque）維護，queue 頭即為當前最大，O(n) 時間。"
       },
       {
         "name": "乘積小於 K 的子陣列計數",
@@ -8665,7 +8665,7 @@
       }
     ],
     "pitfalls": [
-      "⚠️ 滑動視窗要求窗口狀態對 right 移動具單調性；若陣列包含負數且目標是「和 ≤ limit 的最短子陣列」，left 可能需要回頭，此時應改用前綴和加單調佇列。",
+      "⚠️ 滑動視窗要求窗口狀態對 right 移動具單調性；若陣列包含負數且目標是「和 ≤ limit 的最短子陣列」，left 可能需要回頭，此時應改用前綴和加 monotonic queue。",
       "⚠️ 求「最短」視窗時，while 條件是「視窗仍合法則持續收縮」，與求「最長」的 while（不合法則收縮）邏輯相反，寫錯方向會讓視窗在合法狀態下停止收縮，得到錯誤結果。",
       "⚠️ `atMost(K) - atMost(K-1)` 中呼叫 `atMost(-1)` 需做邊界保護（直接返回 0），且 `atMost(0)` 也需正確處理（只允許空視窗，返回 0）。",
       "⚠️ 以 `freq.size()` 計算不同值個數時，刪除頻次須在歸零後立即 `erase`，否則鍵仍存在於 map 中，導致不同值計數偏高，窗口收縮邏輯錯誤。"
@@ -8905,7 +8905,7 @@
       "⚠️ 進入 while 前必須同時確認 `fast != nullptr` 與 `fast->next != nullptr`，兩個條件缺一不可；若只檢查 `fast`，當 `fast->next == nullptr` 時存取 `fast->next->next` 會立即崩潰。",
       "⚠️ Floyd 的相遇點在環內某處，**不等於**環入口；必須再執行第二階段（一個指針回到 head，兩者同速前進）才能定位入口，直接回傳相遇點是常見錯誤。",
       "⚠️ 找環入口的第二階段，兩個指針必須都以速度 1（每步一格）前進；若其中一個仍以兩步走，數學推導失效，得到錯誤的入口位置。",
-      "⚠️ 鏈結串列歸併排序分割時必須使用左中點（`fast` 從 `head->next` 出發），否則長度為 2 的串列無法均分，遞迴呼叫傳入相同的 head，導致無限遞迴與堆疊溢位。"
+      "⚠️ 鏈結串列歸併排序分割時必須使用左中點（`fast` 從 `head->next` 出發），否則長度為 2 的串列無法均分，遞迴呼叫傳入相同的 head，導致無限遞迴與 stack overflow。"
     ],
     "practice_problems": [
       {
@@ -9368,7 +9368,7 @@
         "tier": "warmup",
         "tags": [
           "分組循環",
-          "棧"
+          "stack"
         ]
       },
       {
@@ -9380,7 +9380,7 @@
         "tier": "core",
         "tags": [
           "分組循環",
-          "棧"
+          "stack"
         ]
       },
       {
@@ -9874,7 +9874,7 @@
         "tier": "core",
         "tags": [
           "前綴和",
-          "單調棧"
+          "monotonic stack"
         ]
       }
     ],
@@ -10071,15 +10071,15 @@
   {
     "id": "ms-contribution",
     "parent_id": "monotonic-structure",
-    "title": "貢獻法（單調棧算區間貢獻）",
+    "title": "貢獻法（monotonic stack 算區間貢獻）",
     "slug": "contribution",
-    "description": "改成「每個元素作為最小／最大值的次數」累加總貢獻，用單調棧求每元素的管轄區間。",
-    "core_idea": "面對「所有子陣列的最小值之和」「所有子陣列極差之和」這類**對全部子陣列求和**的問題，逐一枚舉子陣列是 O(n²)。貢獻法反過來想：**固定某元素 `a[i]`，它在多少個子陣列裡是最小值？** 把每個元素的「身分次數 × 數值」加總就是答案。\n\n求 `a[i]` 作為最小值的管轄範圍，就是找它**左邊第一個更小**、**右邊第一個更小**的位置 `L`、`R`，則含 `a[i]` 且 `a[i]` 為最小的子陣列數 = `(i-L) × (R-i)`。這正是單調棧的拿手好戲。處理相等元素時，一邊取嚴格、一邊取非嚴格以避免重複計數。",
-    "complexity": "時間 O(n)（單調棧求左右邊界），空間 O(n)。",
+    "description": "改成「每個元素作為最小／最大值的次數」累加總貢獻，用 monotonic stack 求每元素的管轄區間。",
+    "core_idea": "面對「所有子陣列的最小值之和」「所有子陣列極差之和」這類**對全部子陣列求和**的問題，逐一枚舉子陣列是 O(n²)。貢獻法反過來想：**固定某元素 `a[i]`，它在多少個子陣列裡是最小值？** 把每個元素的「身分次數 × 數值」加總就是答案。\n\n求 `a[i]` 作為最小值的管轄範圍，就是找它**左邊第一個更小**、**右邊第一個更小**的位置 `L`、`R`，則含 `a[i]` 且 `a[i]` 為最小的子陣列數 = `(i-L) × (R-i)`。這正是 monotonic stack 的拿手好戲。處理相等元素時，一邊取嚴格、一邊取非嚴格以避免重複計數。",
+    "complexity": "時間 O(n)（monotonic stack 求左右邊界），空間 O(n)。",
     "deep_dive": [
       {
         "title": "所有子陣列最小值之和",
-        "body": "用單調棧求每個元素左右第一個更小者，左邊嚴格、右邊非嚴格避免重複：\n\n```cpp\nconst long long kMod = 1e9 + 7;\n// a: input array or sequence.\nint sumSubarrayMins(vector<int>& a) {\n    int n = a.size();\n    vector<int> L(n), R(n);  // boundaries where a[i] is the strict min\n    stack<int> st;\n    for (int i = 0; i < n; i++) {  // left: first index with a[left] < a[i]\n        while (!st.empty() && a[st.top()] >= a[i]) {\n            st.pop();\n        }\n        L[i] = st.empty() ? -1 : st.top();\n        st.push(i);\n    }\n    while (!st.empty()) {\n        st.pop();\n    }\n    for (int i = n - 1; i >= 0; i--) {  // right: first index with a[right] < a[i]\n        while (!st.empty() && a[st.top()] > a[i]) {\n            st.pop();\n        }\n        R[i] = st.empty() ? n : st.top();\n        st.push(i);\n    }\n    long long ans = 0;\n    for (int i = 0; i < n; i++) {\n        ans = (ans + 1LL * a[i] * (i - L[i]) % kMod * (R[i] - i)) % kMod;\n    }\n    return ans;\n}\n```\n\n左用 `>=`（嚴格更小才停）、右用 `>`（遇相等不停），保證每個子陣列的最小值唯一歸給最左邊那個，避免重算。"
+        "body": "用 monotonic stack 求每個元素左右第一個更小者，左邊嚴格、右邊非嚴格避免重複：\n\n```cpp\nconst long long kMod = 1e9 + 7;\n// a: input array or sequence.\nint sumSubarrayMins(vector<int>& a) {\n    int n = a.size();\n    vector<int> L(n), R(n);  // boundaries where a[i] is the strict min\n    stack<int> st;\n    for (int i = 0; i < n; i++) {  // left: first index with a[left] < a[i]\n        while (!st.empty() && a[st.top()] >= a[i]) {\n            st.pop();\n        }\n        L[i] = st.empty() ? -1 : st.top();\n        st.push(i);\n    }\n    while (!st.empty()) {\n        st.pop();\n    }\n    for (int i = n - 1; i >= 0; i--) {  // right: first index with a[right] < a[i]\n        while (!st.empty() && a[st.top()] > a[i]) {\n            st.pop();\n        }\n        R[i] = st.empty() ? n : st.top();\n        st.push(i);\n    }\n    long long ans = 0;\n    for (int i = 0; i < n; i++) {\n        ans = (ans + 1LL * a[i] * (i - L[i]) % kMod * (R[i] - i)) % kMod;\n    }\n    return ans;\n}\n```\n\n左用 `>=`（嚴格更小才停）、右用 `>`（遇相等不停），保證每個子陣列的最小值唯一歸給最左邊那個，避免重算。"
       },
       {
         "title": "極差之和 = 最大值之和 − 最小值之和",
@@ -10088,7 +10088,7 @@
     ],
     "reference_links": [
       {
-        "label": "OI-Wiki：單調棧",
+        "label": "OI-Wiki：monotonic stack",
         "url": "https://oi-wiki.org/ds/monotonous-stack/"
       },
       {
@@ -10121,7 +10121,7 @@
         "tier": "advanced",
         "tags": [
           "貢獻法",
-          "單調棧"
+          "monotonic stack"
         ]
       },
       {
@@ -10133,7 +10133,7 @@
         "tier": "core",
         "tags": [
           "貢獻法",
-          "單調棧"
+          "monotonic stack"
         ]
       },
       {
@@ -10157,7 +10157,7 @@
         "tier": "advanced",
         "tags": [
           "貢獻法",
-          "單調棧"
+          "monotonic stack"
         ]
       },
       {
@@ -10200,43 +10200,43 @@
   {
     "id": "ms-lexicographic",
     "parent_id": "monotonic-structure",
-    "title": "單調棧求最小字典序",
+    "title": "monotonic stack 求最小字典序",
     "slug": "lexicographic",
-    "description": "在保留限制下用單調棧貪心刪除較大前導元素，得到字典序最小的結果。",
-    "core_idea": "「移除 k 位使數字最小」「不重複字元的字典序最小子序列」這類問題，核心貪心是：**從左到右維護一個棧，當新元素比棧頂小且仍允許刪除時，就把棧頂彈掉**。因為高位（靠左）變小對字典序的影響遠大於低位，所以遇到「前面大、後面小」就該把前面的大元素刪掉。\n\n單調棧天然支援這個「能刪就刪」的貪心，並用額外條件（剩餘可刪次數、後面是否還會出現、是否已在棧中）約束何時停止。寫對停止條件，就能在 O(n) 內構造出字典序最小（或最大）的答案。",
-    "complexity": "時間 O(n)（每元素進出棧各一次），空間 O(n)。",
+    "description": "在保留限制下用 monotonic stack 貪心刪除較大前導元素，得到字典序最小的結果。",
+    "core_idea": "「移除 k 位使數字最小」「不重複字元的字典序最小子序列」這類問題，核心貪心是：**從左到右維護一個 stack，當新元素比 stack top 小且仍允許刪除時，就把 stack top 彈掉**。因為高位（靠左）變小對字典序的影響遠大於低位，所以遇到「前面大、後面小」就該把前面的大元素刪掉。\n\nmonotonic stack 天然支援這個「能刪就刪」的貪心，並用額外條件（剩餘可刪次數、後面是否還會出現、是否已在 stack 中）約束何時停止。寫對停止條件，就能在 O(n) 內構造出字典序最小（或最大）的答案。",
+    "complexity": "時間 O(n)（每元素進 pop 各一次），空間 O(n)。",
     "deep_dive": [
       {
         "title": "移掉 k 位使數字最小",
-        "body": "維護遞增棧，棧頂比當前大且還能刪就彈：\n\n```cpp\n// num: input string.\n// k: limit, count, or window size used by the algorithm.\nstring removeKdigits(string num, int k) {\n    string st;\n    for (char c : num) {\n        while (!st.empty() && k > 0 && st.back() > c) {\n            st.pop_back();\n            k--;\n        }\n        st.push_back(c);\n    }\n    while (k > 0) {\n        st.pop_back();\n        k--;\n    }  // still must remove from the tail\n    int i = 0;\n    while (i < (int)st.size() && st[i] == '0') {\n        i++;  // strip leading zeros\n    }\n    string res = st.substr(i);\n    return res.empty() ? \"0\" : res;\n}\n```\n\n若掃完還有刪除額度（整體遞增的情況），從尾端補刪；最後去前導零。"
+        "body": "維護遞增 stack，stack top 比當前大且還能刪就彈：\n\n```cpp\n// num: input string.\n// k: limit, count, or window size used by the algorithm.\nstring removeKdigits(string num, int k) {\n    string st;\n    for (char c : num) {\n        while (!st.empty() && k > 0 && st.back() > c) {\n            st.pop_back();\n            k--;\n        }\n        st.push_back(c);\n    }\n    while (k > 0) {\n        st.pop_back();\n        k--;\n    }  // still must remove from the tail\n    int i = 0;\n    while (i < (int)st.size() && st[i] == '0') {\n        i++;  // strip leading zeros\n    }\n    string res = st.substr(i);\n    return res.empty() ? \"0\" : res;\n}\n```\n\n若掃完還有刪除額度（整體遞增的情況），從尾端補刪；最後去前導零。"
       },
       {
         "title": "不重複字元的字典序最小子序列",
-        "body": "每個字元恰留一個，要求字典序最小。多了兩個約束：當前字元已在棧中就跳過；彈棧前要確認被彈字元**後面還會再出現**。\n\n```cpp\n// s: input string.\nstring smallestSubsequence(string s) {\n    int cnt[26] = {0};\n    bool in_stack[26] = {false};\n    for (char c : s) {\n        cnt[c - 'a']++;\n    }\n    string st;\n    for (char c : s) {\n        cnt[c - 'a']--;  // one fewer remaining\n        if (in_stack[c - 'a']) {\n            continue;  // keep only one of each\n        }\n        while (!st.empty() && st.back() > c && cnt[st.back() - 'a'] > 0) {\n            in_stack[st.back() - 'a'] = false;  // safe to pop: appears later\n            st.pop_back();\n        }\n        st.push_back(c);\n        in_stack[c - 'a'] = true;\n    }\n    return st;\n}\n```\n\n彈棧條件 `cnt[st.back()] > 0` 保證被刪字元之後還能補回，否則會丟失必須保留的字元。"
+        "body": "每個字元恰留一個，要求字典序最小。多了兩個約束：當前字元已在 stack 中就跳過；pop 前要確認被彈字元**後面還會再出現**。\n\n```cpp\n// s: input string.\nstring smallestSubsequence(string s) {\n    int cnt[26] = {0};\n    bool in_stack[26] = {false};\n    for (char c : s) {\n        cnt[c - 'a']++;\n    }\n    string st;\n    for (char c : s) {\n        cnt[c - 'a']--;  // one fewer remaining\n        if (in_stack[c - 'a']) {\n            continue;  // keep only one of each\n        }\n        while (!st.empty() && st.back() > c && cnt[st.back() - 'a'] > 0) {\n            in_stack[st.back() - 'a'] = false;  // safe to pop: appears later\n            st.pop_back();\n        }\n        st.push_back(c);\n        in_stack[c - 'a'] = true;\n    }\n    return st;\n}\n```\n\npop 條件 `cnt[st.back()] > 0` 保證被刪字元之後還能補回，否則會丟失必須保留的字元。"
       }
     ],
     "reference_links": [
       {
-        "label": "OI-Wiki：單調棧",
+        "label": "OI-Wiki：monotonic stack",
         "url": "https://oi-wiki.org/ds/monotonous-stack/"
       },
       {
-        "label": "靈茶山艾府：單調棧與字典序",
+        "label": "靈茶山艾府：monotonic stack 與字典序",
         "url": "https://leetcode.cn/circle/discuss/9oZFK9/"
       }
     ],
     "supplemental_patterns": [
       {
         "name": "字典序最大",
-        "description": "**觸發**：要求結果字典序最大。\n**做法**：把比較反向（棧頂比當前**小**才彈），其餘骨架不變。"
+        "description": "**觸發**：要求結果字典序最大。\n**做法**：把比較反向（stack top 比當前**小**才彈），其餘骨架不變。"
       },
       {
         "name": "帶保留下界的拼接最大數",
-        "description": "**觸發**：從多個陣列各取若干、拼接成最大數。\n**做法**：對每段用單調棧取「長度固定下字典序最大子序列」，再用歸併比較拼接。"
+        "description": "**觸發**：從多個陣列各取若干、拼接成最大數。\n**做法**：對每段用 monotonic stack 取「長度固定下字典序最大子序列」，再用歸併比較拼接。"
       }
     ],
     "pitfalls": [
-      "⚠️ 不重複子序列問題中，彈棧前必須確認被彈字元後面還會出現（剩餘計數 > 0），否則會少字元。",
+      "⚠️ 不重複子序列問題中，pop 前必須確認被彈字元後面還會出現（剩餘計數 > 0），否則會少字元。",
       "⚠️ 掃完仍有刪除額度時，要從尾端補刪（遞增序列的情形）。",
       "⚠️ 數字題最後別忘了去前導零，且空結果要回傳 \"0\"。"
     ],
@@ -10250,7 +10250,7 @@
         "tier": "core",
         "tags": [
           "字典序",
-          "單調棧"
+          "monotonic stack"
         ]
       },
       {
@@ -10274,11 +10274,11 @@
         "tier": "core",
         "tags": [
           "字典序",
-          "單調棧"
+          "monotonic stack"
         ]
       },
       {
-        "title": "單調棧最小字典序",
+        "title": "monotonic stack 最小字典序",
         "source": "leetcode",
         "source_id": "smallest-subsequence-of-distinct-characters",
         "frontend_id": "1081",
@@ -10298,7 +10298,7 @@
         "tier": "core",
         "tags": [
           "字典序",
-          "單調棧"
+          "monotonic stack"
         ]
       },
       {
@@ -10362,16 +10362,16 @@
     "title": "網格圖（DFS／BFS／洪水填充）",
     "slug": "grid",
     "description": "把矩陣每格當節點、四／八方向當邊，用 DFS/BFS 做連通塊、最短步數與洪水填充。",
-    "core_idea": "網格圖是隱式圖：節點是格子 `(r,c)`，邊是相鄰格（上下左右，必要時含對角）。所有圖論遍歷都能套用，只是「鄰居」改成方向陣列枚舉，並用邊界與訪問標記控制。\n\n選擇 DFS 或 BFS 取決於問題：**連通塊／島嶼數量／面積**用 DFS 或 BFS 皆可；**最少步數／最短路（邊權皆 1）**必須用 BFS（層序保證最短）；起點有多個時用**多源 BFS**（一次把所有起點入隊）。洪水填充就是從一格出發把整個連通同色區改寫。",
-    "complexity": "時間 O(R×C)（每格訪問一次），空間 O(R×C)（訪問標記與佇列／遞迴）。",
+    "core_idea": "網格圖是隱式圖：節點是格子 `(r,c)`，邊是相鄰格（上下左右，必要時含對角）。所有圖論遍歷都能套用，只是「鄰居」改成方向陣列枚舉，並用邊界與訪問標記控制。\n\n選擇 DFS 或 BFS 取決於問題：**連通塊／島嶼數量／面積**用 DFS 或 BFS 皆可；**最少步數／最短路（邊權皆 1）**必須用 BFS（層序保證最短）；起點有多個時用**多源 BFS**（一次把所有起點 enqueue）。洪水填充就是從一格出發把整個連通同色區改寫。",
+    "complexity": "時間 O(R×C)（每格訪問一次），空間 O(R×C)（訪問標記與 queue／遞迴）。",
     "deep_dive": [
       {
         "title": "DFS 數島嶼 / 算面積",
-        "body": "方向陣列 + 就地標記（把走過的陸地改成水）避免額外 visited：\n\n```cpp\nint dr[] = {-1, 1, 0, 0}, dc[] = {0, 0, -1, 1};\n// g: grid or adjacency structure used by the algorithm.\n// r: right boundary, row, or endpoint.\n// c: candidate character or capacity value.\nint dfs(vector<vector<char>>& g, int r, int c) {\n    int rowCount = g.size(), col_count = g[0].size();\n    if (r < 0 || r >= rowCount || c < 0 || c >= col_count || g[r][c] != '1') {\n        return 0;\n    }\n    g[r][c] = '0';  // mark visited in place\n    int area = 1;\n    for (int k = 0; k < 4; k++) {\n        area += dfs(g, r + dr[k], c + dc[k]);\n    }\n    return area;\n}\n// g: grid or adjacency structure used by the algorithm.\nint numIslands(vector<vector<char>>& g) {\n    int cnt = 0;\n    for (int r = 0; r < (int)g.size(); r++) {\n        for (int c = 0; c < (int)g[0].size(); c++) {\n            if (g[r][c] == '1') {\n                dfs(g, r, c);\n                cnt++;\n            }\n        }\n    }\n    return cnt;\n}\n```\n\n大網格用遞迴 DFS 可能爆棧，改用顯式 stack 或 BFS 較安全。"
+        "body": "方向陣列 + 就地標記（把走過的陸地改成水）避免額外 visited：\n\n```cpp\nint dr[] = {-1, 1, 0, 0}, dc[] = {0, 0, -1, 1};\n// g: grid or adjacency structure used by the algorithm.\n// r: right boundary, row, or endpoint.\n// c: candidate character or capacity value.\nint dfs(vector<vector<char>>& g, int r, int c) {\n    int rowCount = g.size(), col_count = g[0].size();\n    if (r < 0 || r >= rowCount || c < 0 || c >= col_count || g[r][c] != '1') {\n        return 0;\n    }\n    g[r][c] = '0';  // mark visited in place\n    int area = 1;\n    for (int k = 0; k < 4; k++) {\n        area += dfs(g, r + dr[k], c + dc[k]);\n    }\n    return area;\n}\n// g: grid or adjacency structure used by the algorithm.\nint numIslands(vector<vector<char>>& g) {\n    int cnt = 0;\n    for (int r = 0; r < (int)g.size(); r++) {\n        for (int c = 0; c < (int)g[0].size(); c++) {\n            if (g[r][c] == '1') {\n                dfs(g, r, c);\n                cnt++;\n            }\n        }\n    }\n    return cnt;\n}\n```\n\n大網格用遞迴 DFS 可能 stack overflow，改用顯式 stack 或 BFS 較安全。"
       },
       {
         "title": "多源 BFS：最短距離 / 腐爛橘子",
-        "body": "所有源點同時入隊，按層擴散，第一次到達即最短：\n\n```cpp\n// g: grid or adjacency structure used by the algorithm.\nint orangesRotting(vector<vector<int>>& g) {\n    int rowCount = g.size(), col_count = g[0].size(), fresh = 0;\n    queue<pair<int, int>> q;\n    for (int r = 0; r < rowCount; r++) {\n        for (int c = 0; c < col_count; c++) {\n            if (g[r][c] == 2) {\n                q.push({r, c});  // all sources enqueued first\n            }\n            else if (g[r][c] == 1) {\n                fresh++;\n            }\n        }\n    }\n    int dr[] = {-1, 1, 0, 0}, dc[] = {0, 0, -1, 1}, minutes = 0;\n    while (!q.empty() && fresh) {\n        int sz = q.size();\n        while (sz--) {\n            auto [r, c] = q.front();\n            q.pop();\n            for (int k = 0; k < 4; k++) {\n                int nr = r + dr[k], nc = c + dc[k];\n                if (nr < 0 || nr >= rowCount || nc < 0 || nc >= col_count || g[nr][nc] != 1) {\n                    continue;\n                }\n                g[nr][nc] = 2;\n                fresh--;\n                q.push({nr, nc});\n            }\n        }\n        minutes++;  // one layer = one minute\n    }\n    return fresh ? -1 : minutes;\n}\n```\n\n每處理完一整層 `minutes++`，這就是 BFS「按邊數分層」的特性；多源只是初始把所有起點放進同一層。"
+        "body": "所有源點同時 enqueue，按層擴散，第一次到達即最短：\n\n```cpp\n// g: grid or adjacency structure used by the algorithm.\nint orangesRotting(vector<vector<int>>& g) {\n    int rowCount = g.size(), col_count = g[0].size(), fresh = 0;\n    queue<pair<int, int>> q;\n    for (int r = 0; r < rowCount; r++) {\n        for (int c = 0; c < col_count; c++) {\n            if (g[r][c] == 2) {\n                q.push({r, c});  // all sources enqueued first\n            }\n            else if (g[r][c] == 1) {\n                fresh++;\n            }\n        }\n    }\n    int dr[] = {-1, 1, 0, 0}, dc[] = {0, 0, -1, 1}, minutes = 0;\n    while (!q.empty() && fresh) {\n        int sz = q.size();\n        while (sz--) {\n            auto [r, c] = q.front();\n            q.pop();\n            for (int k = 0; k < 4; k++) {\n                int nr = r + dr[k], nc = c + dc[k];\n                if (nr < 0 || nr >= rowCount || nc < 0 || nc >= col_count || g[nr][nc] != 1) {\n                    continue;\n                }\n                g[nr][nc] = 2;\n                fresh--;\n                q.push({nr, nc});\n            }\n        }\n        minutes++;  // one layer = one minute\n    }\n    return fresh ? -1 : minutes;\n}\n```\n\n每處理完一整層 `minutes++`，這就是 BFS「按邊數分層」的特性；多源只是初始把所有起點放進同一層。"
       }
     ],
     "reference_links": [
@@ -10395,9 +10395,9 @@
       }
     ],
     "pitfalls": [
-      "⚠️ BFS 要在「入隊時」標記已訪問，否則同一格會被多次入隊導致重複與超時。",
+      "⚠️ BFS 要在「enqueue 時」標記已訪問，否則同一格會被多次 enqueue 導致重複與超時。",
       "⚠️ 求最短步數必須用 BFS，DFS 找到的不保證最短。",
-      "⚠️ 大網格遞迴 DFS 易爆棧，改顯式堆疊或 BFS。"
+      "⚠️ 大網格遞迴 DFS 易 stack overflow，改顯式 stack 或 BFS。"
     ],
     "practice_problems": [
       {
@@ -12682,7 +12682,7 @@
         ]
       },
       {
-        "title": "根據身高重建隊列",
+        "title": "根據身高重建 queue",
         "source": "leetcode",
         "source_id": "queue-reconstruction-by-height",
         "frontend_id": "406",
@@ -13063,7 +13063,7 @@
     "title": "字典序貪心",
     "slug": "lexicographic-greedy",
     "description": "逐位決定字元並貪心取「在可行前提下最小（或最大）」的選擇，前提是後續仍有合法解。",
-    "core_idea": "求「字典序最小／最大」的結果時，貪心地**逐位確定**：在每一位都嘗試放最小（求最小）的字元，前提是**剩下的位仍能湊出合法解**。因為高位對字典序的影響壓倒低位，所以只要保證可行，當前位取最小一定不會更差。\n\n關鍵在「可行性檢查」——放了這個字元後，剩餘資源／約束是否還能完成。常見做法是預處理後綴資訊（後面還剩多少某字元、後綴是否可達），或用單調棧在掃描中維護「能刪就刪」。寫對可行性判斷，字典序貪心就能在線性或近線性時間構造最優串。",
+    "core_idea": "求「字典序最小／最大」的結果時，貪心地**逐位確定**：在每一位都嘗試放最小（求最小）的字元，前提是**剩下的位仍能湊出合法解**。因為高位對字典序的影響壓倒低位，所以只要保證可行，當前位取最小一定不會更差。\n\n關鍵在「可行性檢查」——放了這個字元後，剩餘資源／約束是否還能完成。常見做法是預處理後綴資訊（後面還剩多少某字元、後綴是否可達），或用 monotonic stack 在掃描中維護「能刪就刪」。寫對可行性判斷，字典序貪心就能在線性或近線性時間構造最優串。",
     "complexity": "多為 O(n) 或 O(n·|Σ|)（每位嘗試字元集並做 O(1) 可行性判斷）。",
     "deep_dive": [
       {
@@ -13071,8 +13071,8 @@
         "body": "在保留每種字元至少需求量下，貪心組出字典序最小結果（示意：從計數構造最小排列且滿足某約束）：\n\n```cpp\n// Build the lexicographically smallest string using counts cnt[26].\n// Place the smallest usable char whose use still leaves a feasible suffix.\n// cnt: counts or frequency table.\n// total: total number of positions or elements to construct.\n// feasible: predicate that checks whether the remaining state can still be completed.\nstring smallestFromCounts(int cnt[26], int total, function<bool(int, int*)> feasible) {\n    string res;\n    for (int pos = 0; pos < total; pos++) {\n        for (int c = 0; c < 26; c++) {\n            if (!cnt[c]) {\n                continue;\n            }\n            cnt[c]--;\n            if (feasible(pos + 1, cnt)) {\n                res += char('a' + c);\n                break;\n            }          // keep choice\n            cnt[c]++;  // revert, try next char\n        }\n    }\n    return res;\n}\n```\n\n每位從最小字元開始試，`feasible` 確認用掉它後剩餘仍可完成；不可行就還原計數換下一個字元。"
       },
       {
-        "title": "單調棧版字典序貪心",
-        "body": "「能刪就刪」型字典序最小（如移除 k 位）用單調棧最直接：\n\n```cpp\n// s: input string.\n// k: limit, count, or window size used by the algorithm.\nstring smallestAfterRemoveK(const string& s, int k) {\n    string st;\n    for (char c : s) {\n        while (!st.empty() && k > 0 && st.back() > c) {\n            st.pop_back();\n            k--;\n        }\n        st.push_back(c);  // greedily keep small prefix\n    }\n    st.resize(st.size() - k);  // remove leftover from tail\n    return st;\n}\n```\n\n當棧頂比當前字元大且還能刪，就彈掉它讓高位變小——這正是「逐位取最小且保證可行」在棧上的實現。"
+        "title": "monotonic stack 版字典序貪心",
+        "body": "「能刪就刪」型字典序最小（如移除 k 位）用 monotonic stack 最直接：\n\n```cpp\n// s: input string.\n// k: limit, count, or window size used by the algorithm.\nstring smallestAfterRemoveK(const string& s, int k) {\n    string st;\n    for (char c : s) {\n        while (!st.empty() && k > 0 && st.back() > c) {\n            st.pop_back();\n            k--;\n        }\n        st.push_back(c);  // greedily keep small prefix\n    }\n    st.resize(st.size() - k);  // remove leftover from tail\n    return st;\n}\n```\n\n當 stack top 比當前字元大且還能刪，就彈掉它讓高位變小——這正是「逐位取最小且保證可行」在 stack 上的實現。"
       }
     ],
     "reference_links": [
@@ -13081,14 +13081,14 @@
         "url": "https://oi-wiki.org/basic/greedy/"
       },
       {
-        "label": "OI-Wiki：單調棧",
+        "label": "OI-Wiki：monotonic stack",
         "url": "https://oi-wiki.org/ds/monotonous-stack/"
       }
     ],
     "supplemental_patterns": [
       {
         "name": "字典序最大",
-        "description": "**觸發**：要求結果字典序最大。\n**做法**：逐位取最大可行字元；單調棧版把比較反向（棧頂較小才彈）。"
+        "description": "**觸發**：要求結果字典序最大。\n**做法**：逐位取最大可行字元；monotonic stack 版把比較反向（stack top 較小才彈）。"
       },
       {
         "name": "後綴可行性預處理",
@@ -13098,7 +13098,7 @@
     "pitfalls": [
       "⚠️ 取最小前必須確認「剩餘仍可完成」，否則貪心會走進死路。",
       "⚠️ 嘗試失敗要正確還原狀態（計數、標記），否則污染後續決策。",
-      "⚠️ 單調棧版掃完別忘了處理剩餘刪除額度與前導零等收尾。"
+      "⚠️ monotonic stack 版掃完別忘了處理剩餘刪除額度與前導零等收尾。"
     ],
     "practice_problems": [
       {
@@ -13126,7 +13126,7 @@
         ]
       },
       {
-        "title": "單調棧最小字典序",
+        "title": "monotonic stack 最小字典序",
         "source": "leetcode",
         "source_id": "smallest-subsequence-of-distinct-characters",
         "frontend_id": "1081",
@@ -13257,7 +13257,7 @@
         "tier": "core",
         "tags": [
           "構造",
-          "棧"
+          "stack"
         ]
       },
       {
@@ -14934,9 +14934,9 @@
     "parent_id": "dp-fundamentals",
     "title": "DP 優化（前綴和／矩陣冪／斜率／單調性）",
     "slug": "dp-optimization",
-    "description": "DP 轉移的加速技巧：前綴和優化、矩陣快速冪、單調隊列/棧、斜率優化，把瓶頸從 O(n) 轉移降到 O(1)/O(log n)。",
-    "core_idea": "當狀態數已不能再少，瓶頸就在「每個狀態的轉移」。DP 優化的共同思路是：發現轉移式中的某種結構（區間求和、線性遞推、單調性、凸性），用資料結構或數學工具把它加速。\n\n- **前綴和優化**：轉移是一段連續區間的和/最值，用前綴和或前綴最值 O(1) 取得。\n- **矩陣快速冪**：線性遞推且階段數巨大（n 達 1e18），把一步轉移寫成矩陣，快速冪 O(k^3 log n)。\n- **單調隊列優化**：轉移取「滑動視窗內最值」，用單調隊列攤還 O(1)。\n- **斜率優化**：轉移式可整理成 `dp[i] = min(線性函式)`，用凸殼維護候選直線。",
-    "complexity": "視技巧而定：前綴和 O(1)/轉移；矩陣冪 O(k^3 log n)；單調隊列攤還 O(1)；斜率優化攤還 O(1)。",
+    "description": "DP 轉移的加速技巧：前綴和優化、矩陣快速冪、單調 queue/stack、斜率優化，把瓶頸從 O(n) 轉移降到 O(1)/O(log n)。",
+    "core_idea": "當狀態數已不能再少，瓶頸就在「每個狀態的轉移」。DP 優化的共同思路是：發現轉移式中的某種結構（區間求和、線性遞推、單調性、凸性），用資料結構或數學工具把它加速。\n\n- **前綴和優化**：轉移是一段連續區間的和/最值，用前綴和或前綴最值 O(1) 取得。\n- **矩陣快速冪**：線性遞推且階段數巨大（n 達 1e18），把一步轉移寫成矩陣，快速冪 O(k^3 log n)。\n- **單調 queue 優化**：轉移取「滑動視窗內最值」，用單調 queue 攤還 O(1)。\n- **斜率優化**：轉移式可整理成 `dp[i] = min(線性函式)`，用凸殼維護候選直線。",
+    "complexity": "視技巧而定：前綴和 O(1)/轉移；矩陣冪 O(k^3 log n)；單調 queue 攤還 O(1)；斜率優化攤還 O(1)。",
     "deep_dive": [
       {
         "title": "前綴和優化區間轉移",
@@ -14960,7 +14960,7 @@
     "supplemental_patterns": [
       {
         "name": "前綴和/前綴最值優化",
-        "description": "**何時用**：轉移是連續區間的和或最值。\n**核心做法**：邊算邊維護 dp 的前綴和/單調隊列，O(1) 取區間。\n**複雜度**：O(n)。"
+        "description": "**何時用**：轉移是連續區間的和或最值。\n**核心做法**：邊算邊維護 dp 的前綴和/單調 queue，O(1) 取區間。\n**複雜度**：O(n)。"
       },
       {
         "name": "矩陣快速冪",
@@ -15158,24 +15158,24 @@
   {
     "id": "ds-stack",
     "parent_id": "heap-priority-queue",
-    "title": "堆疊（Stack）應用",
+    "title": "stack（Stack）應用",
     "slug": "ds-stack",
     "description": "後進先出（LIFO）的線性結構，是括號匹配、表達式求值、最近相關元素等問題的核心工具。",
-    "core_idea": "堆疊的價值在於「最近、未被抵銷的元素」這個語意：每當新元素能與棧頂配對或抵銷，就彈出處理，否則壓入等待。\n\n- **何時觸發**：題目出現「最近的左括號」「上一個未匹配元素」「巢狀結構」「能消去相鄰對」這類描述。\n- **括號／表達式**：用棧記住尚未閉合的層級或運算子，遇到閉合符或更低優先級時結算。\n- **鄰項消除**：把「相鄰相同就消去」「碰撞抵銷」建模成壓入/彈出，棧底到棧頂即為最終殘留序列。",
-    "complexity": "每個元素至多入棧、出棧各一次，整體時間 O(n)、空間 O(n)。",
+    "core_idea": "stack 的價值在於「最近、未被抵銷的元素」這個語意：每當新元素能與 stack top 配對或抵銷，就彈出處理，否則壓入等待。\n\n- **何時觸發**：題目出現「最近的左括號」「上一個未匹配元素」「巢狀結構」「能消去相鄰對」這類描述。\n- **括號／表達式**：用 stack 記住尚未閉合的層級或運算子，遇到閉合符或更低優先級時結算。\n- **鄰項消除**：把「相鄰相同就消去」「碰撞抵銷」建模成壓入/彈出，stack bottom 到 stack top 即為最終殘留序列。",
+    "complexity": "每個元素至多 push、pop 各一次，整體時間 O(n)、空間 O(n)。",
     "deep_dive": [
       {
         "title": "括號匹配與合法性",
-        "body": "左括號壓入，右括號嘗試與棧頂配對；最後棧空才合法。\n\n```cpp\nbool isValid(const string& s) {\n    stack<char> st;\n    unordered_map<char,char> pair = {{\")\",\"(\"[0]},{\"]\",\"[\"[0]},{\"}\",\"{\"[0]}};\n    for (char c : s) {\n        if (c==\"(\"[0] || c==\"[\"[0] || c==\"{\"[0]) st.push(c);\n        else {\n            if (st.empty() || st.top()!=pair[c]) return false;\n            st.pop();\n        }\n    }\n    return st.empty();\n}\n```\n\n變體「最少增刪使括號合法」只需在掃描中統計無法匹配的左右括號數量，棧深的峰值與殘留即答案。"
+        "body": "左括號壓入，右括號嘗試與 stack top 配對；最後 stack 空才合法。\n\n```cpp\nbool isValid(const string& s) {\n    stack<char> st;\n    unordered_map<char,char> pair = {{\")\",\"(\"[0]},{\"]\",\"[\"[0]},{\"}\",\"{\"[0]}};\n    for (char c : s) {\n        if (c==\"(\"[0] || c==\"[\"[0] || c==\"{\"[0]) st.push(c);\n        else {\n            if (st.empty() || st.top()!=pair[c]) return false;\n            st.pop();\n        }\n    }\n    return st.empty();\n}\n```\n\n變體「最少增刪使括號合法」只需在掃描中統計無法匹配的左右括號數量，stack 深的峰值與殘留即答案。"
       },
       {
         "title": "表達式求值與鄰項消除",
-        "body": "基本計算機用「數字棧 + 運算子棧」或在掃描時依運算子優先級即時結算；後綴（逆波蘭）表達式則只需一個數字棧。\n\n```cpp\nint evalRPN(vector<string>& tokens) {\n    stack<long long> st;\n    for (auto& t : tokens) {\n        if (t==\"+\"||t==\"-\"||t==\"*\"||t==\"/\") {\n            long long b=st.top();st.pop();\n            long long a=st.top();st.pop();\n            st.push(t==\"+\"?a+b:t==\"-\"?a-b:t==\"*\"?a*b:a/b);\n        } else st.push(stoll(t));\n    }\n    return st.top();\n}\n```\n\n鄰項消除（如消消樂、星號移除相鄰字元）同理：能與棧頂抵銷就 `pop`，否則 `push`，棧內元素即最終結果。"
+        "body": "基本計算機用「數字 stack + 運算子 stack」或在掃描時依運算子優先級即時結算；後綴（逆波蘭）表達式則只需一個數字 stack。\n\n```cpp\nint evalRPN(vector<string>& tokens) {\n    stack<long long> st;\n    for (auto& t : tokens) {\n        if (t==\"+\"||t==\"-\"||t==\"*\"||t==\"/\") {\n            long long b=st.top();st.pop();\n            long long a=st.top();st.pop();\n            st.push(t==\"+\"?a+b:t==\"-\"?a-b:t==\"*\"?a*b:a/b);\n        } else st.push(stoll(t));\n    }\n    return st.top();\n}\n```\n\n鄰項消除（如消消樂、星號移除相鄰字元）同理：能與 stack top 抵銷就 `pop`，否則 `push`，stack 內元素即最終結果。"
       }
     ],
     "reference_links": [
       {
-        "label": "OI-Wiki：堆疊",
+        "label": "OI-Wiki：stack",
         "url": "https://oi-wiki.org/ds/stack/"
       },
       {
@@ -15185,27 +15185,27 @@
     ],
     "supplemental_patterns": [
       {
-        "name": "棧頂配對／抵銷",
-        "description": "**何時用**：括號合法性、相鄰消除、碰撞模擬。\n**核心做法**：能與棧頂配對/抵銷就彈出，否則壓入，最後看殘留。\n**複雜度**：O(n)。"
+        "name": "stack top 配對／抵銷",
+        "description": "**何時用**：括號合法性、相鄰消除、碰撞模擬。\n**核心做法**：能與 stack top 配對/抵銷就彈出，否則壓入，最後看殘留。\n**複雜度**：O(n)。"
       },
       {
-        "name": "雙棧表達式求值",
-        "description": "**何時用**：含括號與多優先級的中綴表達式。\n**核心做法**：數字棧 + 運算子棧，遇到更低優先級或右括號就結算。\n**複雜度**：O(n)。"
+        "name": "雙 stack 表達式求值",
+        "description": "**何時用**：含括號與多優先級的中綴表達式。\n**核心做法**：數字 stack + 運算子 stack，遇到更低優先級或右括號就結算。\n**複雜度**：O(n)。"
       }
     ],
     "pitfalls": [
-      "⚠️ 彈出前務必檢查棧非空，右括號多於左括號時直接判非法。",
+      "⚠️ 彈出前務必檢查 stack 非空，右括號多於左括號時直接判非法。",
       "⚠️ 表達式求值要正確處理運算子優先級與括號層級，負數與多位數解析也要小心。",
-      "⚠️ 結束時若棧非空代表仍有未匹配元素，別忘了這個收尾判斷。"
+      "⚠️ 結束時若 stack 非空代表仍有未匹配元素，別忘了這個收尾判斷。"
     ],
     "practice_problems": [],
     "study_plan_ref": {
       "plan": "data_structure",
-      "plan_title": "資料結構（字首和/堆疊/佇列/堆/字典樹/並查集/樹狀陣列/線段樹）",
+      "plan_title": "資料結構（字首和/stack/queue/堆/字典樹/並查集/樹狀陣列/線段樹）",
       "section_id": 28,
       "section_title": "基礎",
       "section_path": [
-        ". 堆疊",
+        ". stack",
         "基礎"
       ]
     },
@@ -15279,24 +15279,24 @@
   {
     "id": "ds-queue",
     "parent_id": "heap-priority-queue",
-    "title": "佇列與雙端佇列",
+    "title": "queue 與 deque",
     "slug": "ds-queue",
-    "description": "先進先出（FIFO）的佇列與兩端皆可進出的雙端佇列（deque），是 BFS、滑動視窗與設計題的基礎容器。",
-    "core_idea": "佇列維護「先來先服務」的順序，雙端佇列則允許兩端 O(1) 增刪，能同時模擬棧與佇列。\n\n- **何時觸發**：BFS 逐層擴展、需要按到達順序處理、或設計類題（最近請求計數、循環佇列、滑動視窗最值）。\n- **deque 的威力**：兩端皆可操作，是單調佇列、回文判定、雙向擴展的底層結構。\n- **設計題**：用陣列 + 頭尾指標實作循環佇列，避免搬移；或用兩個棧攤還實作佇列。",
-    "complexity": "入隊／出隊／兩端操作皆 O(1)，空間 O(n)。",
+    "description": "先進先出（FIFO）的 queue 與兩端皆可進出的 deque（deque），是 BFS、滑動視窗與設計題的基礎容器。",
+    "core_idea": "queue 維護「先來先服務」的順序，deque 則允許兩端 O(1) 增刪，能同時模擬 stack 與 queue。\n\n- **何時觸發**：BFS 逐層擴展、需要按到達順序處理、或設計類題（最近請求計數、circular queue、滑動視窗最值）。\n- **deque 的威力**：兩端皆可操作，是 monotonic queue、回文判定、雙向擴展的底層結構。\n- **設計題**：用陣列 + 頭尾指標實作 circular queue，避免搬移；或用兩個 stack 攤還實作 queue。",
+    "complexity": "enqueue／dequeue／兩端操作皆 O(1)，空間 O(n)。",
     "deep_dive": [
       {
-        "title": "循環佇列（陣列實作）",
-        "body": "用固定陣列與 `head/tail` 指標取模循環，避免出隊後搬移元素。\n\n```cpp\nstruct CircularQueue {\n    vector<int> a; int head=0, cnt=0, cap;\n    CircularQueue(int k): a(k), cap(k) {}\n    bool enqueue(int x){ if(cnt==cap) return false; a[(head+cnt)%cap]=x; cnt++; return true; }\n    bool dequeue(){ if(!cnt) return false; head=(head+1)%cap; cnt--; return true; }\n    int front(){ return cnt? a[head] : -1; }\n};\n```\n\n用「容量 + 計數」判斷空滿，比單純比較頭尾指標更不易出錯。"
+        "title": "circular queue（陣列實作）",
+        "body": "用固定陣列與 `head/tail` 指標取模循環，避免 dequeue 後搬移元素。\n\n```cpp\nstruct CircularQueue {\n    vector<int> a; int head=0, cnt=0, cap;\n    CircularQueue(int k): a(k), cap(k) {}\n    bool enqueue(int x){ if(cnt==cap) return false; a[(head+cnt)%cap]=x; cnt++; return true; }\n    bool dequeue(){ if(!cnt) return false; head=(head+1)%cap; cnt--; return true; }\n    int front(){ return cnt? a[head] : -1; }\n};\n```\n\n用「容量 + 計數」判斷空滿，比單純比較頭尾指標更不易出錯。"
       },
       {
-        "title": "兩個棧攤還實作佇列",
-        "body": "`in` 棧負責入隊，`out` 棧負責出隊；`out` 空時把 `in` 整批倒過去。\n\n```cpp\nstack<int> in, out;\nvoid push(int x){ in.push(x); }\nint pop(){ peek(); int v=out.top(); out.pop(); return v; }\nint peek(){ if(out.empty()) while(!in.empty()){ out.push(in.top()); in.pop(); } return out.top(); }\n```\n\n每個元素至多被搬移一次，因此每次操作攤還 O(1)。這也是「用棧維護佇列最值」等進階題的雛形。"
+        "title": "兩個 stack 攤還實作 queue",
+        "body": "`in` stack 負責 enqueue，`out` stack 負責 dequeue；`out` 空時把 `in` 整批倒過去。\n\n```cpp\nstack<int> in, out;\nvoid push(int x){ in.push(x); }\nint pop(){ peek(); int v=out.top(); out.pop(); return v; }\nint peek(){ if(out.empty()) while(!in.empty()){ out.push(in.top()); in.pop(); } return out.top(); }\n```\n\n每個元素至多被搬移一次，因此每次操作攤還 O(1)。這也是「用 stack 維護 queue 最值」等進階題的雛形。"
       }
     ],
     "reference_links": [
       {
-        "label": "OI-Wiki：佇列",
+        "label": "OI-Wiki：queue",
         "url": "https://oi-wiki.org/ds/queue/"
       },
       {
@@ -15306,27 +15306,27 @@
     ],
     "supplemental_patterns": [
       {
-        "name": "循環佇列省搬移",
-        "description": "**何時用**：固定容量、頻繁入出隊（如串流視窗）。\n**核心做法**：陣列 + 頭指標取模 + 計數判空滿。\n**複雜度**：O(1) 每操作。"
+        "name": "circular queue 省搬移",
+        "description": "**何時用**：固定容量、頻繁入 dequeue（如串流視窗）。\n**核心做法**：陣列 + 頭指標取模 + 計數判空滿。\n**複雜度**：O(1) 每操作。"
       },
       {
         "name": "deque 雙端擴展",
-        "description": "**何時用**：需要從兩端取/放（單調佇列、回文、雙向 BFS）。\n**核心做法**：用 `std::deque` 在 front/back 同時 O(1) 操作。\n**複雜度**：O(1) 每操作。"
+        "description": "**何時用**：需要從兩端取/放（monotonic queue、回文、雙向 BFS）。\n**核心做法**：用 `std::deque` 在 front/back 同時 O(1) 操作。\n**複雜度**：O(1) 每操作。"
       }
     ],
     "pitfalls": [
-      "⚠️ 循環佇列用頭尾指標判空滿易混淆，建議額外維護元素計數。",
-      "⚠️ 兩棧佇列要在 `out` 空時才整批搬移，否則順序會錯且失去攤還複雜度。",
+      "⚠️ circular queue 用頭尾指標判空滿易混淆，建議額外維護元素計數。",
+      "⚠️ 兩 stack queue 要在 `out` 空時才整批搬移，否則順序會錯且失去攤還複雜度。",
       "⚠️ 取 front/pop 前先判空，避免對空容器操作。"
     ],
     "practice_problems": [],
     "study_plan_ref": {
       "plan": "data_structure",
-      "plan_title": "資料結構（字首和/堆疊/佇列/堆/字典樹/並查集/樹狀陣列/線段樹）",
+      "plan_title": "資料結構（字首和/stack/queue/堆/字典樹/並查集/樹狀陣列/線段樹）",
       "section_id": 36,
       "section_title": "基礎",
       "section_path": [
-        ". 佇列",
+        ". queue",
         "基礎"
       ]
     },
@@ -15396,11 +15396,11 @@
     "practice_problems": [],
     "study_plan_ref": {
       "plan": "data_structure",
-      "plan_title": "資料結構（字首和/堆疊/佇列/堆/字典樹/並查集/樹狀陣列/線段樹）",
+      "plan_title": "資料結構（字首和/stack/queue/堆/字典樹/並查集/樹狀陣列/線段樹）",
       "section_id": 45,
       "section_title": "反悔堆",
       "section_path": [
-        ". 堆（優先佇列）",
+        ". 堆（priority queue）",
         "反悔堆"
       ]
     },
@@ -15458,7 +15458,7 @@
     "practice_problems": [],
     "study_plan_ref": {
       "plan": "data_structure",
-      "plan_title": "資料結構（字首和/堆疊/佇列/堆/字典樹/並查集/樹狀陣列/線段樹）",
+      "plan_title": "資料結構（字首和/stack/queue/堆/字典樹/並查集/樹狀陣列/線段樹）",
       "section_id": 52,
       "section_title": "0-1 字典樹（異或字典樹）",
       "section_path": [
@@ -15522,7 +15522,7 @@
     "practice_problems": [],
     "study_plan_ref": {
       "plan": "data_structure",
-      "plan_title": "資料結構（字首和/堆疊/佇列/堆/字典樹/並查集/樹狀陣列/線段樹）",
+      "plan_title": "資料結構（字首和/stack/queue/堆/字典樹/並查集/樹狀陣列/線段樹）",
       "section_id": 65,
       "section_title": "動態開點線段樹",
       "section_path": [
@@ -15590,7 +15590,7 @@
     "practice_problems": [],
     "study_plan_ref": {
       "plan": "data_structure",
-      "plan_title": "資料結構（字首和/堆疊/佇列/堆/字典樹/並查集/樹狀陣列/線段樹）",
+      "plan_title": "資料結構（字首和/stack/queue/堆/字典樹/並查集/樹狀陣列/線段樹）",
       "section_id": 69,
       "section_title": "基礎",
       "section_path": [
@@ -15651,12 +15651,12 @@
     "title": "尤拉路徑與尤拉迴路",
     "slug": "gt-euler",
     "description": "尤拉路徑／迴路：一筆畫走遍每條邊恰好一次，存在性由度數判定，構造用 Hierholzer 演算法。",
-    "core_idea": "尤拉問題關注「邊」而非「點」：能否一筆畫走過所有邊，且每條邊只走一次。\n\n- **存在性（無向圖）**：連通且奇度數頂點數為 0（尤拉迴路）或 2（尤拉路徑，起終點為奇度頂點）。\n- **存在性（有向圖）**：底圖連通，且每點入度=出度（迴路）；或恰一點出度-入度=1（起點）、一點入度-出度=1（終點），其餘相等（路徑）。\n- **構造**：Hierholzer 用一個棧 DFS，走不動時回退並記錄，最後逆序即答案。重排字典序、破解密碼鎖（de Bruijn）都是其應用。",
+    "core_idea": "尤拉問題關注「邊」而非「點」：能否一筆畫走過所有邊，且每條邊只走一次。\n\n- **存在性（無向圖）**：連通且奇度數頂點數為 0（尤拉迴路）或 2（尤拉路徑，起終點為奇度頂點）。\n- **存在性（有向圖）**：底圖連通，且每點入度=出度（迴路）；或恰一點出度-入度=1（起點）、一點入度-出度=1（終點），其餘相等（路徑）。\n- **構造**：Hierholzer 用一個 stack DFS，走不動時回退並記錄，最後逆序即答案。重排字典序、破解密碼鎖（de Bruijn）都是其應用。",
     "complexity": "Hierholzer 時間 O(V + E)，空間 O(V + E)。",
     "deep_dive": [
       {
         "title": "Hierholzer 構造尤拉路徑",
-        "body": "用棧模擬：能走就往前走並刪邊，走不動就把節點加入答案，最後反轉。\n\n```cpp\nvector<int> g[N]; int idx[N];   // idx：每點下一條未用邊的指標\nvector<int> path;\nvoid hierholzer(int s){\n    stack<int> st; st.push(s);\n    while(!st.empty()){\n        int u=st.top();\n        if(idx[u]<(int)g[u].size()){\n            int v=g[u][idx[u]++];   // 取下一條未用邊\n            st.push(v);\n        } else { path.push_back(u); st.pop(); }\n    }\n    reverse(path.begin(), path.end());\n}\n```\n\n用 `idx` 指標而非每次刪除邊，確保每條邊只處理一次，達到線性。有向圖直接用此版；無向圖需標記邊是否用過（成對的反向邊）。"
+        "body": "用 stack 模擬：能走就往前走並刪邊，走不動就把節點加入答案，最後反轉。\n\n```cpp\nvector<int> g[N]; int idx[N];   // idx：每點下一條未用邊的指標\nvector<int> path;\nvoid hierholzer(int s){\n    stack<int> st; st.push(s);\n    while(!st.empty()){\n        int u=st.top();\n        if(idx[u]<(int)g[u].size()){\n            int v=g[u][idx[u]++];   // 取下一條未用邊\n            st.push(v);\n        } else { path.push_back(u); st.pop(); }\n    }\n    reverse(path.begin(), path.end());\n}\n```\n\n用 `idx` 指標而非每次刪除邊，確保每條邊只處理一次，達到線性。有向圖直接用此版；無向圖需標記邊是否用過（成對的反向邊）。"
       }
     ],
     "reference_links": [
@@ -15682,7 +15682,7 @@
     "pitfalls": [
       "⚠️ 先確認圖連通（只看有邊的點），孤立的有邊分量會讓一筆畫不存在。",
       "⚠️ 無向圖要標記「邊」已用（含反向），只標點會重複走邊。",
-      "⚠️ 用 `idx` 指標逐邊推進，別用遞迴 + erase，否則退化成 O(E^2) 或爆棧。"
+      "⚠️ 用 `idx` 指標逐邊推進，別用遞迴 + erase，否則退化成 O(E^2) 或 stack overflow。"
     ],
     "practice_problems": [],
     "study_plan_ref": {
@@ -15706,12 +15706,12 @@
     "title": "強連通分量與雙連通分量",
     "slug": "gt-scc",
     "description": "強連通分量（SCC）與雙連通分量：用 Tarjan/Kosaraju 把有向圖縮成 DAG，或找出無向圖的割點、橋。",
-    "core_idea": "有向圖中互相可達的極大點集就是 SCC；把每個 SCC 縮成一點後得到 DAG，許多「環內等價」的問題就化簡了。\n\n- **何時觸發**：2-SAT、縮點後在 DAG 上 DP/拓撲、判斷整圖是否強連通、找必經點/橋。\n- **Tarjan SCC**：一次 DFS，用 `dfn`（時間戳）與 `low`（可回溯到的最早時間戳）配合一個棧，當 `dfn[u]==low[u]` 時彈出一個 SCC。\n- **無向圖雙連通**：類似地用 `low` 找割點（去掉後增加連通分量）與橋（去掉後不連通的邊）。",
+    "core_idea": "有向圖中互相可達的極大點集就是 SCC；把每個 SCC 縮成一點後得到 DAG，許多「環內等價」的問題就化簡了。\n\n- **何時觸發**：2-SAT、縮點後在 DAG 上 DP/拓撲、判斷整圖是否強連通、找必經點/橋。\n- **Tarjan SCC**：一次 DFS，用 `dfn`（時間戳）與 `low`（可回溯到的最早時間戳）配合一個 stack，當 `dfn[u]==low[u]` 時彈出一個 SCC。\n- **無向圖雙連通**：類似地用 `low` 找割點（去掉後增加連通分量）與橋（去掉後不連通的邊）。",
     "complexity": "Tarjan/Kosaraju 時間 O(V + E)，空間 O(V + E)。",
     "deep_dive": [
       {
         "title": "Tarjan 求 SCC",
-        "body": "單次 DFS 維護 dfn/low 與棧，根節點 `dfn==low` 時收一個分量。\n\n```cpp\nint dfn[N], low[N], timer=0, scc[N], sccCnt=0;\nbool inStk[N]; stack<int> st;\nvoid tarjan(int u){\n    dfn[u]=low[u]=++timer; st.push(u); inStk[u]=true;\n    for(int v: g[u]){\n        if(!dfn[v]){ tarjan(v); low[u]=min(low[u],low[v]); }\n        else if(inStk[v]) low[u]=min(low[u],dfn[v]);\n    }\n    if(dfn[u]==low[u]){\n        sccCnt++;\n        while(true){ int x=st.top(); st.pop(); inStk[x]=false; scc[x]=sccCnt; if(x==u) break; }\n    }\n}\n```\n\n縮點後，把跨 SCC 的邊建成新圖（去重），即得 DAG，可在其上做拓撲 DP（如最長路、計數）。"
+        "body": "單次 DFS 維護 dfn/low 與 stack，根節點 `dfn==low` 時收一個分量。\n\n```cpp\nint dfn[N], low[N], timer=0, scc[N], sccCnt=0;\nbool inStk[N]; stack<int> st;\nvoid tarjan(int u){\n    dfn[u]=low[u]=++timer; st.push(u); inStk[u]=true;\n    for(int v: g[u]){\n        if(!dfn[v]){ tarjan(v); low[u]=min(low[u],low[v]); }\n        else if(inStk[v]) low[u]=min(low[u],dfn[v]);\n    }\n    if(dfn[u]==low[u]){\n        sccCnt++;\n        while(true){ int x=st.top(); st.pop(); inStk[x]=false; scc[x]=sccCnt; if(x==u) break; }\n    }\n}\n```\n\n縮點後，把跨 SCC 的邊建成新圖（去重），即得 DAG，可在其上做拓撲 DP（如最長路、計數）。"
       }
     ],
     "reference_links": [
@@ -15735,8 +15735,8 @@
       }
     ],
     "pitfalls": [
-      "⚠️ `low` 更新分兩種：樹邊用 `low[v]`、回邊用 `dfn[v]`（且需在棧中），混用會算錯分量。",
-      "⚠️ 大圖遞迴 DFS 可能爆棧，必要時改迭代或加大棧。",
+      "⚠️ `low` 更新分兩種：樹邊用 `low[v]`、回邊用 `dfn[v]`（且需在 stack 中），混用會算錯分量。",
+      "⚠️ 大圖遞迴 DFS 可能 stack overflow，必要時改迭代或加大 stack。",
       "⚠️ 縮點建新圖時要對重複邊去重，否則後續 DAG DP 計數會偏大。"
     ],
     "practice_problems": [],
@@ -16293,7 +16293,7 @@
     "deep_dive": [
       {
         "title": "合併兩有序鏈",
-        "body": "啞節點接尾，較小者接入後該鏈前進。\n\n```cpp\nListNode* merge(ListNode* a, ListNode* b){\n    ListNode dummy(0), *tail=&dummy;\n    while(a && b){\n        if(a->val<=b->val){ tail->next=a; a=a->next; }\n        else { tail->next=b; b=b->next; }\n        tail=tail->next;\n    }\n    tail->next = a ? a : b;   // 接上剩餘\n    return dummy.next;\n}\n```\n\nk 個合併用優先佇列存各鏈當前頭，每次彈最小、推進該鏈；或分治兩兩合併達 O(N log k)。"
+        "body": "啞節點接尾，較小者接入後該鏈前進。\n\n```cpp\nListNode* merge(ListNode* a, ListNode* b){\n    ListNode dummy(0), *tail=&dummy;\n    while(a && b){\n        if(a->val<=b->val){ tail->next=a; a=a->next; }\n        else { tail->next=b; b=b->next; }\n        tail=tail->next;\n    }\n    tail->next = a ? a : b;   // 接上剩餘\n    return dummy.next;\n}\n```\n\nk 個合併用 priority queue 存各鏈當前頭，每次彈最小、推進該鏈；或分治兩兩合併達 O(N log k)。"
       }
     ],
     "reference_links": [
@@ -16463,12 +16463,12 @@
     "title": "二元樹遍歷",
     "slug": "btree-traverse",
     "description": "二元樹遍歷：前序、中序、後序的遞迴與迭代寫法，以及 Morris 遍歷的 O(1) 空間技巧。",
-    "core_idea": "三種 DFS 遍歷只差「處理節點」相對於遞迴左右孩子的位置；迭代版用棧模擬，Morris 則借空指標達到 O(1) 空間。\n\n- **何時觸發**：需要按特定次序輸出/收集節點；中序對 BST 給出遞增序列。\n- **遞迴 vs 迭代**：遞迴最直觀；面試常要求迭代（用棧）或進一步的 Morris。",
-    "complexity": "時間 O(n)；遞迴/棧空間 O(h)，Morris O(1)。",
+    "core_idea": "三種 DFS 遍歷只差「處理節點」相對於遞迴左右孩子的位置；迭代版用 stack 模擬，Morris 則借空指標達到 O(1) 空間。\n\n- **何時觸發**：需要按特定次序輸出/收集節點；中序對 BST 給出遞增序列。\n- **遞迴 vs 迭代**：遞迴最直觀；面試常要求迭代（用 stack）或進一步的 Morris。",
+    "complexity": "時間 O(n)；遞迴/stack 空間 O(h)，Morris O(1)。",
     "deep_dive": [
       {
         "title": "遞迴框架與迭代中序",
-        "body": "三序只是 visit 位置不同；迭代中序用棧。\n\n```cpp\nvector<int> inorder(TreeNode* root){\n    vector<int> res; stack<TreeNode*> st; TreeNode* cur=root;\n    while(cur || !st.empty()){\n        while(cur){ st.push(cur); cur=cur->left; }   // 一路向左\n        cur=st.top(); st.pop();\n        res.push_back(cur->val);                      // 中序 visit\n        cur=cur->right;\n    }\n    return res;\n}\n```\n\n前序在入棧時 visit、後序可用「反轉的前序（根右左）」再反轉得到。"
+        "body": "三序只是 visit 位置不同；迭代中序用 stack。\n\n```cpp\nvector<int> inorder(TreeNode* root){\n    vector<int> res; stack<TreeNode*> st; TreeNode* cur=root;\n    while(cur || !st.empty()){\n        while(cur){ st.push(cur); cur=cur->left; }   // 一路向左\n        cur=st.top(); st.pop();\n        res.push_back(cur->val);                      // 中序 visit\n        cur=cur->right;\n    }\n    return res;\n}\n```\n\n前序在 push 時 visit、後序可用「反轉的前序（根右左）」再反轉得到。"
       }
     ],
     "reference_links": [
@@ -16483,8 +16483,8 @@
     ],
     "supplemental_patterns": [
       {
-        "name": "迭代用棧模擬",
-        "description": "**何時用**：禁用遞迴或防爆棧。\n**核心做法**：用顯式棧重現 DFS 次序。\n**複雜度**：O(n)、O(h) 空間。"
+        "name": "迭代用 stack 模擬",
+        "description": "**何時用**：禁用遞迴或防 stack overflow。\n**核心做法**：用顯式 stack 重現 DFS 次序。\n**複雜度**：O(n)、O(h) 空間。"
       },
       {
         "name": "Morris 遍歷",
@@ -16855,9 +16855,9 @@
     "parent_id": "binary-tree",
     "title": "二元樹 BFS（層序）",
     "slug": "btree-bfs",
-    "description": "二元樹層序遍歷（BFS）：用佇列逐層展開，處理按層分組、每層最值、之字形、右視圖等需求。",
-    "core_idea": "BFS 用佇列一層層展開。只要在每輪迴圈開頭固定「本層節點數 = 佇列當前大小」，就能精準切分每一層。\n\n- **何時觸發**：按層輸出、求每層最大/平均、找右視圖、最短路徑層數、之字形遍歷。\n- **關鍵**：`for (sz = q.size(); sz--; )` 鎖定當前層，避免把下層節點混進來。",
-    "complexity": "時間 O(n)、空間 O(n)（佇列最大寬度）。",
+    "description": "二元樹層序遍歷（BFS）：用 queue 逐層展開，處理按層分組、每層最值、之字形、右視圖等需求。",
+    "core_idea": "BFS 用 queue 一層層展開。只要在每輪迴圈開頭固定「本層節點數 = queue 當前大小」，就能精準切分每一層。\n\n- **何時觸發**：按層輸出、求每層最大/平均、找右視圖、最短路徑層數、之字形遍歷。\n- **關鍵**：`for (sz = q.size(); sz--; )` 鎖定當前層，避免把下層節點混進來。",
+    "complexity": "時間 O(n)、空間 O(n)（queue 最大寬度）。",
     "deep_dive": [
       {
         "title": "分層 BFS 骨架",
@@ -16886,7 +16886,7 @@
     ],
     "pitfalls": [
       "⚠️ 一定要先存 `sz = q.size()` 再迴圈，否則 push 進的下層節點會混入本層。",
-      "⚠️ 空樹要先判 `root == nullptr` 直接回傳，避免空佇列邏輯出錯。"
+      "⚠️ 空樹要先判 `root == nullptr` 直接回傳，避免空 queue 邏輯出錯。"
     ],
     "practice_problems": [],
     "study_plan_ref": {
@@ -16938,7 +16938,7 @@
     "deep_dive": [
       {
         "title": "N 元樹的 DFS 與最大深度",
-        "body": "遞迴對每個孩子取最優再合併。\n\n```cpp\nint maxDepth(Node* root){\n    if(!root) return 0;\n    int best=0;\n    for(Node* c: root->children) best=max(best, maxDepth(c));\n    return best+1;\n}\n```\n\n前序/後序只是把 visit 放在迴圈孩子之前/之後；層序 BFS 則在出隊時把所有孩子入隊。"
+        "body": "遞迴對每個孩子取最優再合併。\n\n```cpp\nint maxDepth(Node* root){\n    if(!root) return 0;\n    int best=0;\n    for(Node* c: root->children) best=max(best, maxDepth(c));\n    return best+1;\n}\n```\n\n前序/後序只是把 visit 放在迴圈孩子之前/之後；層序 BFS 則在 dequeue 時把所有孩子 enqueue。"
       }
     ],
     "reference_links": [
@@ -16963,7 +16963,7 @@
     ],
     "pitfalls": [
       "⚠️ 空節點與空 children 列表都要安全處理，避免對空指標迭代。",
-      "⚠️ 多叉層序入隊時要遍歷所有孩子，別只入前兩個。"
+      "⚠️ 多叉層序 enqueue 時要遍歷所有孩子，別只入前兩個。"
     ],
     "practice_problems": [],
     "study_plan_ref": {
