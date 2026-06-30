@@ -7,7 +7,8 @@ import { useSettingsStore } from '@/store/useSettingsStore';
 
 const widthClass = {
   standard: 'max-w-7xl',
-  wide: 'max-w-[96rem]'
+  wide: 'max-w-[110rem]',
+  full: 'max-w-none'
 };
 
 export function AppWidthContainer({
@@ -21,7 +22,7 @@ export function AppWidthContainer({
 }) {
   const mounted = useMounted();
   const contentWidth = useSettingsStore((state) => state.contentWidth);
-  const resolvedWidth = mounted ? contentWidth : 'standard';
+  const resolvedWidth = mounted ? contentWidth : 'wide';
 
   return <Component className={cn('mx-auto', widthClass[resolvedWidth], className)}>{children}</Component>;
 }

@@ -24,7 +24,8 @@ const leetCodeOptions: { value: LeetCodeSite; label: string; description: string
 
 const contentWidthOptions: { value: ContentWidth; label: string; description: string }[] = [
   { value: 'standard', label: '標準', description: '維持較集中的閱讀寬度，適合手冊與策略頁。' },
-  { value: 'wide', label: '寬', description: '放寬頁面內容寬度，適合表格、題卡與大螢幕。' }
+  { value: 'wide', label: '寬', description: '放寬內容寬度至約 1760px，適合表格、題卡與大螢幕。' },
+  { value: 'full', label: '全幅', description: '內容填滿視窗寬度，消除兩側空白，適合超寬螢幕。' }
 ];
 
 const textSizeOptions: { value: TextSize; label: string; description: string }[] = [

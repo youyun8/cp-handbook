@@ -4,7 +4,7 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 export type LeetCodeSite = 'cn' | 'en';
-export type ContentWidth = 'standard' | 'wide';
+export type ContentWidth = 'standard' | 'wide' | 'full';
 export type TextSize = 'small' | 'standard' | 'large';
 
 interface SettingsState {
@@ -20,7 +20,7 @@ export const useSettingsStore = create<SettingsState>()(
   persist(
     (set) => ({
       leetCodeSite: 'cn',
-      contentWidth: 'standard',
+      contentWidth: 'wide',
       textSize: 'standard',
       setLeetCodeSite: (site) => set({ leetCodeSite: site }),
       setContentWidth: (width) => set({ contentWidth: width }),
