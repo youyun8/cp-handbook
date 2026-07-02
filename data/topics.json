@@ -1007,7 +1007,7 @@
       },
       {
         "title": "反轉：prev / cur / next 三指標",
-        "body": "反轉是鏈結串列最常考的子程序，務必背到能不假思索寫出。\n\n```cpp\nListNode* reverseList(ListNode* head) {\n    ListNode* prev = nullptr;\n    ListNode* cur = head;\n    while (cur) {\n        ListNode* nxt = cur->next; // 先存後繼\n        cur->next = prev;          // 翻轉指向\n        prev = cur;                // 整體右移\n        cur = nxt;\n    }\n    return prev; // 新的頭\n}\n```\n\n「反轉前 k 個」「每 k 個一組反轉」都是它的變體：先用啞節點框住要反轉的區段，反轉後再把區段兩端接回主串列。"
+        "body": "反轉是鏈結串列最常考的子程序，務必背到能不假思索寫出。\n\n```cpp\nListNode* reverseList(ListNode* head) {\n    ListNode* prev = nullptr;\n    ListNode* cur = head;\n    while (cur) {\n        ListNode* nxt = cur->next;  // 先存後繼\n        cur->next = prev;           // 翻轉指向\n        prev = cur;                 // 整體右移\n        cur = nxt;\n    }\n    return prev; // 新的頭\n}\n```\n\n「反轉前 k 個」「每 k 個一組反轉」都是它的變體：先用啞節點框住要反轉的區段，反轉後再把區段兩端接回主串列。"
       },
       {
         "title": "快慢指標：找中點、判環、找環入口",
@@ -1066,7 +1066,7 @@
       },
       {
         "title": "自底向上 DFS：用回傳值聚合子樹",
-        "body": "許多「全域最優」問題（最大路徑和、直徑、最近公共祖先）用後序一趟解決：遞迴回傳「以當前節點為端點」的局部量，同時用全域變數更新「跨過當前節點」的答案。\n\n```cpp\nint best = INT_MIN;\nint gain(TreeNode* node) {        // 回傳：從 node 向下延伸的最大鏈和\n    if (!node) return 0;\n    int l = max(gain(node->left), 0);\n    int r = max(gain(node->right), 0);\n    best = max(best, node->val + l + r); // 跨過 node 的路徑\n    return node->val + max(l, r);        // 只能選一邊往上接\n}\n```\n\n關鍵在於區分兩種量：**回傳給父層的**（只能單邊延伸）與**用來更新答案的**（可左右合併）。直徑題把 `node->val` 換成邊數 1 即可。"
+        "body": "許多「全域最優」問題（最大路徑和、直徑、最近公共祖先）用後序一趟解決：遞迴回傳「以當前節點為端點」的局部量，同時用全域變數更新「跨過當前節點」的答案。\n\n```cpp\nint best = INT_MIN;\nint gain(TreeNode* node) {        // 回傳：從 node 向下延伸的最大鏈和\n    if (!node) return 0;\n    int l = max(gain(node->left), 0);\n    int r = max(gain(node->right), 0);\n    best = max(best, node->val + l + r);  // 跨過 node 的路徑\n    return node->val + max(l, r);         // 只能選一邊往上接\n}\n```\n\n關鍵在於區分兩種量：**回傳給父層的**（只能單邊延伸）與**用來更新答案的**（可左右合併）。直徑題把 `node->val` 換成邊數 1 即可。"
       },
       {
         "title": "層序 BFS 與 BST 中序",
