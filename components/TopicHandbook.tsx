@@ -49,9 +49,6 @@ export function TopicHandbook({
               <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">{topic.description}</p>
             </div>
           </div>
-          <div className="mt-5">
-            <TopicProblemsProgress problems={problems} />
-          </div>
         </div>
 
         {topic.motivation ? (
@@ -151,6 +148,9 @@ export function TopicHandbook({
 
         <div id="problems">
           <LayerCallout eyebrow="第五層" title="分級題單" variant="problems">
+            <div className="mb-5">
+              <TopicProblemsProgress problems={problems} />
+            </div>
             <ProblemTabs problems={problems} />
           </LayerCallout>
         </div>
