@@ -3,6 +3,8 @@ import { LayerCallout } from '@/components/LayerCallout';
 import { MarkdownBlock } from '@/components/MarkdownBlock';
 import { ProblemTabs } from '@/components/ProblemTabs';
 import { SubtopicPracticeProblems } from '@/components/SubtopicPracticeProblems';
+import { SubtopicPracticeProgress } from '@/components/SubtopicPracticeProgress';
+import { TopicProblemsProgress } from '@/components/TopicProblemsProgress';
 import type { Problem, Subtopic, Topic } from '@/lib/types';
 
 export function SubtopicHandbook({
@@ -22,6 +24,15 @@ export function SubtopicHandbook({
         </p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">{subtopic.title}</h1>
         <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">{subtopic.description}</p>
+        {problems.length > 0 ? (
+          <div className="mt-5">
+            <TopicProblemsProgress problems={problems} />
+          </div>
+        ) : subtopic.practice_problems && subtopic.practice_problems.length > 0 ? (
+          <div className="mt-5">
+            <SubtopicPracticeProgress problems={subtopic.practice_problems} />
+          </div>
+        ) : null}
       </div>
 
       <div id="core">

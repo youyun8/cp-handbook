@@ -5,6 +5,7 @@ import { TopicGlyph } from '@/components/icons';
 import { LayerCallout } from '@/components/LayerCallout';
 import { MarkdownBlock } from '@/components/MarkdownBlock';
 import { ProblemTabs } from '@/components/ProblemTabs';
+import { TopicProblemsProgress } from '@/components/TopicProblemsProgress';
 import type { Problem, Subtopic, Topic } from '@/lib/types';
 
 export function TopicHandbook({
@@ -47,6 +48,9 @@ export function TopicHandbook({
               <h1 className="mt-1 text-3xl font-bold tracking-tight sm:text-4xl">{topic.title}</h1>
               <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">{topic.description}</p>
             </div>
+          </div>
+          <div className="mt-5">
+            <TopicProblemsProgress problems={problems} />
           </div>
         </div>
 
